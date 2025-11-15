@@ -12,7 +12,7 @@ namespace CDOWin.Services {
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerOptions _jsonOptions;
 
-        public NetworkService(string baseUrl, string apiKey = null) {
+        public NetworkService(string baseUrl, string apiKey) {
             _httpClient = new HttpClient {
                 BaseAddress = new Uri(baseUrl)
             };

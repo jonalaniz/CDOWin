@@ -21,8 +21,8 @@ using WinUIEx;
 namespace CDOWin {
     public sealed partial class LoginWindow : Window {
         private bool isTestSuccessful = false;
-        public string ServerAddress { get; private set; }
-        public string ApiKey { get; private set; }
+        public string ServerAddress { get; private set; } = string.Empty;
+        public string ApiKey { get; private set; } = string.Empty;
         public bool CredentialsSaved { get; private set; }
 
         public LoginWindow() {

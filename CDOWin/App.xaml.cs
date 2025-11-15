@@ -1,45 +1,42 @@
-﻿using CDOWin.Constants;
-using CDOWin.Services;
+﻿using CDO.Core.Constants;
+using CDO.Core.Services;
 using Meziantou.Framework.Win32;
 using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace CDOWin {
+namespace CDOWin;
+
+/// <summary>
+/// Provides application-specific behavior to supplement the default Application class.
+/// </summary>
+public partial class App : Application {
+    private Window? _window;
+
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// Initializes the singleton application object.  This is the first line of authored code
+    /// executed, and as such is the logical equivalent of main() or WinMain().
     /// </summary>
-    public partial class App : Application {
-        private Window? _window;
+    public App() {
+        InitializeComponent();
+    }
 
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App() {
-            InitializeComponent();
+    /// <summary>
+    /// Invoked when the application is launched.
+    /// </summary>
+    /// <param name="args">Details about the launch request and process.</param>
+    protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args) {
+        INetworkService network = new NetworkService();
+
+        if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
+            // Initialize ervices
+            AppServices.InitializeServices(creds.UserName!, creds.Password!);
+            _window = new MainWindow();
+        } else {
+            _window = new LoginWindow();
         }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args) {
-            if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
-                NetworkService.Instance.Initialize(baseAddress: creds.UserName!, apiKey: creds.ApplicationName);
-                _window = new MainWindow();
-            } else {
-                _window = new LoginWindow();
-            }
-
-            _window.Activate();
-        }
-
-        private bool DoesHaveSavedCredentials() {
-            var credentials = CredentialManager.ReadCredential(
-                applicationName: AppConstants.AppName);
-            return credentials != null;
-        }
+        _window.Activate();
     }
 }

@@ -1,0 +1,8 @@
+﻿using CDO.Core.Models;
+
+namespace CDO.Core.Services;
+
+public interface IClientService {
+    public Task InitializeAsync();
+    public Task<List<Client>?> GetAllClientsAsync();
+}

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDOWin", "CDOWin\CDOWin.csproj", "{6BA8974E-C33E-4A04-A1F9-173F29F998B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDO.Core", "CDO.Core\CDO.Core.csproj", "{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,18 @@ Global
 		{6BA8974E-C33E-4A04-A1F9-173F29F998B2}.Release|x86.ActiveCfg = Release|x86
 		{6BA8974E-C33E-4A04-A1F9-173F29F998B2}.Release|x86.Build.0 = Release|x86
 		{6BA8974E-C33E-4A04-A1F9-173F29F998B2}.Release|x86.Deploy.0 = Release|x86
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Debug|x86.Build.0 = Debug|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Release|ARM64.Build.0 = Release|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Release|x64.ActiveCfg = Release|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Release|x64.Build.0 = Release|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4A00DA1-9CA3-4F0A-B42B-9C4284AF0C01}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

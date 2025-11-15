@@ -14,12 +14,11 @@
     </Window.SystemBackdrop>
 
     <Grid>
-        
         <!-- Title Bar -->
         <Grid x:Name="AppTitleBar"
-          Height="32"
-          VerticalAlignment="Top"
-          Background="Transparent" />
+              Height="32"
+              VerticalAlignment="Top"
+              Background="Transparent" />
 
         <Grid Padding="24">
             <Grid.RowDefinitions>
@@ -32,67 +31,59 @@
             </Grid.RowDefinitions>
 
             <!-- Header -->
-            <TextBlock 
-            Grid.Row="0"
-            Text="Server Configuration"
-            FontSize="20"
-            FontWeight="SemiBold"
-            Margin="0,8,0,8"/>
+            <TextBlock Grid.Row="0"
+                       Text="Server Configuration"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       Margin="0,12,0,8"/>
 
-            <TextBlock 
-            Grid.Row="1"
-            Text="Please enter your server credentials to continue."
-            TextWrapping="Wrap"
-            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-            Margin="0,0,0,24"/>
+            <TextBlock Grid.Row="1"
+                       Text="Please enter your server credentials to continue."
+                       TextWrapping="Wrap"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       Margin="0,0,0,24"/>
 
             <!-- Server Address -->
-            <StackPanel Grid.Row="2" Margin="0,0,0,16">
-                <TextBlock 
-                Text="Server Address"
-                Margin="0,0,0,4"/>
-                <TextBox 
-                x:Name="ServerAddressTextBox"
-                PlaceholderText="https://example.com"
-                TextChanged="OnCredentialsChanged"/>
+            <StackPanel Grid.Row="2" 
+                        Margin="0,0,0,16">
+                <TextBlock Text="Server Address"
+                           Margin="0,0,0,4"/>
+                <TextBox x:Name="ServerAddressTextBox"
+                         PlaceholderText="https://example.com"
+                         TextChanged="OnCredentialsChanged"/>
             </StackPanel>
 
             <!-- API Key -->
-            <StackPanel Grid.Row="3" Margin="0,0,0,16">
-                <TextBlock 
-                Text="API Key"
-                Margin="0,0,0,4"/>
-                <PasswordBox 
-                x:Name="ApiKeyPasswordBox"
-                PlaceholderText="Enter your API key"
-                PasswordChanged="OnCredentialsChanged"/>
+            <StackPanel Grid.Row="3" 
+                        Margin="0,0,0,16">
+                <TextBlock Text="API Key"
+                           Margin="0,0,0,4"/>
+                <PasswordBox x:Name="ApiKeyPasswordBox"
+                             PlaceholderText="Enter your API key"
+                             PasswordChanged="OnCredentialsChanged"/>
             </StackPanel>
 
             <!-- Status Message -->
-            <InfoBar
-            x:Name="StatusInfoBar"
-            Grid.Row="4"
-            IsOpen="False"
-            Margin="0,0,0,16"
-            VerticalAlignment="Top"/>
+            <InfoBar x:Name="StatusInfoBar"
+                     Grid.Row="4"
+                     IsOpen="False"
+                     Margin="0,0,0,16"
+                     VerticalAlignment="Top"/>
 
             <!-- Buttons -->
-            <StackPanel 
-            Grid.Row="5"
-            Orientation="Horizontal"
-            HorizontalAlignment="Right"
-            Spacing="8">
-                <Button 
-                x:Name="TestButton"
-                Content="Test Connection"
-                Click="TestButton_Click"
-                IsEnabled="False"
-                Style="{StaticResource AccentButtonStyle}"/>
-                <Button 
-                x:Name="SaveButton"
-                Content="Save"
-                Click="SaveButton_Click"
-                IsEnabled="False"/>
+            <StackPanel Grid.Row="5"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Spacing="8">
+                <Button x:Name="TestButton"
+                        Content="Test Connection"
+                        Click="TestButton_Click"
+                        IsEnabled="False"
+                        Style="{StaticResource AccentButtonStyle}"/>
+                <Button x:Name="SaveButton"
+                        Content="Save"
+                        Click="SaveButton_Click"
+                        IsEnabled="False"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -14,9 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using WinUIEx;
 
 namespace CDOWin {
     public sealed partial class LoginWindow : Window {
@@ -28,7 +26,8 @@ namespace CDOWin {
         public bool CredentialsSaved { get; private set; }
 
         public LoginWindow() {
-            this.InitializeComponent();
+            InitializeComponent();
+
             httpClient = new HttpClient();
             httpClient.Timeout = TimeSpan.FromSeconds(10);
 
@@ -40,28 +39,17 @@ namespace CDOWin {
         }
 
         private void SetupWindow() {
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
-
-            if (appWindow != null) {
-                // Edtend content into the title bar
-                ExtendsContentIntoTitleBar = true;
-
-                // Choose an element in your XAML to act as the draggable title bar
-                SetTitleBar(AppTitleBar);
-
-                // Set window size
-                appWindow.Resize(new Windows.Graphics.SizeInt32(640, 480));
-
-                // Center the window
-                var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(windowId, Microsoft.UI.Windowing.DisplayAreaFallback.Nearest);
-                if (displayArea != null) {
-                    var centerX = (displayArea.WorkArea.Width - 640) / 2;
-                    var centerY = (displayArea.WorkArea.Height - 480) / 2;
-                    appWindow.Move(new Windows.Graphics.PointInt32(centerX, centerY));
-                }
-            }
+            // Set up our fullscreen view
+            ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
+            
+            // Set sizing and center the Window
+            var manager = WindowManager.Get(this);
+            manager.MinHeight = 360;
+            manager.MinWidth = 480;
+            manager.MaxHeight = 360;
+            manager.MaxWidth = 480;
+            this.CenterOnScreen();
         }
 
         private void OnCredentialsChanged(object sender, RoutedEventArgs e) {

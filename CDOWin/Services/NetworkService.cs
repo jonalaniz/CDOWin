@@ -22,8 +22,16 @@ namespace CDOWin.Services {
             }
 
             _jsonOptions = new JsonSerializerOptions {
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
             };
+        }
+
+        public static async Task<bool> IsAPIKeyValidAsync(string address, string apiKey) {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+            client.BaseAddress = new Uri(address);
+            var response = await client.GetAsync("api/states");
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<T?> GetAsync<T>(string endpoint) {

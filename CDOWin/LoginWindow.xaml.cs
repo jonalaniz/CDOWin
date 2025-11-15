@@ -1,3 +1,5 @@
+using CDOWin.Models;
+using CDOWin.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -7,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -25,6 +28,8 @@ namespace CDOWin {
         public string ApiKey { get; private set; }
         public bool CredentialsSaved { get; private set; }
 
+        private NetworkService service = new NetworkService("http://api.jonalaniz.com", "WGTcxv4Dka0kt8OS6nTNOGdymArAZcoS");
+
         public LoginWindow() {
             InitializeComponent();
 
@@ -38,6 +43,7 @@ namespace CDOWin {
             this.Closed += OnWindowClosed;
         }
 
+
         private void SetupWindow() {
             // Set up our fullscreen view
             ExtendsContentIntoTitleBar = true;
@@ -45,10 +51,10 @@ namespace CDOWin {
             
             // Set sizing and center the Window
             var manager = WindowManager.Get(this);
-            manager.MinHeight = 360;
-            manager.MinWidth = 480;
-            manager.MaxHeight = 360;
-            manager.MaxWidth = 480;
+            manager.MinHeight = 430;
+            manager.MinWidth = 500;
+            manager.MaxHeight = 430;
+            manager.MaxWidth = 500;
             this.CenterOnScreen();
         }
 
@@ -77,7 +83,7 @@ namespace CDOWin {
             StatusInfoBar.IsOpen = true;
 
             try {
-                bool success = await TestConnectionAsync(
+                bool success = await NetworkService.IsAPIKeyValidAsync(
                     ServerAddressTextBox.Text.Trim(),
                     ApiKeyPasswordBox.Password
                 );
@@ -105,24 +111,6 @@ namespace CDOWin {
             } finally {
                 TestButton.IsEnabled = true;
                 StatusInfoBar.IsOpen = true;
-            }
-        }
-
-        private async Task<bool> TestConnectionAsync(string serverAddress, string apiKey) {
-            // Simulate API call - Replace this with your actual connection test logic
-            await Task.Delay(1500); // Simulate network delay
-
-            try {
-                // Example: Test a simple GET request to the server
-                var request = new HttpRequestMessage(HttpMethod.Get, serverAddress);
-                request.Headers.Add("Authorization", $"Bearer {apiKey}");
-
-                var response = await httpClient.SendAsync(request);
-                return response.IsSuccessStatusCode;
-            } catch {
-                // For demo purposes, you might want to return true/false based on your logic
-                // This is where you'd implement your actual server validation
-                return false;
             }
         }
 

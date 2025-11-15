@@ -67,6 +67,7 @@
             <InfoBar x:Name="StatusInfoBar"
                      Grid.Row="4"
                      IsOpen="False"
+                     IsClosable="False"
                      Margin="0,0,0,16"
                      VerticalAlignment="Top"/>
 

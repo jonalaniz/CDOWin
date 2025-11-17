@@ -2,7 +2,7 @@
 using CDO.Core.Models;
 using System.Diagnostics;
 
-// Get evnironment variables
+// Get environment variables
 var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
 
 var network = new NetworkService();

@@ -6,13 +6,13 @@ var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
 var network = new NetworkService();
 network.Initialize("https://api.jonalaniz.com", apiKey);
 
-IPOService POService = new POService(network);
+IReferralService ReferralService = new ReferralService(network);
 
-var POs = await POService.GetAllPOsAsync();
+var Referrals = await ReferralService.GetAllReferralsAsync();
 
-foreach (var PO in POs) {
-    Console.WriteLine($"State ID: {PO.id}");
-    Console.WriteLine($"State Name: {PO.clientID}");
+foreach (var Referral in Referrals) {
+    Console.WriteLine($"State ID: {Referral.id}");
+    Console.WriteLine($"State Name: {Referral.clientID}");
 }
 
 //var llama = new Llama();

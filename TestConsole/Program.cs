@@ -1,18 +1,18 @@
 ﻿using CDO.Core.Services;
 
-// Get evnironment variables
+// Get environment variables
 var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
 
 var network = new NetworkService();
 network.Initialize("https://api.jonalaniz.com", apiKey);
 
-IClientService clientService = new ClientService(network);
+IPOService POService = new POService(network);
 
-var clients = await clientService.GetAllClientsAsync();
+var POs = await POService.GetAllPOsAsync();
 
-foreach (var client in clients) {
-    Console.WriteLine($"Client ID: {client.id}");
-    Console.WriteLine($"Client Name: {client.firstName} {client.lastName}");
+foreach (var PO in POs) {
+    Console.WriteLine($"State ID: {PO.id}");
+    Console.WriteLine($"State Name: {PO.clientID}");
 }
 
 //var llama = new Llama();

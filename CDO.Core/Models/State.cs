@@ -1,4 +1,5 @@
-﻿namespace CDO.Core.Models; 
+﻿namespace CDO.Core.Models;
+
 public record class State(
     int id,
     string name,

@@ -1,5 +1,6 @@
-﻿namespace CDO.Core.Models; 
-public record class Po(
+﻿namespace CDO.Core.Models;
+
+public record class PO(
     string id,
     int clientID,
     string description,

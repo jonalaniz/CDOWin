@@ -18,6 +18,12 @@ public class ClientService : IClientService {
         }
     }
 
+    #region CRUD Methods
+
+    // Post requests
+
+
+    // Get requests
     public Task<List<Client>?> GetAllClientsAsync() {
         return _network.GetAsync<List<Client>>("/api/clients/");
     }
@@ -25,4 +31,8 @@ public class ClientService : IClientService {
     public Task<Client?> GetClientAsync(int id) {
         return _network.GetAsync<Client> (Endpoints.Client(id));
     }
+
+
+
+    #endregion
 }

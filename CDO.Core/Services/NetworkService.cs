@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace CDO.Core.Services;
@@ -42,5 +43,13 @@ public class NetworkService : INetworkService {
 
         var stream = await response.Content.ReadAsStreamAsync();
         return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
+    }
+
+    public async Task<T?> UpdateAsync<T>(T? value, string endpoint) {
+        var content = JsonContent.Create(value);
+        var response = await _httpClient.PatchAsync(endpoint, content);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadFromJsonAsync<T>();
     }
 }

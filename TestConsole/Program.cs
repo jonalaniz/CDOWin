@@ -6,13 +6,13 @@ var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
 var network = new NetworkService();
 network.Initialize("https://api.jonalaniz.com", apiKey);
 
-IClientService clientService = new ClientService(network);
+IEmployerService employerService = new EmployerService(network);
 
-var clients = await clientService.GetAllClientsAsync();
+var employers = await employerService.GetAllEmployersAsync();
 
-foreach (var client in clients) {
-    Console.WriteLine($"Client ID: {client.id}");
-    Console.WriteLine($"Client Name: {client.firstName} {client.lastName}");
+foreach (var employer in employers) {
+    Console.WriteLine($"State ID: {employer.id}");
+    Console.WriteLine($"State Name: {employer.name}");
 }
 
 //var llama = new Llama();

@@ -27,7 +27,7 @@ public partial class App : Application {
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
     protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args) {
-        INetworkService network = new NetworkService();
+        //INetworkService network = new NetworkService();
 
         if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
             // Initialize ervices

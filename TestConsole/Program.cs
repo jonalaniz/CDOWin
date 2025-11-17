@@ -1,6 +1,4 @@
 ﻿using CDO.Core.Services;
-using CDO.Core.Models;
-using System.Diagnostics;
 
 // Get evnironment variables
 var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
@@ -16,3 +14,9 @@ foreach (var client in clients) {
     Console.WriteLine($"Client ID: {client.id}");
     Console.WriteLine($"Client Name: {client.firstName} {client.lastName}");
 }
+
+//var llama = new Llama();
+
+//await llama.UpdateModel();
+
+//await llama.Chat();

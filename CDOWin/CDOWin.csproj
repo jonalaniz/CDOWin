@@ -45,9 +45,6 @@
     <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

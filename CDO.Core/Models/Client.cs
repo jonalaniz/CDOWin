@@ -56,4 +56,5 @@ public record class Client(
     ) {
     public DateTime? startDateLocal => startDate?.ToLocalTime();
     public DateTime? doblocal => dob?.ToLocalTime();
+    public string name => $"{lastName}, {firstName}";
 }

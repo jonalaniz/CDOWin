@@ -32,6 +32,7 @@ public partial class App : Application {
         if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
             // Initialize ervices
             AppServices.InitializeServices(creds.UserName!, creds.Password!);
+            _ = AppServices.LoadDataAsync();
             _window = new MainWindow();
         } else {
             _window = new LoginWindow();

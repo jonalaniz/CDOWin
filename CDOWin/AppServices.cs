@@ -1,4 +1,8 @@
-﻿namespace CDO.Core.Services;
+﻿using CDOWin.ViewModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace CDO.Core.Services;
 
 public static class AppServices {
     // Network Service singleton
@@ -6,6 +10,9 @@ public static class AppServices {
 
     // Client service singleton
     public static IClientService? ClientService { get; private set; }
+
+    // Client ViewModel
+    public static ClientsViewModel ClientsViewModel { get; private set; }
 
     // Initialize all services
     public static void InitializeServices(string baseAddress, string apiKey) {
@@ -18,11 +25,14 @@ public static class AppServices {
         ClientService = new ClientService(NetworkService);
 
         // Add more services here as needed:
+
+        // Initialize ViewModels
+        ClientsViewModel = new ClientsViewModel(ClientService);
     }
 
     public static async Task LoadDataAsync() {
         var tasks = new List<Task> {
-            ClientService.InitializeAsync()
+            ClientsViewModel.LoadClientsAsync()
             // Add other services `InitializeAsync()` calls here
         };
 

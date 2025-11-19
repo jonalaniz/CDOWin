@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-
-namespace CDO.Core.Constants;
+﻿namespace CDO.Core.Constants;
 
 public static class Endpoints {
     public static string Client(int id) => $"{Clients}/{id}";

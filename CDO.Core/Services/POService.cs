@@ -7,7 +7,7 @@ public class POService : IPOService {
     private readonly INetworkService _network;
     public List<PO> POs { get; private set; } = new();
 
-    public  POService(INetworkService network) {
+    public POService(INetworkService network) {
         _network = network;
     }
 

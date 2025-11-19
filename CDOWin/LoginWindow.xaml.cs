@@ -6,7 +6,8 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using WinUIEx;
 
-namespace CDOWin; 
+namespace CDOWin;
+
 public sealed partial class LoginWindow : Window {
     private bool isTestSuccessful = false;
     public string ServerAddress { get; private set; }

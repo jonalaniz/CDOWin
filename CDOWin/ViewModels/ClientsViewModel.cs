@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Models;
 using CDO.Core.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,15 +10,25 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public class ClientsViewModel : INotifyPropertyChanged {
+public partial class ClientsViewModel : ObservableObject {
     private readonly IClientService _service;
 
-    public ObservableCollection<Client> Clients { get; } = new();
+    [ObservableProperty]
+    public partial ObservableCollection<Client> Clients { get; set; } = [];
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    [ObservableProperty]
+    public partial ObservableCollection<Client> SortedClients { get; set; } = [];
+
+    [ObservableProperty]
+    public partial Client? SelectedClient { get; set; }
 
     public ClientsViewModel(IClientService service) {
         _service = service;
+    }
+
+    partial void OnSelectedClientChanged(Client? value) {
+        if (value != null)
+            _ = RefreshSelectedClient(value.id);
     }
 
     public async Task LoadClientsAsync() {
@@ -30,6 +41,13 @@ public class ClientsViewModel : INotifyPropertyChanged {
         }
     }
 
-    protected void Notify([CallerMemberName] string name = "") =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    public async Task RefreshSelectedClient(int id) {
+        var client = await _service.GetClientAsync(id);
+        if (SelectedClient != client) {
+            SelectedClient = client;
+
+            var index = Clients.IndexOf(Clients.First(c => c.id == id));
+            Clients[index] = client;
+        }
+    }
 }

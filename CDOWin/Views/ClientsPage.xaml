@@ -12,17 +12,89 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ListView ItemsSource="{Binding Clients}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local1:Client">
-                    <StackPanel Orientation="Vertical"
-                                Spacing="12">
-                        <TextBlock Text="{x:Bind name}"/>
-                        <TextBlock Text="{x:Bind address1}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <!-- Rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Left Column -->
+        <Grid BorderThickness="0, 0, 1, 0"
+              BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+
+            <TextBlock Grid.Row="0" 
+                       Grid.Column="0"
+                       Text="Clients"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Margin="16,8,8,8"/>
+
+            <Button Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    Margin="8,8,8,8"
+                    Style="{StaticResource SubtleButtonStyle}">
+                <FontIcon Glyph="&#xE710;"
+                          FontSize="16"
+                          Foreground="{ThemeResource SystemAccentColor}"/>
+            </Button>
+
+            <TextBox Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Margin="8, 0, 8, 8"
+                     PlaceholderText="Filter by name"/>
+
+            <ListView Grid.Row="2" 
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
+                      ItemsSource="{Binding Clients}"
+                      SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
+                      HorizontalAlignment="Left"
+                      Width="220">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local1:Client">
+                        <Grid Margin="0,8,8,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Text="{x:Bind name}"
+                                       FontWeight="Bold"/>
+                            <TextBlock Grid.Row="1" 
+                                       Text="{x:Bind address1}"
+                                       FontWeight="Light"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+
+        <!-- Right Column -->
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{Binding SelectedClient.name}"/>
+        </StackPanel>
 
     </Grid>
 </Page>

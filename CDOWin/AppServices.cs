@@ -8,11 +8,14 @@ public static class AppServices {
     // Network Service singleton
     public static INetworkService? NetworkService { get; private set; }
 
-    // Client service singleton
+    // Services
     public static IClientService? ClientService { get; private set; }
+    public static IEmployerService? EmployerService { get; private set; }
+    public static IStateService? StateService { get; private set; }
 
-    // Client ViewModel
+    // ViewModels
     public static ClientsViewModel ClientsViewModel { get; private set; }
+    public static EmployersViewModel EmployersViewModel { get; private set; }
 
     // Initialize all services
     public static void InitializeServices(string baseAddress, string apiKey) {
@@ -23,11 +26,14 @@ public static class AppServices {
 
         // Initialize other services
         ClientService = new ClientService(NetworkService);
+        EmployerService = new EmployerService(NetworkService);
+        StateService = new StateService(NetworkService);
 
         // Add more services here as needed:
 
         // Initialize ViewModels
         ClientsViewModel = new ClientsViewModel(ClientService);
+
     }
 
     public static async Task LoadDataAsync() {

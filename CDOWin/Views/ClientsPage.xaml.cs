@@ -13,6 +13,7 @@ public sealed partial class ClientsPage : Page {
     public ClientsViewModel ViewModel { get; }
     public ClientsPage() {
         InitializeComponent();
+
         ViewModel = AppServices.ClientsViewModel;
         DataContext = ViewModel;
     }

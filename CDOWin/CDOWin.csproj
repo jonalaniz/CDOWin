@@ -15,6 +15,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="SplashWindow.xaml" />
+    <None Remove="Views\StatesPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\StatesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\EmployersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\SamplePage.xaml">

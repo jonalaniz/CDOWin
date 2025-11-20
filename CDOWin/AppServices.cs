@@ -16,7 +16,7 @@ public static class AppServices {
     // ViewModels
     public static ClientsViewModel ClientsViewModel { get; private set; }
     public static EmployersViewModel EmployersViewModel { get; private set; }
-
+    public static StatesViewModel StatesViewModel { get; private set; }
     // Initialize all services
     public static void InitializeServices(string baseAddress, string apiKey) {
         // Initialize network service
@@ -29,16 +29,18 @@ public static class AppServices {
         EmployerService = new EmployerService(NetworkService);
         StateService = new StateService(NetworkService);
 
-        // Add more services here as needed:
-
         // Initialize ViewModels
         ClientsViewModel = new ClientsViewModel(ClientService);
+        EmployersViewModel = new EmployersViewModel(EmployerService);
+        StatesViewModel = new StatesViewModel(StateService);
 
     }
 
     public static async Task LoadDataAsync() {
         var tasks = new List<Task> {
-            ClientsViewModel.LoadClientsAsync()
+            ClientsViewModel.LoadClientsAsync(),
+            EmployersViewModel.LoadEmployersAsync(),
+            StatesViewModel.LoadStatesAsync()
             // Add other services `InitializeAsync()` calls here
         };
 

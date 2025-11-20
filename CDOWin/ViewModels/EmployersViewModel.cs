@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
+
 public partial class EmployersViewModel : ObservableObject {
     private readonly IEmployerService _service;
 
@@ -26,7 +27,8 @@ public partial class EmployersViewModel : ObservableObject {
     }
 
     partial void OnSelectedEmployerChanged(Employer? value) {
-        _ = RefreshSelectedEmployer(value.id);
+        if (value != null)
+            _ = RefreshSelectedEmployer(value.id);
     }
 
     public async Task LoadEmployersAsync() {

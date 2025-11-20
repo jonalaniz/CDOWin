@@ -1,4 +1,5 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.Constants;
+using CDO.Core.Models;
 
 namespace CDO.Core.Services;
 
@@ -19,5 +20,9 @@ public class StateService : IStateService {
 
     public Task<List<State>?> GetAllStatesAsync() {
         return _network.GetAsync<List<State>>("/api/states/");
+    }
+
+    public Task<State?> GetStateAsync(int id) {
+        return _network.GetAsync<State>(Endpoints.State(id));
     }
 }

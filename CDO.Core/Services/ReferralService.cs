@@ -21,4 +21,8 @@ public class ReferralService : IReferralService {
     public Task<List<Referral>?> GetAllReferralsAsync() {
         return _network.GetAsync<List<Referral>>(Endpoints.Referrals);
     }
+
+    public Task<Referral?> GetReferralAsync(string id) {
+        return _network.GetAsync<Referral>(Endpoints.Referral(id));
+    }
 }

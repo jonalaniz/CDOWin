@@ -21,4 +21,8 @@ public class ReminderService : IReminderService {
     public Task<List<Reminder>?> GetAllRemindersAsync() {
         return _network.GetAsync<List<Reminder>>(Endpoints.Reminders);
     }
+
+    public Task<Reminder?> GetReminderAsync(int id) {
+        return _network.GetAsync<Reminder>(Endpoints.Reminder(id));
+    }
 }

@@ -30,7 +30,7 @@ public partial class App : Application {
         //INetworkService network = new NetworkService();
 
         if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
-            // Initialize ervices
+            // Initialize services
             AppServices.InitializeServices(creds.UserName!, creds.Password!);
             _window = new MainWindow();
         } else {

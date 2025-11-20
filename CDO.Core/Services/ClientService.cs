@@ -24,7 +24,5 @@ public class ClientService : IClientService {
         return _network.GetAsync<Client>(Endpoints.Client(id));
     }
 
-
-
     #endregion
 }

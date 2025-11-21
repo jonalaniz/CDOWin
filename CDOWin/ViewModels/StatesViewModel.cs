@@ -4,11 +4,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
-namespace CDOWin.ViewModels; 
+namespace CDOWin.ViewModels;
+
 public partial class StatesViewModel : ObservableObject {
     private readonly IStateService _service;
 
@@ -19,7 +18,7 @@ public partial class StatesViewModel : ObservableObject {
     public partial ObservableCollection<State> FilteredStates { get; private set; } = [];
 
     [ObservableProperty]
-    public partial State? SelectedState {  get; set; }
+    public partial State? SelectedState { get; set; }
 
     public StatesViewModel(IStateService service) {
         _service = service;
@@ -41,9 +40,9 @@ public partial class StatesViewModel : ObservableObject {
 
     public async Task RefreshSelectedState(int id) {
         var state = await _service.GetStateAsync(id);
-        if ( SelectedState != state) {
+        if (SelectedState != state) {
             SelectedState = state;
-            
+
             var index = States.IndexOf(States.First(s => s.id == id));
             States[index] = state;
         }

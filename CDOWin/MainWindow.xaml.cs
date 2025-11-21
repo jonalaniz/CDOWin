@@ -2,11 +2,6 @@ using CDOWin.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.AccessControl;
-using Windows.UI.Notifications;
 using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,

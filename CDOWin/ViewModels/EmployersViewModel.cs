@@ -1,11 +1,9 @@
-﻿using CDO.Core.Constants;
-using CDO.Core.Models;
+﻿using CDO.Core.Models;
 using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -44,7 +42,7 @@ public partial class EmployersViewModel : ObservableObject {
     public async Task RefreshSelectedEmployer(int id) {
         var employer = await _service.GetEmployerAsync(id);
 
-        if(SelectedEmployer != employer) {
+        if (SelectedEmployer != employer) {
             SelectedEmployer = employer;
 
             var index = Employers.IndexOf(Employers.First(e => e.id == id));

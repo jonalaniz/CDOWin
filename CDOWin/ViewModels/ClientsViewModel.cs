@@ -35,7 +35,7 @@ public partial class ClientsViewModel : ObservableObject {
     partial void OnSelectedClientChanged(Client? value) {
         if (value != null)
             Debug.WriteLine(SelectedClient.reminders);
-            _ = RefreshSelectedClient(value.id);
+        _ = RefreshSelectedClient(value.id);
     }
 
     // CRUD Methods

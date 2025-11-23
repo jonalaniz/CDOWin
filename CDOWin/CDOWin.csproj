@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="SplashWindow.xaml" />
-    <None Remove="Views\BlankPage1.xaml" />
+    <None Remove="Views\ClientViewPage.xaml" />
     <None Remove="Views\Documents.xaml" />
     <None Remove="Views\Notes.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="1.7.10" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6901" />
+    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="1.7.12" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7175" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
@@ -55,7 +55,7 @@
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\BlankPage1.xaml">
+    <Page Update="Views\ClientViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

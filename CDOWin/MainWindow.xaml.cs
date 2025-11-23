@@ -34,6 +34,8 @@ public sealed partial class MainWindow : Window {
         var manager = WindowManager.Get(this);
         manager.MinHeight = 600;
         manager.MinWidth = 800;
+
+        SidebarFrame.Navigate(typeof(RemindersPage));
     }
 
     private void NavigationLoaded(object sender, RoutedEventArgs e) {

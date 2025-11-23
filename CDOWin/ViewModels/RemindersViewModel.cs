@@ -32,7 +32,7 @@ public partial class RemindersViewModel : ObservableObject {
     public async Task LoadRemindersAsync() {
         var reminders = await _service.GetAllRemindersAsync();
 
-        List<Reminder> SortedReminders = reminders.OrderBy(o => o.clientID).ToList();
+        List<Reminder> SortedReminders = reminders.OrderBy(o => o.date).ToList();
         Reminders.Clear();
 
         foreach (var reminder in SortedReminders) {

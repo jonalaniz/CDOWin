@@ -40,32 +40,12 @@
         </Grid>
 
         <!-- Left Column: Sidebar -->
-        <Grid Grid.Row="1"
-              Grid.Column="0"
-              Padding="12">
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Frame Grid.Row="1"
+               Grid.Column="0"
+               Padding="8,8,8,0"
+               x:Name="SidebarFrame" 
+               IsNavigationStackEnabled="False"/>
 
-            <TextBlock Grid.Row="0"
-                       Grid.Column="0"
-                       Text="Alamo City Employment"
-                       HorizontalAlignment="Center"
-                       FontSize="24"
-                       FontWeight="Bold"/>
-
-            <CalendarView Grid.Row="1"
-                          Grid.Column="0" 
-                          SelectionMode="Single"
-                          IsGroupLabelVisible="True"
-                          IsOutOfScopeEnabled="True"
-                          Language="en"
-                          CalendarIdentifier="GregorianCalendar"/>
-        </Grid>
-        
 
         <!-- Right Column: Selector + Content -->
         <Grid Grid.Row="1"

@@ -8,5 +8,5 @@ public record class Reminder(
      bool complete,
      DateTime date
      ) {
-    public DateTime localDate => date.ToLocalTime();
+    public string localDate => date.ToString(format: "MM/dd/yyyy");
 }

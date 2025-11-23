@@ -15,8 +15,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="SplashWindow.xaml" />
+    <None Remove="Views\BlankPage1.xaml" />
     <None Remove="Views\Documents.xaml" />
     <None Remove="Views\Notes.xaml" />
+    <None Remove="Views\RemindersPage.xaml" />
     <None Remove="Views\StatesPage.xaml" />
   </ItemGroup>
 
@@ -51,6 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\BlankPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\RemindersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Documents.xaml">

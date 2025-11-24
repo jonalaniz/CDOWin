@@ -1,4 +1,5 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Models;
 
 namespace CDO.Core.Interfaces {
     public interface ICounselorService {
@@ -18,13 +19,16 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // POST Methods
         // -----------------------------
+        public Task<Counselor?> CreateCounselorAsync(CreateCounselorDTO dto);
 
         // -----------------------------
         // PATCH Methods
         // -----------------------------
+        public Task<Counselor?> UpdateCounselorAsync(UpdateCounselorDTO dto, int id);
 
         // -----------------------------
         // DELETE Methods
         // -----------------------------
+        public Task<bool> DeleteCounselorAsync(int id);
     }
 }

@@ -7,8 +7,8 @@ var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
 Console.WriteLine($"Environment AKI-KEY: {apiKey}");
 
 var network = new NetworkService();
-// network.Initialize("https://api.jonalaniz.com", apiKey);
-network.Initialize("http://127.0.0.1:8080", "RISgMANlIwHwqLPvOTDs8ecmz37VyW8O");
+network.Initialize("https://api.jonalaniz.com", apiKey);
+//network.Initialize("http://127.0.0.1:8080", "RISgMANlIwHwqLPvOTDs8ecmz37VyW8O");
 
 IClientService clientService = new ClientService(network);
 // IPOService POService = new POService(network);
@@ -44,6 +44,11 @@ var updateClient = new UpdateClientDTO {
 
 var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.id);
 Console.WriteLine($"New client updated: {updatedClient}");
+
+var clientWasDeleted = await clientService.DeleteClientAsync(newClient.id);
+if (clientWasDeleted == true) {
+    Console.WriteLine($"Client: {newClient.name} was deleted");
+}
 
 //var llama = new Llama();
 //await llama.UpdateModel();

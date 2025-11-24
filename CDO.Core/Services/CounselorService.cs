@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -37,12 +38,21 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // POST Methods
     // -----------------------------
+    public Task<Counselor?> CreateCounselorAsync(CreateCounselorDTO dto) {
+        return _network.PostAsync<CreateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
+    }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
+    public Task<Counselor?>UpdateCounselorAsync(UpdateCounselorDTO dto, int id) {
+        return _network.UpdateAsync<UpdateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
+    }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    public Task<bool> DeleteCounselorAsync(int id) {
+        return _network.DeleteAsync(Endpoints.Counselor(id));
+    }
 }

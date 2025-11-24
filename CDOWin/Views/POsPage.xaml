@@ -5,10 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CDOWin.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
 
-    <Grid>
-
-    </Grid>
+    <controls:WrapPanel Orientation="Horizontal"
+                        HorizontalSpacing="12"
+                        VerticalSpacing="12"
+                        Margin="12">
+        <Button Content="FUCK" Width="120" Height="69"/>
+        <ToggleSwitch Header="Toggle1"/>
+        <Slider Width="169"/>
+        <TextBox Width="99" PlaceholderText="CUm"/>
+        <CheckBox Content="coom in me"/>
+    </controls:WrapPanel>
 </Page>

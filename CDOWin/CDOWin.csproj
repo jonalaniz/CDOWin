@@ -18,6 +18,7 @@
     <None Remove="Views\ClientViewPage.xaml" />
     <None Remove="Views\Documents.xaml" />
     <None Remove="Views\Notes.xaml" />
+    <None Remove="Views\POsPage.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
     <None Remove="Views\StatesPage.xaml" />
   </ItemGroup>
@@ -46,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250402" />
     <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="1.7.12" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7175" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
@@ -53,6 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\POsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\ClientViewPage.xaml">

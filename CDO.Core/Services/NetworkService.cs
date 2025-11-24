@@ -62,11 +62,11 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // PATCH
     // -----------------------------
-    public async Task<T?> UpdateAsync<T>(T? value, string endpoint) {
-        var content = JsonContent.Create(value);
+    public async Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
+        var content = JsonContent.Create(body);
         var response = await _httpClient.PatchAsync(endpoint, content);
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<T>();
+        return await response.Content.ReadFromJsonAsync<TResponse>();
     }
 }

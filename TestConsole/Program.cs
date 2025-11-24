@@ -38,8 +38,13 @@ foreach (var c in clients) {
 var newClient = await clientService.CreateClientAsync(client);
 Console.WriteLine($"New client created: {newClient}");
 
+var updateClient = new UpdateClientDTO {
+    race = "lmao"
+};
+
+var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.id);
+Console.WriteLine($"New client updated: {updatedClient}");
+
 //var llama = new Llama();
-
 //await llama.UpdateModel();
-
 //await llama.Chat();

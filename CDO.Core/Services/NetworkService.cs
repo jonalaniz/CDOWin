@@ -19,7 +19,7 @@ public class NetworkService : INetworkService {
             PropertyNameCaseInsensitive = true,
         };
     }
-    
+
     // -----------------------------
     // Service Initialization Tasks
     // -----------------------------
@@ -49,7 +49,7 @@ public class NetworkService : INetworkService {
         var stream = await response.Content.ReadAsStreamAsync();
         return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
     }
-    
+
     // -----------------------------
     // POST
     // -----------------------------
@@ -57,10 +57,10 @@ public class NetworkService : INetworkService {
         var content = JsonContent.Create(body);
         var response = await _httpClient.PostAsync(endpoint, content);
         response.EnsureSuccessStatusCode();
-        
+
         return await response.Content.ReadFromJsonAsync<TResponse>();
-    } 
-    
+    }
+
     // -----------------------------
     // PATCH
     // -----------------------------

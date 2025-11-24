@@ -1,7 +1,7 @@
 ﻿namespace CDO.Core.Services;
 
 public interface INetworkService {
-    
+
     // -----------------------------
     // Service Initialization Tasks
     // -----------------------------
@@ -21,7 +21,7 @@ public interface INetworkService {
     // PATCH
     // -----------------------------
     Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body);
-    
+
     // -----------------------------
     // DELETE Methods
     // -----------------------------

@@ -31,20 +31,20 @@ public class ClientService : IClientService {
     }
 
     public Task<Client?> GetClientAsync(int id) {
-        return _network.GetAsync<Client> (Endpoints.Client(id));
+        return _network.GetAsync<Client>(Endpoints.Client(id));
     }
-    
+
     // -----------------------------
     // POST
     // -----------------------------
     public Task<Client?> CreateClientAsync(CreateClientDTO dto) {
-        return _network.PostAsync<CreateClientDTO, Client> (Endpoints.Clients, dto);
+        return _network.PostAsync<CreateClientDTO, Client>(Endpoints.Clients, dto);
     }
-    
+
     // -----------------------------
     // PATCH
     // -----------------------------
     public Task<Client?> UpdateClientAsync(UpdateClientDTO dto, int id) {
-        return _network.UpdateAsync<UpdateClientDTO, Client> (Endpoints.Client(id), dto);
+        return _network.UpdateAsync<UpdateClientDTO, Client>(Endpoints.Client(id), dto);
     }
 }

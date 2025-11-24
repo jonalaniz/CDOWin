@@ -7,5 +7,5 @@ public class UpdateCounselorDTO {
     public string? fax { get; init; }
     public string? notes { get; init; }
     public string? secretaryName { get; init; }
-    public string? secretaryEmail  { get; init; }
+    public string? secretaryEmail { get; init; }
 }

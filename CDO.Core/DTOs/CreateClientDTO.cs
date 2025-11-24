@@ -9,7 +9,7 @@ public class CreateClientDTO {
     public required string state { get; init; }
     public required string disability { get; init; }
 
-    
+
     // Optional fields
     public int? ssn { get; init; }
     public string? caseID { get; init; }

@@ -1,5 +1,4 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -27,15 +26,15 @@ public class StateService : IStateService {
     public Task<State?> GetStateAsync(int id) {
         return _network.GetAsync<State>(Endpoints.State(id));
     }
-    
+
     // -----------------------------
     // POST Methods
     // -----------------------------
-        
+
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-        
+
     // -----------------------------
     // DELETE Methods
     // -----------------------------

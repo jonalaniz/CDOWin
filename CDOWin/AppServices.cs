@@ -1,9 +1,9 @@
-﻿using CDO.Core.Services;
+﻿using CDO.Core.Interfaces;
+using CDO.Core.Services;
 using CDOWin.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using CDO.Core.Interfaces;
 
 namespace CDOWin;
 

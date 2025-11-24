@@ -1,5 +1,4 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -35,15 +34,15 @@ public class ReminderService : IReminderService {
     public Task<Reminder?> GetReminderAsync(int id) {
         return _network.GetAsync<Reminder>(Endpoints.Reminder(id));
     }
-    
+
     // -----------------------------
     // POST Methods
     // -----------------------------
-        
+
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-        
+
     // -----------------------------
     // DELETE Methods
     // -----------------------------

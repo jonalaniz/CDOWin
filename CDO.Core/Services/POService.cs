@@ -1,5 +1,4 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -33,15 +32,15 @@ public class POService : IPOService {
     public Task<PO?> LoadPOAsync(string id) {
         return _network.GetAsync<PO>(Endpoints.PO(id));
     }
-    
+
     // -----------------------------
     // POST Methods
     // -----------------------------
-        
+
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-        
+
     // -----------------------------
     // DELETE Methods
     // -----------------------------

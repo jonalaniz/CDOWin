@@ -1,6 +1,5 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDO.Core.Services;
 
 // Get environment variables

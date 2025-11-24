@@ -25,4 +25,5 @@ public interface INetworkService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    Task<bool> DeleteAsync(string endpoint);
 }

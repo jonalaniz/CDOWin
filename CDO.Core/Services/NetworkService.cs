@@ -81,4 +81,20 @@ public class NetworkService : INetworkService {
 
         return await response.Content.ReadFromJsonAsync<TResponse>();
     }
+
+    // -----------------------------
+    // DELETE
+    // -----------------------------
+    public async Task<bool> DeleteAsync(string endpoint) {
+        var response = await _httpClient.DeleteAsync(endpoint);
+
+        // If the API is written to always return 204 No Content,
+        // success = true is safe here.
+        if (response.IsSuccessStatusCode)
+            return true;
+
+        // You can include logs here if desired
+        Debug.WriteLine($"DELETE failed: {response.StatusCode}");
+        return false;
+    }
 }

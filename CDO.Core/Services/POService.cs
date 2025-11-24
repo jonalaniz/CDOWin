@@ -1,4 +1,6 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
 namespace CDO.Core.Services;
@@ -11,6 +13,9 @@ public class POService : IPOService {
         _network = network;
     }
 
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     public async Task InitializeAsync() {
         var data = await _network.GetAsync<List<PO>>(Endpoints.POs);
         if (data != null) {
@@ -18,6 +23,9 @@ public class POService : IPOService {
         }
     }
 
+    // -----------------------------
+    // GET
+    // -----------------------------
     public Task<List<PO>?> LoadPOsAsync() {
         return _network.GetAsync<List<PO>>(Endpoints.POs);
     }
@@ -25,4 +33,16 @@ public class POService : IPOService {
     public Task<PO?> LoadPOAsync(string id) {
         return _network.GetAsync<PO>(Endpoints.PO(id));
     }
+    
+    // -----------------------------
+    // POST Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // PATCH Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // DELETE Methods
+    // -----------------------------
 }

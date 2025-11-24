@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Constants;
 using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
 namespace CDO.Core.Services;
@@ -12,6 +13,9 @@ public class ClientService : IClientService {
         _network = network;
     }
 
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     public async Task InitializeAsync() {
         var data = await _network.GetAsync<List<Client>>(Endpoints.Clients);
         if (data != null) {

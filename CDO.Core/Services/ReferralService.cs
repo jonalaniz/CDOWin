@@ -1,4 +1,6 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
 namespace CDO.Core.Services;
@@ -10,14 +12,20 @@ public class ReferralService : IReferralService {
     public ReferralService(INetworkService network) {
         _network = network;
     }
-
+    
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     public async Task InitializeAsync() {
         var data = await _network.GetAsync<List<Referral>>(Endpoints.Referrals);
         if (data != null) {
             Referrals = data;
         }
     }
-
+    
+    // -----------------------------
+    // GET
+    // -----------------------------
     public Task<List<Referral>?> GetAllReferralsAsync() {
         return _network.GetAsync<List<Referral>>(Endpoints.Referrals);
     }
@@ -25,4 +33,16 @@ public class ReferralService : IReferralService {
     public Task<Referral?> GetReferralAsync(string id) {
         return _network.GetAsync<Referral>(Endpoints.Referral(id));
     }
+    
+    // -----------------------------
+    // POST Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // PATCH Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // DELETE Methods
+    // -----------------------------
 }

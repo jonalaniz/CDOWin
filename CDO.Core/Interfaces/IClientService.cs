@@ -1,25 +1,33 @@
-﻿using CDO.Core.Models;
-using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Models;
 
-namespace CDO.Core.Services;
+namespace CDO.Core.Interfaces;
 
 public interface IClientService {
+    
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     public Task InitializeAsync();
     
     // -----------------------------
-    // GET
+    // GET Methods
     // -----------------------------
     public Task<List<Client>?> GetAllClientsAsync();
     
     public Task<Client?> GetClientAsync(int id);
 
     // -----------------------------
-    // POST
+    // POST Methods
     // -----------------------------
     public Task<Client?> CreateClientAsync(CreateClientDTO dto);
     
     // -----------------------------
-    // PATCH
+    // PATCH Methods
     // -----------------------------
     public Task<Client?> UpdateClientAsync(UpdateClientDTO dto, int id);
+    
+    // -----------------------------
+    // DELETE Methods
+    // -----------------------------
 }

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CDO.Core.Interfaces;
 
 namespace CDOWin.ViewModels;
 

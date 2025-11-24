@@ -1,7 +1,10 @@
 ﻿namespace CDO.Core.Services;
 
 public interface INetworkService {
-    /// <summary> Initialize the network service with base address and API Key</summary>
+    
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     void Initialize(string baseAddress, string apiKey);
 
     // -----------------------------
@@ -18,4 +21,8 @@ public interface INetworkService {
     // PATCH
     // -----------------------------
     Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body);
+    
+    // -----------------------------
+    // DELETE Methods
+    // -----------------------------
 }

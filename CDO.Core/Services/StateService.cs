@@ -1,4 +1,6 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
 namespace CDO.Core.Services;
@@ -12,17 +14,29 @@ public class StateService : IStateService {
     }
 
     public async Task InitializeAsync() {
-        var data = await _network.GetAsync<List<State>>("/api/states/");
+        var data = await _network.GetAsync<List<State>>(Endpoints.States);
         if (data != null) {
             States = data;
         }
     }
 
     public Task<List<State>?> GetAllStatesAsync() {
-        return _network.GetAsync<List<State>>("/api/states/");
+        return _network.GetAsync<List<State>>(Endpoints.States);
     }
 
     public Task<State?> GetStateAsync(int id) {
         return _network.GetAsync<State>(Endpoints.State(id));
     }
+    
+    // -----------------------------
+    // POST Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // PATCH Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // DELETE Methods
+    // -----------------------------
 }

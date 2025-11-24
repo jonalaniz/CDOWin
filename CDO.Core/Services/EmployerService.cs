@@ -1,4 +1,6 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
 namespace CDO.Core.Services;
@@ -11,6 +13,9 @@ public class EmployerService : IEmployerService {
         _network = network;
     }
 
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     public async Task InitializeAsync() {
         var data = await _network.GetAsync<List<Employer>>(Endpoints.Employers);
         if (data != null) {
@@ -18,6 +23,9 @@ public class EmployerService : IEmployerService {
         }
     }
 
+    // -----------------------------
+    // GET
+    // -----------------------------
     public Task<List<Employer>?> GetAllEmployersAsync() {
         return _network.GetAsync<List<Employer>>(Endpoints.Employers);
     }
@@ -25,4 +33,16 @@ public class EmployerService : IEmployerService {
     public Task<Employer?> GetEmployerAsync(int id) {
         return _network.GetAsync<Employer>(Endpoints.Employer(id));
     }
+    
+    // -----------------------------
+    // POST Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // PATCH Methods
+    // -----------------------------
+        
+    // -----------------------------
+    // DELETE Methods
+    // -----------------------------
 }

@@ -19,8 +19,10 @@ public class NetworkService : INetworkService {
             PropertyNameCaseInsensitive = true,
         };
     }
-
-    // Initialize the service with API credentials
+    
+    // -----------------------------
+    // Service Initialization Tasks
+    // -----------------------------
     public void Initialize(string baseAddress, string apiKey) {
         if (_instance != null) return;
 

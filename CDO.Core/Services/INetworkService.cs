@@ -6,4 +6,6 @@ public interface INetworkService {
 
     /// <summary>Perform a GET request to the specificed endpoint and deserialize the result</summary>
     Task<T?> GetAsync<T>(string endpoint);
+
+    Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body);
 }

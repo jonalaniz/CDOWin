@@ -1,19 +1,42 @@
-﻿using CDO.Core.Services;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Models;
+using CDO.Core.Services;
 
 // Get environment variables
 var apiKey = Environment.GetEnvironmentVariable("CDO_API_KEY");
+Console.WriteLine($"Environment AKI-KEY: {apiKey}");
 
 var network = new NetworkService();
-network.Initialize("https://api.jonalaniz.com", apiKey);
+// network.Initialize("https://api.jonalaniz.com", apiKey);
+network.Initialize("http://127.0.0.1:8080", "RISgMANlIwHwqLPvOTDs8ecmz37VyW8O");
 
-IReferralService ReferralService = new ReferralService(network);
+IClientService clientService = new ClientService(network);
+// IPOService POService = new POService(network);
+//
+// var POs = await POService.GetAllPOsAsync();
+//
+// foreach (var PO in POs) {
+//     Console.WriteLine($"State ID: {PO.id}");
+//     Console.WriteLine($"State Name: {PO.clientID}");
+// }
 
-var Referrals = await ReferralService.GetAllReferralsAsync();
+var client = new CreateClientDTO {
+    firstName = "Jon",
+    lastName = "Alaniz",
+    counselor = "Someone",
+    city = "San Antonio",
+    state = "TX",
+    disability = "everything",
+    ssn = 696969696
+};
 
-foreach (var Referral in Referrals) {
-    Console.WriteLine($"State ID: {Referral.id}");
-    Console.WriteLine($"State Name: {Referral.clientID}");
+var clients = await clientService.GetAllClientsAsync();
+foreach (var c in clients) {
+    Console.WriteLine(c.name);
 }
+
+var newClient = await clientService.CreateClientAsync(client);
+Console.WriteLine($"New client created: {newClient}");
 
 //var llama = new Llama();
 

@@ -7,7 +7,7 @@ public record class Client(
     string counselor,
     Reminder[] reminders,
     DateTime? startDate,
-    string? ssn,
+    int? ssn,
     string? caseID,
     string? address1,
     string? address2,

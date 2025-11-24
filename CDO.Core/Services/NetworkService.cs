@@ -34,6 +34,9 @@ public class NetworkService : INetworkService {
         _instance = this;
     }
 
+    // -----------------------------
+    // GET
+    // -----------------------------
     public async Task<T?> GetAsync<T>(string endpoint) {
         var response = await _httpClient.GetAsync(endpoint);
 
@@ -44,7 +47,21 @@ public class NetworkService : INetworkService {
         var stream = await response.Content.ReadAsStreamAsync();
         return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
     }
-
+    
+    // -----------------------------
+    // POST
+    // -----------------------------
+    public async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
+        var content = JsonContent.Create(body);
+        var response = await _httpClient.PostAsync(endpoint, content);
+        response.EnsureSuccessStatusCode();
+        
+        return await response.Content.ReadFromJsonAsync<TResponse>();
+    } 
+    
+    // -----------------------------
+    // PATCH
+    // -----------------------------
     public async Task<T?> UpdateAsync<T>(T? value, string endpoint) {
         var content = JsonContent.Create(value);
         var response = await _httpClient.PatchAsync(endpoint, content);

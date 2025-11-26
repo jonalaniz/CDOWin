@@ -40,6 +40,8 @@
                       Grid.Column="0"
                       Margin="0,8,0,8"
                       HorizontalAlignment="Center"
+                      x:Name="RemindersCalendar"
+                      CalendarViewDayItemChanging="RemindersCalendar_CalendarViewDayItemChanging"
                       SelectionMode="Single"
                       IsGroupLabelVisible="True"
                       IsOutOfScopeEnabled="True"

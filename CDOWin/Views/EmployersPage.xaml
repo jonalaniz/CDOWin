@@ -8,6 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:local1="using:CDO.Core.Models"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     d:DataContext="{d:DesignInstance Type=viewmodels:EmployersViewModel}"
     mc:Ignorable="d">
 
@@ -89,7 +92,6 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-
 
         <!-- Right Column -->
         <Grid Grid.Column="1">

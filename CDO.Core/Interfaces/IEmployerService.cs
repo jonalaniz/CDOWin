@@ -1,4 +1,5 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Models;
 
 namespace CDO.Core.Interfaces {
     public interface IEmployerService {
@@ -18,13 +19,16 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // POST Methods
         // -----------------------------
-
+        public Task<Employer?> CreateEmployerAsync(EmployerDTO dto);
+        
         // -----------------------------
         // PATCH Methods
         // -----------------------------
+        public Task<Employer?> UpdateEmployerAsync(EmployerDTO dto, int id);
 
         // -----------------------------
         // DELETE Methods
         // -----------------------------
+        public Task<bool> DeleteEmployerAsync(int id);
     }
 }

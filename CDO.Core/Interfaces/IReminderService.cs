@@ -1,4 +1,7 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
+using CDO.Core.Models;
+using System.Net;
 
 namespace CDO.Core.Interfaces;
 
@@ -19,12 +22,16 @@ public interface IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
+    public Task<Reminder?> CreateReminderAsync(CreateReminderDTO dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
+    public Task<Reminder?> UpdateReminderAsync(UpdateReminderDTO dto, int id);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    public Task<bool> DeleteReminderAsync(int id);
+
 }

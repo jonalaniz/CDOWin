@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -30,12 +31,22 @@ public class StateService : IStateService {
     // -----------------------------
     // POST Methods
     // -----------------------------
+    public Task<State?> CreateStateAsync(CreateStateDTO dto) {
+        return _network.PostAsync<CreateStateDTO, State>(Endpoints.States, dto);
+    }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
+    public Task<State?> UpdateStateAsync(UpdateStateDTO dto, int id) {
+        return _network.UpdateAsync<UpdateStateDTO, State>(Endpoints.State(id), dto);
+    }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    public Task<bool> DeleteStateAsync(int id) {
+        return _network.DeleteAsync(Endpoints.State(id));
+    }
+
 }

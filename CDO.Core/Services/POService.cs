@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -36,12 +37,22 @@ public class POService : IPOService {
     // -----------------------------
     // POST Methods
     // -----------------------------
+    public Task<PO?> CreatePOAsync(NewPODTO dto) {
+        return _network.PostAsync<NewPODTO, PO>(Endpoints.POs, dto);
+    }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
+    public Task<PO?> UpdatePOAsync(UpdatePODTO dto, string id) {
+        return _network.UpdateAsync<UpdatePODTO, PO>(Endpoints.PO(id), dto);
+    }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    public Task<bool> DeletePOAsync(string id) {
+        return _network.DeleteAsync(Endpoints.PO(id));
+    }
+
 }

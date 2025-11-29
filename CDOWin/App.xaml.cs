@@ -48,9 +48,8 @@ public partial class App : Application {
             }
         } else {
             _window = new LoginWindow();
+            _window.Activate();
         }
-
-        //_window.Activate();
     }
 
 

@@ -25,7 +25,6 @@ public sealed partial class MainWindow : Window {
         ExtendsContentIntoTitleBar = true;
 
         // Setup Title bar
-        SetTitleBar(AppTitleBar);
         var uiSettings = new Windows.UI.ViewManagement.UISettings();
         var accentColor = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
         AppWindow.TitleBar.ButtonForegroundColor = accentColor;

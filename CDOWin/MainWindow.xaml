@@ -27,17 +27,13 @@
         </Grid.ColumnDefinitions>
         
         <!-- Title Bar -->
-        <Grid Grid.Row="0"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              x:Name="AppTitleBar"
-              Height="32"
-              VerticalAlignment="Top"
-              Background="Transparent">
-            <TextBlock Text="CDO"
-                       VerticalAlignment="Center"
-                       Margin="12, 0, 0, 0"/>
-        </Grid>
+        <TitleBar Grid.Row="0" 
+                  Grid.Column="0" 
+                  Grid.ColumnSpan="2"
+                  Title="CDO Win"
+                  Subtitle="Beta"
+                  IsBackButtonVisible="False"
+                  IsPaneToggleButtonVisible="False"/>
 
         <!-- Left Column: Sidebar -->
         <Frame Grid.Row="1"

@@ -15,11 +15,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="316"/>
+            <ColumnDefinition Width="318"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0"
@@ -27,12 +28,13 @@
                    Text="Reminders"
                    FontSize="22"
                    FontWeight="Bold"
-                   Margin="8,3,8,1"
+                   Margin="8,8,8,4"
                    HorizontalAlignment="Left"/>
+
 
         <CalendarView Grid.Row="1"
                       Grid.Column="0"
-                      Margin="0,8,0,8"
+                      Margin="0,8,0,0"
                       HorizontalAlignment="Center"
                       x:Name="RemindersCalendar"
                       CalendarViewDayItemChanging="RemindersCalendar_CalendarViewDayItemChanging"
@@ -42,7 +44,15 @@
                       Language="en"
                       CalendarIdentifier="GregorianCalendar"/>
 
-        <ScrollViewer Grid.Row="2"
+        <SelectorBar x:Name="SelectionBar"
+                     Grid.Row="2"
+                     Grid.Column="0">
+            <SelectorBarItem Text="All" IsSelected="True" />
+            <SelectorBarItem Text="Upcoming" />
+            <SelectorBarItem Text="Client" IsEnabled="False"/>
+        </SelectorBar>
+
+        <ScrollViewer Grid.Row="3"
                       Grid.Column="0">
             <ItemsRepeater ItemsSource="{Binding Reminders}"
                            HorizontalAlignment="Stretch">

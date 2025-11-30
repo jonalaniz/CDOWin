@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 
 namespace CDOWin.Views;
@@ -53,5 +54,10 @@ public sealed partial class Documents : Page, INotifyPropertyChanged {
         foreach (var file in Directory.GetFiles(path)) {
             Files.Add(Path.GetFileName(file));
         }
+    }
+
+    private void OpenDocuments_Clicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+        Debug.WriteLine($"Open {ViewModel.SelectedClient?.documentsFolderPath}");
+        Process.Start("explorer.exe", $"{ViewModel.SelectedClient?.documentsFolderPath}");
     }
 }

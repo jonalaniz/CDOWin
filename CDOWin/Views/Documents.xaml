@@ -30,6 +30,7 @@
         <Button Grid.Row="1"
                 Grid.Column="0"
                 HorizontalAlignment="Stretch"
-                Content="Open Documents Folder"/>
+                Content="Open Documents Folder"
+                Click="OpenDocuments_Clicked"/>
     </Grid>
 </Page>

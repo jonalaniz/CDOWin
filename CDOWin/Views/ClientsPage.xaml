@@ -9,6 +9,7 @@
     xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:local1="using:CDO.Core.Models"
+    xmlns:dto="using:CDO.Core.DTOs"
     d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
     mc:Ignorable="d">
 
@@ -49,7 +50,7 @@
                 <TextBlock FontSize="12"
                            Margin="16,1,16,8"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                    <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind ViewModel.ClientSummaries.Count, Mode=OneWay}"/>
                     <Run Text="Clients"/>
                 </TextBlock>
             </StackPanel>
@@ -76,12 +77,13 @@
             <ListView Grid.Row="2" 
                       Grid.Column="0"
                       Grid.ColumnSpan="2"
-                      ItemsSource="{Binding Clients}"
-                      SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
+                      ItemsSource="{Binding ClientSummaries}"
+                      IsItemClickEnabled="True"
+                      ItemClick="ListView_ItemClick"
                       HorizontalAlignment="Left"
                       Width="220">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local1:Client">
+                    <DataTemplate x:DataType="dto:ClientSummaryDTO">
                         <Grid Margin="0,8,8,8">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>

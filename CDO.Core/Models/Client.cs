@@ -57,8 +57,7 @@ public record class Client(
     string? fluentLanguages,
     string? premiums
     ) {
-
-    public string name => $"{lastName}, {firstName}";
+    public string name => $"{firstName} {lastName}";
 
     public string? documentsFolderPath => documentFolder?.Replace('#', ' ').Trim();
 

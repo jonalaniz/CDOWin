@@ -1,6 +1,8 @@
+using CDO.Core.DTOs;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -41,5 +43,10 @@ public sealed partial class ClientsPage : Page {
         var slideNavigationTransitionEffect = SlideNavigationTransitionEffect.FromBottom;
 
         ContentFrame.Navigate(pageType, ViewModel, new SlideNavigationTransitionInfo() { Effect = slideNavigationTransitionEffect });
+    }
+
+    private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
+        var selection = (ClientSummaryDTO)e.ClickedItem;
+        ViewModel.ClientSelected(selection.id);
     }
 }

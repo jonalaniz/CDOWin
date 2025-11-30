@@ -52,7 +52,7 @@ public static class AppServices {
         var sw = Stopwatch.StartNew();
 
         var tasks = new List<Task> {
-            ClientsViewModel.LoadClientsAsync(),
+            ClientsViewModel.LoadClientSummariesAsync(),
             EmployersViewModel.LoadEmployersAsync(),
             POsViewModel.LoadPOsAsync(),
             RemindersViewModel.LoadRemindersAsync(),

@@ -1,4 +1,5 @@
-﻿using CDO.Core.Interfaces;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Observable Properties
 
     [ObservableProperty]
-    public partial ObservableCollection<Client> Clients { get; private set; } = [];
+    public partial ObservableCollection<ClientSummaryDTO> ClientSummaries { get; private set; } = [];
 
     [ObservableProperty]
     public partial ObservableCollection<Client> FilteredClients { get; private set; } = [];
@@ -31,38 +32,36 @@ public partial class ClientsViewModel : ObservableObject {
         _service = service;
     }
 
-    // OnSelectedClientChanged - We are overriding the generated one to refresh our selected client
+    // OnSelectedClientChanged - Testing: Pulling reminders
     partial void OnSelectedClientChanged(Client? value) {
         if (value != null)
             Debug.WriteLine(SelectedClient.reminders);
-        _ = RefreshSelectedClient(value.id);
     }
 
     // CRUD Methods
 
-    public async Task LoadClientsAsync() {
-        // Get all of the Clients and assign them to a variable
-        var clients = await _service.GetAllClientsAsync();
+    public async Task LoadClientSummariesAsync() {
+        var clients = await _service.GetAllClientSummariesAsync();
 
         // Sort that list of downloaded Clients
-        List<Client> SortedClients = clients.OrderBy(o => o.name).ToList();
+        List<ClientSummaryDTO> SortedClients = clients.OrderBy(o => o.name).ToList();
 
         // Clear the ViewModel's Clients variable
-        Clients.Clear();
+        ClientSummaries.Clear();
 
         // Loop over and add all of the clients in the sorted clients list to the main Clients variable
         foreach (var client in SortedClients) {
-            Clients.Add(client);
+            ClientSummaries.Add(client);
         }
     }
 
-    public async Task RefreshSelectedClient(int id) {
-        var client = await _service.GetClientAsync(id);
-        if (SelectedClient != client) {
-            SelectedClient = client;
+    public async Task ClientSelected(int id) {
+        // Ensure the Selected Client is not being called twice.
+        if (SelectedClient != null && SelectedClient.id == id)
+            return;
 
-            var index = Clients.IndexOf(Clients.First(c => c.id == id));
-            Clients[index] = client;
-        }
+        // Fetch the full client.
+        var selectedClient = await _service.GetClientAsync(id);
+        SelectedClient = selectedClient;
     }
 }

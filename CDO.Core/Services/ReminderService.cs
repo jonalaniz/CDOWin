@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -38,12 +39,21 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
+    public Task<Reminder?> CreateReminderAsync(CreateReminderDTO dto) {
+        return _network.PostAsync<CreateReminderDTO, Reminder>(Endpoints.Reminders, dto);
+    }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
+    public Task<Reminder?> UpdateReminderAsync(UpdateReminderDTO dto, int id) {
+        return _network.UpdateAsync<UpdateReminderDTO, Reminder>(Endpoints.Reminder(id), dto);
+    }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    public Task<bool> DeleteReminderAsync(int id) {
+        return _network.DeleteAsync(Endpoints.Reminder(id));
+    }
 }

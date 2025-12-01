@@ -1,4 +1,5 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Models;
 
 namespace CDO.Core.Interfaces;
 
@@ -19,12 +20,16 @@ public interface IPOService {
     // -----------------------------
     // POST Methods
     // -----------------------------
+    public Task<PO?> CreatePOAsync(NewPODTO dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
+    public Task<PO?> UpdatePOAsync(UpdatePODTO dto, string id);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
+    public Task<bool> DeletePOAsync(string id);
+
 }

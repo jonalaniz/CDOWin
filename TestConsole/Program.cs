@@ -20,35 +20,89 @@ IClientService clientService = new ClientService(network);
 //     Console.WriteLine($"State Name: {PO.clientID}");
 // }
 
-var client = new CreateClientDTO {
-    firstName = "Jon",
-    lastName = "Alaniz",
-    counselor = "Someone",
-    city = "San Antonio",
-    state = "TX",
-    disability = "everything",
-    ssn = 696969696
-};
+//var client = new CreateClientDTO {
+//    firstName = "Jon",
+//    lastName = "Alaniz",
+//    counselor = "Someone",
+//    city = "San Antonio",
+//    state = "TX",
+//    disability = "everything",
+//    ssn = 696969696
+//};
 
 var clients = await clientService.GetAllClientsAsync();
+var disabilityCount = 0;
+var disability = "";
+var criminalChargeCount = 0;
+var criminalCharges = "";
+var transportationCount = 0;
+var transportation = "";
+var conditionsCount = 0;
+var conditions = "";
+var employmnetGoalsCount = 0;
+var employmentGoals = "";
+var totalLength = 0;
+var totalName = "";
+
 foreach (var c in clients) {
-    Console.WriteLine(c.name);
+    var length = 0;
+    if (c.disability.Length > disabilityCount) {
+        disabilityCount = c.disability.Length;
+        disability = c.disability;
+        length += c.disability.Length;
+    }
+
+    if (c.criminalCharge != null && c.criminalCharge.Length > criminalChargeCount) {
+        criminalChargeCount = c.criminalCharge.Length;
+        criminalCharges = c.criminalCharge;
+        length += c.criminalCharge.Length;
+    }
+
+    if (c.transportation != null && c.transportation.Length > transportationCount) {
+        transportationCount = c.transportation.Length;
+        transportation = c.transportation;
+        length += c.transportation.Length;
+    }
+
+    if (c.conditions != null && c.conditions.Length > conditionsCount) {
+        conditionsCount = c.conditions.Length;
+        conditions = c.conditions;
+    }
+
+    if (c.employmentGoal != null && c.employmentGoal.Length > employmnetGoalsCount) {
+        employmnetGoalsCount = c.employmentGoal.Length;
+        employmentGoals = c.employmentGoal;
+    }
+
+    if (length > totalLength) {
+        totalLength = length;
+        totalName = c.name;
+    }
 }
 
-var newClient = await clientService.CreateClientAsync(client);
-Console.WriteLine($"New client created: {newClient}");
+Console.WriteLine($"Longest disability: {disabilityCount}");
+Console.WriteLine(employmentGoals);
+Console.WriteLine($"Longest criminal charge: {criminalChargeCount}");
+Console.WriteLine(criminalCharges);
+Console.WriteLine($"Longest transportation: {transportationCount}");
+Console.WriteLine(transportation);
 
-var updateClient = new UpdateClientDTO {
-    race = "lmao"
-};
+Console.WriteLine($"Longest user: {totalName}");
 
-var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.id);
-Console.WriteLine($"New client updated: {updatedClient}");
+//var newClient = await clientService.CreateClientAsync(client);
+//Console.WriteLine($"New client created: {newClient}");
 
-var clientWasDeleted = await clientService.DeleteClientAsync(newClient.id);
-if (clientWasDeleted == true) {
-    Console.WriteLine($"Client: {newClient.name} was deleted");
-}
+//var updateClient = new UpdateClientDTO {
+//    race = "lmao"
+//};
+
+//var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.id);
+//Console.WriteLine($"New client updated: {updatedClient}");
+
+//var clientWasDeleted = await clientService.DeleteClientAsync(newClient.id);
+//if (clientWasDeleted == true) {
+//    Console.WriteLine($"Client: {newClient.name} was deleted");
+//}
 
 //var llama = new Llama();
 //await llama.UpdateModel();

@@ -3,11 +3,11 @@
     x:Class="CDOWin.Views.ClientViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CDOWin.Views"
+    xmlns:views="using:CDOWin.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CDOWin.ViewModels" 
-    xmlns:local1="using:CDO.Core.Models"
+    xmlns:models="using:CDO.Core.Models"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
     mc:Ignorable="d">
@@ -26,14 +26,12 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" 
-                       Grid.Column="0"
-                       Text="{Binding SelectedClient.name}"
-                       FontSize="22"
-                       FontWeight="Bold"
-                       Margin="16,8,8,8"/>
-        <Button Grid.Row="0"
-                Grid.Column="1"
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="{Binding SelectedClient.name}"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Margin="16,8,8,8"/>
+        <Button Grid.Row="0" Grid.Column="1"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Width="32"
@@ -57,9 +55,7 @@
         </Button>
 
         <!-- Scroll Viewwer Content -->
-        <ScrollViewer Grid.Row="2"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2">
+        <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             
             <!-- Wrap Panel -->
             <controls:WrapPanel Orientation="Horizontal"
@@ -68,17 +64,10 @@
                                 Margin="12">
 
                 <!-- Personal Information Card-->
-                <Grid Width="300"
-                      Height="320"
-                      CornerRadius="4"
-                      BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                      BorderThickness="1"
-                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <Grid Style="{StaticResource CardContainerGridStyle}">
                     
                     <!-- Inner Grid -->
-                    <Grid Margin="16,10,16,16" 
-                          ColumnSpacing="12"
-                          RowSpacing="10">
+                    <Grid Style="{StaticResource CardInnerGridStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -99,87 +88,72 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="0" Grid.Column="0"
                                    Grid.ColumnSpan="6"
                                    Text="Personal Information"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                         <!-- Date of Birth/DL/SSN -->
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="1" Grid.Column="0"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="DOB"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="DOB"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.formattedDOB}"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="2"
+                        <StackPanel Grid.Row="1" Grid.Column="2"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="DL/ID"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="DL/ID"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.driversLicense}"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="4"
+                        <StackPanel Grid.Row="1" Grid.Column="4"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="SSN"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="SSN"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.formattedSSN}"/>
                         </StackPanel>
 
                         <!-- Fluent Languages/Race -->
-                        <StackPanel Grid.Row="2"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="2" Grid.Column="0"
                                     Grid.ColumnSpan="3">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Fluent Languages"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Fluent Languages"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.fluentLanguages}"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2"
-                                    Grid.Column="3"
+                        <StackPanel Grid.Row="2" Grid.Column="3"
                                     Grid.ColumnSpan="3">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Race"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Race"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.race}"/>
                         </StackPanel>
 
                         <!-- Address Section -->
-                        <StackPanel Grid.Row="3"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="3" Grid.Column="0"
                                     Grid.ColumnSpan="6">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Address"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Address"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.formattedAddress}"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" 
                                        Text="{Binding SelectedClient.formattedCityStateZip}"/>
                         </StackPanel>
                         
 
 
                         <!-- Education Section -->
-                        <StackPanel Grid.Row="4"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="4" Grid.Column="0"
                                     Grid.ColumnSpan="6">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Education"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Education"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.education}"
                                        TextWrapping="WrapWholeWords"/>
                         </StackPanel>
@@ -187,17 +161,10 @@
                 </Grid>
 
                 <!-- Case Information Card -->
-                <Grid Width="300"
-                      Height="320"
-                      CornerRadius="4"
-                      BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                      BorderThickness="1"
-                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <Grid Style="{StaticResource CardContainerGridStyle}">
                     
                     <!-- Inner Grid -->
-                    <Grid Margin="16,10,16,16" 
-                          ColumnSpacing="12"
-                          RowSpacing="10">
+                    <Grid Style="{StaticResource CardInnerGridStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -218,104 +185,87 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="0" Grid.Column="0"
                                    Grid.ColumnSpan="6"
                                    Text="Case Information"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                         <!-- Start Date/Case ID/Status Section -->
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="1" Grid.Column="0"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Start Date"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Start Date"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.formattedStartDate}"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="2"
+                        <StackPanel Grid.Row="1" Grid.Column="2"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Case ID"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Case ID"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.caseID}"/>
                         </StackPanel>
                         
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="4"
+                        <StackPanel Grid.Row="1" Grid.Column="4"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Status"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Status"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.status}"/>
                         </StackPanel>
 
                         <!-- Benefits/Premiums Section -->
-                        <StackPanel Grid.Row="2"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="2" Grid.Column="0"
                                     Grid.ColumnSpan="2">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Benefits"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Benefits"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.benefit}"/>
                         </StackPanel>
                         
-                        <StackPanel Grid.Row="2"
-                                    Grid.Column="2"
+                        <StackPanel Grid.Row="2" Grid.Column="2"
                                     Grid.ColumnSpan="4">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Premiums"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Premiums"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.premiums}"/>
                         </StackPanel>
 
                         <!-- Counselor Section -->
-                        <StackPanel Grid.Row="3"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="3" Grid.Column="0"
                                     Grid.ColumnSpan="6">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Counselor"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Counselor"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.counselor}"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.counselorPhone}"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.counselorEmail}"/>
                         </StackPanel>
 
                         <!-- Secretary Section -->
-                        <StackPanel Grid.Row="4"
-                                    Grid.Column="0"
+                        <StackPanel Grid.Row="4" Grid.Column="0"
                                     Grid.ColumnSpan="6">
-                            <TextBlock FontWeight="Bold"
-                                       Text="Secretary"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Secretary"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.counselor}"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
                 
+                <!-- Conditions/Goals Card -->
+                <Grid Style="{StaticResource CardContainerGridStyle}">
+                    
+                </Grid>
+
                 <!-- Contact Information Card -->
-                <Grid Width="300"
-                      Height="320"
-                      CornerRadius="4"
-                      BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                      BorderThickness="1"
-                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <Grid Style="{StaticResource CardContainerGridStyle}">
                     
                     <!-- Inner Grid -->
-                    <Grid Margin="16,10,16,16" 
-                          ColumnSpacing="12"
-                          RowSpacing="10">
+                    <Grid Style="{StaticResource CardInnerGridStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -332,78 +282,62 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="0" Grid.Column="0"
                                    Grid.ColumnSpan="2"
                                    Text="Contact Information"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                         <!-- Phone 1 -->
-                        <FontIcon Grid.Row="1"
-                                  Grid.Column="0"
+                        <FontIcon Grid.Row="1" Grid.Column="0"
                                   Glyph="&#xE717;"/>
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="1">
-                            <TextBlock FontWeight="Bold"
-                                       Text="{Binding SelectedClient.phone1Identity}"
-                                       Margin="0,2,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="{Binding SelectedClient.phone1Identity}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.phone1}"/>
                         </StackPanel>
 
                         <!-- Phone 2 -->
-                        <FontIcon Grid.Row="2"
-                                  Grid.Column="0"
+                        <FontIcon Grid.Row="2" Grid.Column="0"
                                   Glyph="&#xE717;"/>
 
-                        <StackPanel Grid.Row="2"
-                                    Grid.Column="1">
-                            <TextBlock FontWeight="Bold"
-                                       Text="{Binding SelectedClient.phone2Identity}"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        <StackPanel Grid.Row="2" Grid.Column="1">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="{Binding SelectedClient.phone2Identity}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.phone2}"/>
                         </StackPanel>
 
                         <!-- Phone 3 -->
-                        <FontIcon Grid.Row="3"
-                                  Grid.Column="0"
+                        <FontIcon Grid.Row="3" Grid.Column="0"
                                   Glyph="&#xE717;"/>
 
-                        <StackPanel Grid.Row="3"
-                                    Grid.Column="1">
-                            <TextBlock FontWeight="Bold"
-                                       Text="{Binding SelectedClient.phone3Identity}"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        <StackPanel Grid.Row="3" Grid.Column="1">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="{Binding SelectedClient.phone3Identity}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.phone3}"/>
                         </StackPanel>
 
                         <!-- Email 1 -->
-                        <FontIcon Grid.Row="4"
-                                  Grid.Column="0"
+                        <FontIcon Grid.Row="4" Grid.Column="0"
                                   Glyph="&#xE715;"/>
 
-                        <StackPanel Grid.Row="4"
-                                    Grid.Column="1">
-                            <TextBlock FontWeight="Bold"
-                                       Text="{Binding SelectedClient.emailIdentity}"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        <StackPanel Grid.Row="4" Grid.Column="1">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="{Binding SelectedClient.emailIdentity}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.email}"/>
                         </StackPanel>
 
                         <!-- Email 2 -->
-                        <FontIcon Grid.Row="5"
-                                  Grid.Column="0"
+                        <FontIcon Grid.Row="5" Grid.Column="0"
                                   Glyph="&#xE715;"/>
 
-                        <StackPanel Grid.Row="5"
-                                    Grid.Column="1">
-                            <TextBlock FontWeight="Bold"
-                                       Text="{Binding SelectedClient.email2Identity}"
-                                       Margin="0,0,0,1"/>
-                            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        <StackPanel Grid.Row="5" Grid.Column="1">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="{Binding SelectedClient.email2Identity}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{Binding SelectedClient.email2}"/>
                         </StackPanel>
                     </Grid>
@@ -411,17 +345,10 @@
                 </Grid>
                 
                 <!-- Checklist Card-->
-                <Grid Width="300"
-                      Height="320"
-                      CornerRadius="4"
-                      BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                      BorderThickness="1"
-                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <Grid Style="{StaticResource CardContainerGridStyle}">
                     
                     <!-- Inner Grid -->
-                    <Grid Margin="16,10,16,16" 
-                          RowSpacing="2"
-                          ColumnSpacing="12">
+                    <Grid Style="{StaticResource Checklists CardInnerGridStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -441,102 +368,78 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="0" Grid.Column="0"
                                    Grid.ColumnSpan="2"
-                                   Margin="0,0,0,10"
+                                   Margin="0,0,0,9"
                                    Text="Checklists"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
                         
                         <!-- Resume Section -->
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="1" Grid.Column="0"
                                    Text="Resume"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="2"
-                                  Grid.Column="0"
-                                  HorizontalAlignment="Left"
+                        <CheckBox Grid.Row="2" Grid.Column="0"
+                                  Style="{StaticResource LeftCheckboxStyle}"
                                   Content="Required"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.resumeRequired}"/>
-                        <CheckBox Grid.Row="2"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Right"
+                        <CheckBox Grid.Row="2" Grid.Column="1"
+                                  Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.resumeCompleted}"/>
 
                         <!-- Video Interviews Section -->
-                        <TextBlock Grid.Row="3"
-                                   Grid.Column="0"
-                                   Margin="0,4,0,0"
+                        <TextBlock Grid.Row="3" Grid.Column="0"
                                    Text="Video Interviews"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="4"
-                                  Grid.Column="0"
-                                  HorizontalAlignment="Left"
+                        <CheckBox Grid.Row="4" Grid.Column="0"
+                                  Style="{StaticResource LeftCheckboxStyle}"
                                   Content="Required"
                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.videoInterviewRequired}"/>
-                        <CheckBox Grid.Row="4"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Right"
+                        <CheckBox Grid.Row="4" Grid.Column="1"
+                                  Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.videoInterviewCompleted}"/>
 
                         <!-- Releases Section -->
-                        <TextBlock Grid.Row="5"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="5" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Text="Releases"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="5"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Right"
+                        <CheckBox Grid.Row="5" Grid.Column="1"
+                                  Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.releasesCompleted}"/>
 
                         <!-- Orientation Section -->
-                        <TextBlock Grid.Row="6"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="6" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Text="Orientation"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="6"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Right"
+                        <CheckBox Grid.Row="6" Grid.Column="1"
+                                  Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.orientationCompleted}"/>
 
                         <!-- 1850 Data Sheet Section -->
-                        <TextBlock Grid.Row="7"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="7"  Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Text="1850 Data Sheet"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="7"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Right"
+                        <CheckBox Grid.Row="7"  Grid.Column="1"
+                                  Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.dataSheetCompleted}"/>
 
-
                         <!-- Elevator Speech Section -->
-                        <TextBlock Grid.Row="8"
-                                   Grid.Column="0"
+                        <TextBlock Grid.Row="8" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Text="Elevator Speech"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="8"
-                                  Grid.Column="1"
+                        <CheckBox Grid.Row="8" Grid.Column="1"
                                   Click="ElevatorSpeech_Clicked"
-                                  HorizontalAlignment="Right"
+                                  Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed"
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                   IsChecked="{Binding SelectedClient.elevatorSpeechCompleted}"/>
                     </Grid>
                 </Grid>

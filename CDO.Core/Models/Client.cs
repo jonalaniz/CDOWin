@@ -66,9 +66,9 @@ public record class Client(
             if (address1 == null && address2 == null)
                 return "No address on file.";
             else if (address2 == null) {
-                return address1;
+                return $"{address1}\n{formattedCityStateZip}";
             } else {
-                return $"{address1} {address2}";
+                return $"{address1} {address2}\n{formattedCityStateZip}";
             }
         }
     }

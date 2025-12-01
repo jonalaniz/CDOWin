@@ -9,6 +9,7 @@
     xmlns:viewmodels="using:CDOWin.ViewModels" 
     xmlns:models="using:CDO.Core.Models"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:usercontrols="using:CDOWin.Controls"
     d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
     mc:Ignorable="d">
 
@@ -88,75 +89,34 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Grid.ColumnSpan="6"
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
                                    Text="Personal Information"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                         <!-- Date of Birth/DL/SSN -->
-                        <StackPanel Grid.Row="1" Grid.Column="0"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="DOB"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.formattedDOB}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                     Label="DOB" Value="{Binding SelectedClient.formattedDOB}"/>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="DL/ID"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.driversLicense}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                                     Label="DL/ID" Value="{Binding SelectedClient.driversLicense}"/>
 
-                        <StackPanel Grid.Row="1" Grid.Column="4"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="SSN"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.formattedSSN}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                                                     Label="SSN" Value="{Binding SelectedClient.formattedSSN}"/>
 
                         <!-- Fluent Languages/Race -->
-                        <StackPanel Grid.Row="2" Grid.Column="0"
-                                    Grid.ColumnSpan="3">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Fluent Languages"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.fluentLanguages}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                                                     Label="Fluent Languages" Value="{Binding SelectedClient.fluentLanguages}"/>
 
-                        <StackPanel Grid.Row="2" Grid.Column="3"
-                                    Grid.ColumnSpan="3">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Race"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.race}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3"
+                                                     Label="Race" Value="{Binding SelectedClient.race}"/>
 
                         <!-- Address Section -->
-                        <StackPanel Grid.Row="3" Grid.Column="0"
-                                    Grid.ColumnSpan="6">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Address"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.formattedAddress}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" 
-                                       Text="{Binding SelectedClient.formattedCityStateZip}"/>
-                        </StackPanel>
-                        
-
+                        <usercontrols:LabelValuePair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
+                                                     Label="Address" Value="{Binding SelectedClient.formattedAddress}"/>
 
                         <!-- Education Section -->
-                        <StackPanel Grid.Row="4" Grid.Column="0"
-                                    Grid.ColumnSpan="6">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Education"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.education}"
-                                       TextWrapping="WrapWholeWords"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
+                                                     Label="Education" Value="{Binding SelectedClient.education}"/>
                     </Grid>
                 </Grid>
 
@@ -185,69 +145,44 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Grid.ColumnSpan="6"
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
                                    Text="Case Information"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                         <!-- Start Date/Case ID/Status Section -->
-                        <StackPanel Grid.Row="1" Grid.Column="0"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Start Date"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.formattedStartDate}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                                     Label="Start Date" Value="{Binding SelectedClient.formattedStartDate}"/>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Case ID"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.caseID}"/>
-                        </StackPanel>
-                        
-                        <StackPanel Grid.Row="1" Grid.Column="4"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Status"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.status}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                                     Label="Case ID" Value="{Binding SelectedClient.caseID}"/>
+
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                                                     Label="Status" Value="{Binding SelectedClient.status}"/>
 
                         <!-- Benefits/Premiums Section -->
-                        <StackPanel Grid.Row="2" Grid.Column="0"
-                                    Grid.ColumnSpan="2">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Benefits"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.benefit}"/>
-                        </StackPanel>
-                        
-                        <StackPanel Grid.Row="2" Grid.Column="2"
-                                    Grid.ColumnSpan="4">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="Premiums"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.premiums}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                                     Label="Benefits" Value="{Binding SelectedClient.benefit}"/>
+
+                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4"
+                                                     Label="Premiums" Value="{Binding SelectedClient.premiums}"/>
 
                         <!-- Counselor Section -->
-                        <StackPanel Grid.Row="3" Grid.Column="0"
-                                    Grid.ColumnSpan="6">
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}"
                                        Text="Counselor"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.counselor}"/>
+                                       Text="{Binding SelectedClient.counselor}"
+                                       Visibility="{Binding SelectedClient.counselor, Converter={StaticResource StringToVisability}}"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.counselorPhone}"/>
+                                       Text="{Binding SelectedClient.counselorPhone}"
+                                       Visibility="{Binding SelectedClient.counselorPhone, Converter={StaticResource StringToVisability}}"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.counselorEmail}"/>
+                                       Text="{Binding SelectedClient.counselorEmail}"
+                                       Visibility="{Binding SelectedClient.counselorEmail, Converter={StaticResource StringToVisability}}"/>
                         </StackPanel>
 
                         <!-- Secretary Section -->
-                        <StackPanel Grid.Row="4" Grid.Column="0"
-                                    Grid.ColumnSpan="6">
+                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}"
                                        Text="Secretary"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}"
@@ -256,9 +191,44 @@
                     </Grid>
                 </Grid>
                 
-                <!-- Conditions/Goals Card -->
+                <!-- Employment Profile Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
-                    
+                    <!-- Inner Grid -->
+                    <Grid Style="{StaticResource CardInnerGridStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Header -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+                                   Text="Employment Profile"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+                        <!-- Start Date/Case ID/Status Section -->
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
+                                                     Label="Disability" Value="{Binding SelectedClient.disability}"/>
+
+                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
+                                                     Label="Criminal Charges" Value="{Binding SelectedClient.criminalCharge}"/>
+
+                        <usercontrols:LabelValuePair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
+                                                     Label="Transportation" Value="{Binding SelectedClient.transportation}"/>
+                    </Grid>
                 </Grid>
 
                 <!-- Contact Information Card -->
@@ -282,64 +252,53 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Grid.ColumnSpan="2"
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                    Text="Contact Information"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                         <!-- Phone 1 -->
                         <FontIcon Grid.Row="1" Grid.Column="0"
-                                  Glyph="&#xE717;"/>
-                        <StackPanel Grid.Row="1" Grid.Column="1">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="{Binding SelectedClient.phone1Identity}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.phone1}"/>
-                        </StackPanel>
+                                  Glyph="&#xE717;"
+                                  Visibility="{Binding SelectedClient.phone1, Converter={StaticResource StringToVisability}}"/>
+                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="1"
+                                                     Label="{Binding SelectedClient.phone1Identity}" Value="{Binding SelectedClient.phone1}"
+                                                     Visibility="{Binding SelectedClient.phone1, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 2 -->
                         <FontIcon Grid.Row="2" Grid.Column="0"
-                                  Glyph="&#xE717;"/>
+                                  Glyph="&#xE717;"
+                                  Visibility="{Binding SelectedClient.phone2, Converter={StaticResource StringToVisability}}"/>
 
-                        <StackPanel Grid.Row="2" Grid.Column="1">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="{Binding SelectedClient.phone2Identity}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.phone2}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="1"
+                                                     Label="{Binding SelectedClient.phone2Identity}" Value="{Binding SelectedClient.phone2}"
+                                                     Visibility="{Binding SelectedClient.phone2, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 3 -->
                         <FontIcon Grid.Row="3" Grid.Column="0"
-                                  Glyph="&#xE717;"/>
+                                  Glyph="&#xE717;"
+                                  Visibility="{Binding SelectedClient.phone3, Converter={StaticResource StringToVisability}}"/>
 
-                        <StackPanel Grid.Row="3" Grid.Column="1">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="{Binding SelectedClient.phone3Identity}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.phone3}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="3" Grid.Column="1"
+                                                     Label="{Binding SelectedClient.phone3Identity}" Value="{Binding SelectedClient.phone3}"
+                                                     Visibility="{Binding SelectedClient.phone3, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 1 -->
                         <FontIcon Grid.Row="4" Grid.Column="0"
-                                  Glyph="&#xE715;"/>
+                                  Glyph="&#xE715;"
+                                  Visibility="{Binding SelectedClient.email, Converter={StaticResource StringToVisability}}"/>
 
-                        <StackPanel Grid.Row="4" Grid.Column="1">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="{Binding SelectedClient.emailIdentity}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.email}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="4" Grid.Column="1"
+                                                     Label="{Binding SelectedClient.emailIdentity}" Value="{Binding SelectedClient.email}"
+                                                     Visibility="{Binding SelectedClient.email, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 2 -->
                         <FontIcon Grid.Row="5" Grid.Column="0"
-                                  Glyph="&#xE715;"/>
+                                  Glyph="&#xE715;"
+                                  Visibility="{Binding SelectedClient.email2, Converter={StaticResource StringToVisability}}"/>
 
-                        <StackPanel Grid.Row="5" Grid.Column="1">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
-                                       Text="{Binding SelectedClient.email2Identity}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{Binding SelectedClient.email2}"/>
-                        </StackPanel>
+                        <usercontrols:LabelValuePair Grid.Row="5" Grid.Column="1"
+                                                     Label="{Binding SelectedClient.email2Identity}" Value="{Binding SelectedClient.email2}"
+                                                     Visibility="{Binding SelectedClient.email2, Converter={StaticResource StringToVisability}}"/>
                     </Grid>
 
                 </Grid>
@@ -368,9 +327,8 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Header -->
-                        <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   Margin="0,0,0,9"
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Margin="0,0,0,5"
                                    Text="Checklists"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
                         

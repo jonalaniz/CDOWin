@@ -3,9 +3,12 @@
     x:Class="CDOWin.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:CDOWin.Converters"
     xmlns:local="using:CDOWin">
     <Application.Resources>
         <ResourceDictionary>
+            <converters:StringNullVisibilityConverter x:Key="StringToVisability"/>
+            <converters:StringNullVisibilityConverter x:Key="NullToVisability"/>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="/Resources/Styles.xaml"/>

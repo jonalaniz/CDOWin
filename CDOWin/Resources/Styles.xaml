@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CDOWin.Resources">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Card Container Grid Style -->
     <Style x:Key="CardContainerGridStyle" TargetType="Grid">
@@ -16,7 +15,7 @@
 
     <!-- Card Inner Grid Style -->
     <Style x:Key="CardInnerGridStyle" TargetType="Grid">
-        <Setter Property="Margin" Value="16,10,16,16"/>
+        <Setter Property="Margin" Value="16,9,16,16"/>
         <Setter Property="ColumnSpacing" Value="12"/>
         <Setter Property="RowSpacing" Value="10"/>
     </Style>

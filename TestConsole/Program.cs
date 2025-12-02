@@ -30,64 +30,12 @@ IClientService clientService = new ClientService(network);
 //    ssn = 696969696
 //};
 
-var clients = await clientService.GetAllClientsAsync();
-var disabilityCount = 0;
-var disability = "";
-var criminalChargeCount = 0;
-var criminalCharges = "";
-var transportationCount = 0;
-var transportation = "";
-var conditionsCount = 0;
-var conditions = "";
-var employmnetGoalsCount = 0;
-var employmentGoals = "";
-var totalLength = 0;
-var totalName = "";
+var clients = await clientService.GetAllClientSummariesAsync();
 
-foreach (var c in clients) {
-    var length = 0;
-    if (c.disability.Length > disabilityCount) {
-        disabilityCount = c.disability.Length;
-        disability = c.disability;
-        length += c.disability.Length;
-    }
-
-    if (c.criminalCharge != null && c.criminalCharge.Length > criminalChargeCount) {
-        criminalChargeCount = c.criminalCharge.Length;
-        criminalCharges = c.criminalCharge;
-        length += c.criminalCharge.Length;
-    }
-
-    if (c.transportation != null && c.transportation.Length > transportationCount) {
-        transportationCount = c.transportation.Length;
-        transportation = c.transportation;
-        length += c.transportation.Length;
-    }
-
-    if (c.conditions != null && c.conditions.Length > conditionsCount) {
-        conditionsCount = c.conditions.Length;
-        conditions = c.conditions;
-    }
-
-    if (c.employmentGoal != null && c.employmentGoal.Length > employmnetGoalsCount) {
-        employmnetGoalsCount = c.employmentGoal.Length;
-        employmentGoals = c.employmentGoal;
-    }
-
-    if (length > totalLength) {
-        totalLength = length;
-        totalName = c.name;
-    }
+foreach (var client in clients) {
+    Console.WriteLine($"Client: {client.name}");
+    Console.WriteLine($"Printed Counselor name: {client.counselorName}");
 }
-
-Console.WriteLine($"Longest disability: {disabilityCount}");
-Console.WriteLine(employmentGoals);
-Console.WriteLine($"Longest criminal charge: {criminalChargeCount}");
-Console.WriteLine(criminalCharges);
-Console.WriteLine($"Longest transportation: {transportationCount}");
-Console.WriteLine(transportation);
-
-Console.WriteLine($"Longest user: {totalName}");
 
 //var newClient = await clientService.CreateClientAsync(client);
 //Console.WriteLine($"New client created: {newClient}");

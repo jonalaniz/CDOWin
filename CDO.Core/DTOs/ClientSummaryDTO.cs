@@ -17,6 +17,7 @@ public class ClientSummaryDTO {
     public string? address1 { get; init; }
     public string? address2 { get; init; }
     public string? zip { get; init; }
+    public string? counselorName { get; init; }
 
     // Computed Properties
     public string name => $"{lastName}, {firstName}";

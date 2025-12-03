@@ -3,7 +3,7 @@
 public static class Endpoints {
     public static string Client(int id) => $"{Clients}/{id}";
     public static readonly string Clients = "/api/clients";
-    public static readonly string ClientSummaries = "/api/clients";
+    public static readonly string ClientSummaries = "/api/clients/summaries";
     public static string Counselor(int id) => $"{Counselors}/{id}";
     public static readonly string Counselors = "/api/counselors";
     public static string Employer(int id) => $"{Employers}/{id}";

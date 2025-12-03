@@ -20,7 +20,7 @@ namespace CDO.Core.Interfaces {
         // POST Methods
         // -----------------------------
         public Task<Employer?> CreateEmployerAsync(EmployerDTO dto);
-        
+
         // -----------------------------
         // PATCH Methods
         // -----------------------------

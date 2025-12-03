@@ -4,7 +4,6 @@ using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -89,12 +88,5 @@ public partial class ClientsViewModel : ObservableObject {
         // Fetch the full client.
         var selectedClient = await _service.GetClientAsync(id);
         SelectedClient = selectedClient;
-
-        if (selectedClient != null) {
-            var IsNullOrEmpty = string.IsNullOrEmpty(selectedClient.driversLicense);
-            var IsNullOrWhiteSpace = string.IsNullOrWhiteSpace(selectedClient.driversLicense);
-            Debug.WriteLine($"NullOrEmpty: {IsNullOrEmpty}");
-            Debug.WriteLine($"NullOrWhiteSpace: {IsNullOrWhiteSpace}");
-        }
     }
 }

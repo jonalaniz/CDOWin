@@ -1,7 +1,4 @@
-﻿using System.IO.Pipes;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace CDO.Core.Models;
+﻿namespace CDO.Core.Models;
 
 public record class Client(
     int id,
@@ -80,16 +77,16 @@ public record class Client(
         get {
             if (zip != null)
                 return $"{city}, {state} {zip}";
-            else 
+            else
                 return $"{city}, {state}";
         }
     }
 
     public string formattedSSN {
         get {
-            if(ssn.ToString() is { } unwrappedSSN) {
-                if(unwrappedSSN.Length == 9) {
-                    return $"{unwrappedSSN.Substring(0,3)}-{unwrappedSSN.Substring(3,2)}-{unwrappedSSN.Substring(5,4)}";
+            if (ssn.ToString() is { } unwrappedSSN) {
+                if (unwrappedSSN.Length == 9) {
+                    return $"{unwrappedSSN.Substring(0, 3)}-{unwrappedSSN.Substring(3, 2)}-{unwrappedSSN.Substring(5, 4)}";
                 }
             }
             return ssn.ToString();

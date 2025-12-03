@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace CDO.Core.Services;
@@ -25,8 +24,6 @@ public class NetworkService : INetworkService {
     // -----------------------------
     public void Initialize(string baseAddress, string apiKey) {
         if (_instance != null) return;
-
-        Debug.WriteLine($"Base Address: {baseAddress}, API-Key: {apiKey}");
 
         // Initialize HttpClient
         _httpClient.BaseAddress = new Uri(baseAddress);

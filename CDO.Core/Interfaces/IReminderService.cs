@@ -1,7 +1,5 @@
-﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs;
 using CDO.Core.Models;
-using System.Net;
 
 namespace CDO.Core.Interfaces;
 

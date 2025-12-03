@@ -1,9 +1,4 @@
-﻿using CDO.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CDO.Core.DTOs;
+﻿namespace CDO.Core.DTOs;
 
 public class ClientSummaryDTO {
     // Non-optional fields

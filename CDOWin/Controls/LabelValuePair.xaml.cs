@@ -45,7 +45,7 @@ public sealed partial class LabelValuePair : UserControl {
     private void UpdateOpacityBasedOnValue(object newValue) {
         var value = (string)newValue;
 
-        if(string.IsNullOrWhiteSpace(value)) {
+        if(string.IsNullOrEmpty(value)) {
             this.Opacity = 0.5;
         } else {
             this.Opacity = 1.0;

@@ -57,6 +57,7 @@ public partial class ClientsViewModel : ObservableObject {
         (c.name?.ToLower().Contains(query) ?? false)
         || (c.id.ToString()?.Contains(query) ?? false)
         || (c.formattedAddress?.ToLower().Contains(query) ?? false)
+        || (c.counselorName?.ToLower().Contains(query) ?? false)
         );
 
         FilteredClients = new ObservableCollection<ClientSummaryDTO>(result);
@@ -88,5 +89,12 @@ public partial class ClientsViewModel : ObservableObject {
         // Fetch the full client.
         var selectedClient = await _service.GetClientAsync(id);
         SelectedClient = selectedClient;
+
+        if (selectedClient != null) {
+            var IsNullOrEmpty = string.IsNullOrEmpty(selectedClient.driversLicense);
+            var IsNullOrWhiteSpace = string.IsNullOrWhiteSpace(selectedClient.driversLicense);
+            Debug.WriteLine($"NullOrEmpty: {IsNullOrEmpty}");
+            Debug.WriteLine($"NullOrWhiteSpace: {IsNullOrWhiteSpace}");
+        }
     }
 }

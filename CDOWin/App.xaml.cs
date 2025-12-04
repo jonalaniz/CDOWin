@@ -17,7 +17,6 @@ public partial class App : Application {
             // Initialize services
             AppServices.InitializeServices(creds.UserName!, creds.Password!);
 
-
             // Show the loading splash screen
             var splashWindow = new SplashWindow();
             splashWindow.Activate();

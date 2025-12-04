@@ -3,6 +3,7 @@ using CDO.Core.Services;
 using Meziantou.Framework.Win32;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.AppLifecycle;
 using System;
 using WinUIEx;
 
@@ -120,7 +121,6 @@ public sealed partial class LoginWindow : Window {
             persistence: CredentialPersistence.LocalMachine);
 
         CredentialsSaved = true;
-
-        this.Close();
+        AppInstance.Restart("");
     }
 }

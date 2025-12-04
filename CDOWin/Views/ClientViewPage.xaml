@@ -14,7 +14,8 @@
     mc:Ignorable="d">
 
     <Grid BorderThickness="0, 0, 1, 0"
-          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+          Visibility="{Binding SelectedClient, Mode=OneWay, Converter={StaticResource NullToVisability}}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

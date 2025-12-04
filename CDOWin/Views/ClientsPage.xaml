@@ -42,31 +42,37 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0"
-                        Grid.Column="0">
-                <TextBlock Text="Clients"
-                           FontSize="22"
-                           FontWeight="Bold"
-                           Margin="16,8,16,1"/>
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0"
+                               Text="Clients"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Margin="16,8,16,0"/>
+                    <Button Grid.Column="1" VerticalAlignment="Center"
+                            Width="32" Height="32" Padding="0"
+                            Margin="16,8,12,0"
+                            Style="{StaticResource SubtleButtonStyle}">
+                        <FontIcon Glyph="&#xE710;"
+                          FontSize="16"
+                          Foreground="{ThemeResource SystemAccentColor}"/>
+                    </Button>
+                </Grid>
                 <TextBlock FontSize="12"
-                           Margin="16,1,16,8"
+                           Margin="16,0,16,8"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}">
                     <Run Text="{x:Bind ViewModel.FilteredClients.Count, Mode=OneWay}"/>
                     <Run Text="Clients"/>
                 </TextBlock>
             </StackPanel>
 
-            <Button Grid.Row="0"
-                    Grid.Column="1"
-                    VerticalAlignment="Center"
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    Margin="16,8,16,8"
-                    Style="{StaticResource SubtleButtonStyle}">
-                <FontIcon Glyph="&#xE710;"
-                          FontSize="16"
-                          Foreground="{ThemeResource SystemAccentColor}"/>
-            </Button>
+
 
             <TextBox Grid.Row="1"
                      Grid.Column="0"
@@ -127,7 +133,8 @@
                          SelectionChanged="SelectionChanged"
                          Grid.Column="0"
                          Grid.Row="0"
-                         Margin="8, 0, 0, 8">
+                         Margin="8, 0, 0, 8"
+                         Visibility="{Binding SelectedClient, Mode=OneWay, Converter={StaticResource NullToVisability}}">
                 <SelectorBarItem Text="Notes" IsSelected="True" />
                 <SelectorBarItem Text="Other" />
             </SelectorBar>

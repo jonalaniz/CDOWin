@@ -16,10 +16,12 @@
   <ItemGroup>
     <None Remove="Assets\CDO_Dark.png" />
     <None Remove="Assets\CDO_Light.png" />
+    <None Remove="Controls\LabelTextBoxPair.xaml" />
     <None Remove="Controls\LabelValuePAir.xaml" />
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\ClientViewPage.xaml" />
+    <None Remove="Views\Dialogs\UpdateContact.xaml" />
     <None Remove="Views\Notes.xaml" />
     <None Remove="Views\POsPage.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
@@ -73,6 +75,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Controls\LabelTextBoxPair.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Views\POsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,6 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\LabelValuePair.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Dialogs\UpdateContact.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

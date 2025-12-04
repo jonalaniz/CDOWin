@@ -82,7 +82,8 @@
                             
                             <TextBlock Grid.Column="0" Text="Personal Information"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                    Tag="personalInformation" Click="EditButton_Clicked">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
                             </Button>
                         </Grid>
@@ -145,7 +146,8 @@
 
                             <TextBlock Grid.Column="0" Text="Case Information"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                    Tag="caseInformation" Click="EditButton_Clicked">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
                             </Button>
                         </Grid>
@@ -196,6 +198,7 @@
                 
                 <!-- Employment Profile Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
+                    
                     <!-- Inner Grid -->
                     <Grid Style="{StaticResource CardInnerGridStyle}">
                         <Grid.RowDefinitions>
@@ -214,7 +217,8 @@
 
                             <TextBlock Grid.Column="0" Text="Employment Profile"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                    Tag="employmentProfile" Click="EditButton_Clicked">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
                             </Button>
                         </Grid>
@@ -232,6 +236,7 @@
 
                 <!-- Arrangements Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
+                    
                     <!-- Inner Grid -->
                     <Grid Style="{StaticResource CardInnerGridStyle}">
                         <Grid.RowDefinitions>
@@ -249,7 +254,8 @@
 
                             <TextBlock Grid.Column="0" Text="Arrangements"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                    Tag="arrangements" Click="EditButton_Clicked">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
                             </Button>
                         </Grid>
@@ -291,7 +297,10 @@
 
                             <TextBlock Grid.Column="0" Text="Contact Information"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                            
+                            <!-- Edit Contact Information Button -->
+                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" 
+                                    Tag="contactInformation" Click="EditButton_Clicked">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
                             </Button>
                         </Grid>
@@ -335,7 +344,6 @@
                                                      Label="{Binding SelectedClient.email2Identity}" Value="{Binding SelectedClient.email2}"
                                                      Visibility="{Binding SelectedClient.email2, Converter={StaticResource StringToVisability}}"/>
                     </Grid>
-
                 </Grid>
                 
                 <!-- Checklist Card-->
@@ -362,8 +370,7 @@
 
                         <!-- Header -->
                         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                   Margin="0,0,0,5"
-                                   Text="Checklists"
+                                   Margin="0,0,0,5" Text="Checklists"
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
                         
                         <!-- Resume Section -->

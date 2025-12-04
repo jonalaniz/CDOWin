@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CDOWin.Views.Dialogs.UpdateContact"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CDOWin.Views.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CDOWin.Controls" 
+    xmlns:models="using:CDO.Core.Models" 
+    d:DataContext="{d:DesignInstance Type=models:Client}"
+    mc:Ignorable="d">
+
+    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Row 0: DOB/DL/SSN -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Margin="0,8,8,8" Text="DOB" Style="{StaticResource LabelTextBlockStyle}"/>
+            <CalendarDatePicker Date="{Binding dob}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+
+        <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                                 Label="DL/ID" Value="{Binding driversLicense}"/>
+        <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
+                         Label="SSN" Value="{Binding ssn}"/>
+        
+        <!-- Row 1: Fluent Languages/Race-->
+        <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+                                   Label="Fluent Languages" Value="{Binding fluentLanguages}"/>
+        <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                                   Label="Race" Value="{Binding race}"/>
+        <!-- Row 2: Address -->
+        <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                                   Label="Address" Value="{Binding address1}"/>
+        <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
+                           Label="Apt, ste, etc" Value="{Binding address2}"/>
+        
+        <!-- Row 3: Address cont. -->
+        <controls:LabelTextBoxPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                                   Label="City" Value="{Binding city}"/>
+        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1">
+            <TextBlock Margin="0,8,8,8" Text="DOB" Style="{StaticResource LabelTextBlockStyle}"/>
+            <DropDownButton Content="TX"/>
+        </StackPanel>
+        <controls:LabelTextBoxPair Grid.Row="3" Grid.Column="5"
+                                   Label="Zip" Value="{Binding zip}"/>
+
+    </Grid>
+</Page>

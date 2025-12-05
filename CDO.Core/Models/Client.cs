@@ -6,6 +6,8 @@ public record class Client(
     string lastName,
     string counselor,
     Reminder[] reminders,
+    Referral[]? referrals,
+    PO[]? pos,
     DateTime? startDate,
     int? ssn,
     string? caseID,

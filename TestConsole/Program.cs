@@ -30,12 +30,28 @@ IClientService clientService = new ClientService(network);
 //    ssn = 696969696
 //};
 
-var clients = await clientService.GetAllClientSummariesAsync();
+// var clients = await clientService.GetAllClientSummariesAsync();
+var client = await clientService.GetClientAsync(755);
 
-foreach (var client in clients) {
-    Console.WriteLine($"Client: {client.name}");
-    Console.WriteLine($"Printed Counselor name: {client.counselorName}");
+foreach (var reminder in client.reminders)
+{
+    Console.WriteLine(reminder.description);
 }
+
+foreach (var referral in client.referrals)
+{
+    Console.WriteLine(referral.id);
+}
+
+foreach (var po in client.pos)
+{
+    Console.WriteLine(po.description); 
+}
+
+//foreach (var client in clients) {
+//    Console.WriteLine($"Client: {client.name}");
+//    Console.WriteLine($"Printed Counselor name: {client.counselorName}");
+//}
 
 //var newClient = await clientService.CreateClientAsync(client);
 //Console.WriteLine($"New client created: {newClient}");

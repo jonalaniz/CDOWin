@@ -27,8 +27,11 @@ public record class Referral(
     string? descriptionOfWorkSchedule,
     string? hourlyOrMonthlyWages,
     DateTime? hireDate,
-    DateTime? endDate
+    DateTime? endDate,
+
+    // Optional Parents
+    Employer? employer
     ) {
-    public DateTime? hireDateLocal => hireDate?.ToLocalTime();
-    public DateTime? endDateLocal => endDate?.ToLocalTime();
+    public string? formattedHireDate => hireDate?.ToString(format: "MM/dd/yyyy");
+    public string? formattedEndDate => endDate?.ToString(format: "MM/dd/yyyy");
 }

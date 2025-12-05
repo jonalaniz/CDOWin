@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CDOWin.Views.Inspectors.Placements"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CDOWin.Views.Inspectors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:CDOWin.ViewModels" 
+    xmlns:local1="using:CDO.Core.Models"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
+    mc:Ignorable="d">
+
+    <Grid Margin="16,4,16,16" RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Placements -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Placements"
+                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+        <ListView Grid.Row="1" Grid.Column="0" BorderThickness="1" CornerRadius="4" 
+                  BorderBrush="{ThemeResource SubtleFillColorTertiaryBrush}"
+                  ItemsSource="{x:Bind ViewModel.SelectedClient.referrals, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local1:Referral">
+                    <Grid RowSpacing="4" Margin="0,8,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="2">
+                            <TextBlock FontWeight="Bold" Text="{x:Bind employer.name, Mode=OneWay}"/>
+                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedHireDate, Mode=OneWay}"/>
+                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind position, Mode=OneWay}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Service Authorizations -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Service Authorizations"
+                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+        <ListView Grid.Row="3" Grid.Column="0" BorderThickness="1" CornerRadius="4" 
+                  BorderBrush="{ThemeResource SubtleFillColorTertiaryBrush}"
+                  ItemsSource="{x:Bind ViewModel.SelectedClient.pos, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local1:PO">
+                    <Grid RowSpacing="4" Margin="0,8,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="2">
+                            <TextBlock FontWeight="Bold" Text="{x:Bind id, Mode=OneWay}"/>
+                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedStartDate, Mode=OneWay}"/>
+                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind formattedEndDate, Mode=OneWay}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

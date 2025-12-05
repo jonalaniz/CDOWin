@@ -11,6 +11,6 @@ public record class PO(
     DateTime startDate,
     DateTime endDate
     ) {
-    public DateTime? startDateLocal => startDate.ToLocalTime();
-    public DateTime? endDateLocal => endDate.ToLocalTime();
+    public string? formattedStartDate => startDate.ToString(format: "MM/dd/yyyy");
+    public string? formattedEndDate => endDate.ToString(format: "MM/dd/yyyy");
 }

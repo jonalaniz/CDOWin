@@ -31,20 +31,30 @@ IClientService clientService = new ClientService(network);
 //};
 
 // var clients = await clientService.GetAllClientSummariesAsync();
-var client = await clientService.GetClientAsync(755);
+var client = await clientService.GetClientAsync(2338);
 
 foreach (var reminder in client.reminders)
 {
     Console.WriteLine(reminder.description);
 }
 
+Console.WriteLine("Referrals");
+Console.WriteLine();
 foreach (var referral in client.referrals)
 {
     Console.WriteLine(referral.id);
+    Console.WriteLine(referral.employer.name);
+    Console.WriteLine(referral.formattedHireDate);
+    Console.WriteLine(referral.position);
 }
 
+Console.WriteLine("Service Authorizations");
+Console.WriteLine();
 foreach (var po in client.pos)
 {
+    Console.WriteLine(po.id);
+    Console.WriteLine(po.startDate);
+    Console.WriteLine(po.endDate);
     Console.WriteLine(po.description); 
 }
 

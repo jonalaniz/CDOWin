@@ -136,7 +136,7 @@
                          Margin="8, 0, 0, 8"
                          Visibility="{Binding SelectedClient, Mode=OneWay, Converter={StaticResource NullToVisability}}">
                 <SelectorBarItem Text="Notes" IsSelected="True" />
-                <SelectorBarItem Text="Other" />
+                <SelectorBarItem Text="Employment" />
             </SelectorBar>
             
             <Frame Grid.Column="0"

@@ -26,6 +26,7 @@
     <None Remove="Views\Dialogs\UpdateCaseInformation.xaml" />
     <None Remove="Views\Dialogs\UpdateContacts.xaml" />
     <None Remove="Views\Dialogs\UpdateEmploymentProfile.xaml" />
+    <None Remove="Views\Inspectors\Placements.xaml" />
     <None Remove="Views\Notes.xaml" />
     <None Remove="Views\POsPage.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
@@ -165,6 +166,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Dialogs\UpdatePersonalInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Inspectors\Placements.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

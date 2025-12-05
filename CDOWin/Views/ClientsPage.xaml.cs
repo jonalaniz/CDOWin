@@ -1,5 +1,6 @@
 using CDO.Core.DTOs;
 using CDOWin.ViewModels;
+using CDOWin.Views.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 
@@ -32,7 +33,7 @@ public sealed partial class ClientsPage : Page {
                 pageType = typeof(Notes);
                 break;
             case 1:
-                pageType = typeof(SamplePage);
+                pageType = typeof(Placements);
                 break;
             default:
                 pageType = typeof(SamplePage);

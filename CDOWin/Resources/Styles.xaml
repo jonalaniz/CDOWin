@@ -10,6 +10,15 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
     </Style>
+    
+    <!-- Basic Card Container Grid Style -->
+    <Style x:Key="BasicCardContainerGridStyle" TargetType="Grid">
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource DividerStrokeColorDefaultBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+        <Setter Property="Padding" Value="14,5,14,8"/>
+    </Style>
 
     <!-- Card Container Grid Style -->
     <Style x:Key="CardContainerGridStyle" TargetType="Grid">

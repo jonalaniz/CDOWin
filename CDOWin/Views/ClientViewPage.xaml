@@ -402,7 +402,7 @@
                         <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"
                                    Text="Releases" FontWeight="Bold"/>
                         <CheckBox Grid.Row="5" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
-                                  Content="Completed"  Tag="releasesCompleted"
+                                  Content="Completed" Tag="releasesCompleted"
                                   IsChecked="{Binding SelectedClient.releasesCompleted}"
                                   Click="Checkbox_Clicked"/>
 

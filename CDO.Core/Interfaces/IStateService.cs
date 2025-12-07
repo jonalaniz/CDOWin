@@ -6,11 +6,6 @@ namespace CDO.Core.Interfaces;
 public interface IStateService {
 
     // -----------------------------
-    // Service Initialization Tasks
-    // -----------------------------
-    public Task InitializeAsync();
-
-    // -----------------------------
     // GET Methods
     // -----------------------------
     public Task<List<State>?> GetAllStatesAsync();

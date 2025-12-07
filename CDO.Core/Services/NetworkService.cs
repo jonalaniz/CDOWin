@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CDO.Core.Services;
 
@@ -73,11 +76,22 @@ public class NetworkService : INetworkService {
     // PATCH
     // -----------------------------
     public async Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var content = JsonContent.Create(body);
-        var response = await _httpClient.PatchAsync(endpoint, content);
-        response.EnsureSuccessStatusCode();
+        var options = new JsonSerializerOptions {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+        var json = JsonSerializer.Serialize(body, options);
+        var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
 
-        return await response.Content.ReadFromJsonAsync<TResponse>();
+        try {
+            var response = await _httpClient.PatchAsync(endpoint, content);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<TResponse>();
+        } catch (HttpRequestException ex) {
+            Debug.WriteLine("HTTP Request Exception:");
+            Debug.WriteLine($"Message: {ex.Message}");
+            throw;
+        }
     }
 
     // -----------------------------

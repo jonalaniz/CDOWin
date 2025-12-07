@@ -48,7 +48,7 @@ public class ClientService : IClientService {
     // -----------------------------
     // PATCH
     // -----------------------------
-    public Task<Client?> UpdateClientAsync(UpdateClientDTO dto, int id) {
+    public Task<Client?> UpdateClientAsync(int id, UpdateClientDTO dto) {
         return _network.UpdateAsync<UpdateClientDTO, Client>(Endpoints.Client(id), dto);
     }
 

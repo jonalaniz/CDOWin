@@ -53,8 +53,14 @@ public sealed partial class UpdatePersonalInformation : Page {
     // Data Updates
 
     private void DOBPicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
+        if (ViewModel.OriginalClient.dob is DateTime dob) {
+            if (dob == DOBPicker.Date)
+                return;
+        }
         if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-            ViewModel.UpdatedClient.dob = offset.DateTime;
+            // We call DateTime.Date to get the date with the time zeroed out
+            // Then .ToUniversalTime to ensure it is in the correct format for the API.
+            ViewModel.UpdatedClient.dob = offset.DateTime.Date.ToUniversalTime();
         }
     }
 

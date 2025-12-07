@@ -13,14 +13,4 @@ public partial class ClientUpdateViewModel : ObservableObject {
     public ClientUpdateViewModel(Client client) {
         OriginalClient = client;
     }
-
-    public void UpdateContact() {
-        var options = new JsonSerializerOptions {
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-            WriteIndented = true
-        };
-
-        var json = JsonSerializer.Serialize(UpdatedClient, options);
-        Debug.WriteLine(json.ToString());
-    }
 }

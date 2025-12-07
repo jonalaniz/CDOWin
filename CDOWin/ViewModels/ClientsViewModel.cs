@@ -90,4 +90,11 @@ public partial class ClientsViewModel : ObservableObject {
         var selectedClient = await _service.GetClientAsync(id);
         SelectedClient = selectedClient;
     }
+
+    public async Task UpdateClient(UpdateClientDTO update) {
+        if (SelectedClient == null)
+            return;
+        var updatedClient = await _service.UpdateClientAsync(SelectedClient.id, update);
+        SelectedClient = updatedClient;
+    }
 }

@@ -1,3 +1,4 @@
+using CDO.Core.DTOs;
 using CDOWin.ViewModels;
 using CDOWin.Views.Dialogs;
 using Microsoft.UI.Xaml;
@@ -19,7 +20,6 @@ public sealed partial class ClientViewPage : Page {
         DataContext = ViewModel;
     }
     private void OpenDocuments_Clicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        Debug.WriteLine($"Open {ViewModel.SelectedClient?.documentsFolderPath}");
         Process.Start("explorer.exe", $"{ViewModel.SelectedClient?.documentsFolderPath}");
     }
 
@@ -46,8 +46,6 @@ public sealed partial class ClientViewPage : Page {
             if (string.IsNullOrEmpty(editType))
                 return;
 
-            Debug.WriteLine($"{editType} edit button pressed.");
-
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = this.XamlRoot;
             dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
@@ -55,28 +53,28 @@ public sealed partial class ClientViewPage : Page {
             dialog.CloseButtonText = "Cancel";
             dialog.DefaultButton = ContentDialogButton.Primary;
 
-            var updateViewModel = new ClientUpdateViewModel(ViewModel.SelectedClient);
+            var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
 
             switch (editType) {
                 case "personalInformation":
                     dialog.Title = "Edit Personal Information";
-                    dialog.Content = new UpdatePersonalInformation(updateViewModel);
+                    dialog.Content = new UpdatePersonalInformation(updateVM);
                     break;
                 case "caseInformation":
                     dialog.Title = "Edit Case Information";
-                    dialog.Content = new UpdateCaseInformation(updateViewModel);
+                    dialog.Content = new UpdateCaseInformation(updateVM);
                     break;
                 case "employmentProfile":
                     dialog.Title = "Edit Employment Profile";
-                    dialog.Content = new UpdateEmploymentProfile(updateViewModel);
+                    dialog.Content = new UpdateEmploymentProfile(updateVM);
                     break;
                 case "arrangements":
                     dialog.Title = "Edit Arrangements";
-                    dialog.Content = new UpdateArrangements(updateViewModel);
+                    dialog.Content = new UpdateArrangements(updateVM);
                     break;
                 case "contactInformation":
                     dialog.Title = "Edit Contact Information";
-                    dialog.Content = new UpdateContacts(updateViewModel);
+                    dialog.Content = new UpdateContacts(updateVM);
                     break;
 
                 default: break;
@@ -86,9 +84,12 @@ public sealed partial class ClientViewPage : Page {
             Debug.WriteLine(result);
 
             if (result == ContentDialogResult.Primary) {
-                updateViewModel.UpdateContact();
+                updateClient(updateVM.UpdatedClient);
             }
-
         }
+    }
+
+    private void updateClient(UpdateClientDTO update) {
+        ViewModel.UpdateClient(update);
     }
 }

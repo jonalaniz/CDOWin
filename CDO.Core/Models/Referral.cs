@@ -1,4 +1,6 @@
-﻿namespace CDO.Core.Models;
+﻿using CDO.Core.DTOs;
+
+namespace CDO.Core.Models;
 
 public record class Referral(
     string id,
@@ -30,7 +32,7 @@ public record class Referral(
     DateTime? endDate,
 
     // Optional Parents
-    Employer? employer
+    EmployerDTO? employer
     ) {
     public string? formattedHireDate => hireDate?.ToString(format: "MM/dd/yyyy");
     public string? formattedEndDate => endDate?.ToString(format: "MM/dd/yyyy");

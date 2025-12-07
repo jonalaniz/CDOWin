@@ -1,5 +1,4 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.Interfaces;
+﻿using CDO.Core.Interfaces;
 using CDO.Core.Services;
 
 // Get environment variables
@@ -33,15 +32,13 @@ IClientService clientService = new ClientService(network);
 // var clients = await clientService.GetAllClientSummariesAsync();
 var client = await clientService.GetClientAsync(2338);
 
-foreach (var reminder in client.reminders)
-{
+foreach (var reminder in client.reminders) {
     Console.WriteLine(reminder.description);
 }
 
 Console.WriteLine("Referrals");
 Console.WriteLine();
-foreach (var referral in client.referrals)
-{
+foreach (var referral in client.referrals) {
     Console.WriteLine(referral.id);
     Console.WriteLine(referral.employer.name);
     Console.WriteLine(referral.formattedHireDate);
@@ -50,12 +47,11 @@ foreach (var referral in client.referrals)
 
 Console.WriteLine("Service Authorizations");
 Console.WriteLine();
-foreach (var po in client.pos)
-{
+foreach (var po in client.pos) {
     Console.WriteLine(po.id);
     Console.WriteLine(po.startDate);
     Console.WriteLine(po.endDate);
-    Console.WriteLine(po.description); 
+    Console.WriteLine(po.description);
 }
 
 //foreach (var client in clients) {

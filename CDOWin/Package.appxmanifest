@@ -10,7 +10,7 @@
   <Identity
     Name="fadb4a78-0ec9-46de-acf4-6fd775fd427b"
     Publisher="CN=Alaniz Technology Services"
-    Version="0.1.9.0" />
+    Version="0.1.10.0" />
 
   <mp:PhoneIdentity PhoneProductId="fadb4a78-0ec9-46de-acf4-6fd775fd427b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

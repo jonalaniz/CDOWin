@@ -1,17 +1,123 @@
 using CDO.Core.Models;
+using CDOWin.Controls;
+using CDOWin.Extensions;
+using CDOWin.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CDOWin.Views.Dialogs;
 
-
 public sealed partial class UpdatePersonalInformation : Page {
-    private Client? _client;
-    public Client? selectedClient;
+    private List<State> _states;
 
-    public UpdatePersonalInformation(Client client) {
-        _client = client;
-        selectedClient = _client;
+    public ClientUpdateViewModel ViewModel { get; private set; }
+
+    public UpdatePersonalInformation(ClientUpdateViewModel viewModel) {
+        var states = AppServices.StatesViewModel.States.ToList();
+        _states = states;
+        ViewModel = viewModel;
         InitializeComponent();
-        DataContext = selectedClient;
+        DataContext = viewModel.OriginalClient;
+        BuildStateDrowdown();
+    }
+
+    private void BuildStateDrowdown() {
+        var flyout = new MenuFlyout();
+
+        foreach (var state in _states) {
+            var item = new MenuFlyoutItem {
+                Text = state.shortName,
+                Tag = state.shortName
+            };
+
+            item.Click += StateSelected;
+
+            flyout.Items.Add(item);
+        }
+
+        StateDropDownButton.Flyout = flyout;
+    }
+
+    private void StateSelected(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item) {
+            var state = item.Tag.ToString();
+            ViewModel.UpdatedClient.state = state;
+            StateDropDownButton.Content = state;
+        }
+    }
+
+    private void LabelTextBoxPair_TextChangedForwarded(object sender, TextChangedEventArgs e) {
+        string? originalValue = null;
+        string? updatedValue = null;
+        PersonalInformationFields? field = null;
+
+        if (sender is LabelTextBoxPair pair) {
+            originalValue = pair.Value;
+            updatedValue = pair.innerTextBox.Text;
+            if (pair.TextBoxTag is PersonalInformationFields f)
+                field = f;
+        } else if (sender is LabelMultiLineTextBoxPair multiLinePair) {
+            originalValue = multiLinePair.Value.NormalizeString();
+            updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
+            if (multiLinePair.TextBoxTag is PersonalInformationFields f)
+                field = f;
+        }
+
+        if (field == null || originalValue == updatedValue || updatedValue == null)
+            return;
+
+        UpdateValue(updatedValue, field.Value);
+    }
+
+    private void UpdateValue(string value, PersonalInformationFields type) {
+        switch (type) {
+            case PersonalInformationFields.DL:
+                ViewModel.UpdatedClient.driversLicense = value;
+                break;
+            case PersonalInformationFields.SSN:
+                ViewModel.UpdatedClient.ssn = ParseSSN(value);
+                break;
+            case PersonalInformationFields.Languages:
+                ViewModel.UpdatedClient.fluentLanguages = value;
+                break;
+            case PersonalInformationFields.Race:
+                ViewModel.UpdatedClient.race = value;
+                break;
+            case PersonalInformationFields.Address1:
+                ViewModel.UpdatedClient.address1 = value;
+                break;
+            case PersonalInformationFields.Address2:
+                ViewModel.UpdatedClient.address2 = value;
+                break;
+            case PersonalInformationFields.City:
+                ViewModel.UpdatedClient.city = value;
+                break;
+            case PersonalInformationFields.Zip:
+                ViewModel.UpdatedClient.zip = ParseZip(value);
+                break;
+            case PersonalInformationFields.Education:
+                ViewModel.UpdatedClient.education = value;
+                break;
+        }
+    }
+
+    private int? ParseSSN(string value) {
+        var sanitizedValue = value.Trim();
+        if (sanitizedValue.Length <= 11) {
+            int x;
+            if (int.TryParse(value, out x)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    private string? ParseZip(string value) {
+        var sanitizedValue = value.Trim();
+        if (sanitizedValue.Length <= 11)
+            return sanitizedValue;
+        return null;
     }
 }

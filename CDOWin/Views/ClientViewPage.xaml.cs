@@ -54,33 +54,40 @@ public sealed partial class ClientViewPage : Page {
             dialog.PrimaryButtonText = "Save";
             dialog.CloseButtonText = "Cancel";
             dialog.DefaultButton = ContentDialogButton.Primary;
-            Debug.WriteLine(ViewModel.SelectedClient.employmentGoal);
+
+            var updateViewModel = new ClientUpdateViewModel(ViewModel.SelectedClient);
+
             switch (editType) {
                 case "personalInformation":
                     dialog.Title = "Edit Personal Information";
-                    dialog.Content = new UpdatePersonalInformation(ViewModel.SelectedClient);
+                    dialog.Content = new UpdatePersonalInformation(updateViewModel);
                     break;
                 case "caseInformation":
                     dialog.Title = "Edit Case Information";
-                    dialog.Content = new UpdateCaseInformation(ViewModel.SelectedClient);
+                    dialog.Content = new UpdateCaseInformation(updateViewModel);
                     break;
                 case "employmentProfile":
                     dialog.Title = "Edit Employment Profile";
-                    dialog.Content = new UpdateEmploymentProfile(ViewModel.SelectedClient);
+                    dialog.Content = new UpdateEmploymentProfile(updateViewModel);
                     break;
                 case "arrangements":
                     dialog.Title = "Edit Arrangements";
-                    dialog.Content = new UpdateArrangements(ViewModel.SelectedClient);
+                    dialog.Content = new UpdateArrangements(updateViewModel);
                     break;
                 case "contactInformation":
                     dialog.Title = "Edit Contact Information";
-                    dialog.Content = new UpdateContacts(ViewModel.SelectedClient);
+                    dialog.Content = new UpdateContacts(updateViewModel);
                     break;
 
                 default: break;
             }
 
             var result = await dialog.ShowAsync();
+            Debug.WriteLine(result);
+
+            if (result == ContentDialogResult.Primary) {
+                updateViewModel.UpdateContact();
+            }
 
         }
     }

@@ -8,11 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models" 
+    xmlns:dialogs="using:CDOWin.Views.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
     mc:Ignorable="d">
 
     <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -35,30 +37,50 @@
         </StackPanel>
 
         <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
-                                 Label="DL/ID" Value="{Binding driversLicense}"/>
+                                   Label="DL/ID" Value="{Binding driversLicense}" 
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.DL}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
-                         Label="SSN" Value="{Binding ssn}"/>
+                                   Label="SSN" Value="{Binding ssn}" 
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.SSN}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         
         <!-- Row 1: Fluent Languages/Race-->
         <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
-                                   Label="Fluent Languages" Value="{Binding fluentLanguages}"/>
+                                   Label="Fluent Languages" Value="{Binding fluentLanguages}" 
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Languages}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
-                                   Label="Race" Value="{Binding race}"/>
+                                   Label="Race" Value="{Binding race}" TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Race}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <!-- Row 2: Address -->
         <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
-                                   Label="Address" Value="{Binding address1}"/>
+                                   Label="Address" Value="{Binding address1}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Address1}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
-                           Label="Apt, ste, etc" Value="{Binding address2}"/>
+                                   Label="Apt, ste, etc" Value="{Binding address2}" 
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Address2}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         
         <!-- Row 3: Address cont. -->
         <controls:LabelTextBoxPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
-                                   Label="City" Value="{Binding city}"/>
+                                   Label="City" Value="{Binding city}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.City}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1">
             <TextBlock Margin="0,8,8,8" Text="State" Style="{StaticResource LabelTextBlockStyle}"/>
-            <DropDownButton Content="TX"/>
+            <DropDownButton x:Name="StateDropDownButton" Content="{Binding state}"/>
         </StackPanel>
         <controls:LabelTextBoxPair Grid.Row="3" Grid.Column="5"
-                                   Label="Zip" Value="{Binding zip}"/>
+                                   Label="Zip" Value="{Binding zip}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Zip}"
+                                   TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
 
+        <!-- Row 4: Education -->
+        <controls:LabelMultiLineTextBoxPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
+                                            Label="Education" Value="{Binding education}"
+                                            TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Education}"
+                                            TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
     </Grid>
 </Page>

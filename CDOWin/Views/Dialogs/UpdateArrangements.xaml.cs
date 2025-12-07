@@ -1,16 +1,14 @@
-using CDO.Core.Models;
+using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CDOWin.Views.Dialogs;
 
 public sealed partial class UpdateArrangements : Page {
-    private Client? _client;
-    public Client? selectedClient;
+    public ClientUpdateViewModel ViewModel;
 
-    public UpdateArrangements(Client client) {
-        _client = client;
-        selectedClient = _client;
+    public UpdateArrangements(ClientUpdateViewModel viewModel) {
+        ViewModel = viewModel;
         InitializeComponent();
-        DataContext = selectedClient;
+        DataContext = viewModel;
     }
 }

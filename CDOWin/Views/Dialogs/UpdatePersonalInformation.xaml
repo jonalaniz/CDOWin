@@ -33,7 +33,7 @@
         <!-- Row 0: DOB/DL/SSN -->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Margin="0,8,8,8" Text="DOB" Style="{StaticResource LabelTextBlockStyle}"/>
-            <CalendarDatePicker Date="{Binding dob}" HorizontalAlignment="Stretch"/>
+            <CalendarDatePicker x:Name="DOBPicker" DateChanged="DOBPicker_DateChanged"  HorizontalAlignment="Stretch"/>
         </StackPanel>
 
         <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"

@@ -4,6 +4,7 @@ using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,10 +19,13 @@ public sealed partial class UpdatePersonalInformation : Page {
         var states = AppServices.StatesViewModel.States.ToList();
         _states = states;
         ViewModel = viewModel;
-        InitializeComponent();
         DataContext = viewModel.OriginalClient;
+        InitializeComponent();
         BuildStateDrowdown();
+        SetupDatePicker();
     }
+
+    // UI Setup
 
     private void BuildStateDrowdown() {
         var flyout = new MenuFlyout();
@@ -38,6 +42,20 @@ public sealed partial class UpdatePersonalInformation : Page {
         }
 
         StateDropDownButton.Flyout = flyout;
+    }
+
+    private void SetupDatePicker() {
+        if (ViewModel.OriginalClient.dob is DateTime dob) {
+            DOBPicker.Date = dob;
+        }
+    }
+
+    // Data Updates
+
+    private void DOBPicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
+        if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
+            ViewModel.UpdatedClient.dob = offset.DateTime;
+        }
     }
 
     private void StateSelected(object sender, RoutedEventArgs e) {
@@ -102,6 +120,8 @@ public sealed partial class UpdatePersonalInformation : Page {
                 break;
         }
     }
+
+    // Utility Methods
 
     private int? ParseSSN(string value) {
         var sanitizedValue = value.Trim();

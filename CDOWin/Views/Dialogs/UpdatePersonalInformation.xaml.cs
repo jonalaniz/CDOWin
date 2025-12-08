@@ -75,17 +75,17 @@ public sealed partial class UpdatePersonalInformation : Page {
     private void LabelTextBoxPair_TextChangedForwarded(object sender, TextChangedEventArgs e) {
         string? originalValue = null;
         string? updatedValue = null;
-        PersonalInformationFields? field = null;
+        PersonalField? field = null;
 
         if (sender is LabelTextBoxPair pair) {
             originalValue = pair.Value;
             updatedValue = pair.innerTextBox.Text;
-            if (pair.TextBoxTag is PersonalInformationFields f)
+            if (pair.TextBoxTag is PersonalField f)
                 field = f;
         } else if (sender is LabelMultiLineTextBoxPair multiLinePair) {
             originalValue = multiLinePair.Value.NormalizeString();
             updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            if (multiLinePair.TextBoxTag is PersonalInformationFields f)
+            if (multiLinePair.TextBoxTag is PersonalField f)
                 field = f;
         }
 
@@ -95,33 +95,33 @@ public sealed partial class UpdatePersonalInformation : Page {
         UpdateValue(updatedValue, field.Value);
     }
 
-    private void UpdateValue(string value, PersonalInformationFields type) {
+    private void UpdateValue(string value, PersonalField type) {
         switch (type) {
-            case PersonalInformationFields.DL:
+            case PersonalField.DL:
                 ViewModel.UpdatedClient.driversLicense = value;
                 break;
-            case PersonalInformationFields.SSN:
+            case PersonalField.SSN:
                 ViewModel.UpdatedClient.ssn = ParseSSN(value);
                 break;
-            case PersonalInformationFields.Languages:
+            case PersonalField.Languages:
                 ViewModel.UpdatedClient.fluentLanguages = value;
                 break;
-            case PersonalInformationFields.Race:
+            case PersonalField.Race:
                 ViewModel.UpdatedClient.race = value;
                 break;
-            case PersonalInformationFields.Address1:
+            case PersonalField.Address1:
                 ViewModel.UpdatedClient.address1 = value;
                 break;
-            case PersonalInformationFields.Address2:
+            case PersonalField.Address2:
                 ViewModel.UpdatedClient.address2 = value;
                 break;
-            case PersonalInformationFields.City:
+            case PersonalField.City:
                 ViewModel.UpdatedClient.city = value;
                 break;
-            case PersonalInformationFields.Zip:
+            case PersonalField.Zip:
                 ViewModel.UpdatedClient.zip = ParseZip(value);
                 break;
-            case PersonalInformationFields.Education:
+            case PersonalField.Education:
                 ViewModel.UpdatedClient.education = value;
                 break;
         }

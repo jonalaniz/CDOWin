@@ -38,35 +38,35 @@
 
         <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                    Label="DL/ID" Value="{Binding driversLicense}" 
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.DL}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.DL}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
                                    Label="SSN" Value="{Binding ssn}" 
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.SSN}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.SSN}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         
         <!-- Row 1: Fluent Languages/Race-->
         <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                                    Label="Fluent Languages" Value="{Binding fluentLanguages}" 
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Languages}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.Languages}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
-                                   Label="Race" Value="{Binding race}" TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Race}"
+                                   Label="Race" Value="{Binding race}" TextBoxTag="{x:Bind dialogs:PersonalField.Race}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <!-- Row 2: Address -->
         <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
                                    Label="Address" Value="{Binding address1}"
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Address1}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.Address1}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                                    Label="Apt, ste, etc" Value="{Binding address2}" 
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Address2}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.Address2}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         
         <!-- Row 3: Address cont. -->
         <controls:LabelTextBoxPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
                                    Label="City" Value="{Binding city}"
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.City}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.City}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
         <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1">
             <TextBlock Margin="0,8,8,8" Text="State" Style="{StaticResource LabelTextBlockStyle}"/>
@@ -74,13 +74,13 @@
         </StackPanel>
         <controls:LabelTextBoxPair Grid.Row="3" Grid.Column="5"
                                    Label="Zip" Value="{Binding zip}"
-                                   TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Zip}"
+                                   TextBoxTag="{x:Bind dialogs:PersonalField.Zip}"
                                    TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
 
         <!-- Row 4: Education -->
         <controls:LabelMultiLineTextBoxPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
                                             Label="Education" Value="{Binding education}"
-                                            TextBoxTag="{x:Bind dialogs:PersonalInformationFields.Education}"
+                                            TextBoxTag="{x:Bind dialogs:PersonalField.Education}"
                                             TextChangedForwarded="LabelTextBoxPair_TextChangedForwarded"/>
     </Grid>
 </Page>

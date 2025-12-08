@@ -33,10 +33,7 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private async void EditButton_Clicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        if (sender is Button button) {
-            string? editType = button.Tag?.ToString();
-            if (string.IsNullOrEmpty(editType))
-                return;
+        if (sender is Button button && button.Tag is ClientEditType tag) {
 
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = this.XamlRoot;
@@ -47,29 +44,27 @@ public sealed partial class ClientViewPage : Page {
 
             var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
 
-            switch (editType) {
-                case "personalInformation":
+            switch (tag) {
+                case ClientEditType.Personal:
                     dialog.Title = "Edit Personal Information";
                     dialog.Content = new UpdatePersonalInformation(updateVM);
                     break;
-                case "caseInformation":
+                case ClientEditType.Case:
                     dialog.Title = "Edit Case Information";
                     dialog.Content = new UpdateCaseInformation(updateVM);
                     break;
-                case "employmentProfile":
+                case ClientEditType.Employment:
                     dialog.Title = "Edit Employment Profile";
                     dialog.Content = new UpdateEmploymentProfile(updateVM);
                     break;
-                case "arrangements":
+                case ClientEditType.Arrangements:
                     dialog.Title = "Edit Arrangements";
                     dialog.Content = new UpdateArrangements(updateVM);
                     break;
-                case "contactInformation":
+                case ClientEditType.Contact:
                     dialog.Title = "Edit Contact Information";
                     dialog.Content = new UpdateContacts(updateVM);
                     break;
-
-                default: break;
             }
 
             var result = await dialog.ShowAsync();

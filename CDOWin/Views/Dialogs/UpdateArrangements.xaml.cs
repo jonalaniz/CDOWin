@@ -9,6 +9,6 @@ public sealed partial class UpdateArrangements : Page {
     public UpdateArrangements(ClientUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
-        DataContext = viewModel;
+        DataContext = viewModel.OriginalClient;
     }
 }

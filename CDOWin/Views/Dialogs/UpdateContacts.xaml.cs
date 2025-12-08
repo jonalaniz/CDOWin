@@ -9,6 +9,6 @@ public sealed partial class UpdateContacts : Page {
     public UpdateContacts(ClientUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
-        DataContext = viewModel.UpdatedClient;
+        DataContext = viewModel.OriginalClient;
     }
 }

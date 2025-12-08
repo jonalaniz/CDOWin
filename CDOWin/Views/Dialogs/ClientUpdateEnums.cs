@@ -1,6 +1,14 @@
 ﻿namespace CDOWin.Views.Dialogs;
 
-public enum PersonalInformationFields {
+public enum ClientEditType {
+    Personal,
+    Case,
+    Employment,
+    Arrangements,
+    Contact
+}
+
+public enum PersonalField {
     DL,
     SSN,
     Languages,
@@ -10,6 +18,38 @@ public enum PersonalInformationFields {
     City,
     Zip,
     Education
+}
+
+public enum CaseField {
+    CaseID,
+    Status,
+    Benefit,
+    Premiums,
+    Counselor
+}
+
+public enum EmpoymentField {
+    Disability,
+    CriminalCharge,
+    Transportation
+}
+
+public enum ArrangementsField {
+    EmploymentGoal,
+    Conditions
+}
+
+public enum ContactField {
+    Phone1,
+    Phone1Identity,
+    Phone2,
+    Phone2Identity,
+    Phone3,
+    Phone3Identity,
+    Email,
+    EmailIdentity,
+    Email2,
+    Email2Identity
 }
 
 public enum CheckboxTag {

@@ -9,6 +9,6 @@ public sealed partial class UpdateCaseInformation : Page {
     public UpdateCaseInformation(ClientUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
-        DataContext = viewModel.UpdatedClient;
+        DataContext = viewModel.OriginalClient;
     }
 }

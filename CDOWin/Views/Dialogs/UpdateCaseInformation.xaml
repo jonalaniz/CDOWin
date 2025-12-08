@@ -31,16 +31,16 @@
             <TextBlock Margin="0,8,8,8" Text="Start Date" Style="{StaticResource LabelTextBlockStyle}"/>
             <CalendarDatePicker Date="{Binding startDate}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+        <controls:LabeledTextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                  Label="Case ID" Value="{Binding caseID}"/>
-        <controls:LabelTextBoxPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
-                                   Label="Status" Value="{Binding status}"/>
+        <controls:LabeledTextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Label="Status" Value="{Binding status}"/>
         
         <!-- Row 1: Benefits/Premiums -->
-        <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="Benefits" Value="{Binding benefit}"/>
-        <controls:LabelTextBoxPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"
-                                   Label="Premiums" Value="{Binding premiums}"/>
+        <controls:LabeledTextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"
+                                 Label="Premiums" Value="{Binding premiums}"/>
         
         <!-- Row 2: -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">

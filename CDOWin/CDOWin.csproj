@@ -16,9 +16,6 @@
   <ItemGroup>
     <None Remove="Assets\CDO_Dark.png" />
     <None Remove="Assets\CDO_Light.png" />
-    <None Remove="Controls\LabelMultiLineTextBoxPair.xaml" />
-    <None Remove="Controls\LabelTextBoxPair.xaml" />
-    <None Remove="Controls\LabelValuePAir.xaml" />
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\ClientViewPage.xaml" />
@@ -80,7 +77,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\LabelMultiLineTextBoxPair.xaml">
+    <Page Update="Controls\LabeledMultiLinePair.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -105,7 +102,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\LabelTextBoxPair.xaml">
+    <Page Update="Controls\LabeledTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -160,7 +157,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\LabelValuePair.xaml">
+    <Page Update="Controls\LabelPair.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

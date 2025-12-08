@@ -3,14 +3,14 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace CDOWin.Controls;
 
-public sealed partial class LabelValuePair : UserControl {
+public sealed partial class LabelPair : UserControl {
     public string Label {
         get => (string)GetValue(LabelProperty);
         set => SetValue(LabelProperty, value);
     }
 
     public static readonly DependencyProperty LabelProperty =
-        DependencyProperty.Register("Label", typeof(string), typeof(LabelValuePair), new PropertyMetadata(""));
+        DependencyProperty.Register("Label", typeof(string), typeof(LabelPair), new PropertyMetadata(""));
 
     public string Value {
         get => (string)GetValue(ValueProperty);
@@ -18,14 +18,14 @@ public sealed partial class LabelValuePair : UserControl {
     }
 
     public static readonly DependencyProperty ValueProperty =
-        DependencyProperty.Register("Value", typeof(string), typeof(LabelValuePair), new PropertyMetadata("", OnValueChanged));
+        DependencyProperty.Register("Value", typeof(string), typeof(LabelPair), new PropertyMetadata("", OnValueChanged));
 
-    public LabelValuePair() {
+    public LabelPair() {
         InitializeComponent();
     }
 
     private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
-        var control = (LabelValuePair)d;
+        var control = (LabelPair)d;
         control.UpdateOpacityBasedOnValue(e.NewValue);
     }
 

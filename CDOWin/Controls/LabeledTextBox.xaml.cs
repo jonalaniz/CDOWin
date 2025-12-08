@@ -4,7 +4,7 @@ using System;
 
 namespace CDOWin.Controls;
 
-public sealed partial class LabelTextBoxPair : UserControl {
+public sealed partial class LabeledTextBox : UserControl {
     public TextBox innerTextBox => this.InnerTextBox;
 
     public string Label {
@@ -12,23 +12,23 @@ public sealed partial class LabelTextBoxPair : UserControl {
         set => SetValue(LabelProperty, value);
     }
 
-    public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(LabelTextBoxPair), new PropertyMetadata(""));
+    public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(LabeledTextBox), new PropertyMetadata(""));
 
     public Object TextBoxTag {
         get => (Object)GetValue(TextBoxTagProperty);
         set => SetValue(TextBoxTagProperty, value);
     }
 
-    public static readonly DependencyProperty TextBoxTagProperty = DependencyProperty.Register("TextBoxTagProperty", typeof(Object), typeof(LabelTextBoxPair), new PropertyMetadata(""));
+    public static readonly DependencyProperty TextBoxTagProperty = DependencyProperty.Register("TextBoxTagProperty", typeof(Object), typeof(LabeledTextBox), new PropertyMetadata(""));
 
     public string Value {
         get => (string)GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
     }
 
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(LabelTextBoxPair), new PropertyMetadata(""));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(LabeledTextBox), new PropertyMetadata(""));
 
-    public LabelTextBoxPair() {
+    public LabeledTextBox() {
         InitializeComponent();
     }
 

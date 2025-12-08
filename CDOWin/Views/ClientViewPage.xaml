@@ -90,29 +90,29 @@
                         </Grid>
 
                         <!-- Date of Birth/DL/SSN -->
-                        <usercontrols:LabelValuePair Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                                                     Label="DOB" Value="{Binding SelectedClient.formattedDOB}"/>
+                        <usercontrols:LabelPair Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                Label="DOB" Value="{Binding SelectedClient.formattedDOB}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
-                                                     Label="DL/ID" Value="{Binding SelectedClient.driversLicense}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                                Label="DL/ID" Value="{Binding SelectedClient.driversLicense}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
-                                                     Label="SSN" Value="{Binding SelectedClient.formattedSSN}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                                                Label="SSN" Value="{Binding SelectedClient.formattedSSN}"/>
 
                         <!-- Fluent Languages/Race -->
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                                                     Label="Fluent Languages" Value="{Binding SelectedClient.fluentLanguages}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                                                Label="Fluent Languages" Value="{Binding SelectedClient.fluentLanguages}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3"
-                                                     Label="Race" Value="{Binding SelectedClient.race}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3"
+                                                Label="Race" Value="{Binding SelectedClient.race}"/>
 
                         <!-- Address Section -->
-                        <usercontrols:LabelValuePair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
-                                                     Label="Address" Value="{Binding SelectedClient.formattedAddress}"/>
+                        <usercontrols:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
+                                                Label="Address" Value="{Binding SelectedClient.formattedAddress}"/>
 
                         <!-- Education Section -->
-                        <usercontrols:LabelValuePair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
-                                                     Label="Education" Value="{Binding SelectedClient.education}"/>
+                        <usercontrols:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
+                                                Label="Education" Value="{Binding SelectedClient.education}"/>
                     </Grid>
                 </Grid>
 
@@ -154,21 +154,21 @@
                         </Grid>
 
                         <!-- Start Date/Case ID/Status Section -->
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                                     Label="Start Date" Value="{Binding SelectedClient.formattedStartDate}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                                Label="Start Date" Value="{Binding SelectedClient.formattedStartDate}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
-                                                     Label="Case ID" Value="{Binding SelectedClient.caseID}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                                Label="Case ID" Value="{Binding SelectedClient.caseID}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
-                                                     Label="Status" Value="{Binding SelectedClient.status}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                                                Label="Status" Value="{Binding SelectedClient.status}"/>
 
                         <!-- Benefits/Premiums Section -->
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                                     Label="Benefits" Value="{Binding SelectedClient.benefit}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                                Label="Benefits" Value="{Binding SelectedClient.benefit}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4"
-                                                     Label="Premiums" Value="{Binding SelectedClient.premiums}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4"
+                                                Label="Premiums" Value="{Binding SelectedClient.premiums}"/>
 
                         <!-- Counselor Section -->
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">
@@ -224,14 +224,14 @@
                             </Button>
                         </Grid>
                         <!-- Start Date/Case ID/Status Section -->
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="0"
-                                                     Label="Disability" Value="{Binding SelectedClient.disability}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="0"
+                                                Label="Disability" Value="{Binding SelectedClient.disability}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0"
-                                                     Label="Criminal Charges" Value="{Binding SelectedClient.criminalCharge}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="0"
+                                                Label="Criminal Charges" Value="{Binding SelectedClient.criminalCharge}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="3" Grid.Column="0"
-                                                     Label="Transportation" Value="{Binding SelectedClient.transportation}"/>
+                        <usercontrols:LabelPair Grid.Row="3" Grid.Column="0"
+                                                Label="Transportation" Value="{Binding SelectedClient.transportation}"/>
                     </Grid>
                 </Grid>
 
@@ -262,11 +262,11 @@
                         </Grid>
 
                         <!-- Start Date/Case ID/Status Section -->
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="0"
-                                                     Label="Employment Goals" Value="{Binding SelectedClient.employmentGoal}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="0"
+                                                Label="Employment Goals" Value="{Binding SelectedClient.employmentGoal}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="0"
-                                                     Label="Conditions" Value="{Binding SelectedClient.conditions}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="0"
+                                                Label="Conditions" Value="{Binding SelectedClient.conditions}"/>
                     </Grid>
                 </Grid>
 
@@ -309,41 +309,41 @@
                         <!-- Phone 1 -->
                         <FontIcon Grid.Row="1" Grid.Column="0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                                   Glyph="&#xE717;" Visibility="{Binding SelectedClient.phone1, Converter={StaticResource StringToVisability}}"/>
-                        <usercontrols:LabelValuePair Grid.Row="1" Grid.Column="1"
-                                                     Label="{Binding SelectedClient.phone1Identity}" Value="{Binding SelectedClient.phone1}"
-                                                     Visibility="{Binding SelectedClient.phone1, Converter={StaticResource StringToVisability}}"/>
+                        <usercontrols:LabelPair Grid.Row="1" Grid.Column="1"
+                                                Label="{Binding SelectedClient.phone1Identity}" Value="{Binding SelectedClient.phone1}"
+                                                Visibility="{Binding SelectedClient.phone1, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 2 -->
                         <FontIcon Grid.Row="2" Grid.Column="0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                                   Glyph="&#xE717;" Visibility="{Binding SelectedClient.phone2, Converter={StaticResource StringToVisability}}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="2" Grid.Column="1"
-                                                     Label="{Binding SelectedClient.phone2Identity}" Value="{Binding SelectedClient.phone2}"
-                                                     Visibility="{Binding SelectedClient.phone2, Converter={StaticResource StringToVisability}}"/>
+                        <usercontrols:LabelPair Grid.Row="2" Grid.Column="1"
+                                                Label="{Binding SelectedClient.phone2Identity}" Value="{Binding SelectedClient.phone2}"
+                                                Visibility="{Binding SelectedClient.phone2, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 3 -->
                         <FontIcon Grid.Row="3" Grid.Column="0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                                   Glyph="&#xE717;" Visibility="{Binding SelectedClient.phone3, Converter={StaticResource StringToVisability}}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="3" Grid.Column="1"
-                                                     Label="{Binding SelectedClient.phone3Identity}" Value="{Binding SelectedClient.phone3}"
-                                                     Visibility="{Binding SelectedClient.phone3, Converter={StaticResource StringToVisability}}"/>
+                        <usercontrols:LabelPair Grid.Row="3" Grid.Column="1"
+                                                Label="{Binding SelectedClient.phone3Identity}" Value="{Binding SelectedClient.phone3}"
+                                                Visibility="{Binding SelectedClient.phone3, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 1 -->
                         <FontIcon Grid.Row="4" Grid.Column="0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                                   Glyph="&#xE715;" Visibility="{Binding SelectedClient.email, Converter={StaticResource StringToVisability}}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="4" Grid.Column="1"
-                                                     Label="{Binding SelectedClient.emailIdentity}" Value="{Binding SelectedClient.email}"
-                                                     Visibility="{Binding SelectedClient.email, Converter={StaticResource StringToVisability}}"/>
+                        <usercontrols:LabelPair Grid.Row="4" Grid.Column="1"
+                                                Label="{Binding SelectedClient.emailIdentity}" Value="{Binding SelectedClient.email}"
+                                                Visibility="{Binding SelectedClient.email, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 2 -->
                         <FontIcon Grid.Row="5" Grid.Column="0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                                   Glyph="&#xE715;" Visibility="{Binding SelectedClient.email2, Converter={StaticResource StringToVisability}}"/>
 
-                        <usercontrols:LabelValuePair Grid.Row="5" Grid.Column="1"
-                                                     Label="{Binding SelectedClient.email2Identity}" Value="{Binding SelectedClient.email2}"
-                                                     Visibility="{Binding SelectedClient.email2, Converter={StaticResource StringToVisability}}"/>
+                        <usercontrols:LabelPair Grid.Row="5" Grid.Column="1"
+                                                Label="{Binding SelectedClient.email2Identity}" Value="{Binding SelectedClient.email2}"
+                                                Visibility="{Binding SelectedClient.email2, Converter={StaticResource StringToVisability}}"/>
                     </Grid>
                 </Grid>
                 

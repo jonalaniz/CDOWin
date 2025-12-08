@@ -18,11 +18,11 @@
         </Grid.RowDefinitions>
         
         <!-- Row 0: Employment Goals -->
-        <controls:LabelMultiLineTextBoxPair Grid.Row="0" Grid.Column="0" 
-                                            Label="Employment Goals" Value="{Binding employmentGoal}"/>
+        <controls:LabeledMultiLinePair Grid.Row="0" Grid.Column="0" 
+                                       Label="Employment Goals" Value="{Binding employmentGoal}"/>
 
         <!-- Row 1: Conditions -->
-        <controls:LabelMultiLineTextBoxPair Grid.Row="1" Grid.Column="0" 
-                                    Label="Conditions" Value="{Binding conditions}"/>
+        <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" 
+                                       Label="Conditions" Value="{Binding conditions}"/>
     </Grid>
 </Page>

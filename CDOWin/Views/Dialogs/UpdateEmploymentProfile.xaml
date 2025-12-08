@@ -19,13 +19,13 @@
         </Grid.RowDefinitions>
         
         <!-- Row 0: Disability -->
-        <controls:LabelMultiLineTextBoxPair Grid.Row="0" Grid.Column="0" 
-                                            Label="Disability" Value="{Binding disability}"/>
+        <controls:LabeledMultiLinePair Grid.Row="0" Grid.Column="0" 
+                                       Label="Disability" Value="{Binding disability}"/>
         <!-- Row 1: Criminal Charges -->
-        <controls:LabelMultiLineTextBoxPair Grid.Row="1" Grid.Column="0" 
-                                            Label="Criminal Charges" Value="{Binding criminalCharge}"/>
+        <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" 
+                                       Label="Criminal Charges" Value="{Binding criminalCharge}"/>
         <!-- Row 2: Transportation -->
-        <controls:LabelTextBoxPair Grid.Row="2" Grid.Column="0"
-                                   Label="Transportation" Value="{Binding transportation}"/>
+        <controls:LabeledTextBox Grid.Row="2" Grid.Column="0"
+                                 Label="Transportation" Value="{Binding transportation}"/>
     </Grid>
 </Page>

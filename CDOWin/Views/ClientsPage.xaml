@@ -23,12 +23,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="316"/>
+            <ColumnDefinition Width="340"/>
         </Grid.ColumnDefinitions>
         
         <!-- Left Column -->
-        <Grid Grid.Column="0"
-              BorderThickness="0, 0, 1, 0"
+        <Grid Grid.Column="0" BorderThickness="0, 0, 1, 0"
               BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -41,54 +40,40 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock Grid.Column="0"
-                               Text="Clients"
-                               FontSize="22"
-                               FontWeight="Bold"
-                               Margin="16,8,16,0"/>
-                    <Button Grid.Column="1" VerticalAlignment="Center"
-                            Width="32" Height="32" Padding="0"
-                            Margin="16,8,12,0"
+
+                    <TextBlock Grid.Column="0" Margin="16,8,16,0"
+                               FontSize="22" FontWeight="Bold"
+                               Text="Clients"/>
+                    <Button Grid.Column="1" Margin="16,8,12,0"
+                            VerticalAlignment="Center"
+                            Width="32" Height="32" Padding="0"   
                             Style="{StaticResource SubtleButtonStyle}">
-                        <FontIcon Glyph="&#xE710;"
-                          FontSize="16"
+                        <FontIcon Glyph="&#xE710;" FontSize="16"
                           Foreground="{ThemeResource SystemAccentColor}"/>
                     </Button>
                 </Grid>
-                <TextBlock FontSize="12"
-                           Margin="16,0,16,8"
+                <TextBlock Margin="16,0,16,8" FontSize="12"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}">
                     <Run Text="{x:Bind ViewModel.FilteredClients.Count, Mode=OneWay}"/>
                     <Run Text="Clients"/>
                 </TextBlock>
             </StackPanel>
 
-
-
-            <TextBox Grid.Row="1"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="2"
-                     Margin="8, 0, 8, 8"
-                     PlaceholderText="Filter clients"
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     Margin="8, 0, 8, 8" PlaceholderText="Filter clients"
                      Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <ListView Grid.Row="2" 
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2"
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      Width="200" HorizontalAlignment="Left"
                       ItemsSource="{Binding FilteredClients}"
                       IsItemClickEnabled="True"
-                      ItemClick="ListView_ItemClick"
-                      HorizontalAlignment="Left"
-                      Width="200">
+                      ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:ClientSummaryDTO">
                         <Grid Margin="0,8,8,8">
@@ -96,13 +81,11 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
+                            <TextBlock Grid.Row="0" FontWeight="Bold"
                                        Text="{x:Bind name}"
-                                       FontWeight="Bold"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                            <TextBlock Grid.Row="1" 
+                            <TextBlock Grid.Row="1" TextWrapping="WrapWholeWords"
                                        Text="{x:Bind formattedAddress}"
-                                       TextWrapping="WrapWholeWords"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                         </Grid>
                     </DataTemplate>
@@ -128,19 +111,15 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <SelectorBar x:Name="SelectionBar"
-                         SelectionChanged="SelectionChanged"
-                         Grid.Column="0"
-                         Grid.Row="0"
-                         Margin="8, 0, 0, 8"
+
+            <SelectorBar Grid.Row="0" Grid.Column="0" Margin="8, 0, 0, 8"
+                         x:Name="SelectionBar" SelectionChanged="SelectionChanged"
                          Visibility="{Binding SelectedClient, Mode=OneWay, Converter={StaticResource NullToVisability}}">
                 <SelectorBarItem Text="Notes" IsSelected="True" />
                 <SelectorBarItem Text="Employment" />
             </SelectorBar>
             
-            <Frame Grid.Column="0"
-                   Grid.Row="1"
+            <Frame Grid.Column="0" Grid.Row="1"
                    x:Name="ContentFrame" 
                    IsNavigationStackEnabled="False"/>
         </Grid>

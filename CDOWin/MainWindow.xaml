@@ -38,7 +38,7 @@
         <!-- Left Column: Sidebar -->
         <Frame Grid.Row="1"
                Grid.Column="0"
-               Padding="8,0,8,0"
+               Padding="4,0,4,0"
                x:Name="SidebarFrame" 
                IsNavigationStackEnabled="False"/>
 

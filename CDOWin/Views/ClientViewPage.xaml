@@ -48,9 +48,9 @@
             
             <!-- Wrap Panel -->
             <controls:WrapPanel Orientation="Horizontal"
-                                HorizontalSpacing="12"
-                                VerticalSpacing="12"
-                                Margin="12">
+                                HorizontalSpacing="8"
+                                VerticalSpacing="8"
+                                Margin="8,12,8,8">
 
                 <!-- Personal Information Card-->
                 <Grid Style="{StaticResource CardContainerGridStyle}">

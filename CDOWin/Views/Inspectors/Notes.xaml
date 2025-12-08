@@ -25,7 +25,7 @@
                  Grid.Column="0"
                  VerticalAlignment="Stretch"
                  CornerRadius="4"
-                 Margin="16,8,16,8"
+                 Margin="12,9,12,8"
                  Style="{StaticResource MultiLineCheckboxStyle}"
                  TextWrapping="Wrap"
                  Text="{x:Bind ViewModel.SelectedClient.clientNotes, Mode=OneWay}"/>

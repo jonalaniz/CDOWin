@@ -57,7 +57,7 @@ public static class AppServices {
 
         var tasks = new List<Task> {
             ClientsViewModel.LoadClientSummariesAsync(),
-            CounselorsViewModel.LoadCounselorAsync(),
+            CounselorsViewModel.LoadCounselorsAsync(),
             EmployersViewModel.LoadEmployersAsync(),
             POsViewModel.LoadPOsAsync(),
             RemindersViewModel.LoadRemindersAsync(),

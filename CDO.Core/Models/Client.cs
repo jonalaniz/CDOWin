@@ -1,4 +1,6 @@
-﻿namespace CDO.Core.Models;
+﻿using CDO.Core.DTOs;
+
+namespace CDO.Core.Models;
 
 public record class Client(
     int id,
@@ -55,7 +57,7 @@ public record class Client(
     string? race,
     string? fluentLanguages,
     string? premiums,
-    Counselor? counselorReference
+    UpdateCounselorDTO? counselorReference
     ) {
     public string name => $"{firstName} {lastName} ({id})";
 

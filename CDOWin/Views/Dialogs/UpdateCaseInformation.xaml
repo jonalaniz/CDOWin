@@ -36,14 +36,14 @@
                                  Label="Case ID" Value="{Binding caseID}"/>
         <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2">
             <TextBlock Margin="0,8,8,8" Text="Status" Style="{StaticResource LabelTextBlockStyle}"/>
-            <DropDownButton x:Name="StatusDropDownButton" Content="{Binding status}" 
+            <DropDownButton x:Name="StatusDropDown" Content="{Binding status}" 
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
 
         <!-- Row 1: Benefits/Premiums -->
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Margin="0,8,8,8" Text="Benefits" Style="{StaticResource LabelTextBlockStyle}"/>
-            <DropDownButton x:Name="BenefitDropDownButton" Content="{Binding benefits}" 
+            <DropDownButton x:Name="BenefitDropDown" Content="{Binding benefits}" 
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <controls:LabeledTextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"
@@ -52,7 +52,8 @@
         <!-- Row 2: Counselor -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">
             <TextBlock Margin="0,8,8,8" Text="Counselor" Style="{StaticResource LabelTextBlockStyle}"/>
-            <DropDownButton Content="{Binding counselorReference.name}" HorizontalAlignment="Stretch"/>
+            <DropDownButton x:Name="CounselorDropDown" 
+                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Page>

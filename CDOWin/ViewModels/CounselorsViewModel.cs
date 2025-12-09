@@ -29,7 +29,7 @@ public partial class CounselorsViewModel : ObservableObject {
             _ = RefreshSelectedCounselor(value.id);
     }
 
-    public async Task LoadCounselorAsync() {
+    public async Task LoadCounselorsAsync() {
         var counselors = await _service.GetAllCounselorsAsync();
         List<Counselor> SortedCounselors = counselors.OrderBy(o => o.name).ToList();
         Counselors.Clear();

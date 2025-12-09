@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CDOWin.Views.Dialogs;
 
@@ -15,7 +16,8 @@ public sealed partial class UpdateCaseInformation : Page {
     public ClientUpdateViewModel ViewModel { get; private set; }
 
     public UpdateCaseInformation(ClientUpdateViewModel viewModel) {
-        var counselors = AppServices.
+        var counselors = AppServices.CounselorsViewModel.Counselors.ToList();
+        _counselors = counselors;
         ViewModel = viewModel;
         DataContext = viewModel.OriginalClient;
         InitializeComponent();
@@ -26,12 +28,33 @@ public sealed partial class UpdateCaseInformation : Page {
     // UI Setup
 
     private void BuildDropDowns() {
-        BenefitDropDownButton.Flyout = BuildFlyout(Benefit.All);
-        StatusDropDownButton.Flyout = BuildFlyout(Status.All);
+        BuildCounselorDropDown();
+        BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
+        StatusDropDown.Flyout = BuildFlyout(Status.All);
         if (string.IsNullOrEmpty(ViewModel.OriginalClient.benefits))
-            BenefitDropDownButton.Content = "None";
+            BenefitDropDown.Content = "None";
         if (string.IsNullOrEmpty(ViewModel.OriginalClient.status))
-            StatusDropDownButton.Content = "None";
+            StatusDropDown.Content = "None";
+    }
+
+    private void BuildCounselorDropDown() {
+        var flyout = new MenuFlyout();
+        foreach (var counselor in _counselors) {
+            var item = new MenuFlyoutItem {
+                Text = counselor.name,
+                Tag = counselor
+            };
+
+            item.Click += CounselorSelected;
+            flyout.Items.Add(item);
+        }
+        CounselorDropDown.Flyout = flyout;
+
+        if (ViewModel.OriginalClient?.counselorReference?.name is string name) {
+            CounselorDropDown.Content = name;
+        } else {
+            CounselorDropDown.Content = "Select a Counselor";
+        }
     }
 
     private MenuFlyout BuildFlyout(IEnumerable<dynamic> items) {
@@ -69,14 +92,25 @@ public sealed partial class UpdateCaseInformation : Page {
         }
     }
 
+    private void CounselorSelected(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item && item.Tag is Counselor counselor) {
+            ViewModel.UpdatedClient.counselor = counselor.name;
+            ViewModel.UpdatedClient.counselorID = counselor.id;
+            ViewModel.UpdatedClient.counselorEmail = counselor.email;
+            ViewModel.UpdatedClient.counselorPhone = counselor.phone;
+            ViewModel.UpdatedClient.counselorFax = counselor.fax;
+            CounselorDropDown.Content = counselor.name;
+        }
+    }
+
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             if (item.Tag is Benefit benefit) {
                 ViewModel.UpdatedClient.benefit = benefit.Value;
-                BenefitDropDownButton.Content = benefit.Value;
+                BenefitDropDown.Content = benefit.Value;
             } else if (item.Tag is Status status) {
                 ViewModel.UpdatedClient.status = status.Value;
-                StatusDropDownButton.Content = status.Value;
+                StatusDropDown.Content = status.Value;
             }
         }
     }

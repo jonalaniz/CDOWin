@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace CDOWin.Controls;
 
@@ -37,5 +39,22 @@ public sealed partial class LabelPair : UserControl {
         } else {
             this.Opacity = 1.0;
         }
+    }
+
+    private void StackPanel_RightTapped(object sender, Microsoft.UI.Xaml.Input.RightTappedRoutedEventArgs e) {
+        if (string.IsNullOrWhiteSpace(Value))
+            return;
+
+        var data = new DataPackage();
+        data.SetText(Value);
+        Clipboard.SetContent(data);
+        ShowCopied();
+    }
+
+    private async void ShowCopied() {
+        var old = Label;
+        Label = "Copied!";
+        await Task.Delay(650);
+        Label = old;
     }
 }

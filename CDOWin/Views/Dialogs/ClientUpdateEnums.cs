@@ -24,11 +24,10 @@ public enum CaseField {
     CaseID,
     Status,
     Benefit,
-    Premiums,
-    Counselor
+    Premiums
 }
 
-public enum EmpoymentField {
+public enum EmploymentField {
     Disability,
     CriminalCharge,
     Transportation

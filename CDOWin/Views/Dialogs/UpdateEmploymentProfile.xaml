@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
-    xmlns:models="using:CDO.Core.Models" 
+    xmlns:models="using:CDO.Core.Models"
+    xmlns:dialogs="using:CDOWin.Views.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
     mc:Ignorable="d">
 
@@ -20,12 +21,18 @@
         
         <!-- Row 0: Disability -->
         <controls:LabeledMultiLinePair Grid.Row="0" Grid.Column="0" 
-                                       Label="Disability" Value="{Binding disability}"/>
+                                       Label="Disability" Value="{Binding disability}"
+                                       TextBoxTag="{x:Bind dialogs:EmploymentField.Disability}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <!-- Row 1: Criminal Charges -->
         <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" 
-                                       Label="Criminal Charges" Value="{Binding criminalCharge}"/>
+                                       Label="Criminal Charges" Value="{Binding criminalCharge}"
+                                       TextBoxTag="{x:Bind dialogs:EmploymentField.CriminalCharge}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <!-- Row 2: Transportation -->
         <controls:LabeledTextBox Grid.Row="2" Grid.Column="0"
-                                 Label="Transportation" Value="{Binding transportation}"/>
+                                 Label="Transportation" Value="{Binding transportation}"
+                                 TextBoxTag="{x:Bind dialogs:EmploymentField.Transportation}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
     </Grid>
 </Page>

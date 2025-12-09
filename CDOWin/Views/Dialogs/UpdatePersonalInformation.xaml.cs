@@ -37,7 +37,6 @@ public sealed partial class UpdatePersonalInformation : Page {
             };
 
             item.Click += StateSelected;
-
             flyout.Items.Add(item);
         }
 
@@ -45,9 +44,8 @@ public sealed partial class UpdatePersonalInformation : Page {
     }
 
     private void SetupDatePicker() {
-        if (ViewModel.OriginalClient.dob is DateTime dob) {
+        if (ViewModel.OriginalClient.dob is DateTime dob)
             DOBPicker.Date = dob;
-        }
     }
 
     // Data Updates
@@ -58,8 +56,8 @@ public sealed partial class UpdatePersonalInformation : Page {
                 return;
         }
         if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-            // We call DateTime.Date to get the date with the time zeroed out
-            // Then .ToUniversalTime to ensure it is in the correct format for the API.
+            // We call DateTime.Date to get the date with the time zeroed out then
+            // .ToUniversalTime to ensure it is in the correct format for the API.
             ViewModel.UpdatedClient.dob = offset.DateTime.Date.ToUniversalTime();
         }
     }

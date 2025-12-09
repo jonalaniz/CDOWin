@@ -242,7 +242,7 @@
 
                         <!-- Benefits/Premiums Section -->
                         <usercontrols:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                                Label="Benefits" Value="{Binding SelectedClient.benefit}"/>
+                                                Label="Benefits" Value="{Binding SelectedClient.benefits}"/>
 
                         <usercontrols:LabelPair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4"
                                                 Label="Premiums" Value="{Binding SelectedClient.premiums}"/>

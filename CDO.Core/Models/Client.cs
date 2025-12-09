@@ -40,7 +40,7 @@ public record class Client(
     string? employmentGoal,
     int? employerID,
     string? status,
-    string? benefit,
+    string? benefits,
     string? criminalCharge,
     string? education,
     string? transportation,

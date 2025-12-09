@@ -70,7 +70,8 @@
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1">
             <TextBlock Margin="0,8,8,8" Text="State" Style="{StaticResource LabelTextBlockStyle}"/>
-            <DropDownButton x:Name="StateDropDownButton" Content="{Binding state}"/>
+            <DropDownButton x:Name="StateDropDownButton" Content="{Binding state}"
+                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <controls:LabeledTextBox Grid.Row="3" Grid.Column="5"
                                  Label="Zip" Value="{Binding zip}"

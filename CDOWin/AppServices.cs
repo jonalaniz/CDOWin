@@ -13,6 +13,7 @@ public static class AppServices {
 
     // Services
     public static IClientService? ClientService { get; private set; }
+    public static ICounselorService? CounselorService { get; private set; }
     public static IEmployerService? EmployerService { get; private set; }
     public static IPOService? POsService { get; private set; }
     public static IStateService? StateService { get; private set; }
@@ -20,6 +21,7 @@ public static class AppServices {
 
     // ViewModels
     public static ClientsViewModel? ClientsViewModel { get; private set; }
+    public static CounselorsViewModel? CounselorsViewModel { get; private set; }
     public static EmployersViewModel? EmployersViewModel { get; private set; }
     public static POsViewModel? POsViewModel { get; private set; }
     public static RemindersViewModel? RemindersViewModel { get; private set; }
@@ -34,6 +36,7 @@ public static class AppServices {
 
         // Initialize other services
         ClientService = new ClientService(NetworkService);
+        CounselorService = new CounselorService(NetworkService);
         EmployerService = new EmployerService(NetworkService);
         POsService = new POService(NetworkService);
         ReminderService = new ReminderService(NetworkService);
@@ -41,6 +44,7 @@ public static class AppServices {
 
         // Initialize ViewModels
         ClientsViewModel = new ClientsViewModel(ClientService);
+        CounselorsViewModel = new CounselorsViewModel(CounselorService);
         EmployersViewModel = new EmployersViewModel(EmployerService);
         POsViewModel = new POsViewModel(POsService);
         RemindersViewModel = new RemindersViewModel(ReminderService);
@@ -53,6 +57,7 @@ public static class AppServices {
 
         var tasks = new List<Task> {
             ClientsViewModel.LoadClientSummariesAsync(),
+            CounselorsViewModel.LoadCounselorAsync(),
             EmployersViewModel.LoadEmployersAsync(),
             POsViewModel.LoadPOsAsync(),
             RemindersViewModel.LoadRemindersAsync(),

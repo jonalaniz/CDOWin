@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
-    xmlns:models="using:CDO.Core.Models" 
+    xmlns:models="using:CDO.Core.Models"
+    xmlns:dialogs="using:CDOWin.Views.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
     mc:Ignorable="d">
 
@@ -29,20 +30,26 @@
         <!-- Row 0: Start Date/Case ID/Status -->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Margin="0,8,8,8" Text="Start Date" Style="{StaticResource LabelTextBlockStyle}"/>
-            <CalendarDatePicker Date="{Binding startDate}" HorizontalAlignment="Stretch"/>
+            <CalendarDatePicker x:Name="StartDatePicker" DateChanged="StartDatePicker_DateChanged" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <controls:LabeledTextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                  Label="Case ID" Value="{Binding caseID}"/>
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
-                                 Label="Status" Value="{Binding status}"/>
-        
+        <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2">
+            <TextBlock Margin="0,8,8,8" Text="Status" Style="{StaticResource LabelTextBlockStyle}"/>
+            <DropDownButton x:Name="StatusDropDownButton" Content="{Binding status}" 
+                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+
         <!-- Row 1: Benefits/Premiums -->
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                 Label="Benefits" Value="{Binding benefit}"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Margin="0,8,8,8" Text="Benefits" Style="{StaticResource LabelTextBlockStyle}"/>
+            <DropDownButton x:Name="BenefitDropDownButton" Content="{Binding benefits}" 
+                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+        </StackPanel>
         <controls:LabeledTextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"
                                  Label="Premiums" Value="{Binding premiums}"/>
         
-        <!-- Row 2: -->
+        <!-- Row 2: Counselor -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">
             <TextBlock Margin="0,8,8,8" Text="Counselor" Style="{StaticResource LabelTextBlockStyle}"/>
             <DropDownButton Content="{Binding counselorReference.name}" HorizontalAlignment="Stretch"/>

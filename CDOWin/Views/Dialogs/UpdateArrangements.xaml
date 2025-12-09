@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models" 
+    xmlns:dialogs="using:CDOWin.Views.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
     mc:Ignorable="d">
 
@@ -19,10 +20,14 @@
         
         <!-- Row 0: Employment Goals -->
         <controls:LabeledMultiLinePair Grid.Row="0" Grid.Column="0" 
-                                       Label="Employment Goals" Value="{Binding employmentGoal}"/>
+                                       Label="Employment Goals" Value="{Binding employmentGoal}"
+                                       TextBoxTag="{x:Bind dialogs:ArrangementsField.EmploymentGoal}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 1: Conditions -->
         <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" 
-                                       Label="Conditions" Value="{Binding conditions}"/>
+                                       Label="Conditions" Value="{Binding conditions}"
+                                       TextBoxTag="{x:Bind dialogs:ArrangementsField.Conditions}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
     </Grid>
 </Page>

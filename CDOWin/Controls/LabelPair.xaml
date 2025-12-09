@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Opacity="0.4">
 
-    <StackPanel>
+    <StackPanel IsRightTapEnabled="True" RightTapped="StackPanel_RightTapped">
         <TextBlock Text="{x:Bind Label, Mode=OneWay}" 
                    Style="{StaticResource LabelTextBlockStyle}"/>
         <TextBlock Text="{x:Bind Value, Mode=OneWay}" 

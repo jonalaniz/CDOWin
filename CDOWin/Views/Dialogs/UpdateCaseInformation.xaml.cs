@@ -49,7 +49,7 @@ public sealed partial class UpdateCaseInformation : Page {
         }
         CounselorDropDown.Flyout = flyout;
 
-        if (ViewModel.OriginalClient?.counselorReference?.name is string name) {
+        if (ViewModel.OriginalClient.counselorReference?.name is string name) {
             CounselorDropDown.Content = name;
         } else {
             CounselorDropDown.Content = "Select a Counselor";

@@ -22,8 +22,8 @@
 
         <!-- Columns -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
         <!-- Left Column -->
@@ -41,39 +41,24 @@
             </Grid.ColumnDefinitions>
 
 
-            <TextBlock Grid.Row="0" 
-                    Grid.Column="0"
-                    Text="Employers"
-                    FontSize="22"
-                    FontWeight="Bold"
-                    Margin="16,8,8,8"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="16,8,8,8"
+                       FontSize="22" FontWeight="Bold"
+                       Text="Employers" />
 
-            <Button Grid.Row="0"
-                 Grid.Column="1"
-                 VerticalAlignment="Center"
-                 Width="32"
-                 Height="32"
-                 Padding="0"
-                 Margin="8,8,8,8"
-                 Style="{StaticResource SubtleButtonStyle}">
-                <FontIcon Glyph="&#xE710;"
-                       FontSize="16"
-                       Foreground="{ThemeResource SystemAccentColor}"/>
+            <Button Grid.Row="0" Grid.Column="1" Margin="8,8,8,8"
+                    VerticalAlignment="Center"
+                    Width="32" Height="32" Padding="0"
+                    Style="{StaticResource SubtleButtonStyle}">
+                <FontIcon Glyph="&#xE710;" FontSize="16"
+                          Foreground="{ThemeResource SystemAccentColor}"/>
             </Button>
 
-            <TextBox Grid.Row="1"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="2"
-                  Margin="8, 0, 8, 8"
-                  PlaceholderText="Filter by name"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     Margin="8, 0, 8, 8" PlaceholderText="Filter by name"/>
 
-            <ListView Grid.Row="2" 
-                   Grid.Column="0"
-                   Grid.ColumnSpan="2"
-                   ItemsSource="{Binding Employers}"
-                   SelectedItem="{Binding SelectedEmployer, Mode=TwoWay}"
-                   HorizontalAlignment="Left"
-                   Width="220">
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      HorizontalAlignment="Stretch" ItemsSource="{Binding Employers}"
+                      SelectedItem="{Binding SelectedEmployer, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local1:Employer">
                         <Grid Margin="0,8,8,8">
@@ -81,12 +66,8 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
-                                    Text="{x:Bind name}"
-                                    FontWeight="Bold"/>
-                            <TextBlock Grid.Row="1" 
-                                    Text="{x:Bind address1}"
-                                    FontWeight="Light"/>
+                            <TextBlock Grid.Row="0" FontWeight="Bold" Text="{x:Bind name}"/>
+                            <TextBlock Grid.Row="1" FontWeight="Light" Text="{x:Bind address1}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -108,12 +89,9 @@
             </Grid.ColumnDefinitions>
 
 
-            <TextBlock Grid.Row="0" 
-                       Grid.Column="0"
-                       Text="{Binding SelectedEmployer.name}"
-                       FontSize="22"
-                       FontWeight="Bold"
-                       Margin="16,8,8,8"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="16,8,8,8"
+                       FontSize="22" FontWeight="Bold"
+                       Text="{Binding SelectedEmployer.name}"/>
         </Grid>
 
     </Grid>

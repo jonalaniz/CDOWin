@@ -3,11 +3,10 @@
     x:Class="CDOWin.Views.EmployersPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CDOWin.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CDOWin.ViewModels"
-    xmlns:local1="using:CDO.Core.Models"
+    xmlns:models="using:CDO.Core.Models"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -40,14 +39,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="16,8,8,8"
-                       FontSize="22" FontWeight="Bold"
-                       Text="Employers" />
+                       FontSize="22" FontWeight="Bold" Text="Employers"/>
 
-            <Button Grid.Row="0" Grid.Column="1" Margin="8,8,8,8"
-                    VerticalAlignment="Center"
-                    Width="32" Height="32" Padding="0"
+            <Button Grid.Row="0" Grid.Column="1" Margin="8,8,8,8" Padding="0"
+                    Width="32" Height="32" VerticalAlignment="Center"
                     Style="{StaticResource SubtleButtonStyle}">
                 <FontIcon Glyph="&#xE710;" FontSize="16"
                           Foreground="{ThemeResource SystemAccentColor}"/>
@@ -56,19 +52,42 @@
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8, 0, 8, 8" PlaceholderText="Filter by name"/>
 
-            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      HorizontalAlignment="Stretch" ItemsSource="{Binding Employers}"
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                      ScrollViewer.HorizontalScrollMode="Enabled" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                      HorizontalAlignment="Left" ItemsSource="{Binding Employers}"
                       SelectedItem="{Binding SelectedEmployer, Mode=TwoWay}">
+                <ListView.Header>
+                    <Border>
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:StickyHeaderBehavior/>
+                        </interactivity:Interaction.Behaviors>
+
+                        <controls:DataTable Margin="12,0,0,0">
+                            <controls:DataColumn Content="Employer" DesiredWidth="160"/>
+                            <controls:DataColumn Content="Address" DesiredWidth="180" CanResize="True"/>
+                            <controls:DataColumn Content="Phone" DesiredWidth="100"/>
+                            <controls:DataColumn Content="Fax" DesiredWidth="100"/>
+                            <controls:DataColumn Content="Email" DesiredWidth="140"/>
+                            <controls:DataColumn Content="Supervisor" DesiredWidth="140"/>
+                            <controls:DataColumn Content="Supervisor Phone" DesiredWidth="140"/>
+                            <controls:DataColumn Content="Supervior Email" DesiredWidth="140"/>
+                        </controls:DataTable>
+                    </Border>
+                </ListView.Header>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local1:Employer">
-                        <Grid Margin="0,8,8,8">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontWeight="Bold" Text="{x:Bind name}"/>
-                            <TextBlock Grid.Row="1" FontWeight="Light" Text="{x:Bind address1}"/>
-                        </Grid>
+                    <DataTemplate x:DataType="models:Employer">
+                        <controls:DataRow Margin="0,8,0,8">
+                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" TextWrapping="WrapWholeWords" Text="{x:Bind name}"/>
+                            <TextBlock Text="{x:Bind address1}"/>
+                            <TextBlock VerticalAlignment="Center" Text="{x:Bind phone}"/>
+                            <TextBlock Text="{x:Bind fax}"/>
+                            <TextBlock VerticalAlignment="Center" Text="{x:Bind email}"/>
+                            <TextBlock Text="{x:Bind supervisor}"/>
+                            <TextBlock VerticalAlignment="Center" Text="{x:Bind supervisorPhone}"/>
+                            <TextBlock Text="{x:Bind supervisorEmail}"/>
+                        </controls:DataRow>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="CDOWin.Views.Dialogs.UpdateArrangements"
+    x:Class="CDOWin.Views.Clients.Dialogs.UpdateArrangements"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CDOWin.Views.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models" 
-    xmlns:dialogs="using:CDOWin.Views.Dialogs"
+    xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
     mc:Ignorable="d">
 

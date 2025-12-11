@@ -1,13 +1,13 @@
 using CDO.Core.DTOs;
 using CDOWin.ViewModels;
-using CDOWin.Views.Dialogs;
+using CDOWin.Views.Clients.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Diagnostics;
 
-namespace CDOWin.Views;
+namespace CDOWin.Views.Clients;
 
 public sealed partial class ClientViewPage : Page {
     public ClientsViewModel? ViewModel { get; private set; }

@@ -3,7 +3,7 @@ using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
-namespace CDOWin.Views.Dialogs;
+namespace CDOWin.Views.Clients.Dialogs;
 
 public sealed partial class UpdateArrangements : Page {
     public ClientUpdateViewModel ViewModel;

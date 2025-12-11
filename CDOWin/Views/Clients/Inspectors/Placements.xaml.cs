@@ -2,7 +2,7 @@ using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace CDOWin.Views.Inspectors;
+namespace CDOWin.Views.Clients.Inspectors;
 
 public sealed partial class Placements : Page {
     public ClientsViewModel? ViewModel { get; private set; }

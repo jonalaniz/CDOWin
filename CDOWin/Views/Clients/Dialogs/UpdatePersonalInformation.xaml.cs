@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CDOWin.Views.Dialogs;
+namespace CDOWin.Views.Clients.Dialogs;
 
 public sealed partial class UpdatePersonalInformation : Page {
     private List<State> _states;

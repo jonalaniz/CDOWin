@@ -1,4 +1,4 @@
-﻿namespace CDOWin.Views.Dialogs;
+﻿namespace CDOWin.Views.Clients.Dialogs;
 
 public enum ClientEditType {
     Personal,

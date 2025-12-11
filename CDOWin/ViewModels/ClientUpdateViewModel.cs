@@ -1,6 +1,6 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Models;
-using CDOWin.Views.Dialogs;
+using CDOWin.Views.Clients.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;

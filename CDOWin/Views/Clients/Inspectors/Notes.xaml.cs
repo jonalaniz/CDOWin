@@ -1,11 +1,11 @@
 using CDOWin.ViewModels;
-using CDOWin.Views.Dialogs;
+using CDOWin.Views.Clients.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 
-namespace CDOWin.Views.Inspectors;
+namespace CDOWin.Views.Clients.Inspectors;
 
 public sealed partial class Notes : Page {
     public ClientsViewModel? ViewModel { get; private set; }

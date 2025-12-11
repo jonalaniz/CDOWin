@@ -3,7 +3,7 @@ using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using System;
 
-namespace CDOWin.Views.Dialogs;
+namespace CDOWin.Views.Clients.Dialogs;
 
 public sealed partial class UpdateNotes : Page {
     public ClientUpdateViewModel ViewModel;

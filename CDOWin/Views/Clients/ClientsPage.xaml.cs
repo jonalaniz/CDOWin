@@ -1,10 +1,10 @@
 using CDO.Core.DTOs;
 using CDOWin.ViewModels;
-using CDOWin.Views.Inspectors;
+using CDOWin.Views.Clients.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CDOWin.Views;
+namespace CDOWin.Views.Clients;
 
 public sealed partial class ClientsPage : Page {
     public readonly ClientsViewModel ViewModel;

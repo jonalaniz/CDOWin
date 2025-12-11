@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ namespace CDOWin.ViewModels;
 
 public partial class RemindersViewModel : ObservableObject {
     private readonly IReminderService _service;
+    private readonly ClientSelectionService _selectionService;
 
     [ObservableProperty]
     public partial ObservableCollection<Reminder> Reminders { get; private set; } = [];
@@ -18,10 +20,25 @@ public partial class RemindersViewModel : ObservableObject {
     public partial ObservableCollection<Reminder> FilteredReminders { get; private set; } = [];
 
     [ObservableProperty]
+    public partial ObservableCollection<Reminder> ClientReminders { get; private set; } = [];
+
+    [ObservableProperty]
     public partial Reminder? SelectedReminder { get; set; }
 
-    public RemindersViewModel(IReminderService service) {
+    public RemindersViewModel(IReminderService service, Services.ClientSelectionService clientSelectionService) {
         _service = service;
+        _selectionService = clientSelectionService;
+        _selectionService.SelectedClientChanged += OnClientChanged;
+    }
+
+    private void OnClientChanged(Client? client) {
+        if (client != null && client.reminders != null) {
+            List<Reminder> SortedReminders = client.reminders.OrderBy(o => o.date).ToList();
+            ClientReminders.Clear();
+            foreach (var reminder in SortedReminders) {
+                ClientReminders.Add(reminder);
+            }
+        }
     }
 
     partial void OnSelectedReminderChanged(Reminder? value) {

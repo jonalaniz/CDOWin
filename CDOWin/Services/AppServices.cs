@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace CDOWin;
+namespace CDOWin.Services;
 
 public static class AppServices {
     // Network
@@ -19,6 +19,8 @@ public static class AppServices {
     public static IStateService? StateService { get; private set; }
     public static IReminderService? ReminderService { get; private set; }
     public static IReferralService? ReferralService { get; private set; }
+
+    private static ClientSelectionService _clientSelectionService;
 
     // ViewModels
     public static ClientsViewModel? ClientsViewModel { get; private set; }
@@ -45,12 +47,14 @@ public static class AppServices {
         StateService = new StateService(NetworkService);
         ReferralService = new ReferralService(NetworkService);
 
+        _clientSelectionService = new();
+
         // Initialize ViewModels
-        ClientsViewModel = new ClientsViewModel(ClientService);
+        ClientsViewModel = new ClientsViewModel(ClientService, _clientSelectionService);
         CounselorsViewModel = new CounselorsViewModel(CounselorService);
         EmployersViewModel = new EmployersViewModel(EmployerService);
         POsViewModel = new POsViewModel(POsService);
-        RemindersViewModel = new RemindersViewModel(ReminderService);
+        RemindersViewModel = new RemindersViewModel(ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(StateService);
         ReferralsViewModel = new ReferralsViewModel(ReferralService);
 

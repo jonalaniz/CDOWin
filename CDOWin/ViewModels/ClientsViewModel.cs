@@ -30,7 +30,7 @@ public partial class ClientsViewModel : ObservableObject {
 
 
     // Constructor
-    public ClientsViewModel(IClientService service) {
+    public ClientsViewModel(IClientService service, Services.ClientSelectionService clientSelectionService) {
         _service = service;
     }
 

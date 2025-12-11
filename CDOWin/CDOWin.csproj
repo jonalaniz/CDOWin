@@ -22,7 +22,6 @@
     <None Remove="Views\Employers\Inspectors\EmployerInspector.xaml" />
     <None Remove="Views\Inspectors\Placements.xaml" />
     <None Remove="Views\Notes.xaml" />
-    <None Remove="Views\POsPage.xaml" />
     <None Remove="Views\Referrals\ReferralsPage.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
     <None Remove="Views\StatesPage.xaml" />
@@ -90,7 +89,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\POsPage.xaml">
+    <Page Update="Views\ServiceAuthorizationsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

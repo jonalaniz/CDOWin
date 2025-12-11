@@ -4,10 +4,10 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace CDOWin.Views;
 
-public sealed partial class POsPage : Page {
-    public POsViewModel ViewModel { get; }
+public sealed partial class ServiceAuthorizationsPage : Page {
+    public ServiceAuthorizationsViewModel ViewModel { get; }
 
-    public POsPage() {
+    public ServiceAuthorizationsPage() {
         InitializeComponent();
         ViewModel = AppServices.POsViewModel;
         DataContext = ViewModel;

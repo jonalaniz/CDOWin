@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs;
 
-public class UpdatePODTO {
+public class UpdateServiceAuthorizationDTO {
     public int? clientID { get; init; }
     public string? description { get; init; }
     public DateTime? startDate { get; init; }

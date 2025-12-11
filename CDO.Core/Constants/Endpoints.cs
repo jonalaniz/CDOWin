@@ -8,8 +8,8 @@ public static class Endpoints {
     public static readonly string Counselors = "/api/counselors";
     public static string Employer(int id) => $"{Employers}/{id}";
     public static readonly string Employers = "/api/employers";
-    public static string PO(string id) => $"{POs}/{id}";
-    public static readonly string POs = "/api/pos";
+    public static string ServiceAuthorization(string id) => $"{ServiceAuthorizations}/{id}";
+    public static readonly string ServiceAuthorizations = "/api/pos";
     public static string Referral(string id) => $"{Referrals}/{id}";
     public static readonly string Referrals = "/api/referrals";
     public static string Reminder(int id) => $"{Reminders}/{id}";

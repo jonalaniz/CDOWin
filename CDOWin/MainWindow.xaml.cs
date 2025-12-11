@@ -60,7 +60,7 @@ public sealed partial class MainWindow : Window {
                 pageType = typeof(EmployersPage);
                 break;
             case 3:
-                pageType = typeof(POsPage);
+                pageType = typeof(ServiceAuthorizationsPage);
                 break;
             case 4:
                 pageType = typeof(ReferralsPage);

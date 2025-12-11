@@ -15,7 +15,7 @@ public static class AppServices {
     public static IClientService? ClientService { get; private set; }
     public static ICounselorService? CounselorService { get; private set; }
     public static IEmployerService? EmployerService { get; private set; }
-    public static IPOService? POsService { get; private set; }
+    public static IServiceAuthorizationService? POsService { get; private set; }
     public static IStateService? StateService { get; private set; }
     public static IReminderService? ReminderService { get; private set; }
     public static IReferralService? ReferralService { get; private set; }
@@ -26,7 +26,7 @@ public static class AppServices {
     public static ClientsViewModel? ClientsViewModel { get; private set; }
     public static CounselorsViewModel? CounselorsViewModel { get; private set; }
     public static EmployersViewModel? EmployersViewModel { get; private set; }
-    public static POsViewModel? POsViewModel { get; private set; }
+    public static ServiceAuthorizationsViewModel? POsViewModel { get; private set; }
     public static RemindersViewModel? RemindersViewModel { get; private set; }
     public static StatesViewModel? StatesViewModel { get; private set; }
     public static ReferralsViewModel? ReferralsViewModel { get; private set; }
@@ -42,7 +42,7 @@ public static class AppServices {
         ClientService = new ClientService(NetworkService);
         CounselorService = new CounselorService(NetworkService);
         EmployerService = new EmployerService(NetworkService);
-        POsService = new POService(NetworkService);
+        POsService = new ServiceAuthorizationService(NetworkService);
         ReminderService = new ReminderService(NetworkService);
         StateService = new StateService(NetworkService);
         ReferralService = new ReferralService(NetworkService);
@@ -53,7 +53,7 @@ public static class AppServices {
         ClientsViewModel = new ClientsViewModel(ClientService, _clientSelectionService);
         CounselorsViewModel = new CounselorsViewModel(CounselorService);
         EmployersViewModel = new EmployersViewModel(EmployerService);
-        POsViewModel = new POsViewModel(POsService);
+        POsViewModel = new ServiceAuthorizationsViewModel(POsService);
         RemindersViewModel = new RemindersViewModel(ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(StateService);
         ReferralsViewModel = new ReferralsViewModel(ReferralService);
@@ -67,7 +67,7 @@ public static class AppServices {
             ClientsViewModel.LoadClientSummariesAsync(),
             CounselorsViewModel.LoadCounselorsAsync(),
             EmployersViewModel.LoadEmployersAsync(),
-            POsViewModel.LoadPOsAsync(),
+            POsViewModel.LoadServiceAuthorizationsAsync(),
             RemindersViewModel.LoadRemindersAsync(),
             StatesViewModel.LoadStatesAsync(),
             ReferralsViewModel.LoadReferralsAsync()

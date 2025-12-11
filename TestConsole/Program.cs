@@ -10,13 +10,13 @@ network.Initialize("https://api.jonalaniz.com", apiKey);
 //network.Initialize("http://127.0.0.1:8080", "RISgMANlIwHwqLPvOTDs8ecmz37VyW8O");
 
 IClientService clientService = new ClientService(network);
-// IPOService POService = new POService(network);
+// IServiceAuthorizationService POService = new POService(network);
 //
-// var POs = await POService.GetAllPOsAsync();
+// var ServiceAuthorizations = await POService.GetAllServiceAuthorizationsAsync();
 //
-// foreach (var PO in POs) {
-//     Console.WriteLine($"State ID: {PO.id}");
-//     Console.WriteLine($"State Name: {PO.clientID}");
+// foreach (var ServiceAuthorization in ServiceAuthorizations) {
+//     Console.WriteLine($"State ID: {ServiceAuthorization.id}");
+//     Console.WriteLine($"State Name: {ServiceAuthorization.clientID}");
 // }
 
 //var client = new CreateClientDTO {

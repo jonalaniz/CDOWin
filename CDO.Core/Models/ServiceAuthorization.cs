@@ -1,6 +1,6 @@
 ﻿namespace CDO.Core.Models;
 
-public record class PO(
+public record class ServiceAuthorization(
     string id,
     int clientID,
     string description,

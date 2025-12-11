@@ -52,7 +52,7 @@
                   BorderBrush="{ThemeResource SubtleFillColorTertiaryBrush}"
                   ItemsSource="{x:Bind ViewModel.SelectedClient.pos, Mode=OneWay}">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:PO">
+                <DataTemplate x:DataType="models:ServiceAuthorization">
                     <Grid RowSpacing="4" Margin="0,8,0,8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

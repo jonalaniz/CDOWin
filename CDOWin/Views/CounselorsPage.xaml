@@ -72,6 +72,7 @@
                       SelectionMode="Single" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.IsHorizontalRailEnabled="True"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Auto"
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
+                
                 <!-- Header -->
                 <ListView.Header>
                     <Grid Background="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"

@@ -1,4 +1,6 @@
-﻿namespace CDO.Core.Models;
+﻿using System.Globalization;
+
+namespace CDO.Core.Models;
 
 public record class PO(
     string id,
@@ -13,4 +15,6 @@ public record class PO(
     ) {
     public string? formattedStartDate => startDate.ToString(format: "MM/dd/yyyy");
     public string? formattedEndDate => endDate.ToString(format: "MM/dd/yyyy");
+
+    public string? formattedCost => $"{unitCost:C2}";
 }

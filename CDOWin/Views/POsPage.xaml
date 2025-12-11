@@ -6,17 +6,152 @@
     xmlns:local="using:CDOWin.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:viewmodels="using:CDOWin.ViewModels"
+    xmlns:models="using:CDO.Core.Models"
+    d:DataContext="{d:DesignInstance Type=viewmodels:POsViewModel}"
     mc:Ignorable="d">
 
-    <controls:WrapPanel Orientation="Horizontal"
-                        HorizontalSpacing="12"
-                        VerticalSpacing="12"
-                        Margin="12">
-        <Button Content="FUCK" Width="120" Height="69"/>
-        <ToggleSwitch Header="Toggle1"/>
-        <Slider Width="169"/>
-        <TextBox Width="99" PlaceholderText="CUm"/>
-        <CheckBox Content="coom in me"/>
-    </controls:WrapPanel>
+    <Grid>
+        <!-- Columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="380"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Left Column -->
+        <Grid BorderThickness="0,0,1,0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+            
+            <!-- Rows -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Columns -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Title + Button -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Column="0" Margin="16,8,16,0"
+                               FontSize="22" FontWeight="Bold" Text="POs"/>
+
+                    <!-- Add Button -->
+                    <Button Grid.Column="1" Margin="16,8,12,0" Width="32" Height="32"
+                            Padding="0" VerticalAlignment="Center" Style="{StaticResource SubtleButtonStyle}">
+                        <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                    </Button>
+                </Grid>
+
+                <!-- Subtitle -->
+                <TextBlock Margin="16,0,16,8" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                    <Run Text="{x:Bind ViewModel.POs.Count, Mode=OneWay}"/>
+                    <Run Text="POs"/>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Search Bar -->
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     Margin="8,0,8,8" PlaceholderText="Filter"/>
+
+            <!-- Counselors Table -->
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding POs}" SelectedItem="{Binding SelectedPO, Mode=TwoWay}"
+                      SelectionMode="Single" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.IsHorizontalRailEnabled="True"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                <!-- Header -->
+                <ListView.Header>
+                    <Grid Background="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"
+                          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                          BorderThickness="0,0,0,1" Padding="12,8">
+
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:StickyHeaderBehavior/>
+                        </interactivity:Interaction.Behaviors>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="110"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="PO Number" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Client" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Case ID" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="Counselor" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" Text="Start Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="End Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Unit Cost" FontWeight="SemiBold"/>
+                    </Grid>
+                </ListView.Header>
+
+                <!-- Content -->
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:PO">
+                        <Grid Padding="12,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="110"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{x:Bind id}" TextWrapping="WrapWholeWords"
+                                       FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind id}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind id}"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind id}"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind formattedStartDate}" TextWrapping="WrapWholeWords"
+                                       FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind formattedEndDate}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="6" Text="{x:Bind formattedCost}" TextTrimming="CharacterEllipsis"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <!-- Container Style -->
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+        <!-- Right Column -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Margin="16,8,8,8"
+                   FontSize="22" FontWeight="Bold"
+                   TextWrapping="WrapWholeWords"
+                   Text="{Binding SelectedPO.description}"/>
+        </Grid>
+    </Grid>
 </Page>

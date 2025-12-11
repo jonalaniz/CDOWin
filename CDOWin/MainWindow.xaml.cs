@@ -57,7 +57,7 @@ public sealed partial class MainWindow : Window {
                 pageType = typeof(EmployersPage);
                 break;
             case 3:
-                pageType = typeof(SamplePage);
+                pageType = typeof(POsPage);
                 break;
             default:
                 pageType = typeof(SamplePage);

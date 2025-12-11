@@ -1,4 +1,5 @@
 using CDOWin.ViewModels;
+using CDOWin.Views.Employers.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Diagnostics;
@@ -12,6 +13,6 @@ public sealed partial class EmployersPage : Page {
         InitializeComponent();
         ViewModel = AppServices.EmployersViewModel;
         DataContext = ViewModel;
-        Debug.WriteLine(ViewModel.Employers.Count);
+        InspectorFrame.Navigate(typeof(EmployerInspector), ViewModel);
     }
 }

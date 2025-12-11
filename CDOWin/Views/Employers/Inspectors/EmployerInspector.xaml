@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CDOWin.Views.Employers.Inspectors.EmployerInspector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CDOWin.Views.Employers.Inspectors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:CDOWin.ViewModels"
+    xmlns:control="using:CDOWin.Controls"
+    d:DataContext="{d:DesignInstance Type=viewmodels:EmployersViewModel}"
+    mc:Ignorable="d">
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="16,8,8,8" FontSize="22" 
+                   FontWeight="Bold" TextWrapping="WrapWholeWords"
+                   Text="{Binding SelectedEmployer.name}"/>
+
+        <TextBlock Grid.Row="1" Margin="16,8,8,8" Style="{StaticResource CaptionTextBlockStyle}" Text="Details"/>
+
+        <Grid Grid.Row="2" Margin="12,0,12,8" RowSpacing="12" Padding="12,8,16,12"
+              Style="{StaticResource BasicCardContainerGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0: Address -->
+            <control:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Label="Address" Value="{Binding SelectedEmployer.formattedAddress}"/>
+            
+            <!-- Row 1: Phone + Fax -->
+            <control:LabelPair Grid.Row="1" Grid.Column="0" Label="Phone" Value="{Binding SelectedEmployer.phone}"/>
+            <control:LabelPair Grid.Row="1" Grid.Column="1" Label="Fax" Value="{Binding SelectedEmployer.fax}"/>
+            
+            <!-- Row 2: Email -->
+            <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Email" Value="{Binding SelectedEmployer.email}"/>
+
+            <!-- Row 3: Supervisor -->
+            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Supervisor"/>
+                <TextBlock Style="{StaticResource ValueTextBlockStyle}" Text="{Binding SelectedEmployer.supervisor}"
+                           Visibility="{Binding SelectedEmployer.supervisor, Converter={StaticResource StringToVisability}}"/>
+                <TextBlock Style="{StaticResource ValueTextBlockStyle}"  Text="{Binding SelectedEmployer.supervisorPhone}"
+                           Visibility="{Binding SelectedEmployer.supervisorPhone, Converter={StaticResource StringToVisability}}"/>
+                <TextBlock Style="{StaticResource ValueTextBlockStyle}"  Text="{Binding SelectedEmployer.supervisorEmail}"
+                           Visibility="{Binding SelectedEmployer.supervisorEmail, Converter={StaticResource StringToVisability}}"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Grid.Row="3" Margin="16,8,8,8" Style="{StaticResource CaptionTextBlockStyle}" Text="Notes"/>
+
+        <TextBox Grid.Row="4" Grid.Column="0" Margin="12,0,12,16"
+                CornerRadius="4" VerticalAlignment="Stretch"
+                Style="{StaticResource MultiLineCheckboxStyle}"
+                TextWrapping="Wrap"
+                Text="{x:Bind ViewModel.SelectedEmployer.notes, Mode=OneWay}"/>
+    </Grid>
+</Page>

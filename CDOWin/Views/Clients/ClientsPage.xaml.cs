@@ -11,10 +11,8 @@ public sealed partial class ClientsPage : Page {
 
     public ClientsPage() {
         InitializeComponent();
-
         ViewModel = AppServices.ClientsViewModel;
         DataContext = ViewModel;
-
         ClientFrame.Navigate(typeof(ClientViewPage), ViewModel);
     }
 

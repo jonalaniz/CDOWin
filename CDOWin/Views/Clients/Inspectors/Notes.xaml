@@ -7,7 +7,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CDOWin.ViewModels" 
-    xmlns:local1="using:CDO.Core.Models"
     d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
     mc:Ignorable="d">
 

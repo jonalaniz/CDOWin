@@ -1,7 +1,9 @@
 using CDOWin.Views;
 using CDOWin.Views.Clients;
+using CDOWin.Views.Counselors;
 using CDOWin.Views.Employers;
 using CDOWin.Views.Referrals;
+using CDOWin.Views.ServiceAuthorizations;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;

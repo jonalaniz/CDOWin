@@ -2,7 +2,7 @@ using CDOWin.Services;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
-namespace CDOWin.Views;
+namespace CDOWin.Views.ServiceAuthorizations;
 
 public sealed partial class ServiceAuthorizationsPage : Page {
     public ServiceAuthorizationsViewModel ViewModel { get; }

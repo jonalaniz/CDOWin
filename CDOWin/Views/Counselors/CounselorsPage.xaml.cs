@@ -2,7 +2,7 @@ using CDOWin.Services;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
-namespace CDOWin.Views;
+namespace CDOWin.Views.Counselors;
 
 public sealed partial class CounselorsPage : Page {
     public CounselorsViewModel ViewModel { get; }

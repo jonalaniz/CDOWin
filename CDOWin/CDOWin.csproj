@@ -156,6 +156,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Employers\Dialogs\" />
+    <Folder Include="Views\Counselors\" />
+    <Folder Include="Views\ServiceAuthorizations\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Referrals\ReferralsPage.xaml">

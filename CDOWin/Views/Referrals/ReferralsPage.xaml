@@ -56,18 +56,19 @@
 
                 <!-- Subtitle -->
                 <TextBlock Margin="16,0,16,8" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                    <Run Text="{x:Bind ViewModel.Referrals.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind ViewModel.FilteredReferrals.Count, Mode=OneWay}"/>
                     <Run Text="Referrals"/>
                 </TextBlock>
             </StackPanel>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" PlaceholderText="Filter"/>
+                     Margin="8,0,8,8" PlaceholderText="Filter Referrals"
+                     Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Referrals Table -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding Referrals}" SelectedItem="{Binding SelectedReferral, Mode=TwoWay}" 
+                      ItemsSource="{Binding FilteredReferrals}" SelectedItem="{Binding SelectedReferral, Mode=TwoWay}" 
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
                       SelectionMode="Single" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.IsHorizontalRailEnabled="True"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Auto"

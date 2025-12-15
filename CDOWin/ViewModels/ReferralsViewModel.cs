@@ -20,8 +20,31 @@ public partial class ReferralsViewModel : ObservableObject {
     [ObservableProperty]
     public partial Referral? SelectedReferral { get; set; }
 
+    [ObservableProperty]
+    public partial string SearchQuery { get; set; } = string.Empty;
+
     public ReferralsViewModel(IReferralService service) {
         _service = service;
+    }
+
+    partial void OnSearchQueryChanged(string value) {
+        ApplyFilter();
+    }
+
+    void ApplyFilter() {
+        if (string.IsNullOrWhiteSpace(SearchQuery)) {
+            FilteredReferrals = new ObservableCollection<Referral>(Referrals);
+            return;
+        }
+
+        var query = SearchQuery.Trim().ToLower();
+        var result = Referrals.Where(r =>
+        (r.clientName?.ToLower().Contains(query) ?? false)
+        || (r.employer.name?.ToLower().Contains(query) ?? false)
+        || (r.supervisor?.ToLower().Contains(query) ?? false)
+        );
+
+        FilteredReferrals = new ObservableCollection<Referral>(result);
     }
 
     public async Task LoadReferralsAsync() {
@@ -32,6 +55,8 @@ public partial class ReferralsViewModel : ObservableObject {
         foreach (var referral in SortedReferrals) {
             Referrals.Add(referral);
         }
+
+        ApplyFilter();
     }
 
     public async Task RefreshSelectedReferral(string id) {

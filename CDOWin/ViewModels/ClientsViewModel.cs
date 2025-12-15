@@ -45,7 +45,6 @@ public partial class ClientsViewModel : ObservableObject {
     partial void OnSelectedClientChanged(Client? client) {
         if (client != null)
             Debug.WriteLine(SelectedClient.reminders);
-
         _selectionService.SelectedClient = client;
     }
 

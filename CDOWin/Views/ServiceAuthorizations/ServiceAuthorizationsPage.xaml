@@ -57,18 +57,19 @@
 
                 <!-- Subtitle -->
                 <TextBlock Margin="16,0,16,8" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                    <Run Text="{x:Bind ViewModel.ServiceAuthorizations.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Service Authorizations"/>
                 </TextBlock>
             </StackPanel>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" PlaceholderText="Filter"/>
+                     Margin="8,0,8,8" PlaceholderText="Filter Service Authorizations"
+                     Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- ServiceAuthorizations Table -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding ServiceAuthorizations}" SelectedItem="{Binding SelectedServiceAuthorization, Mode=TwoWay}"
+                      ItemsSource="{Binding Filtered}" SelectedItem="{Binding Selected, Mode=TwoWay}"
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
                       SelectionMode="Single" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.IsHorizontalRailEnabled="True"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Auto"

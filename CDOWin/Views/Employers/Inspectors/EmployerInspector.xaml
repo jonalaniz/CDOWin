@@ -27,7 +27,7 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="16,8,8,8" FontSize="22" 
                    FontWeight="Bold" TextWrapping="WrapWholeWords"
-                   Text="{Binding SelectedEmployer.name}"/>
+                   Text="{Binding Selected.name}"/>
 
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="2" Margin="16,8,12,0" Width="32" Height="32"
@@ -54,22 +54,22 @@
 
             <!-- Row 0: Address -->
             <control:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                               Label="Address" Value="{Binding SelectedEmployer.formattedAddress}"/>
+                               Label="Address" Value="{Binding Selected.formattedAddress}"/>
 
             <!-- Row 1: Phone + Fax -->
-            <control:LabelPair Grid.Row="1" Grid.Column="0" Label="Phone" Value="{Binding SelectedEmployer.phone}"/>
-            <control:LabelPair Grid.Row="1" Grid.Column="1" Label="Fax" Value="{Binding SelectedEmployer.fax}"/>
+            <control:LabelPair Grid.Row="1" Grid.Column="0" Label="Phone" Value="{Binding Selected.phone}"/>
+            <control:LabelPair Grid.Row="1" Grid.Column="1" Label="Fax" Value="{Binding Selected.fax}"/>
 
             <!-- Row 2: Email -->
             <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Email" Value="{Binding SelectedEmployer.email}"/>
+                               Label="Email" Value="{Binding Selected.email}"/>
 
             <!-- Row 3: Supervisor -->
             <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Supervisor" Value="{Binding SelectedEmployer.formattedSuperviror}"/>
+                               Label="Supervisor" Value="{Binding Selected.formattedSuperviror}"/>
             <!-- Row 4: Notes -->
             <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Notes" Value="{Binding SelectedEmployer.notes}"/>
+                               Label="Notes" Value="{Binding Selected.notes}"/>
         </Grid>
     </Grid>
 </Page>

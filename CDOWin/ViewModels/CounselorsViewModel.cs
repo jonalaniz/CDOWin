@@ -12,13 +12,13 @@ public partial class CounselorsViewModel : ObservableObject {
     private readonly ICounselorService _service;
 
     [ObservableProperty]
-    public partial ObservableCollection<Counselor> AllCounselors { get; private set; } = [];
+    public partial ObservableCollection<Counselor> All { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<Counselor> FilteredCounselors { get; private set; } = [];
+    public partial ObservableCollection<Counselor> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Counselor? SelectedCounselor { get; set; }
+    public partial Counselor? Selected { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -33,28 +33,28 @@ public partial class CounselorsViewModel : ObservableObject {
 
     void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            FilteredCounselors = new ObservableCollection<Counselor>(AllCounselors);
+            Filtered = new ObservableCollection<Counselor>(All);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = AllCounselors.Where(c =>
+        var result = All.Where(c =>
         (c.name?.ToLower().Contains(query) ?? false)
         || (c.secretaryName?.ToLower().Contains(query) ?? false)
         || (c.email?.ToLower().Contains(query) ?? false)
         || (c.secretaryEmail?.ToLower().Contains(query) ?? false)
         );
 
-        FilteredCounselors = new ObservableCollection<Counselor>(result);
+        Filtered = new ObservableCollection<Counselor>(result);
     }
 
     public async Task LoadCounselorsAsync() {
         var counselors = await _service.GetAllCounselorsAsync();
         List<Counselor> SortedCounselors = counselors.OrderBy(o => o.name).ToList();
-        AllCounselors.Clear();
+        All.Clear();
 
         foreach (var counselor in SortedCounselors) {
-            AllCounselors.Add(counselor);
+            All.Add(counselor);
         }
 
         ApplyFilter();
@@ -62,8 +62,8 @@ public partial class CounselorsViewModel : ObservableObject {
 
     public async Task RefreshSelectedCounselor(int id) {
         var counselor = await _service.GetCounselorAsync(id);
-        var index = AllCounselors.IndexOf(AllCounselors.First(c => c.id == id));
-        AllCounselors[index] = counselor;
-        SelectedCounselor = counselor;
+        var index = All.IndexOf(All.First(c => c.id == id));
+        All[index] = counselor;
+        Selected = counselor;
     }
 }

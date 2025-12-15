@@ -16,7 +16,7 @@ public sealed partial class UpdateCaseInformation : Page {
     public ClientUpdateViewModel ViewModel { get; private set; }
 
     public UpdateCaseInformation(ClientUpdateViewModel viewModel) {
-        var counselors = AppServices.CounselorsViewModel.AllCounselors.ToList();
+        var counselors = AppServices.CounselorsViewModel.All.ToList();
         _counselors = counselors;
         ViewModel = viewModel;
         DataContext = viewModel.OriginalClient;

@@ -29,8 +29,10 @@
                    Text="{Binding Selected.name}"/>
         
         <!-- Edit Button -->
-        <Button Grid.Row="0" Grid.Column="2" Margin="16,8,12,0" Width="32" Height="32"
-                            Padding="0" VerticalAlignment="Top" Style="{StaticResource SubtleButtonStyle}">
+        <Button Grid.Row="0" Grid.Column="2" Margin="16,8,12,0" 
+                Width="32" Height="32" Padding="0"
+                Click="Button_Click" VerticalAlignment="Top" 
+                Style="{StaticResource SubtleButtonStyle}">
             <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
         </Button>
 

@@ -42,7 +42,7 @@ public sealed partial class MainWindow : Window {
     }
 
     private void NavigationSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {
-        if(args.SelectedItem is NavigationViewItem selectedItem && selectedItem.Tag is CDOFrame frame) {
+        if (args.SelectedItem is NavigationViewItem selectedItem && selectedItem.Tag is CDOFrame frame) {
             var currentSelectedIndex = sender.MenuItems.IndexOf(selectedItem);
             System.Type pageType;
 

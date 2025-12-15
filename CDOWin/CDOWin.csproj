@@ -29,11 +29,14 @@
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\ClientViewPage.xaml" />
+    <None Remove="Views\Counselors\Inspectors\CounselorInspector.xaml" />
     <None Remove="Views\Employers\Inspectors\EmployerInspector.xaml" />
     <None Remove="Views\Inspectors\Placements.xaml" />
     <None Remove="Views\Notes.xaml" />
+    <None Remove="Views\Referrals\Inspectors\ReferralInspector.xaml" />
     <None Remove="Views\Referrals\ReferralsPage.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
+    <None Remove="Views\ServiceAuthorizations\Inspectors\ServiceAuthorizationInspector.xaml" />
     <None Remove="Views\StatesPage.xaml" />
   </ItemGroup>
 
@@ -159,8 +162,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Counselors\Dialogs\" />
     <Folder Include="Views\Employers\Dialogs\" />
-    <Folder Include="Views\Counselors\" />
+    <Folder Include="Views\Referrals\Dialogs\" />
+    <Folder Include="Views\Reminders\Inspectors\" />
+    <Folder Include="Views\Reminders\Dialogs\" />
+    <Folder Include="Views\ServiceAuthorizations\Dialogs\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Referrals\ReferralsPage.xaml">
@@ -205,5 +212,20 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Service Authorizations\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ServiceAuthorizations\Inspectors\ServiceAuthorizationInspector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Referrals\Inspectors\ReferralInspector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Counselors\Inspectors\CounselorInspector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

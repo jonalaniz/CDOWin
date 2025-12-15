@@ -60,7 +60,7 @@ public sealed partial class RemindersPage : Page {
 
     private void SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) {
         SelectorBarItem selectedItem = sender.SelectedItem;
-        if(selectedItem.Tag is RemindersFilter filter)
+        if (selectedItem.Tag is RemindersFilter filter)
             ViewModel.Filter = filter;
     }
 }

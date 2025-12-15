@@ -168,17 +168,6 @@
         </Grid>
 
         <!-- Right Column -->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Margin="16,8,8,8"
-                       FontSize="22" FontWeight="Bold"
-                       TextWrapping="WrapWholeWords"
-                       Text="{Binding SelectedReferral.clientName}"/>
-        </Grid>
+        <Frame Grid.Column="1" x:Name="InspectorFrame" IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

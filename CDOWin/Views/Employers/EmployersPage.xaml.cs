@@ -17,7 +17,7 @@ public sealed partial class EmployersPage : Page {
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if(e.ClickedItem is Employer employer) {
+        if (e.ClickedItem is Employer employer) {
             ViewModel.RefreshSelectedEmployer(employer.id);
         }
     }

@@ -53,7 +53,7 @@ public partial class RemindersViewModel : ObservableObject {
             }
 
             if (Filter == RemindersFilter.Client) {
-            ReplaceFiltered(ClientSpecific);
+                ReplaceFiltered(ClientSpecific);
                 UpdateEndText();
             }
         }
@@ -87,7 +87,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     private void SetUpcomingReminders() {
         Filtered.Clear();
-        foreach(var reminder in All) {
+        foreach (var reminder in All) {
             if (reminder.date > DateTime.Now)
                 Filtered.Add(reminder);
         }

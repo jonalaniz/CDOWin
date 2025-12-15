@@ -1,6 +1,7 @@
 using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
+using CDOWin.Views.Counselors.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CDOWin.Views.Counselors;
@@ -12,10 +13,11 @@ public sealed partial class CounselorsPage : Page {
         InitializeComponent();
         ViewModel = AppServices.CounselorsViewModel;
         DataContext = ViewModel;
+        InspectorFrame.Navigate(typeof(CounselorInspector), ViewModel);
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if(e.ClickedItem is Counselor counselor) {
+        if (e.ClickedItem is Counselor counselor) {
             ViewModel.RefreshSelectedCounselor(counselor.id);
         }
     }

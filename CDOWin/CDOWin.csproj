@@ -163,11 +163,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Employers\Dialogs\" />
-    <Folder Include="Views\Referrals\Dialogs\" />
     <Folder Include="Views\Reminders\Inspectors\" />
-    <Folder Include="Views\Reminders\Dialogs\" />
-    <Folder Include="Views\ServiceAuthorizations\Dialogs\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Referrals\ReferralsPage.xaml">

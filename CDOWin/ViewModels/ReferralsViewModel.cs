@@ -12,13 +12,13 @@ public partial class ReferralsViewModel : ObservableObject {
     private readonly IReferralService _service;
 
     [ObservableProperty]
-    public partial ObservableCollection<Referral> Referrals { get; private set; } = [];
+    public partial ObservableCollection<Referral> All { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<Referral> FilteredReferrals { get; private set; } = [];
+    public partial ObservableCollection<Referral> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Referral? SelectedReferral { get; set; }
+    public partial Referral? Selected { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -33,27 +33,27 @@ public partial class ReferralsViewModel : ObservableObject {
 
     void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            FilteredReferrals = new ObservableCollection<Referral>(Referrals);
+            Filtered = new ObservableCollection<Referral>(All);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = Referrals.Where(r =>
+        var result = All.Where(r =>
         (r.clientName?.ToLower().Contains(query) ?? false)
         || (r.employer.name?.ToLower().Contains(query) ?? false)
         || (r.supervisor?.ToLower().Contains(query) ?? false)
         );
 
-        FilteredReferrals = new ObservableCollection<Referral>(result);
+        Filtered = new ObservableCollection<Referral>(result);
     }
 
     public async Task LoadReferralsAsync() {
         var referrals = await _service.GetAllReferralsAsync();
         List<Referral> SortedReferrals = referrals.OrderBy(o => o.clientID).ToList();
-        Referrals.Clear();
+        All.Clear();
 
         foreach (var referral in SortedReferrals) {
-            Referrals.Add(referral);
+            All.Add(referral);
         }
 
         ApplyFilter();
@@ -61,8 +61,8 @@ public partial class ReferralsViewModel : ObservableObject {
 
     public async Task RefreshSelectedReferral(string id) {
         var referral = await _service.GetReferralAsync(id);
-        var index = Referrals.IndexOf(Referrals.First(r => r.id == referral.id));
-        Referrals[index] = referral;
-        SelectedReferral = referral;
+        var index = All.IndexOf(All.First(r => r.id == referral.id));
+        All[index] = referral;
+        Selected = referral;
     }
 }

@@ -6,18 +6,100 @@
     xmlns:local="using:CDOWin.Views.Referrals.Inspectors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:CDOWin.ViewModels"
+    xmlns:control="using:CDOWin.Controls"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ReferralsViewModel}"
+
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Margin="16,8,8,8"
-                       FontSize="22" FontWeight="Bold"
-                       TextWrapping="WrapWholeWords"
-                       Text="{Binding SelectedReferral.clientName}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="16,8,8,8"
+                   FontSize="22" FontWeight="Bold"
+                   TextWrapping="WrapWholeWords"
+                   Text="{Binding Selected.clientName}"/>
+        
+        <!-- Edit Button -->
+        <Button Grid.Row="0" Grid.Column="1" Margin="16,8,12,0" Width="32" Height="32"
+                Padding="0" VerticalAlignment="Top" Style="{StaticResource SubtleButtonStyle}">
+            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+        </Button>
+
+        <!-- Details Caption -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,8,8,8" Style="{StaticResource CaptionTextBlockStyle}" Text="Details"/>
+
+        <!-- Detials Grid -->
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  
+              Margin="12,0,12,8" RowSpacing="12" Padding="12,8,16,12"
+              Style="{StaticResource BasicCardContainerGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0: Placement + Active -->
+            <control:LabelPair Grid.Row="0" Grid.Column="0" Label="Placement" Value="{Binding Selected.placementNumber}"/>
+            <control:LabelPair Grid.Row="0" Grid.Column="1" Label="Active" Value="{Binding Selected.active}"/>
+
+            <!-- Row 1: Employer -->
+            <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Employer" Value="{Binding Selected.employer.name}"/>
+            
+            <!-- Row 2: Counselor -->
+            <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Counselor" Value="{Binding Selected.counselorName}"/>
+
+            <!-- Row 3: PO number + Employer ID -->
+            <control:LabelPair Grid.Row="3" Grid.Column="0" Label="SA ID" Value="{Binding Selected.poNumber}"/>
+            <control:LabelPair Grid.Row="3" Grid.Column="1" Label="Employer ID" Value="{Binding Selected.employerID}"/>
+
+            <!-- Row 4: Supervisor -->
+            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Supervisor" Value="{Binding Selected.supervisor}"/>
+            
+            <!-- Row 5: Supervisor Email -->
+            <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Supervisor Email" Value="{Binding Selected.supervisorEmail}"/>
+
+            <!-- Row 6: Supervisor Telephone -->
+            <control:LabelPair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Supervisor Phone" Value="{Binding Selected.supervisorPhone}"/>
+
+            <!-- Row 7: Position -->
+            <control:LabelPair Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Position" Value="{Binding Selected.position}"/>
+
+            <!-- Row 8: Salary + Days on Job -->
+            <control:LabelPair Grid.Row="8" Grid.Column="0" Label="Salary" Value="{Binding Selected.formattedSalary}"/>
+            <control:LabelPair Grid.Row="8" Grid.Column="1" Label="Days on Job" Value="{Binding Selected.daysOnJob}"/>
+
+            <!-- Row 9: Hire Date + End Date -->
+            <control:LabelPair Grid.Row="9" Grid.Column="0" Label="Hire Date" Value="{Binding Selected.formattedHireDate}"/>
+            <control:LabelPair Grid.Row="9" Grid.Column="1" Label="End Date" Value="{Binding Selected.formattedEndDate}"/>
+        </Grid>
     </Grid>
 </Page>

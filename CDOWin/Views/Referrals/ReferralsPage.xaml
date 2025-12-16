@@ -56,7 +56,7 @@
 
                 <!-- Subtitle -->
                 <TextBlock Margin="16,0,16,8" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                    <Run Text="{x:Bind ViewModel.FilteredReferrals.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Referrals"/>
                 </TextBlock>
             </StackPanel>
@@ -68,7 +68,7 @@
 
             <!-- Referrals Table -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding FilteredReferrals}" SelectedItem="{Binding SelectedReferral, Mode=TwoWay}" 
+                      ItemsSource="{Binding Filtered}" SelectedItem="{Binding Selected, Mode=TwoWay}" 
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
                       SelectionMode="Single" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.IsHorizontalRailEnabled="True"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Auto"

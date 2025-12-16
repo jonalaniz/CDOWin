@@ -1,7 +1,7 @@
 namespace CDO.Core.DTOs;
 
 public class UpdateStateDTO {
-    public string? name { get; init; }
-    public int? countryID { get; init; }
-    public string? shortName { get; init; }
+    public string? name { get; set; }
+    public int? countryID { get; set; }
+    public string? shortName { get; set; }
 }

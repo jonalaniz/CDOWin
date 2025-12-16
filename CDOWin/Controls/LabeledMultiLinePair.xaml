@@ -12,7 +12,7 @@
         <TextBlock Margin="0,8,8,8" Text="{x:Bind Label, Mode=OneWay}" 
                    Style="{StaticResource LabelTextBlockStyle}"/>
         <TextBox x:Name="InnerTextBox" Text="{x:Bind Value, Mode=TwoWay}"
-                 TextChanged="TextBox_TextChanged" MaxHeight="250"
+                 TextChanged="TextBox_TextChanged" MaxHeight="200"
                  Style="{StaticResource MultiLineCheckboxStyle}"/>
     </StackPanel>
 </UserControl>

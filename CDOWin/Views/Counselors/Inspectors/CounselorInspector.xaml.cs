@@ -22,8 +22,9 @@ public sealed partial class CounselorInspector : Page {
     }
 
     private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        // TODO: CHECK THAT VIWMODEL.SELECTED ISN'T NULL
-        // THIS ENSURES NOTHING HAPPENS IF THEY CLICK AND NOTHING IS SELECTED
+        if (ViewModel == null || ViewModel.Selected == null)
+            return;
+
         var updateVM = new CounselorUpdateViewModel(ViewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Counselor");
         dialog.Content = new UpdateCounselor(updateVM);
@@ -37,6 +38,7 @@ public sealed partial class CounselorInspector : Page {
 
     private void updateCounselor(UpdateCounselorDTO update) {
         Debug.WriteLine("UPDATING");
+        ViewModel.UpdateCounselor(update);
         // Here we need ot implement ViewModel.UpdateCounselor
     }
 }

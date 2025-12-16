@@ -35,7 +35,7 @@ public class CounselorService : ICounselorService {
     // PATCH Methods
     // -----------------------------
     public Task<Counselor?> UpdateCounselorAsync(int id, UpdateCounselorDTO dto) {
-        return _network.UpdateAsync<UpdateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
+        return _network.UpdateAsync<UpdateCounselorDTO, Counselor>(Endpoints.Counselor(id), dto);
     }
 
     // -----------------------------

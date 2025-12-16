@@ -1,6 +1,6 @@
 ﻿namespace CDOWin.Views.Counselors.Dialogs;
 
-public enum UpdateFields {
+public enum UpdateField {
     Name,
     Email,
     Phone,

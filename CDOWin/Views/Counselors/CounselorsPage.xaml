@@ -67,7 +67,7 @@
                      Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Counselors Table -->
-            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView"
                       ItemsSource="{Binding Filtered}" SelectedItem="{Binding Selected, Mode=TwoWay}"
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
                       SelectionMode="Single" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.IsHorizontalRailEnabled="True"
@@ -115,14 +115,14 @@
                                 <ColumnDefinition Width="210"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind name}" TextWrapping="WrapWholeWords"
+                            <TextBlock Grid.Column="0" Text="{x:Bind name, Mode=OneWay}" TextWrapping="WrapWholeWords"
                                        FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind email}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind phone}"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind fax}"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind secretaryName}" TextWrapping="WrapWholeWords"
+                            <TextBlock Grid.Column="1" Text="{x:Bind email, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind phone, Mode=OneWay}"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind fax, Mode=OneWay}"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind secretaryName, Mode=OneWay}" TextWrapping="WrapWholeWords"
                                        FontWeight="Bold"/>
-                            <TextBlock Grid.Column="5" Text="{x:Bind secretaryEmail}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind secretaryEmail, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -28,35 +28,42 @@
         <!-- Row 0: Name -->
         <controls:LabeledTextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="Name" Value="{Binding name}" 
-                                 Tag="{x:Bind dialogs:UpdateFields.Name}"/>
+                                 Tag="{x:Bind dialogs:UpdateField.Name}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 1: Email -->
         <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="Email" Value="{Binding email}"
-                                 Tag="{x:Bind dialogs:UpdateFields.Email}"/>
+                                 Tag="{x:Bind dialogs:UpdateField.Email}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 2: Phone + Fax -->
         <controls:LabeledTextBox Grid.Row="2" Grid.Column="0" 
                                  Label="Phone" Value="{Binding phone}"
-                                 Tag="{x:Bind dialogs:UpdateFields.Phone}"/>
+                                 Tag="{x:Bind dialogs:UpdateField.Phone}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <controls:LabeledTextBox Grid.Row="2" Grid.Column="2" 
                                  Label="Fax" Value="{Binding fax}"
-                                 Tag="{x:Bind dialogs:UpdateFields.Fax}"/>
+                                 Tag="{x:Bind dialogs:UpdateField.Fax}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!--Row 3:  Notes -->
         <controls:LabeledMultiLinePair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                                        Label="Notes" Value="{Binding notes}"
-                                       Tag="{x:Bind dialogs:UpdateFields.Notes}"/>
+                                       Tag="{x:Bind dialogs:UpdateField.Notes}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 4: Secretary -->
         <controls:LabeledTextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="Secretary" Value="{Binding secretaryName}"
-                                 Tag="{x:Bind dialogs:UpdateFields.Secretary}"/>
+                                 Tag="{x:Bind dialogs:UpdateField.Secretary}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 5: Secretary Email-->
         <controls:LabeledTextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
                                  Label="Secretray Email" Value="{Binding secretaryEmail}"
-                                 Tag="{x:Bind dialogs:UpdateFields.SecretaryEmail}"/>
+                                 Tag="{x:Bind dialogs:UpdateField.SecretaryEmail}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
     </Grid>
 </Page>

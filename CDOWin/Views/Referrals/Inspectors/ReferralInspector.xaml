@@ -52,8 +52,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -79,27 +77,19 @@
 
             <!-- Row 4: Supervisor -->
             <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Supervisor" Value="{Binding Selected.supervisor}"/>
+                               Label="Supervisor" Value="{Binding Selected.formattedSupervisor}"/>
             
-            <!-- Row 5: Supervisor Email -->
+            <!-- Row 5: Position -->
             <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Supervisor Email" Value="{Binding Selected.supervisorEmail}"/>
-
-            <!-- Row 6: Supervisor Telephone -->
-            <control:LabelPair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Supervisor Phone" Value="{Binding Selected.supervisorPhone}"/>
-
-            <!-- Row 7: Position -->
-            <control:LabelPair Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                                Label="Position" Value="{Binding Selected.position}"/>
 
-            <!-- Row 8: Salary + Days on Job -->
-            <control:LabelPair Grid.Row="8" Grid.Column="0" Label="Salary" Value="{Binding Selected.formattedSalary}"/>
-            <control:LabelPair Grid.Row="8" Grid.Column="1" Label="Days on Job" Value="{Binding Selected.daysOnJob}"/>
+            <!-- Row 6: Salary + Days on Job -->
+            <control:LabelPair Grid.Row="6" Grid.Column="0" Label="Salary" Value="{Binding Selected.formattedSalary}"/>
+            <control:LabelPair Grid.Row="6" Grid.Column="1" Label="Days on Job" Value="{Binding Selected.daysOnJob}"/>
 
-            <!-- Row 9: Hire Date + End Date -->
-            <control:LabelPair Grid.Row="9" Grid.Column="0" Label="Hire Date" Value="{Binding Selected.formattedHireDate}"/>
-            <control:LabelPair Grid.Row="9" Grid.Column="1" Label="End Date" Value="{Binding Selected.formattedEndDate}"/>
+            <!-- Row 7: Hire Date + End Date -->
+            <control:LabelPair Grid.Row="7" Grid.Column="0" Label="Hire Date" Value="{Binding Selected.formattedHireDate}"/>
+            <control:LabelPair Grid.Row="7" Grid.Column="1" Label="End Date" Value="{Binding Selected.formattedEndDate}"/>
         </Grid>
     </Grid>
 </Page>

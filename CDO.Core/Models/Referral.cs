@@ -38,4 +38,12 @@ public record class Referral(
     public string? formattedEndDate => endDate?.ToString(format: "MM/dd/yyyy");
 
     public string? formattedSalary => $"${salary}";
+
+    public string? formattedSupervisor {
+        get {
+            var text = $"{supervisor}\n{supervisorPhone}\n{supervisorEmail}";
+            if (string.IsNullOrWhiteSpace(text)) { return null; }
+            return text;
+        }
+    }
 }

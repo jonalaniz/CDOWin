@@ -10,7 +10,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Windows.UI;
 
-namespace CDOWin.Views;
+namespace CDOWin.Views.Reminders;
 
 public sealed partial class RemindersPage : Page {
     public RemindersViewModel ViewModel { get; }
@@ -62,5 +62,13 @@ public sealed partial class RemindersPage : Page {
         SelectorBarItem selectedItem = sender.SelectedItem;
         if (selectedItem.Tag is RemindersFilter filter)
             ViewModel.Filter = filter;
+    }
+
+    private void Reminder_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e) {
+        // Here we open a reminder window with the actual reminder in it
+    }
+
+    private void NewReminder_Clicked(object sender, RoutedEventArgs e) {
+        // Here we open a new reminder window
     }
 }

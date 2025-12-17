@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="CDOWin.Views.RemindersPage"
+    x:Class="CDOWin.Views.Reminders.RemindersPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CDOWin.Views"
@@ -21,21 +21,18 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="318"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="8,8,8,4"
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,8,8,4"
                    HorizontalAlignment="Left" FontSize="22" FontWeight="Bold"
                    Text="Reminders"/>
 
-        <CalendarView Grid.Row="1" Grid.Column="0" Margin="0,6,0,0"
-                      HorizontalAlignment="Center"
-                      x:Name="RemindersCalendar"
+        <CalendarView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,6,0,0" 
+                      x:Name="RemindersCalendar" HorizontalAlignment="Center" SelectionMode="Single"
+                      IsGroupLabelVisible="True" IsOutOfScopeEnabled="True"
                       CalendarViewDayItemChanging="RemindersCalendar_CalendarViewDayItemChanging"
-                      SelectionMode="Single"
-                      IsGroupLabelVisible="True"
-                      IsOutOfScopeEnabled="True"
-                      Language="en"
                       CalendarIdentifier="GregorianCalendar"/>
 
         <SelectorBar Grid.Row="2" Grid.Column="0" x:Name="SelectionBar" SelectionChanged="SelectionChanged">
@@ -44,7 +41,13 @@
             <SelectorBarItem Text="Client" IsEnabled="False" Tag="{x:Bind reminders:RemindersFilter.Client}"/>
         </SelectorBar>
 
-        <ScrollViewer Grid.Row="3" Grid.Column="0">
+        <Button Grid.Row="2" Grid.Column="2" Margin="16,6,12,0"
+                Width="32" Height="32" Padding="0" Click="NewReminder_Clicked"
+                Style="{StaticResource SubtleButtonStyle}">
+            <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+        </Button>
+
+        <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -53,8 +56,10 @@
                 <ItemsRepeater Grid.Row="0" ItemsSource="{Binding Filtered}" HorizontalAlignment="Stretch">
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="models:Reminder">
-                            <Border Margin="8,6,8,6" Padding="14,10,14,10"
-                                Style="{StaticResource BasicCardBorderStyle}">
+                            <Button Margin="8,6,8,0" Padding="14,10,14,10" DoubleTapped="Reminder_DoubleTapped"
+                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                    BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
@@ -67,17 +72,17 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Grid.Column="0" FontSize="14" FontWeight="Bold"
-                                               Text="{x:Bind clientName}"/>
-                                        <TextBlock Grid.Column="1" FontSize="14" FontWeight="Normal"
-                                               Text="{x:Bind localDate}"/>
+                                        <TextBlock Grid.Column="0" FontSize="14" 
+                                                   FontWeight="Bold" Text="{x:Bind clientName}"/>
+                                        <TextBlock Grid.Column="1" FontSize="14" 
+                                                   FontWeight="Normal" Text="{x:Bind localDate}"/>
                                     </Grid>
 
-                                    <TextBlock Grid.Row="1" FontWeight="Normal" TextWrapping="WrapWholeWords"
-                                           Text="{x:Bind description}"
-                                           Foreground="{StaticResource TextFillColorSecondaryBrush}"/>
+                                    <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                               FontWeight="Normal" TextWrapping="WrapWholeWords" 
+                                               Text="{x:Bind description}"/>
                                 </Grid>
-                            </Border>
+                            </Button>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>

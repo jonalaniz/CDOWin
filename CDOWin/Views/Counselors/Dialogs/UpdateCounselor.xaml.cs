@@ -7,6 +7,8 @@ namespace CDOWin.Views.Counselors.Dialogs;
 
 public sealed partial class UpdateCounselor : Page {
     public CounselorUpdateViewModel ViewModel;
+
+    // Constructor
     public UpdateCounselor(CounselorUpdateViewModel viewModel) {
         ViewModel = viewModel;
         DataContext = viewModel.Original;

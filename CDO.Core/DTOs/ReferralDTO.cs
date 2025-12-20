@@ -1,30 +1,30 @@
 namespace CDO.Core.DTOs;
 
 public class ReferralDTO {
-    public int? placementNumber { get; init; }
-    public string? employerID { get; init; }
-    public int? clientID { get; init; }
-    public int? counselorID { get; init; }
-    public string? poNumber { get; init; }
-    public string? supervisor { get; init; }
-    public string? supervisorEmail { get; init; }
-    public string? supervisorPhone { get; init; }
-    public string? position { get; init; }
-    public string? salary { get; init; }
-    public float? daysOnJob { get; init; }
-    public string? clientName { get; init; }
-    public string? counselorName { get; init; }
-    public bool? active { get; init; }
-    public string? website { get; init; }
-    public string? descriptionOfDuties { get; init; }
-    public string? numbersOfHoursWorking { get; init; }
-    public string? firstFiveDays1 { get; init; }
-    public string? firstFiveDays2 { get; init; }
-    public string? firstFiveDays3 { get; init; }
-    public string? firstFiveDays4 { get; init; }
-    public string? firstFiveDays5 { get; init; }
-    public string? descriptionOfWorkSchedule { get; init; }
-    public string? hourlyOrMonthlyWages { get; init; }
-    public DateTime? hireDate { get; init; }
-    public DateTime? endDate { get; init; }
+    public int? placementNumber { get; set; }
+    public string? employerID { get; set; }
+    public int? clientID { get; set; }
+    public int? counselorID { get; set; }
+    public string? poNumber { get; set; }
+    public string? supervisor { get; set; }
+    public string? supervisorEmail { get; set; }
+    public string? supervisorPhone { get; set; }
+    public string? position { get; set; }
+    public string? salary { get; set; }
+    public float? daysOnJob { get; set; }
+    public string? clientName { get; set; }
+    public string? counselorName { get; set; }
+    public bool? active { get; set; }
+    public string? website { get; set; }
+    public string? descriptionOfDuties { get; set; }
+    public string? numbersOfHoursWorking { get; set; }
+    public string? firstFiveDays1 { get; set; }
+    public string? firstFiveDays2 { get; set; }
+    public string? firstFiveDays3 { get; set; }
+    public string? firstFiveDays4 { get; set; }
+    public string? firstFiveDays5 { get; set; }
+    public string? descriptionOfWorkSchedule { get; set; }
+    public string? hourlyOrMonthlyWages { get; set; }
+    public DateTime? hireDate { get; set; }
+    public DateTime? endDate { get; set; }
 }

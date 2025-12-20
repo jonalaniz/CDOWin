@@ -2,7 +2,11 @@
 
 public enum UpdateField {
     Name,
-    Address,
+    Address1,
+    Address2,
+    City,
+    State,
+    Zip,
     Phone,
     Fax,
     Email,

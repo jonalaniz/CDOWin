@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CDOWin.Views.Employers.Dialogs.UpdateEmployer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dialogs="using:CDOWin.Views.Employers.Dialogs"
+    xmlns:controls="using:CDOWin.Controls"
+    xmlns:models="using:CDO.Core.Models"
+    d:DataContext="{d:DesignInstance Type=models:Employer}"
+    mc:Ignorable="d">
+
+    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Row 0: Name -->
+        <controls:LabeledTextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+                                 Label="Name" Value="{Binding name}"
+                                 Tag="{x:Bind dialogs:UpdateField.Name}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        
+        <!-- Row 1: Phone & Fax -->
+        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                                 Label="Address 1" Value="{Binding address1}"
+                                 Tag="{x:Bind dialogs:UpdateField.Address1}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <controls:LabeledTextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3"
+                                 Label="Address 1" Value="{Binding address2}"
+                                 Tag="{x:Bind dialogs:UpdateField.Address2}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+
+        <!-- Row 2: Address 1 & 2 -->
+        <controls:LabeledTextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                                 Label="Address 1" Value="{Binding address1}"
+                                 Tag="{x:Bind dialogs:UpdateField.Address1}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <controls:LabeledTextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Label="Address 1" Value="{Binding address2}"
+                                 Tag="{x:Bind dialogs:UpdateField.Address2}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        
+        <!-- Row 3: City/State/Zip -->
+        <controls:LabeledTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                                 Label="City" Value="{Binding address1}"
+                                 Tag="{x:Bind dialogs:UpdateField.City}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1">
+            <TextBlock Margin="0,8,8,8" Text="State" Style="{StaticResource LabelTextBlockStyle}"/>
+            <DropDownButton x:Name="StateDropDownButton" Content="{Binding state}"
+                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <controls:LabeledTextBox Grid.Row="3" Grid.Column="5"
+                                 Label="Zip" Value="{Binding zip}"
+                                 Tag="{x:Bind dialogs:UpdateField.Zip}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        
+        <!-- Row 4: Supervisor Name & Phone -->
+        <controls:LabeledTextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                                 Label="Supervisor" Value="{Binding supervisor}"
+                                 Tag="{x:Bind dialogs:UpdateField.Supervisor}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <controls:LabeledTextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
+                                 Label="Phone " Value="{Binding supervisorPhone}"
+                                 Tag="{x:Bind dialogs:UpdateField.SupervisorPhone}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+
+        <!-- Row 5: Supervisor Email -->
+        <controls:LabeledTextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"
+                                 Label="Email" Value="{Binding supervisorEmail}"
+                                 Tag="{x:Bind dialogs:UpdateField.SupervisorEmail}"
+                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        
+        <!-- Row 6: Notes -->
+        <controls:LabeledMultiLinePair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"
+                                       Label="Notes" Value="{Binding notes}"
+                                       Tag="{x:Bind dialogs:UpdateField.Notes}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+    </Grid>
+</Page>

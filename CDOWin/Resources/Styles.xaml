@@ -134,8 +134,8 @@
     <!-- Single Icon Button Style -->
     <Style x:Key="SingleIconButtonStyle" TargetType="Button" BasedOn="{StaticResource SubtleButtonStyle}">
         <Setter Property="Margin" Value="16,8,12,0"/>
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
     

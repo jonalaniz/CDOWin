@@ -14,13 +14,6 @@ public sealed partial class LabeledMultiLinePair : UserControl {
 
     public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(LabeledMultiLinePair), new PropertyMetadata(""));
 
-    public Object Tag {
-        get => (Object)GetValue(TagProperty);
-        set => SetValue(TagProperty, value);
-    }
-
-    public static readonly DependencyProperty TagProperty = DependencyProperty.Register("TagProperty", typeof(Object), typeof(LabeledTextBox), new PropertyMetadata(""));
-
     public string Value {
         get => (string)GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);

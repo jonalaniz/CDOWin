@@ -131,7 +131,7 @@
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind placementNumber}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="0" Text="{x:Bind placementNumber}"/>
                             <TextBlock Grid.Column="1" Text="{x:Bind active}"/>
                             <TextBlock Grid.Column="2" Text="{x:Bind clientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                             <TextBlock Grid.Column="3" Text="{x:Bind employer.name}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>

@@ -1,4 +1,5 @@
-﻿using CDO.Core.Interfaces;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
@@ -62,10 +63,25 @@ public partial class EmployersViewModel : ObservableObject {
         ApplyFilter();
     }
 
+    public async Task UpdateEmployer(EmployerDTO update) {
+        if (Selected == null)
+            return;
+        var updatedEmployer = await _service.UpdateEmployerAsync(Selected.id, update);
+        await RefreshSelectedEmployer(Selected.id);
+    }
+
     public async Task RefreshSelectedEmployer(int id) {
         var employer = await _service.GetEmployerAsync(id);
-        var index = All.IndexOf(All.First(e => e.id == id));
-        All[index] = employer;
+        Replace(All, employer);
+        Replace(Filtered, employer);
+
         Selected = employer;
+    }
+
+    // Utility Methods
+    private void Replace(ObservableCollection<Employer> list, Employer updated) {
+        var index = list.IndexOf(list.First(e => e.id == updated.id));
+        if (index >= 0)
+            list[index] = updated;
     }
 }

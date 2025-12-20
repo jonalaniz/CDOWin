@@ -49,6 +49,8 @@ public partial class CounselorsViewModel : ObservableObject {
         Filtered = new ObservableCollection<Counselor>(result);
     }
 
+    // CRUD Methods
+
     public async Task LoadCounselorsAsync() {
         var counselors = await _service.GetAllCounselorsAsync();
         List<Counselor> SortedCounselors = counselors.OrderBy(o => o.name).ToList();
@@ -69,16 +71,18 @@ public partial class CounselorsViewModel : ObservableObject {
         Selected = counselor;
     }
 
-    private void Replace(ObservableCollection<Counselor> list, Counselor updated) {
-        var index = list.IndexOf(list.First(c => c.id == updated.id));
-        if (index >= 0)
-            list[index] = updated;
-    }
-
     public async Task UpdateCounselor(UpdateCounselorDTO update) {
         if (Selected == null)
             return;
         var updatedCounselor = await _service.UpdateCounselorAsync(Selected.id, update);
         await RefreshSelectedCounselor(Selected.id);
+    }
+
+    // Utility Methods
+
+    private void Replace(ObservableCollection<Counselor> list, Counselor updated) {
+        var index = list.IndexOf(list.First(c => c.id == updated.id));
+        if (index >= 0)
+            list[index] = updated;
     }
 }

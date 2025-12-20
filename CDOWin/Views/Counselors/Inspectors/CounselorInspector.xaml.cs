@@ -19,7 +19,7 @@ public sealed partial class CounselorInspector : Page {
         DataContext = ViewModel;
     }
 
-    private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private async void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
         if (ViewModel == null || ViewModel.Selected == null)
             return;
 

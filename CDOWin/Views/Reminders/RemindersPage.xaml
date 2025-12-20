@@ -44,7 +44,7 @@
         <Button Grid.Row="2" Grid.Column="2" Margin="8,4,8,0"
                 Style="{StaticResource SingleIconButtonStyle}"
                 Click="NewReminder_Clicked">
-            <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
+            <FontIcon Glyph="&#xF763;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
 
         <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">

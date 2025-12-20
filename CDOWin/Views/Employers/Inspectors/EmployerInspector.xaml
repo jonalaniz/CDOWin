@@ -30,7 +30,8 @@
 
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
-                Style="{StaticResource SingleIconButtonStyle}">
+                Style="{StaticResource SingleIconButtonStyle}"
+                Click="EditButton_Click">
             <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
         </Button>
 

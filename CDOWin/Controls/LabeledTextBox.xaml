@@ -12,6 +12,6 @@
         <TextBlock Margin="0,8,8,8" Text="{x:Bind Label, Mode=OneWay}" 
                    Style="{StaticResource LabelTextBlockStyle}"/>
         <TextBox x:Name="InnerTextBox" Text="{x:Bind Value, Mode=TwoWay}" 
-                 TextChanged="TextBox_TextChanged" Tag="{x:Bind TextBoxTag}"/>
+                 TextChanged="TextBox_TextChanged"/>
     </StackPanel>
 </UserControl>

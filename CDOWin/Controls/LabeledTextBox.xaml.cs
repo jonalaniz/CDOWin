@@ -14,13 +14,6 @@ public sealed partial class LabeledTextBox : UserControl {
 
     public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(LabeledTextBox), new PropertyMetadata(""));
 
-    public Object TextBoxTag {
-        get => (Object)GetValue(TextBoxTagProperty);
-        set => SetValue(TextBoxTagProperty, value);
-    }
-
-    public static readonly DependencyProperty TextBoxTagProperty = DependencyProperty.Register("TextBoxTagProperty", typeof(Object), typeof(LabeledTextBox), new PropertyMetadata(""));
-
     public string Value {
         get => (string)GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);

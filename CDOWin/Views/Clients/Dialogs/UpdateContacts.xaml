@@ -28,51 +28,51 @@
         <!-- Row 0: Phone 1 -->
         <controls:LabeledTextBox Grid.Row="0" Grid.Column="0"
                                  Label="Phone 1" Value="{Binding phone1}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Phone1}"
+                                 Tag="{x:Bind dialogs:ContactField.Phone1}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <controls:LabeledTextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                  Label="Description" Value="{Binding phone1Identity}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Phone1Identity}"
+                                 Tag="{x:Bind dialogs:ContactField.Phone1Identity}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 1: Phone 2 -->
         <controls:LabeledTextBox Grid.Row="1" Grid.Column="0"
                                  Label="Phone 2" Value="{Binding phone2}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Phone2}"
+                                 Tag="{x:Bind dialogs:ContactField.Phone2}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <controls:LabeledTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                                  Label="Description" Value="{Binding phone2Identity}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Phone2Identity}"
+                                 Tag="{x:Bind dialogs:ContactField.Phone2Identity}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 2: Phone 3 -->
         <controls:LabeledTextBox Grid.Row="2" Grid.Column="0"
                                  Label="Phone 3" Value="{Binding phone3}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Phone3}"
+                                 Tag="{x:Bind dialogs:ContactField.Phone3}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <controls:LabeledTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                                  Label="Description" Value="{Binding phone3Identity}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Phone3Identity}"
+                                 Tag="{x:Bind dialogs:ContactField.Phone3Identity}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 3: Email 1 -->
         <controls:LabeledTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="Email 1" Value="{Binding email}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Email}"
+                                 Tag="{x:Bind dialogs:ContactField.Email}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <controls:LabeledTextBox Grid.Row="3" Grid.Column="2" 
                                  Label="Description" Value="{Binding emailIdentity}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.EmailIdentity}"
+                                 Tag="{x:Bind dialogs:ContactField.EmailIdentity}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 4: Email 2 -->
         <controls:LabeledTextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="Email 2" Value="{Binding email2}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Email2}"
+                                 Tag="{x:Bind dialogs:ContactField.Email2}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
         <controls:LabeledTextBox Grid.Row="4" Grid.Column="2"
                                  Label="Email 2" Value="{Binding email2Identity}"
-                                 TextBoxTag="{x:Bind dialogs:ContactField.Email2Identity}"
+                                 Tag="{x:Bind dialogs:ContactField.Email2Identity}"
                                  TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
     </Grid>

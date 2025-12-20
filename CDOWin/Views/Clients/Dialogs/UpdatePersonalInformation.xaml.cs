@@ -79,12 +79,12 @@ public sealed partial class UpdatePersonalInformation : Page {
         if (sender is LabeledTextBox pair) {
             originalValue = pair.Value;
             updatedValue = pair.innerTextBox.Text;
-            if (pair.TextBoxTag is PersonalField f)
+            if (pair.Tag is PersonalField f)
                 field = f;
         } else if (sender is LabeledMultiLinePair multiLinePair) {
             originalValue = multiLinePair.Value.NormalizeString();
             updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            if (multiLinePair.TextBoxTag is PersonalField f)
+            if (multiLinePair.Tag is PersonalField f)
                 field = f;
         }
 

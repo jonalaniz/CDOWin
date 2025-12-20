@@ -22,7 +22,7 @@ public sealed partial class UpdateArrangements : Page {
         if (sender is LabeledMultiLinePair multiLinePair) {
             originalValue = multiLinePair.Value.NormalizeString();
             updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            if (multiLinePair.TextBoxTag is ArrangementsField f)
+            if (multiLinePair.Tag is ArrangementsField f)
                 field = f;
         }
 

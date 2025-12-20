@@ -21,12 +21,12 @@ public sealed partial class UpdateEmploymentProfile : Page {
         if (sender is LabeledTextBox pair) {
             originalValue = pair.Value;
             updatedValue = pair.innerTextBox.Text;
-            if (pair.TextBoxTag is EmploymentField f)
+            if (pair.Tag is EmploymentField f)
                 field = f;
         } else if (sender is LabeledMultiLinePair multiLinePair) {
             originalValue = multiLinePair.Value.NormalizeString();
             updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            if (multiLinePair.TextBoxTag is EmploymentField f)
+            if (multiLinePair.Tag is EmploymentField f)
                 field = f;
         }
 

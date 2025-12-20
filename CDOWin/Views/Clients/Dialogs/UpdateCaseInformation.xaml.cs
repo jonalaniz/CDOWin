@@ -123,7 +123,7 @@ public sealed partial class UpdateCaseInformation : Page {
         if (sender is LabeledTextBox pair) {
             originalValue = pair.Value;
             updatedValue = pair.innerTextBox.Text;
-            if (pair.TextBoxTag is CaseField f)
+            if (pair.Tag is CaseField f)
                 field = f;
         }
 

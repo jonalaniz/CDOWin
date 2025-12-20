@@ -21,7 +21,7 @@ public sealed partial class UpdateContacts : Page {
         if (sender is LabeledTextBox pair) {
             originalValue = pair.Value;
             updatedValue = pair.innerTextBox.Text;
-            if (pair.TextBoxTag is ContactField f)
+            if (pair.Tag is ContactField f)
                 field = f;
         }
 

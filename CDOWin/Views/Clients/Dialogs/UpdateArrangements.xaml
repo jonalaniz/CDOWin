@@ -20,13 +20,13 @@
         <!-- Row 0: Employment Goals -->
         <controls:LabeledMultiLinePair Grid.Row="0" Grid.Column="0" 
                                        Label="Employment Goals" Value="{Binding employmentGoal}"
-                                       TextBoxTag="{x:Bind dialogs:ArrangementsField.EmploymentGoal}"
+                                       Tag="{x:Bind dialogs:ArrangementsField.EmploymentGoal}"
                                        TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
 
         <!-- Row 1: Conditions -->
         <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" 
                                        Label="Conditions" Value="{Binding conditions}"
-                                       TextBoxTag="{x:Bind dialogs:ArrangementsField.Conditions}"
+                                       Tag="{x:Bind dialogs:ArrangementsField.Conditions}"
                                        TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
     </Grid>
 </Page>

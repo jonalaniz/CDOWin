@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using Windows.UI;
 
@@ -24,14 +25,17 @@ public sealed partial class RemindersPage : Page {
 
     private void ClientRemindersChanged(object? sender, NotifyCollectionChangedEventArgs e) {
         if (ViewModel.ClientSpecific != null) {
-            SelectionBar.Items.Last().IsEnabled = true;
+            SelectionBar.Items[2].IsEnabled = true;
         }
 
-        if (SelectionBar.Items.Last().IsSelected)
+        if (SelectionBar.Items[2].IsSelected)
             return;
 
-        SelectionBar.SelectedItem = SelectionBar.Items.Last();
+        SelectionBar.SelectedItem = SelectionBar.Items[2];
+    }
 
+    private void RemindersCalendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args) {
+        SetDate();
     }
 
     private void RemindersCalendar_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs args) {
@@ -60,8 +64,28 @@ public sealed partial class RemindersPage : Page {
 
     private void SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) {
         SelectorBarItem selectedItem = sender.SelectedItem;
-        if (selectedItem.Tag is RemindersFilter filter)
-            ViewModel.Filter = filter;
+        if (selectedItem.Tag is RemindersFilter filter) {
+            switch (filter) {
+                case RemindersFilter.Date:
+                    SetDate();
+                    break;
+                default:
+                    ViewModel.Filter = filter;
+                    break;
+            }
+        }
+    }
+
+    private void SetDate() {
+        if (RemindersCalendar.SelectedDates.First() is DateTimeOffset offset) {
+            ViewModel.ApplyDateFilter(offset.Date);
+            SelectionBar.Items[3].IsEnabled = true;
+
+            if (SelectionBar.Items.Last().IsSelected)
+                return;
+
+            SelectionBar.SelectedItem = SelectionBar.Items.Last();
+        }
     }
 
     private void Reminder_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e) {

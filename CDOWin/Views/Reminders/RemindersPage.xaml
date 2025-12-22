@@ -26,19 +26,22 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,8,8,4"
-                   HorizontalAlignment="Left" FontSize="22" FontWeight="Bold"
+                   Style="{StaticResource PageTitleStyle}"
                    Text="Reminders"/>
 
         <CalendarView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,6,0,0" 
                       x:Name="RemindersCalendar" HorizontalAlignment="Center" SelectionMode="Single"
-                      IsGroupLabelVisible="True" IsOutOfScopeEnabled="True"
+                      IsGroupLabelVisible="True" IsOutOfScopeEnabled="True" 
+                      SelectedDatesChanged="RemindersCalendar_SelectedDatesChanged"
                       CalendarViewDayItemChanging="RemindersCalendar_CalendarViewDayItemChanging"
                       CalendarIdentifier="GregorianCalendar"/>
 
+        <!-- Selection Bar: Used to filter our reminders -->
         <SelectorBar Grid.Row="2" Grid.Column="0" x:Name="SelectionBar" SelectionChanged="SelectionChanged">
             <SelectorBarItem Text="All" IsSelected="True" Tag="{x:Bind reminders:RemindersFilter.All}"/>
             <SelectorBarItem Text="Upcoming" Tag="{x:Bind reminders:RemindersFilter.Upcoming}"/>
             <SelectorBarItem Text="Client" IsEnabled="False" Tag="{x:Bind reminders:RemindersFilter.Client}"/>
+            <SelectorBarItem Text="Date" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
         </SelectorBar>
 
         <Button Grid.Row="2" Grid.Column="2" Margin="8,4,8,0"

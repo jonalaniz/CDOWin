@@ -75,6 +75,18 @@ public partial class RemindersViewModel : ObservableObject {
             case RemindersFilter.Client:
                 ReplaceFiltered(ClientSpecific);
                 break;
+            default:
+                break;
+        }
+        UpdateEndText();
+    }
+
+    public void ApplyDateFilter(DateTime date) {
+        Filter = RemindersFilter.Date;
+        Filtered.Clear();
+        foreach(var reminder in All) {
+            if (reminder.date.Date == date.Date)
+                Filtered.Add(reminder);
         }
         UpdateEndText();
     }

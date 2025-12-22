@@ -3,5 +3,6 @@
 public enum RemindersFilter {
     All,
     Upcoming,
-    Client
+    Client,
+    Date
 }

@@ -41,9 +41,12 @@ public sealed partial class RemindersPage : Page {
     private void RemindersCalendar_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs args) {
         // Render basic day items.
         if (args.Phase == 0) {
+
             // Register callback for next phase.
             args.RegisterUpdateCallback(RemindersCalendar_CalendarViewDayItemChanging);
+
         } else if (args.Phase == 1) {
+
             DateTime day = args.Item.Date.Date;
 
             // Does any reminder match this date?
@@ -51,8 +54,8 @@ public sealed partial class RemindersPage : Page {
 
             if (hasReminder) {
                 // Mark the date (simple highlight)
-                Color accentColor = (Color)Application.Current.Resources["SystemAccentColorLight1"];
-                args.Item.Background = new SolidColorBrush(accentColor);
+                var brush = (Brush)Application.Current.Resources["AccentAAFillColorDefaultBrush"];
+                args.Item.Background = brush;
                 args.Item.FontWeight = FontWeights.Bold;
             } else {
                 // Reset to defaults when not a reminder date
@@ -77,10 +80,10 @@ public sealed partial class RemindersPage : Page {
     }
 
     private void SetDate() {
-        if (RemindersCalendar.SelectedDates.First() is DateTimeOffset offset) {
+        if (RemindersCalendar.SelectedDates.Count == 0) {
+            ViewModel.ApplyDateFilter(DateTime.Now);
+        } else if (RemindersCalendar.SelectedDates.First() is DateTimeOffset offset) {
             ViewModel.ApplyDateFilter(offset.Date);
-            SelectionBar.Items[3].IsEnabled = true;
-
             if (SelectionBar.Items.Last().IsSelected)
                 return;
 
@@ -88,11 +91,14 @@ public sealed partial class RemindersPage : Page {
         }
     }
 
-    private void Reminder_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e) {
-        // Here we open a reminder window with the actual reminder in it
-    }
-
     private void NewReminder_Clicked(object sender, RoutedEventArgs e) {
         // Here we open a new reminder window
+    }
+
+    private void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
+        if(sender.Tag is Int32 clientID) {
+            // here we need to select the client with that name
+            Debug.WriteLine($"Client: {clientID} selected.");
+        }
     }
 }

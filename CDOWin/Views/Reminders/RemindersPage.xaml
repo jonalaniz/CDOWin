@@ -29,7 +29,7 @@
                    Style="{StaticResource PageTitleStyle}"
                    Text="Reminders"/>
 
-        <CalendarView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,6,0,0" 
+        <CalendarView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,6,0,0"
                       x:Name="RemindersCalendar" HorizontalAlignment="Center" SelectionMode="Single"
                       IsGroupLabelVisible="True" IsOutOfScopeEnabled="True" 
                       SelectedDatesChanged="RemindersCalendar_SelectedDatesChanged"
@@ -41,7 +41,7 @@
             <SelectorBarItem Text="All" IsSelected="True" Tag="{x:Bind reminders:RemindersFilter.All}"/>
             <SelectorBarItem Text="Upcoming" Tag="{x:Bind reminders:RemindersFilter.Upcoming}"/>
             <SelectorBarItem Text="Client" IsEnabled="False" Tag="{x:Bind reminders:RemindersFilter.Client}"/>
-            <SelectorBarItem Text="Date" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
+            <SelectorBarItem Text="Selected" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
         </SelectorBar>
 
         <Button Grid.Row="2" Grid.Column="2" Margin="8,4,8,0"
@@ -59,10 +59,11 @@
                 <ItemsRepeater Grid.Row="0" ItemsSource="{Binding Filtered}" HorizontalAlignment="Stretch">
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="models:Reminder">
-                            <Button Margin="8,6,8,0" Padding="14,10,14,10" DoubleTapped="Reminder_DoubleTapped"
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                    BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+                            <SplitButton Margin="8,6,8,0" Padding="14,10,14,10" Click="Reminder_Click"
+                                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                         HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                         BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                                         Tag="{x:Bind clientID}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
@@ -85,7 +86,7 @@
                                                FontWeight="Normal" TextWrapping="WrapWholeWords" 
                                                Text="{x:Bind description}"/>
                                 </Grid>
-                            </Button>
+                            </SplitButton>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>

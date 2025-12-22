@@ -41,7 +41,7 @@
             </Button>
             
             <!-- Reminders Split Button (flyout contains templated reminders) -->
-            <SplitButton x:Name="RemindersSplitButton" Margin="0,3,8,0" Padding="6"
+            <SplitButton x:Name="RemindersSplitButton" Margin="0,2,8,0" Padding="6"
                          Click="NewReminder_Click"
                          Style="{ThemeResource SplitButtonCommandBarStyle}">
                 <FontIcon Glyph="&#xED0E;" Foreground="{StaticResource AccentAAFillColorDefaultBrush}"/>

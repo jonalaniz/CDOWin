@@ -28,6 +28,7 @@
     <None Remove="Assets\CDO_Light.png" />
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
+    <None Remove="Views\Clients\Dialogs\NewReminder.xaml" />
     <None Remove="Views\ClientViewPage.xaml" />
     <None Remove="Views\Counselors\Dialogs\UpdateCounselor.xaml" />
     <None Remove="Views\Counselors\Inspectors\CounselorInspector.xaml" />
@@ -210,6 +211,11 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Service Authorizations\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Clients\Dialogs\NewReminder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Employers\Dialogs\UpdateEmployer.xaml">

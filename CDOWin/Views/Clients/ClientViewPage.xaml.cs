@@ -13,6 +13,7 @@ public sealed partial class ClientViewPage : Page {
     public ClientsViewModel? ViewModel { get; private set; }
     public ClientViewPage() {
         InitializeComponent();
+        BuildRemindersFlyout();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e) {
@@ -20,19 +21,46 @@ public sealed partial class ClientViewPage : Page {
         DataContext = ViewModel;
     }
 
+    // UI Setup
+    private void BuildRemindersFlyout() {
+        var flyout = new MenuFlyout();
+
+        foreach (var reminderItem in ReminderMenuItem.AllItems()) {
+            var item = new MenuFlyoutItem {
+                Text = reminderItem.ToString(),
+                Tag = reminderItem.Value
+            };
+
+            item.Click += ReminderFlyoutItem_Click;
+            flyout.Items.Add(item);
+        }
+
+        RemindersSplitButton.Flyout = flyout;
+    }
+
     // Click Events
-    private void OpenDocuments_Clicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private void OpenDocuments_Clicked(object sender, RoutedEventArgs e) {
         Process.Start("explorer.exe", $"{ViewModel.SelectedClient?.documentsFolderPath}");
     }
 
-    private void Checkbox_Clicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private void NewReminder_Click(SplitButton sender, SplitButtonClickEventArgs e) {
+        Debug.WriteLine("New Reminder Button Clicked");
+    }
+
+    private void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item) {
+            Debug.WriteLine($"Item: {item.Tag.ToString()} clicked");
+        }
+    }
+
+    private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
         if (sender is CheckBox checkBox && checkBox.Tag is CheckboxTag tag) {
             var isChecked = checkBox.IsChecked;
             Debug.WriteLine($"Checkbox: {tag}");
         }
     }
 
-    private async void EditButton_Clicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
         if (sender is Button button && button.Tag is ClientEditType tag) {
 
             ContentDialog dialog = new();

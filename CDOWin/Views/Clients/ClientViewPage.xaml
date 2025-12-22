@@ -14,8 +14,7 @@
     d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
     mc:Ignorable="d">
 
-    <Grid BorderThickness="0, 0, 1, 0"
-          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+    <Grid BorderThickness="0, 0, 1, 0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
           Visibility="{Binding SelectedClient, Mode=OneWay, Converter={StaticResource NullToVisability}}">
 
         <Grid.RowDefinitions>
@@ -28,30 +27,33 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0"
-                   Text="{Binding SelectedClient.name}"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   Margin="16,8,8,8"/>
-        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,12"
-                    Orientation="Horizontal">
-            <Button Style="{StaticResource SingleIconButtonStyle}" Margin="8,8,4,0">
-                <FontIcon Glyph="&#xED11;" Style="{StaticResource SingleIconFontStyle}"/>
-            </Button>
-            <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,8,12,0"
+        <!-- Row 0: Title + Buttons -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                   Text="{Binding SelectedClient.name}"/>
+        
+        <!-- Button Row -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            
+            <!-- Documents Button -->
+            <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,2,8,0"
                     Click="OpenDocuments_Clicked">
                 <FontIcon Glyph="&#xE838;" Style="{StaticResource SingleIconFontStyle}"/>
             </Button>
+            
+            <!-- Reminders Split Button (flyout contains templated reminders) -->
+            <SplitButton x:Name="RemindersSplitButton" Margin="0,3,8,0" Padding="6"
+                         Click="NewReminder_Click"
+                         Style="{ThemeResource SplitButtonCommandBarStyle}">
+                <FontIcon Glyph="&#xED0E;" Foreground="{StaticResource AccentAAFillColorDefaultBrush}"/>
+            </SplitButton>
         </StackPanel>
 
-        <!-- Scroll Viewwer Content -->
+        <!-- Row 1: ScrollViewer + WrapPanel -->
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             
             <!-- Wrap Panel -->
-            <controls:WrapPanel Orientation="Horizontal"
-                                HorizontalSpacing="8"
-                                VerticalSpacing="8"
-                                Margin="8,12,8,8">
+            <controls:WrapPanel Orientation="Horizontal" Margin="8,12,8,8"
+                                HorizontalSpacing="8" VerticalSpacing="8">
 
                 <!-- Personal Information Card-->
                 <Grid Style="{StaticResource CardContainerGridStyle}">

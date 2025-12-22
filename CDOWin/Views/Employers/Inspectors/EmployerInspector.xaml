@@ -32,7 +32,7 @@
         <Button Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
                 Style="{StaticResource SingleIconButtonStyle}"
                 Click="EditButton_Click">
-            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+            <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
 
         <!-- Details Caption -->

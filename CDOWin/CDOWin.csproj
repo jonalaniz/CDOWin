@@ -26,6 +26,7 @@
   <ItemGroup>
     <None Remove="Assets\CDO_Dark.png" />
     <None Remove="Assets\CDO_Light.png" />
+    <None Remove="Resources\Grids.xaml" />
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\Clients\Dialogs\NewReminder.xaml" />
@@ -211,6 +212,11 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Service Authorizations\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\Grids.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Clients\Dialogs\NewReminder.xaml">

@@ -11,10 +11,10 @@
     d:DataContext="{d:DesignInstance Type=viewmodels:ClientsViewModel}"
     mc:Ignorable="d">
 
-    <Grid Margin="16,4,16,16" RowSpacing="8">
+    <Grid Margin="16,8,16,0" RowSpacing="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="300"/>
         </Grid.RowDefinitions>
@@ -23,50 +23,85 @@
         </Grid.ColumnDefinitions>
 
         <!-- Placements -->
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Placements"
-                   Style="{StaticResource SubtitleTextBlockStyle}"/>
-        <ListView Grid.Row="1" Grid.Column="0" BorderThickness="1" CornerRadius="4" 
-                  BorderBrush="{ThemeResource SubtleFillColorTertiaryBrush}"
-                  ItemsSource="{x:Bind ViewModel.SelectedClient.referrals, Mode=OneWay}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:Referral">
-                    <Grid RowSpacing="4" Margin="0,8,0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Spacing="2">
-                            <TextBlock FontWeight="Bold" Text="{x:Bind employer.name, Mode=OneWay}"/>
-                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedHireDate, Mode=OneWay}"/>
-                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind position, Mode=OneWay}"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid Grid.Row="0" Grid.Column="0" RowSpacing="8" Style="{StaticResource BasicCardContainerGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="280"/>
+            </Grid.RowDefinitions>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Row 0: Title + Button-->
+            <TextBlock Grid.Column="0" Text="Placements" Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+            </Button>
+
+            <!-- Row 1: ListView -->
+            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                      Style="{StaticResource InspectorListViewStyle}"
+                      ItemsSource="{x:Bind ViewModel.SelectedClient.referrals, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Referral">
+                        <Grid RowSpacing="4" Margin="0,8,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Spacing="2">
+                                <TextBlock FontWeight="Bold" Text="{x:Bind employer.name, Mode=OneWay}"/>
+                                <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedHireDate, Mode=OneWay}"/>
+                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind position, Mode=OneWay}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
         <!-- Service Authorizations -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Service Authorizations"
+        <Grid Grid.Row="1" Grid.Column="0" RowSpacing="8" Style="{StaticResource BasicCardContainerGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="280"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0: Title + Button-->
+            <TextBlock Grid.Column="0" Text="Service Authorizations"
                    Style="{StaticResource SubtitleTextBlockStyle}"/>
-        <ListView Grid.Row="3" Grid.Column="0" BorderThickness="1" CornerRadius="4" 
-                  BorderBrush="{ThemeResource SubtleFillColorTertiaryBrush}"
-                  ItemsSource="{x:Bind ViewModel.SelectedClient.pos, Mode=OneWay}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:ServiceAuthorization">
-                    <Grid RowSpacing="4" Margin="0,8,0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Spacing="2">
-                            <TextBlock FontWeight="Bold" Text="{x:Bind id, Mode=OneWay}"/>
-                            <TextBlock Text="{x:Bind description, Mode=OneWay}"/>
-                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedStartDate, Mode=OneWay}"/>
-                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind formattedEndDate, Mode=OneWay}"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+
+            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
+                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+            </Button>
+            <ListView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                      Style="{StaticResource InspectorListViewStyle}"
+                      ItemsSource="{x:Bind ViewModel.SelectedClient.pos, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ServiceAuthorization">
+                        <Grid RowSpacing="4" Margin="0,8,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Spacing="2">
+                                <TextBlock FontWeight="Bold" Text="{x:Bind id, Mode=OneWay}"/>
+                                <TextBlock Text="{x:Bind description, Mode=OneWay}"/>
+                                <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedStartDate, Mode=OneWay}"/>
+                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind formattedEndDate, Mode=OneWay}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

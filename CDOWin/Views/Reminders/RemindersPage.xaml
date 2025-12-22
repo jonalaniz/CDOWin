@@ -86,6 +86,12 @@
                                                FontWeight="Normal" TextWrapping="WrapWholeWords" 
                                                Text="{x:Bind description}"/>
                                 </Grid>
+
+                                <SplitButton.Flyout>
+                                    <MenuFlyout Placement="Right">
+                                        <MenuFlyoutItem Text="FUCK"/>
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
                             </SplitButton>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>

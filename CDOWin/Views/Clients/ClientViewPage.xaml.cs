@@ -63,13 +63,7 @@ public sealed partial class ClientViewPage : Page {
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
         if (sender is Button button && button.Tag is ClientEditType tag) {
 
-            ContentDialog dialog = new();
-            dialog.XamlRoot = this.XamlRoot;
-            dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            dialog.PrimaryButtonText = "Save";
-            dialog.CloseButtonText = "Cancel";
-            dialog.DefaultButton = ContentDialogButton.Primary;
-
+            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "");
             var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
 
             switch (tag) {

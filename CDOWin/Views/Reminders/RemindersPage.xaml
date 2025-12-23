@@ -63,7 +63,7 @@
                                          Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                                         Tag="{x:Bind clientID}">
+                                         Tag="{x:Bind id}">
                                 <Grid Opacity="{x:Bind complete, Converter={StaticResource BoolOpacityConverter}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
@@ -89,7 +89,10 @@
 
                                 <SplitButton.Flyout>
                                     <MenuFlyout Placement="Right">
-                                        <MenuFlyoutItem Text="FUCK"/>
+                                        <MenuFlyoutItem Text="Mark Completed"/>
+                                        <MenuFlyoutItem Text="Edit"/>
+                                        <MenuFlyoutItem Text="View Client"/>
+                                        <MenuFlyoutItem Text="Delete"/>
                                     </MenuFlyout>
                                 </SplitButton.Flyout>
                             </SplitButton>

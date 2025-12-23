@@ -43,14 +43,14 @@
     
     <!-- Page Title Style -->
     <Style x:Key="PageTitleStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="16,8,16,0"/>
+        <Setter Property="Margin" Value="16,10,16,0"/>
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!-- Inspector Header Style -->
     <Style x:Key="InspectorHeaderStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="16,8,8,8"/>
+        <Setter Property="Margin" Value="16,10,8,7"/>
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="TextWrapping" Value="WrapWholeWords"/>

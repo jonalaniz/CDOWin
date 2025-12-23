@@ -6,7 +6,7 @@ namespace CDOWin.Converters;
 class BoolOpacityConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
         if (value is bool b) {
-            return b == false ? 0.4 : 1.0;
+            return b == true ? 0.4 : 1.0;
         }
 
         return 1.0;

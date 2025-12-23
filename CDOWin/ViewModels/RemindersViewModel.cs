@@ -36,14 +36,14 @@ public partial class RemindersViewModel : ObservableObject {
     [ObservableProperty]
     public partial Reminder? SelectedReminder { get; set; }
 
+    [ObservableProperty]
+    public string endText = "";
+
     public RemindersViewModel(IReminderService service, Services.ClientSelectionService clientSelectionService) {
         _service = service;
         _selectionService = clientSelectionService;
         _selectionService.SelectedClientChanged += OnClientChanged;
     }
-
-    [ObservableProperty]
-    public string endText = "";
 
     private void OnClientChanged(Client? client) {
         ClientSpecific.Clear();
@@ -63,6 +63,8 @@ public partial class RemindersViewModel : ObservableObject {
         if (value != null)
             _ = RefreshSelectedReminderAsync(value.id);
     }
+
+    // Public Methods
 
     private void ApplyFilter() {
         switch (Filter) {
@@ -91,6 +93,12 @@ public partial class RemindersViewModel : ObservableObject {
         UpdateEndText();
     }
 
+    public Reminder GetReminderByID(int id) {
+        return Filtered.FirstOrDefault(r => r.id == id);
+    }
+
+    // Utility Methods
+
     private void ReplaceFiltered(IEnumerable<Reminder> source) {
         Filtered.Clear();
         foreach (var reminder in source)
@@ -113,6 +121,7 @@ public partial class RemindersViewModel : ObservableObject {
         }
     }
 
+    // CRUD Methods
     public async Task LoadRemindersAsync() {
         var reminders = await _service.GetAllRemindersAsync();
 

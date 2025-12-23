@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CDOWin.Views.Reminders.Dialogs.UpdateReminderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CDOWin.Controls" 
+    xmlns:models="using:CDO.Core.Models" 
+    xmlns:dialogs="using:CDOWin.Views.Reminders.Dialogs"
+    d:DataContext="{d:DesignInstance Type=models:Reminder}"
+    mc:Ignorable="d">
+
+    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0: Name + Complete Checkbox -->
+        <controls:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                            Label="Client" Value="{Binding clientName}"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Spacing="2">
+            <TextBlock Text="Date" Style="{StaticResource LabelTextBlockStyle}"/>
+            <CalendarDatePicker x:Name="DatePicker" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+
+        <!-- Row 1: Checkbox -->
+        <CheckBox Grid.Row="1" Grid.Column="0"
+                  Content="Mark Completed" IsChecked="{Binding complete}"/>
+
+        <!-- Row 2: Description -->
+        <controls:LabeledMultiLinePair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                                       Label="Description" Value="{Binding description}"
+                                       Tag="{x:Bind dialogs:UpdateField.Description}"
+                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+
+    </Grid>
+</Page>

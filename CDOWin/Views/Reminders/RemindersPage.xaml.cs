@@ -1,5 +1,6 @@
 ﻿using CDOWin.Services;
 using CDOWin.ViewModels;
+using CDOWin.Views.Reminders.Dialogs;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CDOWin.Views.Reminders;
 
@@ -93,10 +95,17 @@ public sealed partial class RemindersPage : Page {
         // Here we open a new reminder window
     }
 
-    private void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
-        if (sender.Tag is Int32 clientID) {
-            // here we need to select the client with that name
-            Debug.WriteLine($"Client: {clientID} selected.");
+    private async void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
+        if (sender.Tag is Int32 id) {
+            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Reminder");
+            var updateVM = new ReminderUpdateViewModel(ViewModel.GetReminderByID(id));
+            dialog.Content = new UpdateReminderPage(updateVM);
+
+            var result = await dialog.ShowAsync();
+
+            if(result == ContentDialogResult.Primary) {
+                // do some shit
+            }
         }
     }
 }

@@ -106,28 +106,8 @@
                IsNavigationStackEnabled="False"/>
 
         <!-- Right Column -->
-        <Grid Grid.Column="2">
-            <!-- Right Column Rows -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!-- Right Column Colums -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <SelectorBar Grid.Row="0" Grid.Column="0" Margin="8, 0, 0, 8"
-                         x:Name="SelectionBar" SelectionChanged="SelectionChanged"
-                         Visibility="{Binding SelectedClient, Mode=OneWay, Converter={StaticResource NullToVisability}}">
-                <SelectorBarItem Text="Notes" IsSelected="True" />
-                <SelectorBarItem Text="Employment" />
-            </SelectorBar>
-            
-            <Frame Grid.Column="0" Grid.Row="1"
-                   x:Name="ContentFrame" 
-                   IsNavigationStackEnabled="False"/>
-        </Grid>
+        <Frame Grid.Column="2"
+                x:Name="InspectorFrame" 
+                IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

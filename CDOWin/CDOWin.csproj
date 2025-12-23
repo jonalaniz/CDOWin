@@ -214,6 +214,11 @@
     <PRIResource Remove="Views\Service Authorizations\**" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\Reminders\Dialogs\UpdateReminderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Resources\Grids.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

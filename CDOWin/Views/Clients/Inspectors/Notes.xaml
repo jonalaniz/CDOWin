@@ -11,25 +11,31 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Margin="12,9,12,8"
-                 CornerRadius="4" VerticalAlignment="Stretch"
-                 Style="{StaticResource MultiLineCheckboxStyle}"
-                 TextWrapping="Wrap"
-                 Text="{x:Bind ViewModel.SelectedClient.clientNotes, Mode=OneWay}"/>
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Style="{StaticResource InspectorHeaderStyle}"
+                   Text="Notes"/>
 
-        <Button Grid.Row="1" Grid.Column="0" Margin="16,8,16,16"
-                HorizontalAlignment="Right" VerticalAlignment="Center"
+        <!-- Edit Button -->
+        <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" 
                 Style="{StaticResource SingleIconButtonStyle}"
                 Click="Button_Click">
             <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
+
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,16,12,12"
+                 IsReadOnly="True" CornerRadius="4" VerticalAlignment="Stretch"
+                 Style="{StaticResource MultiLineCheckboxStyle}"
+                 TextWrapping="Wrap"
+                 Text="{x:Bind ViewModel.SelectedClient.clientNotes, Mode=OneWay}"/>
     </Grid>
 </Page>

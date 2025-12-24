@@ -88,6 +88,7 @@
                             <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="SA Number" FontWeight="SemiBold"/>
@@ -97,6 +98,7 @@
                         <TextBlock Grid.Column="4" Text="Start Date" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="5" Text="End Date" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="6" Text="Unit Cost" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="7" Text="Description" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -112,6 +114,7 @@
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{x:Bind id}"/>
@@ -121,6 +124,7 @@
                             <TextBlock Grid.Column="4" Text="{x:Bind formattedStartDate}"/>
                             <TextBlock Grid.Column="5" Text="{x:Bind formattedEndDate}"/>
                             <TextBlock Grid.Column="6" Text="{x:Bind formattedCost}"/>
+                            <TextBlock Grid.Column="7" Text="{x:Bind description}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

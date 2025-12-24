@@ -46,6 +46,7 @@ public partial class EmployersViewModel : ObservableObject {
         || (e.email?.ToLower().Contains(query) ?? false)
         || (e.supervisor?.ToLower().Contains(query) ?? false)
         || (e.supervisorEmail?.ToLower().Contains(query) ?? false)
+        || (e.notes?.ToLower().Contains(query) ?? false)
         );
 
         Filtered = new ObservableCollection<Employer>(result);

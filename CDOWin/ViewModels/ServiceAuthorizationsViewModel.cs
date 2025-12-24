@@ -42,6 +42,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         (s.client?.name?.ToLower().Contains(query) ?? false)
         || (s.client?.counselorReference?.name?.ToLower().Contains(query) ?? false)
         || (s.id?.ToLower().Contains(query) ?? false)
+        || (s.description?.ToLower().Contains(query) ?? false)
         );
 
         Filtered = new ObservableCollection<ServiceAuthorization>(result);

@@ -42,6 +42,7 @@ public partial class ReferralsViewModel : ObservableObject {
         (r.clientName?.ToLower().Contains(query) ?? false)
         || (r.employer.name?.ToLower().Contains(query) ?? false)
         || (r.supervisor?.ToLower().Contains(query) ?? false)
+        || (r.position?.ToLower().Contains(query) ?? false)
         );
 
         Filtered = new ObservableCollection<Referral>(result);

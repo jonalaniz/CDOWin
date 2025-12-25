@@ -2,7 +2,7 @@
 
 namespace CDO.Core.Models;
 
-public record class Referral(
+public record class Placement(
     string id,
     int? placementNumber,
     string? employerID,

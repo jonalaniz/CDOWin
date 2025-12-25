@@ -18,7 +18,7 @@ public static class AppServices {
     public static IServiceAuthorizationService? POsService { get; private set; }
     public static IStateService? StateService { get; private set; }
     public static IReminderService? ReminderService { get; private set; }
-    public static IReferralService? ReferralService { get; private set; }
+    public static IPlacementService? PlacementService { get; private set; }
 
     private static ClientSelectionService _clientSelectionService;
 
@@ -29,7 +29,7 @@ public static class AppServices {
     public static ServiceAuthorizationsViewModel? POsViewModel { get; private set; }
     public static RemindersViewModel? RemindersViewModel { get; private set; }
     public static StatesViewModel? StatesViewModel { get; private set; }
-    public static ReferralsViewModel? ReferralsViewModel { get; private set; }
+    public static PlacementsViewModel? PlacementsViewModel { get; private set; }
 
     // Initialize all services
     public static void InitializeServices(string baseAddress, string apiKey) {
@@ -45,7 +45,7 @@ public static class AppServices {
         POsService = new ServiceAuthorizationService(NetworkService);
         ReminderService = new ReminderService(NetworkService);
         StateService = new StateService(NetworkService);
-        ReferralService = new ReferralService(NetworkService);
+        PlacementService = new PlacementService(NetworkService);
 
         _clientSelectionService = new();
 
@@ -56,7 +56,7 @@ public static class AppServices {
         POsViewModel = new ServiceAuthorizationsViewModel(POsService);
         RemindersViewModel = new RemindersViewModel(ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(StateService);
-        ReferralsViewModel = new ReferralsViewModel(ReferralService);
+        PlacementsViewModel = new PlacementsViewModel(PlacementService);
 
     }
 
@@ -70,7 +70,7 @@ public static class AppServices {
             POsViewModel.LoadServiceAuthorizationsAsync(),
             RemindersViewModel.LoadRemindersAsync(),
             StatesViewModel.LoadStatesAsync(),
-            ReferralsViewModel.LoadReferralsAsync()
+            PlacementsViewModel.LoadPlacementsAsync()
         };
 
         await Task.WhenAll(tasks);

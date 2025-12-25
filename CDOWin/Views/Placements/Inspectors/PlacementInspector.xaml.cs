@@ -2,18 +2,18 @@ using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace CDOWin.Views.Referrals.Inspectors;
+namespace CDOWin.Views.Placements.Inspectors;
 
-public sealed partial class ReferralInspector : Page {
-    public ReferralsViewModel? ViewModel {
+public sealed partial class PlacementInspector : Page {
+    public PlacementsViewModel? ViewModel {
         get; private set;
     }
-    public ReferralInspector() {
+    public PlacementInspector() {
         InitializeComponent();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e) {
-        ViewModel = (ReferralsViewModel)e.Parameter;
+        ViewModel = (PlacementsViewModel)e.Parameter;
         DataContext = ViewModel;
     }
 }

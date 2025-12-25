@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs;
 
-public class ReferralDTO {
+public class PlacementDTO {
     public int? placementNumber { get; set; }
     public string? employerID { get; set; }
     public int? clientID { get; set; }

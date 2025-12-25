@@ -1,4 +1,4 @@
-﻿namespace CDOWin.Views.Referrals.Dialogs;
+﻿namespace CDOWin.Views.Placements.Dialogs;
 
 public enum UpdateField {
     PlacementNumber,

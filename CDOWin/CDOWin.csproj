@@ -37,8 +37,6 @@
     <None Remove="Views\Employers\Inspectors\EmployerInspector.xaml" />
     <None Remove="Views\Inspectors\Placements.xaml" />
     <None Remove="Views\Notes.xaml" />
-    <None Remove="Views\Referrals\Inspectors\ReferralInspector.xaml" />
-    <None Remove="Views\Referrals\ReferralsPage.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
     <None Remove="Views\ServiceAuthorizations\Inspectors\ServiceAuthorizationInspector.xaml" />
     <None Remove="Views\StatesPage.xaml" />
@@ -170,7 +168,7 @@
     <Folder Include="Views\Reminders\Inspectors\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Referrals\ReferralsPage.xaml">
+    <Page Update="Views\Referrals\PlacementsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -244,7 +242,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Referrals\Inspectors\ReferralInspector.xaml">
+    <Page Update="Views\Referrals\Inspectors\PlacementInspector.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

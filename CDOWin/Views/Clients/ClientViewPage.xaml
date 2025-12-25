@@ -303,9 +303,9 @@
                         <!-- List View -->
                         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,8,0" VerticalAlignment="Stretch"
                                   Style="{StaticResource InspectorListViewStyle}"
-                                  ItemsSource="{x:Bind ViewModel.SelectedClient.referrals, Mode=OneWay}">
+                                  ItemsSource="{x:Bind ViewModel.SelectedClient.placements, Mode=OneWay}">
                             <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Referral">
+                                <DataTemplate x:DataType="models:Placement">
                                     <Grid RowSpacing="4" Margin="0,8,0,8">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>

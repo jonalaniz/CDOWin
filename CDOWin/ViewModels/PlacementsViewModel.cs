@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class ReferralsViewModel : ObservableObject {
-    private readonly IReferralService _service;
+public partial class PlacementsViewModel : ObservableObject {
+    private readonly IPlacementService _service;
 
     [ObservableProperty]
-    public partial ObservableCollection<Referral> All { get; private set; } = [];
+    public partial ObservableCollection<Placement> All { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<Referral> Filtered { get; private set; } = [];
+    public partial ObservableCollection<Placement> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Referral? Selected { get; set; }
+    public partial Placement? Selected { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
-    public ReferralsViewModel(IReferralService service) {
+    public PlacementsViewModel(IPlacementService service) {
         _service = service;
     }
 
@@ -33,7 +33,7 @@ public partial class ReferralsViewModel : ObservableObject {
 
     void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Referral>(All);
+            Filtered = new ObservableCollection<Placement>(All);
             return;
         }
 
@@ -45,25 +45,25 @@ public partial class ReferralsViewModel : ObservableObject {
         || (r.position?.ToLower().Contains(query) ?? false)
         );
 
-        Filtered = new ObservableCollection<Referral>(result);
+        Filtered = new ObservableCollection<Placement>(result);
     }
 
-    public async Task LoadReferralsAsync() {
-        var referrals = await _service.GetAllReferralsAsync();
-        List<Referral> SortedReferrals = referrals.OrderBy(o => o.clientID).ToList();
+    public async Task LoadPlacementsAsync() {
+        var placements = await _service.GetAllPlacementsAsync();
+        List<Placement> SortedPlacements = placements.OrderBy(o => o.clientID).ToList();
         All.Clear();
 
-        foreach (var referral in SortedReferrals) {
-            All.Add(referral);
+        foreach (var placement in SortedPlacements) {
+            All.Add(placement);
         }
 
         ApplyFilter();
     }
 
-    public async Task RefreshSelectedReferral(string id) {
-        var referral = await _service.GetReferralAsync(id);
-        var index = All.IndexOf(All.First(r => r.id == referral.id));
-        All[index] = referral;
-        Selected = referral;
+    public async Task RefreshSelectedPlacement(string id) {
+        var placement = await _service.GetPlacementAsync(id);
+        var index = All.IndexOf(All.First(r => r.id == placement.id));
+        All[index] = placement;
+        Selected = placement;
     }
 }

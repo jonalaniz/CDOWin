@@ -36,13 +36,13 @@ foreach (var reminder in client.reminders) {
     Console.WriteLine(reminder.description);
 }
 
-Console.WriteLine("Referrals");
+Console.WriteLine("Placements");
 Console.WriteLine();
-foreach (var referral in client.referrals) {
-    Console.WriteLine(referral.id);
-    Console.WriteLine(referral.employer.name);
-    Console.WriteLine(referral.formattedHireDate);
-    Console.WriteLine(referral.position);
+foreach (var placement in client.placements) {
+    Console.WriteLine(placement.id);
+    Console.WriteLine(placement.employer.name);
+    Console.WriteLine(placement.formattedHireDate);
+    Console.WriteLine(placement.position);
 }
 
 Console.WriteLine("Service Authorizations");

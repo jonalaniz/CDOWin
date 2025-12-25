@@ -2,7 +2,7 @@ using CDOWin.Views;
 using CDOWin.Views.Clients;
 using CDOWin.Views.Counselors;
 using CDOWin.Views.Employers;
-using CDOWin.Views.Referrals;
+using CDOWin.Views.Placements;
 using CDOWin.Views.Reminders;
 using CDOWin.Views.ServiceAuthorizations;
 using Microsoft.UI.Xaml;
@@ -61,7 +61,7 @@ public sealed partial class MainWindow : Window {
                     pageType = typeof(ServiceAuthorizationsPage);
                     break;
                 case CDOFrame.Placements:
-                    pageType = typeof(ReferralsPage);
+                    pageType = typeof(PlacementsPage);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(frame), frame, null);

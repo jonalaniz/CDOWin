@@ -72,7 +72,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     public void ToggleCompleted(int id) {
         var reminder = Filtered.First(r => r.id == id);
-        if(reminder != null) {
+        if (reminder != null) {
             var update = new UpdateReminderDTO();
             update.complete = !reminder.complete;
             _ = UpdateReminder(id, update);

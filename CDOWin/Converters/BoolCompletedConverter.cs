@@ -2,6 +2,7 @@
 using System;
 
 namespace CDOWin.Converters;
+
 class BoolCompletedConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
         if (value is bool b) {

@@ -3,7 +3,6 @@ using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Inspectors;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
 
 namespace CDOWin.Views.Clients;
 

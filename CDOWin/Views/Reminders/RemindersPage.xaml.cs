@@ -7,9 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CDOWin.Views.Reminders;
 
@@ -99,7 +97,7 @@ public sealed partial class RemindersPage : Page {
 
             var result = await dialog.ShowAsync();
 
-            if(result == ContentDialogResult.Primary) {
+            if (result == ContentDialogResult.Primary) {
                 _ = ViewModel.UpdateReminder(id, updateVM.Updated);
             }
         }
@@ -112,13 +110,13 @@ public sealed partial class RemindersPage : Page {
     }
 
     private void ViewClient_Click(object sender, RoutedEventArgs e) {
-        if(sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId) {
+        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId) {
             ViewModel.RequestClient(clientId);
         }
     }
 
     private void Delete_Click(object sender, RoutedEventArgs e) {
-        if(sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int id) {
+        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int id) {
             // Here we show a scaare sheet and delete
         }
     }

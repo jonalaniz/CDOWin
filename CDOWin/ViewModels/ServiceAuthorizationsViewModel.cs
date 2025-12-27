@@ -50,6 +50,8 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     public async Task LoadServiceAuthorizationsAsync() {
         var serviceAuthorizations = await _service.GetAllServiceAuthorizationsAsync();
+        if (serviceAuthorizations == null) return;
+
         List<ServiceAuthorization> SortedServiceAuthorizations = serviceAuthorizations.OrderBy(o => o.clientID).ToList();
         All.Clear();
 
@@ -61,9 +63,10 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     }
 
     public async Task RefreshSelectedServiceAuthorization(string id) {
-        var po = await _service.GetServiceAuthorizationAsync(id);
+        var serviceAuthorization = await _service.GetServiceAuthorizationAsync(id);
+        if (serviceAuthorization == null) return;
         var index = All.IndexOf(All.First(p => p.id == id));
-        All[index] = po;
-        Selected = po;
+        All[index] = serviceAuthorization;
+        Selected = serviceAuthorization;
     }
 }

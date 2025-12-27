@@ -4,12 +4,11 @@ using CDOWin.Views.Counselors.Dialogs;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Diagnostics;
 
 namespace CDOWin.Views.Counselors.Inspectors;
 
 public sealed partial class CounselorInspector : Page {
-    public CounselorsViewModel? ViewModel { get; private set; }
+    public CounselorsViewModel ViewModel { get; private set; } = null!;
     public CounselorInspector() {
         InitializeComponent();
     }
@@ -35,8 +34,7 @@ public sealed partial class CounselorInspector : Page {
     }
 
     private void updateCounselor(UpdateCounselorDTO update) {
-        Debug.WriteLine("UPDATING");
-        ViewModel.UpdateCounselor(update);
+        _ = ViewModel.UpdateCounselor(update);
         // Here we need ot implement ViewModel.UpdateCounselor
     }
 }

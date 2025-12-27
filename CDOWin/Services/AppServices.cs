@@ -9,27 +9,27 @@ namespace CDOWin.Services;
 
 public static class AppServices {
     // Network
-    public static INetworkService? NetworkService { get; private set; }
+    public static INetworkService NetworkService { get; private set; } = null!;
 
     // Services
-    public static IClientService? ClientService { get; private set; }
-    public static ICounselorService? CounselorService { get; private set; }
-    public static IEmployerService? EmployerService { get; private set; }
-    public static IServiceAuthorizationService? POsService { get; private set; }
-    public static IStateService? StateService { get; private set; }
-    public static IReminderService? ReminderService { get; private set; }
-    public static IPlacementService? PlacementService { get; private set; }
+    public static IClientService ClientService { get; private set; } = null!;
+    public static ICounselorService CounselorService { get; private set; } = null!;
+    public static IEmployerService EmployerService { get; private set; } = null!;
+    public static IServiceAuthorizationService POsService { get; private set; } = null!;
+    public static IStateService StateService { get; private set; } = null!;
+    public static IReminderService ReminderService { get; private set; } = null!;
+    public static IPlacementService PlacementService { get; private set; } = null!;
 
-    private static ClientSelectionService _clientSelectionService;
+    private static ClientSelectionService? _clientSelectionService;
 
     // ViewModels
-    public static ClientsViewModel? ClientsViewModel { get; private set; }
-    public static CounselorsViewModel? CounselorsViewModel { get; private set; }
-    public static EmployersViewModel? EmployersViewModel { get; private set; }
-    public static ServiceAuthorizationsViewModel? POsViewModel { get; private set; }
-    public static RemindersViewModel? RemindersViewModel { get; private set; }
-    public static StatesViewModel? StatesViewModel { get; private set; }
-    public static PlacementsViewModel? PlacementsViewModel { get; private set; }
+    public static ClientsViewModel ClientsViewModel { get; private set; } = null!;
+    public static CounselorsViewModel CounselorsViewModel { get; private set; } = null!;
+    public static EmployersViewModel EmployersViewModel { get; private set; } = null!;
+    public static ServiceAuthorizationsViewModel POsViewModel { get; private set; } = null!;
+    public static RemindersViewModel RemindersViewModel { get; private set; } = null!;
+    public static StatesViewModel StatesViewModel { get; private set; } = null!;
+    public static PlacementsViewModel PlacementsViewModel { get; private set; } = null!;
 
     // Initialize all services
     public static void InitializeServices(string baseAddress, string apiKey) {
@@ -77,5 +77,9 @@ public static class AppServices {
         sw.Stop();
         Debug.WriteLine($"LoadDataAsync completed in {sw.ElapsedMilliseconds}");
         return true;
+    }
+
+    public static NewRemindersViewModel CreateNewReminderViewModel(int clientId) {
+        return new NewRemindersViewModel(ReminderService, clientId);
     }
 }

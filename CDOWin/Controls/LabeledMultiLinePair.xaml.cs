@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls;
 namespace CDOWin.Controls;
 
 public sealed partial class LabeledMultiLinePair : UserControl {
+    public event TextChangedEventHandler? TextChangedForwarded;
     public TextBox innerTextBox => this.InnerTextBox;
 
     public string Label {
@@ -23,8 +24,6 @@ public sealed partial class LabeledMultiLinePair : UserControl {
     public LabeledMultiLinePair() {
         InitializeComponent();
     }
-
-    public event TextChangedEventHandler TextChangedForwarded;
 
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
         TextChangedForwarded?.Invoke(this, e);

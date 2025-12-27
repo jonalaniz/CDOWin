@@ -19,6 +19,6 @@ public sealed partial class ClientsPage : Page {
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         var selection = (ClientSummaryDTO)e.ClickedItem;
-        ViewModel.ClientSelected(selection.id);
+        _ = ViewModel.ClientSelected(selection.id);
     }
 }

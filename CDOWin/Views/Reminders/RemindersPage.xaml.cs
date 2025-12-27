@@ -98,7 +98,7 @@ public sealed partial class RemindersPage : Page {
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary) {
-                _ = ViewModel.UpdateReminder(id, updateVM.Updated);
+                _ = ViewModel.UpdateReminderAsync(id, updateVM.Updated);
             }
         }
     }

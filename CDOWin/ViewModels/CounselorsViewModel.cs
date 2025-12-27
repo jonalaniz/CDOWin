@@ -65,6 +65,7 @@ public partial class CounselorsViewModel : ObservableObject {
 
     public async Task RefreshSelectedCounselor(int id) {
         var counselor = await _service.GetCounselorAsync(id);
+        if (counselor == null) return;
         Replace(All, counselor);
         Replace(Filtered, counselor);
 

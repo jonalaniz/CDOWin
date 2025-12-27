@@ -8,7 +8,7 @@ using System;
 namespace CDOWin.Views.Employers.Inspectors;
 
 public sealed partial class EmployerInspector : Page {
-    public EmployersViewModel? ViewModel { get; private set; }
+    public EmployersViewModel ViewModel { get; private set; } = null!;
 
     public EmployerInspector() {
         InitializeComponent();
@@ -35,6 +35,6 @@ public sealed partial class EmployerInspector : Page {
     }
 
     private void updateEmployer(EmployerDTO update) {
-        ViewModel.UpdateEmployer(update);
+        _ = ViewModel.UpdateEmployer(update);
     }
 }

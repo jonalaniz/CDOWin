@@ -8,7 +8,7 @@ using System;
 namespace CDOWin.Views.Clients.Inspectors;
 
 public sealed partial class Notes : Page {
-    public ClientsViewModel? ViewModel { get; private set; }
+    public ClientsViewModel ViewModel { get; private set; } = null!;
 
     public Notes() {
         InitializeComponent();
@@ -20,6 +20,7 @@ public sealed partial class Notes : Page {
     }
 
     private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+        if (ViewModel.SelectedClient == null) return;
         var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
 
         ContentDialog dialog = new();
@@ -33,8 +34,6 @@ public sealed partial class Notes : Page {
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
-            ViewModel.UpdateClient(updateVM.UpdatedClient);
-
-
+            _ = ViewModel.UpdateClient(updateVM.UpdatedClient);
     }
 }

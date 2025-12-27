@@ -1,4 +1,5 @@
 using CDO.Core.DTOs;
+using CDO.Core.Models;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
 using Microsoft.UI.Xaml;
@@ -10,7 +11,7 @@ using System.Diagnostics;
 namespace CDOWin.Views.Clients;
 
 public sealed partial class ClientViewPage : Page {
-    public ClientsViewModel? ViewModel { get; private set; }
+    public ClientsViewModel ViewModel { get; private set; } = null!;
     public ClientViewPage() {
         InitializeComponent();
         BuildRemindersFlyout();
@@ -56,12 +57,11 @@ public sealed partial class ClientViewPage : Page {
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
         if (sender is CheckBox checkBox && checkBox.Tag is CheckboxTag tag) {
             var isChecked = checkBox.IsChecked;
-            Debug.WriteLine($"Checkbox: {tag}");
         }
     }
 
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is Button button && button.Tag is ClientEditType tag) {
+        if (sender is Button button && button.Tag is ClientEditType tag && ViewModel.SelectedClient != null) {
 
             var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "");
             var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
@@ -100,12 +100,13 @@ public sealed partial class ClientViewPage : Page {
     // Utility Methods
 
     private void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
+        if (ViewModel.SelectedClient == null) return;
         var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
         updateVM.UpdateCheckbox(tag, isChecked);
         updateClient(updateVM.UpdatedClient);
     }
 
     private void updateClient(UpdateClientDTO update) {
-        ViewModel.UpdateClient(update);
+        _ = ViewModel.UpdateClient(update);
     }
 }

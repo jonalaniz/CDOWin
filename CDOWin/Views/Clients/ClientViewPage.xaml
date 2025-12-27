@@ -312,9 +312,9 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Spacing="2">
-                                            <TextBlock FontWeight="Bold" Text="{x:Bind employer.name, Mode=OneWay}"/>
-                                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedHireDate, Mode=OneWay}"/>
-                                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind position, Mode=OneWay}"/>
+                                            <TextBlock FontWeight="Bold" Text="{x:Bind employer.name}"/>
+                                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedHireDate}"/>
+                                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind position}"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -357,10 +357,10 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Spacing="2">
-                                            <TextBlock FontWeight="Bold" Text="{x:Bind id, Mode=OneWay}"/>
-                                            <TextBlock Text="{x:Bind description, Mode=OneWay}"/>
-                                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedStartDate, Mode=OneWay}"/>
-                                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind formattedEndDate, Mode=OneWay}"/>
+                                            <TextBlock FontWeight="Bold" Text="{x:Bind id}"/>
+                                            <TextBlock Text="{x:Bind description}"/>
+                                            <TextBlock FontWeight="SemiBold" Text="{x:Bind formattedStartDate}"/>
+                                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind formattedEndDate}"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>

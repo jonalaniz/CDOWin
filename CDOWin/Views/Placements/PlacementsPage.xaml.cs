@@ -18,7 +18,7 @@ public sealed partial class PlacementsPage : Page {
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is Placement placement) {
-            ViewModel.RefreshSelectedPlacement(placement.id);
+            _ = ViewModel.RefreshSelectedPlacement(placement.id);
         }
     }
 }

@@ -25,11 +25,13 @@ public partial class StatesViewModel : ObservableObject {
     }
 
     partial void OnSelectedStateChanged(State? value) {
+        if (value == null) return;
         _ = RefreshSelectedState(value.id);
     }
 
     public async Task LoadStatesAsync() {
         var states = await _service.GetAllStatesAsync();
+        if(states == null) return;
         List<State> SortedStates = states.OrderBy(o => o.name).ToList();
         States.Clear();
 
@@ -40,6 +42,7 @@ public partial class StatesViewModel : ObservableObject {
 
     public async Task RefreshSelectedState(int id) {
         var state = await _service.GetStateAsync(id);
+        if (state == null) return;
         if (SelectedState != state) {
             SelectedState = state;
 

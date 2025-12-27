@@ -18,7 +18,7 @@ public sealed partial class ServiceAuthorizationsPage : Page {
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is ServiceAuthorization sa) {
-            ViewModel.RefreshSelectedServiceAuthorization(sa.id);
+            _ = ViewModel.RefreshSelectedServiceAuthorization(sa.id);
         }
     }
 }

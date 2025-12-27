@@ -73,6 +73,8 @@ public partial class EmployersViewModel : ObservableObject {
 
     public async Task RefreshSelectedEmployer(int id) {
         var employer = await _service.GetEmployerAsync(id);
+        if (employer == null) return;
+
         Replace(All, employer);
         Replace(Filtered, employer);
 

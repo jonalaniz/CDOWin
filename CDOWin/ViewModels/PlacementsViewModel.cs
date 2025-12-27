@@ -62,6 +62,8 @@ public partial class PlacementsViewModel : ObservableObject {
 
     public async Task RefreshSelectedPlacement(string id) {
         var placement = await _service.GetPlacementAsync(id);
+        if (placement == null) return;
+
         var index = All.IndexOf(All.First(r => r.id == placement.id));
         All[index] = placement;
         Selected = placement;

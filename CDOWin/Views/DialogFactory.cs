@@ -5,10 +5,25 @@ namespace CDOWin.Views;
 
 public static class DialogFactory {
     public static ContentDialog UpdateDialog(XamlRoot root, string title) {
+        ContentDialog dialog = Dialog(root, title);
+        dialog.PrimaryButtonText = "Save";
+        dialog.Title = title;
+
+        return dialog;
+    }
+
+    public static ContentDialog NewObjectDialog(XamlRoot root, string title) {
+        ContentDialog dialog = Dialog(root, title);
+        dialog.PrimaryButtonText = "Create";
+        dialog.Title = title;
+
+        return dialog;
+    }
+
+    private static ContentDialog Dialog(XamlRoot root, string title) {
         ContentDialog dialog = new();
         dialog.XamlRoot = root;
         dialog.Style = dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.PrimaryButtonText = "Save";
         dialog.CloseButtonText = "Cancel";
         dialog.DefaultButton = ContentDialogButton.Primary;
         dialog.Title = title;

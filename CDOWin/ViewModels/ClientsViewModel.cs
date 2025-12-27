@@ -110,4 +110,10 @@ public partial class ClientsViewModel : ObservableObject {
         var updatedClient = await _service.UpdateClientAsync(SelectedClient.id, update);
         SelectedClient = updatedClient;
     }
+
+    public async Task ReloadClientAsync() {
+        if (SelectedClient == null)
+            return;
+        SelectedClient = await _service.GetClientAsync(SelectedClient.id);
+    }
 }

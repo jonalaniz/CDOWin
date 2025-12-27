@@ -6,9 +6,34 @@
     xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CDOWin.Controls" 
+    xmlns:viewModels="using:CDOWin.ViewModels" 
+    xmlns:dialogs="using:CDOWin.Views.Reminders.Dialogs"
+    d:DataContext="{d:DesignInstance Type=viewModels:NewRemindersViewModel}"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Width="400" RowSpacing="12" ColumnSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 1: Date-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
+            <TextBlock Text="Date" Style="{StaticResource LabelTextBlockStyle}"/>
+            <CalendarDatePicker x:Name="DatePicker" HorizontalAlignment="Stretch"
+                                DateChanged="DatePicker_DateChanged"/>
+        </StackPanel>
+
+        <!-- Row 2: Description -->
+        <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Label="Description" Value="{Binding Description}"
+                                       TextChangedForwarded="LabeledMultiLinePair_TextChangedForwarded"/>
 
     </Grid>
 </Page>

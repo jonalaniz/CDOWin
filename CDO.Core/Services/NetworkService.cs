@@ -14,11 +14,15 @@ public class NetworkService : INetworkService {
     // Properties
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonOptions;
+    private readonly JsonSerializerOptions _jsonDeserializerOptions;
 
     public NetworkService() {
         _httpClient = new HttpClient();
         _jsonOptions = new JsonSerializerOptions {
             PropertyNameCaseInsensitive = true,
+        };
+        _jsonDeserializerOptions = new JsonSerializerOptions {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
     }
 
@@ -64,7 +68,10 @@ public class NetworkService : INetworkService {
     // POST
     // -----------------------------
     public async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var content = JsonContent.Create(body);
+        var options = _jsonDeserializerOptions;
+
+        var json = JsonSerializer.Serialize(body, options);
+        var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(endpoint, content);
         response.EnsureSuccessStatusCode();
 
@@ -75,9 +82,7 @@ public class NetworkService : INetworkService {
     // PATCH
     // -----------------------------
     public async Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var options = new JsonSerializerOptions {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-        };
+        var options = _jsonDeserializerOptions
         var json = JsonSerializer.Serialize(body, options);
         var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
 

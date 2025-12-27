@@ -1,5 +1,6 @@
 using CDO.Core.DTOs;
 using CDO.Core.Models;
+using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
 using Microsoft.UI.Xaml;
@@ -7,6 +8,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CDOWin.Views.Clients;
 
@@ -44,8 +46,33 @@ public sealed partial class ClientViewPage : Page {
         Process.Start("explorer.exe", $"{ViewModel.SelectedClient?.documentsFolderPath}");
     }
 
-    private void NewReminder_Click(SplitButton sender, SplitButtonClickEventArgs e) {
-        Debug.WriteLine("New Reminder Button Clicked");
+    private async void NewReminder_ClickAsync(SplitButton sender, SplitButtonClickEventArgs e) {
+        if (ViewModel.SelectedClient == null) return;
+
+        // Initialize our dialog/vm/page
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Reminder for {ViewModel.SelectedClient.name}");
+        var newReminderVM = AppServices.CreateNewReminderViewModel(ViewModel.SelectedClient.id);
+        var newReminderPage = new NewReminder(newReminderVM);
+
+        // Set the content
+        dialog.Content = newReminderPage;
+
+        // Set the button state
+        dialog.IsPrimaryButtonEnabled = newReminderVM.CanSave;
+
+        // Keep button state in sync with ViewModel
+        newReminderVM.PropertyChanged += (_, args) => {
+            if (args.PropertyName == nameof(newReminderVM.CanSave))
+                dialog.IsPrimaryButtonEnabled = newReminderVM.CanSave;
+        };
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary) {
+            await newReminderVM.CreateNewReminderAsync();
+            _ = ViewModel.ReloadClientAsync();
+        }
+
     }
 
     private void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {
@@ -92,7 +119,7 @@ public sealed partial class ClientViewPage : Page {
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary) {
-                updateClient(updateVM.UpdatedClient);
+                UpdateClient(updateVM.UpdatedClient);
             }
         }
     }
@@ -103,10 +130,10 @@ public sealed partial class ClientViewPage : Page {
         if (ViewModel.SelectedClient == null) return;
         var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
         updateVM.UpdateCheckbox(tag, isChecked);
-        updateClient(updateVM.UpdatedClient);
+        UpdateClient(updateVM.UpdatedClient);
     }
 
-    private void updateClient(UpdateClientDTO update) {
+    private void UpdateClient(UpdateClientDTO update) {
         _ = ViewModel.UpdateClient(update);
     }
 }

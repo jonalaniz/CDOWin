@@ -41,7 +41,7 @@
             <SelectorBarItem Text="All" IsSelected="True" Tag="{x:Bind reminders:RemindersFilter.All}"/>
             <SelectorBarItem Text="Upcoming" Tag="{x:Bind reminders:RemindersFilter.Upcoming}"/>
             <SelectorBarItem Text="Client" IsEnabled="False" Tag="{x:Bind reminders:RemindersFilter.Client}"/>
-            <SelectorBarItem Text="Selected" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
+            <SelectorBarItem Text="Date" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
         </SelectorBar>
 
         <Button Grid.Row="2" Grid.Column="2" Margin="8,4,8,0"

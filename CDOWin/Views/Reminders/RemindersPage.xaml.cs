@@ -1,6 +1,7 @@
 ﻿using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Reminders.Dialogs;
+using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -115,9 +116,15 @@ public sealed partial class RemindersPage : Page {
         }
     }
 
-    private void Delete_Click(object sender, RoutedEventArgs e) {
+    private async void Delete_Click(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int id) {
-            // Here we show a scaare sheet and delete
+            var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Reminder?");
+            dialog.Content = new DeletePage();
+
+            var result = await dialog.ShowAsync();
+            if(result == ContentDialogResult.Primary) {
+                ViewModel.DeleteReminderAsync(id);
+            }
         }
     }
 }

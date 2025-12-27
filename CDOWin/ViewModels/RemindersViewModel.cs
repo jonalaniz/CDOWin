@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,6 +48,7 @@ public partial class RemindersViewModel : ObservableObject {
         _service = service;
         _selectionService = clientSelectionService;
         _selectionService.SelectedClientChanged += OnClientChanged;
+        _selectionService.NewReminderCreated += OnReminderCreated;
     }
 
     // =========================
@@ -64,6 +66,11 @@ public partial class RemindersViewModel : ObservableObject {
                 UpdateEndText();
             }
         }
+    }
+
+    private void OnReminderCreated() {
+        Debug.WriteLine("New Reminder Created");
+        _ = LoadRemindersAsync();
     }
 
     // =========================
@@ -108,8 +115,13 @@ public partial class RemindersViewModel : ObservableObject {
         }
     }
 
-    public async Task CreateReminder(NewReminder newReminder) {
-
+    public async void DeleteReminderAsync(int id) {
+        if (All.FirstOrDefault(r => r.id == id) is Reminder reminder) {
+            await _service.DeleteReminderAsync(reminder.id);
+            Remove(All, reminder);
+            Remove(Filtered, reminder);
+            Remove(ClientSpecific, reminder);
+        }
     }
 
     public async Task ReloadReminderAsync(int id) {
@@ -150,6 +162,10 @@ public partial class RemindersViewModel : ObservableObject {
                 break;
         }
         UpdateEndText();
+    }
+
+    private void Remove(ObservableCollection<Reminder> list, Reminder reminder) {
+        list.Remove(reminder);
     }
 
     private void ReplaceFiltered(IEnumerable<Reminder> source) {

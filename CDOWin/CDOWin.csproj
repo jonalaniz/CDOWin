@@ -39,6 +39,7 @@
     <None Remove="Views\Notes.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
     <None Remove="Views\ServiceAuthorizations\Inspectors\ServiceAuthorizationInspector.xaml" />
+    <None Remove="Views\Shared\Dialogs\DeletePage.xaml" />
     <None Remove="Views\StatesPage.xaml" />
   </ItemGroup>
 
@@ -164,7 +165,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Shared\Dialogs\" />
     <Folder Include="Windows\" />
     <Folder Include="Views\Reminders\Inspectors\" />
   </ItemGroup>
@@ -211,6 +211,11 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Service Authorizations\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Shared\Dialogs\DeletePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Reminders\Dialogs\UpdateReminderPage.xaml">

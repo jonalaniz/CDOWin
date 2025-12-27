@@ -8,7 +8,6 @@ public static class DialogFactory {
         ContentDialog dialog = Dialog(root, title);
         dialog.PrimaryButtonText = "Save";
         dialog.Title = title;
-
         return dialog;
     }
 
@@ -16,7 +15,14 @@ public static class DialogFactory {
         ContentDialog dialog = Dialog(root, title);
         dialog.PrimaryButtonText = "Create";
         dialog.Title = title;
+        return dialog;
+    }
 
+    public static ContentDialog DeleteDialog(XamlRoot root, string title) {
+        ContentDialog dialog = Dialog(root, title);
+        dialog.PrimaryButtonText = "Delete";
+        dialog.Title = title;
+        dialog.DefaultButton = ContentDialogButton.None;
         return dialog;
     }
 
@@ -27,7 +33,6 @@ public static class DialogFactory {
         dialog.CloseButtonText = "Cancel";
         dialog.DefaultButton = ContentDialogButton.Primary;
         dialog.Title = title;
-
         return dialog;
     }
 }

@@ -71,6 +71,7 @@ public sealed partial class ClientViewPage : Page {
         if (result == ContentDialogResult.Primary) {
             await newReminderVM.CreateNewReminderAsync();
             _ = ViewModel.ReloadClientAsync();
+            ViewModel.NotifyNewClientCreated();
         }
 
     }
@@ -87,6 +88,7 @@ public sealed partial class ClientViewPage : Page {
 
             await newReminderVM.CreateNewReminderAsync();
             _ = ViewModel.ReloadClientAsync();
+            ViewModel.NotifyNewClientCreated();
         }
     }
 

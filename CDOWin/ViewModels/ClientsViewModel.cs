@@ -58,6 +58,10 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     // Utility Methods
+    public void NotifyNewClientCreated() {
+        _selectionService.NotifyNewReminderCreated();
+    }
+
     void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             FilteredClients = new ObservableCollection<ClientSummaryDTO>(AllClientSummaries);

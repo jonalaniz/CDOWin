@@ -18,7 +18,7 @@ public sealed partial class CounselorsPage : Page {
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is Counselor counselor) {
-            _ = ViewModel.RefreshSelectedCounselor(counselor.id);
+            _ = ViewModel.ReloadCounselorAsync(counselor.id);
         }
     }
 }

@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 namespace CDOWin.ViewModels;
 
 public partial class PlacementsViewModel : ObservableObject {
+
+    // =========================
+    // Services / Dependencies
+    // =========================
     private readonly IPlacementService _service;
 
+    // =========================
+    // View State
+    // =========================
     [ObservableProperty]
     public partial ObservableCollection<Placement> All { get; private set; } = [];
 
@@ -23,15 +30,49 @@ public partial class PlacementsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
+
+    // =========================
+    // Constructor
+    // =========================
     public PlacementsViewModel(IPlacementService service) {
         _service = service;
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     partial void OnSearchQueryChanged(string value) {
         ApplyFilter();
     }
 
-    void ApplyFilter() {
+    // =========================
+    // CRUD Methods
+    // =========================
+    public async Task LoadPlacementsAsync() {
+        var placements = await _service.GetAllPlacementsAsync();
+        List<Placement> SortedPlacements = placements.OrderBy(o => o.clientID).ToList();
+        All.Clear();
+
+        foreach (var placement in SortedPlacements) {
+            All.Add(placement);
+        }
+
+        ApplyFilter();
+    }
+
+    public async Task ReloadPlacementAsync(string id) {
+        var placement = await _service.GetPlacementAsync(id);
+        if (placement == null) return;
+
+        var index = All.IndexOf(All.First(r => r.id == placement.id));
+        All[index] = placement;
+        Selected = placement;
+    }
+
+    // =========================
+    // Utility / Filtering
+    // =========================
+    private void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<Placement>(All);
             return;
@@ -46,26 +87,5 @@ public partial class PlacementsViewModel : ObservableObject {
         );
 
         Filtered = new ObservableCollection<Placement>(result);
-    }
-
-    public async Task LoadPlacementsAsync() {
-        var placements = await _service.GetAllPlacementsAsync();
-        List<Placement> SortedPlacements = placements.OrderBy(o => o.clientID).ToList();
-        All.Clear();
-
-        foreach (var placement in SortedPlacements) {
-            All.Add(placement);
-        }
-
-        ApplyFilter();
-    }
-
-    public async Task RefreshSelectedPlacement(string id) {
-        var placement = await _service.GetPlacementAsync(id);
-        if (placement == null) return;
-
-        var index = All.IndexOf(All.First(r => r.id == placement.id));
-        All[index] = placement;
-        Selected = placement;
     }
 }

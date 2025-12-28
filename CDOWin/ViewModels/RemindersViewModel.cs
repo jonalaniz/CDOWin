@@ -2,22 +2,25 @@
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Services;
-using CDOWin.Views.Clients.Dialogs;
 using CDOWin.Views.Reminders;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
 public partial class RemindersViewModel : ObservableObject {
+
+    // =========================
+    // Services / Dependencies
+    // =========================
     private readonly IReminderService _service;
     private readonly ClientSelectionService _selectionService;
 
+    private RemindersFilter _filter = RemindersFilter.All;
     public RemindersFilter Filter {
         get => _filter;
         set {
@@ -26,8 +29,9 @@ public partial class RemindersViewModel : ObservableObject {
         }
     }
 
-    private RemindersFilter _filter = RemindersFilter.All;
-
+    // =========================
+    // View State
+    // =========================
     [ObservableProperty]
     public partial ObservableCollection<Reminder> All { get; private set; } = [];
 
@@ -37,14 +41,13 @@ public partial class RemindersViewModel : ObservableObject {
     [ObservableProperty]
     public partial ObservableCollection<Reminder> ClientSpecific { get; private set; } = [];
 
-
     [ObservableProperty]
     public partial string EndText { get; set; } = string.Empty;
 
     // =========================
     // Constructor
     // =========================
-    public RemindersViewModel(IReminderService service, Services.ClientSelectionService clientSelectionService) {
+    public RemindersViewModel(IReminderService service, ClientSelectionService clientSelectionService) {
         _service = service;
         _selectionService = clientSelectionService;
         _selectionService.SelectedClientChanged += OnClientChanged;
@@ -69,7 +72,6 @@ public partial class RemindersViewModel : ObservableObject {
     }
 
     private void OnReminderCreated() {
-        Debug.WriteLine("New Reminder Created");
         _ = LoadRemindersAsync();
     }
 
@@ -108,19 +110,11 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     public async Task LoadRemindersAsync() {
         var reminders = await _service.GetAllRemindersAsync();
+        if (reminders == null) return;
 
         All.Clear();
         foreach (var reminder in reminders.OrderBy(o => o.date)) {
             All.Add(reminder);
-        }
-    }
-
-    public async void DeleteReminderAsync(int id) {
-        if (All.FirstOrDefault(r => r.id == id) is Reminder reminder) {
-            await _service.DeleteReminderAsync(reminder.id);
-            Remove(All, reminder);
-            Remove(Filtered, reminder);
-            Remove(ClientSpecific, reminder);
         }
     }
 
@@ -138,14 +132,17 @@ public partial class RemindersViewModel : ObservableObject {
         await ReloadReminderAsync(id);
     }
 
-    private void Replace(ObservableCollection<Reminder> list, Reminder updated) {
-        var index = list.IndexOf(list.FirstOrDefault(r => r.id == updated.id));
-        if (index >= 0)
-            list[index] = updated;
+    public async Task DeleteReminderAsync(int id) {
+        if (All.FirstOrDefault(r => r.id == id) is Reminder reminder) {
+            await _service.DeleteReminderAsync(reminder.id);
+            All.Remove(reminder);
+            Filtered.Remove(reminder);
+            ClientSpecific.Remove(reminder);
+        }
     }
 
     // =========================
-    // Utility/Filtering Methods
+    // Utility / Filtering
     // =========================
     private void ApplyFilter() {
         switch (Filter) {
@@ -164,8 +161,10 @@ public partial class RemindersViewModel : ObservableObject {
         UpdateEndText();
     }
 
-    private void Remove(ObservableCollection<Reminder> list, Reminder reminder) {
-        list.Remove(reminder);
+    private void Replace(ObservableCollection<Reminder> list, Reminder updated) {
+        var index = list.IndexOf(list.FirstOrDefault(r => r.id == updated.id));
+        if (index >= 0)
+            list[index] = updated;
     }
 
     private void ReplaceFiltered(IEnumerable<Reminder> source) {

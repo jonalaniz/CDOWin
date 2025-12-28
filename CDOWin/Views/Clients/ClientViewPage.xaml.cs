@@ -145,6 +145,6 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private void UpdateClient(UpdateClientDTO update) {
-        _ = ViewModel.UpdateClient(update);
+        _ = ViewModel.UpdateClientAsync(update);
     }
 }

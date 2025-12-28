@@ -123,7 +123,7 @@ public sealed partial class RemindersPage : Page {
 
             var result = await dialog.ShowAsync();
             if(result == ContentDialogResult.Primary) {
-                ViewModel.DeleteReminderAsync(id);
+                await ViewModel.DeleteReminderAsync(id);
             }
         }
     }

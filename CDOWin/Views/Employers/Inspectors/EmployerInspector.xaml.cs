@@ -35,6 +35,6 @@ public sealed partial class EmployerInspector : Page {
     }
 
     private void updateEmployer(EmployerDTO update) {
-        _ = ViewModel.UpdateEmployer(update);
+        _ = ViewModel.UpdateEmployerAsync(update);
     }
 }

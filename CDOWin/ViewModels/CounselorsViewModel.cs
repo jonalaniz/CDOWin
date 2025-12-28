@@ -10,8 +10,15 @@ using System.Threading.Tasks;
 namespace CDOWin.ViewModels;
 
 public partial class CounselorsViewModel : ObservableObject {
+
+    // =========================
+    // Services / Dependencies
+    // =========================
     private readonly ICounselorService _service;
 
+    // =========================
+    // View State
+    // =========================
     [ObservableProperty]
     public partial ObservableCollection<Counselor> All { get; private set; } = [];
 
@@ -24,15 +31,62 @@ public partial class CounselorsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
+    // =========================
+    // Constructor
+    // =========================
     public CounselorsViewModel(ICounselorService service) {
         _service = service;
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     partial void OnSearchQueryChanged(string value) {
         ApplyFilter();
     }
 
-    void ApplyFilter() {
+    // =========================
+    // CRUD Methods
+    // =========================
+    public async Task LoadCounselorsAsync() {
+        var counselors = await _service.GetAllCounselorsAsync();
+        if (counselors == null) return;
+
+        List<Counselor> SortedCounselors = counselors.OrderBy(o => o.name).ToList();
+        All.Clear();
+        foreach (var counselor in SortedCounselors) {
+            All.Add(counselor);
+        }
+
+        ApplyFilter();
+    }
+
+    public async Task ReloadCounselorAsync(int id) {
+        var counselor = await _service.GetCounselorAsync(id);
+        if (counselor == null) return;
+        Replace(All, counselor);
+        Replace(Filtered, counselor);
+
+        Selected = counselor;
+    }
+
+    public async Task UpdateCounselorAsync(UpdateCounselorDTO update) {
+        if (Selected == null)
+            return;
+        var updatedCounselor = await _service.UpdateCounselorAsync(Selected.id, update);
+        await ReloadCounselorAsync(Selected.id);
+    }
+
+    // =========================
+    // Utility / Filtering
+    // =========================
+    private void Replace(ObservableCollection<Counselor> list, Counselor updated) {
+        var index = list.IndexOf(list.First(c => c.id == updated.id));
+        if (index >= 0)
+            list[index] = updated;
+    }
+
+    private void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<Counselor>(All);
             return;
@@ -47,43 +101,5 @@ public partial class CounselorsViewModel : ObservableObject {
         );
 
         Filtered = new ObservableCollection<Counselor>(result);
-    }
-
-    // CRUD Methods
-
-    public async Task LoadCounselorsAsync() {
-        var counselors = await _service.GetAllCounselorsAsync();
-        List<Counselor> SortedCounselors = counselors.OrderBy(o => o.name).ToList();
-        All.Clear();
-
-        foreach (var counselor in SortedCounselors) {
-            All.Add(counselor);
-        }
-
-        ApplyFilter();
-    }
-
-    public async Task RefreshSelectedCounselor(int id) {
-        var counselor = await _service.GetCounselorAsync(id);
-        if (counselor == null) return;
-        Replace(All, counselor);
-        Replace(Filtered, counselor);
-
-        Selected = counselor;
-    }
-
-    public async Task UpdateCounselor(UpdateCounselorDTO update) {
-        if (Selected == null)
-            return;
-        var updatedCounselor = await _service.UpdateCounselorAsync(Selected.id, update);
-        await RefreshSelectedCounselor(Selected.id);
-    }
-
-    // Utility Methods
-
-    private void Replace(ObservableCollection<Counselor> list, Counselor updated) {
-        var index = list.IndexOf(list.First(c => c.id == updated.id));
-        if (index >= 0)
-            list[index] = updated;
     }
 }

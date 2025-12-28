@@ -34,6 +34,6 @@ public sealed partial class Notes : Page {
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
-            _ = ViewModel.UpdateClient(updateVM.UpdatedClient);
+            _ = ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
     }
 }

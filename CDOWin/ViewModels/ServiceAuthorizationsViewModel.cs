@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 namespace CDOWin.ViewModels;
 
 public partial class ServiceAuthorizationsViewModel : ObservableObject {
+
+    // =========================
+    // Services / Dependencies
+    // =========================
     private readonly IServiceAuthorizationService _service;
 
+    // =========================
+    // View State
+    // =========================
     [ObservableProperty]
     public partial ObservableCollection<ServiceAuthorization> All { get; private set; } = [];
 
@@ -23,14 +30,48 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
+    // =========================
+    // Constructor
+    // =========================
     public ServiceAuthorizationsViewModel(IServiceAuthorizationService service) {
         _service = service;
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     partial void OnSearchQueryChanged(string value) {
         ApplyFilter();
     }
 
+    // =========================
+    // CRUD Methods
+    // =========================
+    public async Task LoadServiceAuthorizationsAsync() {
+        var serviceAuthorizations = await _service.GetAllServiceAuthorizationsAsync();
+        if (serviceAuthorizations == null) return;
+
+        List<ServiceAuthorization> SortedServiceAuthorizations = serviceAuthorizations.OrderBy(o => o.clientID).ToList();
+        All.Clear();
+
+        foreach (var serviceAuthorization in SortedServiceAuthorizations) {
+            All.Add(serviceAuthorization);
+        }
+
+        ApplyFilter();
+    }
+
+    public async Task ReloadServiceAuthorizationAsync(string id) {
+        var serviceAuthorization = await _service.GetServiceAuthorizationAsync(id);
+        if (serviceAuthorization == null) return;
+        var index = All.IndexOf(All.First(p => p.id == id));
+        All[index] = serviceAuthorization;
+        Selected = serviceAuthorization;
+    }
+
+    // =========================
+    // Utility / Filtering
+    // =========================
     void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<ServiceAuthorization>(All);
@@ -46,27 +87,5 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         );
 
         Filtered = new ObservableCollection<ServiceAuthorization>(result);
-    }
-
-    public async Task LoadServiceAuthorizationsAsync() {
-        var serviceAuthorizations = await _service.GetAllServiceAuthorizationsAsync();
-        if (serviceAuthorizations == null) return;
-
-        List<ServiceAuthorization> SortedServiceAuthorizations = serviceAuthorizations.OrderBy(o => o.clientID).ToList();
-        All.Clear();
-
-        foreach (var serviceAuthorization in SortedServiceAuthorizations) {
-            All.Add(serviceAuthorization);
-        }
-
-        ApplyFilter();
-    }
-
-    public async Task RefreshSelectedServiceAuthorization(string id) {
-        var serviceAuthorization = await _service.GetServiceAuthorizationAsync(id);
-        if (serviceAuthorization == null) return;
-        var index = All.IndexOf(All.First(p => p.id == id));
-        All[index] = serviceAuthorization;
-        Selected = serviceAuthorization;
     }
 }

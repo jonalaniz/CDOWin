@@ -34,7 +34,7 @@ public sealed partial class CounselorInspector : Page {
     }
 
     private void updateCounselor(UpdateCounselorDTO update) {
-        _ = ViewModel.UpdateCounselor(update);
+        _ = ViewModel.UpdateCounselorAsync(update);
         // Here we need ot implement ViewModel.UpdateCounselor
     }
 }

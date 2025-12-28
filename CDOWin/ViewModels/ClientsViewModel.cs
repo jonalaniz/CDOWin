@@ -100,7 +100,7 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     public async Task UpdateClientAsync(UpdateClientDTO update) {
-        if (SelectedClient == null)  return;
+        if (SelectedClient == null) return;
         var updatedClient = await _service.UpdateClientAsync(SelectedClient.id, update);
         SelectedClient = updatedClient;
     }

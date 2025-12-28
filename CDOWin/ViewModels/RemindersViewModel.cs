@@ -84,7 +84,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     public void DeferDate(int id, int days) {
         var reminder = Filtered.FirstOrDefault(r => r.id == id);
-        if(reminder != null) {
+        if (reminder != null) {
             var update = new UpdateReminderDTO();
             var date = reminder.date.AddDays(days);
             update.date = date;

@@ -8,7 +8,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Linq;
 
 namespace CDOWin.Views.Reminders;
@@ -23,6 +22,9 @@ public sealed partial class RemindersPage : Page {
         InitializeComponent();
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     private void ClientRemindersChanged(object? sender, NotifyCollectionChangedEventArgs e) {
         if (ViewModel.ClientSpecific != null) {
             SelectionBar.Items[2].IsEnabled = true;
@@ -79,18 +81,9 @@ public sealed partial class RemindersPage : Page {
         }
     }
 
-    private void SetDate() {
-        if (RemindersCalendar.SelectedDates.Count == 0) {
-            ViewModel.ApplyDateFilter(DateTime.Now);
-        } else if (RemindersCalendar.SelectedDates.First() is DateTimeOffset offset) {
-            ViewModel.ApplyDateFilter(offset.Date);
-            if (SelectionBar.Items.Last().IsSelected)
-                return;
-
-            SelectionBar.SelectedItem = SelectionBar.Items.Last();
-        }
-    }
-
+    // =========================
+    // Click Handlers
+    // =========================
     private async void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
         if (sender.Tag is Int32 id) {
             var updateVM = new ReminderUpdateViewModel(ViewModel.GetReminderByID(id));
@@ -129,9 +122,24 @@ public sealed partial class RemindersPage : Page {
             dialog.Content = new DeletePage();
 
             var result = await dialog.ShowAsync();
-            if(result == ContentDialogResult.Primary) {
+            if (result == ContentDialogResult.Primary) {
                 await ViewModel.DeleteReminderAsync(id);
             }
+        }
+    }
+
+    // =========================
+    // Utility Methods
+    // =========================
+    private void SetDate() {
+        if (RemindersCalendar.SelectedDates.Count == 0) {
+            ViewModel.ApplyDateFilter(DateTime.Now);
+        } else if (RemindersCalendar.SelectedDates.First() is DateTimeOffset offset) {
+            ViewModel.ApplyDateFilter(offset.Date);
+            if (SelectionBar.Items.Last().IsSelected)
+                return;
+
+            SelectionBar.SelectedItem = SelectionBar.Items.Last();
         }
     }
 }

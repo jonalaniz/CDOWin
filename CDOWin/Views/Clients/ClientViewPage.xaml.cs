@@ -1,5 +1,4 @@
 using CDO.Core.DTOs;
-using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
@@ -8,7 +7,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace CDOWin.Views.Clients;
 
@@ -77,7 +75,7 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private async void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem item 
+        if (sender is MenuFlyoutItem item
             && item.Tag is ReminderMenuItem reminderItem
             && ViewModel.SelectedClient != null) {
             var newReminderVM = AppServices.CreateNewReminderViewModel(ViewModel.SelectedClient.id);
@@ -136,7 +134,6 @@ public sealed partial class ClientViewPage : Page {
     }
 
     // Utility Methods
-
     private void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
         if (ViewModel.SelectedClient == null) return;
         var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);

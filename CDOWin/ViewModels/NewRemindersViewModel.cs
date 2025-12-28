@@ -1,7 +1,5 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
-using CDOWin.Services;
-using CDOWin.Views.Clients.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Diagnostics;

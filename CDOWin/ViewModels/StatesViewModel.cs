@@ -31,7 +31,7 @@ public partial class StatesViewModel : ObservableObject {
 
     public async Task LoadStatesAsync() {
         var states = await _service.GetAllStatesAsync();
-        if(states == null) return;
+        if (states == null) return;
         List<State> SortedStates = states.OrderBy(o => o.name).ToList();
         States.Clear();
 

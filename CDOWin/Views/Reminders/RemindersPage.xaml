@@ -25,10 +25,12 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Header Text -->
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,8,8,4"
                    Style="{StaticResource PageTitleStyle}"
                    Text="Reminders"/>
 
+        <!-- Calendar -->
         <CalendarView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,6,0,0"
                       x:Name="RemindersCalendar" HorizontalAlignment="Center" SelectionMode="Single"
                       IsGroupLabelVisible="True" IsOutOfScopeEnabled="True" 
@@ -36,7 +38,7 @@
                       CalendarViewDayItemChanging="RemindersCalendar_CalendarViewDayItemChanging"
                       CalendarIdentifier="GregorianCalendar"/>
 
-        <!-- Selection Bar: Used to filter our reminders -->
+        <!-- Selection Bar + Calendar View Button: Used to filter our reminders -->
         <SelectorBar Grid.Row="2" Grid.Column="0" x:Name="SelectionBar" SelectionChanged="SelectionChanged">
             <SelectorBarItem Text="All" IsSelected="True" Tag="{x:Bind reminders:RemindersFilter.All}"/>
             <SelectorBarItem Text="Upcoming" Tag="{x:Bind reminders:RemindersFilter.Upcoming}"/>
@@ -49,6 +51,7 @@
             <FontIcon Glyph="&#xF763;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
 
+        <!-- Reminders List -->
         <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -58,6 +61,8 @@
                 <ItemsRepeater Grid.Row="0" ItemsSource="{Binding Filtered}" HorizontalAlignment="Stretch">
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="models:Reminder">
+                            
+                            <!-- Split Button -->
                             <SplitButton Margin="8,6,8,0" Padding="14,10,14,10" Click="Reminder_Click"
                                          Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
@@ -86,8 +91,10 @@
                                                Text="{x:Bind description}"/>
                                 </Grid>
 
+                                <!-- Split Button Flyout -->
                                 <SplitButton.Flyout>
                                     <MenuFlyout Placement="Right">
+                                        <!-- Section 0: Completion / Goto Client -->
                                         <MenuFlyoutItem Text="{x:Bind complete, Converter={StaticResource BoolCompletedConverter}}" 
                                                         Click="ToggleCompleted_Click" Tag="{x:Bind id}">
                                             <MenuFlyoutItem.Icon>
@@ -97,6 +104,25 @@
                                         <MenuFlyoutItem Text="Go To Client" Icon="Contact" 
                                                         Click="ViewClient_Click" Tag="{x:Bind clientID}"/>
                                         <MenuFlyoutSeparator/>
+                                        
+                                        <!-- Section 1: Defer Dates -->
+                                        <MenuFlyoutItem Text="Defer 1 Day" CommandParameter="1" Click="Defer_Click" Tag="{x:Bind id}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon Glyph="&#xE8F5;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="Defer 1 Week" CommandParameter="7" Click="Defer_Click" Tag="{x:Bind id}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon Glyph="&#xE8F5;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="Defer 1 Month" CommandParameter="30" Click="Defer_Click" Tag="{x:Bind id}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon Glyph="&#xE8F5;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutSeparator/>
+                                        <!-- Section 2: Delete -->
                                         <MenuFlyoutItem Text="Delete..." Icon="Delete"
                                                         Click="Delete_Click" Tag="{x:Bind id}"/>
                                     </MenuFlyout>

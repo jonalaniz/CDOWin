@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CDOWin.Views.Reminders;
@@ -93,7 +94,7 @@ public sealed partial class RemindersPage : Page {
     private async void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
         if (sender.Tag is Int32 id) {
             var updateVM = new ReminderUpdateViewModel(ViewModel.GetReminderByID(id));
-            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, $"Reminder for {updateVM.Original.clientName}");
+            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, $"Edit Reminder for {updateVM.Original.clientName}");
             dialog.Content = new UpdateReminderPage(updateVM);
 
             var result = await dialog.ShowAsync();
@@ -105,14 +106,20 @@ public sealed partial class RemindersPage : Page {
     }
 
     private void ToggleCompleted_Click(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int id) {
+        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int id)
             ViewModel.ToggleCompleted(id);
-        }
     }
 
     private void ViewClient_Click(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId) {
+        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId)
             ViewModel.RequestClient(clientId);
+    }
+
+    private void Defer_Click(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item && item.Tag is int id) {
+            if (!int.TryParse(item.CommandParameter?.ToString(), out var days))
+                return;
+            ViewModel.DeferDate(id, days);
         }
     }
 

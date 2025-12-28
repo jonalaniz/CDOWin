@@ -82,6 +82,16 @@ public partial class RemindersViewModel : ObservableObject {
         _selectionService.RequestSelectedClient(clientID);
     }
 
+    public void DeferDate(int id, int days) {
+        var reminder = Filtered.FirstOrDefault(r => r.id == id);
+        if(reminder != null) {
+            var update = new UpdateReminderDTO();
+            var date = reminder.date.AddDays(days);
+            update.date = date;
+            _ = UpdateReminderAsync(id, update);
+        }
+    }
+
     public void ToggleCompleted(int id) {
         var reminder = Filtered.FirstOrDefault(r => r.id == id);
         if (reminder != null) {

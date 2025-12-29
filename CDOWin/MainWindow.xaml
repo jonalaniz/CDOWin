@@ -53,13 +53,14 @@
             </Grid.ColumnDefinitions>
 
             <NavigationView Grid.Column="0" Grid.Row="0" Margin="0,0,0,-2"
-                            x:Name="NavigationBar" IsBackButtonVisible="Collapsed"
+                            x:Name="NavigationBar" IsBackButtonVisible="Collapsed" IsSettingsVisible="False"
                             PaneDisplayMode="Top" Loaded="NavigationLoaded"
                             SelectionChanged="NavigationSelectionChanged">
                 <NavigationView.MenuItems>
                     <NavigationViewItem Content="Clients" Tag="{x:Bind views:CDOFrame.Clients}"/>
                     <NavigationViewItem Content="Counselors" Tag="{x:Bind views:CDOFrame.Counselors}"/>
                     <NavigationViewItem Content="Employers" Tag="{x:Bind views:CDOFrame.Employers}"/>
+                    <NavigationViewItemSeparator/>
                     <NavigationViewItem Content="Placements" Tag="{x:Bind views:CDOFrame.Placements}"/>
                     <NavigationViewItem Content="Service Authorizations" Tag="{x:Bind views:CDOFrame.ServiceAuthorizations}"/>
                 </NavigationView.MenuItems>

@@ -47,6 +47,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -56,23 +57,27 @@
 
             <!-- Row 0: PO Number + Case ID-->
             <control:LabelPair Grid.Row="0" Grid.Column="0" Label="SA Number" Value="{Binding Selected.id}"/>
-            <control:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{Binding Selected.clientID}"/>
+            <control:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{Binding Selected.client.caseID}"/>
 
             <!-- Row 1: Counselor -->
             <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                Label="Issued By" Value="{Binding Selected.client.counselorReference.name}"/>
 
-            <!-- Row 2: Start Date + End Date -->
-            <control:LabelPair Grid.Row="2" Grid.Column="0" Label="Start Date" Value="{Binding Selected.formattedStartDate}"/>
-            <control:LabelPair Grid.Row="2" Grid.Column="1" Label="End Date" Value="{Binding Selected.formattedEndDate}"/>
+            <!-- Row 2: Counselor -->
+            <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Office" Value="{Binding Selected.office}"/>
+            
+            <!-- Row 3: Start Date + End Date -->
+            <control:LabelPair Grid.Row="3" Grid.Column="0" Label="Start Date" Value="{Binding Selected.formattedStartDate}"/>
+            <control:LabelPair Grid.Row="3" Grid.Column="1" Label="End Date" Value="{Binding Selected.formattedEndDate}"/>
 
-            <!-- Row 3: Unit Cost -->
-            <control:LabelPair Grid.Row="3" Grid.Column="0"
+            <!-- Row 4: Unit Cost -->
+            <control:LabelPair Grid.Row="4" Grid.Column="0"
                                Label="Unit Cost" Value="{Binding Selected.formattedCost}"/>
-            <control:LabelPair Grid.Row="3" Grid.Column="1"
+            <control:LabelPair Grid.Row="4" Grid.Column="1"
                                Label="U/M" Value="{Binding Selected.unitOfMeasurement}"/>
-            <!-- Row 4: Description -->
-            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+            <!-- Row 5: Description -->
+            <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                                Label="Description" Value="{Binding Selected.description}"/>
         </Grid>
 

@@ -29,12 +29,11 @@ public sealed partial class CounselorInspector : Page {
         var result = await dialog.ShowAsync();
 
         if (result == ContentDialogResult.Primary) {
-            updateCounselor(updateVM.Updated);
+            _ = ViewModel.UpdateCounselorAsync(updateVM.Updated);
         }
     }
 
-    private void updateCounselor(UpdateCounselorDTO update) {
-        _ = ViewModel.UpdateCounselorAsync(update);
-        // Here we need ot implement ViewModel.UpdateCounselor
+    private void Delete_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+
     }
 }

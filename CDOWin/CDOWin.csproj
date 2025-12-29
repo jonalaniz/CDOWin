@@ -29,18 +29,20 @@
     <None Remove="Resources\Grids.xaml" />
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
-    <None Remove="Views\Clients\Dialogs\NewReminder.xaml" />
     <None Remove="Views\ClientViewPage.xaml" />
+    <None Remove="Views\Counselors\Dialogs\CreateCounselor.xaml" />
     <None Remove="Views\Counselors\Dialogs\UpdateCounselor.xaml" />
     <None Remove="Views\Counselors\Inspectors\CounselorInspector.xaml" />
+    <None Remove="Views\Employers\Dialogs\CreateEmployer.xaml" />
     <None Remove="Views\Employers\Dialogs\UpdateEmployer.xaml" />
     <None Remove="Views\Employers\Inspectors\EmployerInspector.xaml" />
     <None Remove="Views\Inspectors\Placements.xaml" />
     <None Remove="Views\Notes.xaml" />
+    <None Remove="Views\Placements\Dialogs\CreatePlacements.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
+    <None Remove="Views\ServiceAuthorizations\Dialogs\CreateServiceAuthorization.xaml" />
     <None Remove="Views\ServiceAuthorizations\Inspectors\ServiceAuthorizationInspector.xaml" />
     <None Remove="Views\Shared\Dialogs\DeletePage.xaml" />
-    <None Remove="Views\StatesPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -125,17 +127,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\StatesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\EmployersPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\SamplePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -213,6 +205,26 @@
     <PRIResource Remove="Views\Service Authorizations\**" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\ServiceAuthorizations\Dialogs\CreateServiceAuthorization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Placements\Dialogs\CreatePlacements.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Employers\Dialogs\CreateEmployer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Counselors\Dialogs\CreateCounselor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Views\Shared\Dialogs\DeletePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,7 +240,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Clients\Dialogs\NewReminder.xaml">
+    <Page Update="Views\Clients\Dialogs\CreateReminder.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

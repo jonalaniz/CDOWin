@@ -15,7 +15,7 @@ public static class AppServices {
     public static IClientService ClientService { get; private set; } = null!;
     public static ICounselorService CounselorService { get; private set; } = null!;
     public static IEmployerService EmployerService { get; private set; } = null!;
-    public static IServiceAuthorizationService POsService { get; private set; } = null!;
+    public static IServiceAuthorizationService SAService { get; private set; } = null!;
     public static IStateService StateService { get; private set; } = null!;
     public static IReminderService ReminderService { get; private set; } = null!;
     public static IPlacementService PlacementService { get; private set; } = null!;
@@ -42,7 +42,7 @@ public static class AppServices {
         ClientService = new ClientService(NetworkService);
         CounselorService = new CounselorService(NetworkService);
         EmployerService = new EmployerService(NetworkService);
-        POsService = new ServiceAuthorizationService(NetworkService);
+        SAService = new ServiceAuthorizationService(NetworkService);
         ReminderService = new ReminderService(NetworkService);
         StateService = new StateService(NetworkService);
         PlacementService = new PlacementService(NetworkService);
@@ -53,7 +53,7 @@ public static class AppServices {
         ClientsViewModel = new ClientsViewModel(ClientService, _clientSelectionService);
         CounselorsViewModel = new CounselorsViewModel(CounselorService);
         EmployersViewModel = new EmployersViewModel(EmployerService);
-        POsViewModel = new ServiceAuthorizationsViewModel(POsService);
+        POsViewModel = new ServiceAuthorizationsViewModel(SAService);
         RemindersViewModel = new RemindersViewModel(ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(StateService);
         PlacementsViewModel = new PlacementsViewModel(PlacementService);
@@ -79,7 +79,27 @@ public static class AppServices {
         return true;
     }
 
-    public static NewRemindersViewModel CreateNewReminderViewModel(int clientId) {
-        return new NewRemindersViewModel(ReminderService, clientId);
+    public static CreateCounselorViewModel CreateCounselorViewModel() {
+        return new CreateCounselorViewModel(CounselorService);
+    }
+
+    public static CreateClientViewModel CreateClientViewModel() {
+        return new CreateClientViewModel(ClientService);
+    }
+
+    public static CreateEmployerViewModel CreateEmployerViewModel() {
+        return new CreateEmployerViewModel(EmployerService);
+    }
+
+    public static CreatePlacementViewModel CreatePlacementViewMdoel() {
+        return new CreatePlacementViewModel(PlacementService);
+    }
+
+    public static CreateReminderViewModel CreateReminderViewModel(int clientId) {
+        return new CreateReminderViewModel(ReminderService, clientId);
+    }
+
+    public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel() {
+        return new CreateServiceAuthorizationsViewModel(SAService);
     }
 }

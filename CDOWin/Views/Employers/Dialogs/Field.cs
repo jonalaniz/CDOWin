@@ -1,6 +1,6 @@
 ﻿namespace CDOWin.Views.Employers.Dialogs;
 
-public enum UpdateField {
+public enum Field {
     Name,
     Address1,
     Address2,

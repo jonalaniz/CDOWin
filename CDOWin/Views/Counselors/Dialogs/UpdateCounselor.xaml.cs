@@ -18,16 +18,16 @@ public sealed partial class UpdateCounselor : Page {
     private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
         string? originalValue = null;
         string? updatedValue = null;
-        UpdateField? field = null;
+        Field? field = null;
 
         if (sender is LabeledMultiLinePair multiLinePair) {
             originalValue = multiLinePair.Value.NormalizeString();
             updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            field = (UpdateField)multiLinePair.Tag;
+            field = (Field)multiLinePair.Tag;
         } else if (sender is LabeledTextBox multiLineTextBox) {
             originalValue = multiLineTextBox.Value.NormalizeString();
             updatedValue = multiLineTextBox.innerTextBox.Text.NormalizeString();
-            field = (UpdateField)multiLineTextBox.Tag;
+            field = (Field)multiLineTextBox.Tag;
         }
 
         if (field == null || originalValue == updatedValue || updatedValue == null)
@@ -36,27 +36,27 @@ public sealed partial class UpdateCounselor : Page {
         UpdateModel(updatedValue, field.Value);
     }
 
-    private void UpdateModel(string value, UpdateField field) {
+    private void UpdateModel(string value, Field field) {
         switch (field) {
-            case UpdateField.Name:
+            case Field.Name:
                 ViewModel.Updated.name = value;
                 break;
-            case UpdateField.Email:
+            case Field.Email:
                 ViewModel.Updated.email = value;
                 break;
-            case UpdateField.Phone:
+            case Field.Phone:
                 ViewModel.Updated.phone = value;
                 break;
-            case UpdateField.Fax:
+            case Field.Fax:
                 ViewModel.Updated.fax = value;
                 break;
-            case UpdateField.Notes:
+            case Field.Notes:
                 ViewModel.Updated.notes = value;
                 break;
-            case UpdateField.Secretary:
+            case Field.Secretary:
                 ViewModel.Updated.secretaryName = value;
                 break;
-            case UpdateField.SecretaryEmail:
+            case Field.SecretaryEmail:
                 ViewModel.Updated.secretaryEmail = value;
                 break;
         }

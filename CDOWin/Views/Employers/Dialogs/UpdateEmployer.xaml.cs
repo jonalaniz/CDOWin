@@ -52,16 +52,16 @@ public sealed partial class UpdateEmployer : Page {
     private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
         string? originalValue = null;
         string? updatedValue = null;
-        UpdateField? field = null;
+        Field? field = null;
 
         if (sender is LabeledMultiLinePair multiLinePair) {
             originalValue = multiLinePair.Value.NormalizeString();
             updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            field = (UpdateField)multiLinePair.Tag;
+            field = (Field)multiLinePair.Tag;
         } else if (sender is LabeledTextBox multiLineTextBox) {
             originalValue = multiLineTextBox.Value.NormalizeString();
             updatedValue = multiLineTextBox.innerTextBox.Text.NormalizeString();
-            field = (UpdateField)multiLineTextBox.Tag;
+            field = (Field)multiLineTextBox.Tag;
         }
 
         if (field == null || originalValue == updatedValue || updatedValue == null)
@@ -70,45 +70,45 @@ public sealed partial class UpdateEmployer : Page {
         UpdateModel(updatedValue, field.Value);
     }
 
-    private void UpdateModel(string value, UpdateField field) {
+    private void UpdateModel(string value, Field field) {
         switch (field) {
-            case UpdateField.Name:
+            case Field.Name:
                 ViewModel.Updated.name = value;
                 break;
-            case UpdateField.Address1:
+            case Field.Address1:
                 ViewModel.Updated.address1 = value;
                 break;
-            case UpdateField.Address2:
+            case Field.Address2:
                 ViewModel.Updated.address2 = value;
                 break;
-            case UpdateField.City:
+            case Field.City:
                 ViewModel.Updated.city = value;
                 break;
-            case UpdateField.State:
+            case Field.State:
                 ViewModel.Updated.state = value;
                 break;
-            case UpdateField.Zip:
+            case Field.Zip:
                 ViewModel.Updated.zip = value;
                 break;
-            case UpdateField.Phone:
+            case Field.Phone:
                 ViewModel.Updated.phone = value;
                 break;
-            case UpdateField.Fax:
+            case Field.Fax:
                 ViewModel.Updated.fax = value;
                 break;
-            case UpdateField.Email:
+            case Field.Email:
                 ViewModel.Updated.email = value;
                 break;
-            case UpdateField.Supervisor:
+            case Field.Supervisor:
                 ViewModel.Updated.supervisor = value;
                 break;
-            case UpdateField.SupervisorPhone:
+            case Field.SupervisorPhone:
                 ViewModel.Updated.supervisorPhone = value;
                 break;
-            case UpdateField.SupervisorEmail:
+            case Field.SupervisorEmail:
                 ViewModel.Updated.supervisorEmail = value;
                 break;
-            case UpdateField.Notes:
+            case Field.Notes:
                 ViewModel.Updated.notes = value;
                 break;
         }

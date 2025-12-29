@@ -2,42 +2,56 @@
 using CDO.Core.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class NewRemindersViewModel : ObservableObject {
+public partial class CreateReminderViewModel : ObservableObject {
+
+    // =========================
+    // Dependencies
+    // =========================
     private readonly IReminderService _service;
     private readonly int _clientId;
 
+    // =========================
+    // Fields
+    // =========================
     public DateTime Date;
 
     [ObservableProperty]
     public partial string Description { get; set; } = string.Empty;
 
+    // =========================
+    // Input Validation
+    // =========================
     public bool CanSave => !string.IsNullOrWhiteSpace(Description);
 
-    public NewRemindersViewModel(IReminderService service, int clientId) {
+    // =========================
+    // Constructor
+    // =========================
+    public CreateReminderViewModel(IReminderService service, int clientId) {
         _service = service;
         _clientId = clientId;
         Date = DateTime.Now.Date;
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     partial void OnDescriptionChanged(string value) {
-        Debug.WriteLine("Description Changed");
         OnPropertyChanged(nameof(CanSave));
     }
 
-    public async Task CreateNewReminderAsync() {
+    // =========================
+    // CRUD Methods
+    // =========================
+    public async Task CreateReminderAsync() {
         var reminder = new CreateReminderDTO {
             clientID = _clientId,
             date = Date.ToUniversalTime(),
             description = Description
         };
-        Debug.WriteLine($"Client ID: {reminder.clientID}");
-        Debug.WriteLine($"Date: {reminder.date}");
-        Debug.WriteLine($"Description: {reminder.description}");
 
         await _service.CreateReminderAsync(reminder);
     }

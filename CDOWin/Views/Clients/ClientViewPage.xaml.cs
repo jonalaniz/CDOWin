@@ -11,18 +11,31 @@ using System.Diagnostics;
 namespace CDOWin.Views.Clients;
 
 public sealed partial class ClientViewPage : Page {
+
+    // =========================
+    // ViewModel
+    // =========================
     public ClientsViewModel ViewModel { get; private set; } = null!;
+
+    // =========================
+    // Constructor
+    // =========================
     public ClientViewPage() {
         InitializeComponent();
         BuildRemindersFlyout();
     }
 
+    // =========================
+    // Navigation
+    // =========================
     protected override void OnNavigatedTo(NavigationEventArgs e) {
         ViewModel = (ClientsViewModel)e.Parameter;
         DataContext = ViewModel;
     }
 
+    // =========================
     // UI Setup
+    // =========================
     private void BuildRemindersFlyout() {
         var flyout = new MenuFlyout();
 
@@ -39,35 +52,37 @@ public sealed partial class ClientViewPage : Page {
         RemindersSplitButton.Flyout = flyout;
     }
 
-    // Click Events
+    // =========================
+    // Click Handlers
+    // =========================
     private void OpenDocuments_Clicked(object sender, RoutedEventArgs e) {
         Process.Start("explorer.exe", $"{ViewModel.SelectedClient?.documentsFolderPath}");
     }
 
-    private async void NewReminder_ClickAsync(SplitButton sender, SplitButtonClickEventArgs e) {
+    private async void CreateReminder_ClickAsync(SplitButton sender, SplitButtonClickEventArgs e) {
         if (ViewModel.SelectedClient == null) return;
 
         // Initialize our dialog/vm/page
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Reminder for {ViewModel.SelectedClient.name}");
-        var newReminderVM = AppServices.CreateNewReminderViewModel(ViewModel.SelectedClient.id);
-        var newReminderPage = new NewReminder(newReminderVM);
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"Create Reminder for {ViewModel.SelectedClient.name}");
+        var createReminderVM = AppServices.CreateReminderViewModel(ViewModel.SelectedClient.id);
+        var createReminderPage = new CreateReminder(createReminderVM);
 
         // Set the content
-        dialog.Content = newReminderPage;
+        dialog.Content = createReminderPage;
 
         // Set the button state
-        dialog.IsPrimaryButtonEnabled = newReminderVM.CanSave;
+        dialog.IsPrimaryButtonEnabled = createReminderVM.CanSave;
 
         // Keep button state in sync with ViewModel
-        newReminderVM.PropertyChanged += (_, args) => {
-            if (args.PropertyName == nameof(newReminderVM.CanSave))
-                dialog.IsPrimaryButtonEnabled = newReminderVM.CanSave;
+        createReminderVM.PropertyChanged += (_, args) => {
+            if (args.PropertyName == nameof(createReminderVM.CanSave))
+                dialog.IsPrimaryButtonEnabled = createReminderVM.CanSave;
         };
 
         var result = await dialog.ShowAsync();
 
         if (result == ContentDialogResult.Primary) {
-            await newReminderVM.CreateNewReminderAsync();
+            await createReminderVM.CreateReminderAsync();
             _ = ViewModel.ReloadClientAsync();
             ViewModel.NotifyNewClientCreated();
         }
@@ -78,13 +93,13 @@ public sealed partial class ClientViewPage : Page {
         if (sender is MenuFlyoutItem item
             && item.Tag is ReminderMenuItem reminderItem
             && ViewModel.SelectedClient != null) {
-            var newReminderVM = AppServices.CreateNewReminderViewModel(ViewModel.SelectedClient.id);
+            var newReminderVM = AppServices.CreateReminderViewModel(ViewModel.SelectedClient.id);
             newReminderVM.Description = reminderItem.Description;
 
             var dateOffset = DateTimeOffset.Now.AddDays(reminderItem.Days);
             newReminderVM.Date = dateOffset.Date.ToUniversalTime();
 
-            await newReminderVM.CreateNewReminderAsync();
+            await newReminderVM.CreateReminderAsync();
             _ = ViewModel.ReloadClientAsync();
             ViewModel.NotifyNewClientCreated();
         }
@@ -133,7 +148,9 @@ public sealed partial class ClientViewPage : Page {
         }
     }
 
+    // =========================
     // Utility Methods
+    // =========================
     private void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
         if (ViewModel.SelectedClient == null) return;
         var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);

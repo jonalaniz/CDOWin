@@ -80,7 +80,8 @@
         <!-- Row 3: Button -->
         <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
               Style="{StaticResource InspectorButtonGridStyle}">
-            <Button Style="{StaticResource InspectorCriticalStyle}">
+            <Button Style="{StaticResource InspectorCriticalStyle}"
+                    Click="Delete_Click">
                 <StackPanel Orientation="Horizontal" Spacing="5">
                     <SymbolIcon Symbol="Delete"/>
                     <TextBlock Text="Delete"/>

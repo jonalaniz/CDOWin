@@ -48,7 +48,7 @@
                                Text="Employers"/>
 
                     <!-- Add Button -->
-                    <Button Grid.Column="1" VerticalAlignment="Center" 
+                    <Button Grid.Column="1" VerticalAlignment="Center" Click="NewEmployer_ClickAsync"
                             Style="{StaticResource SingleIconButtonStyle}">
                         <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
                     </Button>

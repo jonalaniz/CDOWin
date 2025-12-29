@@ -1,6 +1,5 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
-using CDOWin.Views.Clients.Inspectors;
 using CDOWin.Views.Employers.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
@@ -117,6 +116,6 @@ public partial class CreateEmployerViewModel : ObservableObject {
             case Field.SupervisorEmail:
                 SupervisorEmail = value;
                 break;
-}
+        }
     }
 }

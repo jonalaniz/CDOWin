@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Interfaces;
+using CDO.Core.Models;
 using CDO.Core.Services;
 using CDOWin.ViewModels;
 using System.Collections.Generic;
@@ -99,7 +100,7 @@ public static class AppServices {
         return new CreateReminderViewModel(ReminderService, clientId);
     }
 
-    public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel() {
-        return new CreateServiceAuthorizationsViewModel(SAService);
+    public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel(Client client) {
+        return new CreateServiceAuthorizationsViewModel(SAService, client);
     }
 }

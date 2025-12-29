@@ -2,7 +2,6 @@
 using CDO.Core.Interfaces;
 using CDOWin.Views.Counselors.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;

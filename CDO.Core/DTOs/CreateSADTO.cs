@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs;
 
-public class NewServiceAuthorizationDTO {
+public class CreateSADTO {
     // Required creation fields
     public required int clientID { get; init; }
     public required string description { get; init; }

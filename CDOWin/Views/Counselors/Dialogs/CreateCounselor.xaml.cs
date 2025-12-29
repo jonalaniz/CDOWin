@@ -2,7 +2,6 @@ using CDOWin.Controls;
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
-using System.Diagnostics;
 
 namespace CDOWin.Views.Counselors.Dialogs;
 

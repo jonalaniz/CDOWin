@@ -1,4 +1,3 @@
-using CDO.Core.DTOs;
 using CDOWin.ViewModels;
 using CDOWin.Views.Counselors.Dialogs;
 using Microsoft.UI.Xaml.Controls;

@@ -5,7 +5,6 @@ using CDOWin.Views.Counselors.Dialogs;
 using CDOWin.Views.Counselors.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Threading.Tasks;
 
 namespace CDOWin.Views.Counselors;
 

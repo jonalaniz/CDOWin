@@ -27,8 +27,8 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<ServiceAuthorization?> CreateServiceAuthorizationAsync(NewServiceAuthorizationDTO dto) {
-        return _network.PostAsync<NewServiceAuthorizationDTO, ServiceAuthorization>(Endpoints.ServiceAuthorizations, dto);
+    public Task<ServiceAuthorization?> CreateServiceAuthorizationAsync(CreateSADTO dto) {
+        return _network.PostAsync<CreateSADTO, ServiceAuthorization>(Endpoints.ServiceAuthorizations, dto);
     }
 
     // -----------------------------

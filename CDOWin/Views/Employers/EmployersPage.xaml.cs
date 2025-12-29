@@ -5,7 +5,6 @@ using CDOWin.Views.Employers.Dialogs;
 using CDOWin.Views.Employers.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Threading.Tasks;
 
 namespace CDOWin.Views.Employers;
 
@@ -43,7 +42,7 @@ public sealed partial class EmployersPage : Page {
 
         var result = await dialog.ShowAsync();
 
-        if(result == ContentDialogResult.Primary) {
+        if (result == ContentDialogResult.Primary) {
             await createEmployerVM.CreateEmployerAsync();
             _ = ViewModel.LoadEmployersAsync();
         }

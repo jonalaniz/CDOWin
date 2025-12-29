@@ -89,6 +89,13 @@ public sealed partial class ClientViewPage : Page {
 
     }
 
+    private void CreateSA_Click(object sender, RoutedEventArgs e) {
+        if (ViewModel.SelectedClient == null) return;
+
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Service Authorization for {ViewModel.SelectedClient.name}");
+        var createSAVM = AppServices.CreateServiceAuthorizationsViewModel(ViewModel.SelectedClient);
+    }
+
     private async void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item
             && item.Tag is ReminderMenuItem reminderItem

@@ -1,9 +1,21 @@
+using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CDOWin.Views.ServiceAuthorizations.Dialogs;
 
 public sealed partial class CreateServiceAuthorization : Page {
-    public CreateServiceAuthorization() {
+
+    // =========================
+    // Dependencies
+    // =========================
+    private readonly CreateServiceAuthorizationsViewModel ViewModel;
+
+    // =========================
+    // Constructor
+    // =========================
+    public CreateServiceAuthorization(CreateServiceAuthorizationsViewModel viewModel) {
+        ViewModel = viewModel;
+        DataContext = viewModel;
         InitializeComponent();
     }
 }

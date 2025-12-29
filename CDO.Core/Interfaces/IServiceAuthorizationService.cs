@@ -15,7 +15,7 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<ServiceAuthorization?> CreateServiceAuthorizationAsync(NewServiceAuthorizationDTO dto);
+    public Task<ServiceAuthorization?> CreateServiceAuthorizationAsync(CreateSADTO dto);
 
     // -----------------------------
     // PATCH Methods

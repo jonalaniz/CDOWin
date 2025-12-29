@@ -47,12 +47,6 @@
                     <!-- Title -->
                     <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
                                Text="Service Authorizations"/>
-
-                    <!-- Add Button -->
-                    <Button Grid.Column="1" VerticalAlignment="Center" 
-                            Style="{StaticResource SingleIconButtonStyle}">
-                        <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
-                    </Button>
                 </Grid>
 
                 <!-- Subtitle -->

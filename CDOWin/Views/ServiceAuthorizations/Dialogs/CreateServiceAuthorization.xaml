@@ -37,8 +37,6 @@
         <controls:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
                                  Label="Case ID" Value="{Binding Client.caseID}"/>
 
-        
-        
         <!-- Row 1: Office Address -->
         <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
                                  Label="DRS Office Address" Value="{Binding Office}"/>
@@ -47,18 +45,14 @@
         <controls:LabeledTextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="SA Number" Value="{Binding Id}"/>
         
-        <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,8,0,0" Spacing="7">
-            <TextBlock Text="Start Date" Style="{StaticResource LabelTextBlockStyle}"/>
-            <CalendarDatePicker x:Name="StartDatePicker" HorizontalAlignment="Stretch"
-                                DateChanged="DatePicker_DateChanged"/>
-        </StackPanel>
+        <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,8,0,0"
+                            Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
+                            DateChanged="DatePicker_DateChanged"/>
 
-        <StackPanel Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,8,0,0" Spacing="7">
-            <TextBlock Text="End Date" Style="{StaticResource LabelTextBlockStyle}"/>
-            <CalendarDatePicker x:Name="EndDatePicker" HorizontalAlignment="Stretch"
-                                DateChanged="DatePicker_DateChanged"/>
-        </StackPanel>
-        
+        <CalendarDatePicker Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,8,0,0"
+                            Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
+                            DateChanged="DatePicker_DateChanged"/>
+
         <!-- Row 3: U/M + Cost-->
         <controls:LabeledTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                                  Label="U/M" Value="{Binding UnitOfMeasurement}"/>

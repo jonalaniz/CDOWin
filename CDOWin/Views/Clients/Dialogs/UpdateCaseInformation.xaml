@@ -27,10 +27,10 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0: Start Date/Case ID/Status -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock Margin="0,8,8,8" Text="Start Date" Style="{StaticResource LabelTextBlockStyle}"/>
-            <CalendarDatePicker x:Name="StartDatePicker" DateChanged="StartDatePicker_DateChanged" HorizontalAlignment="Stretch"/>
-        </StackPanel>
+        <CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0"
+                            x:Name="StartDatePicker" Header="Start Date" HorizontalAlignment="Stretch"
+                            DateChanged="StartDatePicker_DateChanged"/>
+        
         <controls:LabeledTextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                  Label="Case ID" Value="{Binding caseID}"/>
         <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2">

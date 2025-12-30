@@ -30,10 +30,9 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0: DOB/DL/SSN -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock Margin="0,8,8,8" Text="DOB" Style="{StaticResource LabelTextBlockStyle}"/>
-            <CalendarDatePicker x:Name="DOBPicker" DateChanged="DOBPicker_DateChanged"  HorizontalAlignment="Stretch"/>
-        </StackPanel>
+        <CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0"
+                            x:Name="DOBPicker" Header="DOB" HorizontalAlignment="Stretch"
+                            DateChanged="DOBPicker_DateChanged"/>
 
         <controls:LabeledTextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                  Label="DL/ID" Value="{Binding driversLicense}" 

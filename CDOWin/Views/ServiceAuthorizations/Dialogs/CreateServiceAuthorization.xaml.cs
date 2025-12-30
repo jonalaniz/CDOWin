@@ -18,4 +18,8 @@ public sealed partial class CreateServiceAuthorization : Page {
         DataContext = viewModel;
         InitializeComponent();
     }
+
+    private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
+        //
+    }
 }

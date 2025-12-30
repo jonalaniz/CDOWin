@@ -2,11 +2,13 @@ using CDO.Core.DTOs;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
+using CDOWin.Views.ServiceAuthorizations.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CDOWin.Views.Clients;
 
@@ -89,11 +91,15 @@ public sealed partial class ClientViewPage : Page {
 
     }
 
-    private void CreateSA_Click(object sender, RoutedEventArgs e) {
+    private async void CreateSA_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.SelectedClient == null) return;
 
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Service Authorization for {ViewModel.SelectedClient.name}");
         var createSAVM = AppServices.CreateServiceAuthorizationsViewModel(ViewModel.SelectedClient);
+        var createSAPage = new CreateServiceAuthorization(createSAVM);
+        dialog.Content = createSAPage;
+
+        await dialog.ShowAsync();
     }
 
     private async void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {

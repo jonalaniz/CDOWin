@@ -44,15 +44,15 @@ public class NetworkService : INetworkService {
     // GET
     // -----------------------------
     public async Task<T?> GetAsync<T>(string endpoint) {
-        var response = await _httpClient.GetAsync(endpoint);
-
-        if (!response.IsSuccessStatusCode) {
-            return default;
-        }
-
-        var stream = await response.Content.ReadAsStreamAsync();
         try {
-            return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
+            var response = await _httpClient.GetAsync(endpoint);
+
+            if (!response.IsSuccessStatusCode) {
+                return default;
+            }
+
+            var stream = await response.Content.ReadAsStreamAsync();
+                return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
         } catch (JsonException ex) {
             Debug.WriteLine("JSON DESERIALIZATION ERROR:");
             Debug.WriteLine($"Message: {ex.Message}");
@@ -60,6 +60,9 @@ public class NetworkService : INetworkService {
             Debug.WriteLine($"LineNumber: {ex.LineNumber}");
             Debug.WriteLine($"BytePositionInLine: {ex.BytePositionInLine}");
 
+            throw;
+        } catch (Exception ex) {
+            Debug.WriteLine(ex.Message);
             throw;
         }
     }

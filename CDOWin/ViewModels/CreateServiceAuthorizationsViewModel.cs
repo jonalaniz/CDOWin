@@ -13,9 +13,12 @@ public partial class CreateServiceAuthorizationsViewModel : ObservableObject {
     // Dependencies
     // =========================
     private readonly IServiceAuthorizationService _service;
-    private readonly Client _client;
 
-    private readonly int _clientID;
+    [ObservableProperty]
+    public partial Client Client { get; set; }
+
+    [ObservableProperty]
+    public partial string Id { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial string Description { get; set; } = string.Empty;
@@ -45,12 +48,12 @@ public partial class CreateServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     public CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, Client client) {
         _service = service;
-        _client = client;
-        _clientID = client.id;
+        Client = client;
     }
 
     private bool CanSaveMethod() {
-        if (string.IsNullOrWhiteSpace(Description)
+        if (string.IsNullOrWhiteSpace(Id)
+            || string.IsNullOrWhiteSpace(Description)
             || string.IsNullOrWhiteSpace(UnitOfMeasurement)
             || UnitCost == null)
             return false;
@@ -67,8 +70,9 @@ public partial class CreateServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     public async Task CreateSAAsync() {
         var sa = new CreateSADTO {
-            clientID = _clientID,
-            counselorrID = _client.counselorID,
+            id = Id,
+            clientID = Client.id,
+            counselorrID = Client.counselorID,
             description = Description,
             startDate = StartDate,
             endDate = EndDate,

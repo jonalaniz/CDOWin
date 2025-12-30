@@ -36,7 +36,8 @@
     </Style>
     
     <!-- Multi-Line TextBox (Notes, etc.) -->
-    <Style x:Key="MultiLineCheckboxStyle" TargetType="TextBox">
+    <Style x:Key="MultiLineTextBoxStyle" TargetType="TextBox">
+        <Setter Property="MaxHeight" Value="150"/>
         <Setter Property="AcceptsReturn" Value="True"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>

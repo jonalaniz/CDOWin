@@ -34,8 +34,8 @@
 
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,16,12,12"
                  IsReadOnly="True" CornerRadius="4" VerticalAlignment="Stretch"
-                 Style="{StaticResource MultiLineCheckboxStyle}"
-                 TextWrapping="Wrap"
+                 Style="{StaticResource MultiLineTextBoxStyle}"
+                 TextWrapping="Wrap" MaxHeight="1500"
                  Text="{x:Bind ViewModel.SelectedClient.clientNotes, Mode=OneWay}"/>
     </Grid>
 </Page>

@@ -97,16 +97,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\LabeledMultiLinePair.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Controls\LabeledTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\ServiceAuthorizationsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

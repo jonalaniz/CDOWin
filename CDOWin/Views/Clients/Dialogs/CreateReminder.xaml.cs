@@ -40,8 +40,8 @@ public sealed partial class CreateReminder : Page {
         }
     }
 
-    private void LabeledMultiLinePair_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        if (sender is LabeledMultiLinePair pair && pair.innerTextBox.Text.NormalizeString() is string text)
+    private void LabeledMultiLinePair_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is TextBox textbox && textbox.Text.NormalizeString() is string text)
             ViewModel.Description = text;
     }
 }

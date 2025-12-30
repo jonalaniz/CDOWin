@@ -24,11 +24,15 @@ public sealed partial class CreateCounselor : Page {
     // =========================
     // Property Change Methods
     // =========================
-    private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        if (sender is LabeledTextBox pair
-            && pair.innerTextBox.Text.NormalizeString() is string value
-            && !string.IsNullOrWhiteSpace(value)
-            && pair.Tag is Field field)
-            ViewModel.UpdateField(field, value);
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox || textbox.Tag is not Field field)
+            return;
+
+        var text = textbox.Text.NormalizeString();
+
+        if (string.IsNullOrWhiteSpace(text))
+            return;
+
+        ViewModel.UpdateField(field, text);
     }
 }

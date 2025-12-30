@@ -1,5 +1,6 @@
 using CDO.Core.Models;
 using CDOWin.Controls;
+using CDOWin.Extensions;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml;
@@ -117,22 +118,16 @@ public sealed partial class UpdateCaseInformation : Page {
         }
     }
 
-    private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        string? originalValue = null;
-        string? updatedValue = null;
-        CaseField? field = null;
-
-        if (sender is LabeledTextBox pair) {
-            originalValue = pair.Value;
-            updatedValue = pair.innerTextBox.Text;
-            if (pair.Tag is CaseField f)
-                field = f;
-        }
-
-        if (field == null || originalValue == updatedValue || updatedValue == null)
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox || textbox.Tag is not CaseField field)
             return;
 
-        UpdateValue(updatedValue, field.Value);
+        var text = textbox.Text.NormalizeString();
+
+        if (string.IsNullOrWhiteSpace(text))
+            return;
+
+        UpdateValue(text, field);
     }
 
     private void UpdateValue(string value, CaseField type) {

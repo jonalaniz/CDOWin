@@ -31,36 +31,37 @@
 
         <!-- Row 0: Case ID + Tier + Counselor (Non Editable) -->
         <controls:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
-                         Label="Issued By" Value="{Binding Client.counselorReference.name}"/>
+                            Label="Issued By" Value="{Binding Client.counselorReference.name}"/>
         <controls:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
-                                 Label="Tier Level" Value="{Binding Client.status}"/>
+                            Label="Tier Level" Value="{Binding Client.status}"/>
         <controls:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
-                                 Label="Case ID" Value="{Binding Client.caseID}"/>
+                            Label="Case ID" Value="{Binding Client.caseID}"/>
 
         <!-- Row 1: Office Address -->
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
-                                 Label="DRS Office Address" Value="{Binding Office}"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="DRS Office Address" 
+                 Text="{Binding Office}"/>
         
         <!-- Row 2: SA Number + Start Date + End Date -->
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                 Label="SA Number" Value="{Binding Id}"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number" 
+                 Text="{Binding Id}"/>
         
-        <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,8,0,0"
+        <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
                             Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
                             DateChanged="DatePicker_DateChanged"/>
 
-        <CalendarDatePicker Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,8,0,0"
+        <CalendarDatePicker Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                             Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
                             DateChanged="DatePicker_DateChanged"/>
 
         <!-- Row 3: U/M + Cost-->
-        <controls:LabeledTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                 Label="U/M" Value="{Binding UnitOfMeasurement}"/>
-        <controls:LabeledTextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
-                                 Label="Unit Cost" Value="{Binding UnitCost}"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M" 
+                 Text="{Binding UnitOfMeasurement}"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost" 
+                 Text="{Binding UnitCost}"/>
         
         <!-- Row 4: Decription -->
-        <controls:LabeledMultiLinePair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
-                                       Label="Description" Value="{Binding Description}"/>
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" 
+                 Style ="{StaticResource MultiLineTextBoxStyle}"
+                 Header="Description" Text="{Binding Description}"/>
     </Grid>
 </Page>

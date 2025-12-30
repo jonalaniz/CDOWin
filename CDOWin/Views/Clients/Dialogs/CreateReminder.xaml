@@ -6,7 +6,6 @@
     xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls" 
     xmlns:viewModels="using:CDOWin.ViewModels" 
     d:DataContext="{d:DesignInstance Type=viewModels:CreateReminderViewModel}"
     mc:Ignorable="d">
@@ -28,9 +27,9 @@
                             DateChanged="DatePicker_DateChanged"/>
 
         <!-- Row 2: Description -->
-        <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Label="Description" Value="{Binding Description}"
-                                       TextChangedForwarded="LabeledMultiLinePair_TextChangedForwarded"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Description" 
+                 Style="{StaticResource MultiLineTextBoxStyle}"
+                 Text="{Binding Description}" TextChanged="LabeledMultiLinePair_TextChanged"/>
 
     </Grid>
 </Page>

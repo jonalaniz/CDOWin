@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
@@ -27,26 +26,28 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0: Start Date/Case ID/Status -->
-        <CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0"
+        <CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             x:Name="StartDatePicker" Header="Start Date" HorizontalAlignment="Stretch"
                             DateChanged="StartDatePicker_DateChanged"/>
         
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
-                                 Label="Case ID" Value="{Binding caseID}"/>
-        <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2">
-            <TextBlock Margin="0,8,8,8" Text="Status" Style="{StaticResource LabelTextBlockStyle}"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Case ID" 
+                 Text="{Binding caseID}" Tag="{x:Bind dialogs:CaseField.CaseID}"
+                 TextChanged="TextBox_TextChanged"/>
+        <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
+            <TextBlock Text="Status"/>
             <DropDownButton x:Name="StatusDropDown" Content="{Binding status}" 
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
 
         <!-- Row 1: Benefits/Premiums -->
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock Margin="0,8,8,8" Text="Benefits" Style="{StaticResource LabelTextBlockStyle}"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="8">
+            <TextBlock Text="Benefits"/>
             <DropDownButton x:Name="BenefitDropDown" Content="{Binding benefits}" 
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"
-                                 Label="Premiums" Value="{Binding premiums}"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
+                 Text="{Binding premiums}" Tag="{x:Bind dialogs:CaseField.Premiums}"
+                 TextChanged="TextBox_TextChanged"/>
         
         <!-- Row 2: Counselor -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">

@@ -38,19 +38,16 @@ public sealed partial class UpdateReminderPage : Page {
         }
     }
 
-    private void DescriptionTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        string? originalValue = null;
-        string? updatedValue = null;
-
-        if (sender is LabeledMultiLinePair pair) {
-            originalValue = pair.Value.NormalizeString();
-            updatedValue = pair.innerTextBox.Text.NormalizeString();
-        }
-
-        if (originalValue == updatedValue || updatedValue == null)
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox)
             return;
 
-        ViewModel.Updated.description = updatedValue;
+        var text = textbox.Text.NormalizeString();
+
+        if (string.IsNullOrWhiteSpace(text))
+            return;
+
+        ViewModel.Updated.description = text;
     }
 
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {

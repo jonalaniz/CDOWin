@@ -33,10 +33,9 @@
                   Click="Checkbox_Clicked"/>
 
         <!-- Row 3: Description -->
-        <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Label="Description" Value="{Binding description}"
-                                       Tag="{x:Bind dialogs:UpdateField.Description}"
-                                       TextChangedForwarded="DescriptionTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Description" 
+                 Text="{Binding description}" Tag="{x:Bind dialogs:UpdateField.Description}"
+                 TextChanged="TextBox_TextChanged"/>
 
     </Grid>
 </Page>

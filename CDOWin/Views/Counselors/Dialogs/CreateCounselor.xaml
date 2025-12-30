@@ -24,39 +24,33 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Name + Email -->
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="0"
-                                 Label="Name" Value="{Binding Name}" 
-                                 Tag="{x:Bind local:Field.Name}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                                 Label="Email" Value="{Binding Email}"
-                                 Tag="{x:Bind local:Field.Email}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Header="Name" 
+                 Text="{Binding Name}" Tag="{x:Bind local:Field.Name}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Header="Email" 
+                 Text="{Binding Email}" Tag="{x:Bind local:Field.Email}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 1: Phone + Fax -->
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" 
-                                 Label="Phone" Value="{Binding Phone}"
-                                 Tag="{x:Bind local:Field.Phone}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="1" 
-                                 Label="Fax" Value="{Binding Fax}"
-                                 Tag="{x:Bind local:Field.Fax}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Header="Phone" 
+                 Text="{Binding Phone}" Tag="{x:Bind local:Field.Phone}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Header="Fax" 
+                 Text="{Binding Fax}" Tag="{x:Bind local:Field.Fax}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 2: Secretary + Secretary Email -->
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="0"
-                                 Label="Secretary" Value="{Binding SecretaryName}"
-                                 Tag="{x:Bind local:Field.Secretary}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="1"
-                                 Label="Secretray Email" Value="{Binding SecretaryEmail}"
-                                 Tag="{x:Bind local:Field.SecretaryEmail}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Header="Secretary" 
+                 Text="{Binding SecretaryName}" Tag="{x:Bind local:Field.Secretary}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Header="Secretray Email" 
+                 Text="{Binding SecretaryEmail}" Tag="{x:Bind local:Field.SecretaryEmail}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!--Row 3:  Notes -->
-        <controls:LabeledMultiLinePair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Label="Notes" Value="{Binding Notes}"
-                                       Tag="{x:Bind local:Field.Notes}"
-                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                 Style="{StaticResource MultiLineTextBoxStyle}"
+                 Header="Notes" Text="{Binding Notes}" Tag="{x:Bind local:Field.Notes}"
+                 TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Page>

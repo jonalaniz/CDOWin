@@ -71,27 +71,16 @@ public sealed partial class UpdatePersonalInformation : Page {
         }
     }
 
-    private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        string? originalValue = null;
-        string? updatedValue = null;
-        PersonalField? field = null;
-
-        if (sender is LabeledTextBox pair) {
-            originalValue = pair.Value;
-            updatedValue = pair.innerTextBox.Text;
-            if (pair.Tag is PersonalField f)
-                field = f;
-        } else if (sender is LabeledMultiLinePair multiLinePair) {
-            originalValue = multiLinePair.Value.NormalizeString();
-            updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            if (multiLinePair.Tag is PersonalField f)
-                field = f;
-        }
-
-        if (field == null || originalValue == updatedValue || updatedValue == null)
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox || textbox.Tag is not PersonalField field)
             return;
 
-        UpdateValue(updatedValue, field.Value);
+        var text = textbox.Text.NormalizeString();
+
+        if (string.IsNullOrWhiteSpace(text))
+            return;
+
+        UpdateValue(text, field);
     }
 
     private void UpdateValue(string value, PersonalField type) {

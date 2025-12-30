@@ -57,17 +57,11 @@ public sealed partial class CreateEmployer : Page {
         }
     }
 
-    private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        if (sender is not FrameworkElement fe || fe.Tag is not Field field)
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox || textbox.Tag is not Field field)
             return;
 
-        string? text = sender switch {
-            LabeledTextBox p => p.innerTextBox.Text,
-            LabeledMultiLinePair p => p.innerTextBox.Text,
-            _ => null
-        };
-
-        text = text?.NormalizeString();
+        var text = textbox.Text.NormalizeString();
 
         if (string.IsNullOrWhiteSpace(text))
             return;

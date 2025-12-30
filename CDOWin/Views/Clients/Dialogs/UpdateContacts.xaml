@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models" 
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
@@ -26,54 +25,44 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Phone 1 -->
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="0"
-                                 Label="Phone 1" Value="{Binding phone1}"
-                                 Tag="{x:Bind dialogs:ContactField.Phone1}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                                 Label="Description" Value="{Binding phone1Identity}"
-                                 Tag="{x:Bind dialogs:ContactField.Phone1Identity}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Header="Phone 1" 
+                 Text="{Binding phone1}" Tag="{x:Bind dialogs:ContactField.Phone1}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Header="Description" 
+                 Text="{Binding phone1Identity}" Tag="{x:Bind dialogs:ContactField.Phone1Identity}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 1: Phone 2 -->
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0"
-                                 Label="Phone 2" Value="{Binding phone2}"
-                                 Tag="{x:Bind dialogs:ContactField.Phone2}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                                 Label="Description" Value="{Binding phone2Identity}"
-                                 Tag="{x:Bind dialogs:ContactField.Phone2Identity}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Header="Phone 2" 
+                 Text="{Binding phone2}" Tag="{x:Bind dialogs:ContactField.Phone2}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Header="Description"
+                 Text="{Binding phone2Identity}" Tag="{x:Bind dialogs:ContactField.Phone2Identity}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 2: Phone 3 -->
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="0"
-                                 Label="Phone 3" Value="{Binding phone3}"
-                                 Tag="{x:Bind dialogs:ContactField.Phone3}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
-                                 Label="Description" Value="{Binding phone3Identity}"
-                                 Tag="{x:Bind dialogs:ContactField.Phone3Identity}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Header="Phone 3" 
+                 Text="{Binding phone3}" Tag="{x:Bind dialogs:ContactField.Phone3}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Header="Description" 
+                 Text="{Binding phone3Identity}" Tag="{x:Bind dialogs:ContactField.Phone3Identity}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 3: Email 1 -->
-        <controls:LabeledTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                 Label="Email 1" Value="{Binding email}"
-                                 Tag="{x:Bind dialogs:ContactField.Email}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="3" Grid.Column="2" 
-                                 Label="Description" Value="{Binding emailIdentity}"
-                                 Tag="{x:Bind dialogs:ContactField.EmailIdentity}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="Email 1" 
+                 Text="{Binding email}" Tag="{x:Bind dialogs:ContactField.Email}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Header="Description" 
+                 Text="{Binding emailIdentity}" Tag="{x:Bind dialogs:ContactField.EmailIdentity}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 4: Email 2 -->
-        <controls:LabeledTextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                                 Label="Email 2" Value="{Binding email2}"
-                                 Tag="{x:Bind dialogs:ContactField.Email2}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="4" Grid.Column="2"
-                                 Label="Email 2" Value="{Binding email2Identity}"
-                                 Tag="{x:Bind dialogs:ContactField.Email2Identity}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Header="Email 2" 
+                 Text="{Binding email2}" Tag="{x:Bind dialogs:ContactField.Email2}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Header="Email 2" 
+                 Text="{Binding email2Identity}" Tag="{x:Bind dialogs:ContactField.Email2Identity}"
+                 TextChanged="TextBox_TextChanged"/>
 
     </Grid>
 </Page>

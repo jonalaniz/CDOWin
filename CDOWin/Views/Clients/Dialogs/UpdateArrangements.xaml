@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models" 
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     d:DataContext="{d:DesignInstance Type=models:Client}"
@@ -18,15 +17,15 @@
         </Grid.RowDefinitions>
         
         <!-- Row 0: Employment Goals -->
-        <controls:LabeledMultiLinePair Grid.Row="0" Grid.Column="0" 
-                                       Label="Employment Goals" Value="{Binding employmentGoal}"
-                                       Tag="{x:Bind dialogs:ArrangementsField.EmploymentGoal}"
-                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
+                 Header="Employment Goals" Text="{Binding employmentGoal}"
+                 Tag="{x:Bind dialogs:ArrangementsField.EmploymentGoal}"
+                 TextChanged="LabeledTextBox_TextChanged"/>
 
         <!-- Row 1: Conditions -->
-        <controls:LabeledMultiLinePair Grid.Row="1" Grid.Column="0" 
-                                       Label="Conditions" Value="{Binding conditions}"
-                                       Tag="{x:Bind dialogs:ArrangementsField.Conditions}"
-                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
+                 Header="Conditions" Text="{Binding conditions}"
+                 Tag="{x:Bind dialogs:ArrangementsField.Conditions}"
+                 TextChanged="LabeledTextBox_TextChanged"/>
     </Grid>
 </Page>

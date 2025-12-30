@@ -30,56 +30,48 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0: DOB/DL/SSN -->
-        <CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0"
+        <CalendarDatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             x:Name="DOBPicker" Header="DOB" HorizontalAlignment="Stretch"
                             DateChanged="DOBPicker_DateChanged"/>
 
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
-                                 Label="DL/ID" Value="{Binding driversLicense}" 
-                                 Tag="{x:Bind dialogs:PersonalField.DL}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
-                                 Label="SSN" Value="{Binding ssn}" 
-                                 Tag="{x:Bind dialogs:PersonalField.SSN}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="DL/ID" 
+                 Text="{Binding driversLicense}" Tag="{x:Bind dialogs:PersonalField.DL}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Header="SSN" 
+                 Text="{Binding ssn}" Tag="{x:Bind dialogs:PersonalField.SSN}"
+                 TextChanged="TextBox_TextChanged"/>
         
         <!-- Row 1: Fluent Languages/Race-->
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
-                                 Label="Fluent Languages" Value="{Binding fluentLanguages}" 
-                                 Tag="{x:Bind dialogs:PersonalField.Languages}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
-                                 Label="Race" Value="{Binding race}" Tag="{x:Bind dialogs:PersonalField.Race}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Header="Fluent Languages" 
+                 Text="{Binding fluentLanguages}" Tag="{x:Bind dialogs:PersonalField.Languages}"
+                                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Header="Race" 
+                 Text="{Binding race}" Tag="{x:Bind dialogs:PersonalField.Race}"
+                 TextChanged="TextBox_TextChanged"/>
         <!-- Row 2: Address -->
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
-                                 Label="Address" Value="{Binding address1}"
-                                 Tag="{x:Bind dialogs:PersonalField.Address1}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <controls:LabeledTextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
-                                 Label="Apt, ste, etc" Value="{Binding address2}" 
-                                 Tag="{x:Bind dialogs:PersonalField.Address2}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Address" 
+                 Text="{Binding address1}" Tag="{x:Bind dialogs:PersonalField.Address1}"
+                 TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc" 
+                 Text="{Binding address2}" Tag="{x:Bind dialogs:PersonalField.Address2}"
+                 TextChanged="TextBox_TextChanged"/>
         
         <!-- Row 3: Address cont. -->
-        <controls:LabeledTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
-                                 Label="City" Value="{Binding city}"
-                                 Tag="{x:Bind dialogs:PersonalField.City}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
-        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1">
-            <TextBlock Margin="0,8,8,8" Text="State" Style="{StaticResource LabelTextBlockStyle}"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="City" 
+                 Text="{Binding city}" Tag="{x:Bind dialogs:PersonalField.City}"
+                 TextChanged="TextBox_TextChanged"/>
+        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
+            <TextBlock Text="State"/>
             <DropDownButton x:Name="StateDropDownButton" Content="{Binding state}"
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <controls:LabeledTextBox Grid.Row="3" Grid.Column="5"
-                                 Label="Zip" Value="{Binding zip}"
-                                 Tag="{x:Bind dialogs:PersonalField.Zip}"
-                                 TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="3" Grid.Column="5" Header="Zip" 
+                 Text="{Binding zip}" Tag="{x:Bind dialogs:PersonalField.Zip}"
+                 TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 4: Education -->
-        <controls:LabeledMultiLinePair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
-                                       Label="Education" Value="{Binding education}"
-                                       Tag="{x:Bind dialogs:PersonalField.Education}"
-                                       TextChangedForwarded="LabeledTextBox_TextChangedForwarded"/>
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Style="{StaticResource MultiLineTextBoxStyle}"
+                 Header="Education" Text="{Binding education}" Tag="{x:Bind dialogs:PersonalField.Education}"
+                 TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Page>

@@ -49,67 +49,71 @@ public sealed partial class UpdateEmployer : Page {
         }
     }
 
-    private void LabeledTextBox_TextChangedForwarded(object sender, TextChangedEventArgs e) {
-        string? originalValue = null;
-        string? updatedValue = null;
-        Field? field = null;
-
-        if (sender is LabeledMultiLinePair multiLinePair) {
-            originalValue = multiLinePair.Value.NormalizeString();
-            updatedValue = multiLinePair.innerTextBox.Text.NormalizeString();
-            field = (Field)multiLinePair.Tag;
-        } else if (sender is LabeledTextBox multiLineTextBox) {
-            originalValue = multiLineTextBox.Value.NormalizeString();
-            updatedValue = multiLineTextBox.innerTextBox.Text.NormalizeString();
-            field = (Field)multiLineTextBox.Tag;
-        }
-
-        if (field == null || originalValue == updatedValue || updatedValue == null)
+    private void LabeledTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox || textbox.Tag is not Field field)
             return;
 
-        UpdateModel(updatedValue, field.Value);
+        var text = textbox.Text.NormalizeString();
+
+        if (string.IsNullOrWhiteSpace(text))
+            return;
+
+        UpdateModel(text, field);
     }
 
     private void UpdateModel(string value, Field field) {
         switch (field) {
             case Field.Name:
-                ViewModel.Updated.name = value;
+                if (value != ViewModel.Original.name)
+                    ViewModel.Updated.name = value;
                 break;
             case Field.Address1:
-                ViewModel.Updated.address1 = value;
+                if (value != ViewModel.Original.address1)
+                    ViewModel.Updated.address1 = value;
                 break;
             case Field.Address2:
-                ViewModel.Updated.address2 = value;
+                if (value != ViewModel.Original.address2)
+                    ViewModel.Updated.address2 = value;
                 break;
             case Field.City:
-                ViewModel.Updated.city = value;
+                if (value != ViewModel.Original.city)
+                    ViewModel.Updated.city = value;
                 break;
             case Field.State:
-                ViewModel.Updated.state = value;
+                if (value != ViewModel.Original.state)
+                    ViewModel.Updated.state = value;
                 break;
             case Field.Zip:
-                ViewModel.Updated.zip = value;
+                if (value != ViewModel.Original.zip)
+                    ViewModel.Updated.zip = value;
                 break;
             case Field.Phone:
-                ViewModel.Updated.phone = value;
+                if (value != ViewModel.Original.phone)
+                    ViewModel.Updated.phone = value;
                 break;
             case Field.Fax:
-                ViewModel.Updated.fax = value;
+                if (value != ViewModel.Original.fax)
+                    ViewModel.Updated.fax = value;
                 break;
             case Field.Email:
-                ViewModel.Updated.email = value;
+                if (value != ViewModel.Original.email)
+                    ViewModel.Updated.email = value;
                 break;
             case Field.Supervisor:
-                ViewModel.Updated.supervisor = value;
+                if (value != ViewModel.Original.supervisor)
+                    ViewModel.Updated.supervisor = value;
                 break;
             case Field.SupervisorPhone:
-                ViewModel.Updated.supervisorPhone = value;
+                if (value != ViewModel.Original.supervisorPhone)
+                    ViewModel.Updated.supervisorPhone = value;
                 break;
             case Field.SupervisorEmail:
-                ViewModel.Updated.supervisorEmail = value;
+                if (value != ViewModel.Original.supervisorEmail)
+                    ViewModel.Updated.supervisorEmail = value;
                 break;
             case Field.Notes:
-                ViewModel.Updated.notes = value;
+                if (value != ViewModel.Original.notes)
+                    ViewModel.Updated.notes = value;
                 break;
         }
     }

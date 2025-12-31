@@ -30,29 +30,29 @@ IClientService clientService = new ClientService(network);
 //};
 
 // var clients = await clientService.GetAllClientSummariesAsync();
-var client = await clientService.GetClientAsync(2338);
+//var client = await clientService.GetClientAsync(2338);
 
-foreach (var reminder in client.reminders) {
-    Console.WriteLine(reminder.description);
-}
+//foreach (var reminder in client.reminders) {
+//    Console.WriteLine(reminder.description);
+//}
 
-Console.WriteLine("Placements");
-Console.WriteLine();
-foreach (var placement in client.placements) {
-    Console.WriteLine(placement.id);
-    Console.WriteLine(placement.employer.name);
-    Console.WriteLine(placement.formattedHireDate);
-    Console.WriteLine(placement.position);
-}
+//Console.WriteLine("Placements");
+//Console.WriteLine();
+//foreach (var placement in client.placements) {
+//    Console.WriteLine(placement.id);
+//    Console.WriteLine(placement.employer.name);
+//    Console.WriteLine(placement.formattedHireDate);
+//    Console.WriteLine(placement.position);
+//}
 
-Console.WriteLine("Service Authorizations");
-Console.WriteLine();
-foreach (var po in client.pos) {
-    Console.WriteLine(po.id);
-    Console.WriteLine(po.startDate);
-    Console.WriteLine(po.endDate);
-    Console.WriteLine(po.description);
-}
+//Console.WriteLine("Service Authorizations");
+//Console.WriteLine();
+//foreach (var po in client.pos) {
+//    Console.WriteLine(po.id);
+//    Console.WriteLine(po.startDate);
+//    Console.WriteLine(po.endDate);
+//    Console.WriteLine(po.description);
+//}
 
 //foreach (var client in clients) {
 //    Console.WriteLine($"Client: {client.name}");
@@ -77,3 +77,11 @@ foreach (var po in client.pos) {
 //var llama = new Llama();
 //await llama.UpdateModel();
 //await llama.Chat();
+
+DateTime Today = DateTime.Now.Date;
+DateTime firstOfMonth = new(Today.Year, Today.Month, 1);
+int dayOfWeekOffset = (int)firstOfMonth.DayOfWeek;
+DateTime firstVisibleDay = firstOfMonth.AddDays(-dayOfWeekOffset);
+Console.WriteLine($"Today is: {Today.DayOfWeek}");
+Console.WriteLine($"Today as an int: {dayOfWeekOffset}");
+Console.WriteLine($"First visible day is always: {firstVisibleDay.DayOfWeek}");

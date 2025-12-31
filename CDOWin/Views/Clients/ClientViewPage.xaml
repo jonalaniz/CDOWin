@@ -88,7 +88,7 @@
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
                                     Tag="{x:Bind dialogs:ClientEditType.Personal}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
 
@@ -151,7 +151,7 @@
                             <!-- Edit Contact Information Button -->
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" 
                                     Tag="{x:Bind dialogs:ClientEditType.Contact}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
 
@@ -229,7 +229,7 @@
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
                                     Tag="{x:Bind dialogs:ClientEditType.Case}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
 
@@ -297,7 +297,7 @@
                                         Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
                                     Click="CreateSA_Click">
-                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
 
@@ -343,7 +343,7 @@
                             <TextBlock Grid.Column="0" Text="Placements"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
-                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
 
@@ -392,7 +392,7 @@
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
                                     Tag="{x:Bind dialogs:ClientEditType.Arrangements}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
 
@@ -428,7 +428,7 @@
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
                                     Tag="{x:Bind dialogs:ClientEditType.Employment}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource SystemAccentColor}"/>
+                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
                         <!-- Start Date/Case ID/Status Section -->

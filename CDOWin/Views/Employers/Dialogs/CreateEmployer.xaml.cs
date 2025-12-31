@@ -1,5 +1,4 @@
 using CDO.Core.Models;
-using CDOWin.Controls;
 using CDOWin.Extensions;
 using CDOWin.Services;
 using CDOWin.ViewModels;

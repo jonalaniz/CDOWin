@@ -91,6 +91,10 @@ public sealed partial class RemindersPage : Page {
     // =========================
     // Click Handlers
     // =========================
+    private void Calendar_Click(object sender, RoutedEventArgs e) {
+        WindowManager.Instance.ShowCalendar();
+    }
+
     private async void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
         if (sender.Tag is Int32 id) {
             var updateVM = new ReminderUpdateViewModel(ViewModel.GetReminderByID(id));

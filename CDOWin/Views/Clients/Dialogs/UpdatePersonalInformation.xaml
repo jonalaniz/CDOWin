@@ -34,17 +34,18 @@
                             x:Name="DOBPicker" Header="DOB" HorizontalAlignment="Stretch"
                             DateChanged="DOBPicker_DateChanged"/>
 
-        <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="DL/ID" 
-                 Text="{Binding driversLicense}" Tag="{x:Bind dialogs:PersonalField.DL}"
-                 TextChanged="TextBox_TextChanged"/>
-        <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Header="SSN" 
-                 Text="{Binding ssn}" Tag="{x:Bind dialogs:PersonalField.SSN}"
-                 TextChanged="TextBox_TextChanged"/>
+        <NumberBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="DL/ID"
+                   Style="{StaticResource WholeNumberStyle}"
+                   Text="{Binding driversLicense}" Tag="{x:Bind dialogs:PersonalField.DL}"
+                   ValueChanged="NumberBox_ValueChanged"/>
+        <NumberBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Header="SSN"
+                   Text="{Binding ssn}" Tag="{x:Bind dialogs:PersonalField.SSN}"
+                   ValueChanged="NumberBox_ValueChanged"/>
         
         <!-- Row 1: Fluent Languages/Race-->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Header="Fluent Languages" 
                  Text="{Binding fluentLanguages}" Tag="{x:Bind dialogs:PersonalField.Languages}"
-                                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"/>
         <TextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Header="Race" 
                  Text="{Binding race}" Tag="{x:Bind dialogs:PersonalField.Race}"
                  TextChanged="TextBox_TextChanged"/>
@@ -65,9 +66,9 @@
             <DropDownButton x:Name="StateDropDownButton" Content="{Binding state}"
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <TextBox Grid.Row="3" Grid.Column="5" Header="Zip" 
-                 Text="{Binding zip}" Tag="{x:Bind dialogs:PersonalField.Zip}"
-                 TextChanged="TextBox_TextChanged"/>
+        <NumberBox Grid.Row="3" Grid.Column="5" Header="Zip"
+                   Text="{Binding zip}" Tag="{x:Bind dialogs:PersonalField.Zip}"
+                   ValueChanged="NumberBox_ValueChanged"/>
 
         <!-- Row 4: Education -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Style="{StaticResource MultiLineTextBoxStyle}"

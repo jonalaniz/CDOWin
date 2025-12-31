@@ -1,4 +1,3 @@
-using CDOWin.Controls;
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
@@ -34,15 +33,15 @@ public sealed partial class UpdateCounselor : Page {
                     ViewModel.Updated.name = value;
                 break;
             case Field.Email:
-                if(value != ViewModel.Original.email)
+                if (value != ViewModel.Original.email)
                     ViewModel.Updated.email = value;
                 break;
             case Field.Phone:
-                if(value != ViewModel.Original.phone)
+                if (value != ViewModel.Original.phone)
                     ViewModel.Updated.phone = value;
                 break;
             case Field.Fax:
-                if(value != ViewModel.Original.fax)
+                if (value != ViewModel.Original.fax)
                     ViewModel.Updated.fax = value;
                 break;
             case Field.Notes:

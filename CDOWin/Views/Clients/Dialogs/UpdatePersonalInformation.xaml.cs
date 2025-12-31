@@ -1,5 +1,4 @@
 using CDO.Core.Models;
-using CDOWin.Controls;
 using CDOWin.Extensions;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -71,6 +70,26 @@ public sealed partial class UpdatePersonalInformation : Page {
         }
     }
 
+    private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
+        if (sender.Tag is not PersonalField field)
+            return;
+
+        if (ParseDouble(sender.Value) is not string stringValue)
+            return;
+
+        switch (field) {
+            case PersonalField.DL:
+                ViewModel.UpdatedClient.driversLicense = stringValue;
+                break;
+            case PersonalField.SSN:
+                ViewModel.UpdatedClient.ssn = ParseSSN(stringValue);
+                break;
+            case PersonalField.Zip:
+                ViewModel.UpdatedClient.zip = stringValue;
+                break;
+        }
+    }
+
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is not TextBox textbox || textbox.Tag is not PersonalField field)
             return;
@@ -85,12 +104,6 @@ public sealed partial class UpdatePersonalInformation : Page {
 
     private void UpdateValue(string value, PersonalField type) {
         switch (type) {
-            case PersonalField.DL:
-                ViewModel.UpdatedClient.driversLicense = value;
-                break;
-            case PersonalField.SSN:
-                ViewModel.UpdatedClient.ssn = ParseSSN(value);
-                break;
             case PersonalField.Languages:
                 ViewModel.UpdatedClient.fluentLanguages = value;
                 break;
@@ -106,9 +119,6 @@ public sealed partial class UpdatePersonalInformation : Page {
             case PersonalField.City:
                 ViewModel.UpdatedClient.city = value;
                 break;
-            case PersonalField.Zip:
-                ViewModel.UpdatedClient.zip = ParseZip(value);
-                break;
             case PersonalField.Education:
                 ViewModel.UpdatedClient.education = value;
                 break;
@@ -116,6 +126,13 @@ public sealed partial class UpdatePersonalInformation : Page {
     }
 
     // Utility Methods
+
+    private string? ParseDouble(double Value) {
+        string stringValue = ((int)Value).ToString();
+        if (stringValue.Length < 11)
+            return stringValue;
+        return null;
+    }
 
     private int? ParseSSN(string value) {
         var sanitizedValue = value.Trim();
@@ -125,13 +142,6 @@ public sealed partial class UpdatePersonalInformation : Page {
                 return x;
             }
         }
-        return null;
-    }
-
-    private string? ParseZip(string value) {
-        var sanitizedValue = value.Trim();
-        if (sanitizedValue.Length <= 11)
-            return sanitizedValue;
         return null;
     }
 }

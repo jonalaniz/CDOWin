@@ -20,29 +20,21 @@
                         <DataTemplate x:DataType="models:Reminder">
                             
                             <!-- Button -->
-                            <SplitButton HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                            <Button HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                                 <Grid Opacity="{x:Bind complete, Converter={StaticResource BoolOpacityConverter}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                    <Grid Grid.Row="0" Margin="0,0,0,6">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" FontSize="14" 
-                                                   FontWeight="Bold" Text="{x:Bind clientName}"/>
-                                    </Grid>
+                                    <TextBlock Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{x:Bind clientName}"/>
 
                                     <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                FontWeight="Normal" TextWrapping="WrapWholeWords" 
                                                Text="{x:Bind description}"/>
                                 </Grid>
-                            </SplitButton>
+                            </Button>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>

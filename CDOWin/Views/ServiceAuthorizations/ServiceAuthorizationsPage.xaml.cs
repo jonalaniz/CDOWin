@@ -11,7 +11,7 @@ public sealed partial class ServiceAuthorizationsPage : Page {
 
     public ServiceAuthorizationsPage() {
         InitializeComponent();
-        ViewModel = AppServices.POsViewModel;
+        ViewModel = AppServices.SAsViewModel;
         DataContext = ViewModel;
         InspectorFrame.Navigate(typeof(ServiceAuthorizationInspector), ViewModel);
     }

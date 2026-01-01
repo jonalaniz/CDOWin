@@ -20,6 +20,7 @@
         <!-- Rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -34,8 +35,12 @@
                   IsBackButtonVisible="False"
                   IsPaneToggleButtonVisible="False"/>
 
+        <!-- Header Text -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,8,8,4"
+                   Style="{StaticResource PageTitleStyle}"
+                   Text="{x:Bind ViewModel.CurrentMonth.Month}"/>
 
-        <Border Grid.Row="1" CornerRadius="8, 8, 8, 8" Margin="12" BorderThickness="1" 
+        <Border Grid.Row="2" CornerRadius="8, 8, 8, 8" Margin="12" BorderThickness="1" 
                 BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"    
                 Background="{ThemeResource LayerFillColorDefaultBrush}">
             <Grid x:Name="CalendarGrid">

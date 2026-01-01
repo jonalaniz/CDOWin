@@ -19,6 +19,8 @@ public partial class CalendarViewModel : ObservableObject {
     }
 
     public void BuildCalendarDays() {
+        Days.Clear();
+
         // Get the first Sunday of the Calendar
         DateTime firstOfMonth = new(CurrentMonth.Year, CurrentMonth.Month, 1);
         int dayOfWeekOffset = (int)firstOfMonth.DayOfWeek;
@@ -38,9 +40,15 @@ public partial class CalendarViewModel : ObservableObject {
     private ObservableCollection<Reminder> FilterByDate(ObservableCollection<Reminder> reminders, DateTime date) {
         var filteredReminders = new ObservableCollection<Reminder>();
         foreach (Reminder reminder in reminders) {
-            if(reminder.date.Day == date.Day)
+            if (reminder.date.Day == date.Day) {
                 filteredReminders.Add(reminder);
+            }
         }
+
+        foreach(Reminder reminder in filteredReminders) {
+            reminders.Remove(reminder);
+        }
+
         return filteredReminders;
     }
 }

@@ -28,7 +28,7 @@ public static class AppServices {
     public static ClientsViewModel ClientsViewModel { get; private set; } = null!;
     public static CounselorsViewModel CounselorsViewModel { get; private set; } = null!;
     public static EmployersViewModel EmployersViewModel { get; private set; } = null!;
-    public static ServiceAuthorizationsViewModel POsViewModel { get; private set; } = null!;
+    public static ServiceAuthorizationsViewModel SAsViewModel { get; private set; } = null!;
     public static RemindersViewModel RemindersViewModel { get; private set; } = null!;
     public static StatesViewModel StatesViewModel { get; private set; } = null!;
     public static PlacementsViewModel PlacementsViewModel { get; private set; } = null!;
@@ -55,7 +55,7 @@ public static class AppServices {
         ClientsViewModel = new ClientsViewModel(ClientService, _clientSelectionService);
         CounselorsViewModel = new CounselorsViewModel(CounselorService);
         EmployersViewModel = new EmployersViewModel(EmployerService);
-        POsViewModel = new ServiceAuthorizationsViewModel(SAService);
+        SAsViewModel = new ServiceAuthorizationsViewModel(SAService);
         RemindersViewModel = new RemindersViewModel(ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(StateService);
         PlacementsViewModel = new PlacementsViewModel(PlacementService);
@@ -70,16 +70,21 @@ public static class AppServices {
             ClientsViewModel.LoadClientSummariesAsync(),
             CounselorsViewModel.LoadCounselorsAsync(),
             EmployersViewModel.LoadEmployersAsync(),
-            POsViewModel.LoadServiceAuthorizationsAsync(),
             RemindersViewModel.LoadRemindersAsync(),
-            StatesViewModel.LoadStatesAsync(),
-            PlacementsViewModel.LoadPlacementsAsync()
         };
 
         await Task.WhenAll(tasks);
+
+        _ = LoadSecondaryDataAsync();
         sw.Stop();
         Debug.WriteLine($"LoadDataAsync completed in {sw.ElapsedMilliseconds}");
         return true;
+    }
+
+    public static async Task LoadSecondaryDataAsync() {
+        _ = SAsViewModel.LoadServiceAuthorizationsAsync();
+        _ = PlacementsViewModel.LoadPlacementsAsync();
+        _ = StatesViewModel.LoadStatesAsync();
     }
 
     public static CreateCounselorViewModel CreateCounselorViewModel() {

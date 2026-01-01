@@ -83,12 +83,12 @@ public partial class RemindersViewModel : ObservableObject {
     public ObservableCollection<Reminder> GetRemindersForMonth(DateTime date) {
         var RemindersForMonth = new ObservableCollection<Reminder>();
         foreach (var reminder in All) {
-            Debug.WriteLine($"Building for date: {date.ToString()}");
             if (reminder.date.Month == date.Month)
                 RemindersForMonth.Add(reminder);
         }
         return RemindersForMonth;
     }
+
     public void RequestClient(int clientID) {
         _selectionService.RequestSelectedClient(clientID);
     }

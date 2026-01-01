@@ -33,6 +33,8 @@ public sealed partial class CalendarWindow : Window {
     }
 
     void BuildCalendar() {
+        CalendarGrid.Children.Clear();
+
         for(int i = 0; i < ViewModel.Days.Count;  i++) {
             var day = ViewModel.Days[i];
             var dayView = new CalendarDayView {

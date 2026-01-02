@@ -45,11 +45,17 @@ public sealed class WindowManager {
     public void ShowMainWindow() {
         if (_mainWindow == null) {
             _mainWindow = new MainWindow();
+            _mainWindow.Closed += _closeCalendar;
             _mainWindow.Closed += (_, _) => _mainWindow = null;
             _mainWindow.Activate();
         } else {
             _mainWindow.Activate();
         }
+    }
+
+    private void _closeCalendar(object sender, Microsoft.UI.Xaml.WindowEventArgs args) {
+        if(_calendarWindow != null)
+            _calendarWindow.Close();
     }
 
     public void CloseSplash() {

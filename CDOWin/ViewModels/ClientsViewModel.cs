@@ -3,6 +3,8 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Dispatching;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,9 +19,16 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     private readonly IClientService _service;
     private readonly ClientSelectionService _selectionService;
+    private readonly DispatcherQueue _dispatcher;
 
     // =========================
-    // View State
+    // Private Backing Fields
+    // =========================
+    private IReadOnlyList<Client> _allClients = Array.Empty<Client>();
+    private string _searchQuery = string.Empty;
+
+    // =========================
+    // Public Property / State
     // =========================
     [ObservableProperty]
     public partial ObservableCollection<ClientSummaryDTO> AllClientSummaries { get; private set; } = [];
@@ -47,6 +56,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) {
+        _dispatcher.TryEnqueue(() )
         ApplyFilter();
     }
 

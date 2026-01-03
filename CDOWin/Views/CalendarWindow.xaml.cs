@@ -13,37 +13,49 @@ namespace CDOWin.Views;
 
 public sealed partial class CalendarWindow : Window {
     private CalendarViewModel ViewModel { get; }
+
+    // =========================
+    // Constructor
+    // =========================
     public CalendarWindow() {
         InitializeComponent();
+        SetupWindow();
+        _ = SetupTitleBarAsync();
+
         ViewModel = AppServices.CalendarViewModel;
         ViewModel.BuildCalendarDays();
-        SetupWindow();
+   
         BuildCalendar();
     }
 
+    // =========================
+    // Window Setup
+    // =========================
     private void SetupWindow() {
         ExtendsContentIntoTitleBar = true;
-        // Setup Title bar
-        var uiSettings = new Windows.UI.ViewManagement.UISettings();
-        var accentColor = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
-        AppWindow.TitleBar.ButtonForegroundColor = accentColor;
 
-        // Set sizing and center the Window
         var manager = WinUIEx.WindowManager.Get(this);
         manager.MinHeight = 600;
         manager.MinWidth = 800;
     }
 
+    private async Task SetupTitleBarAsync() {
+        var uiSettings = new Windows.UI.ViewManagement.UISettings();
+        var accentColor = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
+        AppWindow.TitleBar.ButtonForegroundColor = accentColor;
+    }
+
     void BuildCalendar() {
         MonthHeader.Text = ViewModel.CurrentMonth.ToString("MMMM yyyy");
-        CalendarGrid.Children.Clear();
 
-        for (int i = 0; i < ViewModel.Days.Count; i++) {
+        CalendarGrid.Children.Clear();
+        int totalDays = ViewModel.Days.Count;
+
+        for (int i = 0; i < totalDays; i++) {
             if (!ViewModel.Days[i].IsCurrentMonth) {
                 var emptyDayView = new EmptyCalendarDay();
                 Grid.SetRow(emptyDayView, i / 7);
                 Grid.SetColumn(emptyDayView, i % 7);
-
                 CalendarGrid.Children.Add(emptyDayView);
                 continue;
             }
@@ -63,6 +75,9 @@ public sealed partial class CalendarWindow : Window {
         }
     }
 
+    // =========================
+    // Event Handlers
+    // =========================
     private void Button_Click(object sender, RoutedEventArgs e) {
         if(sender is Button button && button.Tag is string tag) {
             if (tag == "0") {

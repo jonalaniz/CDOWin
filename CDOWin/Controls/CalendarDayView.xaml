@@ -21,7 +21,8 @@
                             
                             <!-- Button -->
                             <Button Margin="0,0,0,4" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                    Tag="{x:Bind id}" Click="Button_Click">
                                 <Grid Opacity="{x:Bind complete, Converter={StaticResource BoolOpacityConverter}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />

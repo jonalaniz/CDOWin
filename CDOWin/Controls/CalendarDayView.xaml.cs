@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 namespace CDOWin.Controls;
 
 public sealed partial class CalendarDayView : UserControl {
+    public event EventHandler<int>? ReminderClicked;
     public DateTime Date {
         get => (DateTime)GetValue(DateProperty);
         set => SetValue(DateProperty, value);
@@ -33,5 +34,11 @@ public sealed partial class CalendarDayView : UserControl {
 
     public CalendarDayView() {
         InitializeComponent();
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e) {
+        if(sender is Button button && button.Tag is int iD) {
+            ReminderClicked?.Invoke(this, iD);
+        }
     }
 }

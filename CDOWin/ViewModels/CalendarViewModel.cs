@@ -1,22 +1,19 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CalendarViewModel : ObservableObject {
-    private readonly RemindersViewModel _remindersViewModel;
+public partial class CalendarViewModel(RemindersViewModel viewModel) : ObservableObject {
+    private readonly RemindersViewModel _remindersViewModel = viewModel;
 
     public DateTime CurrentMonth { get; private set; } = DateTime.Today;
-    public ObservableCollection<CalendarDay> Days { get; }
-
-    public CalendarViewModel(RemindersViewModel viewModel) {
-        _remindersViewModel = viewModel;
-        Days = [];
-    }
+    public ObservableCollection<CalendarDay> Days { get; } = [];
 
     public void BuildCalendarDays() {
         Days.Clear();
@@ -52,5 +49,13 @@ public partial class CalendarViewModel : ObservableObject {
     public void DecrementMonth() {
         CurrentMonth = CurrentMonth.AddMonths(-1);
         BuildCalendarDays();
+    }
+
+    public Reminder GetReminderByID(int id) => _remindersViewModel.GetReminderByID(id);
+
+    public async Task UpdateReminderAsync(int id, UpdateReminderDTO update) {
+        await _remindersViewModel.UpdateReminderAsync(id, update);
+        BuildCalendarDays();
+        // the task above both updates and reloads the data, we need to refresh the 
     }
 }

@@ -1,9 +1,12 @@
 using CDOWin.Controls;
 using CDOWin.Services;
 using CDOWin.ViewModels;
+using CDOWin.Views.Reminders.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 
 namespace CDOWin.Views;
@@ -51,6 +54,8 @@ public sealed partial class CalendarWindow : Window {
                 Reminders = day.Reminders
             };
 
+            dayView.ReminderClicked += OnReminderClickedAsync;
+
             Grid.SetRow(dayView, i / 7);
             Grid.SetColumn(dayView, i % 7);
 
@@ -60,7 +65,6 @@ public sealed partial class CalendarWindow : Window {
 
     private void Button_Click(object sender, RoutedEventArgs e) {
         if(sender is Button button && button.Tag is string tag) {
-            Debug.WriteLine("BUTTON CLICKED");
             if (tag == "0") {
                 ViewModel.DecrementMonth();
                 BuildCalendar();
@@ -68,6 +72,19 @@ public sealed partial class CalendarWindow : Window {
                 ViewModel.IncrementMonth();
                 BuildCalendar();
             }
+        }
+    }
+
+    private async void OnReminderClickedAsync(object? sender, int id) {
+        var updateVM = new ReminderUpdateViewModel(ViewModel.GetReminderByID(id));
+        var dialog = DialogFactory.UpdateDialog(this.Content.XamlRoot, $"Edit Reminder for {updateVM.Original.clientName}");
+        dialog.Content = new UpdateReminderPage(updateVM);
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary) {
+            await ViewModel.UpdateReminderAsync(id, updateVM.Updated);
+            BuildCalendar();
         }
     }
 }

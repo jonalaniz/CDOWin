@@ -92,12 +92,12 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     private void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Placement>(All);
+            Filtered = new ObservableCollection<Placement>(_allPlacements);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = All.Where(r =>
+        var result = _allPlacements.Where(r =>
         (r.clientName?.ToLower().Contains(query) ?? false)
         || (r.employer.name?.ToLower().Contains(query) ?? false)
         || (r.supervisor?.ToLower().Contains(query) ?? false)

@@ -91,12 +91,12 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<ServiceAuthorization>(All);
+            Filtered = new ObservableCollection<ServiceAuthorization>(_allServiceAuthorizations);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = All.Where(s =>
+        var result = _allServiceAuthorizations.Where(s =>
         (s.client?.name?.ToLower().Contains(query) ?? false)
         || (s.client?.counselorReference?.name?.ToLower().Contains(query) ?? false)
         || (s.id?.ToLower().Contains(query) ?? false)

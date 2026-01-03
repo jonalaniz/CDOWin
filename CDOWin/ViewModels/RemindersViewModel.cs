@@ -8,6 +8,7 @@ using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -160,15 +161,15 @@ public partial class RemindersViewModel : ObservableObject {
     // Event Handlers
     // =========================
     private void OnClientChanged(Client? client) {
+        Debug.WriteLine("On client changed");
         var source = client?.reminders?
             .OrderBy(r => r.date)
             .ToList()
             .AsReadOnly();
-
         _dispatcher.TryEnqueue(() => {
             ClientSpecific.Clear();
             foreach (var reminder in source)
-                Filtered.Add(reminder);
+                ClientSpecific.Add(reminder);
 
             if (Filter == RemindersFilter.Client)
                 ApplyFilterInternal();

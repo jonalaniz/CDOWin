@@ -33,6 +33,9 @@ public sealed partial class RemindersPage : Page {
     // Property Change Methods
     // =========================
     private void ClientRemindersChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+        if (SelectionBar.Items[2].IsEnabled == false)
+            SelectionBar.Items[2].IsEnabled = true;
+
         if (SelectionBar.Items[2].IsSelected)
             return;
 

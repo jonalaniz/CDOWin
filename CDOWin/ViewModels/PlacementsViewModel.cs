@@ -1,6 +1,7 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Dispatching;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,12 +15,16 @@ public partial class PlacementsViewModel : ObservableObject {
     // Services / Dependencies
     // =========================
     private readonly IPlacementService _service;
+    private readonly DispatcherQueue _dispatcher;
 
     // =========================
-    // View State
+    // Private Backing Fields
     // =========================
-    [ObservableProperty]
-    public partial ObservableCollection<Placement> All { get; private set; } = [];
+    private IReadOnlyList<Placement> _allPlacements = [];
+
+    // =========================
+    // Public Property / State
+    // =========================
 
     [ObservableProperty]
     public partial ObservableCollection<Placement> Filtered { get; private set; } = [];
@@ -36,13 +41,17 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     public PlacementsViewModel(IPlacementService service) {
         _service = service;
+        _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
     // =========================
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) {
-        ApplyFilter();
+        if (_dispatcher.HasThreadAccess)
+            ApplyFilter();
+        else
+            _dispatcher.TryEnqueue(ApplyFilter);
     }
 
     // =========================
@@ -50,22 +59,31 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     public async Task LoadPlacementsAsync() {
         var placements = await _service.GetAllPlacementsAsync();
-        List<Placement> SortedPlacements = placements.OrderBy(o => o.clientID).ToList();
-        All.Clear();
+        if (placements == null) return;
 
-        foreach (var placement in SortedPlacements) {
-            All.Add(placement);
-        }
+        var snapshot = placements.OrderBy(o => o.id).ToList().AsReadOnly();
+        _allPlacements = snapshot;
 
-        ApplyFilter();
+        _dispatcher.TryEnqueue(() => {
+            ApplyFilter();
+        });
     }
 
     public async Task ReloadPlacementAsync(string id) {
         var placement = await _service.GetPlacementAsync(id);
         if (placement == null) return;
 
-        var index = All.IndexOf(All.First(r => r.id == placement.id));
-        All[index] = placement;
+        var updated = _allPlacements
+            .Select(p => p.id == id ? placement : p)
+            .ToList()
+            .AsReadOnly();
+
+        _allPlacements = updated;
+        _dispatcher.TryEnqueue(() => {
+            ApplyFilter();
+            Selected = placement;
+        });
+
         Selected = placement;
     }
 

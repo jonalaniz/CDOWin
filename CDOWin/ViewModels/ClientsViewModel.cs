@@ -25,7 +25,6 @@ public partial class ClientsViewModel : ObservableObject {
     // Private Backing Fields
     // =========================
     private IReadOnlyList<ClientSummaryDTO> _allClients = [];
-    private string _searchQuery = string.Empty;
 
     // =========================
     // Public Property / State

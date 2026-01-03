@@ -2,6 +2,7 @@
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Dispatching;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,12 +16,16 @@ public partial class EmployersViewModel : ObservableObject {
     // Services / Dependencies
     // =========================
     private readonly IEmployerService _service;
+    private readonly DispatcherQueue _dispatcher;
 
     // =========================
-    // View State
+    // Private Backing Fields
     // =========================
-    [ObservableProperty]
-    public partial ObservableCollection<Employer> All { get; private set; } = [];
+    private IReadOnlyList<Employer> _allEmployers = [];
+
+    // =========================
+    // Public Property / State
+    // =========================
 
     [ObservableProperty]
     public partial ObservableCollection<Employer> Filtered { get; private set; } = [];
@@ -36,13 +41,17 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     public EmployersViewModel(IEmployerService service) {
         _service = service;
+        _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
     // =========================
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) {
-        ApplyFilter();
+        if (_dispatcher.HasThreadAccess)
+            ApplyFilter();
+        else
+            _dispatcher.TryEnqueue(ApplyFilter);
     }
 
     // =========================
@@ -50,22 +59,30 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     public async Task LoadEmployersAsync() {
         var employers = await _service.GetAllEmployersAsync();
-        List<Employer> SortedEmployers = employers.OrderBy(o => o.name).ToList();
-        All.Clear();
+        if (employers == null) return;
 
-        foreach (var employer in SortedEmployers) {
-            All.Add(employer);
-        }
+        var snapshot = employers.OrderBy(e => e.id).ToList().AsReadOnly();
+        _allEmployers = snapshot;
 
-        ApplyFilter();
+        _dispatcher.TryEnqueue(() => {
+            ApplyFilter();
+        });
     }
 
     public async Task ReloadEmployerAsync(int id) {
         var employer = await _service.GetEmployerAsync(id);
         if (employer == null) return;
 
-        Replace(All, employer);
-        Replace(Filtered, employer);
+        var updated = _allEmployers
+            .Select(e => e.id == id ? employer : e)
+            .ToList()
+            .AsReadOnly();
+
+        _allEmployers = updated;
+        _dispatcher.TryEnqueue(() => {
+            ApplyFilter();
+            Selected = employer;
+        });
 
         Selected = employer;
     }
@@ -80,20 +97,15 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     // Utility / Filtering
     // =========================
-    private void Replace(ObservableCollection<Employer> list, Employer updated) {
-        var index = list.IndexOf(list.First(e => e.id == updated.id));
-        if (index >= 0)
-            list[index] = updated;
-    }
 
     private void ApplyFilter() {
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Employer>(All);
+            Filtered = new ObservableCollection<Employer>(_allEmployers);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = All.Where(e =>
+        var result = _allEmployers.Where(e =>
         (e.name?.ToLower().Contains(query) ?? false)
         || (e.formattedAddress?.ToLower().Contains(query) ?? false)
         || (e.email?.ToLower().Contains(query) ?? false)

@@ -1,6 +1,7 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Dispatching;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,13 +15,17 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Services / Dependencies
     // =========================
     private readonly IServiceAuthorizationService _service;
+    private readonly DispatcherQueue _dispatcher;
+
+    // =========================
+    // Private Backing Fields
+    // =========================
+    private IReadOnlyList<ServiceAuthorization> _allServiceAuthorizations = [];
 
     // =========================
     // View State
     // =========================
-    [ObservableProperty]
-    public partial ObservableCollection<ServiceAuthorization> All { get; private set; } = [];
-
+   
     [ObservableProperty]
     public partial ObservableCollection<ServiceAuthorization> Filtered { get; private set; } = [];
 
@@ -35,13 +40,17 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     public ServiceAuthorizationsViewModel(IServiceAuthorizationService service) {
         _service = service;
+        _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
     // =========================
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) {
-        ApplyFilter();
+        if (_dispatcher.HasThreadAccess)
+            ApplyFilter();
+        else
+            _dispatcher.TryEnqueue(ApplyFilter);
     }
 
     // =========================
@@ -51,21 +60,29 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var serviceAuthorizations = await _service.GetAllServiceAuthorizationsAsync();
         if (serviceAuthorizations == null) return;
 
-        List<ServiceAuthorization> SortedServiceAuthorizations = serviceAuthorizations.OrderBy(o => o.clientID).ToList();
-        All.Clear();
+        var snapshot = serviceAuthorizations.OrderBy(o => o.id).ToList().AsReadOnly();
+        _allServiceAuthorizations = snapshot;
 
-        foreach (var serviceAuthorization in SortedServiceAuthorizations) {
-            All.Add(serviceAuthorization);
-        }
-
-        ApplyFilter();
+        _dispatcher.TryEnqueue(() => {
+            ApplyFilter();
+        });
     }
 
     public async Task ReloadServiceAuthorizationAsync(string id) {
         var serviceAuthorization = await _service.GetServiceAuthorizationAsync(id);
         if (serviceAuthorization == null) return;
-        var index = All.IndexOf(All.First(p => p.id == id));
-        All[index] = serviceAuthorization;
+
+        var updated = _allServiceAuthorizations
+            .Select(s => s.id == id ? serviceAuthorization : s)
+            .ToList()
+            .AsReadOnly();
+
+        _allServiceAuthorizations = updated;
+        _dispatcher.TryEnqueue(() => {
+            ApplyFilter();
+            Selected = serviceAuthorization;
+        });
+
         Selected = serviceAuthorization;
     }
 

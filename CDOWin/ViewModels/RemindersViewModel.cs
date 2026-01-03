@@ -96,7 +96,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     public Reminder GetReminderByID(int id) => Filtered.FirstOrDefault(r => r.id == id);
 
-    public bool DateHasReminders(DateTime date) =>  _allReminders.Any(r => r.date.Date == date.Date);
+    public bool DateHasReminders(DateTime date) => _allReminders.Any(r => r.date.Date == date.Date);
 
     public void ApplyDateFilter(DateTime date) {
         Filter = RemindersFilter.Date;

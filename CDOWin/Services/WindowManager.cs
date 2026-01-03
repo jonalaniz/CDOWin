@@ -54,7 +54,7 @@ public sealed class WindowManager {
     }
 
     private void _closeCalendar(object sender, Microsoft.UI.Xaml.WindowEventArgs args) {
-        if(_calendarWindow != null)
+        if (_calendarWindow != null)
             _calendarWindow.Close();
     }
 

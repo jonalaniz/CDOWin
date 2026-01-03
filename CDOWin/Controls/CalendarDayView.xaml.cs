@@ -37,7 +37,7 @@ public sealed partial class CalendarDayView : UserControl {
     }
 
     private void Button_Click(object sender, RoutedEventArgs e) {
-        if(sender is Button button && button.Tag is int iD) {
+        if (sender is Button button && button.Tag is int iD) {
             ReminderClicked?.Invoke(this, iD);
         }
     }

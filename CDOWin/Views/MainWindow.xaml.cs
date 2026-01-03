@@ -53,8 +53,8 @@ public sealed partial class MainWindow : Window {
     private void OnActivated(object sender, WindowActivatedEventArgs args) {
         Activated -= OnActivated;
         NavigationBar.SelectedItem = NavigationBar.MenuItems.First();
-        SidebarFrame.Navigate(typeof(RemindersPage), null, new SlideNavigationTransitionInfo() { 
-            Effect = SlideNavigationTransitionEffect.FromBottom 
+        SidebarFrame.Navigate(typeof(RemindersPage), null, new SlideNavigationTransitionInfo() {
+            Effect = SlideNavigationTransitionEffect.FromBottom
         });
     }
 

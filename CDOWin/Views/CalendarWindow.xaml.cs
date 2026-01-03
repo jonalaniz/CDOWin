@@ -5,7 +5,6 @@ using CDOWin.Views.Reminders.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 
@@ -24,7 +23,7 @@ public sealed partial class CalendarWindow : Window {
 
         ViewModel = AppServices.CalendarViewModel;
         ViewModel.BuildCalendarDays();
-   
+
         BuildCalendar();
     }
 
@@ -79,7 +78,7 @@ public sealed partial class CalendarWindow : Window {
     // Event Handlers
     // =========================
     private void Button_Click(object sender, RoutedEventArgs e) {
-        if(sender is Button button && button.Tag is string tag) {
+        if (sender is Button button && button.Tag is string tag) {
             if (tag == "0") {
                 ViewModel.DecrementMonth();
                 BuildCalendar();

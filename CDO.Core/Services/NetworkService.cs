@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using CDO.Core.Serialization;
+using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -14,14 +15,13 @@ public class NetworkService : INetworkService {
     // Properties
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonOptions;
-    private readonly JsonSerializerOptions _jsonDeserializerOptions;
 
     public NetworkService() {
         _httpClient = new HttpClient();
         _jsonOptions = new JsonSerializerOptions {
+            TypeInfoResolver = SourceGenerationContext.Default,
             PropertyNameCaseInsensitive = true,
-        };
-        _jsonDeserializerOptions = new JsonSerializerOptions {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
     }
@@ -52,7 +52,7 @@ public class NetworkService : INetworkService {
             }
 
             var stream = await response.Content.ReadAsStreamAsync();
-                return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
+            return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
         } catch (JsonException ex) {
             Debug.WriteLine("JSON DESERIALIZATION ERROR:");
             Debug.WriteLine($"Message: {ex.Message}");
@@ -71,7 +71,7 @@ public class NetworkService : INetworkService {
     // POST
     // -----------------------------
     public async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var options = _jsonDeserializerOptions;
+        var options = _jsonOptions;
 
         var json = JsonSerializer.Serialize(body, options);
         var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
@@ -85,7 +85,7 @@ public class NetworkService : INetworkService {
     // PATCH
     // -----------------------------
     public async Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var options = _jsonDeserializerOptions;
+        var options = _jsonOptions;
         var json = JsonSerializer.Serialize(body, options);
         var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
 

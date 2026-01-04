@@ -70,7 +70,7 @@ public partial class CounselorsViewModel : ObservableObject {
         var snapshot = counselors.OrderBy(o => o.name).ToList().AsReadOnly();
         _allCounselors = snapshot;
 
-        _dispatcher.TryEnqueue(() => { 
+        _dispatcher.TryEnqueue(() => {
             ApplyFilter();
         });
     }

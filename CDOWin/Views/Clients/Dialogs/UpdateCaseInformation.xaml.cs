@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace CDOWin.Views.Clients.Dialogs;
 

@@ -25,7 +25,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // View State
     // =========================
-   
+
     [ObservableProperty]
     public partial ObservableCollection<ServiceAuthorization> Filtered { get; private set; } = [];
 

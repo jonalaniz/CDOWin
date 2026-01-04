@@ -4,11 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;
 
-public partial class ServiceAuthorizationUpdateViewModel : ObservableObject {
-    public ServiceAuthorization Original;
-    public UpdateServiceAuthorizationDTO Updated = new UpdateServiceAuthorizationDTO();
-
-    public ServiceAuthorizationUpdateViewModel(ServiceAuthorization serviceAuthorization) {
-        Original = serviceAuthorization;
-    }
+public partial class ServiceAuthorizationUpdateViewModel(ServiceAuthorization serviceAuthorization) : ObservableObject {
+    public ServiceAuthorization Original = serviceAuthorization;
+    public UpdateServiceAuthorizationDTO Updated = new();
 }

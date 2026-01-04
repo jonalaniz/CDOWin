@@ -96,7 +96,7 @@ public sealed partial class CalendarWindow : Window {
             return;
 
         var updateVM = new ReminderUpdateViewModel(reminder);
-        var dialog = DialogFactory.UpdateDialog(this.Content.XamlRoot, $"Edit Reminder for {updateVM.Original.clientName}");
+        var dialog = DialogFactory.UpdateDialog(this.Content.XamlRoot, $"Edit Reminder for {updateVM.Original.ClientName}");
         dialog.Content = new UpdateReminderPage(updateVM);
 
         var result = await dialog.ShowAsync();

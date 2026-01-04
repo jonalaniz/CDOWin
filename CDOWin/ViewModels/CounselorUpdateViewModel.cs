@@ -4,11 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;
 
-public partial class CounselorUpdateViewModel : ObservableObject {
-    public Counselor Original;
-    public UpdateCounselorDTO Updated = new UpdateCounselorDTO();
-
-    public CounselorUpdateViewModel(Counselor counselor) {
-        Original = counselor;
-    }
+public partial class CounselorUpdateViewModel(Counselor counselor) : ObservableObject {
+    public Counselor Original = counselor;
+    public UpdateCounselorDTO Updated = new();
 }

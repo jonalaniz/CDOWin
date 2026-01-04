@@ -99,7 +99,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
         var result = _allServiceAuthorizations.Where(s =>
         (s.Client?.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) || 
-        (s.Client?.CounselorReference?.name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) || 
+        (s.Client?.CounselorReference?.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) || 
         (s.Id ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) || 
         (s.Description ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );

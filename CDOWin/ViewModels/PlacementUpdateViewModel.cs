@@ -4,11 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;
 
-public partial class PlacementUpdateViewModel : ObservableObject {
-    public Placement Original;
-    public PlacementDTO Updated = new PlacementDTO();
-
-    public PlacementUpdateViewModel(Placement placement) {
-        Original = placement;
-    }
+public partial class PlacementUpdateViewModel(Placement placement) : ObservableObject {
+    public Placement Original = placement;
+    public PlacementDTO Updated = new();
 }

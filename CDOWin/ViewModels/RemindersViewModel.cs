@@ -68,8 +68,8 @@ public partial class RemindersViewModel : ObservableObject {
 
     public IReadOnlyDictionary<DateTime, IReadOnlyList<Reminder>> GetRemindersByMonth(DateTime month) {
         return _allReminders
-            .Where(r => r.date.Month == month.Month)
-            .GroupBy(r => r.date.Date)
+            .Where(r => r.Date.Month == month.Month)
+            .GroupBy(r => r.Date.Date)
             .OrderBy(g => g.Key)
             .ToDictionary(
                 g => g.Key,
@@ -80,29 +80,29 @@ public partial class RemindersViewModel : ObservableObject {
     public void RequestClient(int clientID) => _selectionService.RequestSelectedClient(clientID);
 
     public void DeferDate(int id, int days) {
-        var reminder = Filtered.FirstOrDefault(r => r.id == id);
+        var reminder = Filtered.FirstOrDefault(r => r.Id == id);
         if (reminder != null) {
-            var update = new UpdateReminderDTO { Date = reminder.date.AddDays(days) };
+            var update = new UpdateReminderDTO { Date = reminder.Date.AddDays(days) };
             _ = UpdateReminderAsync(id, update);
         }
     }
 
     public void ToggleCompleted(int id) {
-        var reminder = Filtered.FirstOrDefault(r => r.id == id);
+        var reminder = Filtered.FirstOrDefault(r => r.Id == id);
         if (reminder != null) {
-            var update = new UpdateReminderDTO { Complete = !reminder.complete };
+            var update = new UpdateReminderDTO { Complete = !reminder.Complete };
             _ = UpdateReminderAsync(id, update);
         }
     }
 
-    public Reminder? GetReminderByID(int id) => Filtered.FirstOrDefault(r => r.id == id);
+    public Reminder? GetReminderByID(int id) => Filtered.FirstOrDefault(r => r.Id == id);
 
-    public bool DateHasReminders(DateTime date) => _allReminders.Any(r => r.date.Date == date.Date);
+    public bool DateHasReminders(DateTime date) => _allReminders.Any(r => r.Date.Date == date.Date);
 
     public void ApplyDateFilter(DateTime date) {
         Filter = RemindersFilter.Date;
         var source = _allReminders
-            .Where(r => r.date.Date == date)
+            .Where(r => r.Date.Date == date)
             .ToList()
             .AsReadOnly();
 
@@ -122,7 +122,7 @@ public partial class RemindersViewModel : ObservableObject {
         var reminders = await _service.GetAllRemindersAsync();
         if (reminders == null) return;
 
-        var snapshot = reminders.OrderBy(r => r.date).ToList().AsReadOnly();
+        var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
         _allReminders = snapshot;
 
         _dispatcher.TryEnqueue(ApplyFilterInternal);
@@ -133,7 +133,7 @@ public partial class RemindersViewModel : ObservableObject {
         if (reminder == null) return;
 
         var updated = _allReminders
-            .Select(r => r.id == id ? reminder : r)
+            .Select(r => r.Id == id ? reminder : r)
             .ToList()
             .AsReadOnly();
 
@@ -150,7 +150,7 @@ public partial class RemindersViewModel : ObservableObject {
         await _service.DeleteReminderAsync(id);
 
         _allReminders = _allReminders
-            .Where(r => r.id != id)
+            .Where(r => r.Id != id)
             .ToList()
             .AsReadOnly();
 
@@ -163,7 +163,7 @@ public partial class RemindersViewModel : ObservableObject {
     private void OnClientChanged(Client? client) {
         Debug.WriteLine("On client changed");
         var source = client?.Reminders?
-            .OrderBy(r => r.date)
+            .OrderBy(r => r.Date)
             .ToList()
             .AsReadOnly();
 
@@ -189,7 +189,7 @@ public partial class RemindersViewModel : ObservableObject {
     private void ApplyFilterInternal() {
         IEnumerable<Reminder> source = _filter switch {
             RemindersFilter.All => _allReminders,
-            RemindersFilter.Upcoming => _allReminders.Where(r => r.date > DateTime.Now),
+            RemindersFilter.Upcoming => _allReminders.Where(r => r.Date > DateTime.Now),
             RemindersFilter.Client => ClientSpecific,
             _ => Array.Empty<Reminder>()
         };

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreateServiceAuthorizationsViewModel : ObservableObject {
+public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, Client client) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly IServiceAuthorizationService _service;
+    private readonly IServiceAuthorizationService _service = service;
 
     [ObservableProperty]
-    public partial Client Client { get; set; }
+    public partial Client Client { get; set; } = client;
 
     [ObservableProperty]
     public partial string Id { get; set; } = string.Empty;
@@ -42,14 +42,6 @@ public partial class CreateServiceAuthorizationsViewModel : ObservableObject {
     // Input Validation
     // =========================
     public bool CanSave => CanSaveMethod();
-
-    // =========================
-    // Constructor
-    // =========================
-    public CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, Client client) {
-        _service = service;
-        Client = client;
-    }
 
     private bool CanSaveMethod() {
         if (string.IsNullOrWhiteSpace(Id)

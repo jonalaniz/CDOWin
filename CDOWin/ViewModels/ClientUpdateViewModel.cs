@@ -5,13 +5,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;
 
-public partial class ClientUpdateViewModel : ObservableObject {
-    public Client OriginalClient;
-    public UpdateClientDTO UpdatedClient = new UpdateClientDTO();
-
-    public ClientUpdateViewModel(Client client) {
-        OriginalClient = client;
-    }
+public partial class ClientUpdateViewModel(Client client) : ObservableObject {
+    public Client OriginalClient = client;
+    public UpdateClientDTO UpdatedClient = new();
 
     public void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
         switch (tag) {

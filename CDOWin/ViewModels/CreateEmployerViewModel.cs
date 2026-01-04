@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreateEmployerViewModel : ObservableObject {
+public partial class CreateEmployerViewModel(IEmployerService service) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly IEmployerService _service;
+    private readonly IEmployerService _service = service;
 
     // =========================
     // Fields
@@ -37,13 +37,6 @@ public partial class CreateEmployerViewModel : ObservableObject {
     // Input Validation
     // =========================
     public bool CanSave => !string.IsNullOrWhiteSpace(Name);
-
-    // =========================
-    // Constructor
-    // =========================
-    public CreateEmployerViewModel(IEmployerService service) {
-        _service = service;
-    }
 
     // =========================
     // Property Change Methods

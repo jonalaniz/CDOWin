@@ -4,11 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;
 
-public partial class ReminderUpdateViewModel : ObservableObject {
-    public Reminder Original;
-    public UpdateReminderDTO Updated = new UpdateReminderDTO();
-
-    public ReminderUpdateViewModel(Reminder reminder) {
-        Original = reminder;
-    }
+public partial class ReminderUpdateViewModel(Reminder reminder) : ObservableObject {
+    public Reminder Original = reminder;
+    public UpdateReminderDTO Updated = new();
 }

@@ -127,10 +127,10 @@ public partial class ClientsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
 
         var result = _allClients.Where(c =>
-        (c.name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)  || 
-        (c.id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)  || 
-        (c.formattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)  || 
-        (c.counselorName ??"").Contains(query, StringComparison.CurrentCultureIgnoreCase) 
+        (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)  || 
+        (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)  || 
+        (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)  || 
+        (c.CounselorName ??"").Contains(query, StringComparison.CurrentCultureIgnoreCase) 
         );
 
         Filtered = new ObservableCollection<ClientSummaryDTO>(result);

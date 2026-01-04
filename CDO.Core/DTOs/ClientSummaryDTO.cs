@@ -3,10 +3,10 @@
 public class ClientSummaryDTO {
     // Non-optional fields
     public int Id { get; init; }
-    public string FirstName { get; init; }
-    public string LastName { get; init; }
-    public string City { get; init; }
-    public string State { get; init; }
+    public required string FirstName { get; init; }
+    public required string LastName { get; init; }
+    public required string City { get; init; }
+    public required string State { get; init; }
 
     // Nullable fields
     public string? Address1 { get; init; }

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreateReminderViewModel : ObservableObject {
+public partial class CreateReminderViewModel(IReminderService service, int clientId) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly IReminderService _service;
-    private readonly int _clientId;
+    private readonly IReminderService _service = service;
+    private readonly int _clientId = clientId;
 
     // =========================
     // Fields
     // =========================
-    public DateTime Date;
+    public DateTime Date = DateTime.Now.Date;
 
     [ObservableProperty]
     public partial string Description { get; set; } = string.Empty;
@@ -26,15 +26,6 @@ public partial class CreateReminderViewModel : ObservableObject {
     // Input Validation
     // =========================
     public bool CanSave => !string.IsNullOrWhiteSpace(Description);
-
-    // =========================
-    // Constructor
-    // =========================
-    public CreateReminderViewModel(IReminderService service, int clientId) {
-        _service = service;
-        _clientId = clientId;
-        Date = DateTime.Now.Date;
-    }
 
     // =========================
     // Property Change Methods

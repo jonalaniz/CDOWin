@@ -68,8 +68,8 @@
                                          Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                                         Tag="{x:Bind id}">
-                                <Grid Opacity="{x:Bind complete, Converter={StaticResource BoolOpacityConverter}}">
+                                         Tag="{x:Bind Id}">
+                                <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
@@ -82,42 +82,42 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Grid.Column="0" FontSize="14" 
-                                                   FontWeight="Bold" Text="{x:Bind clientName}"/>
+                                                   FontWeight="Bold" Text="{x:Bind ClientName}"/>
                                         <TextBlock Grid.Column="1" FontSize="14" 
-                                                   FontWeight="Normal" Text="{x:Bind localDate}"/>
+                                                   FontWeight="Normal" Text="{x:Bind LocalDate}"/>
                                     </Grid>
 
                                     <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                FontWeight="Normal" TextWrapping="WrapWholeWords" 
-                                               Text="{x:Bind description}"/>
+                                               Text="{x:Bind Description}"/>
                                 </Grid>
 
                                 <!-- Split Button Flyout -->
                                 <SplitButton.Flyout>
                                     <MenuFlyout Placement="Right">
                                         <!-- Section 0: Completion / Goto Client -->
-                                        <MenuFlyoutItem Text="{x:Bind complete, Converter={StaticResource BoolCompletedConverter}}" 
-                                                        Click="ToggleCompleted_Click" Tag="{x:Bind id}">
+                                        <MenuFlyoutItem Text="{x:Bind Complete, Converter={StaticResource BoolCompletedConverter}}" 
+                                                        Click="ToggleCompleted_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xF0B5;" />
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
                                         <MenuFlyoutItem Text="Go To Client" Icon="Contact" 
-                                                        Click="ViewClient_Click" Tag="{x:Bind clientID}"/>
+                                                        Click="ViewClient_Click" Tag="{x:Bind ClientID}"/>
                                         <MenuFlyoutSeparator/>
                                         
                                         <!-- Section 1: Defer Dates -->
-                                        <MenuFlyoutItem Text="Defer 1 Day" CommandParameter="1" Click="Defer_Click" Tag="{x:Bind id}">
+                                        <MenuFlyoutItem Text="Defer 1 Day" CommandParameter="1" Click="Defer_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE8F5;"/>
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="Defer 1 Week" CommandParameter="7" Click="Defer_Click" Tag="{x:Bind id}">
+                                        <MenuFlyoutItem Text="Defer 1 Week" CommandParameter="7" Click="Defer_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE8F5;"/>
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="Defer 1 Month" CommandParameter="30" Click="Defer_Click" Tag="{x:Bind id}">
+                                        <MenuFlyoutItem Text="Defer 1 Month" CommandParameter="30" Click="Defer_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE8F5;"/>
                                             </MenuFlyoutItem.Icon>
@@ -125,7 +125,7 @@
                                         <MenuFlyoutSeparator/>
                                         <!-- Section 2: Delete -->
                                         <MenuFlyoutItem Text="Delete..." Icon="Delete"
-                                                        Click="Delete_Click" Tag="{x:Bind id}"/>
+                                                        Click="Delete_Click" Tag="{x:Bind Id}"/>
                                     </MenuFlyout>
                                 </SplitButton.Flyout>
                             </SplitButton>

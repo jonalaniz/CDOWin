@@ -2,14 +2,14 @@
 
 public class Reminder {
     // Required creation fields
-    public int id { get; set; }
-    public DateTime date { get; set; }
-    public string description { get; set; }
+    public int Id { get; set; }
+    public DateTime Date { get; set; }
+    public string Description { get; set; }
 
     // Optional fields
-    public int clientID { get; set; }
-    public string? clientName { get; set; }
-    public bool complete { get; set; }
+    public int ClientID { get; set; }
+    public string? ClientName { get; set; }
+    public bool Complete { get; set; }
 
-    public string localDate => date.ToString(format: "MM/dd/yyyy");
+    public string LocalDate => Date.ToString(format: "MM/dd/yyyy");
 }

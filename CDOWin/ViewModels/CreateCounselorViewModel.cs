@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreateCounselorViewModel : ObservableObject {
+public partial class CreateCounselorViewModel(ICounselorService service) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly ICounselorService _service;
+    private readonly ICounselorService _service = service;
 
     // =========================
     // Fields
@@ -41,13 +41,6 @@ public partial class CreateCounselorViewModel : ObservableObject {
     // Input Validation
     // =========================
     public bool CanSave => !string.IsNullOrWhiteSpace(Name);
-
-    // =========================
-    // Constructor
-    // =========================
-    public CreateCounselorViewModel(ICounselorService service) {
-        _service = service;
-    }
 
     // =========================
     // Property Change Methods

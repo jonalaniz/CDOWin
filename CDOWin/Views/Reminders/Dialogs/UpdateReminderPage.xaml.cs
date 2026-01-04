@@ -18,16 +18,16 @@ public sealed partial class UpdateReminderPage : Page {
     }
 
     private void SetupDatePicker() {
-        Debug.WriteLine($"Local Date: {ViewModel.Original.localDate}");
-        Debug.WriteLine($"Full Date: {ViewModel.Original.date}");
+        Debug.WriteLine($"Local Date: {ViewModel.Original.LocalDate}");
+        Debug.WriteLine($"Full Date: {ViewModel.Original.Date}");
 
-        if (ViewModel.Original.date is DateTime date) {
+        if (ViewModel.Original.Date is DateTime date) {
             DatePicker.Date = date;
         }
     }
 
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-        if (ViewModel.Original.date is DateTime date) {
+        if (ViewModel.Original.Date is DateTime date) {
             if (date == DatePicker.Date)
                 return;
 

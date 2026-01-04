@@ -89,7 +89,7 @@ public partial class ClientsViewModel : ObservableObject {
         var clients = await _service.GetAllClientSummariesAsync();
         if (clients == null) return;
 
-        var snapshot = clients.OrderBy(c => c.name).ToList().AsReadOnly();
+        var snapshot = clients.OrderBy(c => c.Name).ToList().AsReadOnly();
         _allClients = snapshot;
 
         _dispatcher.TryEnqueue(() => {
@@ -127,10 +127,10 @@ public partial class ClientsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
 
         var result = _allClients.Where(c =>
-        (c.name?.ToLower().Contains(query) ?? false)
-        || (c.id.ToString()?.Contains(query) ?? false)
-        || (c.formattedAddress?.ToLower().Contains(query) ?? false)
-        || (c.counselorName?.ToLower().Contains(query) ?? false)
+        (c.Name?.ToLower().Contains(query) ?? false)
+        || (c.Id.ToString()?.Contains(query) ?? false)
+        || (c.FormattedAddress?.ToLower().Contains(query) ?? false)
+        || (c.CounselorName?.ToLower().Contains(query) ?? false)
         );
 
         Filtered = new ObservableCollection<ClientSummaryDTO>(result);

@@ -82,7 +82,7 @@ public partial class RemindersViewModel : ObservableObject {
     public void DeferDate(int id, int days) {
         var reminder = Filtered.FirstOrDefault(r => r.id == id);
         if (reminder != null) {
-            var update = new UpdateReminderDTO { date = reminder.date.AddDays(days) };
+            var update = new UpdateReminderDTO { Date = reminder.date.AddDays(days) };
             _ = UpdateReminderAsync(id, update);
         }
     }
@@ -90,7 +90,7 @@ public partial class RemindersViewModel : ObservableObject {
     public void ToggleCompleted(int id) {
         var reminder = Filtered.FirstOrDefault(r => r.id == id);
         if (reminder != null) {
-            var update = new UpdateReminderDTO { complete = !reminder.complete };
+            var update = new UpdateReminderDTO { Complete = !reminder.complete };
             _ = UpdateReminderAsync(id, update);
         }
     }

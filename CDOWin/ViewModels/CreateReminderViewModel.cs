@@ -48,9 +48,9 @@ public partial class CreateReminderViewModel : ObservableObject {
     // =========================
     public async Task CreateReminderAsync() {
         var reminder = new CreateReminderDTO {
-            clientID = _clientId,
-            date = Date.ToUniversalTime(),
-            description = Description
+            ClientID = _clientId,
+            Date = Date.ToUniversalTime(),
+            Description = Description
         };
 
         await _service.CreateReminderAsync(reminder);

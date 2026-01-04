@@ -28,34 +28,34 @@ public sealed partial class UpdateContacts : Page {
     private void UpdateValue(string value, ContactField type) {
         switch (type) {
             case ContactField.Phone1:
-                ViewModel.UpdatedClient.phone1 = value;
+                ViewModel.UpdatedClient.Phone1 = value;
                 break;
             case ContactField.Phone1Identity:
-                ViewModel.UpdatedClient.phone1Identity = value;
+                ViewModel.UpdatedClient.Phone1Identity = value;
                 break;
             case ContactField.Phone2:
-                ViewModel.UpdatedClient.phone2 = value;
+                ViewModel.UpdatedClient.Phone2 = value;
                 break;
             case ContactField.Phone2Identity:
-                ViewModel.UpdatedClient.phone2Identity = value;
+                ViewModel.UpdatedClient.Phone2Identity = value;
                 break;
             case ContactField.Phone3:
-                ViewModel.UpdatedClient.phone3 = value;
+                ViewModel.UpdatedClient.Phone3 = value;
                 break;
             case ContactField.Phone3Identity:
-                ViewModel.UpdatedClient.phone3Identity = value;
+                ViewModel.UpdatedClient.Phone3Identity = value;
                 break;
             case ContactField.Email:
-                ViewModel.UpdatedClient.email = value;
+                ViewModel.UpdatedClient.Email = value;
                 break;
             case ContactField.EmailIdentity:
-                ViewModel.UpdatedClient.emailIdentity = value;
+                ViewModel.UpdatedClient.EmailIdentity = value;
                 break;
             case ContactField.Email2:
-                ViewModel.UpdatedClient.email2 = value;
+                ViewModel.UpdatedClient.Email2 = value;
                 break;
             case ContactField.Email2Identity:
-                ViewModel.UpdatedClient.email2Identity = value;
+                ViewModel.UpdatedClient.Email2Identity = value;
                 break;
         }
     }

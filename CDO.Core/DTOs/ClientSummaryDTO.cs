@@ -2,38 +2,38 @@
 
 public class ClientSummaryDTO {
     // Non-optional fields
-    public int id { get; init; }
-    public string firstName { get; init; }
-    public string lastName { get; init; }
-    public string city { get; init; }
-    public string state { get; init; }
+    public int Id { get; init; }
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public string City { get; init; }
+    public string State { get; init; }
 
     // Nullable fields
-    public string? address1 { get; init; }
-    public string? address2 { get; init; }
-    public string? zip { get; init; }
-    public string? counselorName { get; init; }
+    public string? Address1 { get; init; }
+    public string? Address2 { get; init; }
+    public string? Zip { get; init; }
+    public string? CounselorName { get; init; }
 
     // Computed Properties
-    public string name => $"{lastName}, {firstName}";
-    public string formattedAddress {
+    public string Name => $"{LastName}, {FirstName}";
+    public string FormattedAddress {
         get {
-            if (address1 == null && address2 == null)
+            if (Address1 == null && Address2 == null)
                 return "No address on file.";
-            else if (address2 == null) {
-                return $"{address1}\n{formattedCityStateZip}";
+            else if (Address2 == null) {
+                return $"{Address1}\n{FormattedCityStateZip}";
             } else {
-                return $"{address1} {address2}\n{formattedCityStateZip}";
+                return $"{Address1} {Address2}\n{FormattedCityStateZip}";
             }
         }
     }
 
-    public string formattedCityStateZip {
+    public string FormattedCityStateZip {
         get {
-            if (zip != null)
-                return $"{city}, {state} {zip}";
+            if (Zip != null)
+                return $"{City}, {State} {Zip}";
             else
-                return $"{city}, {state}";
+                return $"{City}, {State}";
         }
     }
 }

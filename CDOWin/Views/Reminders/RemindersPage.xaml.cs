@@ -57,16 +57,16 @@ public sealed partial class RemindersPage : Page {
 
             DateTime day = args.Item.Date.Date;
 
-            // Does any reminder match this date?
+            // Does any reminder match this Date?
             bool hasReminder = ViewModel.DateHasReminders(day);
 
             if (hasReminder) {
-                // Mark the date (simple highlight)
+                // Mark the Date (simple highlight)
                 var brush = (Brush)Application.Current.Resources["AccentAAFillColorDefaultBrush"];
                 args.Item.Background = brush;
                 args.Item.FontWeight = FontWeights.Bold;
             } else {
-                // Reset to defaults when not a reminder date
+                // Reset to defaults when not a reminder Date
                 args.Item.Background = null;
                 args.Item.FontWeight = FontWeights.Normal;
             }

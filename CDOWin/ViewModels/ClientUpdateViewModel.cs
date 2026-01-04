@@ -16,28 +16,28 @@ public partial class ClientUpdateViewModel : ObservableObject {
     public void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
         switch (tag) {
             case CheckboxTag.ResumeRequired:
-                UpdatedClient.resumeRequired = isChecked;
+                UpdatedClient.ResumeRequired = isChecked;
                 break;
             case CheckboxTag.ResumeCompleted:
-                UpdatedClient.resumeCompleted = isChecked;
+                UpdatedClient.ResumeCompleted = isChecked;
                 break;
             case CheckboxTag.VideoInterviewRequired:
-                UpdatedClient.videoInterviewRequired = isChecked;
+                UpdatedClient.VideoInterviewRequired = isChecked;
                 break;
             case CheckboxTag.VideoInterviewCompleted:
-                UpdatedClient.videoInterviewCompleted = isChecked;
+                UpdatedClient.VideoInterviewCompleted = isChecked;
                 break;
             case CheckboxTag.ReleasesCompleted:
-                UpdatedClient.releasesCompleted = isChecked;
+                UpdatedClient.ReleasesCompleted = isChecked;
                 break;
             case CheckboxTag.OrientationCompleted:
-                UpdatedClient.orientationCompleted = isChecked;
+                UpdatedClient.OrientationCompleted = isChecked;
                 break;
             case CheckboxTag.DataSheetCompleted:
-                UpdatedClient.dataSheetCompleted = isChecked;
+                UpdatedClient.DataSheetCompleted = isChecked;
                 break;
             case CheckboxTag.ElevatorSpeechCompleted:
-                UpdatedClient.elevatorSpeechCompleted = isChecked;
+                UpdatedClient.ElevatorSpeechCompleted = isChecked;
                 break;
         }
     }

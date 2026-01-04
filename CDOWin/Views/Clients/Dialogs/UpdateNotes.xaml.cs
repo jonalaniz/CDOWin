@@ -23,7 +23,7 @@ public sealed partial class UpdateNotes : Page {
             return;
 
         var notes = BuildNotes(text);
-        ViewModel.UpdatedClient.clientNotes = notes;
+        ViewModel.UpdatedClient.ClientNotes = notes;
     }
 
     private string BuildNotes(string note) {

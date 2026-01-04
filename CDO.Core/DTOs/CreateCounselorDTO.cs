@@ -5,10 +5,10 @@ public class CreateCounselorDTO {
     public required string name { get; init; }
 
     // Optional fields
-    public string? email { get; init; }
-    public string? phone { get; init; }
-    public string? fax { get; init; }
-    public string? notes { get; init; }
-    public string? secretaryName { get; init; }
-    public string? secretaryEmail { get; init; }
+    public string? Email { get; init; }
+    public string? Phone { get; init; }
+    public string? Fax { get; init; }
+    public string? Notes { get; init; }
+    public string? SecretaryName { get; init; }
+    public string? SecretaryEmail { get; init; }
 }

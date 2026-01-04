@@ -114,7 +114,7 @@
                             <TextBlock Grid.Column="0" Text="{x:Bind Id}"/>
                             <TextBlock Grid.Column="1" Text="{x:Bind Client.Name}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                             <TextBlock Grid.Column="2" Text="{x:Bind Client.CaseID}"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind Client.CounselorReference.name}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind Client.CounselorReference.Name}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                             <TextBlock Grid.Column="4" Text="{x:Bind FormattedStartDate}"/>
                             <TextBlock Grid.Column="5" Text="{x:Bind FormattedEndDate}"/>
                             <TextBlock Grid.Column="6" Text="{x:Bind FormattedCost}"/>

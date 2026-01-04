@@ -1,12 +1,12 @@
 namespace CDO.Core.DTOs;
 
 public class UpdateServiceAuthorizationDTO {
-    public int? clientID { get; set; }
-    public string? description { get; set; }
-    public DateTime? startDate { get; set; }
-    public DateTime? endDate { get; set; }
-    public string? office { get; set; }
-    public int? counselorID { get; set; }
-    public double? unitCost { get; set; }
-    public string? unitOfMeasurement { get; set; }
+    public int? ClientID { get; set; }
+    public string? Description { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+    public string? Office { get; set; }
+    public int? CounselorID { get; set; }
+    public double? UnitCost { get; set; }
+    public string? UnitOfMeasurement { get; set; }
 }

@@ -56,16 +56,16 @@ public sealed partial class UpdatePersonalInformation : Page {
                 return;
         }
         if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-            // We call DateTime.Date to get the date with the time zeroed out then
+            // We call DateTime.Date to get the Date with the time zeroed out then
             // .ToUniversalTime to ensure it is in the correct format for the API.
-            ViewModel.UpdatedClient.dob = offset.DateTime.Date.ToUniversalTime();
+            ViewModel.UpdatedClient.Dob = offset.DateTime.Date.ToUniversalTime();
         }
     }
 
     private void StateSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             var state = item.Tag.ToString();
-            ViewModel.UpdatedClient.state = state;
+            ViewModel.UpdatedClient.State = state;
             StateDropDownButton.Content = state;
         }
     }
@@ -79,13 +79,13 @@ public sealed partial class UpdatePersonalInformation : Page {
 
         switch (field) {
             case PersonalField.DL:
-                ViewModel.UpdatedClient.driversLicense = stringValue;
+                ViewModel.UpdatedClient.DriversLicense = stringValue;
                 break;
             case PersonalField.SSN:
-                ViewModel.UpdatedClient.ssn = ParseSSN(stringValue);
+                ViewModel.UpdatedClient.Ssn = ParseSSN(stringValue);
                 break;
             case PersonalField.Zip:
-                ViewModel.UpdatedClient.zip = stringValue;
+                ViewModel.UpdatedClient.Zip = stringValue;
                 break;
         }
     }
@@ -105,22 +105,22 @@ public sealed partial class UpdatePersonalInformation : Page {
     private void UpdateValue(string value, PersonalField type) {
         switch (type) {
             case PersonalField.Languages:
-                ViewModel.UpdatedClient.fluentLanguages = value;
+                ViewModel.UpdatedClient.FluentLanguages = value;
                 break;
             case PersonalField.Race:
-                ViewModel.UpdatedClient.race = value;
+                ViewModel.UpdatedClient.Race = value;
                 break;
             case PersonalField.Address1:
-                ViewModel.UpdatedClient.address1 = value;
+                ViewModel.UpdatedClient.Address1 = value;
                 break;
             case PersonalField.Address2:
-                ViewModel.UpdatedClient.address2 = value;
+                ViewModel.UpdatedClient.Address2 = value;
                 break;
             case PersonalField.City:
-                ViewModel.UpdatedClient.city = value;
+                ViewModel.UpdatedClient.City = value;
                 break;
             case PersonalField.Education:
-                ViewModel.UpdatedClient.education = value;
+                ViewModel.UpdatedClient.Education = value;
                 break;
         }
     }

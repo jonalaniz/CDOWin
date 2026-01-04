@@ -99,7 +99,7 @@ public partial class PlacementsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
         var result = _allPlacements.Where(r =>
         (r.ClientName?.ToLower().Contains(query) ?? false)
-        || (r.Employer.name?.ToLower().Contains(query) ?? false)
+        || (r.Employer.Name?.ToLower().Contains(query) ?? false)
         || (r.Supervisor?.ToLower().Contains(query) ?? false)
         || (r.Position?.ToLower().Contains(query) ?? false)
         );

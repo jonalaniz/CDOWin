@@ -15,61 +15,61 @@ IClientService clientService = new ClientService(network);
 // var ServiceAuthorizations = await POService.GetAllServiceAuthorizationsAsync();
 //
 // foreach (var ServiceAuthorization in ServiceAuthorizations) {
-//     Console.WriteLine($"State ID: {ServiceAuthorization.id}");
-//     Console.WriteLine($"State Name: {ServiceAuthorization.clientID}");
+//     Console.WriteLine($"State ID: {ServiceAuthorization.Id}");
+//     Console.WriteLine($"State Name: {ServiceAuthorization.ClientID}");
 // }
 
 //var client = new CreateClientDTO {
-//    firstName = "Jon",
-//    lastName = "Alaniz",
-//    counselor = "Someone",
-//    city = "San Antonio",
-//    state = "TX",
-//    disability = "everything",
-//    ssn = 696969696
+//    FirstName = "Jon",
+//    LastName = "Alaniz",
+//    Counselor = "Someone",
+//    City = "San Antonio",
+//    State = "TX",
+//    Disability = "everything",
+//    Ssn = 696969696
 //};
 
 // var clients = await clientService.GetAllClientSummariesAsync();
 //var client = await clientService.GetClientAsync(2338);
 
 //foreach (var reminder in client.reminders) {
-//    Console.WriteLine(reminder.description);
+//    Console.WriteLine(reminder.Description);
 //}
 
 //Console.WriteLine("Placements");
 //Console.WriteLine();
 //foreach (var placement in client.placements) {
-//    Console.WriteLine(placement.id);
+//    Console.WriteLine(placement.Id);
 //    Console.WriteLine(placement.employer.Name);
 //    Console.WriteLine(placement.FormattedHireDate);
-//    Console.WriteLine(placement.position);
+//    Console.WriteLine(placement.Position);
 //}
 
 //Console.WriteLine("Service Authorizations");
 //Console.WriteLine();
 //foreach (var po in client.pos) {
-//    Console.WriteLine(po.id);
-//    Console.WriteLine(po.startDate);
-//    Console.WriteLine(po.endDate);
-//    Console.WriteLine(po.description);
+//    Console.WriteLine(po.Id);
+//    Console.WriteLine(po.StartDate);
+//    Console.WriteLine(po.EndDate);
+//    Console.WriteLine(po.Description);
 //}
 
 //foreach (var client in clients) {
 //    Console.WriteLine($"Client: {client.Name}");
-//    Console.WriteLine($"Printed Counselor Name: {client.counselorName}");
+//    Console.WriteLine($"Printed Counselor Name: {client.CounselorName}");
 //}
 
 //var newClient = await clientService.CreateClientAsync(client);
 //Console.WriteLine($"New client created: {newClient}");
 
 //var updateClient = new UpdateClientDTO {
-//    race = "lmao"
+//    Race = "lmao"
 //};
 
-//var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.id);
+//var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.Id);
 //Console.WriteLine($"New client updated: {updatedClient}");
 
-//var clientWasDeleted = await clientService.DeleteClientAsync(newClient.id);
+//var clientWasDeleted = await clientService.DeleteClientAsync(newClient.Id);
 //if (clientWasDeleted == true) {
 //    Console.WriteLine($"Client: {newClient.Name} was deleted");
 //}

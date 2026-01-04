@@ -156,6 +156,7 @@ public sealed partial class ClientViewPage : Page {
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary) {
+                Debug.WriteLine(updateVM.UpdatedClient.Benefit);
                 UpdateClient(updateVM.UpdatedClient);
             }
         }

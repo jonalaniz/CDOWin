@@ -314,8 +314,7 @@
                                         <StackPanel Spacing="2">
                                             <TextBlock FontWeight="Bold" Text="{x:Bind Id}"/>
                                             <TextBlock Text="{x:Bind Description}"/>
-                                            <TextBlock FontWeight="SemiBold" Text="{x:Bind FormattedStartDate}"/>
-                                            <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind FormattedEndDate}"/>
+                                            <TextBlock Text="{x:Bind FormattedDateRange}"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>

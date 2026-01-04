@@ -15,4 +15,5 @@ public record class ServiceAuthorization(
     public string? FormattedStartDate => StartDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedEndDate => EndDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedCost => $"{UnitCost:C2}";
+    public string? FormattedDateRange => $"Valid {FormattedStartDate} to {FormattedEndDate}";
 }

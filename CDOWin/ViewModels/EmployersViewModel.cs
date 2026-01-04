@@ -72,12 +72,17 @@ public partial class EmployersViewModel(IEmployerService service) : ObservableOb
             .AsReadOnly();
 
         _allEmployers = updated;
+
         _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
+            var index = Filtered
+            .Select((e,i) => new { e, i })
+            .FirstOrDefault(x => x.e.Id == id)?.i;
+
+            if (index != null)
+                Filtered[index.Value] = employer;
+
             Selected = employer;
         });
-
-        Selected = employer;
     }
 
     public async Task UpdateEmployerAsync(EmployerDTO update) {

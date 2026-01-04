@@ -71,12 +71,17 @@ public partial class PlacementsViewModel(IPlacementService service) : Observable
             .AsReadOnly();
 
         _allPlacements = updated;
+
         _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
+            var index = Filtered
+            .Select((p, i) => new { p, i })
+            .FirstOrDefault(x => x.p.Id == id)?.i;
+
+            if (index != null)
+                Filtered[index.Value] = placement;
+
             Selected = placement;
         });
-
-        Selected = placement;
     }
 
     // =========================

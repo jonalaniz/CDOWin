@@ -78,12 +78,17 @@ public partial class CounselorsViewModel(ICounselorService service) : Observable
             .AsReadOnly();
 
         _allCounselors = updated;
+
         _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
+            var index = Filtered
+            .Select((c, i) => new { c, i })
+            .FirstOrDefault(x => x.c.Id == id)?.i;
+
+            if (index != null)
+                Filtered[index.Value] = counselor;
+
             Selected = counselor;
         });
-
-        Selected = counselor;
     }
 
     public async Task UpdateCounselorAsync(UpdateCounselorDTO update) {

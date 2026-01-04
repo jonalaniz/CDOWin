@@ -71,12 +71,17 @@ public partial class ServiceAuthorizationsViewModel(IServiceAuthorizationService
             .AsReadOnly();
 
         _allServiceAuthorizations = updated;
+
         _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
+            var index = Filtered
+            .Select((s, i) => new { s, i })
+            .FirstOrDefault(x => x.s.Id == id)?.i;
+
+            if (index != null)
+                Filtered[index.Value] = serviceAuthorization;
+
             Selected = serviceAuthorization;
         });
-
-        Selected = serviceAuthorization;
     }
 
     // =========================

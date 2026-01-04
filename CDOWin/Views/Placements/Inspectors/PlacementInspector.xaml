@@ -65,7 +65,7 @@
 
             <!-- Row 1: Employer -->
             <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Employer" Value="{Binding Selected.Employer.name}"/>
+                               Label="Employer" Value="{Binding Selected.Employer.Name}"/>
             
             <!-- Row 2: Counselor -->
             <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"

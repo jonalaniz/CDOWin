@@ -30,31 +30,31 @@ public sealed partial class UpdateCounselor : Page {
         switch (field) {
             case Field.Name:
                 if (value != ViewModel.Original.Name)
-                    ViewModel.Updated.name = value;
+                    ViewModel.Updated.Name = value;
                 break;
             case Field.Email:
                 if (value != ViewModel.Original.Email)
-                    ViewModel.Updated.email = value;
+                    ViewModel.Updated.Email = value;
                 break;
             case Field.Phone:
                 if (value != ViewModel.Original.Phone)
-                    ViewModel.Updated.phone = value;
+                    ViewModel.Updated.Phone = value;
                 break;
             case Field.Fax:
                 if (value != ViewModel.Original.Fax)
-                    ViewModel.Updated.fax = value;
+                    ViewModel.Updated.Fax = value;
                 break;
             case Field.Notes:
                 if (value != ViewModel.Original.Notes)
-                    ViewModel.Updated.notes = value;
+                    ViewModel.Updated.Notes = value;
                 break;
             case Field.Secretary:
                 if (value != ViewModel.Original.SecretaryName)
-                    ViewModel.Updated.secretaryName = value;
+                    ViewModel.Updated.SecretaryName = value;
                 break;
             case Field.SecretaryEmail:
                 if (value != ViewModel.Original.SecretaryEmail)
-                    ViewModel.Updated.secretaryEmail = value;
+                    ViewModel.Updated.SecretaryEmail = value;
                 break;
         }
     }

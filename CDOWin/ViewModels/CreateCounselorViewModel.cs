@@ -62,12 +62,12 @@ public partial class CreateCounselorViewModel : ObservableObject {
     public async Task CreateCounselorAsync() {
         var counselor = new CreateCounselorDTO {
             name = Name,
-            email = Email,
-            phone = Phone,
-            fax = Fax,
-            notes = Notes,
-            secretaryName = SecretaryName,
-            secretaryEmail = SecretaryEmail
+            Email = Email,
+            Phone = Phone,
+            Fax = Fax,
+            Notes = Notes,
+            SecretaryName = SecretaryName,
+            SecretaryEmail = SecretaryEmail
         };
 
         await _service.CreateCounselorAsync(counselor);

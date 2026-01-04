@@ -128,7 +128,7 @@
                             <TextBlock Grid.Column="0" Text="{x:Bind PlacementNumber}"/>
                             <TextBlock Grid.Column="1" Text="{x:Bind Active}"/>
                             <TextBlock Grid.Column="2" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind Employer.name}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind Employer.Name}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                             <TextBlock Grid.Column="4" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                             <TextBlock Grid.Column="5" Text="{x:Bind PoNumber}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="6" Text="{x:Bind Supervisor}" TextTrimming="CharacterEllipsis"/>

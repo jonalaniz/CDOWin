@@ -28,10 +28,10 @@ public sealed partial class UpdateArrangements : Page {
     private void UpdateValue(string value, ArrangementsField type) {
         switch (type) {
             case ArrangementsField.EmploymentGoal:
-                ViewModel.UpdatedClient.employmentGoal = value;
+                ViewModel.UpdatedClient.EmploymentGoal = value;
                 break;
             case ArrangementsField.Conditions:
-                ViewModel.UpdatedClient.conditions = value;
+                ViewModel.UpdatedClient.Conditions = value;
                 break;
         }
     }

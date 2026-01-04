@@ -98,7 +98,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
         var result = _allServiceAuthorizations.Where(s =>
         (s.Client?.Name?.ToLower().Contains(query) ?? false)
-        || (s.Client?.CounselorReference?.name?.ToLower().Contains(query) ?? false)
+        || (s.Client?.CounselorReference?.Name?.ToLower().Contains(query) ?? false)
         || (s.Id?.ToLower().Contains(query) ?? false)
         || (s.Description?.ToLower().Contains(query) ?? false)
         );

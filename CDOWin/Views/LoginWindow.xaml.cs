@@ -51,7 +51,7 @@ public sealed partial class LoginWindow : Window {
 
         TestButton.IsEnabled = hasServerAddress && hasApiKey;
 
-        // Reset test status when credentials change
+        // Reset test Status when credentials change
         if (isTestSuccessful) {
             isTestSuccessful = false;
             SaveButton.IsEnabled = false;

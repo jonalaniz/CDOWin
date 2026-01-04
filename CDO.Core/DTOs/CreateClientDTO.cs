@@ -2,57 +2,57 @@ namespace CDO.Core.DTOs;
 
 public class CreateClientDTO {
     // Required creation fields
-    public required string firstName { get; init; }
-    public required string lastName { get; init; }
-    public required string counselor { get; init; }
-    public required string city { get; init; }
-    public required string state { get; init; }
-    public required string disability { get; init; }
+    public required string FirstName { get; init; }
+    public required string LastName { get; init; }
+    public required string Counselor { get; init; }
+    public required string City { get; init; }
+    public required string State { get; init; }
+    public required string Disability { get; init; }
 
 
     // Optional fields
-    public int? ssn { get; init; }
-    public string? caseID { get; init; }
-    public string? address1 { get; init; }
-    public string? address2 { get; init; }
-    public string? zip { get; init; }
-    public DateTime? dob { get; init; }
-    public DateTime? startDate { get; init; }
-    public string? driversLicense { get; init; }
-    public string? phone1 { get; init; }
-    public string? phone1Identity { get; init; }
-    public string? phone2 { get; init; }
-    public string? phone2Identity { get; init; }
-    public string? phone3 { get; init; }
-    public string? phone3Identity { get; init; }
-    public string? email { get; init; }
-    public string? emailIdentity { get; init; }
-    public string? email2 { get; init; }
-    public string? email2Identity { get; init; }
-    public int? counselorID { get; init; }
-    public string? counselorEmail { get; init; }
-    public string? counselorPhone { get; init; }
-    public string? counselorFax { get; init; }
-    public string? clientNotes { get; init; }
-    public string? conditions { get; init; }
-    public string? documentFolder { get; init; }
-    public bool? active { get; init; }
-    public string? employmentGoal { get; init; }
-    public int? employerID { get; init; }
-    public string? status { get; init; }
-    public string? benefit { get; init; }
-    public string? criminalCharge { get; init; }
-    public string? education { get; init; }
-    public string? transportation { get; init; }
-    public bool? resumeRequired { get; init; }
-    public bool? resumeCompleted { get; init; }
-    public bool? videoInterviewRequired { get; init; }
-    public bool? videoInterviewCompleted { get; init; }
-    public bool? releasesCompleted { get; init; }
-    public bool? orientationCompleted { get; init; }
-    public bool? dataSheetCompleted { get; init; }
-    public bool? elevatorSpeechCompleted { get; init; }
-    public string? race { get; init; }
-    public string? fluentLanguages { get; init; }
-    public string? premium { get; init; }
+    public int? Ssn { get; init; }
+    public string? CaseID { get; init; }
+    public string? Address1 { get; init; }
+    public string? Address2 { get; init; }
+    public string? Zip { get; init; }
+    public DateTime? Dob { get; init; }
+    public DateTime? StartDate { get; init; }
+    public string? DriversLicense { get; init; }
+    public string? Phone1 { get; init; }
+    public string? Phone1Identity { get; init; }
+    public string? Phone2 { get; init; }
+    public string? Phone2Identity { get; init; }
+    public string? Phone3 { get; init; }
+    public string? Phone3Identity { get; init; }
+    public string? Email { get; init; }
+    public string? EmailIdentity { get; init; }
+    public string? Email2 { get; init; }
+    public string? Email2Identity { get; init; }
+    public int? CounselorID { get; init; }
+    public string? CounselorEmail { get; init; }
+    public string? CounselorPhone { get; init; }
+    public string? CounselorFax { get; init; }
+    public string? ClientNotes { get; init; }
+    public string? Conditions { get; init; }
+    public string? DocumentFolder { get; init; }
+    public bool? Active { get; init; }
+    public string? EmploymentGoal { get; init; }
+    public int? EmployerID { get; init; }
+    public string? Status { get; init; }
+    public string? Benefit { get; init; }
+    public string? CriminalCharge { get; init; }
+    public string? Education { get; init; }
+    public string? Transportation { get; init; }
+    public bool? ResumeRequired { get; init; }
+    public bool? ResumeCompleted { get; init; }
+    public bool? VideoInterviewRequired { get; init; }
+    public bool? VideoInterviewCompleted { get; init; }
+    public bool? ReleasesCompleted { get; init; }
+    public bool? OrientationCompleted { get; init; }
+    public bool? DataSheetCompleted { get; init; }
+    public bool? ElevatorSpeechCompleted { get; init; }
+    public string? Race { get; init; }
+    public string? FluentLanguages { get; init; }
+    public string? Premium { get; init; }
 }

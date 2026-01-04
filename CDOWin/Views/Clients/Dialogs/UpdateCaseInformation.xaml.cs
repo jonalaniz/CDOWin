@@ -50,7 +50,7 @@ public sealed partial class UpdateCaseInformation : Page {
         }
         CounselorDropDown.Flyout = flyout;
 
-        if (ViewModel.OriginalClient.CounselorReference?.name is string name) {
+        if (ViewModel.OriginalClient.CounselorReference?.Name is string name) {
             CounselorDropDown.Content = name;
         } else {
             CounselorDropDown.Content = "Select a Counselor";
@@ -85,21 +85,21 @@ public sealed partial class UpdateCaseInformation : Page {
                 return;
 
             if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-                // We call DateTime.Date to get the date with the time zeroed out then
+                // We call DateTime.Date to get the Date with the time zeroed out then
                 // .ToUniversalTime to ensure it si in the correct format for the API
                 Debug.WriteLine(offset.Date.ToUniversalTime());
-                ViewModel.UpdatedClient.startDate = offset.DateTime.Date.ToUniversalTime();
+                ViewModel.UpdatedClient.StartDate = offset.DateTime.Date.ToUniversalTime();
             }
         }
     }
 
     private void CounselorSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item && item.Tag is Counselor counselor) {
-            ViewModel.UpdatedClient.counselor = counselor.Name;
-            ViewModel.UpdatedClient.counselorID = counselor.Id;
-            ViewModel.UpdatedClient.counselorEmail = counselor.Email;
-            ViewModel.UpdatedClient.counselorPhone = counselor.Phone;
-            ViewModel.UpdatedClient.counselorFax = counselor.Fax;
+            ViewModel.UpdatedClient.Counselor = counselor.Name;
+            ViewModel.UpdatedClient.CounselorID = counselor.Id;
+            ViewModel.UpdatedClient.CounselorEmail = counselor.Email;
+            ViewModel.UpdatedClient.CounselorPhone = counselor.Phone;
+            ViewModel.UpdatedClient.CounselorFax = counselor.Fax;
             CounselorDropDown.Content = counselor.Name;
         }
     }
@@ -107,10 +107,10 @@ public sealed partial class UpdateCaseInformation : Page {
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             if (item.Tag is Benefit benefit) {
-                ViewModel.UpdatedClient.benefit = benefit.Value;
+                ViewModel.UpdatedClient.Benefit = benefit.Value;
                 BenefitDropDown.Content = benefit.Value;
             } else if (item.Tag is Status status) {
-                ViewModel.UpdatedClient.status = status.Value;
+                ViewModel.UpdatedClient.Status = status.Value;
                 StatusDropDown.Content = status.Value;
             }
         }
@@ -131,16 +131,16 @@ public sealed partial class UpdateCaseInformation : Page {
     private void UpdateValue(string value, CaseField type) {
         switch (type) {
             case CaseField.CaseID:
-                ViewModel.UpdatedClient.caseID = value;
+                ViewModel.UpdatedClient.CaseID = value;
                 break;
             case CaseField.Status:
-                ViewModel.UpdatedClient.status = value;
+                ViewModel.UpdatedClient.Status = value;
                 break;
             case CaseField.Benefit:
-                ViewModel.UpdatedClient.benefit = value;
+                ViewModel.UpdatedClient.Benefit = value;
                 break;
             case CaseField.Premiums:
-                ViewModel.UpdatedClient.premium = value;
+                ViewModel.UpdatedClient.Premium = value;
                 break;
         }
     }

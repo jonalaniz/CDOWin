@@ -57,19 +57,19 @@ public partial class CreateEmployerViewModel : ObservableObject {
     // =========================
     public async Task CreateEmployerAsync() {
         var employer = new EmployerDTO {
-            name = Name,
-            address1 = Address1,
-            address2 = Address2,
-            city = City,
-            state = State,
-            zip = Zip,
-            phone = Phone,
-            fax = Fax,
-            email = Email,
-            notes = Notes,
-            supervisor = Supervisor,
-            supervisorPhone = SupervisorPhone,
-            supervisorEmail = SupervisorEmail
+            Name = Name,
+            Address1 = Address1,
+            Address2 = Address2,
+            City = City,
+            State = State,
+            Zip = Zip,
+            Phone = Phone,
+            Fax = Fax,
+            Email = Email,
+            Notes = Notes,
+            Supervisor = Supervisor,
+            SupervisorPhone = SupervisorPhone,
+            SupervisorEmail = SupervisorEmail
         };
 
         await _service.CreateEmployerAsync(employer);

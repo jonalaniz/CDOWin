@@ -70,15 +70,15 @@ public partial class CreateServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     public async Task CreateSAAsync() {
         var sa = new CreateSADTO {
-            id = Id,
-            clientID = Client.Id,
-            counselorrID = Client.CounselorID,
-            description = Description,
-            startDate = StartDate,
-            endDate = EndDate,
-            office = Office,
-            unitCost = UnitCost,
-            unitOfMeasurement = UnitOfMeasurement
+            Id = Id,
+            ClientID = Client.Id,
+            CounselorrID = Client.CounselorID,
+            Description = Description,
+            StartDate = StartDate,
+            EndDate = EndDate,
+            Office = Office,
+            UnitCost = UnitCost,
+            UnitOfMeasurement = UnitOfMeasurement
         };
 
         await _service.CreateServiceAuthorizationAsync(sa);

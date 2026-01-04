@@ -88,10 +88,10 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" FontWeight="Bold"
-                                       Text="{x:Bind name}"
+                                       Text="{x:Bind Name}"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                             <TextBlock Grid.Row="1" TextWrapping="WrapWholeWords"
-                                       Text="{x:Bind formattedAddress}"
+                                       Text="{x:Bind FormattedAddress}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                         </Grid>
                     </DataTemplate>

@@ -32,7 +32,7 @@ public sealed partial class UpdateReminderPage : Page {
                 return;
 
             if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-                ViewModel.Updated.date = offset.DateTime.Date.ToUniversalTime();
+                ViewModel.Updated.Date = offset.DateTime.Date.ToUniversalTime();
             }
         }
     }
@@ -46,12 +46,12 @@ public sealed partial class UpdateReminderPage : Page {
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        ViewModel.Updated.description = text;
+        ViewModel.Updated.Description = text;
     }
 
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
         if (sender is CheckBox checkbox) {
-            ViewModel.Updated.complete = checkbox.IsChecked;
+            ViewModel.Updated.Complete = checkbox.IsChecked;
         }
     }
 }

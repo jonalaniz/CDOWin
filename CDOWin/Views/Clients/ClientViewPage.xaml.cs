@@ -71,10 +71,10 @@ public sealed partial class ClientViewPage : Page {
         // Set the content
         dialog.Content = createReminderPage;
 
-        // Set the button state
+        // Set the button State
         dialog.IsPrimaryButtonEnabled = createReminderVM.CanSave;
 
-        // Keep button state in sync with ViewModel
+        // Keep button State in sync with ViewModel
         createReminderVM.PropertyChanged += (_, args) => {
             if (args.PropertyName == nameof(createReminderVM.CanSave))
                 dialog.IsPrimaryButtonEnabled = createReminderVM.CanSave;

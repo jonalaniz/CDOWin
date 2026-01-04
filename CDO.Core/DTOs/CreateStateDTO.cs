@@ -2,10 +2,10 @@ namespace CDO.Core.DTOs;
 
 public class CreateStateDTO {
     // Required creation fields
-    public required int id { get; init; }
-    public required string name { get; init; }
+    public required int Id { get; init; }
+    public required string Name { get; init; }
 
     // Optional fields
-    public int? countryID { get; init; }
-    public string? shortName { get; init; }
+    public int? CountryID { get; init; }
+    public string? ShortName { get; init; }
 }

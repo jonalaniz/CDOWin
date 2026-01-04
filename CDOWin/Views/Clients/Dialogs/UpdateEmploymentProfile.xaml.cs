@@ -27,13 +27,13 @@ public sealed partial class UpdateEmploymentProfile : Page {
     private void UpdateValue(string value, EmploymentField type) {
         switch (type) {
             case EmploymentField.Disability:
-                ViewModel.UpdatedClient.disability = value;
+                ViewModel.UpdatedClient.Disability = value;
                 break;
             case EmploymentField.CriminalCharge:
-                ViewModel.UpdatedClient.criminalCharge = value;
+                ViewModel.UpdatedClient.CriminalCharge = value;
                 break;
             case EmploymentField.Transportation:
-                ViewModel.UpdatedClient.transportation = value;
+                ViewModel.UpdatedClient.Transportation = value;
                 break;
         }
     }

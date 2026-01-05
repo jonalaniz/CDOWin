@@ -28,7 +28,8 @@
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" 
                 Style="{StaticResource SingleIconButtonStyle}"
-                Click="Button_Click">
+                Click="Button_Click"
+                ToolTipService.ToolTip="New Note">
             <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
 

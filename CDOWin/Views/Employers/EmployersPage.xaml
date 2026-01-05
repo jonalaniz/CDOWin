@@ -49,7 +49,8 @@
 
                     <!-- Add Button -->
                     <Button Grid.Column="1" VerticalAlignment="Center" Click="NewEmployer_ClickAsync"
-                            Style="{StaticResource SingleIconButtonStyle}">
+                            Style="{StaticResource SingleIconButtonStyle}"
+                            ToolTipService.ToolTip="New Employer">
                         <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
                     </Button>
                 </Grid>

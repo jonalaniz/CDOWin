@@ -43,7 +43,7 @@
         <TextBox Grid.Row="2" Grid.Column="0" Header="Secretary" 
                  Text="{Binding SecretaryName}" Tag="{x:Bind local:Field.Secretary}"
                  TextChanged="TextBox_TextChanged"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Header="Secretray Email" 
+        <TextBox Grid.Row="2" Grid.Column="1" Header="Secretary Email" 
                  Text="{Binding SecretaryEmail}" Tag="{x:Bind local:Field.SecretaryEmail}"
                  TextChanged="TextBox_TextChanged"/>
 

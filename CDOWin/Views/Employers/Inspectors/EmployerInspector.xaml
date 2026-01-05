@@ -31,7 +31,8 @@
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
                 Style="{StaticResource SingleIconButtonStyle}"
-                Click="EditButton_Click">
+                Click="EditButton_Click"
+                ToolTipService.ToolTip="Edit">
             <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
 

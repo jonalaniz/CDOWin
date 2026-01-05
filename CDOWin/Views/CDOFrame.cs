@@ -1,6 +1,6 @@
 ﻿namespace CDOWin.Views;
 
-enum CDOFrame {
+public enum CDOFrame {
     Clients,
     Counselors,
     Employers,

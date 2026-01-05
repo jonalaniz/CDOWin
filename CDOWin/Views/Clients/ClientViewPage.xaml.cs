@@ -14,7 +14,7 @@ namespace CDOWin.Views.Clients;
 public sealed partial class ClientViewPage : Page {
 
     // =========================
-    // ViewModel
+    // Dependencies
     // =========================
     public ClientsViewModel ViewModel { get; private set; } = null!;
 
@@ -103,12 +103,14 @@ public sealed partial class ClientViewPage : Page {
 
     private void SA_Click(object sender, RoutedEventArgs e) {
         if (sender is Button button && button.Tag is string id)
-            Debug.WriteLine($"SA Clicked. ID: {id}");
+            ViewModel.SASelected(id);
+        AppServices.Navigation.Navigate(CDOFrame.ServiceAuthorizations);
     }
 
     private void Placement_Click(object sender, RoutedEventArgs e) {
         if (sender is Button button && button.Tag is string id)
-            Debug.WriteLine($"SA Clicked. ID: {id}");
+            ViewModel.PlacementSelected(id);
+        AppServices.Navigation.Navigate(CDOFrame.Placements);
     }
 
     private async void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {

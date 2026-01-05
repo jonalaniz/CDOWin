@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -10,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class ServiceAuthorizationsViewModel(IServiceAuthorizationService service) : ObservableObject {
+public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     // =========================
     // Services / Dependencies
     // =========================
-    private readonly IServiceAuthorizationService _service = service;
+    private readonly IServiceAuthorizationService _service;
+    private readonly SASelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
@@ -35,6 +37,36 @@ public partial class ServiceAuthorizationsViewModel(IServiceAuthorizationService
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
+
+    // =========================
+    // Constructor
+    // =========================
+
+    public ServiceAuthorizationsViewModel(IServiceAuthorizationService service, SASelectionService selectionService) {
+        _service = service;
+        _selectionService = selectionService;
+        _selectionService.NewSACreated += OnNewSACreated;
+        _selectionService.SASelected += OnSASelected;
+    }
+
+    // =========================
+    // Selection Handlers
+    // =========================
+
+    private void OnNewSACreated() {
+        _ = LoadServiceAuthorizationsAsync();
+    }
+
+    private void OnSASelected(string id) {
+        var selected = _allServiceAuthorizations.FirstOrDefault(s => s.Id == id);
+        if (selected == null) return;
+
+        _dispatcher.TryEnqueue(() => {
+            SearchQuery = "";
+            ApplyFilter();
+            Selected = selected;
+        });
+    }
 
     // =========================
     // Property Change Methods

@@ -1,6 +1,7 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDO.Core.Services;
+using CDOWin.Navigation;
 using CDOWin.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +13,10 @@ public static class AppServices {
     // Network
     public static INetworkService NetworkService { get; private set; } = null!;
 
-    // Services
+    // Navigation
+    public static INavigationService Navigation { get; private set; }
+
+    // Services (Network-based)
     public static IClientService ClientService { get; private set; } = null!;
     public static ICounselorService CounselorService { get; private set; } = null!;
     public static IEmployerService EmployerService { get; private set; } = null!;
@@ -22,6 +26,10 @@ public static class AppServices {
     public static IPlacementService PlacementService { get; private set; } = null!;
 
     private static ClientSelectionService? _clientSelectionService;
+
+    private static PlacementSelectionService? _placementSelectionService;
+
+    private static SASelectionService? _sASelectionService;
 
     // ViewModels
     public static CalendarViewModel CalendarViewModel { get; private set; } = null!;
@@ -40,6 +48,9 @@ public static class AppServices {
         network.Initialize(baseAddress, apiKey);
         NetworkService = network;
 
+        // Initialize Navigation
+        Navigation = new NavigationService();
+
         // Initialize other services
         ClientService = new ClientService(NetworkService);
         CounselorService = new CounselorService(NetworkService);
@@ -50,15 +61,17 @@ public static class AppServices {
         PlacementService = new PlacementService(NetworkService);
 
         _clientSelectionService = new();
+        _placementSelectionService = new();
+        _sASelectionService = new();
 
         // Initialize ViewModels
-        ClientsViewModel = new ClientsViewModel(ClientService, _clientSelectionService);
+        ClientsViewModel = new ClientsViewModel(ClientService, _clientSelectionService, _placementSelectionService, _sASelectionService);
         CounselorsViewModel = new CounselorsViewModel(CounselorService);
         EmployersViewModel = new EmployersViewModel(EmployerService);
-        SAsViewModel = new ServiceAuthorizationsViewModel(SAService);
+        SAsViewModel = new ServiceAuthorizationsViewModel(SAService, _sASelectionService);
         RemindersViewModel = new RemindersViewModel(ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(StateService);
-        PlacementsViewModel = new PlacementsViewModel(PlacementService);
+        PlacementsViewModel = new PlacementsViewModel(PlacementService, _placementSelectionService);
         CalendarViewModel = new CalendarViewModel(RemindersViewModel);
 
     }

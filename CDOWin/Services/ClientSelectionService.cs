@@ -1,6 +1,5 @@
 ﻿using CDO.Core.Models;
 using System;
-using System.Diagnostics;
 
 namespace CDOWin.Services;
 
@@ -25,7 +24,6 @@ public class ClientSelectionService {
     }
 
     public void NotifyNewReminderCreated() {
-        Debug.WriteLine("Notified");
         NewReminderCreated?.Invoke();
     }
 }

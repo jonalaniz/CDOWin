@@ -75,7 +75,7 @@ public partial class EmployersViewModel(IEmployerService service) : ObservableOb
 
         _dispatcher.TryEnqueue(() => {
             var index = Filtered
-            .Select((e,i) => new { e, i })
+            .Select((e, i) => new { e, i })
             .FirstOrDefault(x => x.e.Id == id)?.i;
 
             if (index != null)

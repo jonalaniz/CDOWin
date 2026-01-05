@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -10,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class PlacementsViewModel(IPlacementService service) : ObservableObject {
+public partial class PlacementsViewModel : ObservableObject {
 
     // =========================
     // Services / Dependencies
     // =========================
-    private readonly IPlacementService _service = service;
+    private readonly IPlacementService _service;
+    private readonly PlacementSelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
@@ -35,6 +37,36 @@ public partial class PlacementsViewModel(IPlacementService service) : Observable
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
+
+    // =========================
+    // Constructor
+    // =========================
+
+    public PlacementsViewModel(IPlacementService service, PlacementSelectionService selectionService) {
+        _service = service;
+        _selectionService = selectionService;
+        _selectionService.NewPlacementCreated += OnNewPlacementCreated;
+        _selectionService.PlacementSelected += OnPlacementSelected;
+    }
+
+    // =========================
+    // Selection Handlers
+    // =========================
+
+    private void OnNewPlacementCreated() {
+        _ = LoadPlacementsAsync();
+    }
+
+    private void OnPlacementSelected(string id) {
+        var selected = _allPlacements.FirstOrDefault(p => p.Id == id);
+        if (selected == null) return;
+
+        _dispatcher.TryEnqueue(() => {
+            SearchQuery = "";
+            ApplyFilter();
+            Selected = selected;
+        });
+    }
 
     // =========================
     // Property Change Methods

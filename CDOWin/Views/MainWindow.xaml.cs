@@ -1,29 +1,28 @@
-using CDOWin.Views.Clients;
-using CDOWin.Views.Counselors;
-using CDOWin.Views.Employers;
-using CDOWin.Views.Placements;
+using CDOWin.Navigation;
+using CDOWin.Services;
 using CDOWin.Views.Reminders;
-using CDOWin.Views.ServiceAuthorizations;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.ViewManagement;
-using WinUIEx;
 
 namespace CDOWin.Views;
 
 public sealed partial class MainWindow : Window {
     private int _previousSelectedIndex = 0;
+    private INavigationService _navigationService;
 
     // =========================
     // Constructor
     // =========================
     public MainWindow() {
         InitializeComponent();
+        _navigationService = AppServices.Navigation;
+        _navigationService.SetFrame(ContentFrame);
+        _navigationService.NavigationRequested += OnNavigationRequested;
         SetupWindow();
         _ = SetupTitleBarAsync();
 
@@ -37,7 +36,7 @@ public sealed partial class MainWindow : Window {
     private void SetupWindow() {
         ExtendsContentIntoTitleBar = true;
 
-        var manager = WindowManager.Get(this);
+        var manager = WinUIEx.WindowManager.Get(this);
         manager.MinHeight = 800;
         manager.MinWidth = 1200;
     }
@@ -62,23 +61,41 @@ public sealed partial class MainWindow : Window {
     // Navigation
     // =========================
 
+    private void OnNavigationRequested(CDOFrame frame) {
+        var item = NavigationBar.MenuItems
+            .OfType<NavigationViewItem>()
+            .FirstOrDefault(mi => mi.Tag is CDOFrame tag && tag == frame);
+
+        if (item != null)
+            NavigationBar.SelectedItem = item;
+    }
+
     private void NavigationSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {
         if (args.SelectedItem is NavigationViewItem selectedItem && selectedItem.Tag is CDOFrame frame) {
-            Type pageType = frame switch {
-                CDOFrame.Clients => typeof(ClientsPage),
-                CDOFrame.Counselors => typeof(CounselorsPage),
-                CDOFrame.Employers => typeof(EmployersPage),
-                CDOFrame.ServiceAuthorizations => typeof(ServiceAuthorizationsPage),
-                CDOFrame.Placements => typeof(PlacementsPage),
-                _ => throw new ArgumentOutOfRangeException(nameof(frame), frame, null),
-            };
-
             var currentSelectedIndex = sender.MenuItems.IndexOf(selectedItem);
-            var effect = currentSelectedIndex - _previousSelectedIndex > 0
-                ? SlideNavigationTransitionEffect.FromRight
-                : SlideNavigationTransitionEffect.FromLeft;
-            ContentFrame.Navigate(pageType, null, new SlideNavigationTransitionInfo() { Effect = effect });
+            var direction = currentSelectedIndex - _previousSelectedIndex > 0
+                ? Direction.Forward
+                : Direction.Backward;
             _previousSelectedIndex = currentSelectedIndex;
+
+            switch (frame) {
+                case CDOFrame.Clients:
+                    _navigationService.ShowClients(direction);
+                    break;
+                case CDOFrame.Counselors:
+                    _navigationService.ShowCounselors(direction);
+                    break;
+                case CDOFrame.Employers:
+                    _navigationService.ShowEmployers(direction);
+                    break;
+                case CDOFrame.ServiceAuthorizations:
+                    _navigationService.ShowServiceAuthorizations(direction);
+                    break;
+                case CDOFrame.Placements:
+                    _navigationService.ShowPlacements(direction);
+                    break;
+            }
+            ;
         }
     }
 }

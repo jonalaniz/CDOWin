@@ -77,7 +77,7 @@
 
             <!-- Clients List -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                       ItemsSource="{Binding Filtered}"
                       IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick">

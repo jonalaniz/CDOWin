@@ -36,13 +36,15 @@
             
             <!-- Documents Button -->
             <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,2,8,0"
-                    Click="OpenDocuments_Clicked">
+                    Click="OpenDocuments_Clicked"
+                    ToolTipService.ToolTip="Open Documents">
                 <FontIcon Glyph="&#xE838;" Style="{StaticResource SingleIconFontStyle}"/>
             </Button>
             
             <!-- Reminders Split Button (flyout contains templated reminders) -->
             <SplitButton x:Name="RemindersSplitButton" Margin="0,2,8,0" Padding="6"
                          Click="CreateReminder_ClickAsync"
+                         ToolTipService.ToolTip="New Reminder"
                          Style="{ThemeResource SplitButtonCommandBarStyle}">
                 <FontIcon Glyph="&#xED0E;" Foreground="{StaticResource AccentAAFillColorDefaultBrush}"/>
             </SplitButton>
@@ -87,7 +89,8 @@
                             <TextBlock Grid.Column="0" Text="Personal Information"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Personal}" Click="EditButton_Clicked">
+                                    Tag="{x:Bind dialogs:ClientEditType.Personal}" Click="EditButton_Clicked"
+                                    ToolTipService.ToolTip="Edit">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
@@ -150,8 +153,10 @@
 
                             <!-- Edit Contact Information Button -->
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" 
-                                    Tag="{x:Bind dialogs:ClientEditType.Contact}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                    Tag="{x:Bind dialogs:ClientEditType.Contact}" Click="EditButton_Clicked"
+                                    ToolTipService.ToolTip="Edit">
+                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"
+                                          ToolTipService.ToolTip="Simple ToolTip"/>
                             </Button>
                         </Grid>
 
@@ -228,7 +233,8 @@
                             <TextBlock Grid.Column="0" Text="Case Information"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Case}" Click="EditButton_Clicked">
+                                    Tag="{x:Bind dialogs:ClientEditType.Case}" Click="EditButton_Clicked"
+                                    ToolTipService.ToolTip="Edit">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
@@ -296,7 +302,8 @@
                             <TextBlock Grid.Column="0" Text="Service Authorizations"
                                         Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Click="CreateSA_Click">
+                                    Click="CreateSA_Click"
+                                    ToolTipService.ToolTip="New Service Authorization">
                                 <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
@@ -342,7 +349,8 @@
                             <TextBlock Grid.Column="0" Text="Placements"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}">
-                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"
+                                          ToolTipService.ToolTip="New Placement"/>
                             </Button>
                         </Grid>
 
@@ -390,7 +398,8 @@
                             <TextBlock Grid.Column="0" Text="Arrangements"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Arrangements}" Click="EditButton_Clicked">
+                                    Tag="{x:Bind dialogs:ClientEditType.Arrangements}" Click="EditButton_Clicked"
+                                    ToolTipService.ToolTip="Edit">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>
@@ -426,7 +435,8 @@
                             <TextBlock Grid.Column="0" Text="Employment Profile"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Employment}" Click="EditButton_Clicked">
+                                    Tag="{x:Bind dialogs:ClientEditType.Employment}" Click="EditButton_Clicked"
+                                    ToolTipService.ToolTip="Edit">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>
                         </Grid>

@@ -48,7 +48,8 @@
 
         <Button Grid.Row="2" Grid.Column="2" Margin="8,4,8,0" 
                 Style="{StaticResource SingleIconButtonStyle}"
-                Click="Calendar_Click">
+                Click="Calendar_Click"
+                ToolTipService.ToolTip="Open Calendar">
             <FontIcon Glyph="&#xF763;" Style="{StaticResource SingleIconFontStyle}"/>
         </Button>
 

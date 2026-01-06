@@ -8,7 +8,6 @@
     xmlns:controls="using:CDOWin.Controls" 
     xmlns:models="using:CDO.Core.Models" 
     xmlns:dialogs="using:CDOWin.Views.Reminders.Dialogs"
-    d:DataContext="{d:DesignInstance Type=models:Reminder}"
     mc:Ignorable="d">
 
     <Grid Width="400" RowSpacing="12" ColumnSpacing="16">
@@ -23,18 +22,18 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 1: Date-->
-        <CalendarDatePicker Grid.Row="0" Grid.Column="0"
-                            x:Name="DatePicker" Header="Date" HorizontalAlignment="Stretch"
+        <CalendarDatePicker Grid.Row="0" Grid.Column="0" x:Name="DatePicker" 
+                            Header="Date" HorizontalAlignment="Stretch"
                             DateChanged="DatePicker_DateChanged"/>
 
         <!-- Row 2: Checkbox -->
         <CheckBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom"
-                  Content="Mark Completed" IsChecked="{Binding Complete}"
+                  Content="Mark Completed" IsChecked="{x:Bind ViewModel.Original.Complete}"
                   Click="Checkbox_Clicked"/>
 
         <!-- Row 3: Description -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Description" 
-                 Text="{Binding Description}" Tag="{x:Bind dialogs:UpdateField.Description}"
+                 Text="{x:Bind ViewModel.Original.Description}"
                  TextChanged="TextBox_TextChanged"/>
 
     </Grid>

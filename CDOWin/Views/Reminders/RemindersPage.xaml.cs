@@ -18,14 +18,12 @@ public sealed partial class RemindersPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public RemindersViewModel ViewModel { get; }
+    public RemindersViewModel ViewModel { get; } = AppServices.RemindersViewModel;
 
     // =========================
     // Constructor
     // =========================
     public RemindersPage() {
-        ViewModel = AppServices.RemindersViewModel;
-        DataContext = ViewModel;
         ViewModel.ClientSpecific.CollectionChanged += ClientRemindersChanged;
         InitializeComponent();
     }

@@ -3,29 +3,37 @@ using CDOWin.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Diagnostics;
 
 namespace CDOWin.Views.Reminders.Dialogs;
 
 public sealed partial class UpdateReminderPage : Page {
+
+    // =========================
+    // Dependencies
+    // =========================
     public ReminderUpdateViewModel ViewModel;
 
+    // =========================
+    // Constructor
+    // =========================
     public UpdateReminderPage(ReminderUpdateViewModel viewModel) {
         ViewModel = viewModel;
-        DataContext = viewModel.Original;
         InitializeComponent();
         SetupDatePicker();
     }
 
+    // =========================
+    // UI Setup
+    // =========================
     private void SetupDatePicker() {
-        Debug.WriteLine($"Local Date: {ViewModel.Original.LocalDate}");
-        Debug.WriteLine($"Full Date: {ViewModel.Original.Date}");
-
         if (ViewModel.Original.Date is DateTime date) {
             DatePicker.Date = date;
         }
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
         if (ViewModel.Original.Date is DateTime date) {
             if (date == DatePicker.Date)

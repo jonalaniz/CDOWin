@@ -15,7 +15,6 @@ public sealed partial class CreateServiceAuthorization : Page {
     // =========================
     public CreateServiceAuthorization(CreateServiceAuthorizationsViewModel viewModel) {
         ViewModel = viewModel;
-        DataContext = viewModel;
         InitializeComponent();
     }
 

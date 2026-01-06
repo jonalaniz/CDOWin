@@ -154,9 +154,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Reminders\Inspectors\" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\Referrals\PlacementsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

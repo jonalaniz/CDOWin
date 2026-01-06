@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls"
     xmlns:viewModels="using:CDOWin.ViewModels"
-    d:DataContext="{d:DesignInstance Type=viewModels:CreateServiceAuthorizationsViewModel}"
     mc:Ignorable="d">
 
     <Grid RowSpacing="12" ColumnSpacing="16">
@@ -31,19 +30,17 @@
 
         <!-- Row 0: Case ID + Tier + Counselor (Non Editable) -->
         <controls:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
-                            Label="Issued By" Value="{Binding Client.CounselorReference.Name}"/>
+                            Label="Issued By" Value="{x:Bind ViewModel.Client.CounselorReference.Name}"/>
         <controls:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
-                            Label="Tier Level" Value="{Binding Client.Status}"/>
+                            Label="Tier Level" Value="{x:Bind ViewModel.Client.Status}"/>
         <controls:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
-                            Label="Case ID" Value="{Binding Client.CaseID}"/>
+                            Label="Case ID" Value="{x:Bind ViewModel.Client.CaseID}"/>
 
         <!-- Row 1: Office Address -->
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="DRS Office Address" 
-                 Text="{Binding Office}"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="DRS Office Address"/>
         
         <!-- Row 2: SA Number + Start Date + End Date -->
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number" 
-                 Text="{Binding Id}"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"/>
         
         <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
                             Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
@@ -54,14 +51,12 @@
                             DateChanged="DatePicker_DateChanged"/>
 
         <!-- Row 3: U/M + Cost-->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M" 
-                 Text="{Binding UnitOfMeasurement}"/>
-        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost" 
-                 Text="{Binding UnitCost}"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"/>
         
         <!-- Row 4: Decription -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" 
                  Style ="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Description" Text="{Binding Description}"/>
+                 Header="Description"/>
     </Grid>
 </Page>

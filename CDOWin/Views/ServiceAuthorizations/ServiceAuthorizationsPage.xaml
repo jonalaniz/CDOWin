@@ -10,7 +10,6 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:models="using:CDO.Core.Models"
-    d:DataContext="{d:DesignInstance Type=viewmodels:ServiceAuthorizationsViewModel}"
     mc:Ignorable="d">
 
     <Grid>
@@ -59,12 +58,12 @@
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" PlaceholderText="Filter Service Authorizations"
-                     Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- ServiceAuthorizations Table -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView"
-                      Style="{StaticResource DataTableStyle}" ItemsSource="{Binding Filtered}" 
-                      SelectedItem="{Binding Selected, Mode=TwoWay}" ItemClick="ListView_ItemClick">
+                      Style="{StaticResource DataTableStyle}" ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
+                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" ItemClick="ListView_ItemClick">
 
                 <!-- Header -->
                 <ListView.Header>

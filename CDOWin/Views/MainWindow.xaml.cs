@@ -13,7 +13,7 @@ namespace CDOWin.Views;
 
 public sealed partial class MainWindow : Window {
     private int _previousSelectedIndex = 0;
-    private INavigationService _navigationService;
+    private readonly INavigationService _navigationService;
 
     // =========================
     // Constructor

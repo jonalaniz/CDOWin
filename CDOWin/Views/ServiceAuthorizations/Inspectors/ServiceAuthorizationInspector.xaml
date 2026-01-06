@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:control="using:CDOWin.Controls"
-    d:DataContext="{d:DesignInstance Type=viewmodels:ServiceAuthorizationsViewModel}"
     mc:Ignorable="d">
 
     <Grid RowSpacing="0">
@@ -26,7 +25,7 @@
         
         <!-- Header -->
         <TextBlock Grid.Row="0" Style="{StaticResource InspectorHeaderStyle}"
-                   Text="{Binding Selected.Client.Name}"/>
+                   Text="{x:Bind ViewModel.Selected.Client.Name, Mode=OneWay}"/>
 
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" 
@@ -57,29 +56,31 @@
             </Grid.ColumnDefinitions>
 
             <!-- Row 0: PO Number + Case ID-->
-            <control:LabelPair Grid.Row="0" Grid.Column="0" Label="SA Number" Value="{Binding Selected.Id}"/>
-            <control:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{Binding Selected.Client.CaseID}"/>
+            <control:LabelPair Grid.Row="0" Grid.Column="0" 
+                               Label="SA Number" Value="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="0" Grid.Column="1" 
+                               Label="Case ID" Value="{x:Bind ViewModel.Selected.Client.CaseID, Mode=OneWay}"/>
 
             <!-- Row 1: Counselor -->
             <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Issued By" Value="{Binding Selected.Client.CounselorReference.name}"/>
+                               Label="Issued By" Value="{x:Bind ViewModel.Selected.Client.CounselorReference.Name}"/>
 
             <!-- Row 2: Counselor -->
             <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Office" Value="{Binding Selected.Office}"/>
+                               Label="Office" Value="{x:Bind ViewModel.Selected.Office, Mode=OneWay}"/>
             
             <!-- Row 3: Start Date + End Date -->
-            <control:LabelPair Grid.Row="3" Grid.Column="0" Label="Start Date" Value="{Binding Selected.FormattedStartDate}"/>
-            <control:LabelPair Grid.Row="3" Grid.Column="1" Label="End Date" Value="{Binding Selected.FormattedEndDate}"/>
+            <control:LabelPair Grid.Row="3" Grid.Column="0" Label="Start Date" Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="3" Grid.Column="1" Label="End Date" Value="{x:Bind ViewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
 
             <!-- Row 4: Unit Cost -->
             <control:LabelPair Grid.Row="4" Grid.Column="0"
-                               Label="Unit Cost" Value="{Binding Selected.FormattedCost}"/>
+                               Label="Unit Cost" Value="{x:Bind ViewModel.Selected.FormattedCost, Mode=OneWay}"/>
             <control:LabelPair Grid.Row="4" Grid.Column="1"
-                               Label="U/M" Value="{Binding Selected.UnitOfMeasurement}"/>
+                               Label="U/M" Value="{x:Bind ViewModel.Selected.UnitOfMeasurement, Mode=OneWay}"/>
             <!-- Row 5: Description -->
             <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                               Label="Description" Value="{Binding Selected.Description}"/>
+                               Label="Description" Value="{x:Bind ViewModel.Selected.Description, Mode=OneWay}"/>
         </Grid>
 
         <!-- Row 5: Button Row -->
@@ -87,20 +88,12 @@
               Style="{StaticResource InspectorButtonGridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Style="{StaticResource InspectorAccentStyle}">
                 <StackPanel Orientation="Horizontal" Spacing="5">
                     <SymbolIcon Symbol="Page"/>
                     <TextBlock Text="Invoice"/>
-                </StackPanel>
-            </Button>
-
-            <Button Grid.Column="1" Style="{StaticResource InspectorCriticalStyle}">
-                <StackPanel Orientation="Horizontal" Spacing="5">
-                    <SymbolIcon Symbol="Delete"/>
-                    <TextBlock Text="Delete"/>
                 </StackPanel>
             </Button>
         </Grid>

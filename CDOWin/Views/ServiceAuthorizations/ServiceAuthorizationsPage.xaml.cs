@@ -7,15 +7,23 @@ using Microsoft.UI.Xaml.Controls;
 namespace CDOWin.Views.ServiceAuthorizations;
 
 public sealed partial class ServiceAuthorizationsPage : Page {
-    public ServiceAuthorizationsViewModel ViewModel { get; }
 
+    // =========================
+    // ViewModel
+    // =========================
+    public ServiceAuthorizationsViewModel ViewModel { get; } = AppServices.SAsViewModel;
+
+    // =========================
+    // Constructor
+    // =========================
     public ServiceAuthorizationsPage() {
         InitializeComponent();
-        ViewModel = AppServices.SAsViewModel;
-        DataContext = ViewModel;
-        InspectorFrame.Navigate(typeof(ServiceAuthorizationInspector), ViewModel);
+        InspectorFrame.Navigate(typeof(ServiceAuthorizationInspector));
     }
 
+    // =========================
+    // Click Handlers
+    // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is ServiceAuthorization sa) {
             _ = ViewModel.ReloadServiceAuthorizationAsync(sa.Id);

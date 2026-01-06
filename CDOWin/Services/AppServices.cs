@@ -14,7 +14,7 @@ public static class AppServices {
     public static INetworkService NetworkService { get; private set; } = null!;
 
     // Navigation
-    public static INavigationService Navigation { get; private set; }
+    public static INavigationService Navigation { get; } = new NavigationService();
 
     // Services (Network-based)
     public static IClientService ClientService { get; private set; } = null!;
@@ -47,9 +47,6 @@ public static class AppServices {
         var network = new NetworkService();
         network.Initialize(baseAddress, apiKey);
         NetworkService = network;
-
-        // Initialize Navigation
-        Navigation = new NavigationService();
 
         // Initialize other services
         ClientService = new ClientService(NetworkService);

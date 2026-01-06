@@ -139,7 +139,7 @@ public partial class RemindersViewModel : ObservableObject {
 
         _allReminders = updated;
 
-        if(Filter == RemindersFilter.Client) {
+        if (Filter == RemindersFilter.Client) {
             ClientSpecific = new ObservableCollection<Reminder>(
                 ClientSpecific.Select(r => r.Id == id ? reminder : r)
             );

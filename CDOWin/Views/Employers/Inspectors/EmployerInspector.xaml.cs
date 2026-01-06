@@ -1,9 +1,7 @@
-using CDO.Core.DTOs;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Employers.Dialogs;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace CDOWin.Views.Employers.Inspectors;

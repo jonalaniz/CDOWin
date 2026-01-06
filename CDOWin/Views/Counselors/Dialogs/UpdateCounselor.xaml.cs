@@ -5,15 +5,23 @@ using Microsoft.UI.Xaml.Controls;
 namespace CDOWin.Views.Counselors.Dialogs;
 
 public sealed partial class UpdateCounselor : Page {
+
+    // =========================
+    // Dependencies
+    // =========================
     public CounselorUpdateViewModel ViewModel;
 
+    // =========================
     // Constructor
+    // =========================
     public UpdateCounselor(CounselorUpdateViewModel viewModel) {
         ViewModel = viewModel;
-        DataContext = viewModel.Original;
         InitializeComponent();
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is not TextBox textbox || textbox.Tag is not Field field)
             return;
@@ -26,6 +34,9 @@ public sealed partial class UpdateCounselor : Page {
         UpdateModel(text, field);
     }
 
+    // =========================
+    // Utility Methods
+    // =========================
     private void UpdateModel(string value, Field field) {
         switch (field) {
             case Field.Name:

@@ -13,15 +13,13 @@ public sealed partial class CounselorsPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public CounselorsViewModel ViewModel { get; }
+    public CounselorsViewModel ViewModel { get; } = AppServices.CounselorsViewModel;
 
     // =========================
     // Constructor
     // =========================
     public CounselorsPage() {
         InitializeComponent();
-        ViewModel = AppServices.CounselorsViewModel;
-        DataContext = ViewModel;
         InspectorFrame.Navigate(typeof(CounselorInspector), ViewModel);
     }
 

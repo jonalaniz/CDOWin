@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
     xmlns:viewModels="using:CDOWin.ViewModels" 
-    d:DataContext="{d:DesignInstance Type=viewModels:CreateCounselorViewModel}"
     mc:Ignorable="d">
 
     <Grid Width="400" RowSpacing="12" ColumnSpacing="16">
@@ -25,32 +24,32 @@
 
         <!-- Row 0: Name + Email -->
         <TextBox Grid.Row="0" Grid.Column="0" Header="Name" 
-                 Text="{Binding Name}" Tag="{x:Bind local:Field.Name}"
+                 Tag="{x:Bind local:Field.Name}"
                  TextChanged="TextBox_TextChanged"/>
         <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Header="Email" 
-                 Text="{Binding Email}" Tag="{x:Bind local:Field.Email}"
+                 Tag="{x:Bind local:Field.Email}"
                  TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 1: Phone + Fax -->
         <TextBox Grid.Row="1" Grid.Column="0" Header="Phone" 
-                 Text="{Binding Phone}" Tag="{x:Bind local:Field.Phone}"
+                 Tag="{x:Bind local:Field.Phone}"
                  TextChanged="TextBox_TextChanged"/>
         <TextBox Grid.Row="1" Grid.Column="1" Header="Fax" 
-                 Text="{Binding Fax}" Tag="{x:Bind local:Field.Fax}"
+                 Tag="{x:Bind local:Field.Fax}"
                  TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 2: Secretary + Secretary Email -->
         <TextBox Grid.Row="2" Grid.Column="0" Header="Secretary" 
-                 Text="{Binding SecretaryName}" Tag="{x:Bind local:Field.Secretary}"
+                 Tag="{x:Bind local:Field.Secretary}"
                  TextChanged="TextBox_TextChanged"/>
         <TextBox Grid.Row="2" Grid.Column="1" Header="Secretary Email" 
-                 Text="{Binding SecretaryEmail}" Tag="{x:Bind local:Field.SecretaryEmail}"
+                 Tag="{x:Bind local:Field.SecretaryEmail}"
                  TextChanged="TextBox_TextChanged"/>
 
         <!--Row 3:  Notes -->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="Notes"
                  Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Notes" Text="{Binding Notes}" Tag="{x:Bind local:Field.Notes}"
+                 Tag="{x:Bind local:Field.Notes}"
                  TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Page>

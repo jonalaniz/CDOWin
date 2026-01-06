@@ -9,6 +9,7 @@ using System;
 namespace CDOWin.Views.Clients.Inspectors;
 
 public sealed partial class Notes : Page {
+
     // =========================
     // ViewModel
     // =========================

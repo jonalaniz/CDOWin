@@ -16,7 +16,6 @@ public sealed partial class CreateCounselor : Page {
     // =========================
     public CreateCounselor(CreateCounselorViewModel viewModel) {
         ViewModel = viewModel;
-        DataContext = viewModel;
         InitializeComponent();
     }
 

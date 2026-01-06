@@ -1,22 +1,28 @@
+using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Counselors.Dialogs;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace CDOWin.Views.Counselors.Inspectors;
 
 public sealed partial class CounselorInspector : Page {
-    public CounselorsViewModel ViewModel { get; private set; } = null!;
+
+    // =========================
+    // ViewModel
+    // =========================
+    public CounselorsViewModel ViewModel { get; private set; } = AppServices.CounselorsViewModel;
+
+    // =========================
+    // Constructor
+    // =========================
     public CounselorInspector() {
         InitializeComponent();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e) {
-        ViewModel = (CounselorsViewModel)e.Parameter;
-        DataContext = ViewModel;
-    }
-
+    // =========================
+    // Click Handlers
+    // =========================
     private async void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
         if (ViewModel == null || ViewModel.Selected == null)
             return;
@@ -30,9 +36,5 @@ public sealed partial class CounselorInspector : Page {
         if (result == ContentDialogResult.Primary) {
             _ = ViewModel.UpdateCounselorAsync(updateVM.Updated);
         }
-    }
-
-    private void Delete_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-
     }
 }

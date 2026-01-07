@@ -3,6 +3,7 @@ using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Diagnostics;
+using Windows.Globalization.NumberFormatting;
 
 namespace CDOWin.Views.ServiceAuthorizations.Dialogs;
 
@@ -16,10 +17,11 @@ public sealed partial class CreateServiceAuthorization : Page {
     // =========================
     // Constructor
     // =========================
-    public CreateServiceAuthorization(CreateServiceAuthorizationsViewModel viewModel) {
+    public CreateServiceAuthorization(CreateServiceAuthorizationsViewModel viewModel, int clientID) {
         ViewModel = viewModel;
         InitializeComponent();
         SetupDatePickers();
+        SetupNumberBox();
     }
 
     // =========================
@@ -29,6 +31,15 @@ public sealed partial class CreateServiceAuthorization : Page {
         DateTimeOffset date = DateTime.Now;
         StartDatePicker.Date = date;
         EndDatePicker.Date = date;
+    }
+
+    private void SetupNumberBox() {
+        DecimalFormatter formatter = new();
+        formatter.IntegerDigits = 1;
+        formatter.FractionDigits = 2;
+        formatter.SignificantDigits = 2;
+
+        NumberBox.NumberFormatter = formatter;
     }
 
     // =========================
@@ -60,21 +71,25 @@ public sealed partial class CreateServiceAuthorization : Page {
 
         switch (field) {
             case Field.Id:
-                break;
-            case Field.ClientID:
-                break;
-            case Field.CounselorID:
+                ViewModel.Id = text;
                 break;
             case Field.Description:
+                ViewModel.Description = text;
                 break;
             case Field.Office:
+                ViewModel.Office = text;
                 break;
             case Field.UoM:
+                ViewModel.UnitOfMeasurement = text;
                 break;
         }
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
+        if (sender is not NumberBox numberBox || numberBox.Value <= 0.00) return;
 
+        ViewModel.UnitCost = numberBox.Value;
     }
+
+    // when we create the SA, we use the client's id and client's associated counselor id
 }

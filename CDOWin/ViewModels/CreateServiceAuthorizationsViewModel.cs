@@ -3,6 +3,7 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -18,24 +19,30 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     public partial Client Client { get; set; } = client;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string Id { get; set; } = string.Empty;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string Description { get; set; } = string.Empty;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial DateTime StartDate { get; set; } = DateTime.Now.Date;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial DateTime EndDate { get; set; } = DateTime.Now.Date;
 
     [ObservableProperty]
     public partial string? Office { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial double? UnitCost { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? UnitOfMeasurement { get; set; }
 
     // =========================
@@ -44,6 +51,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     public bool CanSave => CanSaveMethod();
 
     private bool CanSaveMethod() {
+        Debug.WriteLine("didchange");
         if (string.IsNullOrWhiteSpace(Id)
             || string.IsNullOrWhiteSpace(Description)
             || string.IsNullOrWhiteSpace(UnitOfMeasurement)

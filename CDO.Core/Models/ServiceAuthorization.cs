@@ -2,7 +2,6 @@
 
 public record class ServiceAuthorization(
     string Id,
-    int ClientID,
     string Description,
     string? Office,
     int? CounselorID,

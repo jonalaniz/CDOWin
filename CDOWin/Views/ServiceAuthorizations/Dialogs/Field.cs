@@ -2,7 +2,6 @@
 
 public enum Field {
     Id,
-    ClientID,
     CounselorID,
     Description,
     Office,

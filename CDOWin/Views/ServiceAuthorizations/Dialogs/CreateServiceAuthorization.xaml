@@ -56,8 +56,9 @@
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
                  TextChanged="TextChanged" Tag="{x:Bind local:Field.UoM}"/>
         <NumberBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
+                   x:Name="NumberBox" PlaceholderText="0.00"
                    ValueChanged="NumberBox_ValueChanged"/>
-        
+
         <!-- Row 4: Decription -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
                  Style ="{StaticResource MultiLineTextBoxStyle}" 

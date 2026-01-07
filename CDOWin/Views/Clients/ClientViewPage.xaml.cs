@@ -87,7 +87,7 @@ public sealed partial class ClientViewPage : Page {
 
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Service Authorization for {ViewModel.SelectedClient.Name}");
         var createSAVM = AppServices.CreateServiceAuthorizationsViewModel(ViewModel.SelectedClient);
-        var createSAPage = new CreateServiceAuthorization(createSAVM);
+        var createSAPage = new CreateServiceAuthorization(createSAVM, ViewModel.SelectedClient.Id);
         dialog.Content = createSAPage;
         dialog.IsPrimaryButtonEnabled = createSAVM.CanSave;
 

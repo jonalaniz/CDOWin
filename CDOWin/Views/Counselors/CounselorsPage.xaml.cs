@@ -5,6 +5,7 @@ using CDOWin.Views.Counselors.Dialogs;
 using CDOWin.Views.Counselors.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.ComponentModel;
 
 namespace CDOWin.Views.Counselors;
 
@@ -33,10 +34,12 @@ public sealed partial class CounselorsPage : Page {
         dialog.Content = createCounselorPage;
         dialog.IsPrimaryButtonEnabled = createCounselorVM.CanSave;
 
-        createCounselorVM.PropertyChanged += (_, args) => {
+        PropertyChangedEventHandler handler = (_, args) => {
             if (args.PropertyName == nameof(createCounselorVM.CanSave))
                 dialog.IsPrimaryButtonEnabled = createCounselorVM.CanSave;
         };
+
+        createCounselorVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
 
@@ -44,6 +47,8 @@ public sealed partial class CounselorsPage : Page {
             await createCounselorVM.CreateCounselorAsync();
             _ = ViewModel.LoadCounselorsAsync();
         }
+
+        createCounselorVM.PropertyChanged -= handler;
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {

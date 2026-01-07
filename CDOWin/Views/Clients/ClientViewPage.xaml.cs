@@ -6,6 +6,7 @@ using CDOWin.Views.ServiceAuthorizations.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace CDOWin.Views.Clients;
@@ -90,10 +91,12 @@ public sealed partial class ClientViewPage : Page {
         dialog.Content = createSAPage;
         dialog.IsPrimaryButtonEnabled = createSAVM.CanSave;
 
-        createSAVM.PropertyChanged += (_, args) => {
+        PropertyChangedEventHandler handler = (_, args) => {
             if (args.PropertyName == nameof(createSAVM.CanSave))
                 dialog.IsPrimaryButtonEnabled = createSAVM.CanSave;
         };
+
+        createSAVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
 
@@ -101,6 +104,8 @@ public sealed partial class ClientViewPage : Page {
             await createSAVM.CreateSAAsync();
             _ = ViewModel.ReloadClientAsync();
         }
+
+        createSAVM.PropertyChanged -= handler;
     }
 
     private void SA_Click(object sender, RoutedEventArgs e) {

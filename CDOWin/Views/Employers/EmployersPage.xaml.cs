@@ -5,6 +5,7 @@ using CDOWin.Views.Employers.Dialogs;
 using CDOWin.Views.Employers.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.ComponentModel;
 
 namespace CDOWin.Views.Employers;
 
@@ -33,10 +34,12 @@ public sealed partial class EmployersPage : Page {
         dialog.Content = createEmployerPage;
         dialog.IsPrimaryButtonEnabled = createEmployerVM.CanSave;
 
-        createEmployerVM.PropertyChanged += (_, args) => {
+        PropertyChangedEventHandler handler = (_, args) => {
             if (args.PropertyName == nameof(createEmployerVM.CanSave))
                 dialog.IsPrimaryButtonEnabled = createEmployerVM.CanSave;
         };
+
+        createEmployerVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
 
@@ -44,6 +47,8 @@ public sealed partial class EmployersPage : Page {
             await createEmployerVM.CreateEmployerAsync();
             _ = ViewModel.LoadEmployersAsync();
         }
+
+        createEmployerVM.PropertyChanged -= handler;
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {

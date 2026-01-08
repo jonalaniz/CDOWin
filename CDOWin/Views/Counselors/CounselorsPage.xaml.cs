@@ -4,6 +4,7 @@ using CDOWin.ViewModels;
 using CDOWin.Views.Counselors.Dialogs;
 using CDOWin.Views.Counselors.Inspectors;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.ComponentModel;
 
@@ -22,6 +23,14 @@ public sealed partial class CounselorsPage : Page {
     public CounselorsPage() {
         InitializeComponent();
         InspectorFrame.Navigate(typeof(CounselorInspector));
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    protected override async void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        await ViewModel.LoadCounselorsAsync();
     }
 
     // =========================

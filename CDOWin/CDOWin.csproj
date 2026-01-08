@@ -181,7 +181,7 @@
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
 	<JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
-	<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+	<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <PackageCertificateThumbprint>7A9448D2CCE2C03FDAACD51C3FB1D2883B850F19</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
@@ -190,7 +190,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppInstallerUri>https://stserver.org/CDO</AppInstallerUri>
+    <AppInstallerUri>https://alamoemployment.com/CDO</AppInstallerUri>
   </PropertyGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Clients\ClientInspectors\**" />

@@ -4,6 +4,7 @@ using CDOWin.ViewModels;
 using CDOWin.Views.Employers.Dialogs;
 using CDOWin.Views.Employers.Inspectors;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.ComponentModel;
 
@@ -22,6 +23,14 @@ public sealed partial class EmployersPage : Page {
     public EmployersPage() {
         InitializeComponent();
         InspectorFrame.Navigate(typeof(EmployerInspector));
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    protected override async void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        await ViewModel.LoadEmployersAsync();
     }
 
     // =========================

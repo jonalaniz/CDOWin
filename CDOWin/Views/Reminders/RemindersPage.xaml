@@ -98,33 +98,27 @@
                                         <MenuFlyoutItem Text="{x:Bind Complete, Mode=OneWay, Converter={StaticResource BoolCompletedConverter}}" 
                                                         Click="ToggleCompleted_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xF0B5;" />
+                                                <FontIcon Glyph="&#xF0B5;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="Go To Client" Icon="Contact" 
-                                                        Click="ViewClient_Click" Tag="{x:Bind ClientID}"/>
+                                        <MenuFlyoutItem Text="Go To Client" Click="ViewClient_Click" Tag="{x:Bind ClientID}">
+                                            <MenuFlyoutItem.Icon>
+                                                <SymbolIcon Symbol="Contact" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
                                         <MenuFlyoutSeparator/>
                                         
                                         <!-- Section 1: Defer Dates -->
-                                        <MenuFlyoutItem Text="Defer 1 Day" CommandParameter="1" Click="Defer_Click" Tag="{x:Bind Id}">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE8F5;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="Defer 1 Week" CommandParameter="7" Click="Defer_Click" Tag="{x:Bind Id}">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE8F5;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="Defer 1 Month" CommandParameter="30" Click="Defer_Click" Tag="{x:Bind Id}">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE8F5;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="Defer 1 Day" CommandParameter="1" Click="Defer_Click" Tag="{x:Bind Id}"/>
+                                        <MenuFlyoutItem Text="Defer 1 Week" CommandParameter="7" Click="Defer_Click" Tag="{x:Bind Id}"/>
+                                        <MenuFlyoutItem Text="Defer 1 Month" CommandParameter="30" Click="Defer_Click" Tag="{x:Bind Id}"/>
                                         <MenuFlyoutSeparator/>
                                         <!-- Section 2: Delete -->
-                                        <MenuFlyoutItem Text="Delete..." Icon="Delete"
-                                                        Click="Delete_Click" Tag="{x:Bind Id}"/>
+                                        <MenuFlyoutItem Text="Delete..." Click="Delete_Click" Tag="{x:Bind Id}">
+                                            <MenuFlyoutItem.Icon>
+                                                <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
                                     </MenuFlyout>
                                 </SplitButton.Flyout>
                             </SplitButton>

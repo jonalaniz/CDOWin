@@ -6,11 +6,6 @@ namespace CDOWin.Navigation;
 
 public interface INavigationService {
     event Action<CDOFrame>? NavigationRequested;
-    void SetFrame(Frame frame);
+    void Initialize(NavigationView navigationView, Frame frame);
     void Navigate(CDOFrame frame);
-    void ShowClients(Direction direction);
-    void ShowCounselors(Direction direction);
-    void ShowEmployers(Direction direction);
-    void ShowPlacements(Direction direction);
-    void ShowServiceAuthorizations(Direction direction);
 }

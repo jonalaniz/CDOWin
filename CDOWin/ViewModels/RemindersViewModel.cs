@@ -1,10 +1,12 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CDOWin.Services;
 using CDOWin.Views.Reminders;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +22,7 @@ public partial class RemindersViewModel : ObservableObject {
     // Services / Dependencies
     // =========================
     private readonly IReminderService _service;
+    private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher;
 
@@ -28,6 +31,7 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     private IReadOnlyList<Reminder> _allReminders = [];
     private RemindersFilter _filter = RemindersFilter.All;
+    private readonly DispatcherTimer _refreshTimer;
 
     // =========================
     // Public Properties / State
@@ -53,13 +57,22 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public RemindersViewModel(IReminderService service, ClientSelectionService clientSelectionService) {
+    public RemindersViewModel(DataCoordinator dataCoordinator, IReminderService service, ClientSelectionService clientSelectionService) {
         _service = service;
+        _dataCoordinator = dataCoordinator;
+
         _selectionService = clientSelectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
         _selectionService.SelectedClientChanged += OnClientChanged;
         _selectionService.NewReminderCreated += OnReminderCreated;
+
+        _refreshTimer = new DispatcherTimer {
+            Interval = TimeSpan.FromSeconds(30)
+        };
+
+        _refreshTimer.Tick += async (_, _) => await LoadRemindersAsync();
+        _refreshTimer.Start();
     }
 
     // =========================
@@ -119,7 +132,7 @@ public partial class RemindersViewModel : ObservableObject {
     // CRUD Methods
     // =========================
     public async Task LoadRemindersAsync() {
-        var reminders = await _service.GetAllRemindersAsync();
+        var reminders = await _dataCoordinator.GetRemindersAsync();
         if (reminders == null) return;
 
         var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();

@@ -1,6 +1,7 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -11,12 +12,13 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CounselorsViewModel(ICounselorService service) : ObservableObject {
+public partial class CounselorsViewModel(DataCoordinator dataCoordinator, ICounselorService service) : ObservableObject {
 
     // =========================
     // Services / Dependencies
     // =========================
     private readonly ICounselorService _service = service;
+    private readonly DataCoordinator _dataCoordinator = dataCoordinator;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
@@ -50,14 +52,13 @@ public partial class CounselorsViewModel(ICounselorService service) : Observable
     // =========================
     // Public Methods
     // =========================
-
     public List<Counselor> All() => _allCounselors.ToList();
 
     // =========================
     // CRUD Methods
     // =========================
     public async Task LoadCounselorsAsync() {
-        var counselors = await _service.GetAllCounselorsAsync();
+        var counselors = await _dataCoordinator.GetCounselorsAsync();
         if (counselors == null) return;
 
         var snapshot = counselors.OrderBy(o => o.Name).ToList().AsReadOnly();
@@ -102,8 +103,11 @@ public partial class CounselorsViewModel(ICounselorService service) : Observable
     // =========================
 
     private void ApplyFilter() {
+        int? previousSelection = Selected?.Id;
+
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<Counselor>(_allCounselors);
+            ReSelect(previousSelection);
             return;
         }
 
@@ -116,5 +120,12 @@ public partial class CounselorsViewModel(ICounselorService service) : Observable
         );
 
         Filtered = new ObservableCollection<Counselor>(result);
+        ReSelect(previousSelection);
+    }
+
+    private void ReSelect(int? id) {
+        if (id == null) return;
+        if (Filtered.FirstOrDefault(c => c.Id == id) is Counselor selected)
+            Selected = selected;
     }
 }

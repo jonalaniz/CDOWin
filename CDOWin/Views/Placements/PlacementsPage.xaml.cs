@@ -3,6 +3,7 @@ using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Placements.Inspectors;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace CDOWin.Views.Placements;
 
@@ -19,6 +20,14 @@ public sealed partial class PlacementsPage : Page {
     public PlacementsPage() {
         InitializeComponent();
         InspectorFrame.Navigate(typeof(PlacementInspector), ViewModel);
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    protected override async void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        await ViewModel.LoadPlacementsAsync();
     }
 
     // =========================

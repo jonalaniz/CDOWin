@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class StatesViewModel(IStateService service) : ObservableObject {
+public partial class StatesViewModel(DataCoordinator dataCoordinator, IStateService service) : ObservableObject {
     private readonly IStateService _service = service;
+    private readonly DataCoordinator _dataCoordinator = dataCoordinator;
 
     [ObservableProperty]
     public partial ObservableCollection<State> States { get; private set; } = [];
@@ -26,7 +28,7 @@ public partial class StatesViewModel(IStateService service) : ObservableObject {
     }
 
     public async Task LoadStatesAsync() {
-        var states = await _service.GetAllStatesAsync();
+        var states = await _dataCoordinator.GetStatesAsync();
         if (states == null) return;
         List<State> SortedStates = states.OrderBy(o => o.Name).ToList();
         States.Clear();

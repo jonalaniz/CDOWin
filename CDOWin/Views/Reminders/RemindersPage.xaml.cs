@@ -7,6 +7,7 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -26,6 +27,14 @@ public sealed partial class RemindersPage : Page {
     public RemindersPage() {
         ViewModel.ClientSpecific.CollectionChanged += ClientRemindersChanged;
         InitializeComponent();
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    protected override async void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        await ViewModel.LoadRemindersAsync();
     }
 
     // =========================
@@ -113,8 +122,10 @@ public sealed partial class RemindersPage : Page {
     }
 
     private void ViewClient_Click(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId)
+        if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId) {
             ViewModel.RequestClient(clientId);
+            AppServices.Navigation.Navigate(CDOFrame.Clients);
+        }
     }
 
     private void Defer_Click(object sender, RoutedEventArgs e) {

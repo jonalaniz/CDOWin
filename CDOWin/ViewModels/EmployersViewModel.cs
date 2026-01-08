@@ -1,6 +1,7 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -11,12 +12,13 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class EmployersViewModel(IEmployerService service) : ObservableObject {
+public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmployerService service) : ObservableObject {
 
     // =========================
     // Services / Dependencies
     // =========================
     private readonly IEmployerService _service = service;
+    private readonly DataCoordinator _dataCoordinator = dataCoordinator;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
@@ -51,7 +53,7 @@ public partial class EmployersViewModel(IEmployerService service) : ObservableOb
     // CRUD Methods
     // =========================
     public async Task LoadEmployersAsync() {
-        var employers = await _service.GetAllEmployersAsync();
+        var employers = await _dataCoordinator.GetEmployersAsync();
         if (employers == null) return;
 
         var snapshot = employers.OrderBy(e => e.Id).ToList().AsReadOnly();
@@ -97,8 +99,11 @@ public partial class EmployersViewModel(IEmployerService service) : ObservableOb
     // =========================
 
     private void ApplyFilter() {
+        int? previousSelection = Selected?.Id;
+
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<Employer>(_allEmployers);
+            ReSelect(previousSelection);
             return;
         }
 
@@ -113,5 +118,12 @@ public partial class EmployersViewModel(IEmployerService service) : ObservableOb
         );
 
         Filtered = new ObservableCollection<Employer>(result);
+        ReSelect(previousSelection);
+    }
+
+    private void ReSelect(int? id) {
+        if (id == null) return;
+        if (Filtered.FirstOrDefault(e => e.Id == id) is Employer selected)
+            Selected = selected;
     }
 }

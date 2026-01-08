@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -17,6 +18,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // Services / Dependencies
     // =========================
     private readonly IPlacementService _service;
+    private readonly DataCoordinator _dataCoordinator;
     private readonly PlacementSelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
@@ -42,8 +44,10 @@ public partial class PlacementsViewModel : ObservableObject {
     // Constructor
     // =========================
 
-    public PlacementsViewModel(IPlacementService service, PlacementSelectionService selectionService) {
+    public PlacementsViewModel(DataCoordinator dataCoordinator, IPlacementService service, PlacementSelectionService selectionService) {
         _service = service;
+        _dataCoordinator = dataCoordinator;
+
         _selectionService = selectionService;
         _selectionService.NewPlacementCreated += OnNewPlacementCreated;
         _selectionService.PlacementSelected += OnPlacementSelected;
@@ -62,9 +66,9 @@ public partial class PlacementsViewModel : ObservableObject {
         if (selected == null) return;
 
         _dispatcher.TryEnqueue(() => {
-            SearchQuery = "";
-            ApplyFilter();
             Selected = selected;
+            SearchQuery = "";
+            //ApplyFilter();
         });
     }
 
@@ -82,7 +86,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // CRUD Methods
     // =========================
     public async Task LoadPlacementsAsync() {
-        var placements = await _service.GetAllPlacementsAsync();
+        var placements = await _dataCoordinator.GetPlacementsAsync();
         if (placements == null) return;
 
         var snapshot = placements.OrderBy(o => o.Id).ToList().AsReadOnly();
@@ -120,8 +124,11 @@ public partial class PlacementsViewModel : ObservableObject {
     // Utility / Filtering
     // =========================
     private void ApplyFilter() {
+        string? previousSelection = Selected?.Id;
+
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<Placement>(_allPlacements);
+            ReSelect(previousSelection);
             return;
         }
 
@@ -134,5 +141,12 @@ public partial class PlacementsViewModel : ObservableObject {
         );
 
         Filtered = new ObservableCollection<Placement>(result);
+        ReSelect(previousSelection);
+    }
+
+    private void ReSelect(string? id) {
+        if (id == null) return;
+        if (Filtered.FirstOrDefault(p => p.Id == id) is Placement selected)
+            Selected = selected;
     }
 }

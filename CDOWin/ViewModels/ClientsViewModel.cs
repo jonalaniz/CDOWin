@@ -1,6 +1,7 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -18,6 +19,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Services / Dependencies
     // =========================
     private readonly IClientService _service;
+    private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
     private readonly PlacementSelectionService _placementSelectionService;
     private readonly SASelectionService _saSelectionService;
@@ -36,7 +38,10 @@ public partial class ClientsViewModel : ObservableObject {
     public partial ObservableCollection<ClientSummaryDTO> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Client? SelectedClient { get; set; }
+    public partial ClientSummaryDTO? SelectedSummary { get; set; }
+
+    [ObservableProperty]
+    public partial Client? Selected { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -45,8 +50,10 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public ClientsViewModel(IClientService service, ClientSelectionService clientSelectionService, PlacementSelectionService psService, SASelectionService saService) {
+    public ClientsViewModel(IClientService service, DataCoordinator dataCoordinator, ClientSelectionService clientSelectionService, PlacementSelectionService psService, SASelectionService saService) {
         _service = service;
+        _dataCoordinator = dataCoordinator;
+
         _placementSelectionService = psService;
         _saSelectionService = saService;
 
@@ -55,6 +62,8 @@ public partial class ClientsViewModel : ObservableObject {
 
         _selectionService.ClientSelectionRequested += OnRequestSelectedClientChange;
     }
+
+
 
     // =========================
     // Child Model Selection
@@ -79,7 +88,7 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     private void OnRequestSelectedClientChange(int clientId) {
-        if (SelectedClient != null && SelectedClient.Id == clientId)
+        if (Selected != null && Selected.Id == clientId)
             return;
 
         SearchQuery = string.Empty;
@@ -87,7 +96,7 @@ public partial class ClientsViewModel : ObservableObject {
         _ = LoadSelectedClientAsync(clientId);
     }
 
-    partial void OnSelectedClientChanged(Client? value) {
+    partial void OnSelectedChanged(Client? value) {
         if (value != null)
             _selectionService.SelectedClient = value;
     }
@@ -103,7 +112,7 @@ public partial class ClientsViewModel : ObservableObject {
     // CRUD Methods
     // =========================
     public async Task LoadClientSummariesAsync() {
-        var clients = await _service.GetAllClientSummariesAsync();
+        var clients = await _dataCoordinator.GetClientsAsync();
         if (clients == null) return;
 
         var snapshot = clients.OrderBy(c => c.Name).ToList().AsReadOnly();
@@ -115,29 +124,32 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     public async Task LoadSelectedClientAsync(int id) {
-        if (SelectedClient != null && SelectedClient.Id == id) return;
+        if (Selected != null && Selected.Id == id) return;
 
         var selectedClient = await _service.GetClientAsync(id);
-        SelectedClient = selectedClient;
+        Selected = selectedClient;
     }
 
     public async Task ReloadClientAsync() {
-        if (SelectedClient == null) return;
-        SelectedClient = await _service.GetClientAsync(SelectedClient.Id);
+        if (Selected == null) return;
+        Selected = await _service.GetClientAsync(Selected.Id);
     }
 
     public async Task UpdateClientAsync(UpdateClientDTO update) {
-        if (SelectedClient == null) return;
-        var updatedClient = await _service.UpdateClientAsync(SelectedClient.Id, update);
-        SelectedClient = updatedClient;
+        if (Selected == null) return;
+        var updatedClient = await _service.UpdateClientAsync(Selected.Id, update);
+        Selected = updatedClient;
     }
 
     // =========================
     // Utility / Filtering
     // =========================
     private void ApplyFilter() {
+        int? previousSelection = Selected?.Id;
+
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<ClientSummaryDTO>(_allClients);
+            ReSelect(previousSelection);
             return;
         }
 
@@ -151,5 +163,12 @@ public partial class ClientsViewModel : ObservableObject {
         );
 
         Filtered = new ObservableCollection<ClientSummaryDTO>(result);
+        ReSelect(previousSelection);
+    }
+
+    private void ReSelect(int? id) {
+        if (id == null) return;
+        if (Filtered.FirstOrDefault(c => c.Id == id) is ClientSummaryDTO selected)
+            SelectedSummary = selected;
     }
 }

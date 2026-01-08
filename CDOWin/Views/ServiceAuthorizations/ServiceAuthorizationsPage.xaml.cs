@@ -3,6 +3,7 @@ using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Inspectors;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace CDOWin.Views.ServiceAuthorizations;
 
@@ -19,6 +20,14 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     public ServiceAuthorizationsPage() {
         InitializeComponent();
         InspectorFrame.Navigate(typeof(ServiceAuthorizationInspector));
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    protected override async void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        await ViewModel.LoadServiceAuthorizationsAsync();
     }
 
     // =========================

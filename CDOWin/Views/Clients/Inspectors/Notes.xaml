@@ -34,6 +34,6 @@
                  IsReadOnly="True" CornerRadius="4" VerticalAlignment="Stretch"
                  Style="{StaticResource MultiLineTextBoxStyle}"
                  TextWrapping="Wrap" MaxHeight="1500"
-                 Text="{x:Bind ViewModel.SelectedClient.ClientNotes, Mode=OneWay}"/>
+                 Text="{x:Bind ViewModel.Selected.ClientNotes, Mode=OneWay}"/>
     </Grid>
 </Page>

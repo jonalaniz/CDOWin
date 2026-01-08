@@ -25,8 +25,8 @@ public sealed partial class Notes : Page {
     // Click Handlers
     // =========================
     private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        if (ViewModel.SelectedClient == null) return;
-        var updateVM = new ClientUpdateViewModel(ViewModel.SelectedClient);
+        if (ViewModel.Selected == null) return;
+        var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
 
         ContentDialog dialog = new();
         dialog.XamlRoot = this.XamlRoot;

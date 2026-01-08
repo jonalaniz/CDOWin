@@ -77,6 +77,7 @@
             <!-- Clients List -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
                       IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick">

@@ -1,4 +1,5 @@
-﻿using CDO.Core.Interfaces;
+﻿using CDO.Core.DTOs;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -114,6 +115,12 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
             Selected = serviceAuthorization;
         });
+    }
+
+    public async Task UpdateSAAsync(UpdateServiceAuthorizationDTO update) {
+        if (Selected == null) return;
+        _ = await _service.UpdateServiceAuthorizationAsync(Selected.Id, update);
+        await ReloadServiceAuthorizationAsync(Selected.Id);
     }
 
     // =========================

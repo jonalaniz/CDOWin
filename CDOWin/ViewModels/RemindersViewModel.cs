@@ -168,7 +168,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     private static ObservableCollection<Reminder> UpdateReminder(int id, Reminder reminder, ObservableCollection<Reminder> collection) {
         return new ObservableCollection<Reminder>(collection.Select(r => r.Id == id ? reminder : r));
-    } 
+    }
 
     private static ObservableCollection<Reminder> RemoveReminder(int id, ObservableCollection<Reminder> collection) {
         return new ObservableCollection<Reminder>(collection.Where(r => r.Id != id));

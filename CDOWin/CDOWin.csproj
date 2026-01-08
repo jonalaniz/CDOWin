@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
@@ -48,6 +48,7 @@
     <None Remove="Views\Placements\Dialogs\CreatePlacements.xaml" />
     <None Remove="Views\RemindersPage.xaml" />
     <None Remove="Views\ServiceAuthorizations\Dialogs\CreateServiceAuthorization.xaml" />
+    <None Remove="Views\ServiceAuthorizations\Dialogs\UpdateSA.xaml" />
     <None Remove="Views\ServiceAuthorizations\Inspectors\ServiceAuthorizationInspector.xaml" />
     <None Remove="Views\Shared\Dialogs\DeletePage.xaml" />
   </ItemGroup>
@@ -269,6 +270,11 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Calendar\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ServiceAuthorizations\Dialogs\UpdateSA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\EmptyCalendarDay.xaml">

@@ -50,7 +50,7 @@ public sealed partial class CalendarWindow : Window {
     }
 
     private void InitializeCalendarGrid() {
-        for(int i = 0; i < _dayCells.Length; i++) {
+        for (int i = 0; i < _dayCells.Length; i++) {
             var dayView = new CalendarDayView { IsCurrentMonth = false };
             dayView.ReminderClicked += OnReminderClickedAsync;
             Grid.SetRow(dayView, i / 7);
@@ -69,7 +69,7 @@ public sealed partial class CalendarWindow : Window {
             var cell = (CalendarDayView)_dayCells[i];
             cell.IsCurrentMonth = day.IsCurrentMonth;
 
-            if(!day.IsCurrentMonth) {
+            if (!day.IsCurrentMonth) {
                 cell.Reminders = [];
                 continue;
             }

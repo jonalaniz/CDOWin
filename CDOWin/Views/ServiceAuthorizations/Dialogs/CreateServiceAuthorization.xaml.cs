@@ -2,7 +2,6 @@ using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Diagnostics;
 using Windows.Globalization.NumberFormatting;
 
 namespace CDOWin.Views.ServiceAuthorizations.Dialogs;
@@ -34,10 +33,11 @@ public sealed partial class CreateServiceAuthorization : Page {
     }
 
     private void SetupNumberBox() {
-        DecimalFormatter formatter = new();
-        formatter.IntegerDigits = 1;
-        formatter.FractionDigits = 2;
-        formatter.SignificantDigits = 2;
+        DecimalFormatter formatter = new() {
+            IntegerDigits = 1,
+            FractionDigits = 2,
+            SignificantDigits = 2
+        };
 
         NumberBox.NumberFormatter = formatter;
     }
@@ -48,7 +48,7 @@ public sealed partial class CreateServiceAuthorization : Page {
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
         if (sender is not CalendarDatePicker datePicker || datePicker.Tag is not DateType dateType)
             return;
-        
+
         if (datePicker.Date is DateTimeOffset offset) {
             switch (dateType) {
                 case DateType.StartDate:

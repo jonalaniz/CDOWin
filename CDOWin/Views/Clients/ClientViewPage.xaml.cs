@@ -100,7 +100,7 @@ public sealed partial class ClientViewPage : Page {
 
         var result = await dialog.ShowAsync();
 
-        if(result == ContentDialogResult.Primary) {
+        if (result == ContentDialogResult.Primary) {
             await createSAVM.CreateSAAsync();
             _ = ViewModel.ReloadClientAsync();
         }

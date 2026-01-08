@@ -9,7 +9,7 @@
     xmlns:viewModels="using:CDOWin.ViewModels" 
     mc:Ignorable="d">
 
-    <Grid Width="400" RowSpacing="12" ColumnSpacing="16">
+    <Grid Width="480" RowSpacing="12" ColumnSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

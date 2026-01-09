@@ -54,7 +54,7 @@ public sealed partial class ClientsPage : Page {
 
         var result = await dialog.ShowAsync();
 
-        if(result == ContentDialogResult.Primary) {
+        if (result == ContentDialogResult.Primary) {
             await createClientVM.CreateClientAsync();
             _ = ViewModel.LoadClientSummariesAsync(force: true);
         }

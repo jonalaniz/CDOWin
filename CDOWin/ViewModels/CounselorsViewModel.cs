@@ -3,7 +3,6 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.Generic;

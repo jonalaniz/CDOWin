@@ -191,7 +191,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppInstallerUri>https://alamoemployment.com/CDO</AppInstallerUri>
+    <AppInstallerUri>https://update.alaniz.tech/cdo/AppPackages/</AppInstallerUri>
   </PropertyGroup>
   <ItemGroup>
     <PRIResource Remove="Views\Clients\ClientInspectors\**" />

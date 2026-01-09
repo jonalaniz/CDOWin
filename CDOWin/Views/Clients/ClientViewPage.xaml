@@ -228,14 +228,14 @@
                             </Button>
                         </Grid>
 
-                        <!-- Start Date/Case ID/Status Section -->
+                        <!-- Start Date/Case ID/Tier Section -->
                         <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Start Date" 
                                      Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
 
                         <c:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Label="Case ID" 
                                      Value="{x:Bind ViewModel.Selected.CaseID, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Status" 
+                        <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Tier" 
                                      Value="{x:Bind ViewModel.Selected.Status, Mode=OneWay}"/>
 
                         <!-- Benefits/Premiums Section -->

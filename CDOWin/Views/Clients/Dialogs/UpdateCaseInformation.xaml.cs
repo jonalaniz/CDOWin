@@ -37,8 +37,12 @@ public sealed partial class UpdateCaseInformation : Page {
         StatusDropDown.Flyout = BuildFlyout(Status.All);
         if (string.IsNullOrEmpty(ViewModel.OriginalClient.Benefits))
             BenefitDropDown.Content = "None";
+        else
+            BenefitDropDown.Content = ViewModel.OriginalClient.Benefits;
         if (string.IsNullOrEmpty(ViewModel.OriginalClient.Status))
             StatusDropDown.Content = "None";
+        else
+            StatusDropDown.Content = ViewModel.OriginalClient.Status;
     }
 
     private void BuildCounselorDropDown() {

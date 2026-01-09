@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CDOWin.Views.Clients.Dialogs;
 
@@ -15,7 +16,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<Counselor> _counselors = AppServices.CounselorsViewModel.All();
+    private readonly List<Counselor> _counselors = AppServices.CounselorsViewModel.GetCounselors();
     public ClientUpdateViewModel ViewModel { get; private set; }
 
     // =========================
@@ -25,44 +26,19 @@ public sealed partial class UpdateCaseInformation : Page {
         ViewModel = viewModel;
         InitializeComponent();
         BuildDropDowns();
+        SetupAutoSuggestBox();
         SetupDatePicker();
     }
 
     // =========================
     // UI Setup
     // =========================
+
     private void BuildDropDowns() {
-        BuildCounselorDropDown();
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);
-        if (string.IsNullOrEmpty(ViewModel.OriginalClient.Benefits))
-            BenefitDropDown.Content = "None";
-        else
-            BenefitDropDown.Content = ViewModel.OriginalClient.Benefits;
-        if (string.IsNullOrEmpty(ViewModel.OriginalClient.Status))
-            StatusDropDown.Content = "None";
-        else
-            StatusDropDown.Content = ViewModel.OriginalClient.Status;
-    }
-
-    private void BuildCounselorDropDown() {
-        var flyout = new MenuFlyout();
-        foreach (var counselor in _counselors) {
-            var item = new MenuFlyoutItem {
-                Text = counselor.Name,
-                Tag = counselor
-            };
-
-            item.Click += CounselorSelected;
-            flyout.Items.Add(item);
-        }
-        CounselorDropDown.Flyout = flyout;
-
-        if (ViewModel.OriginalClient.CounselorReference?.Name is string name) {
-            CounselorDropDown.Content = name;
-        } else {
-            CounselorDropDown.Content = "Select a Counselor";
-        }
+        BenefitDropDown.Content = ViewModel.OriginalClient.Benefits ?? "None";
+        StatusDropDown.Content = ViewModel.OriginalClient.Status ?? "None";
     }
 
     private MenuFlyout BuildFlyout(IEnumerable<dynamic> items) {
@@ -78,6 +54,10 @@ public sealed partial class UpdateCaseInformation : Page {
         }
 
         return flyout;
+    }
+
+    private void SetupAutoSuggestBox() {
+        CounselorAutoSuggest.PlaceholderText = ViewModel.OriginalClient.Counselor ?? "Type to search counselors";
     }
 
     private void SetupDatePicker() {
@@ -102,14 +82,40 @@ public sealed partial class UpdateCaseInformation : Page {
         }
     }
 
-    private void CounselorSelected(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem item && item.Tag is Counselor counselor) {
-            ViewModel.UpdatedClient.Counselor = counselor.Name;
-            ViewModel.UpdatedClient.CounselorID = counselor.Id;
-            ViewModel.UpdatedClient.CounselorEmail = counselor.Email;
-            ViewModel.UpdatedClient.CounselorPhone = counselor.Phone;
-            ViewModel.UpdatedClient.CounselorFax = counselor.Fax;
-            CounselorDropDown.Content = counselor.Name;
+    private void CounselorAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+            var query = sender.Text.Trim().ToLower();
+            var suggestions = _counselors
+                .Where(c => c.Name.ToLower().Contains(query))
+                .Select(c => c.Name)
+                .ToList();
+
+            sender.ItemsSource = suggestions;
+        }
+    }
+
+    private void CounselorAutoSuggest_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
+        if (args.SelectedItem is string name) {
+            var counselor = _counselors.FirstOrDefault(c => c.Name == name);
+            if (counselor != null) {
+                UpdateSelectedCounselor(counselor);
+                sender.Text = counselor.Name; // display chosen name
+            }
+        }
+    }
+
+    private void CounselorAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
+        if (args.ChosenSuggestion is string name) {
+            var counselor = _counselors.FirstOrDefault(c => c.Name == name);
+            if (counselor != null) {
+                UpdateSelectedCounselor(counselor);
+            }
+        } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
+            // Optional: match typed text even if not chosen from suggestions
+            var counselor = _counselors.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
+            if (counselor != null) {
+                UpdateSelectedCounselor(counselor);
+            }
         }
     }
 
@@ -149,5 +155,13 @@ public sealed partial class UpdateCaseInformation : Page {
                 ViewModel.UpdatedClient.Premium = value;
                 break;
         }
+    }
+
+    private void UpdateSelectedCounselor(Counselor counselor) {
+        ViewModel.UpdatedClient.Counselor = counselor.Name;
+        ViewModel.UpdatedClient.CounselorID = counselor.Id;
+        ViewModel.UpdatedClient.CounselorEmail = counselor.Email;
+        ViewModel.UpdatedClient.CounselorPhone = counselor.Phone;
+        ViewModel.UpdatedClient.CounselorFax = counselor.Fax;
     }
 }

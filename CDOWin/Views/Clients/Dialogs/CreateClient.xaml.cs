@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 
@@ -29,6 +30,7 @@ public sealed partial class CreateClient : Page {
         ViewModel = viewModel;
         InitializeComponent();
         BuildDropDowns();
+        SetupAutoSuggestBox();
     }
 
     // =========================
@@ -36,7 +38,6 @@ public sealed partial class CreateClient : Page {
     // =========================
     private void BuildDropDowns() {
         BuildStateDrowdown();
-        BuildCounselorDropDown();
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);
         BenefitDropDown.Content = "None";
@@ -60,21 +61,6 @@ public sealed partial class CreateClient : Page {
         StateDropDownButton.Content = "TX";
     }
 
-    private void BuildCounselorDropDown() {
-        var flyout = new MenuFlyout();
-        foreach (var counselor in _counselors) {
-            var item = new MenuFlyoutItem {
-                Text = counselor.Name,
-                Tag = counselor
-            };
-
-            item.Click += CounselorSelected;
-            flyout.Items.Add(item);
-        }
-        CounselorDropDown.Flyout = flyout;
-        CounselorDropDown.Content = "Select a Counselor";
-    }
-
     private MenuFlyout BuildFlyout(IEnumerable<dynamic> items) {
         var flyout = new MenuFlyout();
         foreach (var obj in items) {
@@ -90,10 +76,13 @@ public sealed partial class CreateClient : Page {
         return flyout;
     }
 
+    private void SetupAutoSuggestBox() {
+        CounselorAutoSuggest.PlaceholderText = "Type to search counselors";
+    }
+
     // =========================
     // Event Handlers
     // =========================
-
     private void Expander_Expanding(Expander sender, ExpanderExpandingEventArgs args) {
         if (sender is Expander expanded && expanded.Parent is StackPanel panel) {
             foreach (var child in panel.Children) {
@@ -166,14 +155,40 @@ public sealed partial class CreateClient : Page {
             ViewModel.StartDate = offset.DateTime.Date.ToUniversalTime();
     }
 
-    private void CounselorSelected(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem item && item.Tag is Counselor counselor) {
-            ViewModel.Counselor = counselor.Name;
-            ViewModel.CounselorID = counselor.Id;
-            ViewModel.CounselorEmail = counselor.Email;
-            ViewModel.CounselorPhone = counselor.Phone;
-            ViewModel.CounselorFax = counselor.Fax;
-            CounselorDropDown.Content = counselor.Name;
+    private void CounselorAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+            var query = sender.Text.Trim().ToLower();
+            var suggestions = _counselors
+                .Where(c => c.Name.ToLower().Contains(query))
+                .Select(c => c.Name)
+                .ToList();
+
+            sender.ItemsSource = suggestions;
+        }
+    }
+
+    private void CounselorAutoSuggest_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
+        if (args.SelectedItem is string name) {
+            var counselor = _counselors.FirstOrDefault(c => c.Name == name);
+            if (counselor != null) {
+                UpdateSelectedCounselor(counselor);
+                sender.Text = counselor.Name; // display chosen name
+            }
+        }
+    }
+
+    private void CounselorAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
+        if (args.ChosenSuggestion is string name) {
+            var counselor = _counselors.FirstOrDefault(c => c.Name == name);
+            if (counselor != null) {
+                UpdateSelectedCounselor(counselor);
+            }
+        } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
+            // Optional: match typed text even if not chosen from suggestions
+            var counselor = _counselors.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
+            if (counselor != null) {
+                UpdateSelectedCounselor(counselor);
+            }
         }
     }
 
@@ -302,6 +317,14 @@ public sealed partial class CreateClient : Page {
                 ViewModel.Premium = value;
                 break;
         }
+    }
+
+    private void UpdateSelectedCounselor(Counselor counselor) {
+        ViewModel.Counselor = counselor.Name;
+        ViewModel.CounselorID = counselor.Id;
+        ViewModel.CounselorEmail = counselor.Email;
+        ViewModel.CounselorPhone = counselor.Phone;
+        ViewModel.CounselorFax = counselor.Fax;
     }
 
     // Arrangements Fields

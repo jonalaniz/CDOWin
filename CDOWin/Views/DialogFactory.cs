@@ -26,6 +26,14 @@ public static class DialogFactory {
         return dialog;
     }
 
+    public static ContentDialog ErrorDialog(XamlRoot root, string error, string message) {
+        ContentDialog dialog = Dialog(root, error);
+        dialog.Content = message;
+        dialog.CloseButtonText = "OK";
+        return dialog;
+        
+    }
+
     private static ContentDialog Dialog(XamlRoot root, string title) {
         ContentDialog dialog = new();
         dialog.XamlRoot = root;

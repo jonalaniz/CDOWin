@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
@@ -99,10 +100,14 @@ public partial class CounselorsViewModel(DataCoordinator dataCoordinator, ICouns
         });
     }
 
-    public async Task UpdateCounselorAsync(UpdateCounselorDTO update) {
-        if (Selected == null) return;
-        _ = await _service.UpdateCounselorAsync(Selected.Id, update);
+    public async Task<Result<Counselor>> UpdateCounselorAsync(UpdateCounselorDTO update) {
+        if (Selected == null) return Result<Counselor>.Fail(new AppError(ErrorKind.Validation, "Counselor not selected.", null));
+
+        var result = await _service.UpdateCounselorAsync(Selected.Id, update);
+        if (!result.IsSuccess) return result;
+
         await ReloadCounselorAsync(Selected.Id);
+        return result;
     }
 
     // =========================

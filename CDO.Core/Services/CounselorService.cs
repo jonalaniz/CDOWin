@@ -28,12 +28,8 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<Counselor?> CreateCounselorAsync(CreateCounselorDTO dto) {
-    //    return _network.PostAsync<CreateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
-    //}
-
     public async Task<Result<Counselor>> CreateCounselorAsync(CreateCounselorDTO dto) {
-        var result = await _network.NeoPostAsync<CreateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
+        var result = await _network.PostAsync<CreateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
         if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
         return Result<Counselor>.Success(result.Value!);
     }
@@ -41,8 +37,10 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Counselor?> UpdateCounselorAsync(int id, UpdateCounselorDTO dto) {
-        return _network.UpdateAsync<UpdateCounselorDTO, Counselor>(Endpoints.Counselor(id), dto);
+    public async Task<Result<Counselor>> UpdateCounselorAsync(int id, UpdateCounselorDTO dto) {
+        var result = await _network.UpdateAsync<UpdateCounselorDTO, Counselor>(Endpoints.Counselor(id), dto);
+        if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
+        return Result<Counselor>.Success(result.Value!);
     }
 
     // -----------------------------

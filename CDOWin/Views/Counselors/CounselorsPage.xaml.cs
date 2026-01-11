@@ -1,3 +1,4 @@
+using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -51,18 +52,28 @@ public sealed partial class CounselorsPage : Page {
         createCounselorVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
+        createCounselorVM.PropertyChanged -= handler;
 
-        if (result == ContentDialogResult.Primary) {
-            await createCounselorVM.CreateCounselorAsync();
-            _ = ViewModel.LoadCounselorsAsync();
+        if (result != ContentDialogResult.Primary) return;
+
+        var updateResult = await createCounselorVM.CreateCounselorAsync();
+        if(!updateResult.IsSuccess) {
+            HandleErrorAsync(updateResult);
+            return;
         }
 
-        createCounselorVM.PropertyChanged -= handler;
+        _ = ViewModel.LoadCounselorsAsync();
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is Counselor counselor) {
             _ = ViewModel.ReloadCounselorAsync(counselor.Id);
         }
+    }
+
+    private async void HandleErrorAsync(Result result) {
+        if (result.Error is not AppError error) return;
+        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
+        await dialog.ShowAsync();
     }
 }

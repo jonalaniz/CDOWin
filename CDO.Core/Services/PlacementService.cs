@@ -28,12 +28,8 @@ public class PlacementService : IPlacementService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<Placement?> CreatePlacementAsync(PlacementDTO dto) {
-    //    return _network.PostAsync<PlacementDTO, Placement>(Endpoints.Placements, dto);
-    //}
-
     public async Task<Result<Placement>> CreatePlacementAsync(PlacementDTO dto) {
-        var result = await _network.NeoPostAsync<PlacementDTO, Placement>(Endpoints.Placements, dto);
+        var result = await _network.PostAsync<PlacementDTO, Placement>(Endpoints.Placements, dto);
         if (!result.IsSuccess) return Result<Placement>.Fail(TranslateError(result.Error!));
         return Result<Placement>.Success(result.Value!);
     }
@@ -41,8 +37,10 @@ public class PlacementService : IPlacementService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Placement?> UpdatePlacementAsync(string id, PlacementDTO dto) {
-        return _network.UpdateAsync<PlacementDTO, Placement>(Endpoints.Placement(id), dto);
+    public async Task<Result<Placement>> UpdatePlacementAsync(string id, PlacementDTO dto) {
+        var result = await _network.UpdateAsync<PlacementDTO, Placement>(Endpoints.Placement(id), dto);
+        if (!result.IsSuccess) return Result<Placement>.Fail(TranslateError(result.Error!));
+        return Result<Placement>.Success(result.Value!);
     }
 
     // -----------------------------

@@ -28,12 +28,8 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<ServiceAuthorization?> CreateServiceAuthorizationAsync(CreateSADTO dto) {
-    //    return _network.PostAsync<CreateSADTO, ServiceAuthorization>(Endpoints.ServiceAuthorizations, dto);
-    //}
-
     public async Task<Result<ServiceAuthorization>> CreateServiceAuthorizationAsync(CreateSADTO dto) {
-        var result = await _network.NeoPostAsync<CreateSADTO, ServiceAuthorization>(Endpoints.ServiceAuthorizations, dto);
+        var result = await _network.PostAsync<CreateSADTO, ServiceAuthorization>(Endpoints.ServiceAuthorizations, dto);
         if (!result.IsSuccess) return Result<ServiceAuthorization>.Fail(TranslateError(result.Error!));
         return Result<ServiceAuthorization>.Success(result.Value!);
     }
@@ -41,8 +37,10 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<ServiceAuthorization?> UpdateServiceAuthorizationAsync(string id, UpdateServiceAuthorizationDTO dto) {
-        return _network.UpdateAsync<UpdateServiceAuthorizationDTO, ServiceAuthorization>(Endpoints.ServiceAuthorization(id), dto);
+    public async Task<Result<ServiceAuthorization>> UpdateServiceAuthorizationAsync(string id, UpdateServiceAuthorizationDTO dto) {
+        var result = await _network.UpdateAsync<UpdateServiceAuthorizationDTO, ServiceAuthorization>(Endpoints.ServiceAuthorization(id), dto);
+        if (!result.IsSuccess) return Result<ServiceAuthorization>.Fail(TranslateError(result.Error!));
+        return Result<ServiceAuthorization>.Success(result.Value!);
     }
 
     // -----------------------------

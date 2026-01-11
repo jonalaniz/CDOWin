@@ -1,14 +1,23 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Views.Clients.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
 public partial class ClientUpdateViewModel(Client client) : ObservableObject {
+    // =========================
+    // Dependencies
+    // =========================
     public Client OriginalClient = client;
     public UpdateClientDTO UpdatedClient = new();
 
+    // =========================
+    // CRUD Methods
+    // =========================
     public void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
         switch (tag) {
             case CheckboxTag.ResumeRequired:

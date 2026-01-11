@@ -30,12 +30,8 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<Reminder?> CreateReminderAsync(CreateReminderDTO dto) {
-    //    return _network.PostAsync<CreateReminderDTO, Reminder>(Endpoints.Reminders, dto);
-    //}
-
     public async Task<Result<Reminder>> CreateRemindersAsync(CreateReminderDTO dto) {
-        var result = await _network.NeoPostAsync<CreateReminderDTO, Reminder>(Endpoints.Reminders, dto);
+        var result = await _network.PostAsync<CreateReminderDTO, Reminder>(Endpoints.Reminders, dto);
         if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
         return Result<Reminder>.Success(result.Value!);
     }
@@ -43,8 +39,10 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Reminder?> UpdateReminderAsync(int id, UpdateReminderDTO dto) {
-        return _network.UpdateAsync<UpdateReminderDTO, Reminder>(Endpoints.Reminder(id), dto);
+    public async Task<Result<Reminder>> UpdateReminderAsync(int id, UpdateReminderDTO dto) {
+        var result = await _network.UpdateAsync<UpdateReminderDTO, Reminder>(Endpoints.Reminder(id), dto);
+        if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
+        return Result<Reminder>.Success(result.Value!);
     }
 
     // -----------------------------

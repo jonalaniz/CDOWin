@@ -21,7 +21,7 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // PATCH Methods
         // -----------------------------
-        public Task<Employer?> UpdateEmployerAsync(int id, EmployerDTO dto);
+        public Task<Result<Employer>> UpdateEmployerAsync(int id, EmployerDTO dto);
 
         // -----------------------------
         // DELETE Methods

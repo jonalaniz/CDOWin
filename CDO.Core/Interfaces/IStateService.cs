@@ -22,7 +22,7 @@ public interface IStateService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<State?> UpdateStateAsync(int id, UpdateStateDTO dto);
+    public Task<Result<State>> UpdateStateAsync(int id, UpdateStateDTO dto);
 
     // -----------------------------
     // DELETE Methods

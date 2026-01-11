@@ -23,7 +23,7 @@ public interface IClientService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Client?> UpdateClientAsync(int id, UpdateClientDTO dto);
+    public Task<Result<Client>> UpdateClientAsync(int id, UpdateClientDTO dto);
 
     // -----------------------------
     // DELETE Methods

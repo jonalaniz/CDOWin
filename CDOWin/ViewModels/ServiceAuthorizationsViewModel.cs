@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
@@ -122,10 +123,14 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         });
     }
 
-    public async Task UpdateSAAsync(UpdateServiceAuthorizationDTO update) {
-        if (Selected == null) return;
-        _ = await _service.UpdateServiceAuthorizationAsync(Selected.Id, update);
+    public async Task<Result<ServiceAuthorization>> UpdateSAAsync(UpdateServiceAuthorizationDTO update) {
+        if (Selected == null) return Result<ServiceAuthorization>.Fail(new AppError(ErrorKind.Validation, "Client not selected.", null));
+
+        var result = await _service.UpdateServiceAuthorizationAsync(Selected.Id, update);
+        if (!result.IsSuccess) return result;
+
         await ReloadServiceAuthorizationAsync(Selected.Id);
+        return result;
     }
 
     // =========================

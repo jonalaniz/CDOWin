@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
@@ -87,11 +88,14 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
         });
     }
 
-    public async Task UpdateEmployerAsync(EmployerDTO update) {
-        if (Selected == null)
-            return;
-        _ = await _service.UpdateEmployerAsync(Selected.Id, update);
+    public async Task<Result<Employer>> UpdateEmployerAsync(EmployerDTO update) {
+        if (Selected == null) return Result<Employer>.Fail(new AppError(ErrorKind.Validation, "Employer not selected.", null));
+
+        var result = await _service.UpdateEmployerAsync(Selected.Id, update);
+        if (!result.IsSuccess) return result;
+
         await ReloadEmployerAsync(Selected.Id);
+        return result;
     }
 
     // =========================

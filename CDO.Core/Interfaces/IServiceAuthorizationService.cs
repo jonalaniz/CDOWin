@@ -21,7 +21,7 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<ServiceAuthorization?> UpdateServiceAuthorizationAsync(string id, UpdateServiceAuthorizationDTO dto);
+    public Task<Result<ServiceAuthorization>> UpdateServiceAuthorizationAsync(string id, UpdateServiceAuthorizationDTO dto);
 
     // -----------------------------
     // DELETE Methods

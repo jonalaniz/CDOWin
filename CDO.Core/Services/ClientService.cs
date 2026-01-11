@@ -33,12 +33,8 @@ public class ClientService : IClientService {
     // -----------------------------
     // POST
     // -----------------------------
-    //public Task<Client?> CreateClientAsync(CreateClientDTO dto) {
-    //    return _network.PostAsync<CreateClientDTO, Client>(Endpoints.Clients, dto);
-    //}
-
     public async Task<Result<Client>> CreateClientAsync(CreateClientDTO dto) {
-        var result = await _network.NeoPostAsync<CreateClientDTO, Client>(Endpoints.Clients, dto);
+        var result = await _network.PostAsync<CreateClientDTO, Client>(Endpoints.Clients, dto);
         if (!result.IsSuccess) return Result<Client>.Fail(TranslateError(result.Error!));
         return Result<Client>.Success(result.Value!);
     }
@@ -46,8 +42,10 @@ public class ClientService : IClientService {
     // -----------------------------
     // PATCH
     // -----------------------------
-    public Task<Client?> UpdateClientAsync(int id, UpdateClientDTO dto) {
-        return _network.UpdateAsync<UpdateClientDTO, Client>(Endpoints.Client(id), dto);
+    public async Task<Result<Client>> UpdateClientAsync(int id, UpdateClientDTO dto) {
+        var result = await _network.UpdateAsync<UpdateClientDTO, Client>(Endpoints.Client(id), dto);
+        if (!result.IsSuccess) return Result<Client>.Fail(TranslateError(result.Error!));
+        return Result<Client>.Success(result.Value!);
     }
 
     // -----------------------------

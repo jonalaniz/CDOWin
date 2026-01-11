@@ -1,4 +1,5 @@
 using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
@@ -9,6 +10,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CDOWin.Views.Clients;
 
@@ -75,11 +77,16 @@ public sealed partial class ClientViewPage : Page {
 
         var result = await dialog.ShowAsync();
 
-        if (result == ContentDialogResult.Primary) {
-            await createReminderVM.CreateReminderAsync();
-            _ = ViewModel.ReloadClientAsync();
-            ViewModel.NotifyNewClientCreated();
+        if (result != ContentDialogResult.Primary) return;
+
+        var reminderResult = await createReminderVM.CreateReminderAsync();
+        if(!reminderResult.IsSuccess) {
+            HandleErrorAsync(reminderResult);
+            return;
         }
+
+        _ = ViewModel.ReloadClientAsync();
+        ViewModel.NotifyNewClientCreated();
     }
 
     private async void CreateSA_Click(object sender, RoutedEventArgs e) {
@@ -100,10 +107,15 @@ public sealed partial class ClientViewPage : Page {
 
         var result = await dialog.ShowAsync();
 
-        if (result == ContentDialogResult.Primary) {
-            await createSAVM.CreateSAAsync();
-            _ = ViewModel.ReloadClientAsync();
+        if (result != ContentDialogResult.Primary) return;
+        var sAResult = await createSAVM.CreateSAAsync();
+
+        if(!sAResult.IsSuccess) {
+            HandleErrorAsync(sAResult);
+            return;
         }
+
+        _ = ViewModel.ReloadClientAsync();
 
         createSAVM.PropertyChanged -= handler;
     }
@@ -140,7 +152,12 @@ public sealed partial class ClientViewPage : Page {
             var dateOffset = DateTimeOffset.Now.AddDays(reminderItem.Days);
             newReminderVM.Date = dateOffset.Date.ToUniversalTime();
 
-            await newReminderVM.CreateReminderAsync();
+            var reminderResult = await newReminderVM.CreateReminderAsync();
+            if(!reminderResult.IsSuccess) {
+                HandleErrorAsync(reminderResult);
+                return;
+            }
+
             _ = ViewModel.ReloadClientAsync();
             ViewModel.NotifyNewClientCreated();
         }
@@ -149,7 +166,7 @@ public sealed partial class ClientViewPage : Page {
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
         if (sender is CheckBox checkBox && checkBox.Tag is CheckboxTag tag) {
             var isChecked = checkBox.IsChecked;
-            UpdateCheckbox(tag, isChecked ?? false);
+            _ = UpdateCheckboxAsync(tag, isChecked ?? false);
         }
     }
 
@@ -184,24 +201,34 @@ public sealed partial class ClientViewPage : Page {
 
             var result = await dialog.ShowAsync();
 
-            if (result == ContentDialogResult.Primary) {
-                Debug.WriteLine(updateVM.UpdatedClient.Benefits);
-                UpdateClient(updateVM.UpdatedClient);
-            }
+            if (result != ContentDialogResult.Primary) return;
+            _ = UpdateClient(updateVM.UpdatedClient);
         }
     }
 
     // =========================
     // Utility Methods
     // =========================
-    private void UpdateCheckbox(CheckboxTag tag, bool isChecked) {
+    private async Task UpdateCheckboxAsync(CheckboxTag tag, bool isChecked) {
         if (ViewModel.Selected == null) return;
+
         var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
         updateVM.UpdateCheckbox(tag, isChecked);
-        UpdateClient(updateVM.UpdatedClient);
+
+        _ = UpdateClient(updateVM.UpdatedClient);
     }
 
-    private void UpdateClient(UpdateClientDTO update) {
-        _ = ViewModel.UpdateClientAsync(update);
+    private async Task UpdateClient(UpdateClientDTO update) {
+        var result = await ViewModel.UpdateClientAsync(update);
+        if(!result.IsSuccess) {
+            HandleErrorAsync(result);
+            return;
+        }
+    }
+
+    private async void HandleErrorAsync(Result result) {
+        if (result.Error is not AppError error) return;
+        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
+        await dialog.ShowAsync();
     }
 }

@@ -28,12 +28,8 @@ public class EmployerService : IEmployerService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<Employer?> CreateEmployerAsync(EmployerDTO dto) {
-    //    return _network.PostAsync<EmployerDTO, Employer>(Endpoints.Employers, dto);
-    //}
-
     public async Task<Result<Employer>> CreateEmployerAsync(EmployerDTO dto) {
-        var result = await _network.NeoPostAsync<EmployerDTO, Employer>(Endpoints.Employers, dto);
+        var result = await _network.PostAsync<EmployerDTO, Employer>(Endpoints.Employers, dto);
         if (!result.IsSuccess) return Result<Employer>.Fail(TranslateError(result.Error!));
         return Result<Employer>.Success(result.Value!);
     }
@@ -41,8 +37,10 @@ public class EmployerService : IEmployerService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Employer?> UpdateEmployerAsync(int id, EmployerDTO dto) {
-        return _network.UpdateAsync<EmployerDTO, Employer>(Endpoints.Employer(id), dto);
+    public async Task<Result<Employer>> UpdateEmployerAsync(int id, EmployerDTO dto) {
+        var result = await _network.UpdateAsync<EmployerDTO, Employer>(Endpoints.Employer(id), dto);
+        if (!result.IsSuccess) return Result<Employer>.Fail(TranslateError(result.Error!));
+        return Result<Employer>.Success(result.Value!);
     }
 
     // -----------------------------

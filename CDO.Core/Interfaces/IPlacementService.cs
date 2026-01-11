@@ -22,7 +22,7 @@ public interface IPlacementService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Placement?> UpdatePlacementAsync(string id, PlacementDTO dto);
+    public Task<Result<Placement>> UpdatePlacementAsync(string id, PlacementDTO dto);
 
     // -----------------------------
     // DELETE Methods

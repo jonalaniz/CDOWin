@@ -24,11 +24,8 @@ public class StateService : IStateService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<State?> CreateStateAsync(CreateStateDTO dto) {
-    //    return _network.PostAsync<CreateStateDTO, State>(Endpoints.States, dto);
-    //}
     public async Task<Result<State>> CreateStateAsync(CreateStateDTO dto) {
-        var result = await _network.NeoPostAsync<CreateStateDTO, State>(Endpoints.States, dto);
+        var result = await _network.PostAsync<CreateStateDTO, State>(Endpoints.States, dto);
         if (!result.IsSuccess) return Result<State>.Fail(TranslateError(result.Error!));
         return Result<State>.Success(result.Value!);
     }
@@ -36,8 +33,10 @@ public class StateService : IStateService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<State?> UpdateStateAsync(int id, UpdateStateDTO dto) {
-        return _network.UpdateAsync<UpdateStateDTO, State>(Endpoints.State(id), dto);
+    public async Task<Result<State>> UpdateStateAsync(int id, UpdateStateDTO dto) {
+        var result = await _network.UpdateAsync<UpdateStateDTO, State>(Endpoints.State(id), dto);
+        if (!result.IsSuccess) return Result<State>.Fail(TranslateError(result.Error!));
+        return Result<State>.Success(result.Value!);
     }
 
     // -----------------------------

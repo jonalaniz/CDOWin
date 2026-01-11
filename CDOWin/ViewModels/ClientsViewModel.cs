@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
@@ -134,10 +135,14 @@ public partial class ClientsViewModel : ObservableObject {
         Selected = await _service.GetClientAsync(Selected.Id);
     }
 
-    public async Task UpdateClientAsync(UpdateClientDTO update) {
-        if (Selected == null) return;
-        var updatedClient = await _service.UpdateClientAsync(Selected.Id, update);
-        Selected = updatedClient;
+    public async Task<Result<Client>> UpdateClientAsync(UpdateClientDTO update) {
+        if (Selected == null) return Result<Client>.Fail(new AppError(ErrorKind.Validation, "Client not selected.", null));
+
+        var result = await _service.UpdateClientAsync(Selected.Id, update);
+        if (!result.IsSuccess) return result;
+
+        Selected = result.Value!;
+        return result;
     }
 
     // =========================

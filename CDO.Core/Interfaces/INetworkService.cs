@@ -17,12 +17,12 @@ public interface INetworkService {
     // -----------------------------
     // POST
     // -----------------------------
-    Task<Result<TResponse>> NeoPostAsync<TRequest, TResponse>(string endpoint, TRequest body);
+    Task<Result<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest body);
 
     // -----------------------------
     // PATCH
     // -----------------------------
-    Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body);
+    Task<Result<TResponse>> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body);
 
     // -----------------------------
     // DELETE Methods

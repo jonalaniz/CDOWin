@@ -75,11 +75,11 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // POST
     // -----------------------------
-    public async Task<Result<TResponse>> NeoPostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
+    public async Task<Result<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
         try {
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
-            var response = await _httpClient.PostAsJsonAsync(endpoint, content);
+            var response = await _httpClient.PostAsync(endpoint, content);
 
             if (response.IsSuccessStatusCode) {
                 var data = await response.Content.ReadFromJsonAsync<TResponse>();
@@ -96,32 +96,43 @@ public class NetworkService : INetworkService {
         }
     }
 
-    public async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var json = JsonSerializer.Serialize(body, _jsonOptions);
-        var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync(endpoint, content);
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<TResponse>();
-    }
-
     // -----------------------------
     // PATCH
     // -----------------------------
-    public async Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
-        var options = _jsonOptions;
-        var json = JsonSerializer.Serialize(body, options);
-        var content = new StringContent(json, encoding: Encoding.UTF8, "application/json");
+    //public async Task<TResponse?> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
+    //    var json = JsonSerializer.Serialize(body, _jsonOptions);
+    //    var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
 
+    //    try {
+    //        var response = await _httpClient.PatchAsync(endpoint, content);
+    //        response.EnsureSuccessStatusCode();
+
+    //        return await response.Content.ReadFromJsonAsync<TResponse>();
+    //    } catch (HttpRequestException ex) {
+    //        Debug.WriteLine("HTTP Request Exception:");
+    //        Debug.WriteLine($"Message: {ex.Message}");
+    //        throw;
+    //    }
+    //}
+
+    public async Task<Result<TResponse>> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
         try {
+            var json = JsonSerializer.Serialize(body, _jsonOptions);
+            var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
             var response = await _httpClient.PatchAsync(endpoint, content);
-            response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadFromJsonAsync<TResponse>();
+            if(response.IsSuccessStatusCode) {
+                var data = await response.Content.ReadFromJsonAsync<TResponse>();
+                return Result<TResponse>.Success(data!);
+            }
+
+            return Result<TResponse>.Fail(MapHttpError(response.StatusCode));
+        } catch (TaskCanceledException ex) {
+            return Result<TResponse>.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
         } catch (HttpRequestException ex) {
-            Debug.WriteLine("HTTP Request Exception:");
-            Debug.WriteLine($"Message: {ex.Message}");
-            throw;
+            return Result<TResponse>.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+        } catch (Exception ex) {
+            return Result<TResponse>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
         }
     }
 

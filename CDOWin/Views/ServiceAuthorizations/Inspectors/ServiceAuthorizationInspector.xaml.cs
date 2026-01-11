@@ -1,3 +1,4 @@
+using CDO.Core.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Dialogs;
@@ -24,8 +25,7 @@ public sealed partial class ServiceAuthorizationInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.Selected == null)
-            return;
+        if (ViewModel == null || ViewModel.Selected == null) return;
 
         var updateVM = new ServiceAuthorizationUpdateViewModel(ViewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Service Authorization");
@@ -33,7 +33,18 @@ public sealed partial class ServiceAuthorizationInspector : Page {
 
         var result = await dialog.ShowAsync();
 
-        if (result == ContentDialogResult.Primary)
-            _ = ViewModel.UpdateSAAsync(updateVM.Updated);
+        if (result != ContentDialogResult.Primary) return;
+
+        var updateResult = await ViewModel.UpdateSAAsync(updateVM.Updated);
+        if(!updateResult.IsSuccess) {
+            HandleErrorAsync(updateResult);
+            return;
+        } 
+    }
+
+    private async void HandleErrorAsync(Result result) {
+        if (result.Error is not AppError error) return;
+        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
+        await dialog.ShowAsync();
     }
 }

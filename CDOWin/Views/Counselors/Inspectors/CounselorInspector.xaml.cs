@@ -1,3 +1,4 @@
+using CDO.Core.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Counselors.Dialogs;
@@ -33,8 +34,18 @@ public sealed partial class CounselorInspector : Page {
 
         var result = await dialog.ShowAsync();
 
-        if (result == ContentDialogResult.Primary) {
-            _ = ViewModel.UpdateCounselorAsync(updateVM.Updated);
+        if (result != ContentDialogResult.Primary) return;
+
+        var updateResult = await ViewModel.UpdateCounselorAsync(updateVM.Updated);
+        if (!updateResult.IsSuccess) {
+            HandleErrorAsync(updateResult);
+            return;
         }
+    }
+
+    private async void HandleErrorAsync(Result result) {
+        if (result.Error is not AppError error) return;
+        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
+        await dialog.ShowAsync();
     }
 }

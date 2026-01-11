@@ -22,7 +22,7 @@ public interface IReminderService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Reminder?> UpdateReminderAsync(int id, UpdateReminderDTO dto);
+    public Task<Result<Reminder>> UpdateReminderAsync(int id, UpdateReminderDTO dto);
 
     // -----------------------------
     // DELETE Methods

@@ -1,3 +1,4 @@
+using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -51,18 +52,28 @@ public sealed partial class EmployersPage : Page {
         createEmployerVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary) {
-            await createEmployerVM.CreateEmployerAsync();
-            _ = ViewModel.LoadEmployersAsync();
-        }
-
         createEmployerVM.PropertyChanged -= handler;
+
+        if (result != ContentDialogResult.Primary) return;
+        
+        var updateResult = await createEmployerVM.CreateEmployerAsync();
+        if (!updateResult.IsSuccess) {
+            HandleErrorAsync(updateResult);
+            return;
+        }
+        
+        _ = ViewModel.LoadEmployersAsync();
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is Employer employer) {
             _ = ViewModel.ReloadEmployerAsync(employer.Id);
         }
+    }
+
+    private async void HandleErrorAsync(Result result) {
+        if (result.Error is not AppError error) return;
+        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
+        await dialog.ShowAsync();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
@@ -159,9 +160,13 @@ public partial class RemindersViewModel : ObservableObject {
         _dispatcher.TryEnqueue(ApplyFilter);
     }
 
-    public async Task UpdateReminderAsync(int id, UpdateReminderDTO update) {
-        await _service.UpdateReminderAsync(id, update);
+    public async Task<Result<Reminder>> UpdateReminderAsync(int id, UpdateReminderDTO update) {
+        var result = await _service.UpdateReminderAsync(id, update);
+
+        if (!result.IsSuccess) return result;
+
         await ReloadReminderAsync(id);
+        return result;
     }
 
     public async Task DeleteReminderAsync(int id) {

@@ -1,5 +1,7 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
+using CDO.Core.Models;
 using CDOWin.Views.Employers.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
@@ -42,7 +44,7 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
     // =========================
     // CRUD Methods
     // =========================
-    public async Task CreateEmployerAsync() {
+    public async Task<Result<Employer>> CreateEmployerAsync() {
         var employer = new EmployerDTO {
             Name = Name,
             Address1 = Address1,
@@ -59,7 +61,7 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
             SupervisorEmail = SupervisorEmail
         };
 
-        await _service.CreateEmployerAsync(employer);
+        return await _service.CreateEmployerAsync(employer);
     }
 
     public void UpdateField(Field field, string value) {

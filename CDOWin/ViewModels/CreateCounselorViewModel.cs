@@ -1,5 +1,7 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
+using CDO.Core.Models;
 using CDOWin.Views.Counselors.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
@@ -46,7 +48,7 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     // =========================
     // CRUD Methods
     // =========================
-    public async Task CreateCounselorAsync() {
+    public async Task<Result<Counselor>> CreateCounselorAsync() {
         var counselor = new CreateCounselorDTO {
             name = Name,
             Email = Email,
@@ -57,7 +59,7 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
             SecretaryEmail = SecretaryEmail
         };
 
-        await _service.CreateCounselorAsync(counselor);
+        return await _service.CreateCounselorAsync(counselor);
     }
 
     public void UpdateField(Field field, string value) {

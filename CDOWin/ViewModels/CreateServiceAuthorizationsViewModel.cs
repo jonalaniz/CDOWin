@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -63,7 +64,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // =========================
     // CRUD Methods
     // =========================
-    public async Task CreateSAAsync() {
+    public async Task<Result<ServiceAuthorization>> CreateSAAsync() {
         var sa = new CreateSADTO {
             Id = Id,
             ClientID = Client.Id,
@@ -76,6 +77,6 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
             UnitOfMeasurement = UnitOfMeasurement
         };
 
-        await _service.CreateServiceAuthorizationAsync(sa);
+        return await _service.CreateServiceAuthorizationAsync(sa);
     }
 }

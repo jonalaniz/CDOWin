@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -99,10 +100,10 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
     // =========================
     // CRUD Methods
     // =========================
-    public async Task CreatePlacementAsync() {
+    public async Task<Result<Placement>> CreatePlacementAsync() {
         if (Client.EmployerID == null
             || Client.CounselorID == null)
-            return;
+            return Result<Placement>.Fail(new AppError(ErrorKind.Validation, "Client is missing required prerequesites."));
 
         var placement = new PlacementDTO {
             PlacementNumber = PlacementNumber,
@@ -133,6 +134,6 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
             EndDate = EndDate
         };
 
-        await _service.CreatePlacementAsync(placement);
+        return await _service.CreatePlacementAsync(placement);
     }
 }

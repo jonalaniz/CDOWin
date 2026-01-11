@@ -80,7 +80,6 @@ public sealed partial class ClientViewPage : Page {
             _ = ViewModel.ReloadClientAsync();
             ViewModel.NotifyNewClientCreated();
         }
-
     }
 
     private async void CreateSA_Click(object sender, RoutedEventArgs e) {

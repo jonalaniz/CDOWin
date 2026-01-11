@@ -68,7 +68,6 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Child Model Selection
     // =========================
-
     public void PlacementSelected(string id) {
         _placementSelectionService.RequestSelectedPlacement(id);
     }

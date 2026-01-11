@@ -33,33 +33,39 @@
         <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Header="Name" 
                  Text="{x:Bind ViewModel.Original.Name}" 
                  Tag="{x:Bind local:Field.Name}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
         
         <!-- Row 1: Phone & Fax -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Header="Phone" 
                  Text="{x:Bind ViewModel.Original.Phone}" 
                  Tag="{x:Bind local:Field.Phone}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Header="Fax" 
                  Text="{x:Bind ViewModel.Original.Fax}" 
                  Tag="{x:Bind local:Field.Fax}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 2: Address 1 & 2 -->
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Address" 
                  Text="{x:Bind ViewModel.Original.Address1}" 
                  Tag="{x:Bind local:Field.Address1}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc." 
                  Text="{x:Bind ViewModel.Original.Address2}" 
                  Tag="{x:Bind local:Field.Address2}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
         
         <!-- Row 3: City/State/Zip -->
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="City" 
                  Text="{x:Bind ViewModel.Original.City}" 
                  Tag="{x:Bind local:Field.City}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="25"/>
         <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
             <TextBlock Text="State"/>
             <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind ViewModel.Original.State}"
@@ -68,23 +74,27 @@
         <TextBox Grid.Row="3" Grid.Column="5" Header="Zip" 
                  Text="{x:Bind ViewModel.Original.Zip}" 
                  Tag="{x:Bind local:Field.Zip}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="12"/>
         
         <!-- Row 4: Supervisor Name & Phone -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="Supervisor" 
                  Text="{x:Bind ViewModel.Original.Supervisor}" 
                  Tag="{x:Bind local:Field.Supervisor}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Header="Phone" 
                  Text="{x:Bind ViewModel.Original.SupervisorPhone}" 
                  Tag="{x:Bind local:Field.SupervisorPhone}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 5: Supervisor Email -->
         <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" Header="Email"
                  Text="{x:Bind ViewModel.Original.SupervisorEmail}" 
                  Tag="{x:Bind local:Field.SupervisorEmail}"
-                 TextChanged="LabeledTextBox_TextChanged"/>
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
         
         <!-- Row 6: Notes -->
         <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"

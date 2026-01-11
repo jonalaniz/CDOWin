@@ -47,26 +47,31 @@
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Header="Fluent Languages" 
                  Text="{x:Bind ViewModel.OriginalClient.FluentLanguages}" 
                  Tag="{x:Bind dialogs:PersonalField.Languages}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="60"/>
         <TextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Header="Race" 
                  Text="{x:Bind ViewModel.OriginalClient.Race}" 
                  Tag="{x:Bind dialogs:PersonalField.Race}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="40"/>
         <!-- Row 2: Address -->
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Address" 
                  Text="{x:Bind ViewModel.OriginalClient.Address1}" 
                  Tag="{x:Bind dialogs:PersonalField.Address1}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc" 
                  Text="{x:Bind ViewModel.OriginalClient.Address2}" 
                  Tag="{x:Bind dialogs:PersonalField.Address2}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         
         <!-- Row 3: Address cont. -->
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="City" 
                  Text="{x:Bind ViewModel.OriginalClient.City}" 
                  Tag="{x:Bind dialogs:PersonalField.City}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
             <TextBlock Text="State"/>
             <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind ViewModel.OriginalClient.State}"

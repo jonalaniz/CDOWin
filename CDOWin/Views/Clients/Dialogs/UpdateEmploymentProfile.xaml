@@ -20,7 +20,8 @@
         <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Disability" Text="{x:Bind ViewModel.OriginalClient.Disability}" 
                  Tag="{x:Bind dialogs:EmploymentField.Disability}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="255"/>
         <!-- Row 1: Criminal Charges -->
         <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Criminal Charges" Text="{x:Bind ViewModel.OriginalClient.CriminalCharge}" 
@@ -30,6 +31,7 @@
         <TextBox Grid.Row="2" Grid.Column="0" Header="Transportation" 
                  Text="{x:Bind ViewModel.OriginalClient.Transportation}" 
                  Tag="{x:Bind dialogs:EmploymentField.Transportation}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="40"/>
     </Grid>
 </Page>

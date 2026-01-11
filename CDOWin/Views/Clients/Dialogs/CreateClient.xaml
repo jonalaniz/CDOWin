@@ -36,10 +36,12 @@
                     <!-- Row 0: Name -->
                     <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Header="First Name" 
                              Tag="{x:Bind dialogs:PersonalField.FirstName}"
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="50"/>
                     <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Header="Last Name"
                              Tag="{x:Bind dialogs:PersonalField.LastName}"
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="50"/>
 
                     <!-- Row 1: DOB/DL/SSN -->
                     <CalendarDatePicker Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
@@ -57,21 +59,26 @@
                     <!-- Row 2: Fluent Languages/Race-->
                     <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Fluent Languages" 
                              Tag="{x:Bind dialogs:PersonalField.Languages}"
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="60"/>
                     <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Race" 
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="40"/>
                     
                     <!-- Row 3: Address -->
                     <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="Address"
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="50"/>
                     <TextBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc" 
                              Tag="{x:Bind dialogs:PersonalField.Address2}"
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="50"/>
                     
                     <!-- Row 4: Address cont. -->
                     <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="City" 
                              Tag="{x:Bind dialogs:PersonalField.City}"
-                             TextChanged="PTextBox_TextChanged"/>
+                             TextChanged="PTextBox_TextChanged"
+                             MaxLength="50"/>
                     <StackPanel Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
                         <TextBlock Text="State"/>
                         <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind ViewModel.State}"
@@ -108,42 +115,52 @@
                     <!-- Row 0: Phone 1 -->
                     <TextBox Grid.Row="0" Grid.Column="0" Header="Phone 1" 
                              Tag="{x:Bind dialogs:ContactField.Phone1}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="15"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Header="Description" 
                              Tag="{x:Bind dialogs:ContactField.Phone1Identity}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="40"/>
 
                     <!-- Row 1: Phone 2 -->
                     <TextBox Grid.Row="1" Grid.Column="0" Header="Phone 2" 
                              Tag="{x:Bind dialogs:ContactField.Phone2}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="15"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Header="Description"
                              Tag="{x:Bind dialogs:ContactField.Phone2Identity}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="40"/>
 
                     <!-- Row 2: Phone 3 -->
                     <TextBox Grid.Row="2" Grid.Column="0" Header="Phone 3" 
                              Tag="{x:Bind dialogs:ContactField.Phone3}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="15"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Header="Description" 
                              Tag="{x:Bind dialogs:ContactField.Phone3Identity}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="40"/>
 
                     <!-- Row 3: Email 1 -->
                     <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="Email 1" 
                              Tag="{x:Bind dialogs:ContactField.Email}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="50"/>
                     <TextBox Grid.Row="3" Grid.Column="2" Header="Description" 
                              Tag="{x:Bind dialogs:ContactField.EmailIdentity}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="40"/>
 
                     <!-- Row 4: Email 2 -->
                     <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Header="Email 2" 
                              Tag="{x:Bind dialogs:ContactField.Email2}"
-                             TextChanged="CTextBox_TextChanged"/>
-                    <TextBox Grid.Row="4" Grid.Column="2" Header="Email 2" 
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="50"/>
+                    <TextBox Grid.Row="4" Grid.Column="2" Header="Description" 
                              Tag="{x:Bind dialogs:ContactField.Email2Identity}"
-                             TextChanged="CTextBox_TextChanged"/>
+                             TextChanged="CTextBox_TextChanged"
+                             MaxLength="40"/>
                 </Grid>
             </Expander>
 
@@ -171,7 +188,8 @@
                             DateChanged="StartDatePicker_DateChanged"/>
 
                     <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Case ID" 
-                             Tag="{x:Bind dialogs:CaseField.CaseID}" TextChanged="TextBox_TextChanged"/>
+                             Tag="{x:Bind dialogs:CaseField.CaseID}" TextChanged="TextBox_TextChanged"
+                             MaxLength="20"/>
                     <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
                         <TextBlock Text="Tier"/>
                         <DropDownButton x:Name="StatusDropDown"  HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
@@ -183,7 +201,8 @@
                         <DropDownButton x:Name="BenefitDropDown" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                     <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
-                             Tag="{x:Bind dialogs:CaseField.Premiums}" TextChanged="TextBox_TextChanged"/>
+                             Tag="{x:Bind dialogs:CaseField.Premiums}" TextChanged="TextBox_TextChanged"
+                             MaxLength="225"/>
 
                     <!-- Row 2: Counselor -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">
@@ -229,7 +248,8 @@
                     <!-- Row 0: Disability -->
                     <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                              Header="Disability" Tag="{x:Bind dialogs:EmploymentField.Disability}"
-                             TextChanged="ETextBox_TextChanged"/>
+                             TextChanged="ETextBox_TextChanged"
+                             MaxLength="255"/>
                     <!-- Row 1: Criminal Charges -->
                     <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                              Header="Criminal Charges" Tag="{x:Bind dialogs:EmploymentField.CriminalCharge}"
@@ -237,7 +257,8 @@
                     <!-- Row 2: Transportation -->
                     <TextBox Grid.Row="2" Grid.Column="0" Header="Transportation" 
                              Tag="{x:Bind dialogs:EmploymentField.Transportation}"
-                             TextChanged="ETextBox_TextChanged"/>
+                             TextChanged="ETextBox_TextChanged"
+                             MaxLength="40"/>
                 </Grid>
             </Expander>
 

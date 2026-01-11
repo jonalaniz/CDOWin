@@ -46,7 +46,8 @@
         </StackPanel>
         <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
                  Text="{x:Bind ViewModel.OriginalClient.Premiums}" Tag="{x:Bind dialogs:CaseField.Premiums}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="255"/>
         
         <!-- Row 2: Counselor -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">

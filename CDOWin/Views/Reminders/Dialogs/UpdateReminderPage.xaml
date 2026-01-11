@@ -34,7 +34,8 @@
         <!-- Row 3: Description -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Description" 
                  Text="{x:Bind ViewModel.Original.Description}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="250"/>
 
     </Grid>
 </Page>

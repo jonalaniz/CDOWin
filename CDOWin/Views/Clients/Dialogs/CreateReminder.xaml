@@ -28,6 +28,7 @@
         <!-- Row 2: Description -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Description" 
                  Style="{StaticResource MultiLineTextBoxStyle}"
-                 TextChanged="TextChanged"/>
+                 TextChanged="TextChanged"
+                 MaxLength="250"/>
     </Grid>
 </Page>

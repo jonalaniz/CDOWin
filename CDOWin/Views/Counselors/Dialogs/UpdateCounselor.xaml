@@ -26,31 +26,37 @@
         <TextBox Grid.Row="0" Grid.Column="0" Header="Name" 
                  Text="{x:Bind ViewModel.Original.Name}" 
                  Tag="{x:Bind local:Field.Name}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Header="Email"
                  Text="{x:Bind ViewModel.Original.Email}" 
                  Tag="{x:Bind local:Field.Email}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 1: Phone + Fax -->
         <TextBox Grid.Row="1" Grid.Column="0" Header="Phone"
                  Text="{x:Bind ViewModel.Original.Phone}" 
                  Tag="{x:Bind local:Field.Phone}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="1" Grid.Column="1" Header="Fax"
                  Text="{x:Bind ViewModel.Original.Fax}" 
                  Tag="{x:Bind local:Field.Fax}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 2: Secretary + Secretary Email -->
         <TextBox Grid.Row="2" Grid.Column="0" Header="Secretary" 
                  Text="{x:Bind ViewModel.Original.SecretaryName}" 
                  Tag="{x:Bind local:Field.Secretary}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="2" Grid.Column="1" Header="Secretary Email"
                  Text="{x:Bind ViewModel.Original.SecretaryEmail}" 
                  Tag="{x:Bind local:Field.SecretaryEmail}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!--Row 3:  Notes -->
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"

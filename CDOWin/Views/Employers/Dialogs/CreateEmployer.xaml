@@ -32,28 +32,34 @@
         <!-- Row 0: Name -->
         <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
                  Header="Name" Tag="{x:Bind local:Field.Name}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 1: Phone & Fax -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                  Header="Phone" Tag="{x:Bind local:Field.Phone}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3"
                  Header="Fax" Tag="{x:Bind local:Field.Fax}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 2: Address 1 & 2 -->
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
                  Header="Address" Tag="{x:Bind local:Field.Address1}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                  Header="Apt, ste, etc." Tag="{x:Bind local:Field.Address2}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 3: City/State/Zip -->
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
                  Header="City" Tag="{x:Bind local:Field.City}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="25"/>
         <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
             <TextBlock Text="State"/>
             <DropDownButton x:Name="StateDropDownButton"
@@ -61,20 +67,24 @@
         </StackPanel>
         <TextBox Grid.Row="3" Grid.Column="5"
                  Header="Zip" Tag="{x:Bind local:Field.Zip}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="12"/>
 
         <!-- Row 4: Supervisor Name & Phone -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
                  Header="Supervisor" Tag="{x:Bind local:Field.Supervisor}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
         <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
                  Header="Phone" Tag="{x:Bind local:Field.SupervisorPhone}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 5: Supervisor Email -->
         <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"
                  Header="Email" Tag="{x:Bind local:Field.SupervisorEmail}"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
 
         <!-- Row 6: Notes -->
         <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"

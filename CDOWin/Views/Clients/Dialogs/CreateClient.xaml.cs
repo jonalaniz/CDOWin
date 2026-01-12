@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 
@@ -162,8 +163,7 @@ public sealed partial class CreateClient : Page {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
             var query = sender.Text.Trim().ToLower();
             var suggestions = _counselors
-                .Where(c => c.Name.ToLower().Contains(query))
-                .Select(c => c.Name)
+                .Where(c => c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
                 .ToList();
 
             sender.ItemsSource = suggestions;
@@ -171,27 +171,23 @@ public sealed partial class CreateClient : Page {
     }
 
     private void CounselorAutoSuggest_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
-        if (args.SelectedItem is string name) {
-            var counselor = _counselors.FirstOrDefault(c => c.Name == name);
-            if (counselor != null) {
-                UpdateSelectedCounselor(counselor);
-                sender.Text = counselor.Name; // display chosen name
+        if (args.SelectedItem is Counselor selectedCounselor) {
+            var result = _counselors.FirstOrDefault(c => c.Id == selectedCounselor.Id);
+            if (result != null) {
+                UpdateSelectedCounselor(result);
+                sender.Text = result.Name; // display chosen name
             }
         }
     }
 
     private void CounselorAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
-        if (args.ChosenSuggestion is string name) {
-            var counselor = _counselors.FirstOrDefault(c => c.Name == name);
-            if (counselor != null) {
-                UpdateSelectedCounselor(counselor);
-            }
+        if (args.ChosenSuggestion is Counselor chosenCounselor) {
+            var counselor = _counselors.FirstOrDefault(c => c.Id == chosenCounselor.Id);
+            if (counselor != null) { UpdateSelectedCounselor(counselor); }
         } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
             // Optional: match typed text even if not chosen from suggestions
             var counselor = _counselors.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
-            if (counselor != null) {
-                UpdateSelectedCounselor(counselor);
-            }
+            if (counselor != null) { UpdateSelectedCounselor(counselor); }
         }
     }
 
@@ -323,6 +319,7 @@ public sealed partial class CreateClient : Page {
     }
 
     private void UpdateSelectedCounselor(Counselor counselor) {
+        Debug.WriteLine(counselor.Name);
         ViewModel.Counselor = counselor.Name;
         ViewModel.CounselorID = counselor.Id;
         ViewModel.CounselorEmail = counselor.Email;

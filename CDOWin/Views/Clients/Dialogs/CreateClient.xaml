@@ -6,6 +6,7 @@
     xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:CDO.Core.Models"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
@@ -206,9 +207,16 @@
 
                     <!-- Row 2: Counselor -->
                     <AutoSuggestBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Counselor"
-                                    x:Name="CounselorAutoSuggest" TextChanged="CounselorAutoSuggest_TextChanged"
+                                    x:Name="CounselorAutoSuggest" TextMemberPath="Name"
+                                    TextChanged="CounselorAutoSuggest_TextChanged"
                                     QuerySubmitted="CounselorAutoSuggest_QuerySubmitted" 
-                                    SuggestionChosen="CounselorAutoSuggest_SuggestionChosen"/>
+                                    SuggestionChosen="CounselorAutoSuggest_SuggestionChosen">
+                        <AutoSuggestBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:Counselor">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </AutoSuggestBox.ItemTemplate>
+                    </AutoSuggestBox>
                 </Grid>
             </Expander>
 

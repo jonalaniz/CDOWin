@@ -4,6 +4,7 @@ using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace CDOWin.Views.Placements.Dialogs;
@@ -69,17 +70,31 @@ public sealed partial class CreatePlacements : Page {
         }
     }
 
+    // =========================
+    // AutoSuggest Box Updates
+    // =========================
     private void EmployerAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+            var query = sender.Text.Trim().ToLower();
+            var suggestions = _employers
+                .Where(c => c.Name.ToLower().Contains(query))
+                .Select(c => c.Name)
+                .ToList();
 
-    }
-
-    private void EmployerAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
-
+            sender.ItemsSource = suggestions;
+        }
     }
 
     private void EmployerAutoSuggest_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
+        if(args.SelectedItem is string name) {
 
+        }
     }
+
+    private void EmployerAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
+    }
+
+
 
     // When the employer is selected, prefill the supervisor/phone/email if the item is empty
 }

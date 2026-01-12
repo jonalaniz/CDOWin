@@ -1,5 +1,6 @@
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
+using System;
 
 
 namespace CDOWin.Views.Placements.Dialogs;
@@ -24,31 +25,30 @@ public sealed partial class CreatePlacements : Page {
 
     }
 
-    private void StartDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-
+    private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
+        if (sender.Tag is UpdateField field && sender.Date is DateTimeOffset offset) {
+            var date = offset.DateTime.Date.ToString(format: "MM/dd/yyyy");
+            switch (field) {
+                case UpdateField.Day1:
+                    ViewModel.FirstFiveDays1 = date;
+                    break;
+                case UpdateField.Day2:
+                    ViewModel.FirstFiveDays2 = date;
+                    break;
+                case UpdateField.Day3:
+                    ViewModel.FirstFiveDays3 = date;
+                    break;
+                case UpdateField.Day4:
+                    ViewModel.FirstFiveDays4 = date;
+                    break;
+                case UpdateField.Day5:
+                    ViewModel.FirstFiveDays5 = date;
+                    break;
+            }
+        }
     }
 
-    private void EndDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-
-    }
-
-    private void DayOne_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-
-    }
-
-    private void DayTwo_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-
-    }
-
-    private void DayThree_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-
-    }
-
-    private void DayFour_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-
-    }
-
-    private void DayFive_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
+    private void DayPicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
 
     }
 

@@ -43,7 +43,7 @@ public class DataCoordinator(
     // TTLs
     // =========================
     private static readonly TimeSpan ClientTTL = TimeSpan.FromMinutes(5);
-    private static readonly TimeSpan CounselorTTL = TimeSpan.FromHours(1);
+    private static readonly TimeSpan CounselorTTL = TimeSpan.FromHours(30);
     private static readonly TimeSpan EmployerTTL = TimeSpan.FromHours(1);
     private static readonly TimeSpan PlacementTTL = TimeSpan.FromHours(1);
     private static readonly TimeSpan ReminderTTL = TimeSpan.FromSeconds(45);

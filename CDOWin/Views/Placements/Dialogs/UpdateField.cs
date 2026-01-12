@@ -14,5 +14,15 @@ public enum UpdateField {
     FormattedSalary,
     FormattedHireDate,
     FormattedEndDate,
-    DaysOnJob
+    DaysOnJob,
+    HoursWorked,
+    HourlyWage,
+    Day1,
+    Day2,
+    Day3,
+    Day4,
+    Day5,
+    Website,
+    JobDuties,
+    WorkSchedule
 }

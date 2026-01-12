@@ -51,6 +51,16 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
     }
 
     // =========================
+    // Public Methods
+    // =========================
+    public List<Employer> GetEmployers() {
+        if (_allEmployers.Count == 0)
+            LoadEmployersAsync().GetAwaiter().GetResult();
+
+        return _allEmployers.ToList();
+    }
+
+    // =========================
     // CRUD Methods
     // =========================
     public async Task LoadEmployersAsync() {

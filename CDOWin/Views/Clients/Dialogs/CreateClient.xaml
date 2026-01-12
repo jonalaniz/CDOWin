@@ -205,12 +205,10 @@
                              MaxLength="225"/>
 
                     <!-- Row 2: Counselor -->
-                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">
-                        <TextBlock Margin="0,8,8,8" Text="Counselor" Style="{StaticResource LabelTextBlockStyle}"/>
-                        <AutoSuggestBox x:Name="CounselorAutoSuggest" TextChanged="CounselorAutoSuggest_TextChanged"
-                                        QuerySubmitted="CounselorAutoSuggest_QuerySubmitted"
-                                        SuggestionChosen="CounselorAutoSuggest_SuggestionChosen"/>
-                    </StackPanel>
+                    <AutoSuggestBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Counselor"
+                                    x:Name="CounselorAutoSuggest" TextChanged="CounselorAutoSuggest_TextChanged"
+                                    QuerySubmitted="CounselorAutoSuggest_QuerySubmitted" 
+                                    SuggestionChosen="CounselorAutoSuggest_SuggestionChosen"/>
                 </Grid>
             </Expander>
 

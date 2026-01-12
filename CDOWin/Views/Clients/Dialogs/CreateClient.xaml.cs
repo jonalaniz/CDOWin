@@ -155,6 +155,9 @@ public sealed partial class CreateClient : Page {
             ViewModel.StartDate = offset.DateTime.Date.ToUniversalTime();
     }
 
+    // =========================
+    // AutoSuggest Box Updates
+    // =========================
     private void CounselorAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
             var query = sender.Text.Trim().ToLower();

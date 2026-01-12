@@ -33,7 +33,6 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     // UI Setup
     // =========================
-
     private void BuildDropDowns() {
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);

@@ -59,11 +59,10 @@
                 <NumberBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Header="Placement Number"
                            x:Name="PlacementNumber" ValueChanged="NumberBox_ValueChanged"
                            Tag="{x:Bind local:UpdateField.PlacementNumber}"/>
-                <StackPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Spacing="8">
-                    <TextBlock  Text="Employer"/>
-                    <DropDownButton x:Name="EmployerDropDownButton" Content="Select an Employer"
-                                    HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+                <AutoSuggestBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Employer"
+                                    x:Name="EmployerAutoSuggest" TextChanged="EmployerAutoSuggest_TextChanged"
+                                    QuerySubmitted="EmployerAutoSuggest_QuerySubmitted" 
+                                    SuggestionChosen="EmployerAutoSuggest_SuggestionChosen"/>
                 <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
                     <TextBlock Text="SA Number"/>
                     <DropDownButton x:Name="SANumberDropDownButton" Content="Select an SA"
@@ -94,11 +93,11 @@
                 <!-- Row 4: Hire Date + End Date -->
                 <CalendarDatePicker Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
                                     Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
-                                    DateChanged="StartDatePicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.FormattedHireDate}"/>
                 <CalendarDatePicker Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"
                                     Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
-                                    DateChanged="EndDatePicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.FormattedEndDate}"/>
 
                 <!-- Row 5: Days on job + Hours Worked + Hourly Wage -->
@@ -112,41 +111,41 @@
                          MaxLength="255" TextChanged="TextChanged"
                          Tag="{x:Bind local:UpdateField.HourlyWage}"/>
 
-                <!-- Rows 8 and 9: First 5 days -->
+                <!-- Rows 6 + 7: First 5 days -->
                 <CalendarDatePicker Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                                     Header="Day 1" HorizontalAlignment="Stretch"
-                                    DateChanged="DayPicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.Day1}"/>
                 <CalendarDatePicker Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
                                     Header="Day 2" HorizontalAlignment="Stretch"
-                                    DateChanged="DayPicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.Day2}"/>
                 <CalendarDatePicker Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2"
                                     Header="Day 3" HorizontalAlignment="Stretch"
-                                    DateChanged="DayPicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.Day3}"/>
                 
                 <CalendarDatePicker Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                                     Header="Day 4" HorizontalAlignment="Stretch"
-                                    DateChanged="DayPicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.Day4}"/>
                 <CalendarDatePicker Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2"
                                     Header="Day 5" HorizontalAlignment="Stretch"
-                                    DateChanged="DayPicker_DateChanged"
+                                    DateChanged="DatePicker_DateChanged"
                                     Tag="{x:Bind local:UpdateField.Day5}"/>
 
-                <!-- Row 10: Website -->
+                <!-- Row :8 Website -->
                 <TextBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
                          MaxLength="225" TextChanged="TextChanged"
                          Tag="{x:Bind local:UpdateField.Website}"/>
 
-                <!-- Row 11: Job Duties -->
+                <!-- Row 9: Job Duties -->
                 <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Job Duties"
                          MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
                          TextChanged="TextChanged"
                          Tag="{x:Bind local:UpdateField.JobDuties}"/>
 
-                <!-- Row 12: Work Schedule -->
+                <!-- Row 10: Work Schedule -->
                 <TextBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Work Schedule"
                          MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
                          TextChanged="TextChanged"

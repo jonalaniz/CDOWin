@@ -4,7 +4,7 @@ public enum ClientEditType {
     Personal,
     Case,
     Employment,
-    Arrangements,
+    Conditions,
     Contact
 }
 

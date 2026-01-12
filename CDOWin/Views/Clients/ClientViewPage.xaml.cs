@@ -217,8 +217,8 @@ public sealed partial class ClientViewPage : Page {
                     dialog.Title = "Edit Employment Profile";
                     dialog.Content = new UpdateEmploymentProfile(updateVM);
                     break;
-                case ClientEditType.Arrangements:
-                    dialog.Title = "Edit Arrangements";
+                case ClientEditType.Conditions:
+                    dialog.Title = "Edit Conditions";
                     dialog.Content = new UpdateArrangements(updateVM);
                     break;
                 case ClientEditType.Contact:

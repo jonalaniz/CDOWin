@@ -217,7 +217,7 @@ public sealed partial class CreateClient : Page {
     }
 
     // =========================
-    // Arrangements Updates
+    // Conditions Updates
     // =========================
     private void ATextBox_TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is not TextBox textbox || textbox.Tag is not ArrangementsField field)
@@ -330,7 +330,7 @@ public sealed partial class CreateClient : Page {
         ViewModel.CounselorFax = counselor.Fax;
     }
 
-    // Arrangements Fields
+    // Conditions Fields
     private void UpdateValue(string value, ArrangementsField type) {
         switch (type) {
             case ArrangementsField.EmploymentGoal:

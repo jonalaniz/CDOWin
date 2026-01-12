@@ -360,7 +360,7 @@
                     </Grid>
                 </Grid>
 
-                <!-- Arrangements Card -->
+                <!-- Conditions Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
 
                     <!-- Inner Grid -->
@@ -378,10 +378,10 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Arrangements"
+                            <TextBlock Grid.Column="0" Text="Conditions"
                                        Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Arrangements}" Click="EditButton_Clicked"
+                                    Tag="{x:Bind dialogs:ClientEditType.Conditions}" Click="EditButton_Clicked"
                                     ToolTipService.ToolTip="Edit">
                                 <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </Button>

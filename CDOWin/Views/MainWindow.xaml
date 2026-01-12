@@ -29,6 +29,7 @@
         
         <!-- Title Bar -->
         <TitleBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                  x:Name="Tbar"
                   Title="CDO Win" Subtitle="Beta"
                   IsBackButtonVisible="False"
                   IsPaneToggleButtonVisible="False"/>

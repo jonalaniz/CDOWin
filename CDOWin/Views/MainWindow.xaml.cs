@@ -3,9 +3,11 @@ using CDOWin.Services;
 using CDOWin.Views.Reminders;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.UI.ViewManagement;
 
 namespace CDOWin.Views;
@@ -35,6 +37,7 @@ public sealed partial class MainWindow : Window {
         var manager = WinUIEx.WindowManager.Get(this);
         manager.MinHeight = 800;
         manager.MinWidth = 1200;
+        Tbar.Subtitle = GetAppVersion();
     }
 
     private async Task SetupTitleBarAsync() {
@@ -51,5 +54,10 @@ public sealed partial class MainWindow : Window {
         SidebarFrame.Navigate(typeof(RemindersPage), null, new SlideNavigationTransitionInfo() {
             Effect = SlideNavigationTransitionEffect.FromBottom
         });
+    }
+
+    private string GetAppVersion() {
+        var version = Package.Current.Id.Version;
+        return $"Beta {version.Major}.{version.Minor}.{version.Build}";
     }
 }

@@ -182,12 +182,12 @@ public sealed partial class CreateClient : Page {
 
     private void CounselorAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
         if (args.ChosenSuggestion is Counselor chosenCounselor) {
-            var counselor = _counselors.FirstOrDefault(c => c.Id == chosenCounselor.Id);
-            if (counselor != null) { UpdateSelectedCounselor(counselor); }
+            var result = _counselors.FirstOrDefault(c => c.Id == chosenCounselor.Id);
+            if (result != null) { UpdateSelectedCounselor(result); }
         } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
             // Optional: match typed text even if not chosen from suggestions
-            var counselor = _counselors.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
-            if (counselor != null) { UpdateSelectedCounselor(counselor); }
+            var result = _counselors.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
+            if (result != null) { UpdateSelectedCounselor(result); }
         }
     }
 

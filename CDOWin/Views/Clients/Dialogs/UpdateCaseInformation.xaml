@@ -55,7 +55,13 @@
             <AutoSuggestBox x:Name="CounselorAutoSuggest" TextMemberPath="Name"
                             TextChanged="CounselorAutoSuggest_TextChanged"
                             QuerySubmitted="CounselorAutoSuggest_QuerySubmitted"
-                            SuggestionChosen="CounselorAutoSuggest_SuggestionChosen"/>
+                            SuggestionChosen="CounselorAutoSuggest_SuggestionChosen">
+                <AutoSuggestBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:Counselor">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </AutoSuggestBox.ItemTemplate>
+            </AutoSuggestBox>
         </StackPanel>
     </Grid>
 </Page>

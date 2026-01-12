@@ -4,6 +4,7 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -16,15 +17,19 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
     private readonly IPlacementService _service = service;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial Client Client { get; set; } = client;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial Employer? Employer { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial int? PlacementNumber { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? PoNumber { get; set; }
 
     [ObservableProperty]
@@ -44,9 +49,6 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
 
     [ObservableProperty]
     public partial float? DaysOnJob { get; set; }
-
-    [ObservableProperty]
-    public partial bool? Active { get; set; }
 
     [ObservableProperty]
     public partial string? Website { get; set; }
@@ -90,9 +92,12 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
     public bool CanSave => CanSaveMethod();
 
     public bool CanSaveMethod() {
-        // Employer cannot be null
-        // Client cannot be null
-        // other shit cannnot be null
+        Debug.WriteLine($"{Employer == null} {Client == null} {PlacementNumber == null} {PoNumber == null}");
+        if (Employer == null
+            || Client == null
+            || PlacementNumber == null
+            || PoNumber == null)
+            return false;
 
         return true;
     }
@@ -101,9 +106,8 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
     // CRUD Methods
     // =========================
     public async Task<Result<Placement>> CreatePlacementAsync() {
-        if (Client.EmployerID == null
-            || Client.CounselorID == null)
-            return Result<Placement>.Fail(new AppError(ErrorKind.Validation, "Client is missing required prerequesites."));
+        if (Client.CounselorID == null)
+            return Result<Placement>.Fail(new AppError(ErrorKind.Validation, "Client is missing a Counselor, assign on and try again."));
 
         var placement = new PlacementDTO {
             PlacementNumber = PlacementNumber,
@@ -119,7 +123,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
             DaysOnJob = DaysOnJob,
             ClientName = Client.Name,
             CounselorName = Client.CounselorReference?.Name,
-            Active = Active,
+            Active = true,
             Website = Website,
             DescriptionOfDuties = DescriptionOfDuties,
             NumbersOfHoursWorking = NumbersOfHoursWorking,

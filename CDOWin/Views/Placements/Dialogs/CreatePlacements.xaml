@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls"
+    xmlns:models="using:CDO.Core.Models"
     xmlns:viewModels="using:CDOWin.ViewModels"
     mc:Ignorable="d">
 
@@ -62,7 +63,13 @@
                 <AutoSuggestBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Employer"
                                     x:Name="EmployerAutoSuggest" TextChanged="EmployerAutoSuggest_TextChanged"
                                     QuerySubmitted="EmployerAutoSuggest_QuerySubmitted" 
-                                    SuggestionChosen="EmployerAutoSuggest_SuggestionChosen"/>
+                                    SuggestionChosen="EmployerAutoSuggest_SuggestionChosen">
+                    <AutoSuggestBox.ItemTemplate>
+                        <DataTemplate x:DataType="models:Employer">
+                            <TextBlock Text="{x:Bind Name}"/>
+                        </DataTemplate>
+                    </AutoSuggestBox.ItemTemplate>
+                </AutoSuggestBox>
                 <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
                     <TextBlock Text="SA Number"/>
                     <DropDownButton x:Name="SANumberDropDownButton" Content="Select an SA"
@@ -71,15 +78,15 @@
 
                 <!-- Row 1: Supervisor + Supervisor Phone -->
                 <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Header="Supervisor"
-                         MaxLength="50" TextChanged="TextChanged"
+                         MaxLength="50" TextChanged="TextChanged" x:Name="SupervisorTextBox"
                          Tag="{x:Bind local:UpdateField.Supervisor}"/>
                 <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Header="Supervisor Phone"
-                         MaxLength="50" TextChanged="TextChanged"
+                         MaxLength="50" TextChanged="TextChanged" x:Name="SPhoneBox"
                          Tag="{x:Bind local:UpdateField.SupervisorPhone}"/>
 
                 <!-- Row 2: Supervisor Email -->
                 <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Supervisor Email"
-                         MaxLength="50" TextChanged="TextChanged"
+                         MaxLength="50" TextChanged="TextChanged" x:Name="SEmailBox"
                          Tag="{x:Bind local:UpdateField.SupervisorEmail}"/>
 
                 <!-- Row 3: Position + Salary-->

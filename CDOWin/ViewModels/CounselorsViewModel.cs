@@ -106,6 +106,8 @@ public partial class CounselorsViewModel(DataCoordinator dataCoordinator, ICouns
         var result = await _service.UpdateCounselorAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
 
+        // TODO: Mark data as stale in DataCoordinator to fetch new data on next update
+
         await ReloadCounselorAsync(Selected.Id);
         return result;
     }

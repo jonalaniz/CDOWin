@@ -36,7 +36,6 @@ public sealed partial class UpdateCaseInformation : Page {
     private void BuildDropDowns() {
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);
-        Debug.WriteLine($"FUCK: {ViewModel.OriginalClient.Benefits} PISS: {ViewModel.OriginalClient.Status}");
         BenefitDropDown.Content = ViewModel.OriginalClient.Benefits?.NormalizeString() ?? "None";
         StatusDropDown.Content = ViewModel.OriginalClient.Status?.NormalizeString() ?? "None";
     }

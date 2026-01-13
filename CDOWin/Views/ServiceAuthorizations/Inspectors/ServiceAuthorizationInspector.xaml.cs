@@ -36,15 +36,19 @@ public sealed partial class ServiceAuthorizationInspector : Page {
 
         if (result != ContentDialogResult.Primary) return;
 
-        var updateResult = await ViewModel.UpdateSAAsync(updateVM.Updated);
+        var updateResult = await updateVM.UpdateSAAsync();
+  
         if (!updateResult.IsSuccess) {
             HandleErrorAsync(updateResult);
             return;
         }
+
+        _ = ViewModel.ReloadServiceAuthorizationAsync(ViewModel.Selected.Id);
     }
 
     private async void Export_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        Debug.WriteLine("Export click clicked");
+        if (ViewModel.Selected == null) return;
+
         var result = await ViewModel.ExportSelectedAsync();
         if (!result.IsSuccess) {
             HandleErrorAsync(result);

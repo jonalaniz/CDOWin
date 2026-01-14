@@ -149,7 +149,7 @@ public sealed partial class UpdateCaseInformation : Page {
                 ViewModel.UpdatedClient.CaseID = value;
                 break;
             case CaseField.Premiums:
-                ViewModel.UpdatedClient.Premium = value;
+                ViewModel.UpdatedClient.Premiums = value;
                 break;
         }
     }

@@ -50,18 +50,16 @@
                  MaxLength="255"/>
         
         <!-- Row 2: Counselor -->
-        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6">
-            <TextBlock Margin="0,8,8,8" Text="Counselor" Style="{StaticResource LabelTextBlockStyle}"/>
-            <AutoSuggestBox x:Name="CounselorAutoSuggest" TextMemberPath="Name"
-                            TextChanged="CounselorAutoSuggest_TextChanged"
-                            QuerySubmitted="CounselorAutoSuggest_QuerySubmitted"
-                            SuggestionChosen="CounselorAutoSuggest_SuggestionChosen">
-                <AutoSuggestBox.ItemTemplate>
-                    <DataTemplate x:DataType="models:Counselor">
-                        <TextBlock Text="{x:Bind Name}"/>
-                    </DataTemplate>
-                </AutoSuggestBox.ItemTemplate>
-            </AutoSuggestBox>
-        </StackPanel>
+        <AutoSuggestBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Counselor"
+                        x:Name="CounselorAutoSuggest" TextMemberPath="Name" 
+                        TextChanged="CounselorAutoSuggest_TextChanged"
+                        QuerySubmitted="CounselorAutoSuggest_QuerySubmitted"
+                        SuggestionChosen="CounselorAutoSuggest_SuggestionChosen">
+            <AutoSuggestBox.ItemTemplate>
+                <DataTemplate x:DataType="models:Counselor">
+                    <TextBlock Text="{x:Bind Name}"/>
+                </DataTemplate>
+            </AutoSuggestBox.ItemTemplate>
+        </AutoSuggestBox>
     </Grid>
 </Page>

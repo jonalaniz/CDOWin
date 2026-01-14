@@ -141,7 +141,8 @@ public partial class ClientsViewModel : ObservableObject {
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
 
-        Selected = result.Value!;
+        // Selected = result.Value!;
+        await ReloadClientAsync();
         return result;
     }
 

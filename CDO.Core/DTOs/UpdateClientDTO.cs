@@ -50,5 +50,5 @@ public class UpdateClientDTO {
     public bool? ElevatorSpeechCompleted { get; set; }
     public string? Race { get; set; }
     public string? FluentLanguages { get; set; }
-    public string? Premium { get; set; }
+    public string? Premiums { get; set; }
 }

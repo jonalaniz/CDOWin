@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Interfaces;
+using CDO.Core.Models.Enums;
 using CDO.Core.Services;
 
 // Get environment variables
@@ -78,10 +79,7 @@ IClientService clientService = new ClientService(network);
 //await llama.UpdateModel();
 //await llama.Chat();
 
-DateTime Today = DateTime.Now.Date;
-DateTime firstOfMonth = new(Today.Year, Today.Month, 1);
-int dayOfWeekOffset = (int)firstOfMonth.DayOfWeek;
-DateTime firstVisibleDay = firstOfMonth.AddDays(-dayOfWeekOffset);
-Console.WriteLine($"Today is: {Today.DayOfWeek}");
-Console.WriteLine($"Today as an int: {dayOfWeekOffset}");
-Console.WriteLine($"First visible day is always: {firstVisibleDay.DayOfWeek}");
+var value = UM.AllItems();
+foreach (var v in value) {
+    Console.WriteLine(v.Value);
+}

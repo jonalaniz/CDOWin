@@ -28,26 +28,6 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     public ClientViewPage() {
         InitializeComponent();
-        BuildRemindersFlyout();
-    }
-
-    // =========================
-    // UI Setup
-    // =========================
-    private void BuildRemindersFlyout() {
-        var flyout = new MenuFlyout();
-
-        foreach (var reminderItem in ReminderMenuItem.AllItems()) {
-            var item = new MenuFlyoutItem {
-                Text = reminderItem.ToString(),
-                Tag = reminderItem
-            };
-
-            item.Click += ReminderFlyoutItem_Click;
-            flyout.Items.Add(item);
-        }
-
-        RemindersSplitButton.Flyout = flyout;
     }
 
     // =========================
@@ -60,8 +40,8 @@ public sealed partial class ClientViewPage : Page {
     }
 
     // Reminders
-    private async void CreateReminder_ClickAsync(SplitButton sender, SplitButtonClickEventArgs e) {
-        if (ViewModel.Selected == null) return;
+    private async void CreateReminder_ClickAsync(object sender, RoutedEventArgs e) {
+        if (sender is not Button || ViewModel.Selected == null) return;
 
         // Initialize our dialog/vm/page
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"Create Reminder for {ViewModel.Selected.Name}");
@@ -206,12 +186,25 @@ public sealed partial class ClientViewPage : Page {
         _ = ViewModel.ReloadClientAsync();
     }
 
-    private void Placement_Click(object sender, RoutedEventArgs e) {
-        if (sender is Button button && button.Tag is string id) {
-            // Here we need to create a new dialog and show the placement
+    private async void Placement_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not string id) { return; }
+        var placement = ViewModel.Selected?.Placements?.FirstOrDefault(c => c.Id == id);
 
-            ViewModel.PlacementSelected(id);
-            AppServices.Navigation.Navigate(CDOFrame.Placements);
+        if (placement == null) { return; }
+        var updatePlacementVM = new PlacementUpdateViewModel(placement);
+        var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Placement");
+        // dialog.SecondaryButtonText = "Export";
+        dialog.Content = new UpdatePlacement(updatePlacementVM);
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary) {
+            var updateResult = await updatePlacementVM.UpdatePlacementAsync();
+            if (!updateResult.IsSuccess) {
+                HandleErrorAsync(updateResult);
+                return;
+            }
+            _ = ViewModel.ReloadClientAsync();
         }
     }
 

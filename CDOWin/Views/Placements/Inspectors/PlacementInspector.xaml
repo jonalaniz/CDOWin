@@ -30,7 +30,6 @@
         
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Top"
-                Click="EditButton_Click"
                 Style="{StaticResource SingleIconButtonStyle}"
                 ToolTipService.ToolTip="Edit"
                 Click="EditButton_Click">

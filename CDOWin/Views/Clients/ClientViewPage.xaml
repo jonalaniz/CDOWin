@@ -31,7 +31,7 @@
                    Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
         
         <!-- Button Row -->
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,6,4,4">
             
             <!-- Documents Button -->
             <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,2,8,0"
@@ -40,12 +40,10 @@
             </Button>
             
             <!-- Reminders Split Button (flyout contains templated reminders) -->
-            <SplitButton x:Name="RemindersSplitButton" Margin="0,2,8,0" Padding="6"
-                         Click="CreateReminder_ClickAsync"
-                         ToolTipService.ToolTip="New Reminder"
-                         Style="{ThemeResource SplitButtonCommandBarStyle}">
-                <FontIcon Glyph="&#xED0E;" Foreground="{StaticResource AccentAAFillColorDefaultBrush}"/>
-            </SplitButton>
+            <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,2,8,0"
+                    Click="CreateReminder_ClickAsync" ToolTipService.ToolTip="New Reminder">
+                <FontIcon Glyph="&#xED0E;" Style="{StaticResource SingleIconFontStyle}"/>
+            </Button>
         </StackPanel>
 
         <!-- Row 1: ScrollViewer + WrapPanel -->

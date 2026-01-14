@@ -62,4 +62,17 @@ public sealed partial class UpdateReminderPage : Page {
             ViewModel.Updated.Complete = checkbox.IsChecked;
         }
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not string tag) return;
+
+        // Try to parse the tag as an integer and unwrap datepicker date
+        if (!int.TryParse(tag, out int days)) return;
+        if (DatePicker.Date is not DateTimeOffset offset) return;
+
+        // Set our date
+        var newDate = offset.AddDays(days);
+        DatePicker.Date = newDate;
+        ViewModel.Updated.Date = newDate.DateTime.Date.ToUniversalTime();
+    }
 }

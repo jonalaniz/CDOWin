@@ -1,6 +1,6 @@
 using CDO.Core.DTOs;
 using CDO.Core.ErrorHandling;
-using CDO.Core.Export.Composer;
+using CDOWin.Composers;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
@@ -150,7 +150,7 @@ public sealed partial class ClientViewPage : Page {
         if (sender is not Button button || button.Tag is not string id) { return; }
         var sa = ViewModel.Selected?.Pos?.FirstOrDefault(c => c.Id == id);
 
-        if(sa == null) { return; }
+        if (sa == null) { return; }
         var updateSAVM = new ServiceAuthorizationUpdateViewModel(sa);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Service Authorization");
         dialog.SecondaryButtonText = "Export";

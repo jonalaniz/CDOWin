@@ -1,4 +1,4 @@
-﻿namespace CDO.Core.Export.Templates;
+﻿namespace CDO.Core.WordInterop;
 
 public sealed class TemplateProvider : ITemplateProvider {
     private const string SharedDrive = @"Z:\Templates";

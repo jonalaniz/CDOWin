@@ -6,46 +6,67 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-
 
 namespace CDOWin.Views.Placements.Dialogs;
 
-public sealed partial class CreatePlacements : Page {
+public sealed partial class UpdatePlacement : Page {
 
     // =========================
     // Dependencies
     // =========================
     private readonly List<Employer> _employers = AppServices.EmployersViewModel.GetEmployers();
-    private readonly CreatePlacementViewModel ViewModel;
+    private readonly PlacementUpdateViewModel ViewModel;
 
     // =========================
     // Constructor
     // =========================
-    public CreatePlacements(CreatePlacementViewModel viewModel) {
+    public UpdatePlacement(PlacementUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
-        BuildDropDown();
+        SetupNumberBoxes();
+        SetupAutoSuggestionBox();
+        SetupDatePickers();
     }
 
     // =========================
-    // UI Setup
+    // Constructor
     // =========================
-    private void BuildDropDown() {
-        var flyout = new MenuFlyout();
+    private void SetupNumberBoxes() {
+        if(ViewModel.Original.PlacementNumber is int number)
+            PlacementNumber.Value = (double)number;
 
-        if (ViewModel.Client.Pos == null) return;
-        foreach (var sa in ViewModel.Client.Pos) {
-            var item = new MenuFlyoutItem {
-                Text = sa.Description,
-                Tag = sa
-            };
+        if (ViewModel.Original.DaysOnJob is float days)
+            DaysOnJob.Value = (double)days;
+    }
 
-            item.Click += DropDownSelected;
-            flyout.Items.Add(item);
-        }
+    private void SetupAutoSuggestionBox() {
+        if (ViewModel.Original.CounselorName is string name)
+            EmployerAutoSuggest.Text = name;
+    }
 
-        SANumberDropDownButton.Flyout = flyout;
+    private void SetupDatePickers() {
+        if (ViewModel.Original.HireDate is DateTime startDate)
+            HireDatePicker.Date = startDate;
+
+        if(ViewModel.Original.EndDate is DateTime endDate)
+            EndDatePicker.Date = endDate;
+
+        if (TryParseDateString(ViewModel.Original.FirstFiveDays1, out var day1))
+            Day1Picker.Date = day1;
+
+        if (TryParseDateString(ViewModel.Original.FirstFiveDays2, out var day2))
+            Day2Picker.Date = day2;
+
+        if (TryParseDateString(ViewModel.Original.FirstFiveDays3, out var day3))
+            Day3Picker.Date = day3;
+
+        if (TryParseDateString(ViewModel.Original.FirstFiveDays4, out var day4))
+            Day4Picker.Date = day4;
+
+        if (TryParseDateString(ViewModel.Original.FirstFiveDays5, out var day5))
+            Day5Picker.Date = day5;
     }
 
     // =========================
@@ -55,7 +76,7 @@ public sealed partial class CreatePlacements : Page {
         if (sender is not MenuFlyoutItem item || item.Tag is not ServiceAuthorization sa)
             return;
         SANumberDropDownButton.Content = sa.Id;
-        ViewModel.PoNumber = sa.Id;
+        ViewModel.Updated.PoNumber = sa.Id;
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
@@ -63,13 +84,13 @@ public sealed partial class CreatePlacements : Page {
 
         switch (field) {
             case UpdateField.PlacementNumber:
-                ViewModel.PlacementNumber = (int)sender.Value;
+                ViewModel.Updated.PlacementNumber = (int)sender.Value;
                 break;
             case UpdateField.FormattedSalary:
-                ViewModel.Salary = sender.Value.ToString("C");
+                ViewModel.Updated.Salary = sender.Value.ToString("C");
                 break;
             case UpdateField.DaysOnJob:
-                ViewModel.DaysOnJob = (float)sender.Value;
+                ViewModel.Updated.DaysOnJob = (float)sender.Value;
                 break;
 
         }
@@ -89,25 +110,25 @@ public sealed partial class CreatePlacements : Page {
             var dateString = offset.DateTime.Date.ToString(format: "MM/dd/yyyy");
             switch (field) {
                 case UpdateField.FormattedHireDate:
-                    ViewModel.HireDate = offset.DateTime.Date.ToUniversalTime();
+                    ViewModel.Updated.HireDate = offset.DateTime.Date.ToUniversalTime();
                     break;
                 case UpdateField.FormattedEndDate:
-                    ViewModel.EndDate = offset.DateTime.Date.ToUniversalTime();
+                    ViewModel.Updated.EndDate = offset.DateTime.Date.ToUniversalTime();
                     break;
                 case UpdateField.Day1:
-                    ViewModel.FirstFiveDays1 = dateString;
+                    ViewModel.Updated.FirstFiveDays1 = dateString;
                     break;
                 case UpdateField.Day2:
-                    ViewModel.FirstFiveDays2 = dateString;
+                    ViewModel.Updated.FirstFiveDays2 = dateString;
                     break;
                 case UpdateField.Day3:
-                    ViewModel.FirstFiveDays3 = dateString;
+                    ViewModel.Updated.FirstFiveDays3 = dateString;
                     break;
                 case UpdateField.Day4:
-                    ViewModel.FirstFiveDays4 = dateString;
+                    ViewModel.Updated.FirstFiveDays4 = dateString;
                     break;
                 case UpdateField.Day5:
-                    ViewModel.FirstFiveDays5 = dateString;
+                    ViewModel.Updated.FirstFiveDays5 = dateString;
                     break;
             }
         }
@@ -157,43 +178,60 @@ public sealed partial class CreatePlacements : Page {
 
         switch (field) {
             case UpdateField.Supervisor:
-                ViewModel.Supervisor = text;
+                ViewModel.Updated.Supervisor = text;
                 break;
             case UpdateField.SupervisorPhone:
-                ViewModel.SupervisorPhone = text;
+                ViewModel.Updated.SupervisorPhone = text;
                 break;
             case UpdateField.SupervisorEmail:
-                ViewModel.SupervisorEmail = text;
+                ViewModel.Updated.SupervisorEmail = text;
                 break;
             case UpdateField.Position:
-                ViewModel.Position = text;
+                ViewModel.Updated.Position = text;
                 break;
             case UpdateField.HoursWorked:
-                ViewModel.NumbersOfHoursWorking = text;
+                ViewModel.Updated.NumbersOfHoursWorking = text;
                 break;
             case UpdateField.HourlyWage:
-                ViewModel.HourlyOrMonthlyWages = text;
+                ViewModel.Updated.HourlyOrMonthlyWages = text;
                 break;
             case UpdateField.Website:
-                ViewModel.Website = text;
+                ViewModel.Updated.Website = text;
                 break;
             case UpdateField.JobDuties:
-                ViewModel.DescriptionOfDuties = text;
+                ViewModel.Updated.DescriptionOfDuties = text;
                 break;
             case UpdateField.WorkSchedule:
-                ViewModel.DescriptionOfWorkSchedule = text;
+                ViewModel.Updated.DescriptionOfWorkSchedule = text;
                 break;
         }
     }
 
     private void UpdateSelectedEmployer(Employer employer) {
-        ViewModel.EmployerID = employer.Id;
-        ViewModel.Supervisor = employer.Supervisor;
-        ViewModel.SupervisorPhone = employer.SupervisorPhone;
-        ViewModel.SupervisorEmail = employer.SupervisorEmail;
+        ViewModel.Updated.EmployerID = employer.Id.ToString();
+        ViewModel.Updated.Supervisor = employer.Supervisor;
+        ViewModel.Updated.SupervisorPhone = employer.SupervisorPhone;
+        ViewModel.Updated.SupervisorEmail = employer.SupervisorEmail;
 
         SupervisorTextBox.Text = employer.Supervisor;
         SPhoneBox.Text = employer.SupervisorPhone;
         SEmailBox.Text = employer.SupervisorEmail;
+    }
+
+    // For some reason the first 5 days are stored as strings in the database.
+    // Covering all sane date formats, though some will still fail as there was
+    // originally no data validation/format enforcement.
+    private static bool TryParseDateString(string? dateString, out DateTime date) {
+        string[] formats = [
+            "M/d/yy",
+            "MM/d/yy",
+            "M/d/yyyy",
+            "MM/d/yyyy",
+            "M/dd/yy",
+            "MM/dd/yy", 
+            "M/dd/yyyy", 
+            "MM/dd/yyyy"
+            ];
+        return DateTime.TryParseExact(dateString, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
     }
 }

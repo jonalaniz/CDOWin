@@ -20,9 +20,13 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial Client Client { get; set; } = client;
 
+    //[ObservableProperty]
+    //[NotifyPropertyChangedFor(nameof(CanSave))]
+    //public partial Employer? Employer { get; set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
-    public partial Employer? Employer { get; set; }
+    public partial int? EmployerID { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -92,8 +96,8 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
     public bool CanSave => CanSaveMethod();
 
     public bool CanSaveMethod() {
-        Debug.WriteLine($"{Employer == null} {Client == null} {PlacementNumber == null} {PoNumber == null}");
-        if (Employer == null
+        Debug.WriteLine($"{EmployerID == null} {Client == null} {PlacementNumber == null} {PoNumber == null}");
+        if (EmployerID == null
             || Client == null
             || PlacementNumber == null
             || PoNumber == null)
@@ -111,7 +115,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
 
         var placement = new PlacementDTO {
             PlacementNumber = PlacementNumber,
-            EmployerID = Employer?.Id.ToString(),
+            EmployerID = EmployerID.ToString(),
             ClientID = Client.Id,
             CounselorID = Client.CounselorID,
             PoNumber = PoNumber,

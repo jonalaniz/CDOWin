@@ -22,7 +22,6 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     private readonly IServiceAuthorizationService _service;
     private readonly DataCoordinator _dataCoordinator;
-    private readonly SASelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
@@ -47,31 +46,9 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Constructor
     // =========================
 
-    public ServiceAuthorizationsViewModel(DataCoordinator dataCoordinator, IServiceAuthorizationService service, SASelectionService selectionService) {
+    public ServiceAuthorizationsViewModel(DataCoordinator dataCoordinator, IServiceAuthorizationService service) {
         _service = service;
         _dataCoordinator = dataCoordinator;
-
-        _selectionService = selectionService;
-        _selectionService.NewSACreated += OnNewSACreated;
-        _selectionService.SASelected += OnSASelected;
-    }
-
-    // =========================
-    // Selection Handlers
-    // =========================
-
-    private void OnNewSACreated() {
-        _ = LoadServiceAuthorizationsAsync();
-    }
-
-    private void OnSASelected(string id) {
-        var selected = _allServiceAuthorizations.FirstOrDefault(s => s.Id == id);
-        if (selected == null) return;
-
-        _dispatcher.TryEnqueue(() => {
-            Selected = selected;
-            SearchQuery = ""; // Clearing the query applies the filter
-        });
     }
 
     // =========================

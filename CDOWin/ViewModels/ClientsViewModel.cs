@@ -22,8 +22,6 @@ public partial class ClientsViewModel : ObservableObject {
     private readonly IClientService _service;
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
-    private readonly PlacementSelectionService _placementSelectionService;
-    private readonly SASelectionService _saSelectionService;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -51,30 +49,14 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public ClientsViewModel(IClientService service, DataCoordinator dataCoordinator, ClientSelectionService clientSelectionService, PlacementSelectionService psService, SASelectionService saService) {
+    public ClientsViewModel(IClientService service, DataCoordinator dataCoordinator, ClientSelectionService clientSelectionService) {
         _service = service;
         _dataCoordinator = dataCoordinator;
-
-        _placementSelectionService = psService;
-        _saSelectionService = saService;
 
         _selectionService = clientSelectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
         _selectionService.ClientSelectionRequested += OnRequestSelectedClientChange;
-    }
-
-
-
-    // =========================
-    // Child Model Selection
-    // =========================
-    public void PlacementSelected(string id) {
-        _placementSelectionService.RequestSelectedPlacement(id);
-    }
-
-    public void SASelected(string id) {
-        _saSelectionService.RequestSelectedSA(id);
     }
 
     // =========================

@@ -19,7 +19,6 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     private readonly IPlacementService _service;
     private readonly DataCoordinator _dataCoordinator;
-    private readonly PlacementSelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
@@ -44,32 +43,9 @@ public partial class PlacementsViewModel : ObservableObject {
     // Constructor
     // =========================
 
-    public PlacementsViewModel(DataCoordinator dataCoordinator, IPlacementService service, PlacementSelectionService selectionService) {
+    public PlacementsViewModel(DataCoordinator dataCoordinator, IPlacementService service) {
         _service = service;
         _dataCoordinator = dataCoordinator;
-
-        _selectionService = selectionService;
-        _selectionService.NewPlacementCreated += OnNewPlacementCreated;
-        _selectionService.PlacementSelected += OnPlacementSelected;
-    }
-
-    // =========================
-    // Selection Handlers
-    // =========================
-
-    private void OnNewPlacementCreated() {
-        _ = LoadPlacementsAsync();
-    }
-
-    private void OnPlacementSelected(string id) {
-        var selected = _allPlacements.FirstOrDefault(p => p.Id == id);
-        if (selected == null) return;
-
-        _dispatcher.TryEnqueue(() => {
-            Selected = selected;
-            SearchQuery = "";
-            //ApplyFilter();
-        });
     }
 
     // =========================

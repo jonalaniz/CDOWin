@@ -31,10 +31,6 @@ public static class AppServices {
 
     private static ClientSelectionService? _clientSelectionService;
 
-    private static PlacementSelectionService? _placementSelectionService;
-
-    private static SASelectionService? _sASelectionService;
-
     // ViewModels
     public static CalendarViewModel CalendarViewModel { get; private set; } = null!;
     public static ClientsViewModel ClientsViewModel { get; private set; } = null!;
@@ -73,24 +69,20 @@ public static class AppServices {
         );
 
         _clientSelectionService = new();
-        _placementSelectionService = new();
-        _sASelectionService = new();
 
         // Initialize ViewModels
         ClientsViewModel = new ClientsViewModel(
             ClientService,
             DataCoordinator,
-            _clientSelectionService,
-            _placementSelectionService,
-            _sASelectionService
+            _clientSelectionService
             );
 
         CounselorsViewModel = new CounselorsViewModel(DataCoordinator, CounselorService);
         EmployersViewModel = new EmployersViewModel(DataCoordinator, EmployerService);
-        SAsViewModel = new ServiceAuthorizationsViewModel(DataCoordinator, SAService, _sASelectionService);
+        SAsViewModel = new ServiceAuthorizationsViewModel(DataCoordinator, SAService);
         RemindersViewModel = new RemindersViewModel(DataCoordinator, ReminderService, _clientSelectionService);
         StatesViewModel = new StatesViewModel(DataCoordinator, StateService);
-        PlacementsViewModel = new PlacementsViewModel(DataCoordinator, PlacementService, _placementSelectionService);
+        PlacementsViewModel = new PlacementsViewModel(DataCoordinator, PlacementService);
         CalendarViewModel = new CalendarViewModel(RemindersViewModel);
 
     }

@@ -30,134 +30,130 @@
                             Label="Tier Level" Value="{x:Bind ViewModel.Client.Status}"/>
         <controls:LabelPair Grid.Row="0" Grid.Column="2"
                             Label="Case ID" Value="{x:Bind ViewModel.Client.CaseID}"/>
+        
+        <!-- Row 1: Border + Content -->
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                BorderThickness="0,1,0,0" BorderBrush="{StaticResource AccentAAFillColorDisabled}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="0,16,0,0">
+                <Grid RowSpacing="12" ColumnSpacing="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-            <Grid RowSpacing="12" ColumnSpacing="16">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <!-- Row 0: Placement Number + Employer + SA Number -->
-                <NumberBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Header="Placement Number"
-                           x:Name="PlacementNumber" ValueChanged="NumberBox_ValueChanged"
-                           Tag="{x:Bind local:UpdateField.PlacementNumber}"/>
-                <AutoSuggestBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Employer"
+                    <!-- Row 0: Placement Number + Employer + SA Number -->
+                    <NumberBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Header="Placement Number"
+                               x:Name="PlacementNumber" ValueChanged="NumberBox_ValueChanged"
+                               Tag="{x:Bind local:UpdateField.PlacementNumber}"/>
+                    <AutoSuggestBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Employer"
                                     x:Name="EmployerAutoSuggest" TextChanged="EmployerAutoSuggest_TextChanged"
                                     QuerySubmitted="EmployerAutoSuggest_QuerySubmitted" 
                                     SuggestionChosen="EmployerAutoSuggest_SuggestionChosen">
-                    <AutoSuggestBox.ItemTemplate>
-                        <DataTemplate x:DataType="models:Employer">
-                            <TextBlock Text="{x:Bind Name}"/>
-                        </DataTemplate>
-                    </AutoSuggestBox.ItemTemplate>
-                </AutoSuggestBox>
-                <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
-                    <TextBlock Text="SA Number"/>
-                    <DropDownButton x:Name="SANumberDropDownButton" Content="Select an SA"
-                                    HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+                        <AutoSuggestBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:Employer">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </AutoSuggestBox.ItemTemplate>
+                    </AutoSuggestBox>
+                    <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
+                        <TextBlock Text="SA Number"/>
+                        <DropDownButton x:Name="SANumberDropDownButton" Content="Select an SA"
+                                        HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
 
-                <!-- Row 1: Supervisor + Supervisor Phone -->
-                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Header="Supervisor"
-                         MaxLength="50" TextChanged="TextChanged" x:Name="SupervisorTextBox"
-                         Tag="{x:Bind local:UpdateField.Supervisor}"/>
-                <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Header="Supervisor Phone"
-                         MaxLength="50" TextChanged="TextChanged" x:Name="SPhoneBox"
-                         Tag="{x:Bind local:UpdateField.SupervisorPhone}"/>
+                    <!-- Row 1: Supervisor + Supervisor Phone -->
+                    <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Header="Supervisor"
+                             MaxLength="50" TextChanged="TextChanged" x:Name="SupervisorTextBox"
+                             Tag="{x:Bind local:UpdateField.Supervisor}"/>
+                    <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Header="Supervisor Phone"
+                             MaxLength="50" TextChanged="TextChanged" x:Name="SPhoneBox"
+                             Tag="{x:Bind local:UpdateField.SupervisorPhone}"/>
 
-                <!-- Row 2: Supervisor Email -->
-                <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Supervisor Email"
-                         MaxLength="50" TextChanged="TextChanged" x:Name="SEmailBox"
-                         Tag="{x:Bind local:UpdateField.SupervisorEmail}"/>
+                    <!-- Row 2: Supervisor Email -->
+                    <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Supervisor Email"
+                             MaxLength="50" TextChanged="TextChanged" x:Name="SEmailBox"
+                             Tag="{x:Bind local:UpdateField.SupervisorEmail}"/>
 
-                <!-- Row 3: Position + Salary-->
-                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Header="Position"
-                         MaxLength="50" TextChanged="TextChanged"
-                         Tag="{x:Bind local:UpdateField.Position}"/>
-                <NumberBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Header="Salary"
-                           x:Name="SalaryNumber" ValueChanged="NumberBox_ValueChanged"
-                           Tag="{x:Bind local:UpdateField.FormattedSalary}"/>
+                    <!-- Row 3: Position + Salary-->
+                    <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Header="Position"
+                             MaxLength="50" TextChanged="TextChanged"
+                             Tag="{x:Bind local:UpdateField.Position}"/>
+                    <NumberBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Header="Salary"
+                               x:Name="SalaryNumber" ValueChanged="NumberBox_ValueChanged"
+                               Tag="{x:Bind local:UpdateField.FormattedSalary}"/>
 
-                <!-- Row 4: Hire Date + End Date -->
-                <CalendarDatePicker Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
-                                    Header="Hire Date" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.FormattedHireDate}"/>
-                <CalendarDatePicker Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"
-                                    Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.FormattedEndDate}"/>
+                    <!-- Row 4: Hire Date + End Date -->
+                    <CalendarDatePicker Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+                                        Header="Hire Date" HorizontalAlignment="Stretch"
+                                        DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.FormattedHireDate}"/>
+                    <CalendarDatePicker Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"
+                                        Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
+                                        DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.FormattedEndDate}"/>
 
-                <!-- Row 5: Days on job + Hours Worked + Hourly Wage -->
-                <NumberBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                           Header="Days on Job" x:Name="DaysOnJob" ValueChanged="NumberBox_ValueChanged"
-                           Tag="{x:Bind local:UpdateField.DaysOnJob}"/>
-                <TextBox Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Header="Hours Working"
-                         MaxLength="255" TextChanged="TextChanged"
-                         Tag="{x:Bind local:UpdateField.HoursWorked}"/>
-                <TextBox Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Header="Hourly or Monthly Wage"
-                         MaxLength="255" TextChanged="TextChanged"
-                         Tag="{x:Bind local:UpdateField.HourlyWage}"/>
+                    <!-- Row 5: Days on job + Hours Worked + Hourly Wage -->
+                    <NumberBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                               Header="Days on Job" x:Name="DaysOnJob" ValueChanged="NumberBox_ValueChanged"
+                               Tag="{x:Bind local:UpdateField.DaysOnJob}"/>
+                    <TextBox Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Header="Hours Working"
+                             MaxLength="255" TextChanged="TextChanged" Tag="{x:Bind local:UpdateField.HoursWorked}"/>
+                    <TextBox Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Header="Hourly or Monthly Wage"
+                             MaxLength="255" TextChanged="TextChanged"
+                             Tag="{x:Bind local:UpdateField.HourlyWage}"/>
 
-                <!-- Rows 6 + 7: First 5 days -->
-                <CalendarDatePicker Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                                    Header="Day 1" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.Day1}"/>
-                <CalendarDatePicker Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
-                                    Header="Day 2" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.Day2}"/>
-                <CalendarDatePicker Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2"
-                                    Header="Day 3" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.Day3}"/>
-                
-                <CalendarDatePicker Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
-                                    Header="Day 4" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.Day4}"/>
-                <CalendarDatePicker Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2"
-                                    Header="Day 5" HorizontalAlignment="Stretch"
-                                    DateChanged="DatePicker_DateChanged"
-                                    Tag="{x:Bind local:UpdateField.Day5}"/>
+                    <!-- Rows 6 + 7: First 5 days -->
+                    <CalendarDatePicker Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Header="Day 1" 
+                                        HorizontalAlignment="Stretch" DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.Day1}"/>
+                    <CalendarDatePicker Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Header="Day 2" 
+                                        HorizontalAlignment="Stretch" DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.Day2}"/>
+                    <CalendarDatePicker Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Header="Day 3" 
+                                        HorizontalAlignment="Stretch" DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.Day3}"/>
 
-                <!-- Row :8 Website -->
-                <TextBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
-                         MaxLength="225" TextChanged="TextChanged"
-                         Tag="{x:Bind local:UpdateField.Website}"/>
+                    <CalendarDatePicker Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Header="Day 4" 
+                                        HorizontalAlignment="Stretch" DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.Day4}"/>
+                    <CalendarDatePicker Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Header="Day 5" 
+                                        HorizontalAlignment="Stretch" DateChanged="DatePicker_DateChanged"
+                                        Tag="{x:Bind local:UpdateField.Day5}"/>
 
-                <!-- Row 9: Job Duties -->
-                <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Job Duties"
-                         MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
-                         TextChanged="TextChanged"
-                         Tag="{x:Bind local:UpdateField.JobDuties}"/>
+                    <!-- Row :8 Website -->
+                    <TextBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
+                             MaxLength="225" TextChanged="TextChanged"
+                             Tag="{x:Bind local:UpdateField.Website}"/>
 
-                <!-- Row 10: Work Schedule -->
-                <TextBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Work Schedule"
-                         MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
-                         TextChanged="TextChanged"
-                         Tag="{x:Bind local:UpdateField.WorkSchedule}"/>
-            </Grid>
-        </ScrollViewer>
+                    <!-- Row 9: Job Duties -->
+                    <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Job Duties"
+                             MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
+                             TextChanged="TextChanged" Tag="{x:Bind local:UpdateField.JobDuties}"/>
+
+                    <!-- Row 10: Work Schedule -->
+                    <TextBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Work Schedule"
+                             MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
+                             TextChanged="TextChanged" Tag="{x:Bind local:UpdateField.WorkSchedule}"/>
+                </Grid>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

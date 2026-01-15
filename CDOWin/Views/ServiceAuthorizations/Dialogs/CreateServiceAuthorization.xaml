@@ -13,16 +13,10 @@
     <Grid Width="480" RowSpacing="12" ColumnSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -31,37 +25,58 @@
         <!-- Row 0: Case ID + Tier + Counselor (Non Editable) -->
         <controls:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
                             Label="Issued By" Value="{x:Bind ViewModel.Client.CounselorReference.Name}"/>
-        <controls:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+        <controls:LabelPair Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                             Label="Tier Level" Value="{x:Bind ViewModel.Client.Status}"/>
-        <controls:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"
+        <controls:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                             Label="Case ID" Value="{x:Bind ViewModel.Client.CaseID}"/>
 
-        <!-- Row 1: Office Address -->
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="DRS Office Address"
-                 MaxLength="100" TextChanged="TextChanged" Tag="{x:Bind local:Field.Office}"/>
-        
-        <!-- Row 2: SA Number + Start Date + End Date -->
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"
-                 MaxLength="15" TextChanged="TextChanged" Tag="{x:Bind local:Field.Id}"/>
-        
-        <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
-                            Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
-                            DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.StartDate}"/>
+        <!-- Row 1: Boder + Content -->
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                BorderThickness="0,1,0,0" BorderBrush="{StaticResource AccentAAFillColorDisabled}">
+            <Grid RowSpacing="12" ColumnSpacing="16" Padding="0,16,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <CalendarDatePicker Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
-                            Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
-                            DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.EndDate}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-        <!-- Row 3: U/M + Cost-->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
-                 MaxLength="9" TextChanged="TextChanged" Tag="{x:Bind local:Field.UoM}"/>
-        <NumberBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
-                   x:Name="NumberBox" PlaceholderText="0.00"
-                   ValueChanged="NumberBox_ValueChanged"/>
+                <!-- Row 0: Office Address -->
+                <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Header="DRS Office Address"
+                         MaxLength="100" TextChanged="TextChanged" Tag="{x:Bind local:Field.Office}"/>
 
-        <!-- Row 4: Decription -->
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
-                 MaxLength="50" Style ="{StaticResource MultiLineTextBoxStyle}" 
-                 TextChanged="TextChanged" Tag="{x:Bind local:Field.Description}"/>
+                <!-- Row 1: SA Number + Start Date + End Date -->
+                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"
+                         MaxLength="15" TextChanged="TextChanged" Tag="{x:Bind local:Field.Id}"/>
+
+                <CalendarDatePicker Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                    Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
+                                    DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.StartDate}"/>
+
+                <CalendarDatePicker Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+                                    Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
+                                    DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.EndDate}"/>
+
+                <!-- Row 2: U/M + Cost-->
+                <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
+                         MaxLength="9" TextChanged="TextChanged" Tag="{x:Bind local:Field.UoM}"/>
+                <NumberBox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
+                           x:Name="NumberBox" PlaceholderText="0.00" ValueChanged="NumberBox_ValueChanged"/>
+
+                <!-- Row 3: Decription -->
+                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
+                         MaxLength="50" Style ="{StaticResource MultiLineTextBoxStyle}" 
+                         TextChanged="TextChanged" Tag="{x:Bind local:Field.Description}"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

@@ -247,20 +247,23 @@
                         <!-- Counselor Section -->
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"
                                        Visibility="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"
                                        Visibility="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"
                                        Visibility="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
                         </StackPanel>
 
                         <!-- Secretary Section -->
                         <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryName, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryEmail, Mode=OneWay}"/>
                         </StackPanel>
                     </Grid>

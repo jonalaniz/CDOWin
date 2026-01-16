@@ -4,7 +4,6 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Composers;
 using CDOWin.Data;
-using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;

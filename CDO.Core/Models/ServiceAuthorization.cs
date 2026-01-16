@@ -17,7 +17,7 @@ public record class ServiceAuthorization(
     public string? FormattedDateRange => $"Valid {FormattedStartDate} to {FormattedEndDate}";
 
     public static ServiceAuthorization InjectClient(ServiceAuthorization sa, Client client) {
-        return new ServiceAuthorization (
+        return new ServiceAuthorization(
             sa.Id,
             sa.Description,
             sa.Office,

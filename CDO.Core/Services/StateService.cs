@@ -42,7 +42,7 @@ public class StateService : IStateService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteStateAsync(int id) {
+    public Task<Result<bool>> DeleteStateAsync(int id) {
         return _network.DeleteAsync(Endpoints.State(id));
     }
 

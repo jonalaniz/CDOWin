@@ -50,7 +50,7 @@ public class ClientService : IClientService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteClientAsync(int id) {
+    public Task<Result<bool>> DeleteClientAsync(int id) {
         return _network.DeleteAsync(Endpoints.Client(id));
     }
 

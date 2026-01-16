@@ -48,7 +48,7 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteReminderAsync(int id) {
+    public Task<Result<bool>> DeleteReminderAsync(int id) {
         return _network.DeleteAsync(Endpoints.Reminder(id));
     }
 

@@ -26,6 +26,6 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // DELETE Methods
         // -----------------------------
-        public Task<bool> DeleteEmployerAsync(int id);
+        public Task<Result<bool>> DeleteEmployerAsync(int id);
     }
 }

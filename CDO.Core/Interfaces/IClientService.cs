@@ -28,5 +28,5 @@ public interface IClientService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteClientAsync(int id);
+    public Task<Result<bool>> DeleteClientAsync(int id);
 }

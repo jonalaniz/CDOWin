@@ -123,17 +123,21 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // DELETE
     // -----------------------------
-    public async Task<bool> DeleteAsync(string endpoint) {
-        var response = await _httpClient.DeleteAsync(endpoint);
+    public async Task<Result<bool>> DeleteAsync(string endpoint) {
+        try {
+            var response = await _httpClient.DeleteAsync(endpoint);
+            if (response.IsSuccessStatusCode) {
+                return Result<bool>.Success(true);
+            }
 
-        // If the API is written to always return 204 No Content,
-        // success = true is safe here.
-        if (response.IsSuccessStatusCode)
-            return true;
-
-        // You can include logs here if desired
-        Debug.WriteLine($"DELETE failed: {response.StatusCode}");
-        return false;
+            return Result<bool>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, null));
+        } catch (TaskCanceledException ex) {
+            return Result<bool>.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
+        } catch (HttpRequestException ex) {
+            return Result<bool>.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+        } catch (Exception ex) {
+            return Result<bool>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
+        }
     }
 
     // -----------------------------

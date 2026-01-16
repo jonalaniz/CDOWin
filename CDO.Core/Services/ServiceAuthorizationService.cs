@@ -46,7 +46,7 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteServiceAuthorizationAsync(string id) {
+    public Task<Result<bool>> DeleteServiceAuthorizationAsync(string id) {
         return _network.DeleteAsync(Endpoints.ServiceAuthorization(id));
     }
 

@@ -27,6 +27,6 @@ public interface IStateService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteStateAsync(int id);
+    public Task<Result<bool>> DeleteStateAsync(int id);
 
 }

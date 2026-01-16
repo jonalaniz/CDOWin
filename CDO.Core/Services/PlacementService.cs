@@ -46,7 +46,7 @@ public class PlacementService : IPlacementService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeletePlacementAsync(string id) {
+    public Task<Result<bool>> DeletePlacementAsync(string id) {
         return _network.DeleteAsync(Endpoints.Placement(id));
     }
 

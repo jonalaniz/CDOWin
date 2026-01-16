@@ -46,7 +46,7 @@ public class EmployerService : IEmployerService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteEmployerAsync(int id) {
+    public Task<Result<bool>> DeleteEmployerAsync(int id) {
         return _network.DeleteAsync(Endpoints.Employer(id));
     }
 

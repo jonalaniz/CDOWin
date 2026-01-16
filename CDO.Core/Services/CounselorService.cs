@@ -46,7 +46,7 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteCounselorAsync(int id) {
+    public Task<Result<bool>> DeleteCounselorAsync(int id) {
         return _network.DeleteAsync(Endpoints.Counselor(id));
     }
 

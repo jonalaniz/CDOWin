@@ -26,6 +26,6 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<bool> DeleteServiceAuthorizationAsync(string id);
+    public Task<Result<bool>> DeleteServiceAuthorizationAsync(string id);
 
 }

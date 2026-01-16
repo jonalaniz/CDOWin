@@ -36,8 +36,12 @@ public sealed partial class UpdateCaseInformation : Page {
     private void BuildDropDowns() {
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);
-        BenefitDropDown.Content = ViewModel.OriginalClient.Benefits?.NormalizeString() ?? "None";
-        StatusDropDown.Content = ViewModel.OriginalClient.Status?.NormalizeString() ?? "None";
+
+        var benefits = ViewModel.OriginalClient.Benefits;
+        var status = ViewModel.OriginalClient.Status;
+
+        StatusDropDown.Content = string.IsNullOrWhiteSpace(status) ? "None Set" : status;
+        BenefitDropDown.Content = string.IsNullOrWhiteSpace(benefits) ? "None Set" : benefits;
     }
 
     private MenuFlyout BuildFlyout(IEnumerable<dynamic> items) {
@@ -155,6 +159,11 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void UpdateSelectedCounselor(Counselor counselor) {
+        // Update Labels
+        CPhone.Value = counselor.Phone ?? "";
+        CEmail.Value = counselor.Email ?? "";
+
+        // Update Client
         ViewModel.UpdatedClient.Counselor = counselor.Name;
         ViewModel.UpdatedClient.CounselorID = counselor.Id;
         ViewModel.UpdatedClient.CounselorEmail = counselor.Email;

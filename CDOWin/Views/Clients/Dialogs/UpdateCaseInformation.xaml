@@ -6,11 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:CDO.Core.Models"
+    xmlns:controls="using:CDOWin.Controls"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
     <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -34,14 +36,14 @@
                  TextChanged="TextBox_TextChanged"/>
         <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
             <TextBlock Text="Tier"/>
-            <DropDownButton x:Name="StatusDropDown" Content="{x:Bind ViewModel.OriginalClient.Status}" 
+            <DropDownButton x:Name="StatusDropDown"
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
 
         <!-- Row 1: Benefits/Premiums -->
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="8">
             <TextBlock Text="Benefits"/>
-            <DropDownButton x:Name="BenefitDropDown" Content="{x:Bind ViewModel.OriginalClient.Benefits}" 
+            <DropDownButton x:Name="BenefitDropDown"
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
@@ -61,5 +63,14 @@
                 </DataTemplate>
             </AutoSuggestBox.ItemTemplate>
         </AutoSuggestBox>
+        
+        <!-- Row 3: Counselor Information -->
+        <controls:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                            Label="Counselor Phone" x:Name="CPhone"
+                            Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Phone}"/>
+        <controls:LabelPair Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4"
+                            Label="Counselor Email" x:Name="CEmail"
+                            Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Email}"/>
+
     </Grid>
 </Page>

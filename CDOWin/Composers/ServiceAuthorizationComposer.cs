@@ -19,7 +19,6 @@ public sealed class ServiceAuthorizationComposer(ServiceAuthorization sa) {
             return tcs.Task;
         }
 
-
         var thread = new System.Threading.Thread(() => {
             try {
                 var wordService = new WordInteropService();

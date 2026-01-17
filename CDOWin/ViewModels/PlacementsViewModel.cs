@@ -1,4 +1,5 @@
-﻿using CDO.Core.Interfaces;
+﻿using CDO.Core.ErrorHandling;
+using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -60,8 +61,8 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadPlacementsAsync() {
-        var placements = await _dataCoordinator.GetPlacementsAsync();
+    public async Task LoadPlacementsAsync(bool force = false) {
+        var placements = await _dataCoordinator.GetPlacementsAsync(force);
         if (placements == null) return;
 
         var snapshot = placements.OrderBy(o => o.Id).ToList().AsReadOnly();
@@ -93,6 +94,18 @@ public partial class PlacementsViewModel : ObservableObject {
 
             Selected = placement;
         });
+    }
+
+    public async Task<Result<bool>> DeleteSelectedPlacement() {
+        if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Placement selected.", null, null));
+        var result = await _service.DeletePlacementAsync(Selected.Id);
+
+        if (result.IsSuccess) {
+            Selected = null;
+            _ = LoadPlacementsAsync(force: true);
+        }
+
+        return result;
     }
 
     // =========================

@@ -110,7 +110,6 @@ public class DataCoordinator(
     public async Task<IReadOnlyList<State>> GetStatesAsync(bool force = false) {
         if (force || States.IsStale(StateTTL)) {
             var data = await _states.GetAllStatesAsync();
-            Debug.WriteLine(data.Count);
             States.Update(data);
         }
 

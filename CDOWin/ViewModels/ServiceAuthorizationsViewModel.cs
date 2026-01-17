@@ -118,13 +118,21 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         });
     }
 
-    public async Task<Result<ServiceAuthorization>> UpdateSAAsync(UpdateServiceAuthorizationDTO update) {
-        if (Selected == null) return Result<ServiceAuthorization>.Fail(new AppError(ErrorKind.Validation, "Client not selected.", null));
+    public async Task<Result<bool>> DeleteSelectedSA() {
+        if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Placement selected.", null, null));
+        var id = Selected.Id;
+        var result = await _service.DeleteServiceAuthorizationAsync(id);
 
-        var result = await _service.UpdateServiceAuthorizationAsync(Selected.Id, update);
-        if (!result.IsSuccess) return result;
+        if (result.IsSuccess) {
+            Selected = null;
+            _allServiceAuthorizations = _allServiceAuthorizations
+                .Where(sa => sa.Id != id)
+                .ToList()
+                .AsReadOnly();
+            ApplyFilter();
+            _ = LoadServiceAuthorizationsAsync(force: true);
+        }
 
-        await ReloadServiceAuthorizationAsync(Selected.Id);
         return result;
     }
 

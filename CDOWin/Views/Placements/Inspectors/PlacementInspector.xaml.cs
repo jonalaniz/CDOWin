@@ -1,6 +1,7 @@
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Placements.Dialogs;
+using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -33,5 +34,17 @@ public sealed partial class PlacementInspector : Page {
         dialog.Content = new UpdatePlacement(updateVM);
 
         var result = await dialog.ShowAsync();
+    }
+
+    private async void Delete_Click(object sender, RoutedEventArgs e) {
+        if (ViewModel.Selected == null) return;
+
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Placement?");
+        dialog.Content = new DeletePage();
+
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary) {
+            await ViewModel.DeleteSelectedPlacement();
+        }
     }
 }

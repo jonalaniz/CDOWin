@@ -2,6 +2,7 @@ using CDO.Core.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Dialogs;
+using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -53,6 +54,19 @@ public sealed partial class ServiceAuthorizationInspector : Page {
         if (!result.IsSuccess) {
             HandleErrorAsync(result);
             return;
+        }
+    }
+
+    private async void Delete_Click(object sender, RoutedEventArgs e) {
+        if (ViewModel.Selected == null) return;
+
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Placement?");
+        dialog.Content = new DeletePage();
+
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary) {
+            var deleteResult = await ViewModel.DeleteSelectedSA();
+            if (!deleteResult.IsSuccess) HandleErrorAsync(deleteResult);
         }
     }
 

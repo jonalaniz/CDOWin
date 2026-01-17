@@ -99,7 +99,8 @@
                 </StackPanel>
             </Button>
 
-            <Button Grid.Column="1" Style="{StaticResource InspectorCriticalStyle}">
+            <Button Grid.Column="1" Style="{StaticResource InspectorCriticalStyle}"
+                    Click="Delete_Click">
                 <StackPanel Orientation="Horizontal" Spacing="5">
                     <SymbolIcon Symbol="Delete"/>
                     <TextBlock Text="Delete..."/>

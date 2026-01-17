@@ -68,9 +68,10 @@
     </Style>
     
     <!-- Inspector Critical Button Style -->
-    <Style x:Key="InspectorCriticalStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+    <Style x:Key="InspectorCriticalStyle" TargetType="Button">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Foreground" Value="{StaticResource SystemFillColorCritical}"/>
+        <Setter Property="CornerRadius" Value="4"/>
     </Style>
 
     <!-- Page Subtitle Style -->

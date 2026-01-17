@@ -50,7 +50,23 @@
             
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
                 <!-- Export Button -->
-                <Button Click="ExportButton_Click" Margin="0" Style="{StaticResource SubtleButtonStyle}" Content="Export"/>
+                <Button Click="ExportButton_Click" Margin="0" 
+                        Height="38" 
+                        Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"
+                        Style="{StaticResource SubtleButtonStyle}" Content="Export">
+                    <Button.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.ThemeDictionaries>
+                                <ResourceDictionary x:Key="Light">
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource AccentAAFillColorDefaultBrush}"/>
+                                </ResourceDictionary>
+                                <ResourceDictionary x:Key="Dark">
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource AccentAAFillColorDefaultBrush}"/>
+                                </ResourceDictionary>
+                            </ResourceDictionary.ThemeDictionaries>
+                        </ResourceDictionary>
+                    </Button.Resources>
+                </Button>
                 
                 <!-- Decrement Button -->
                 <Button Click="Button_Click" Tag="0" Margin="0" Style="{StaticResource SingleIconButtonStyle}">

@@ -1,7 +1,10 @@
+using CDO.Core.Models.Enums;
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Diagnostics;
+using System.Linq;
 using Windows.Globalization.NumberFormatting;
 
 namespace CDOWin.Views.ServiceAuthorizations.Dialogs;
@@ -12,6 +15,7 @@ public sealed partial class CreateServiceAuthorization : Page {
     // Dependencies
     // =========================
     private readonly CreateServiceAuthorizationsViewModel ViewModel;
+    private readonly SAType[] _descriptions = SAType.AllItems();
 
     // =========================
     // Constructor
@@ -91,5 +95,35 @@ public sealed partial class CreateServiceAuthorization : Page {
         ViewModel.UnitCost = numberBox.Value;
     }
 
-    // when we create the SA, we use the client's id and client's associated counselor id
+    private void DescriptionSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
+        if(args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+            var query = sender.Text.Trim().ToLower();
+            var suggestions = _descriptions
+                .Where(d => d.Description.Contains(query, StringComparison.CurrentCultureIgnoreCase))
+                .ToList();
+
+            sender.ItemsSource = suggestions;
+
+            // Also set the description to the text in case they do not ever select.
+            ViewModel.Description = sender.Text;
+        }
+        Debug.WriteLine($"Current Description: {ViewModel.Description}");
+    }
+
+    private void DescriptionSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
+        if(args.ChosenSuggestion is SAType saType) {
+            ViewModel.Description = saType.Description;
+            NumberBox.Value = (double)saType.Value;
+            UMBox.Text = saType.UM;
+        }
+    }
+
+    private void DescriptionSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
+        if(args.SelectedItem is SAType saType) {
+            sender.Text = saType.Description;
+            ViewModel.Description = saType.Description;
+            NumberBox.Value = (double)saType.Value;
+            UMBox.Text = saType.UM;
+        }
+    }
 }

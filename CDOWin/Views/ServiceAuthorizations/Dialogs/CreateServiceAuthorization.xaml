@@ -66,16 +66,17 @@
                                     Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
                                     DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.EndDate}"/>
 
-                <!-- Row 2: U/M + Cost-->
-                <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
+                <!-- Row 2: Decription -->
+                <AutoSuggestBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
+                                x:Name="DescriptionSuggestBox" TextChanged="DescriptionSuggestBox_TextChanged"
+                                QuerySubmitted="DescriptionSuggestBox_QuerySubmitted"
+                                SuggestionChosen="DescriptionSuggestBox_SuggestionChosen"/>
+                
+                <!-- Row 3: U/M + Cost-->
+                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M" x:Name="UMBox"
                          MaxLength="9" TextChanged="TextChanged" Tag="{x:Bind local:Field.UoM}"/>
-                <NumberBox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
+                <NumberBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
                            x:Name="NumberBox" PlaceholderText="0.00" ValueChanged="NumberBox_ValueChanged"/>
-
-                <!-- Row 3: Decription -->
-                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
-                         MaxLength="50" Style ="{StaticResource MultiLineTextBoxStyle}" 
-                         TextChanged="TextChanged" Tag="{x:Bind local:Field.Description}"/>
             </Grid>
         </Border>
     </Grid>

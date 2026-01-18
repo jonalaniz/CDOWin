@@ -1,5 +1,5 @@
-using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
+using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Employers.Dialogs;
@@ -58,7 +58,7 @@ public sealed partial class EmployersPage : Page {
 
         var updateResult = await createEmployerVM.CreateEmployerAsync();
         if (!updateResult.IsSuccess) {
-            HandleErrorAsync(updateResult);
+            ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;
         }
 
@@ -69,11 +69,5 @@ public sealed partial class EmployersPage : Page {
         if (e.ClickedItem is Employer employer) {
             _ = ViewModel.ReloadEmployerAsync(employer.Id);
         }
-    }
-
-    private async void HandleErrorAsync(Result result) {
-        if (result.Error is not AppError error) return;
-        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
-        await dialog.ShowAsync();
     }
 }

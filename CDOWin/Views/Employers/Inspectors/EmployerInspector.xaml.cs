@@ -1,4 +1,4 @@
-using CDO.Core.ErrorHandling;
+using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Employers.Dialogs;
@@ -38,14 +38,8 @@ public sealed partial class EmployerInspector : Page {
 
         var updateResult = await ViewModel.UpdateEmployerAsync(updateVM.Updated);
         if (!updateResult.IsSuccess) {
-            HandleErrorAsync(updateResult);
+            ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;
         }
-    }
-
-    private async void HandleErrorAsync(Result result) {
-        if (result.Error is not AppError error) return;
-        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
-        await dialog.ShowAsync();
     }
 }

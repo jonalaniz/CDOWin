@@ -149,6 +149,6 @@ public class NetworkService : INetworkService {
         HttpStatusCode.Forbidden => new(ErrorKind.Forbidden, "Access denied.", (int)status),
         HttpStatusCode.Conflict => new(ErrorKind.Conflict, "The requested item already exists.", (int)status),
         HttpStatusCode.InternalServerError => new(ErrorKind.Server, "Invalid request.", (int)status),
-        _ => new(ErrorKind.Unknown, "Requet failed.", (int)status)
+        _ => new(ErrorKind.Unknown, "Request failed.", (int)status)
     };
 }

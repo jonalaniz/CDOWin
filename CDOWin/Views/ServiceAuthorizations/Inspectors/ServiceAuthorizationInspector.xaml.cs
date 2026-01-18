@@ -1,4 +1,4 @@
-using CDO.Core.ErrorHandling;
+using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Dialogs;
@@ -40,19 +40,19 @@ public sealed partial class ServiceAuthorizationInspector : Page {
         var updateResult = await updateVM.UpdateSAAsync();
 
         if (!updateResult.IsSuccess) {
-            HandleErrorAsync(updateResult);
+            ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;
         }
 
         _ = ViewModel.ReloadServiceAuthorizationAsync(ViewModel.Selected.Id);
     }
 
-    private async void Export_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private async void Export_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null) return;
 
         var result = await ViewModel.ExportSelectedAsync();
         if (!result.IsSuccess)
-            HandleErrorAsync(result);
+            ErrorHandler.Handle(result, this.XamlRoot);
     }
 
     private async void Delete_Click(object sender, RoutedEventArgs e) {
@@ -64,14 +64,8 @@ public sealed partial class ServiceAuthorizationInspector : Page {
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary) {
             var deleteResult = await ViewModel.DeleteSelectedSA();
-            if (!deleteResult.IsSuccess) HandleErrorAsync(deleteResult);
+            if (!deleteResult.IsSuccess)
+                ErrorHandler.Handle(deleteResult, this.XamlRoot);
         }
-    }
-
-    private async void HandleErrorAsync(Result result) {
-        if (result.Error is not AppError error) return;
-        var message = $"{error.Exception.Source}: {error.Exception.InnerException}: {error.Exception.StackTrace}";
-        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Exception.Message);
-        await dialog.ShowAsync();
     }
 }

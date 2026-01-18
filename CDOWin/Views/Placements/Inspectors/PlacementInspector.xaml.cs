@@ -1,4 +1,4 @@
-using CDO.Core.ErrorHandling;
+using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Placements.Dialogs;
@@ -29,7 +29,6 @@ public sealed partial class PlacementInspector : Page {
     private async void EditButton_Click(object sender, RoutedEventArgs e) {
         if (ViewModel == null || ViewModel.Selected == null) return;
 
-        // THERE IS NO PLLACEMENTS UPDATE VM
         var updateVM = new PlacementUpdateViewModel(ViewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Placement");
         dialog.Content = new UpdatePlacement(updateVM);
@@ -40,8 +39,8 @@ public sealed partial class PlacementInspector : Page {
 
         var updateResult = await updateVM.UpdatePlacementAsync();
 
-        if(!updateResult.IsSuccess) {
-            HandleErrorAsync(updateResult);
+        if (!updateResult.IsSuccess) {
+            ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;
         }
 
@@ -58,12 +57,5 @@ public sealed partial class PlacementInspector : Page {
         if (result == ContentDialogResult.Primary) {
             await ViewModel.DeleteSelectedPlacement();
         }
-    }
-
-    private async void HandleErrorAsync(Result result) {
-        if (result.Error is not AppError error) return;
-        var message = $"{error.Exception.Source}: {error.Exception.InnerException}: {error.Exception.StackTrace}";
-        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Exception.Message);
-        await dialog.ShowAsync();
     }
 }

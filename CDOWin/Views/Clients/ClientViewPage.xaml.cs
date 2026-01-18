@@ -1,7 +1,7 @@
 using CDO.Core.DTOs;
-using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
 using CDOWin.Composers;
+using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
@@ -67,7 +67,7 @@ public sealed partial class ClientViewPage : Page {
 
         var reminderResult = await createReminderVM.CreateReminderAsync();
         if (!reminderResult.IsSuccess) {
-            HandleErrorAsync(reminderResult);
+            ErrorHandler.Handle(reminderResult, this.XamlRoot);
             return;
         }
 
@@ -87,7 +87,7 @@ public sealed partial class ClientViewPage : Page {
 
             var reminderResult = await newReminderVM.CreateReminderAsync();
             if (!reminderResult.IsSuccess) {
-                HandleErrorAsync(reminderResult);
+                ErrorHandler.Handle(reminderResult, this.XamlRoot);
                 return;
             }
 
@@ -120,7 +120,7 @@ public sealed partial class ClientViewPage : Page {
         var sAResult = await createSAVM.CreateSAAsync();
 
         if (!sAResult.IsSuccess) {
-            HandleErrorAsync(sAResult);
+            ErrorHandler.Handle(sAResult, this.XamlRoot);
             return;
         }
 
@@ -142,7 +142,7 @@ public sealed partial class ClientViewPage : Page {
         if (result == ContentDialogResult.Primary) {
             var updateResult = await updateSAVM.UpdateSAAsync();
             if (!updateResult.IsSuccess) {
-                HandleErrorAsync(updateResult);
+                ErrorHandler.Handle(updateResult, this.XamlRoot);
                 return;
             }
             _ = ViewModel.ReloadClientAsync();
@@ -152,8 +152,7 @@ public sealed partial class ClientViewPage : Page {
             var composerResult = await composer.Compose();
 
             if (composerResult.IsSuccess) return;
-
-            HandleErrorAsync(composerResult);
+            ErrorHandler.Handle(composerResult, this.XamlRoot);
         }
     }
 
@@ -181,7 +180,7 @@ public sealed partial class ClientViewPage : Page {
         var placementResult = await createPlacementVM.CreatePlacementAsync();
 
         if (!placementResult.IsSuccess) {
-            HandleErrorAsync(placementResult);
+            ErrorHandler.Handle(placementResult, this.XamlRoot);
             return;
         }
 
@@ -203,7 +202,7 @@ public sealed partial class ClientViewPage : Page {
         if (result == ContentDialogResult.Primary) {
             var updateResult = await updatePlacementVM.UpdatePlacementAsync();
             if (!updateResult.IsSuccess) {
-                HandleErrorAsync(updateResult);
+                ErrorHandler.Handle(updateResult, this.XamlRoot);
                 return;
             }
             _ = ViewModel.ReloadClientAsync();
@@ -270,14 +269,8 @@ public sealed partial class ClientViewPage : Page {
     private async Task UpdateClient(UpdateClientDTO update) {
         var result = await ViewModel.UpdateClientAsync(update);
         if (!result.IsSuccess) {
-            HandleErrorAsync(result);
+            ErrorHandler.Handle(result, this.XamlRoot);
             return;
         }
-    }
-
-    private async void HandleErrorAsync(Result result) {
-        if (result.Error is not AppError error) return;
-        var dialog = DialogFactory.ErrorDialog(this.XamlRoot, error.Kind.ToString(), error.Message);
-        await dialog.ShowAsync();
     }
 }

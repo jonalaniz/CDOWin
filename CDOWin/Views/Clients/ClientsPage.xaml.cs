@@ -53,13 +53,12 @@ public sealed partial class ClientsPage : Page {
         createClientVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary) {
-            await createClientVM.CreateClientAsync();
-            _ = ViewModel.LoadClientSummariesAsync(force: true);
-        }
-
         createClientVM.PropertyChanged -= handler;
+
+        if (result != ContentDialogResult.Primary) return;
+
+        await createClientVM.CreateClientAsync();
+        _ = ViewModel.LoadClientSummariesAsync(force: true);
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {

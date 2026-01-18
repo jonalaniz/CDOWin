@@ -1,3 +1,4 @@
+using CDOWin.ErrorHandling;
 using CDOWin.Extensions;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -31,13 +32,19 @@ public sealed partial class Notes : Page {
         NewButton.IsEnabled = false;
     }
 
-    private void SaveButton_Click(object sender, RoutedEventArgs e) {
+    private async void SaveButton_Click(object sender, RoutedEventArgs e) {
+        if (ViewModel == null || ViewModel.Selected == null) return;
+
         SaveButton.Visibility = Visibility.Collapsed;
         NewButton.IsEnabled = true;
         NotesBox.IsReadOnly = true;
+
         var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
         updateVM.UpdatedClient.ClientNotes = NotesBox.Text.NormalizeString();
-        _ = ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
+
+        var result = await ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
+        if (!result.IsSuccess)
+            ErrorHandler.Handle(result, this.XamlRoot);
     }
 
     private async void SplitButton_Click(SplitButton sender, SplitButtonClickEventArgs args) {
@@ -55,7 +62,10 @@ public sealed partial class Notes : Page {
         };
 
         var result = await dialog.ShowAsync();
-        if (result == ContentDialogResult.Primary)
-            _ = ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
+        if (result != ContentDialogResult.Primary) return;
+
+        var updateResult = await ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
+        if (!updateResult.IsSuccess)
+            ErrorHandler.Handle(updateResult, this.XamlRoot);
     }
 }

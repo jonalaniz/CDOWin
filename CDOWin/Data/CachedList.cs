@@ -13,4 +13,6 @@ public class CachedList<T> {
         Data = data;
         LastUpdated = DateTime.UtcNow;
     }
+
+    public void Invalidate() => Data = null;
 }

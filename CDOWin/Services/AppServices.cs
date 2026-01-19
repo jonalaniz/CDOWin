@@ -26,10 +26,10 @@ public static class AppServices {
     public static IReminderService ReminderService { get; private set; } = null!;
     public static IPlacementService PlacementService { get; private set; } = null!;
 
-    // Data Coordinator
+    // Data Coordination
     public static DataCoordinator DataCoordinator { get; private set; } = null!;
-
-    private static ClientSelectionService? _clientSelectionService;
+    private static readonly DataInvalidationService _invalidationService = new();
+    private static readonly ClientSelectionService _clientSelectionService = new();
 
     // ViewModels
     public static CalendarViewModel CalendarViewModel { get; private set; } = null!;
@@ -41,14 +41,14 @@ public static class AppServices {
     public static StatesViewModel StatesViewModel { get; private set; } = null!;
     public static PlacementsViewModel PlacementsViewModel { get; private set; } = null!;
 
-    // Initialize all services
     public static void InitializeServices(string baseAddress, string apiKey) {
+        
         // Initialize network service
         var network = new NetworkService();
         network.Initialize(baseAddress, apiKey);
         NetworkService = network;
 
-        // Initialize other services
+        // Initialize child services
         ClientService = new ClientService(NetworkService);
         CounselorService = new CounselorService(NetworkService);
         EmployerService = new EmployerService(NetworkService);
@@ -65,17 +65,16 @@ public static class AppServices {
             PlacementService,
             ReminderService,
             SAService,
-            StateService
+            StateService,
+            _invalidationService
         );
-
-        _clientSelectionService = new();
 
         // Initialize ViewModels
         ClientsViewModel = new ClientsViewModel(
             ClientService,
             DataCoordinator,
             _clientSelectionService
-            );
+        );
 
         CounselorsViewModel = new CounselorsViewModel(DataCoordinator, CounselorService);
         EmployersViewModel = new EmployersViewModel(DataCoordinator, EmployerService);
@@ -124,7 +123,7 @@ public static class AppServices {
     }
 
     public static CreatePlacementViewModel CreatePlacementViewMdoel(Client client) {
-        return new CreatePlacementViewModel(PlacementService, client);
+        return new CreatePlacementViewModel(PlacementService, _invalidationService, client);
     }
 
     public static CreateReminderViewModel CreateReminderViewModel(int clientId) {
@@ -132,6 +131,6 @@ public static class AppServices {
     }
 
     public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel(Client client) {
-        return new CreateServiceAuthorizationsViewModel(SAService, client);
+        return new CreateServiceAuthorizationsViewModel(SAService, _invalidationService, client);
     }
 }

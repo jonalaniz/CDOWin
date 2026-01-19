@@ -9,6 +9,7 @@ using CDOWin.Views.Placements.Dialogs;
 using CDOWin.Views.ServiceAuthorizations.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -31,6 +32,13 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     public ClientViewPage() {
         InitializeComponent();
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        if (ViewModel.Selected == null) return;
+        _ = ViewModel.ReloadClientAsync();
+        Debug.WriteLine("NavigatedTo");
     }
 
     // =========================

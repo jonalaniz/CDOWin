@@ -2,19 +2,24 @@
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, Client client) : ObservableObject {
+public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, DataInvalidationService dataInvalidationService, Client client) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
     private readonly IServiceAuthorizationService _service = service;
+    private readonly DataInvalidationService _invalidation = dataInvalidationService;
 
+    // =========================
+    // Fields
+    // =========================
     [ObservableProperty]
     public partial Client Client { get; set; } = client;
 
@@ -77,6 +82,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
             UnitOfMeasurement = UnitOfMeasurement
         };
 
+        _invalidation.InvalidateSAs();
         return await _service.CreateServiceAuthorizationAsync(sa);
     }
 }

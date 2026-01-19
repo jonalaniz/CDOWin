@@ -7,25 +7,42 @@ using System.Threading.Tasks;
 
 namespace CDOWin.Data;
 
-public class DataCoordinator(
-    IClientService clients,
-    ICounselorService counselors,
-    IEmployerService employers,
-    IPlacementService placements,
-    IReminderService reminders,
-    IServiceAuthorizationService sas,
-    IStateService states) {
+public class DataCoordinator {
+
+    public DataCoordinator(
+        IClientService clients,
+        ICounselorService counselors,
+        IEmployerService employers,
+        IPlacementService placements,
+        IReminderService reminders,
+        IServiceAuthorizationService sas,
+        IStateService states,
+        DataInvalidationService invalidationService) {
+        _clients = clients;
+        _counselors = counselors;
+        _employers = employers;
+        _placements = placements;
+        _reminders = reminders;
+        _sas = sas;
+        _states = states;
+        _invalidationService = invalidationService;
+
+        _invalidationService.SAsInvalidated += InvalidateSAs;
+        _invalidationService.PlacementsInvalidated += InvalidatePlacements;
+
+    }
 
     // =========================
     // Services
     // =========================
-    private readonly IClientService _clients = clients;
-    private readonly ICounselorService _counselors = counselors;
-    private readonly IEmployerService _employers = employers;
-    private readonly IPlacementService _placements = placements;
-    private readonly IReminderService _reminders = reminders;
-    private readonly IServiceAuthorizationService _sas = sas;
-    private readonly IStateService _states = states;
+    private readonly IClientService _clients;
+    private readonly ICounselorService _counselors;
+    private readonly IEmployerService _employers;
+    private readonly IPlacementService _placements;
+    private readonly IReminderService _reminders;
+    private readonly IServiceAuthorizationService _sas;
+    private readonly IStateService _states;
+    private readonly DataInvalidationService _invalidationService;
 
     // =========================
     // Public Fields
@@ -48,6 +65,12 @@ public class DataCoordinator(
     private static readonly TimeSpan ReminderTTL = TimeSpan.FromSeconds(45);
     private static readonly TimeSpan SATTL = TimeSpan.FromMinutes(10);
     private static readonly TimeSpan StateTTL = TimeSpan.FromDays(365);
+
+    // =========================
+    // Invalidation Methods
+    // =========================
+    private void InvalidatePlacements() => Placements.Invalidate();
+    private void InvalidateSAs() => SAs.Invalidate();
 
     // =========================
     // Update Methods

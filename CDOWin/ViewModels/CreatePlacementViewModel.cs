@@ -2,6 +2,7 @@
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Diagnostics;
@@ -9,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreatePlacementViewModel(IPlacementService service, Client client) : ObservableObject {
+public partial class CreatePlacementViewModel(IPlacementService service, DataInvalidationService dataInvalidationService, Client client) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
     private readonly IPlacementService _service = service;
+    private readonly DataInvalidationService _invalidation = dataInvalidationService;
 
+    // =========================
+    // Fields
+    // =========================
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial Client Client { get; set; } = client;
-
-    //[ObservableProperty]
-    //[NotifyPropertyChangedFor(nameof(CanSave))]
-    //public partial Employer? Employer { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -142,6 +143,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, Client 
             EndDate = EndDate
         };
 
+        _invalidation.InvalidatePlacements();
         return await _service.CreatePlacementAsync(placement);
     }
 }

@@ -17,6 +17,7 @@ public class ClientSummaryDTO {
     public string? Phone2 { get; init; }
     public string? Phone3 { get; init; }
     public string? EmploymentGoal { get; init; }
+    public string? CaseID { get; init; }
 
 
     // Computed Properties

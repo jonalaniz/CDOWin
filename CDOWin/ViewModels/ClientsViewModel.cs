@@ -150,7 +150,8 @@ public partial class ClientsViewModel : ObservableObject {
         (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Phone2 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Phone3 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.EmploymentGoal ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
+        (c.EmploymentGoal ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (c.CaseID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
         Filtered = new ObservableCollection<ClientSummaryDTO>(result);

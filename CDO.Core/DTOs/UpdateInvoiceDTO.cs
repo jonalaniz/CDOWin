@@ -1,6 +1,7 @@
 namespace CDO.Core.DTOs;
 
-public class UpdateServiceAuthorizationDTO {
+public class UpdateInvoiceDTO {
+    public string? ServiceAuthorizationNumber { get; set; }
     public int? ClientID { get; set; }
     public string? Description { get; set; }
     public DateTime? StartDate { get; set; }

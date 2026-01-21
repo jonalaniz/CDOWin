@@ -1,8 +1,8 @@
 namespace CDO.Core.DTOs;
 
-public class CreateSADTO {
+public class CreateInvoiceDTO {
     // Required creation fields
-    public required string Id { get; init; }
+    public required string ServiceAuthorizationNumber { get; init; }
     public required int ClientID { get; init; }
     public required string Description { get; init; }
     public required DateTime StartDate { get; init; }

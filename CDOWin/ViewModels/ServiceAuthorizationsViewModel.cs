@@ -27,17 +27,17 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<ServiceAuthorization> _allServiceAuthorizations = [];
+    private IReadOnlyList<Invoice> _allServiceAuthorizations = [];
 
     // =========================
     // View State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<ServiceAuthorization> Filtered { get; private set; } = [];
+    public partial ObservableCollection<Invoice> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ServiceAuthorization? Selected { get; set; }
+    public partial Invoice? Selected { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -97,7 +97,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var serviceAuthorizations = await _dataCoordinator.GetSAsAsync();
         if (serviceAuthorizations == null) return;
 
-        var snapshot = serviceAuthorizations.OrderBy(o => o.Id).ToList().AsReadOnly();
+        var snapshot = serviceAuthorizations.OrderBy(o => o.ServiceAuthorizationNumber).ToList().AsReadOnly();
         _allServiceAuthorizations = snapshot;
 
         _dispatcher.TryEnqueue(() => {
@@ -110,7 +110,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         if (serviceAuthorization == null) return;
 
         var updated = _allServiceAuthorizations
-            .Select(s => s.Id == id ? serviceAuthorization : s)
+            .Select(s => s.ServiceAuthorizationNumber == id ? serviceAuthorization : s)
             .ToList()
             .AsReadOnly();
 
@@ -119,7 +119,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         _dispatcher.TryEnqueue(() => {
             var index = Filtered
             .Select((s, i) => new { s, i })
-            .FirstOrDefault(x => x.s.Id == id)?.i;
+            .FirstOrDefault(x => x.s.ServiceAuthorizationNumber == id)?.i;
 
             if (index != null)
                 Filtered[index.Value] = serviceAuthorization;
@@ -130,13 +130,13 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     public async Task<Result<bool>> DeleteSelectedSA() {
         if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Placement selected.", null, null));
-        var id = Selected.Id;
+        var id = Selected.ServiceAuthorizationNumber;
         var result = await _service.DeleteServiceAuthorizationAsync(id);
 
         if (result.IsSuccess) {
             Selected = null;
             _allServiceAuthorizations = _allServiceAuthorizations
-                .Where(sa => sa.Id != id)
+                .Where(sa => sa.ServiceAuthorizationNumber != id)
                 .ToList()
                 .AsReadOnly();
             ApplyFilter();
@@ -150,10 +150,10 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Utility / Filtering
     // =========================
     void ApplyFilter() {
-        string? previousSelection = Selected?.Id;
+        string? previousSelection = Selected?.ServiceAuthorizationNumber;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<ServiceAuthorization>(_allServiceAuthorizations);
+            Filtered = new ObservableCollection<Invoice>(_allServiceAuthorizations);
             ReSelect(previousSelection);
             return;
         }
@@ -162,18 +162,18 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var result = _allServiceAuthorizations.Where(s =>
         (s.Client?.NameAndID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (s.Client?.CounselorReference?.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (s.Id ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (s.ServiceAuthorizationNumber ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (s.Description ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
-        Filtered = new ObservableCollection<ServiceAuthorization>(result);
+        Filtered = new ObservableCollection<Invoice>(result);
         ReSelect(previousSelection);
 
     }
 
     private void ReSelect(string? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(sa => sa.Id == id) is ServiceAuthorization selected)
+        if (Filtered.FirstOrDefault(sa => sa.ServiceAuthorizationNumber == id) is Invoice selected)
             Selected = selected;
     }
 }

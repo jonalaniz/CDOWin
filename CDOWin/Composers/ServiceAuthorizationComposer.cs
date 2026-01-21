@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CDOWin.Composers;
 
-public sealed class ServiceAuthorizationComposer(ServiceAuthorization sa) {
-    private readonly ServiceAuthorization _sa = sa;
+public sealed class ServiceAuthorizationComposer(Invoice sa) {
+    private readonly Invoice _sa = sa;
     private readonly ITemplateProvider _templateProvider = new TemplateProvider();
 
     public Task<Result<string>> Compose() {

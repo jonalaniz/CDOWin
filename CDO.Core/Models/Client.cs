@@ -9,7 +9,7 @@ public record class Client(
     string Counselor,
     Reminder[] Reminders,
     Placement[]? Placements,
-    ServiceAuthorization[]? Pos,
+    Invoice[]? Invoice,
     DateTime? StartDate,
     int? Ssn,                                               // SSN
     string? CaseID,

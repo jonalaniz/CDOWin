@@ -73,10 +73,10 @@ public sealed partial class UpdatePlacement : Page {
     // Even Handlers
     // =========================
     private void DropDownSelected(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem item || item.Tag is not ServiceAuthorization sa)
+        if (sender is not MenuFlyoutItem item || item.Tag is not Invoice sa)
             return;
-        SANumberDropDownButton.Content = sa.Id;
-        ViewModel.Updated.PoNumber = sa.Id;
+        SANumberDropDownButton.Content = sa.ServiceAuthorizationNumber;
+        ViewModel.Updated.PoNumber = sa.ServiceAuthorizationNumber;
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {

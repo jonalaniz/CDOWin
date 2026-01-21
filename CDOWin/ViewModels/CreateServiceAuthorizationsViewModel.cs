@@ -69,9 +69,9 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // =========================
     // CRUD Methods
     // =========================
-    public async Task<Result<ServiceAuthorization>> CreateSAAsync() {
-        var sa = new CreateSADTO {
-            Id = Id,
+    public async Task<Result<Invoice>> CreateSAAsync() {
+        var sa = new CreateInvoiceDTO {
+            ServiceAuthorizationNumber = Id,
             ClientID = Client.Id,
             CounselorrID = Client.CounselorID,
             Description = Description,

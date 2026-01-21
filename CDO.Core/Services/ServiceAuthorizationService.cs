@@ -8,7 +8,7 @@ namespace CDO.Core.Services;
 
 public class ServiceAuthorizationService : IServiceAuthorizationService {
     private readonly INetworkService _network;
-    public List<ServiceAuthorization> ServiceAuthorizations { get; private set; } = new();
+    public List<Invoice> ServiceAuthorizations { get; private set; } = new();
 
     public ServiceAuthorizationService(INetworkService network) {
         _network = network;
@@ -17,30 +17,30 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // GET
     // -----------------------------
-    public Task<List<ServiceAuthorization>?> GetAllServiceAuthorizationsAsync() {
-        return _network.GetAsync<List<ServiceAuthorization>>(Endpoints.ServiceAuthorizations);
+    public Task<List<Invoice>?> GetAllServiceAuthorizationsAsync() {
+        return _network.GetAsync<List<Invoice>>(Endpoints.ServiceAuthorizations);
     }
 
-    public Task<ServiceAuthorization?> GetServiceAuthorizationAsync(string id) {
-        return _network.GetAsync<ServiceAuthorization>(Endpoints.ServiceAuthorization(id));
+    public Task<Invoice?> GetServiceAuthorizationAsync(string id) {
+        return _network.GetAsync<Invoice>(Endpoints.ServiceAuthorization(id));
     }
 
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<ServiceAuthorization>> CreateServiceAuthorizationAsync(CreateSADTO dto) {
-        var result = await _network.PostAsync<CreateSADTO, ServiceAuthorization>(Endpoints.ServiceAuthorizations, dto);
-        if (!result.IsSuccess) return Result<ServiceAuthorization>.Fail(TranslateError(result.Error!));
-        return Result<ServiceAuthorization>.Success(result.Value!);
+    public async Task<Result<Invoice>> CreateServiceAuthorizationAsync(CreateInvoiceDTO dto) {
+        var result = await _network.PostAsync<CreateInvoiceDTO, Invoice>(Endpoints.ServiceAuthorizations, dto);
+        if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
+        return Result<Invoice>.Success(result.Value!);
     }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<ServiceAuthorization>> UpdateServiceAuthorizationAsync(string id, UpdateServiceAuthorizationDTO dto) {
-        var result = await _network.UpdateAsync<UpdateServiceAuthorizationDTO, ServiceAuthorization>(Endpoints.ServiceAuthorization(id), dto);
-        if (!result.IsSuccess) return Result<ServiceAuthorization>.Fail(TranslateError(result.Error!));
-        return Result<ServiceAuthorization>.Success(result.Value!);
+    public async Task<Result<Invoice>> UpdateServiceAuthorizationAsync(string id, UpdateInvoiceDTO dto) {
+        var result = await _network.UpdateAsync<UpdateInvoiceDTO, Invoice>(Endpoints.ServiceAuthorization(id), dto);
+        if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
+        return Result<Invoice>.Success(result.Value!);
     }
 
     // -----------------------------

@@ -30,10 +30,10 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(CreateReminderDTO))]
 [JsonSerializable(typeof(UpdateReminderDTO))]
 
-[JsonSerializable(typeof(ServiceAuthorization))]
-[JsonSerializable(typeof(List<ServiceAuthorization>))]
-[JsonSerializable(typeof(CreateSADTO))]
-[JsonSerializable(typeof(UpdateServiceAuthorizationDTO))]
+[JsonSerializable(typeof(Invoice))]
+[JsonSerializable(typeof(List<Invoice>))]
+[JsonSerializable(typeof(CreateInvoiceDTO))]
+[JsonSerializable(typeof(UpdateInvoiceDTO))]
 
 [JsonSerializable(typeof(State))]
 [JsonSerializable(typeof(List<State>))]

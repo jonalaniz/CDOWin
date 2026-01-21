@@ -169,7 +169,7 @@ public sealed partial class ClientViewPage : Page {
             }
             _ = ViewModel.ReloadClientAsync();
         } else if (result == ContentDialogResult.Secondary) {
-            var export = ServiceAuthorization.InjectClient(sa, ViewModel.Selected!);
+            var export = Invoice.InjectClient(sa, ViewModel.Selected!);
             var composer = new ServiceAuthorizationComposer(export);
             var composerResult = await composer.Compose();
 

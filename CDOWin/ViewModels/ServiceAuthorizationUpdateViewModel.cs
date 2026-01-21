@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class ServiceAuthorizationUpdateViewModel(ServiceAuthorization serviceAuthorization) : ObservableObject {
+public partial class ServiceAuthorizationUpdateViewModel(Invoice serviceAuthorization) : ObservableObject {
     private IServiceAuthorizationService _service = AppServices.SAService;
-    public ServiceAuthorization Original = serviceAuthorization;
-    public UpdateServiceAuthorizationDTO Updated = new();
+    public Invoice Original = serviceAuthorization;
+    public UpdateInvoiceDTO Updated = new();
 
-    public async Task<Result<ServiceAuthorization>> UpdateSAAsync() {
-        return await _service.UpdateServiceAuthorizationAsync(Original.Id, Updated);
+    public async Task<Result<Invoice>> UpdateSAAsync() {
+        return await _service.UpdateServiceAuthorizationAsync(Original.ServiceAuthorizationNumber, Updated);
     }
 }

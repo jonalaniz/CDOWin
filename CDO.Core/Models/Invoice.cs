@@ -1,7 +1,8 @@
 ﻿namespace CDO.Core.Models;
 
-public record class ServiceAuthorization(
-    string Id,
+public record class Invoice(
+    int Id,
+    string ServiceAuthorizationNumber,
     string Description,
     string? Office,
     int? CounselorID,
@@ -16,17 +17,18 @@ public record class ServiceAuthorization(
     public string? FormattedCost => $"{UnitCost:C2}";
     public string? FormattedDateRange => $"Valid {FormattedStartDate} to {FormattedEndDate}";
 
-    public static ServiceAuthorization InjectClient(ServiceAuthorization sa, Client client) {
-        return new ServiceAuthorization(
-            sa.Id,
-            sa.Description,
-            sa.Office,
-            sa.CounselorID,
-            sa.UnitCost,
-            sa.UnitOfMeasurement,
+    public static Invoice InjectClient(Invoice invoice, Client client) {
+        return new Invoice(
+            invoice.Id,
+            invoice.ServiceAuthorizationNumber,
+            invoice.Description,
+            invoice.Office,
+            invoice.CounselorID,
+            invoice.UnitCost,
+            invoice.UnitOfMeasurement,
             client,
-            sa.StartDate,
-            sa.EndDate
+            invoice.StartDate,
+            invoice.EndDate
         );
     }
 }

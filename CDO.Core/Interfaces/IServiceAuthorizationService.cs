@@ -9,19 +9,19 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // GET Methods
     // -----------------------------
-    public Task<List<ServiceAuthorization>?> GetAllServiceAuthorizationsAsync();
+    public Task<List<Invoice>?> GetAllServiceAuthorizationsAsync();
 
-    public Task<ServiceAuthorization?> GetServiceAuthorizationAsync(string id);
+    public Task<Invoice?> GetServiceAuthorizationAsync(string id);
 
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result<ServiceAuthorization>> CreateServiceAuthorizationAsync(CreateSADTO dto);
+    public Task<Result<Invoice>> CreateServiceAuthorizationAsync(CreateInvoiceDTO dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<ServiceAuthorization>> UpdateServiceAuthorizationAsync(string id, UpdateServiceAuthorizationDTO dto);
+    public Task<Result<Invoice>> UpdateServiceAuthorizationAsync(string id, UpdateInvoiceDTO dto);
 
     // -----------------------------
     // DELETE Methods

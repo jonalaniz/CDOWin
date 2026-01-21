@@ -15,9 +15,9 @@ IClientService clientService = new ClientService(network);
 //
 // var ServiceAuthorizations = await POService.GetAllServiceAuthorizationsAsync();
 //
-// foreach (var ServiceAuthorization in ServiceAuthorizations) {
-//     Console.WriteLine($"State ID: {ServiceAuthorization.Id}");
-//     Console.WriteLine($"State Name: {ServiceAuthorization.ClientID}");
+// foreach (var Invoice in ServiceAuthorizations) {
+//     Console.WriteLine($"State ID: {Invoice.ServiceAuthorizationNumber}");
+//     Console.WriteLine($"State Name: {Invoice.ClientID}");
 // }
 
 //var client = new CreateClientDTO {
@@ -40,7 +40,7 @@ IClientService clientService = new ClientService(network);
 //Console.WriteLine("Placements");
 //Console.WriteLine();
 //foreach (var placement in client.placements) {
-//    Console.WriteLine(placement.Id);
+//    Console.WriteLine(placement.ServiceAuthorizationNumber);
 //    Console.WriteLine(placement.employer.Name);
 //    Console.WriteLine(placement.FormattedHireDate);
 //    Console.WriteLine(placement.Position);
@@ -49,7 +49,7 @@ IClientService clientService = new ClientService(network);
 //Console.WriteLine("Service Authorizations");
 //Console.WriteLine();
 //foreach (var po in client.pos) {
-//    Console.WriteLine(po.Id);
+//    Console.WriteLine(po.ServiceAuthorizationNumber);
 //    Console.WriteLine(po.StartDate);
 //    Console.WriteLine(po.EndDate);
 //    Console.WriteLine(po.Description);
@@ -67,10 +67,10 @@ IClientService clientService = new ClientService(network);
 //    Race = "lmao"
 //};
 
-//var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.Id);
+//var updatedClient = await clientService.UpdateClientAsync(updateClient, newClient.ServiceAuthorizationNumber);
 //Console.WriteLine($"New client updated: {updatedClient}");
 
-//var clientWasDeleted = await clientService.DeleteClientAsync(newClient.Id);
+//var clientWasDeleted = await clientService.DeleteClientAsync(newClient.ServiceAuthorizationNumber);
 //if (clientWasDeleted == true) {
 //    Console.WriteLine($"Client: {newClient.Name} was deleted");
 //}

@@ -5,7 +5,7 @@ using Word = Microsoft.Office.Interop.Word;
 namespace CDO.Core.WordInterop;
 
 public sealed class WordInteropService {
-    public void ExportServiceAuthorization(string templatePath, ServiceAuthorization sa) {
+    public void ExportServiceAuthorization(string templatePath, Invoice sa) {
         Debug.WriteLine(templatePath);
 
         var app = new Word.Application();
@@ -16,7 +16,7 @@ public sealed class WordInteropService {
             foreach (Word.FormField field in doc.FormFields) {
                 switch (field.Name) {
                     case "ID":
-                        field.Result = sa.Id;
+                        field.Result = sa.ServiceAuthorizationNumber;
                         break;
                     case "DRSOffice":
                         field.Result = sa.Office ?? "";

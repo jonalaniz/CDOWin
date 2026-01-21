@@ -151,7 +151,7 @@ public sealed partial class ClientViewPage : Page {
 
     private async void SA_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not string id) { return; }
-        var sa = ViewModel.Selected?.Pos?.FirstOrDefault(c => c.Id == id);
+        var sa = ViewModel.Selected?.Invoices?.FirstOrDefault(c => c.ServiceAuthorizationNumber == id);
 
         if (sa == null) { return; }
         var updateSAVM = new ServiceAuthorizationUpdateViewModel(sa);

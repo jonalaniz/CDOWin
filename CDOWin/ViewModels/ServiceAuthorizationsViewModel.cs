@@ -105,12 +105,12 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         });
     }
 
-    public async Task ReloadServiceAuthorizationAsync(string id) {
+    public async Task ReloadServiceAuthorizationAsync(int id) {
         var serviceAuthorization = await _service.GetServiceAuthorizationAsync(id);
         if (serviceAuthorization == null) return;
 
         var updated = _allServiceAuthorizations
-            .Select(s => s.ServiceAuthorizationNumber == id ? serviceAuthorization : s)
+            .Select(s => s.Id == id ? serviceAuthorization : s)
             .ToList()
             .AsReadOnly();
 
@@ -119,7 +119,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         _dispatcher.TryEnqueue(() => {
             var index = Filtered
             .Select((s, i) => new { s, i })
-            .FirstOrDefault(x => x.s.ServiceAuthorizationNumber == id)?.i;
+            .FirstOrDefault(x => x.s.Id == id)?.i;
 
             if (index != null)
                 Filtered[index.Value] = serviceAuthorization;
@@ -130,16 +130,19 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     public async Task<Result<bool>> DeleteSelectedSA() {
         if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Placement selected.", null, null));
-        var id = Selected.ServiceAuthorizationNumber;
+        var id = Selected.Id;
         var result = await _service.DeleteServiceAuthorizationAsync(id);
 
         if (result.IsSuccess) {
-            Selected = null;
-            _allServiceAuthorizations = _allServiceAuthorizations
-                .Where(sa => sa.ServiceAuthorizationNumber != id)
-                .ToList()
-                .AsReadOnly();
-            ApplyFilter();
+            _dispatcher.TryEnqueue(() => {
+                Selected = null;
+                _allServiceAuthorizations = _allServiceAuthorizations
+                    .Where(sa => sa.Id != id)
+                    .ToList()
+                    .AsReadOnly();
+                ApplyFilter();
+            });
+
             _ = LoadServiceAuthorizationsAsync(force: true);
         }
 
@@ -150,7 +153,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Utility / Filtering
     // =========================
     void ApplyFilter() {
-        string? previousSelection = Selected?.ServiceAuthorizationNumber;
+        int? previousSelection = Selected?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
             Filtered = new ObservableCollection<Invoice>(_allServiceAuthorizations);
@@ -171,9 +174,9 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     }
 
-    private void ReSelect(string? id) {
+    private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(sa => sa.ServiceAuthorizationNumber == id) is Invoice selected)
+        if (Filtered.FirstOrDefault(sa => sa.Id == id) is Invoice selected)
             Selected = selected;
     }
 }

@@ -25,7 +25,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
-    public partial string Id { get; set; } = string.Empty;
+    public partial string SANumber { get; set; } = string.Empty;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -57,7 +57,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
 
     private bool CanSaveMethod() {
         if (Client.CounselorID == null
-            || string.IsNullOrWhiteSpace(Id)
+            || string.IsNullOrWhiteSpace(SANumber)
             || string.IsNullOrWhiteSpace(Description)
             || string.IsNullOrWhiteSpace(UnitOfMeasurement)
             || UnitCost == null)
@@ -71,7 +71,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // =========================
     public async Task<Result<Invoice>> CreateSAAsync() {
         var sa = new CreateInvoiceDTO {
-            ServiceAuthorizationNumber = Id,
+            ServiceAuthorizationNumber = SANumber,
             ClientID = Client.Id,
             CounselorrID = Client.CounselorID,
             Description = Description,

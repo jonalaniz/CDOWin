@@ -8,7 +8,7 @@ public static class Endpoints {
     public static readonly string Counselors = "/api/counselors";
     public static string Employer(int id) => $"{Employers}/{id}";
     public static readonly string Employers = "/api/employers";
-    public static string ServiceAuthorization(string id) => $"{ServiceAuthorizations}/{id}";
+    public static string ServiceAuthorization(int id) => $"{ServiceAuthorizations}/{id}";
     public static readonly string ServiceAuthorizations = "/api/pos";
     public static string Placement(string id) => $"{Placements}/{id}";
     public static readonly string Placements = "/api/placements";

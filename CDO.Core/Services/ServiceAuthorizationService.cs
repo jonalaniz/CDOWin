@@ -21,7 +21,7 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
         return _network.GetAsync<List<Invoice>>(Endpoints.ServiceAuthorizations);
     }
 
-    public Task<Invoice?> GetServiceAuthorizationAsync(string id) {
+    public Task<Invoice?> GetServiceAuthorizationAsync(int id) {
         return _network.GetAsync<Invoice>(Endpoints.ServiceAuthorization(id));
     }
 
@@ -37,7 +37,7 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Invoice>> UpdateServiceAuthorizationAsync(string id, UpdateInvoiceDTO dto) {
+    public async Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, UpdateInvoiceDTO dto) {
         var result = await _network.UpdateAsync<UpdateInvoiceDTO, Invoice>(Endpoints.ServiceAuthorization(id), dto);
         if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
         return Result<Invoice>.Success(result.Value!);
@@ -46,7 +46,7 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteServiceAuthorizationAsync(string id) {
+    public Task<Result<bool>> DeleteServiceAuthorizationAsync(int id) {
         return _network.DeleteAsync(Endpoints.ServiceAuthorization(id));
     }
 

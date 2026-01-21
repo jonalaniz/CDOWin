@@ -11,6 +11,14 @@ network.Initialize("https://api.jonalaniz.com", apiKey);
 //network.Initialize("http://127.0.0.1:8080", "RISgMANlIwHwqLPvOTDs8ecmz37VyW8O");
 
 IClientService clientService = new ClientService(network);
+var clients = await clientService.GetAllClientSummariesAsync();
+foreach(var item in clients) {
+    Console.WriteLine(item.CounselorName);
+}
+
+var client = await clientService.GetClientAsync(2266);
+
+
 // IServiceAuthorizationService POService = new POService(network);
 //
 // var ServiceAuthorizations = await POService.GetAllServiceAuthorizationsAsync();

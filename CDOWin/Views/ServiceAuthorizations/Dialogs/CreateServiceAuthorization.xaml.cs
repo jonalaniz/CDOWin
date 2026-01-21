@@ -75,7 +75,7 @@ public sealed partial class CreateServiceAuthorization : Page {
 
         switch (field) {
             case Field.Id:
-                ViewModel.Id = text;
+                ViewModel.SANumber = text;
                 break;
             case Field.Description:
                 ViewModel.Description = text;

@@ -35,7 +35,7 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is Invoice sa) {
-            _ = ViewModel.ReloadServiceAuthorizationAsync(sa.ServiceAuthorizationNumber);
+            _ = ViewModel.ReloadServiceAuthorizationAsync(sa.Id);
         }
     }
 

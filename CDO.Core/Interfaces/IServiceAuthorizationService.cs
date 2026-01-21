@@ -11,7 +11,7 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     public Task<List<Invoice>?> GetAllServiceAuthorizationsAsync();
 
-    public Task<Invoice?> GetServiceAuthorizationAsync(string id);
+    public Task<Invoice?> GetServiceAuthorizationAsync(int id);
 
     // -----------------------------
     // POST Methods
@@ -21,11 +21,11 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<Invoice>> UpdateServiceAuthorizationAsync(string id, UpdateInvoiceDTO dto);
+    public Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, UpdateInvoiceDTO dto);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteServiceAuthorizationAsync(string id);
+    public Task<Result<bool>> DeleteServiceAuthorizationAsync(int id);
 
 }

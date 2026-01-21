@@ -331,16 +331,16 @@
                         
                         <!-- Item Repeater -->
                         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
-                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Pos, Mode=OneWay}">
-                                <DataTemplate x:DataType="models:ServiceAuthorization">
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Invoices, Mode=OneWay}">
+                                <DataTemplate x:DataType="models:Invoice">
 
                                     <!-- Button -->
-                                    <Button Margin="0,0,0,6" Click="SA_Click" Tag="{x:Bind Id}"
+                                    <Button Margin="0,0,0,6" Click="SA_Click" Tag="{x:Bind ServiceAuthorizationNumber}"
                                             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                             Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                             BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
                                         <StackPanel Spacing="2">
-                                            <TextBlock FontWeight="Bold" Text="{x:Bind Id}"/>
+                                            <TextBlock FontWeight="Bold" Text="{x:Bind ServiceAuthorizationNumber}"/>
                                             <TextBlock Text="{x:Bind Description}"/>
                                             <TextBlock Text="{x:Bind FormattedDateRange}"/>
                                         </StackPanel>

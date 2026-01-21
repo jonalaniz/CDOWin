@@ -57,7 +57,7 @@
 
             <!-- Row 0: PO Number + Case ID-->
             <control:LabelPair Grid.Row="0" Grid.Column="0" 
-                               Label="SA Number" Value="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                               Label="SA Number" Value="{x:Bind ViewModel.Selected.ServiceAuthorizationNumber, Mode=OneWay}"/>
             <control:LabelPair Grid.Row="0" Grid.Column="1" 
                                Label="Case ID" Value="{x:Bind ViewModel.Selected.Client.CaseID, Mode=OneWay}"/>
 

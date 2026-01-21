@@ -97,7 +97,7 @@
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ServiceAuthorization">
+                    <DataTemplate x:DataType="models:Invoice">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
@@ -110,7 +110,7 @@
                                 <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind Id}"/>
+                            <TextBlock Grid.Column="0" Text="{x:Bind ServiceAuthorizationNumber}"/>
                             <Grid Grid.Column="1" Margin="0,0,12,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>

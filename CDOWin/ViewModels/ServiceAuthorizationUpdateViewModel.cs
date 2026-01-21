@@ -14,6 +14,6 @@ public partial class ServiceAuthorizationUpdateViewModel(Invoice serviceAuthoriz
     public UpdateInvoiceDTO Updated = new();
 
     public async Task<Result<Invoice>> UpdateSAAsync() {
-        return await _service.UpdateServiceAuthorizationAsync(Original.ServiceAuthorizationNumber, Updated);
+        return await _service.UpdateServiceAuthorizationAsync(Original.Id, Updated);
     }
 }

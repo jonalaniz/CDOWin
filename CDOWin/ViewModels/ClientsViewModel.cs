@@ -71,7 +71,7 @@ public partial class ClientsViewModel : ObservableObject {
 
     private void OnRequestSelectedClientChange(int clientId) {
         if (Selected != null && Selected.Id == clientId) return;
-        
+
         SearchQuery = string.Empty;
         ApplyFilter();
         _ = LoadSelectedClientAsync(clientId);

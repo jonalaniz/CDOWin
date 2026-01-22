@@ -34,7 +34,11 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
-    public partial string? Counselor { get; set; }
+    public partial int? CounselorID { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
+    public partial string? CounselorName { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -103,9 +107,6 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
 
     [ObservableProperty]
     public partial string? Email2Identity { get; set; }
-
-    [ObservableProperty]
-    public partial int? CounselorID { get; set; }
 
     [ObservableProperty]
     public partial string? ClientNotes { get; set; }
@@ -178,7 +179,7 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     public bool CanSaveMethod() {
         if (string.IsNullOrWhiteSpace(FirstName)
             || string.IsNullOrWhiteSpace(LastName)
-            || string.IsNullOrWhiteSpace(Counselor)
+            || CounselorID == null
             || string.IsNullOrWhiteSpace(City)
             || string.IsNullOrWhiteSpace(State)
             || string.IsNullOrWhiteSpace(Disability)) {
@@ -194,14 +195,14 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     public async Task<Result<Client>> CreateClientAsync() {
         if (FirstName == null
             || LastName == null
-            || Counselor == null
+            || CounselorID == null
             || City == null
             || State == null
             || Disability == null)
             return Result<Client>.Fail(new AppError(ErrorKind.Validation, "Missing required fields.", null));
 
         // Create Document folder
-        var folderName = $"Z:\\DARS Clients\\{Counselor}-{FirstName} {LastName}";
+        var folderName = $"Z:\\DARS Clients\\{CounselorName}-{FirstName} {LastName}";
         if (!CreateDocumentFolder(folderName)) return Result<Client>.Fail(new AppError(ErrorKind.Conflict, "Folder already exists.", null));
 
         var client = new CreateClientDTO {

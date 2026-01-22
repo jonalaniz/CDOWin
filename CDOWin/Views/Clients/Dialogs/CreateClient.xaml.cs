@@ -321,6 +321,7 @@ public sealed partial class CreateClient : Page {
     private void UpdateSelectedCounselor(Counselor counselor) {
         Debug.WriteLine(counselor.Name);
         ViewModel.CounselorID = counselor.Id;
+        ViewModel.CounselorName = counselor.Name;
     }
 
     // Conditions Fields
@@ -360,8 +361,7 @@ public sealed partial class CreateClient : Page {
     private int? ParseSSN(string value) {
         var sanitizedValue = value.Trim();
         if (sanitizedValue.Length <= 11) {
-            int x;
-            if (int.TryParse(value, out x)) {
+            if (int.TryParse(value, out int x)) {
                 return x;
             }
         }

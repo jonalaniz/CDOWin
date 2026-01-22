@@ -88,7 +88,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
             return tcs.Task;
         }
 
-        if (Selected.Client is not Client client) {
+        if (Selected.Client is null) {
             tcs.SetResult(Result<string>.Fail(new AppError(ErrorKind.Validation, "This shouldn't be possible")));
             return tcs.Task;
         }

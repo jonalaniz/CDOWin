@@ -97,27 +97,6 @@ public sealed partial class ClientViewPage : Page {
         ViewModel.NotifyNewClientCreated();
     }
 
-    private async void ReminderFlyoutItem_Click(object sender, RoutedEventArgs e) {
-        if (sender is MenuFlyoutItem item
-            && item.Tag is ReminderMenuItem reminderItem
-            && ViewModel.Selected != null) {
-            var newReminderVM = AppServices.CreateReminderViewModel(ViewModel.Selected.Id);
-            newReminderVM.Description = reminderItem.Description;
-
-            var dateOffset = DateTimeOffset.Now.AddDays(reminderItem.Days);
-            newReminderVM.Date = dateOffset.Date.ToUniversalTime();
-
-            var reminderResult = await newReminderVM.CreateReminderAsync();
-            if (!reminderResult.IsSuccess) {
-                ErrorHandler.Handle(reminderResult, this.XamlRoot);
-                return;
-            }
-
-            _ = ViewModel.ReloadClientAsync();
-            ViewModel.NotifyNewClientCreated();
-        }
-    }
-
     // SAs
     private async void CreateSA_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null) return;

@@ -43,7 +43,7 @@ public sealed partial class CounselorInspector : Page {
         }
     }
 
-    private void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private void SA_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
 
     }
 }

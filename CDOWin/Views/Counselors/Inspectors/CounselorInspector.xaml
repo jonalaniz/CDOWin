@@ -89,9 +89,9 @@
 
                     <!-- Button -->
                     <Button Margin="0,0,0,6" Click="SA_Click" Tag="{x:Bind Id}"
-                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
                         <StackPanel Spacing="2">
                             <TextBlock FontWeight="Bold" Text="{x:Bind ServiceAuthorizationNumber}"/>
                             <TextBlock Text="{x:Bind Description}"/>

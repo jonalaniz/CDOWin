@@ -139,28 +139,28 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     public partial string? Transportation { get; set; }
 
     [ObservableProperty]
-    public partial bool? ResumeRequired { get; set; }
+    public partial bool? ResumeRequired { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? ResumeCompleted { get; set; }
+    public partial bool? ResumeCompleted { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? VideoInterviewRequired { get; set; }
+    public partial bool? VideoInterviewRequired { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? VideoInterviewCompleted { get; set; }
+    public partial bool? VideoInterviewCompleted { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? ReleasesCompleted { get; set; }
+    public partial bool? ReleasesCompleted { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? OrientationCompleted { get; set; }
+    public partial bool? OrientationCompleted { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? DataSheetCompleted { get; set; }
+    public partial bool? DataSheetCompleted { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool? ElevatorSpeechCompleted { get; set; }
+    public partial bool? ElevatorSpeechCompleted { get; set; } = false;
 
     [ObservableProperty]
     public partial string? Race { get; set; }

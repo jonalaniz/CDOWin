@@ -48,7 +48,7 @@ public class DataCoordinator {
     // Public Fields
     // =========================
     public CachedList<ClientSummaryDTO> Clients { get; } = new();
-    public CachedList<Counselor> Counselors { get; } = new();
+    public CachedList<CounselorSummaryDTO> Counselors { get; } = new();
     public CachedList<Employer> Employers { get; } = new();
     public CachedList<Placement> Placements { get; } = new();
     public CachedList<Reminder> Reminders { get; } = new();
@@ -84,9 +84,9 @@ public class DataCoordinator {
         return Clients.Data!;
     }
 
-    public async Task<IReadOnlyList<Counselor>> GetCounselorsAsync(bool force = false) {
+    public async Task<IReadOnlyList<CounselorSummaryDTO>> GetCounselorsAsync(bool force = false) {
         if (force || Counselors.IsStale(CounselorTTL)) {
-            var data = await _counselors.GetAllCounselorsAsync();
+            var data = await _counselors.GetAllCounselorSummariesAsync();
             Counselors.Update(data);
         }
 

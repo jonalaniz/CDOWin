@@ -42,8 +42,6 @@
 
             <!-- Title + Button Bar -->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                
-                <!-- Title + Button -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -80,8 +78,7 @@
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                       SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
-                      IsItemClickEnabled="True"
-                      ItemClick="ListView_ItemClick">
+                      IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:ClientSummaryDTO">
                         <Grid Margin="0,8,8,8">

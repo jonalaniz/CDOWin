@@ -1,3 +1,4 @@
+using CDO.Core.DTOs;
 using CDO.Core.Models;
 using CDOWin.Extensions;
 using CDOWin.Services;
@@ -16,7 +17,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<Counselor> _counselors = AppServices.CounselorsViewModel.GetCounselors();
+    private readonly List<CounselorSummaryDTO> _counselors = AppServices.CounselorsViewModel.GetCounselors();
     public ClientUpdateViewModel ViewModel { get; private set; }
 
     // =========================
@@ -100,7 +101,7 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void CounselorAutoSuggest_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
-        if (args.SelectedItem is Counselor selectedCounselor) {
+        if (args.SelectedItem is CounselorSummaryDTO selectedCounselor) {
             var result = _counselors.FirstOrDefault(c => c.Id == selectedCounselor.Id);
             if (result != null) {
                 UpdateSelectedCounselor(result);
@@ -110,7 +111,7 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void CounselorAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
-        if (args.ChosenSuggestion is Counselor chosenCounselor) {
+        if (args.ChosenSuggestion is CounselorSummaryDTO chosenCounselor) {
             var counselor = _counselors.FirstOrDefault(c => c.Id == chosenCounselor.Id);
             if (counselor != null) { UpdateSelectedCounselor(counselor); }
         } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
@@ -158,16 +159,12 @@ public sealed partial class UpdateCaseInformation : Page {
         }
     }
 
-    private void UpdateSelectedCounselor(Counselor counselor) {
+    private void UpdateSelectedCounselor(CounselorSummaryDTO counselor) {
         // Update Labels
         CPhone.Value = counselor.Phone ?? "";
         CEmail.Value = counselor.Email ?? "";
 
         // Update Client
-        ViewModel.UpdatedClient.Counselor = counselor.Name;
         ViewModel.UpdatedClient.CounselorID = counselor.Id;
-        ViewModel.UpdatedClient.CounselorEmail = counselor.Email;
-        ViewModel.UpdatedClient.CounselorPhone = counselor.Phone;
-        ViewModel.UpdatedClient.CounselorFax = counselor.Fax;
     }
 }

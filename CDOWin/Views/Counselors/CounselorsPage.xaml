@@ -8,32 +8,34 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:viewmodels="using:CDOWin.ViewModels"
+    xmlns:dto="using:CDO.Core.DTOs"
     xmlns:models="using:CDO.Core.Models"
     mc:Ignorable="d">
 
     <Grid>
         <!-- Columns -->
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="344"/>
         </Grid.ColumnDefinitions>
         
         <!-- Left Column -->
         <Grid Style="{StaticResource ContentRightBorderStyle}">
-            
+
             <!-- Rows -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <!-- Columns -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <!-- Title + Button -->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid>
@@ -41,11 +43,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <!-- Title -->
                     <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
                                Text="Counselors"/>
-                    
+
                     <!-- Add Button -->
                     <Button Grid.Column="1" VerticalAlignment="Center" 
                             Style="{StaticResource SingleIconButtonStyle}"
@@ -54,25 +56,80 @@
                         <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
                     </Button>
                 </Grid>
-                
+
                 <!-- Subtitle -->
                 <TextBlock Style="{StaticResource PageSubtitleStyle}">
                     <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Counselors"/>
                 </TextBlock>
             </StackPanel>
-                
+
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" PlaceholderText="Filter Counselors"
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
-            <!-- Counselors Table -->
-            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView"
-                      Style="{StaticResource DataTableStyle}" 
-                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
-                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" 
-                      ItemClick="ListView_ItemClick">
+            <!-- Counselors List -->
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
+                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
+                      IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:CounselorSummaryDTO">
+                        <Grid Margin="0,8,8,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontWeight="Bold" Text="{x:Bind Name}" 
+                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock Grid.Row="1" Text="{x:Bind Email}"
+                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock Grid.Row="2" Text="{x:Bind Phone}"
+                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                        </Grid>                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
+        <!-- Middle Column -->
+        <Grid Grid.Row="0" Grid.Column="1" BorderThickness="0,0,1,0"
+              BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+              Visibility="{x:Bind ViewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title + Button -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                               Text="{x:Bind ViewModel.SelectedSummary.Name, Mode=OneWay}"/>
+                </Grid>
+
+                <!-- Subtitle -->
+                <TextBlock Style="{StaticResource PageSubtitleStyle}">
+                    <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
+                    <Run Text="Clients"/>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Clients Table -->
+            <ListView Grid.Row="1" x:Name="ListView"
+                      ItemsSource="{x:Bind ViewModel.Clients, Mode=OneWay}"
+                      Style="{StaticResource DataTableStyle}">
 
                 <!-- Header -->
                 <ListView.Header>
@@ -85,44 +142,44 @@
                         </interactivity:Interaction.Behaviors>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="180"/>
-                            <ColumnDefinition Width="210"/>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="180"/>
-                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Name" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="Email" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" Text="Phone" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="Fax" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" Text="Secretary" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" Text="Secretary Email" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Case ID" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Address" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="Phone" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Counselor">
+                    <DataTemplate x:DataType="dto:ClientSummaryDTO">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="210"/>
-                                <ColumnDefinition Width="110"/>
-                                <ColumnDefinition Width="110"/>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="210"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind Name}" TextWrapping="WrapWholeWords"
-                                       FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind Email}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind Phone}"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind Fax}"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind SecretaryName}" TextWrapping="WrapWholeWords"
-                                       FontWeight="Bold"/>
-                            <TextBlock Grid.Column="5" Text="{x:Bind SecretaryEmail}" TextTrimming="CharacterEllipsis"/>
+                            <Grid Grid.Column="0" Margin="0,0,12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{x:Bind FormattedName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" Click="GoToClient_Click" Tag="{x:Bind Id}">
+                                    <FontIcon Glyph="&#xE76C;"/>
+                                </Button>
+                            </Grid>
+                            <TextBlock Grid.Column="1" Text="{x:Bind CaseID}"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind FormattedAddress}" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind Phone}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -130,6 +187,6 @@
         </Grid>
         
         <!-- Right Column -->
-        <Frame Grid.Column="1" x:Name="InspectorFrame" IsNavigationStackEnabled="False"/>
+        <Frame Grid.Column="2" x:Name="InspectorFrame" IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

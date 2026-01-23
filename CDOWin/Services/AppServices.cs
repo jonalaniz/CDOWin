@@ -77,7 +77,7 @@ public static class AppServices {
             _clientSelectionService
         );
 
-        CounselorsViewModel = new CounselorsViewModel(DataCoordinator, CounselorService, _counselorSelecitonService);
+        CounselorsViewModel = new CounselorsViewModel(DataCoordinator, CounselorService, _counselorSelecitonService, _clientSelectionService);
         EmployersViewModel = new EmployersViewModel(DataCoordinator, EmployerService);
         SAsViewModel = new ServiceAuthorizationsViewModel(DataCoordinator, SAService, _clientSelectionService, _counselorSelecitonService);
         RemindersViewModel = new RemindersViewModel(DataCoordinator, ReminderService, _clientSelectionService);

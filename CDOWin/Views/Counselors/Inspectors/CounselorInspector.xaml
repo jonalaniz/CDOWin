@@ -15,7 +15,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -26,7 +25,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.Column="0"
                    Style="{StaticResource InspectorHeaderStyle}"
-                   Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
+                   Text="Details"/>
         
         <!-- Edit Button -->
         <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" 
@@ -36,11 +35,11 @@
         </Button>
 
         <!-- Details Caption-->
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                   Style="{StaticResource InspectorCaptionStyle}" Text="Details"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,-2,16,8"
+                   Style="{StaticResource InspectorCaptionStyle}" Text="Counselor"/>
 
         <!-- Details Grid -->
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
               Style="{StaticResource InspectorDetialsGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

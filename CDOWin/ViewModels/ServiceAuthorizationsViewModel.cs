@@ -23,7 +23,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _clientSelectionService;
     private readonly CounselorSelectionService _counselorSelectionService;
-    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
+    private readonly DispatcherQueue _dispatcher;
 
     // =========================
     // Private Backing Fields
@@ -47,11 +47,28 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Constructor
     // =========================
 
-    public ServiceAuthorizationsViewModel(DataCoordinator dataCoordinator, IServiceAuthorizationService service, ClientSelectionService clientSelectionService, CounselorSelectionService counselorSelectionService) {
+    public ServiceAuthorizationsViewModel(
+        DataCoordinator dataCoordinator, 
+        IServiceAuthorizationService service, 
+        ClientSelectionService clientSelectionService, 
+        CounselorSelectionService counselorSelectionService) {
         _service = service;
+        _dataCoordinator = dataCoordinator;
+
+
         _clientSelectionService = clientSelectionService;
         _counselorSelectionService = counselorSelectionService;
-        _dataCoordinator = dataCoordinator;
+        _dispatcher = DispatcherQueue.GetForCurrentThread();
+    }
+
+    // =========================
+    // Property Change Methods
+    // =========================
+    partial void OnSearchQueryChanged(string value) {
+        if (_dispatcher.HasThreadAccess)
+            ApplyFilter();
+        else
+            _dispatcher.TryEnqueue(ApplyFilter);
     }
 
     // =========================
@@ -65,16 +82,6 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     public void RequestCounselor(int counselorID) {
         AppServices.Navigation.Navigate(Views.CDOFrame.Counselors);
         _counselorSelectionService.RequestSelectedCounselor(counselorID);
-    }
-
-    // =========================
-    // Property Change Methods
-    // =========================
-    partial void OnSearchQueryChanged(string value) {
-        if (_dispatcher.HasThreadAccess)
-            ApplyFilter();
-        else
-            _dispatcher.TryEnqueue(ApplyFilter);
     }
 
     // =========================

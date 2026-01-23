@@ -8,4 +8,5 @@ public class CounselorSummaryDTO {
     // Nullable fields
     public string? Phone { get; init; }
     public string? Email { get; init; }
+    public string? SecretaryName { get; init; }
 }

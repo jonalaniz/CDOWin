@@ -22,6 +22,7 @@ public class ClientSummaryDTO {
 
     // Computed Properties
     public string Name => $"{LastName}, {FirstName}";
+    public string FormattedName => $"{FirstName} {LastName}";
     public string FormattedAddress {
         get {
             if (Address1 == null && Address2 == null)

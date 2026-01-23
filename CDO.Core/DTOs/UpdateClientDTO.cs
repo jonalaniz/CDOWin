@@ -3,7 +3,6 @@ namespace CDO.Core.DTOs;
 public class UpdateClientDTO {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
-    public string? Counselor { get; set; }
     public string? City { get; set; }
     public string? Disability { get; set; }
     public string? State { get; set; }
@@ -26,9 +25,6 @@ public class UpdateClientDTO {
     public string? Email2 { get; set; }
     public string? Email2Identity { get; set; }
     public int? CounselorID { get; set; }
-    public string? CounselorEmail { get; set; }
-    public string? CounselorPhone { get; set; }
-    public string? CounselorFax { get; set; }
     public string? ClientNotes { get; set; }
     public string? Conditions { get; set; }
     public string? DocumentFolder { get; set; }

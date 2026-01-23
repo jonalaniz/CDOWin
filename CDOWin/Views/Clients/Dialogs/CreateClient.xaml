@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:CDO.Core.Models"
+    xmlns:dto="using:CDO.Core.DTOs"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
@@ -212,7 +213,7 @@
                                     QuerySubmitted="CounselorAutoSuggest_QuerySubmitted" 
                                     SuggestionChosen="CounselorAutoSuggest_SuggestionChosen">
                         <AutoSuggestBox.ItemTemplate>
-                            <DataTemplate x:DataType="models:Counselor">
+                            <DataTemplate x:DataType="dto:CounselorSummaryDTO">
                                 <TextBlock Text="{x:Bind Name}"/>
                             </DataTemplate>
                         </AutoSuggestBox.ItemTemplate>

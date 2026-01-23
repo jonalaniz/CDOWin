@@ -120,7 +120,7 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <TextBlock Grid.Column="0" Text="{x:Bind ClientName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Click="GoToClient_Click" Tag="{x:Bind Client.Id}">
+                                <Button Grid.Column="1" Click="GoToClient_Click" Tag="{x:Bind ClientID}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>

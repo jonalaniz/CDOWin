@@ -4,6 +4,7 @@ using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Inspectors;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 namespace CDOWin.Views.ServiceAuthorizations;
 
@@ -45,7 +46,9 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     }
 
     private void GoToCounselor_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+        Debug.WriteLine($"Clicked");
         if (sender is not Button button || button.Tag is not int id) return;
+        Debug.WriteLine($"Clicked: {id}");
         ViewModel.RequestCounselor(id);
     }
 }

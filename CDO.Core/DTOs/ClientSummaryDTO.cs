@@ -8,6 +8,8 @@ public class ClientSummaryDTO {
     public required string City { get; init; }
     public required string State { get; init; }
 
+    public required bool TTW { get; init; }
+
     // Nullable fields
     public string? Address1 { get; init; }
     public string? Address2 { get; init; }

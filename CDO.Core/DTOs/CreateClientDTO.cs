@@ -8,6 +8,8 @@ public class CreateClientDTO {
     public required string State { get; init; }
     public required string Disability { get; init; }
 
+    public required bool TTW { get; init; }
+
 
     // Optional fields
     public int? Ssn { get; init; }

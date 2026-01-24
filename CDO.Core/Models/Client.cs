@@ -6,6 +6,7 @@ public record class Client(
     int Id,
     string FirstName,
     string LastName,
+    bool TTW,
     Reminder[] Reminders,
     Placement[]? Placements,
     Invoice[]? Invoices,

@@ -52,6 +52,9 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? Disability { get; set; }
 
+    [ObservableProperty]
+    public partial bool TTW { get; set; } = false;
+
     // Optional Fields
 
     [ObservableProperty]
@@ -208,6 +211,7 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
         var client = new CreateClientDTO {
             FirstName = FirstName,
             LastName = LastName,
+            TTW = TTW,
             City = City,
             State = State,
             Disability = Disability,

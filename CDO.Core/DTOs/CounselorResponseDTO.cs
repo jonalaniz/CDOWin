@@ -10,6 +10,7 @@ public class CounselorResponseDTO {
     public required Invoice[] Invoices { get; init; }
 
     // Nullable fields
+    public int? CaseLoadId { get; init; }
     public string? Phone { get; init; }
     public string? Email { get; init; }
     public string? Fax { get; init; }

@@ -2,6 +2,7 @@
 
 public record class Counselor(
     int Id,
+    int? CaseLoadId,
     string Name,
     string? Email,
     string? Phone,

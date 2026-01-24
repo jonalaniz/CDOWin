@@ -6,6 +6,7 @@ public class CounselorSummaryDTO {
     public required string Name { get; init; }
 
     // Nullable fields
+    public int? CaseLoadId { get; init; }
     public string? Phone { get; init; }
     public string? Email { get; init; }
     public string? SecretaryName { get; init; }

@@ -27,31 +27,39 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Title + Buttons -->
-        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                   Text="{x:Bind ViewModel.Selected.NameAndID, Mode=OneWay}"
-                   x:Name="Header" RightTapped="TextBlock_RightTapped"/>
-        
-        <!-- Button Row -->
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,6,4,8">
+        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="3">
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                Text="{x:Bind ViewModel.Selected.FormattedName, Mode=OneWay}"
+                x:Name="Header" RightTapped="TextBlock_RightTapped"/>
             
-            <!-- Documents Button -->
-            <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,2,8,0"
-                    Click="OpenDocuments_Clicked" ToolTipService.ToolTip="Open Documents">
-                <FontIcon Glyph="&#xE838;" Style="{StaticResource SingleIconFontStyle}"/>
-            </Button>
-            
-            <!-- Reminders Split Button (flyout contains templated reminders) -->
-            <Button Style="{StaticResource SingleIconButtonStyle}" Margin="4,2,8,0"
-                    Click="CreateReminder_ClickAsync" ToolTipService.ToolTip="New Reminder">
-                <FontIcon Glyph="&#xED0E;" Style="{StaticResource SingleIconFontStyle}"/>
-            </Button>
+            <!-- Subtitle -->
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="16,0,0,8">
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                    <Run Text="ACE ID:"/>
+                    <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock Text="TTW" FontWeight="Bold" Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
+            </StackPanel>
         </StackPanel>
+        
+        <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+            <AppBarButton Label="Documents" Click="OpenDocuments_Clicked" IsCompact="False" ToolTipService.ToolTip="Open Documents">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE838;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="New Reminder" Click="CreateReminder_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Reminder">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xED0E;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
 
         <!-- Row 1: ScrollViewer + WrapPanel -->
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             
             <!-- Wrap Panel -->
-            <controls:WrapPanel Orientation="Horizontal" Margin="8,12,8,8" HorizontalSpacing="8" VerticalSpacing="8">
+            <controls:WrapPanel Orientation="Horizontal" Margin="8,0,8,8" HorizontalSpacing="8" VerticalSpacing="8">
 
                 <!-- Personal Information Card-->
                 <Grid Style="{StaticResource CardContainerGridStyle}">

@@ -10,6 +10,7 @@
             <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
             <converters:BoolCompletedConverter x:Key="BoolCompletedConverter"/>
             <converters:BoolTransparentConverter x:Key="BoolTransparentConverter"/>
+            <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
             <converters:NullOpacityConverter x:Key="NullOpacityConverter"/>
             <converters:StringNullVisibilityConverter x:Key="StringToVisability"/>
             <converters:NullVisibilityConverter x:Key="NullToVisability"/>

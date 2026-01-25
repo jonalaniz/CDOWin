@@ -76,7 +76,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" FontWeight="Bold" Text="{x:Bind Name}" 
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                            <TextBlock Grid.Row="1" Text="{x:Bind Email}"
+                            <TextBlock Grid.Row="1" Text="{x:Bind FormattedCaseLoadID}"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                             <TextBlock Grid.Row="2" Text="{x:Bind Phone}"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
@@ -104,7 +104,7 @@
                             Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
 
                 <!-- Subtitle -->
-                <StackPanel Orientation="Horizontal" Spacing="8" Margin="16,0,0,8">
+                <StackPanel Orientation="Horizontal" Spacing="4" Margin="16,0,0,8">
                     <TextBlock Margin="0" Style="{StaticResource PageSubtitleStyle}" Visibility="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay, Converter={StaticResource NullToVisability}}">
                         <Run Text="Case Load ID:"/>
                         <Run Text="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>

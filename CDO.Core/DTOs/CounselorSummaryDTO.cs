@@ -10,4 +10,6 @@ public class CounselorSummaryDTO {
     public string? Phone { get; init; }
     public string? Email { get; init; }
     public string? SecretaryName { get; init; }
+
+    public string FormattedCaseLoadID => CaseLoadId == null ? "No case load ID on file." : $"Case Load: {CaseLoadId}";
 }

@@ -55,32 +55,26 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Row 0: Email -->
-            <control:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Label="Case Load" 
-                               Value="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
-            <control:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="4" Label="Email" 
+            <control:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Label="Email" 
                                Value="{x:Bind ViewModel.Selected.Email, Mode=OneWay}"/>
 
             <!-- Row 1: Phone + Fax -->
-            <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Label="Phone" Value="{x:Bind ViewModel.Selected.Phone, Mode=OneWay}"/>
-            <control:LabelPair Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Label="Fax" Value="{x:Bind ViewModel.Selected.Fax, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="1" Grid.Column="0" Label="Phone" Value="{x:Bind ViewModel.Selected.Phone, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="1" Grid.Column="1" Label="Fax" Value="{x:Bind ViewModel.Selected.Fax, Mode=OneWay}"/>
 
             <!-- Row 2: Secretary -->
-            <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Label="Secretary" 
+            <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Secretary" 
                                Value="{x:Bind ViewModel.Selected.SecretaryName, Mode=OneWay}"/>
 
             <!-- Row 3: Secretary -->
-            <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Label="Secretary Email" 
+            <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Label="Secretary Email" 
                                Value="{x:Bind ViewModel.Selected.SecretaryEmail, Mode=OneWay}"/>
 
             <!-- Row 4: Notes -->
-            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Label="Notes" 
+            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Label="Notes" 
                                Value="{x:Bind ViewModel.Selected.Notes, Mode=OneWay}"/>
         </Grid>
 

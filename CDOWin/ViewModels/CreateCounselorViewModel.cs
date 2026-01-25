@@ -54,7 +54,7 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     public async Task<Result<Counselor>> CreateCounselorAsync() {
         var counselor = new CreateCounselorDTO {
             name = Name,
-            CaseLoadId = CaseLoadId,
+            CaseLoadID = CaseLoadId,
             Email = Email,
             Phone = Phone,
             Fax = Fax,

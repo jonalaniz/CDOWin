@@ -33,4 +33,9 @@ public sealed partial class CreateCounselor : Page {
 
         ViewModel.UpdateField(field, text);
     }
+
+    private void CaseLoad_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
+        var value = (int)sender.Value;
+        ViewModel.CaseLoadId = value;
+    }
 }

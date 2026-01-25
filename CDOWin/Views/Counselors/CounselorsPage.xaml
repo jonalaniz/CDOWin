@@ -43,7 +43,7 @@
                             Text="Counselors"/>
                 <!-- Subtitle -->
                 <TextBlock Style="{StaticResource PageSubtitleStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                        <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Counselors"/>
                 </TextBlock>
             </StackPanel>
@@ -104,10 +104,17 @@
                             Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
 
                 <!-- Subtitle -->
-                <TextBlock Style="{StaticResource PageSubtitleStyle}">
-                    <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
-                    <Run Text="Clients"/>
-                </TextBlock>
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="16,0,0,8">
+                    <TextBlock Margin="0" Style="{StaticResource PageSubtitleStyle}" Visibility="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay, Converter={StaticResource NullToVisability}}">
+                        <Run Text="Case Load ID:"/>
+                        <Run Text="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
+                        <Run Text=","/>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                        <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
+                        <Run Text="Client(s)"/>
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
 
             <!-- Clients Table -->

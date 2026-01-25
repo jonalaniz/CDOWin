@@ -16,44 +16,51 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Row 0: Name + Email -->
+        <!-- Row 0: Name + Case Load -->
         <TextBox Grid.Row="0" Grid.Column="0" Header="Name" 
                  Tag="{x:Bind local:Field.Name}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Header="Email" 
+        <NumberBox Grid.Row="0" Grid.Column="2" Header="Case Load"
+                   Style="{StaticResource WholeNumberStyle}"
+                   ValueChanged="CaseLoad_ValueChanged"/>
+
+        <!-- Row 1: Email -->
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Email" 
                  Tag="{x:Bind local:Field.Email}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
-        <!-- Row 1: Phone + Fax -->
-        <TextBox Grid.Row="1" Grid.Column="0" Header="Phone" 
+        <!-- Row 2: Case Load + Phone + Fax -->
+
+        <TextBox Grid.Row="2" Grid.Column="0" Header="Phone" 
                  Tag="{x:Bind local:Field.Phone}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Header="Fax" 
+        <TextBox Grid.Row="2" Grid.Column="1" Header="Fax"
                  Tag="{x:Bind local:Field.Fax}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
-        <!-- Row 2: Secretary + Secretary Email -->
-        <TextBox Grid.Row="2" Grid.Column="0" Header="Secretary" 
+        <!-- Row 3: Secretary + Secretary Email -->
+        <TextBox Grid.Row="3" Grid.Column="0" Header="Secretary" 
                  Tag="{x:Bind local:Field.Secretary}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Header="Secretary Email" 
+        <TextBox Grid.Row="3" Grid.Column="1" Header="Secretary Email" 
                  Tag="{x:Bind local:Field.SecretaryEmail}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
-        <!--Row 3:  Notes -->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="Notes"
+        <!--Row 4:  Notes -->
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Header="Notes"
                  Style="{StaticResource MultiLineTextBoxStyle}"
                  Tag="{x:Bind local:Field.Notes}"
                  TextChanged="TextBox_TextChanged"/>

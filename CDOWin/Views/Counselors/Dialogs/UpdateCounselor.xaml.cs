@@ -1,6 +1,7 @@
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
+using System.Diagnostics;
 
 namespace CDOWin.Views.Counselors.Dialogs;
 
@@ -32,6 +33,11 @@ public sealed partial class UpdateCounselor : Page {
             return;
 
         UpdateModel(text, field);
+    }
+
+    private void CaseLoad_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
+        var value = (int)sender.Value;
+        ViewModel.Updated.CaseLoadID = value;
     }
 
     // =========================

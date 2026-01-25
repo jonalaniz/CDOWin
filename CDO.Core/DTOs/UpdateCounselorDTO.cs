@@ -2,7 +2,7 @@ namespace CDO.Core.DTOs;
 
 public class UpdateCounselorDTO {
     public string? Name { get; set; }
-    public int? CaseLoadId { get; init; }
+    public int? CaseLoadID { get; set; }
     public string? Email { get; set; }
     public string? Phone { get; set; }
     public string? Fax { get; set; }

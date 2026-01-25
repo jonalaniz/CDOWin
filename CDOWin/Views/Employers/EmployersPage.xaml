@@ -34,27 +34,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Title + Button -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Title -->
-                    <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                               Text="Employers"/>
-
-                    <!-- Add Button -->
-                    <Button Grid.Column="1" VerticalAlignment="Center"
-                            Style="{StaticResource SingleIconButtonStyle}"
-                            Click="NewEmployer_ClickAsync"
-                            ToolTipService.ToolTip="New Employer">
-                        <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
-                    </Button>
-                </Grid>
-
+            <!-- Title -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
+                <!-- Title -->
+                <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                            Text="Employers"/>
                 <!-- Subtitle -->
                 <TextBlock Style="{StaticResource PageSubtitleStyle}">
                     <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
@@ -62,6 +46,13 @@
                 </TextBlock>
             </StackPanel>
             
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+                <AppBarButton Click="NewEmployer_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Employer">
+                    <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton>
+            </CommandBar>
+
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" PlaceholderText="Filter Employers"

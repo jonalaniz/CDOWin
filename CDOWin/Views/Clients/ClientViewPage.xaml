@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Title + Buttons -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="3">
+        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
             <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
                 Text="{x:Bind ViewModel.Selected.FormattedName, Mode=OneWay}"
                 x:Name="Header" RightTapped="TextBlock_RightTapped"/>
@@ -42,6 +42,7 @@
             </StackPanel>
         </StackPanel>
         
+        <!-- CommandBar -->
         <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
             <AppBarButton Label="Documents" Click="OpenDocuments_Clicked" IsCompact="False" ToolTipService.ToolTip="Open Documents">
                 <AppBarButton.Icon>

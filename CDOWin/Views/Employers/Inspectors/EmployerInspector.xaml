@@ -24,19 +24,19 @@
 
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.Column="0"
-                   Style="{StaticResource InspectorHeaderStyle}"
-                   Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
+                   Style="{StaticResource PageTitleStyle}"
+                   Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"
+                   TextWrapping="WrapWholeWords"/>
 
-        <!-- Edit Button -->
-        <Button Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
-                Style="{StaticResource SingleIconButtonStyle}"
-                Click="EditButton_Click"
-                ToolTipService.ToolTip="Edit">
-            <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
-        </Button>
+        <!-- CommandBar -->
+        <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+            <AppBarButton Click="EditButton_Click" IsCompact="False" ToolTipService.ToolTip="Edit">
+                <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
+            </AppBarButton>
+        </CommandBar>
 
         <!-- Details Caption -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,-10,16,8"
                    Style="{StaticResource InspectorCaptionStyle}" Text="Details"/>
 
         <!-- Detials Grid -->

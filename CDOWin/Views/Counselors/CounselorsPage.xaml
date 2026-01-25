@@ -37,32 +37,23 @@
             </Grid.ColumnDefinitions>
 
             <!-- Title + Button -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Title -->
-                    <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                               Text="Counselors"/>
-
-                    <!-- Add Button -->
-                    <Button Grid.Column="1" VerticalAlignment="Center" 
-                            Style="{StaticResource SingleIconButtonStyle}"
-                            Click="NewCounselor_ClickAsync"
-                            ToolTipService.ToolTip="New Counselor">
-                        <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
-                    </Button>
-                </Grid>
-
+            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
+                <!-- Title -->
+                <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                            Text="Counselors"/>
                 <!-- Subtitle -->
                 <TextBlock Style="{StaticResource PageSubtitleStyle}">
                     <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Counselors"/>
                 </TextBlock>
             </StackPanel>
+            
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+                <AppBarButton Click="NewCounselor_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Counselor">
+                    <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton>
+            </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
@@ -106,18 +97,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Title + Button -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Title -->
-                    <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                               Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
-                </Grid>
+            <!-- Title -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
+                <!-- Title -->
+                <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                            Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
 
                 <!-- Subtitle -->
                 <TextBlock Style="{StaticResource PageSubtitleStyle}">

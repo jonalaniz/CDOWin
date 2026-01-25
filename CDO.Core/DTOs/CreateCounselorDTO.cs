@@ -5,7 +5,7 @@ public class CreateCounselorDTO {
     public required string name { get; init; }
 
     // Optional fields
-    public int CaseLoadId { get; init; }
+    public int? CaseLoadId { get; init; }
     public string? Email { get; init; }
     public string? Phone { get; init; }
     public string? Fax { get; init; }

@@ -23,6 +23,9 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     public partial string Name { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial int? CaseLoadId { get; set; }
+
+    [ObservableProperty]
     public partial string? Email { get; set; }
 
     [ObservableProperty]
@@ -51,6 +54,7 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     public async Task<Result<Counselor>> CreateCounselorAsync() {
         var counselor = new CreateCounselorDTO {
             name = Name,
+            CaseLoadId = CaseLoadId,
             Email = Email,
             Phone = Phone,
             Fax = Fax,

@@ -44,7 +44,7 @@
     
     <!-- Page Title Style -->
     <Style x:Key="PageTitleStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="16,10,0,0"/>
+        <Setter Property="Margin" Value="16,6,0,0"/>
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>

@@ -146,6 +146,28 @@ public partial class CounselorsViewModel : ObservableObject {
         return result;
     }
 
+    public async Task<Result<bool>> DeleteSelectedCounselor() {
+        if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Counselor Selected.", null, null));
+        var id = Selected.Id;
+        var result = await _service.DeleteCounselorAsync(id);
+
+        if (result.IsSuccess) {
+            _dispatcher.TryEnqueue(() => {
+                Selected = null;
+                SelectedSummary = null;
+                _allCounselors = _allCounselors
+                    .Where(c => c.Id != id)
+                    .ToList()
+                    .AsReadOnly();
+                    ApplyFilter();
+            });
+
+            _ = LoadCounselorSummariesAsync(force: true);
+        }
+
+        return result;
+    }
+
     // =========================
     // Utility / Filtering
     // =========================

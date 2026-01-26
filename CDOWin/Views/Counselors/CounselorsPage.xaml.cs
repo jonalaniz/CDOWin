@@ -4,11 +4,13 @@ using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Counselors.Dialogs;
 using CDOWin.Views.Counselors.Inspectors;
+using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace CDOWin.Views.Counselors;
 
@@ -76,5 +78,18 @@ public sealed partial class CounselorsPage : Page {
     private void GoToClient_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
         ViewModel.RequestClient(id);
+    }
+
+    private async void Delete_MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
+        if (ViewModel.Selected == null) return;
+
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Counselor?");
+        dialog.Content = new DeletePage();
+
+        var result = await dialog.ShowAsync();
+        if(result == ContentDialogResult.Primary) {
+            var deleteResult = await ViewModel.DeleteSelectedCounselor();
+            if (!deleteResult.IsSuccess)  ErrorHandler.Handle(deleteResult, this.XamlRoot);
+        }
     }
 }

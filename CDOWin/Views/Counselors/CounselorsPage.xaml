@@ -117,6 +117,21 @@
                 </StackPanel>
             </StackPanel>
 
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+                <AppBarButton Icon="More" IsCompact="False" ToolTipService.ToolTip="More">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout >
+                            <MenuFlyoutItem Text="Delete..." Click="Delete_MenuFlyoutItem_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar>
+
             <!-- Clients Table -->
             <ListView Grid.Row="1" x:Name="ListView"
                       ItemsSource="{x:Bind ViewModel.Clients, Mode=OneWay}"

@@ -212,11 +212,6 @@
                                     TextChanged="CounselorAutoSuggest_TextChanged"
                                     QuerySubmitted="CounselorAutoSuggest_QuerySubmitted" 
                                     SuggestionChosen="CounselorAutoSuggest_SuggestionChosen">
-                        <AutoSuggestBox.ItemTemplate>
-                            <DataTemplate x:DataType="dto:CounselorSummaryDTO">
-                                <TextBlock Text="{x:Bind Name}"/>
-                            </DataTemplate>
-                        </AutoSuggestBox.ItemTemplate>
                     </AutoSuggestBox>
                 </Grid>
             </Expander>

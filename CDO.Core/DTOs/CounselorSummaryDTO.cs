@@ -12,4 +12,8 @@ public class CounselorSummaryDTO {
     public string? SecretaryName { get; init; }
 
     public string FormattedCaseLoadID => CaseLoadId == null ? "No case load ID on file." : $"Case Load: {CaseLoadId}";
+
+    public override string ToString() {
+        return CaseLoadId == null ? Name : $"{Name}, Case Load: {CaseLoadId}";
+    }
 }

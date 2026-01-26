@@ -176,7 +176,7 @@ public sealed partial class CreateClient : Page {
             var result = _counselors.FirstOrDefault(c => c.Id == selectedCounselor.Id);
             if (result != null) {
                 UpdateSelectedCounselor(result);
-                sender.Text = result.Name; // display chosen name
+                sender.Text = result.ToString(); // display chosen name
             }
         }
     }

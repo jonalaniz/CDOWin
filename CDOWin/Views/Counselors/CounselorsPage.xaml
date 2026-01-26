@@ -119,7 +119,10 @@
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton Icon="More" IsCompact="False" ToolTipService.ToolTip="More">
+                <AppBarButton IsCompact="False" ToolTipService.ToolTip="More">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
+                    </AppBarButton.Icon>
                     <AppBarButton.Flyout>
                         <MenuFlyout >
                             <MenuFlyoutItem Text="Delete..." Click="Delete_MenuFlyoutItem_Click">

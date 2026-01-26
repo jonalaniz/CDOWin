@@ -17,6 +17,15 @@ public sealed partial class UpdateCounselor : Page {
     public UpdateCounselor(CounselorUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
+        SetupNumberBox();
+    }
+
+    // =========================
+    // UI Methods
+    // =========================
+    private void SetupNumberBox() {
+        if (ViewModel.Original.CaseLoadId == null) return;
+        CaseLoad_Numberbox.Value = (double)ViewModel.Original.CaseLoadId;
     }
 
     // =========================

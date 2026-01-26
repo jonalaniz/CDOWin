@@ -30,6 +30,7 @@
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
         <NumberBox Grid.Row="0" Grid.Column="1" Header="Case Load"
+                   x:Name="CaseLoad_Numberbox"
                    Style="{StaticResource WholeNumberStyle}"
                    ValueChanged="CaseLoad_ValueChanged"/>
         
@@ -40,8 +41,7 @@
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
-        <!-- Row 2: Case Load + Phone + Fax -->
-
+        <!-- Row 2: Phone + Fax -->
         <TextBox Grid.Row="2" Grid.Column="0" Header="Phone"
                  Text="{x:Bind ViewModel.Original.Phone}" 
                  Tag="{x:Bind local:Field.Phone}"

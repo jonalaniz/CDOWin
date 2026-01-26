@@ -61,7 +61,7 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void SetupAutoSuggestBox() {
-        CounselorAutoSuggest.PlaceholderText = ViewModel.OriginalClient.CounselorReference.Name ?? "Type to search counselors";
+        CounselorAutoSuggest.PlaceholderText = ViewModel.OriginalClient.CounselorReference.ToString() ?? "Type to search counselors";
     }
 
     private void SetupDatePicker() {
@@ -105,7 +105,7 @@ public sealed partial class UpdateCaseInformation : Page {
             var result = _counselors.FirstOrDefault(c => c.Id == selectedCounselor.Id);
             if (result != null) {
                 UpdateSelectedCounselor(result);
-                sender.Text = result.Name; // display chosen name
+                sender.Text = result.ToString(); // display chosen name
             }
         }
     }

@@ -10,7 +10,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace CDOWin.Views.Counselors;
 
@@ -87,9 +86,9 @@ public sealed partial class CounselorsPage : Page {
         dialog.Content = new DeletePage();
 
         var result = await dialog.ShowAsync();
-        if(result == ContentDialogResult.Primary) {
+        if (result == ContentDialogResult.Primary) {
             var deleteResult = await ViewModel.DeleteSelectedCounselor();
-            if (!deleteResult.IsSuccess)  ErrorHandler.Handle(deleteResult, this.XamlRoot);
+            if (!deleteResult.IsSuccess) ErrorHandler.Handle(deleteResult, this.XamlRoot);
         }
     }
 }

@@ -159,7 +159,7 @@ public partial class CounselorsViewModel : ObservableObject {
                     .Where(c => c.Id != id)
                     .ToList()
                     .AsReadOnly();
-                    ApplyFilter();
+                ApplyFilter();
             });
 
             _ = LoadCounselorSummariesAsync(force: true);

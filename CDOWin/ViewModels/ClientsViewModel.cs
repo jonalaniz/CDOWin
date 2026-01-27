@@ -43,6 +43,12 @@ public partial class ClientsViewModel : ObservableObject {
     public partial Client? Selected { get; set; }
 
     [ObservableProperty]
+    public partial ObservableCollection<Invoice> Invoices { get; private set; } = [];
+
+    [ObservableProperty]
+    public partial ObservableCollection<Placement> Placements { get; private set; } = [];
+
+    [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
 
@@ -78,7 +84,17 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     partial void OnSelectedChanged(Client? value) {
-        if (value != null) _selectionService.SelectedClient = value;
+        if (value == null) return;
+
+        // Notify the selection service
+        _selectionService.SelectedClient = value;
+
+        // Setup Placements/SAs
+        if(value.Invoices is not null)
+            SetupSAs(value.Invoices);
+
+        if(value.Placements is not null)
+            SetupPlacements(value.Placements);
     }
 
     // =========================
@@ -129,6 +145,27 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Utility / Filtering
     // =========================
+    private void SetupSAs(Invoice[] invoices) {
+        var sortedInvoices = invoices
+            .OrderBy(i => i.EndDate)
+            .Reverse()
+            .ToList();
+
+        _dispatcher.TryEnqueue(() => {
+            Invoices = new ObservableCollection<Invoice>(sortedInvoices);
+        });
+    }
+
+    private void SetupPlacements(Placement[] placements) {
+        var sortedPlacements = placements
+            .OrderBy(p => p.HireDate)
+            .Reverse()
+            .ToList();
+        _dispatcher.TryEnqueue(() => {
+            Placements = new ObservableCollection<Placement>(sortedPlacements);
+        });
+    }
+
     private void ApplyFilter() {
         int? previousSelection = Selected?.Id;
 

@@ -339,7 +339,7 @@
                         
                         <!-- Item Repeater -->
                         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
-                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Invoices, Mode=OneWay}">
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Invoices, Mode=OneWay}">
                                 <DataTemplate x:DataType="models:Invoice">
 
                                     <!-- Button -->
@@ -425,7 +425,7 @@
 
                         <!-- Item Repeater -->
                         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
-                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Placements, Mode=OneWay}">
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
                                 <DataTemplate x:DataType="models:Placement">
 
                                     <!-- Button -->

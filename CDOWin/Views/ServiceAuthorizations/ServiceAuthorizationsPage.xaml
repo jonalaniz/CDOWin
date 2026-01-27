@@ -120,7 +120,9 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <TextBlock Grid.Column="0" Text="{x:Bind ClientName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Click="GoToClient_Click" Tag="{x:Bind ClientID}">
+                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                        IsEnabled="{x:Bind ClientID, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="GoToClient_Click" Tag="{x:Bind ClientID}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
@@ -132,7 +134,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Click="GoToCounselor_Click" Tag="{x:Bind CounselorID}">
+                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                        IsEnabled="{x:Bind CounselorID, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="GoToCounselor_Click" Tag="{x:Bind CounselorID}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>

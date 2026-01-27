@@ -182,7 +182,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{x:Bind FormattedName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Click="GoToClient_Click" Tag="{x:Bind Id}">
+                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                        Click="GoToClient_Click" Tag="{x:Bind Id}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>

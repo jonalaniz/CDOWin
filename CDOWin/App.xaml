@@ -14,6 +14,7 @@
             <converters:NullOpacityConverter x:Key="NullOpacityConverter"/>
             <converters:StringNullVisibilityConverter x:Key="StringToVisability"/>
             <converters:NullVisibilityConverter x:Key="NullToVisability"/>
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter"/>
 
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">

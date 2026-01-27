@@ -6,14 +6,14 @@ public class CounselorSummaryDTO {
     public required string Name { get; init; }
 
     // Nullable fields
-    public int? CaseLoadId { get; init; }
+    public int? CaseLoadID { get; init; }
     public string? Phone { get; init; }
     public string? Email { get; init; }
     public string? SecretaryName { get; init; }
 
-    public string FormattedCaseLoadID => CaseLoadId == null ? "No case load ID on file." : $"Case Load: {CaseLoadId}";
+    public string FormattedCaseLoadID => CaseLoadID == null ? "No case load ID on file." : $"Case Load: {CaseLoadID}";
 
     public override string ToString() {
-        return CaseLoadId == null ? Name : $"{Name}, Case Load: {CaseLoadId}";
+        return CaseLoadID == null ? Name : $"{Name}, Case Load: {CaseLoadID}";
     }
 }

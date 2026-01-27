@@ -54,6 +54,7 @@
         
         <!-- Row 2: Counselor -->
         <AutoSuggestBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Counselor"
+                        PlaceholderText="Type to search Counselors"
                         x:Name="CounselorAutoSuggest" TextMemberPath="Name" 
                         TextChanged="CounselorAutoSuggest_TextChanged"
                         QuerySubmitted="CounselorAutoSuggest_QuerySubmitted"

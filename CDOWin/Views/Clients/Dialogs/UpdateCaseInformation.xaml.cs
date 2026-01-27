@@ -61,6 +61,7 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void SetupAutoSuggestBox() {
+        if (ViewModel.OriginalClient.CounselorReference is null) return;
         CounselorAutoSuggest.PlaceholderText = ViewModel.OriginalClient.CounselorReference.ToString() ?? "Type to search counselors";
     }
 

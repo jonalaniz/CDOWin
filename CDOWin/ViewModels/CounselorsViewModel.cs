@@ -184,7 +184,7 @@ public partial class CounselorsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
         var result = _allCounselors.Where(c =>
         (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.CaseLoadId.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (c.CaseLoadID.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.SecretaryName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Email ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );

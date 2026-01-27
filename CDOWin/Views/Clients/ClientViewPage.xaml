@@ -255,21 +255,20 @@
                                      Value="{x:Bind ViewModel.Selected.Premiums, Mode=OneWay}"/>
 
                         <!-- Counselor Section -->
-                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
+                                    Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"
-                                       Visibility="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"
-                                       Visibility="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"
-                                       Visibility="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
                         </StackPanel>
 
                         <!-- Secretary Section -->
-                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6">
+                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
+                                    Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>
                             <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryName, Mode=OneWay}"/>

@@ -4,9 +4,9 @@ using System;
 
 namespace CDOWin.Converters;
 
-public class StringNullVisibilityConverter : IValueConverter {
+public partial class StringNullVisibilityConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
-        return string.IsNullOrWhiteSpace(value as string) ? Visibility.Collapsed : Visibility.Visible;
+        return value is null ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) {

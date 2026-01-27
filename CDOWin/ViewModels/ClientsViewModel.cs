@@ -78,8 +78,7 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     partial void OnSelectedChanged(Client? value) {
-        if (value != null)
-            _selectionService.SelectedClient = value;
+        if (value != null) _selectionService.SelectedClient = value;
     }
 
     // =========================

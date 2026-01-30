@@ -181,7 +181,6 @@ public partial class ClientsViewModel : ObservableObject {
         (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.CounselorName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Phone2 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Phone3 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

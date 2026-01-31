@@ -8,6 +8,7 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // GET Methods
         // -----------------------------
+        public Task<List<EmployerSummaryDTO>?> GetAllEmployerSummariesAsync();
         public Task<List<Employer>?> GetAllEmployersAsync();
 
         public Task<Employer?> GetEmployerAsync(int id);
@@ -16,7 +17,7 @@ namespace CDO.Core.Interfaces {
         // POST Methods
         // -----------------------------
         //public Task<Employer?> CreateEmployerAsync(EmployerDTO dto);
-        public Task<Result<Employer>> CreateEmployerAsync(EmployerDTO dto);
+        public Task<Result<Employer?>> CreateEmployerAsync(EmployerDTO dto);
 
         // -----------------------------
         // PATCH Methods

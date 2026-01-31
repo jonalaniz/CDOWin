@@ -6,9 +6,10 @@ public static class Endpoints {
     public static readonly string ClientSummaries = "/api/clients/summaries";
     public static string Counselor(int id) => $"{Counselors}/{id}";
     public static readonly string Counselors = "/api/counselors";
-    public static readonly string CounselorSummeries = "/api/counselors/summaries";
+    public static readonly string CounselorSummaries = "/api/counselors/summaries";
     public static string Employer(int id) => $"{Employers}/{id}";
     public static readonly string Employers = "/api/employers";
+    public static readonly string EmployerSummaries = "/api/employers/summaries";
     public static string ServiceAuthorization(int id) => $"{ServiceAuthorizations}/{id}";
     public static readonly string ServiceAuthorizations = "/api/pos";
     public static string Placement(string id) => $"{Placements}/{id}";

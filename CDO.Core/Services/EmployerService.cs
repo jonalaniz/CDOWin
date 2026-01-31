@@ -21,6 +21,10 @@ public class EmployerService : IEmployerService {
         return _network.GetAsync<List<Employer>>(Endpoints.Employers);
     }
 
+    public Task<List<DTOs.EmployerSummaryDTO>?> GetAllEmployerSummariesAsync() {
+        return _network.GetAsync<List<EmployerSummaryDTO>>(Endpoints.EmployerSummaries);
+    }
+
     public Task<Employer?> GetEmployerAsync(int id) {
         return _network.GetAsync<Employer>(Endpoints.Employer(id));
     }

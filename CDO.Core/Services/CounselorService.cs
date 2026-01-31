@@ -22,7 +22,7 @@ public class CounselorService : ICounselorService {
     }
 
     public Task<List<CounselorSummaryDTO>?> GetAllCounselorSummariesAsync() {
-        return _network.GetAsync<List<CounselorSummaryDTO>>(Endpoints.CounselorSummeries);
+        return _network.GetAsync<List<CounselorSummaryDTO>>(Endpoints.CounselorSummaries);
     }
 
     public Task<CounselorResponseDTO?> GetCounselorAsync(int id) {

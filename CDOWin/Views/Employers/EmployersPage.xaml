@@ -9,6 +9,7 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:models="using:CDO.Core.Models"
+    xmlns:dto="using:CDO.Core.DTOs"
     mc:Ignorable="d">
 
     <Grid>
@@ -62,7 +63,7 @@
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView"
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
-                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" 
+                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}" 
                       ItemClick="ListView_ItemClick">
 
                 <!-- Header -->
@@ -79,48 +80,36 @@
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="210"/>
-                            <ColumnDefinition Width="140"/>
-                            <ColumnDefinition Width="140"/>
-                            <ColumnDefinition Width="210"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Employer" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="1" Text="Address" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="2" Text="Phone" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="Fax" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" Text="Email" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" Text="Supervisor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" Text="Supervisor Phone" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="7" Text="Supervisor Email" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="Supervisor" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" Text="Supervisor Phone" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Employer">
+                    <DataTemplate x:DataType="dto:EmployerSummaryDTO">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="110"/>
-                                <ColumnDefinition Width="210"/>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="210"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{x:Bind Name}" TextWrapping="WrapWholeWords" 
                                        FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{x:Bind FormattedAddress}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="2" Text="{x:Bind Phone}"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind Fax}"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind Email}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="5" Text="{x:Bind Supervisor}" FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
-                            <TextBlock Grid.Column="6" Text="{x:Bind SupervisorPhone}"/>
-                            <TextBlock Grid.Column="7" Text="{x:Bind SupervisorEmail}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind Supervisor}" FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind SupervisorPhone}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

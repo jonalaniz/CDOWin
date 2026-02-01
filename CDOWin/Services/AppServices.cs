@@ -93,7 +93,7 @@ public static class AppServices {
         var tasks = new List<Task> {
             DataCoordinator.GetClientsAsync(),
             DataCoordinator.GetCounselorsAsync(),
-            DataCoordinator.GetEmployersAsync(),
+            DataCoordinator.GetEmployerSummariesAsync(),
             DataCoordinator.GetRemindersAsync(),
         };
 

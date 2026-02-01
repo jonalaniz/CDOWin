@@ -8,6 +8,7 @@ using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,17 +26,20 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<Employer> _allEmployers = [];
+    private IReadOnlyList<EmployerSummaryDTO> _cache = [];
 
     // =========================
     // Public Property / State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<Employer> Filtered { get; private set; } = [];
+    public partial ObservableCollection<EmployerSummaryDTO> Filtered { get; private set; } = [];
 
     [ObservableProperty]
     public partial Employer? Selected { get; set; }
+
+    [ObservableProperty]
+    public partial EmployerSummaryDTO? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -43,68 +47,66 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) {
-        if (_dispatcher.HasThreadAccess)
-            ApplyFilter();
-        else
-            _dispatcher.TryEnqueue(ApplyFilter);
-    }
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
 
     // =========================
     // Public Methods
     // =========================
     public List<Employer> GetEmployers() {
-        if (_allEmployers.Count == 0)
-            LoadEmployersAsync().GetAwaiter().GetResult();
-
-        return _allEmployers.ToList();
+        var employers = _service.GetAllEmployersAsync().GetAwaiter().GetResult();
+        return employers == null ? new List<Employer>() : employers.ToList();
     }
 
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadEmployersAsync() {
-        var employers = await _dataCoordinator.GetEmployersAsync();
+    public async Task LoadEmployerSummariesAsync(bool force = false) {
+        var employers = await _dataCoordinator.GetEmployerSummariesAsync(force);
         if (employers == null) return;
 
-        var snapshot = employers.OrderBy(e => e.Id).ToList().AsReadOnly();
-        _allEmployers = snapshot;
+        var snapshot = employers.OrderBy(e => e.Name).ToList().AsReadOnly();
+        _cache = snapshot;
+        ApplyFilter();
+    }
 
-        _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
-        });
+    public async Task LoadSelectedEmployerAsync(int id) {
+        if (Selected != null && Selected.Id == id) return;
+        Debug.WriteLine("we up in this hoe");
+
+        var selectedEmployer = await _service.GetEmployerAsync(id);
+        Selected = selectedEmployer;
     }
 
     public async Task ReloadEmployerAsync(int id) {
-        var employer = await _service.GetEmployerAsync(id);
-        if (employer == null) return;
-
-        var updated = _allEmployers
-            .Select(e => e.Id == id ? employer : e)
-            .ToList()
-            .AsReadOnly();
-
-        _allEmployers = updated;
-
-        _dispatcher.TryEnqueue(() => {
-            var index = Filtered
-            .Select((e, i) => new { e, i })
-            .FirstOrDefault(x => x.e.Id == id)?.i;
-
-            if (index != null)
-                Filtered[index.Value] = employer;
-
-            Selected = employer;
-        });
+        if (Selected == null) return;
+        Selected = await _service.GetEmployerAsync(Selected.Id);
     }
 
     public async Task<Result<Employer>> UpdateEmployerAsync(EmployerDTO update) {
-        if (Selected == null) return Result<Employer>.Fail(new AppError(ErrorKind.Validation, "Employer not selected.", null));
+        if (SelectedSummary == null) return Result<Employer>.Fail(new AppError(ErrorKind.Validation, "Employer not selected.", null));
 
-        var result = await _service.UpdateEmployerAsync(Selected.Id, update);
+        var result = await _service.UpdateEmployerAsync(SelectedSummary.Id, update);
         if (!result.IsSuccess) return result;
 
-        await ReloadEmployerAsync(Selected.Id);
+        await ReloadEmployerAsync(SelectedSummary.Id);
+        return result;
+    }
+
+    public async Task<Result<bool>> DeleteSelectedEmployer() {
+        if (Selected == null)
+            return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Employer Selected.", null, null));
+
+        var id = Selected.Id;
+        var result = await _service.DeleteEmployerAsync(id);
+
+        if (result.IsSuccess) {
+            OnUI(() => {
+                Selected = null;
+                SelectedSummary = null;
+            });
+            _ = LoadEmployerSummariesAsync(force: true);
+        }
+
         return result;
     }
 
@@ -113,31 +115,36 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
     // =========================
 
     private void ApplyFilter() {
-        int? previousSelection = Selected?.Id;
+        int? previousSelection = SelectedSummary?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Employer>(_allEmployers);
+            Filtered = new ObservableCollection<EmployerSummaryDTO>(_cache);
             ReSelect(previousSelection);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = _allEmployers.Where(e =>
+        var result = _cache.Where(e =>
         (e.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (e.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (e.Email ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (e.Supervisor ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (e.SupervisorEmail ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (e.Notes ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
-        Filtered = new ObservableCollection<Employer>(result);
-        ReSelect(previousSelection);
+        OnUI(() => {
+            Filtered = new ObservableCollection<EmployerSummaryDTO>(result);
+            ReSelect(previousSelection);
+        });
+    }
+
+    private void OnUI(Action action) {
+        if (_dispatcher.HasThreadAccess) action();
+        else _dispatcher.TryEnqueue(() => action());
     }
 
     private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(e => e.Id == id) is Employer selected)
-            Selected = selected;
+        if (Filtered.FirstOrDefault(e => e.Id == id) is EmployerSummaryDTO selected)
+            SelectedSummary = selected;
     }
 }

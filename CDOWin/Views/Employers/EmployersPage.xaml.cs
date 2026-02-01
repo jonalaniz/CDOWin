@@ -1,4 +1,4 @@
-using CDO.Core.Models;
+using CDO.Core.DTOs;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -31,7 +31,7 @@ public sealed partial class EmployersPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadEmployersAsync();
+        await ViewModel.LoadEmployerSummariesAsync();
     }
 
     // =========================
@@ -62,12 +62,13 @@ public sealed partial class EmployersPage : Page {
             return;
         }
 
-        _ = ViewModel.LoadEmployersAsync();
+        await ViewModel.LoadEmployerSummariesAsync(force: true);
+        _ = ViewModel.LoadSelectedEmployerAsync(updateResult.Value!.Id);
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if (e.ClickedItem is Employer employer) {
-            _ = ViewModel.ReloadEmployerAsync(employer.Id);
+        if (e.ClickedItem is EmployerSummaryDTO employer) {
+            _ = ViewModel.LoadSelectedEmployerAsync(employer.Id);
         }
     }
 }

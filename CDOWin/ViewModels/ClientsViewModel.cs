@@ -17,7 +17,7 @@ namespace CDOWin.ViewModels;
 public partial class ClientsViewModel : ObservableObject {
 
     // =========================
-    // Services / Dependencies
+    // Dependencies
     // =========================
     private readonly IClientService _service;
     private readonly DataCoordinator _dataCoordinator;
@@ -27,20 +27,20 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<ClientSummaryDTO> _allClients = [];
+    private IReadOnlyList<ClientSummaryDTO> _cache = [];
 
     // =========================
-    // Public Property / State
+    // UI State
     // =========================
 
     [ObservableProperty]
     public partial ObservableCollection<ClientSummaryDTO> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ClientSummaryDTO? SelectedSummary { get; set; }
+    public partial Client? Selected { get; set; }
 
     [ObservableProperty]
-    public partial Client? Selected { get; set; }
+    public partial ClientSummaryDTO? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial ObservableCollection<Invoice> Invoices { get; private set; } = [];
@@ -68,16 +68,10 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) {
-        if (_dispatcher.HasThreadAccess)
-            ApplyFilter();
-        else
-            _dispatcher.TryEnqueue(ApplyFilter);
-    }
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
 
     private void OnRequestSelectedClientChange(int clientId) {
         if (Selected != null && Selected.Id == clientId) return;
-
         SearchQuery = string.Empty;
         ApplyFilter();
         _ = LoadSelectedClientAsync(clientId);
@@ -100,9 +94,7 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Public Methods
     // =========================
-    public void NotifyNewClientCreated() {
-        _selectionService.NotifyNewReminderCreated();
-    }
+    public void NotifyNewClientCreated() => _selectionService.NotifyNewReminderCreated();
 
     // =========================
     // CRUD Methods
@@ -112,11 +104,8 @@ public partial class ClientsViewModel : ObservableObject {
         if (clients == null) return;
 
         var snapshot = clients.OrderBy(c => c.Name).ToList().AsReadOnly();
-        _allClients = snapshot;
-
-        _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
-        });
+        _cache = snapshot;
+        ApplyFilter();
     }
 
     public async Task LoadSelectedClientAsync(int id) {
@@ -137,7 +126,6 @@ public partial class ClientsViewModel : ObservableObject {
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
 
-        // Selected = result.Value!;
         await ReloadClientAsync();
         return result;
     }
@@ -150,8 +138,7 @@ public partial class ClientsViewModel : ObservableObject {
             .OrderBy(i => i.EndDate)
             .Reverse()
             .ToList();
-
-        _dispatcher.TryEnqueue(() => {
+        OnUI(() => {
             Invoices = new ObservableCollection<Invoice>(sortedInvoices);
         });
     }
@@ -161,7 +148,7 @@ public partial class ClientsViewModel : ObservableObject {
             .OrderBy(p => p.HireDate)
             .Reverse()
             .ToList();
-        _dispatcher.TryEnqueue(() => {
+        OnUI(() => {
             Placements = new ObservableCollection<Placement>(sortedPlacements);
         });
     }
@@ -170,14 +157,13 @@ public partial class ClientsViewModel : ObservableObject {
         int? previousSelection = Selected?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<ClientSummaryDTO>(_allClients);
+            Filtered = new ObservableCollection<ClientSummaryDTO>(_cache);
             ReSelect(previousSelection);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-
-        var result = _allClients.Where(c =>
+        var result = _cache.Where(c =>
         (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
@@ -188,8 +174,15 @@ public partial class ClientsViewModel : ObservableObject {
         (c.CaseID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
-        Filtered = new ObservableCollection<ClientSummaryDTO>(result);
-        ReSelect(previousSelection);
+        OnUI(() => {
+            Filtered = new ObservableCollection<ClientSummaryDTO>(result);
+            ReSelect(previousSelection);
+        });
+    }
+
+    private void OnUI(Action action) {
+        if (_dispatcher.HasThreadAccess) action();
+        else _dispatcher.TryEnqueue(() => action());
     }
 
     private void ReSelect(int? id) {

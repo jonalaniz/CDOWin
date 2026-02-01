@@ -17,7 +17,7 @@ namespace CDOWin.ViewModels;
 public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     // =========================
-    // Services / Dependencies
+    // Dependencies
     // =========================
     private readonly IServiceAuthorizationService _service;
     private readonly DataCoordinator _dataCoordinator;
@@ -28,14 +28,17 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<Invoice> _allServiceAuthorizations = [];
+    private IReadOnlyList<Invoice> _cache = [];
 
     // =========================
-    // View State
+    // UI State
     // =========================
 
     [ObservableProperty]
     public partial ObservableCollection<Invoice> Filtered { get; private set; } = [];
+
+    [ObservableProperty]
+    public partial Invoice? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial Invoice? Selected { get; set; }
@@ -64,12 +67,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) {
-        if (_dispatcher.HasThreadAccess)
-            ApplyFilter();
-        else
-            _dispatcher.TryEnqueue(ApplyFilter);
-    }
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
 
     // =========================
     // Public Methods
@@ -112,51 +110,27 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         if (serviceAuthorizations == null) return;
 
         var snapshot = serviceAuthorizations.OrderBy(o => o.ServiceAuthorizationNumber).ToList().AsReadOnly();
-        _allServiceAuthorizations = snapshot;
-
-        _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
-        });
+        _cache = snapshot;
+        ApplyFilter();
     }
 
-    public async Task ReloadServiceAuthorizationAsync(int id) {
-        var serviceAuthorization = await _service.GetServiceAuthorizationAsync(id);
-        if (serviceAuthorization == null) return;
+    public async Task LoadSelectedSAAsync(int id) {
+        if (Selected != null && Selected.Id == id) return;
 
-        var updated = _allServiceAuthorizations
-            .Select(s => s.Id == id ? serviceAuthorization : s)
-            .ToList()
-            .AsReadOnly();
-
-        _allServiceAuthorizations = updated;
-
-        _dispatcher.TryEnqueue(() => {
-            var index = Filtered
-            .Select((s, i) => new { s, i })
-            .FirstOrDefault(x => x.s.Id == id)?.i;
-
-            if (index != null)
-                Filtered[index.Value] = serviceAuthorization;
-
-            Selected = serviceAuthorization;
-        });
+        var selectedSA = await _service.GetServiceAuthorizationAsync(id);
+        Selected = selectedSA;
     }
 
     public async Task<Result<bool>> DeleteSelectedSA() {
-        if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No SA selected.", null, null));
-        var id = Selected.Id;
+        if (SelectedSummary == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No SA selected.", null, null));
+        var id = SelectedSummary.Id;
         var result = await _service.DeleteServiceAuthorizationAsync(id);
 
         if (result.IsSuccess) {
-            _dispatcher.TryEnqueue(() => {
+            OnUI(() => {
                 Selected = null;
-                _allServiceAuthorizations = _allServiceAuthorizations
-                    .Where(i => i.Id != id)
-                    .ToList()
-                    .AsReadOnly();
-                ApplyFilter();
+                SelectedSummary = null;
             });
-
             _ = LoadServiceAuthorizationsAsync(force: true);
         }
 
@@ -167,30 +141,36 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Utility / Filtering
     // =========================
     void ApplyFilter() {
-        int? previousSelection = Selected?.Id;
+        int? previousSelection = SelectedSummary?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Invoice>(_allServiceAuthorizations);
+            Filtered = new ObservableCollection<Invoice>(_cache);
             ReSelect(previousSelection);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = _allServiceAuthorizations.Where(i =>
+        var result = _cache.Where(i =>
         (i.ClientName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (i.CounselorName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (i.ServiceAuthorizationNumber).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (i.Description).Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
-        Filtered = new ObservableCollection<Invoice>(result);
-        ReSelect(previousSelection);
+        OnUI(() => {
+            Filtered = new ObservableCollection<Invoice>(result);
+            ReSelect(previousSelection);
+        });
+    }
 
+    private void OnUI(Action action) {
+        if (_dispatcher.HasThreadAccess) action();
+        else _dispatcher.TryEnqueue(() => action());
     }
 
     private void ReSelect(int? id) {
         if (id == null) return;
         if (Filtered.FirstOrDefault(i => i.Id == id) is Invoice selected)
-            Selected = selected;
+            SelectedSummary = selected;
     }
 }

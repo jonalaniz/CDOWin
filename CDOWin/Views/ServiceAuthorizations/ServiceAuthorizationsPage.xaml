@@ -64,7 +64,7 @@
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView" 
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
-                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" 
+                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}" 
                       ItemClick="ListView_ItemClick">
 
                 <!-- Header -->

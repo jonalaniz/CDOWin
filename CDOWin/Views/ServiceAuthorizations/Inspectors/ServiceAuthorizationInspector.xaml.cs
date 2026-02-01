@@ -27,9 +27,9 @@ public sealed partial class ServiceAuthorizationInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.Selected == null) return;
+        if (ViewModel == null || ViewModel.SelectedSummary == null) return;
 
-        var updateVM = new ServiceAuthorizationUpdateViewModel(ViewModel.Selected);
+        var updateVM = new ServiceAuthorizationUpdateViewModel(ViewModel.SelectedSummary);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Service Authorization");
         dialog.Content = new UpdateSA(updateVM);
 
@@ -44,7 +44,8 @@ public sealed partial class ServiceAuthorizationInspector : Page {
             return;
         }
 
-        _ = ViewModel.ReloadServiceAuthorizationAsync(ViewModel.Selected.Id);
+        _ = ViewModel.LoadServiceAuthorizationsAsync(force: true);
+        _ = ViewModel.LoadSelectedSAAsync(updateResult.Value!.Id);
     }
 
     private async void Export_Click(object sender, RoutedEventArgs e) {
@@ -55,7 +56,7 @@ public sealed partial class ServiceAuthorizationInspector : Page {
     }
 
     private async void Delete_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (ViewModel.SelectedSummary == null) return;
 
         var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Placement?");
         dialog.Content = new DeletePage();

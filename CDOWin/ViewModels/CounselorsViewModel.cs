@@ -17,7 +17,7 @@ namespace CDOWin.ViewModels;
 public partial class CounselorsViewModel : ObservableObject {
 
     // =========================
-    // Services / Dependencies
+    // Dependencies
     // =========================
     private readonly ICounselorService _service;
     private readonly DataCoordinator _dataCoordinator;
@@ -28,10 +28,10 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<CounselorSummaryDTO> _allCounselors = [];
+    private IReadOnlyList<CounselorSummaryDTO> _cache = [];
 
     // =========================
-    // View State
+    // UI State
     // =========================
 
     [ObservableProperty]
@@ -66,18 +66,12 @@ public partial class CounselorsViewModel : ObservableObject {
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
         _counselorSelectionService.CounselorSelectionRequested += OnRequestSelectedCounselorChange;
-
     }
 
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) {
-        if (_dispatcher.HasThreadAccess)
-            ApplyFilter();
-        else
-            _dispatcher.TryEnqueue(ApplyFilter);
-    }
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
 
     private void OnRequestSelectedCounselorChange(int counselorId) {
         if (Selected != null && Selected.Id == counselorId) return;
@@ -89,13 +83,13 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Public Methods
     // =========================
-    public List<CounselorSummaryDTO> All() => _allCounselors.ToList();
+    public List<CounselorSummaryDTO> All() => _cache.ToList();
 
     public List<CounselorSummaryDTO> GetCounselors() {
-        if (_allCounselors.Count == 0)
+        if (_cache.Count == 0)
             LoadCounselorSummariesAsync().GetAwaiter().GetResult();
 
-        return _allCounselors.ToList();
+        return _cache.ToList();
     }
 
     public void RequestClient(int clientID) {
@@ -111,11 +105,8 @@ public partial class CounselorsViewModel : ObservableObject {
         if (counselors == null) return;
 
         var snapshot = counselors.OrderBy(o => o.Name).ToList().AsReadOnly();
-        _allCounselors = snapshot;
-
-        _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
-        });
+        _cache = snapshot;
+        ApplyFilter();
     }
 
     public async Task LoadSelectedCounselorAsync(int id) {
@@ -124,7 +115,7 @@ public partial class CounselorsViewModel : ObservableObject {
         var counselor = await _service.GetCounselorAsync(id);
         Selected = counselor;
 
-        _dispatcher.TryEnqueue(() => {
+        OnUI(() => {
             Clients = new ObservableCollection<ClientSummaryDTO>(counselor.Clients);
         });
     }
@@ -140,28 +131,22 @@ public partial class CounselorsViewModel : ObservableObject {
         var result = await _service.UpdateCounselorAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
 
-        // TODO: Mark data as stale in DataCoordinator to fetch new data on next update
-
         await ReloadCounselorAsync();
         return result;
     }
 
     public async Task<Result<bool>> DeleteSelectedCounselor() {
-        if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Counselor Selected.", null, null));
+        if (Selected == null)
+            return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Counselor Selected.", null, null));
+
         var id = Selected.Id;
         var result = await _service.DeleteCounselorAsync(id);
 
         if (result.IsSuccess) {
-            _dispatcher.TryEnqueue(() => {
+            OnUI(() => {
                 Selected = null;
                 SelectedSummary = null;
-                _allCounselors = _allCounselors
-                    .Where(c => c.Id != id)
-                    .ToList()
-                    .AsReadOnly();
-                ApplyFilter();
             });
-
             _ = LoadCounselorSummariesAsync(force: true);
         }
 
@@ -169,28 +154,35 @@ public partial class CounselorsViewModel : ObservableObject {
     }
 
     // =========================
-    // Utility / Filtering
+    // Utility / Helpers
     // =========================
 
     private void ApplyFilter() {
         int? previousSelection = Selected?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<CounselorSummaryDTO>(_allCounselors);
+            Filtered = new ObservableCollection<CounselorSummaryDTO>(_cache);
             ReSelect(previousSelection);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = _allCounselors.Where(c =>
+        var result = _cache.Where(c =>
         (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.CaseLoadID.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.SecretaryName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Email ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
-        Filtered = new ObservableCollection<CounselorSummaryDTO>(result);
-        ReSelect(previousSelection);
+        OnUI(() => {
+            Filtered = new ObservableCollection<CounselorSummaryDTO>(result);
+            ReSelect(previousSelection);
+        });
+    }
+
+    private void OnUI(Action action) {
+        if (_dispatcher.HasThreadAccess) action();
+        else _dispatcher.TryEnqueue(() => action());
     }
 
     private void ReSelect(int? id) {

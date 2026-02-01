@@ -17,7 +17,7 @@ namespace CDOWin.ViewModels;
 public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmployerService service) : ObservableObject {
 
     // =========================
-    // Services / Dependencies
+    // Dependencies
     // =========================
     private readonly IEmployerService _service = service;
     private readonly DataCoordinator _dataCoordinator = dataCoordinator;
@@ -29,7 +29,7 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
     private IReadOnlyList<EmployerSummaryDTO> _cache = [];
 
     // =========================
-    // Public Property / State
+    // UI State
     // =========================
 
     [ObservableProperty]
@@ -77,7 +77,7 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
         Selected = selectedEmployer;
     }
 
-    public async Task ReloadEmployerAsync(int id) {
+    public async Task ReloadEmployerAsync() {
         if (Selected == null) return;
         Selected = await _service.GetEmployerAsync(Selected.Id);
     }
@@ -88,7 +88,7 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
         var result = await _service.UpdateEmployerAsync(SelectedSummary.Id, update);
         if (!result.IsSuccess) return result;
 
-        await ReloadEmployerAsync(SelectedSummary.Id);
+        await ReloadEmployerAsync();
         return result;
     }
 

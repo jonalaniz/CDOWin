@@ -15,7 +15,7 @@ namespace CDOWin.ViewModels;
 public partial class PlacementsViewModel : ObservableObject {
 
     // =========================
-    // Services / Dependencies
+    // Dependencies
     // =========================
     private readonly IPlacementService _service;
     private readonly DataCoordinator _dataCoordinator;
@@ -24,10 +24,10 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<Placement> _allPlacements = [];
+    private IReadOnlyList<Placement> _cache = [];
 
     // =========================
-    // Public Property / State
+    // UI State
     // =========================
 
     [ObservableProperty]
@@ -51,12 +51,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) {
-        if (_dispatcher.HasThreadAccess)
-            ApplyFilter();
-        else
-            _dispatcher.TryEnqueue(ApplyFilter);
-    }
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
 
     // =========================
     // CRUD Methods
@@ -66,32 +61,26 @@ public partial class PlacementsViewModel : ObservableObject {
         if (placements == null) return;
 
         var snapshot = placements.OrderBy(o => o.Id).ToList().AsReadOnly();
-        _allPlacements = snapshot;
-
-        _dispatcher.TryEnqueue(() => {
-            ApplyFilter();
-        });
+        _cache = snapshot;
+        ApplyFilter();
     }
 
     public async Task ReloadPlacementAsync(string id) {
         var placement = await _service.GetPlacementAsync(id);
         if (placement == null) return;
 
-        var updated = _allPlacements
+        var updated = _cache
             .Select(p => p.Id == id ? placement : p)
             .ToList()
             .AsReadOnly();
+        _cache = updated;
 
-        _allPlacements = updated;
-
-        _dispatcher.TryEnqueue(() => {
-            var index = Filtered
+        var index = Filtered
             .Select((p, i) => new { p, i })
             .FirstOrDefault(x => x.p.Id == id)?.i;
 
-            if (index != null)
-                Filtered[index.Value] = placement;
-
+        OnUI(() => {
+            if (index != null) Filtered[index.Value] = placement;
             Selected = placement;
         });
     }
@@ -115,21 +104,28 @@ public partial class PlacementsViewModel : ObservableObject {
         string? previousSelection = Selected?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Placement>(_allPlacements);
+            Filtered = new ObservableCollection<Placement>(_cache);
             ReSelect(previousSelection);
             return;
         }
 
         var query = SearchQuery.Trim().ToLower();
-        var result = _allPlacements.Where(r =>
+        var result = _cache.Where(r =>
         (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (r.Employer?.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (r.Supervisor ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
-        Filtered = new ObservableCollection<Placement>(result);
-        ReSelect(previousSelection);
+        OnUI(() => {
+            Filtered = new ObservableCollection<Placement>(result);
+            ReSelect(previousSelection);
+        });
+    }
+
+    private void OnUI(Action action) {
+        if (_dispatcher.HasThreadAccess) action();
+        else _dispatcher.TryEnqueue(() => action());
     }
 
     private void ReSelect(string? id) {

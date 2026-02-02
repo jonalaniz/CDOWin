@@ -46,4 +46,8 @@ public sealed partial class PlacementsPage : Page {
         // Filter this shit
         Debug.WriteLine(button.IsChecked);
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e) {
+
+    }
 }

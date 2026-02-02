@@ -68,15 +68,15 @@
                         </interactivity:Interaction.Behaviors>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Client" FontWeight="SemiBold"/>
@@ -96,20 +96,61 @@
                     <DataTemplate x:DataType="dto:PlacementSummaryDTO">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind EmployerName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <!-- Jump Buttons-->
+                            <Grid Grid.Column="0" Margin="0,0,12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                        IsEnabled="{x:Bind ClientID, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="Button_Click" Tag="{x:Bind ClientID}">
+                                    <FontIcon Glyph="&#xE76C;"/>
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Column="1" Margin="0,0,12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0" Text="{x:Bind EmployerName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                        IsEnabled="{x:Bind EmployerID, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="Button_Click" Tag="{x:Bind EmployerID}">
+                                    <FontIcon Glyph="&#xE76C;"/>
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Column="2" Margin="0,0,12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                        IsEnabled="{x:Bind CounselorID, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="Button_Click" Tag="{x:Bind CounselorID}">
+                                    <FontIcon Glyph="&#xE76C;"/>
+                                </Button>
+                            </Grid>
+
+                            <!-- Fields -->
                             <TextBlock Grid.Column="3" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="4" Text="{x:Bind SupervisorName}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="5" Text="{x:Bind SupervisorPhone}" TextTrimming="CharacterEllipsis"/>

@@ -34,6 +34,7 @@
                 <RowDefinition Height="84"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" Margin="8,8,8,2"
+                       Foreground="White"
                        HorizontalAlignment="Center"
                        FontWeight="SemiBold" 
                        FontSize="18"

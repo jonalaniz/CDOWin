@@ -17,7 +17,7 @@
     <Grid>
         <!-- Bottom layer: accent color -->
         <Grid.Background>
-            <SolidColorBrush Color="{ThemeResource SystemAccentColorDark1}"/>
+            <SolidColorBrush Color="{ThemeResource SystemAccentColor}"/>
         </Grid.Background>
 
         <!-- Top: image as brush -->
@@ -31,15 +31,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="84"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" Margin="8,8,8,2"
-                       HorizontalAlignment="Right"
-                       Text="" FontFamily="Cascadia Mono"
-                       FontWeight="Normal" FontSize="18"
-                       Foreground="{ThemeResource SystemAccentColor}"/>
+                       HorizontalAlignment="Center"
+                       FontWeight="SemiBold" 
+                       FontSize="18"
+                       x:Name="VersionBlock"/>
             <ProgressBar Grid.Row="2" VerticalAlignment="Bottom"
-                         Foreground="{ThemeResource SystemAltHighColor}"
+                         Foreground="{ThemeResource SystemAccentColorLight1}"
                          IsIndeterminate="True"/>
         </Grid>
     </Grid>

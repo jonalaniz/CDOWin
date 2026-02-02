@@ -307,7 +307,7 @@
                 <!-- Service Authorizations Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
                     <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="14,6,6,0">
+                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,6,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -391,7 +391,7 @@
                 <!-- Placements Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
                     <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="14,6,6,0">
+                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,6,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>

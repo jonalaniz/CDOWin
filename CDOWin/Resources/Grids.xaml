@@ -24,7 +24,7 @@
 
     <!-- Card Inner Grid Style -->
     <Style x:Key="CardInnerGridStyle" TargetType="Grid">
-        <Setter Property="Margin" Value="14,6,6,14"/>
+        <Setter Property="Margin" Value="12,6,6,14"/>
         <Setter Property="ColumnSpacing" Value="12"/>
         <Setter Property="RowSpacing" Value="10"/>
     </Style>

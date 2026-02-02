@@ -27,6 +27,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <!-- Columns -->
@@ -35,25 +36,16 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Title + Button -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                       Text="Placements"/>
 
-                    <!-- Title -->
-                    <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                               Text="Placements"/>
-                </Grid>
-
-                <!-- Subtitle -->
-                <TextBlock Style="{StaticResource PageSubtitleStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
-                    <Run Text="Placements"/>
-                </TextBlock>
-            </StackPanel>
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+                <AppBarToggleButton Width="56" Click="Filter_Click" IsCompact="False" ToolTipService.ToolTip="Filter SAs">
+                    <FontIcon Glyph="&#xE71C;"/>
+                </AppBarToggleButton>
+            </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
@@ -76,7 +68,6 @@
                         </interactivity:Interaction.Behaviors>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
@@ -88,16 +79,15 @@
                             <ColumnDefinition Width="90"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Active" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="Client" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" Text="Employer" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="Counselor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" Text="SA Number" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" Text="Supervisor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" Text="Supervisor Phone" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="7" Text="Position" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="8" Text="Salary" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="9" Text="Hire Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" Text="Client" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Employer" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Counselor" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="SA Number" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" Text="Supervisor" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="Supervisor Phone" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Position" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="7" Text="Salary" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="8" Text="Hire Date" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -106,7 +96,6 @@
                     <DataTemplate x:DataType="dto:PlacementSummaryDTO">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
@@ -118,20 +107,28 @@
                                 <ColumnDefinition Width="90"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind Active}"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind EmployerName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="5" Text="{x:Bind SupervisorName}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="6" Text="{x:Bind SupervisorPhone}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="7" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="8" Text="{x:Bind FormattedSalary}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="9" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="0" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind EmployerName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind SupervisorName}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind SupervisorPhone}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="6" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="7" Text="{x:Bind FormattedSalary}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="8" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Status Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <TextBlock Style="{StaticResource ListStatusBarStyle}">
+                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="Placements"/>
+                </TextBlock>
+            </Grid>
         </Grid>
 
         <!-- Right Column -->

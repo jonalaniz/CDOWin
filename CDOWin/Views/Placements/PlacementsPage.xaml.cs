@@ -3,8 +3,10 @@ using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Placements.Inspectors;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 namespace CDOWin.Views.Placements;
 
@@ -37,5 +39,11 @@ public sealed partial class PlacementsPage : Page {
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is PlacementSummaryDTO placement)
             _ = ViewModel.LoadSelectedPlacementAsync(placement.Id);
+    }
+
+    private void Filter_Click(object sender, RoutedEventArgs e) {
+        if (sender is not AppBarToggleButton button) return;
+        // Filter this shit
+        Debug.WriteLine(button.IsChecked);
     }
 }

@@ -27,6 +27,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <!-- Columns -->
@@ -35,25 +36,16 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Title + Button -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                       Text="Service Authorizations"/>
 
-                    <!-- Title -->
-                    <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                               Text="Service Authorizations"/>
-                </Grid>
-
-                <!-- Subtitle -->
-                <TextBlock Style="{StaticResource PageSubtitleStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
-                    <Run Text="Service Authorizations"/>
-                </TextBlock>
-            </StackPanel>
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+                <AppBarToggleButton Width="56" Click="Filter_Click" IsCompact="False" ToolTipService.ToolTip="Filter SAs">
+                    <FontIcon Glyph="&#xE71C;"/>
+                </AppBarToggleButton>
+            </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
@@ -77,9 +69,9 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="230"/>
+                            <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="230"/>
+                            <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="110"/>
@@ -103,9 +95,9 @@
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="230"/>
+                                <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="230"/>
+                                <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="110"/>
@@ -148,6 +140,18 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Row 2: Status Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <StackPanel Orientation="Horizontal" Spacing="8" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                        <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                        <Run Text="Service Authorizations"/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
         </Grid>
         
         <!-- Right Column -->

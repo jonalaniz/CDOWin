@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -27,29 +28,18 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Title + Buttons -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
-            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                Text="{x:Bind ViewModel.Selected.FormattedName, Mode=OneWay}"
-                x:Name="Header" RightTapped="TextBlock_RightTapped"/>
-            
-            <!-- Subtitle -->
-            <StackPanel Orientation="Horizontal" Spacing="8" Margin="16,0,0,8">
-                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
-                    <Run Text="ACE ID:"/>
-                    <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
-                </TextBlock>
-                <TextBlock Text="TTW" FontWeight="Bold" Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
-            </StackPanel>
-        </StackPanel>
-        
+        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                   Text="{x:Bind ViewModel.Selected.FormattedName, Mode=OneWay}"
+                   x:Name="Header" RightTapped="TextBlock_RightTapped"/>
+
         <!-- CommandBar -->
         <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-            <AppBarButton Label="Documents" Click="OpenDocuments_Clicked" IsCompact="False" ToolTipService.ToolTip="Open Documents">
+            <AppBarButton Width="56" Label="Documents" Click="OpenDocuments_Clicked" IsCompact="False" ToolTipService.ToolTip="Open Documents">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE838;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton Label="New Reminder" Click="CreateReminder_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Reminder">
+            <AppBarButton Width="56" Label="New Reminder" Click="CreateReminder_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Reminder">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xED0E;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
@@ -532,5 +522,18 @@
                 </Grid>
             </controls:WrapPanel>
         </ScrollViewer>
+    
+        <!-- Row 2: Status Bar -->
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+              Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+            <StackPanel Orientation="Horizontal" Spacing="8" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                    <Run Text="ACE ID:"/>
+                    <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock Text="TTW" FontWeight="Bold" Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

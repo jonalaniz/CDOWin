@@ -2,6 +2,7 @@ using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Inspectors;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System.Diagnostics;
@@ -38,6 +39,12 @@ public sealed partial class ServiceAuthorizationsPage : Page {
         if (e.ClickedItem is Invoice sa) {
             _ = ViewModel.LoadSelectedSAAsync(sa.Id);
         }
+    }
+
+    private void Filter_Click(object sender, RoutedEventArgs e) {
+        if (sender is not AppBarToggleButton button) return;
+        // Filter this shit
+        Debug.WriteLine(button.IsChecked);
     }
 
     private void GoToClient_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {

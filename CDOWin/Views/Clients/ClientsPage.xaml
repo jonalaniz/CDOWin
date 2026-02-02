@@ -32,6 +32,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             
             <!-- Columns -->
@@ -40,28 +41,20 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Title + Button Bar -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
-                <!-- Title -->
-                <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                           Text="Clients"/>
-                <!-- Subtitle -->
-                <TextBlock Style="{StaticResource PageSubtitleStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
-                    <Run Text="Clients"/>
-                </TextBlock>
-            </StackPanel>
+            <!-- Title -->
+            <TextBlock Grid.Row="0"  Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                       Text="Clients"/>
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton Click="NewClient_Click" IsCompact="False" ToolTipService.ToolTip="New Client">
+                <AppBarButton Width="56" Click="NewClient_Click" IsCompact="False" ToolTipService.ToolTip="New Client">
                     <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton>
             </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8, 0, 8, 8" PlaceholderText="Filter clients"
+                     Margin="8, 0, 8, 8" PlaceholderText="Filter Clients"
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Clients List -->
@@ -86,6 +79,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Status Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <TextBlock Style="{StaticResource ListStatusBarStyle}">
+                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="Clients"/>
+                </TextBlock>
+            </Grid>
         </Grid>
 
 

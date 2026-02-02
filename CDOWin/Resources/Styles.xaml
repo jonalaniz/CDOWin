@@ -44,7 +44,8 @@
     
     <!-- Page Title Style -->
     <Style x:Key="PageTitleStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="16,6,0,0"/>
+        <Setter Property="Margin" Value="17,0,0,4"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
@@ -79,6 +80,16 @@
         <Setter Property="Margin" Value="16,0,16,8"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}"/>
+    </Style>
+
+    <!-- List Status Bar Style -->
+    <Style x:Key="ListStatusBarStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0,0,0,0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
     </Style>
 
     <!-- Single Icon Button Style -->

@@ -28,6 +28,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <!-- Columns -->
@@ -36,21 +37,13 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Title + Button -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
-                <!-- Title -->
-                <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                            Text="Counselors"/>
-                <!-- Subtitle -->
-                <TextBlock Style="{StaticResource PageSubtitleStyle}">
-                        <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
-                    <Run Text="Counselors"/>
-                </TextBlock>
-            </StackPanel>
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                       Text="Counselors"/>
             
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton Click="NewCounselor_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Counselor">
+                <AppBarButton Width="56" Click="NewCounselor_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Counselor">
                     <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton>
             </CommandBar>
@@ -85,6 +78,14 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <!-- Statu Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <TextBlock Style="{StaticResource ListStatusBarStyle}">
+                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="Counselors"/>
+                </TextBlock>
+            </Grid>
         </Grid>
 
         <!-- Middle Column -->
@@ -95,31 +96,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <!-- Title -->
-            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
-                <!-- Title -->
-                <TextBlock Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                            Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
-
-                <!-- Subtitle -->
-                <StackPanel Orientation="Horizontal" Spacing="4" Margin="16,0,0,8">
-                    <TextBlock Margin="0" Style="{StaticResource PageSubtitleStyle}" Visibility="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay, Converter={StaticResource NullToVisability}}">
-                        <Run Text="Case Load ID:"/>
-                        <Run Text="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
-                        <Run Text=","/>
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
-                        <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
-                        <Run Text="Client(s)"/>
-                    </TextBlock>
-                </StackPanel>
-            </StackPanel>
+            <TextBlock Grid.Row="0"  Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+                       Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton IsCompact="False" ToolTipService.ToolTip="More">
+                <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                     </AppBarButton.Icon>
@@ -142,7 +128,7 @@
 
                 <!-- Header -->
                 <ListView.Header>
-                    <Grid Background="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"
+                    <Grid Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
                           BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                           BorderThickness="0,0,0,1" Padding="12,8">
 
@@ -194,6 +180,18 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Statu Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <TextBlock Style="{StaticResource ListStatusBarStyle}">
+                    <Run Text="Case Load ID:"/>
+                    <Run Text="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
+                    <Run Text=","/>
+                    <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
+                    <Run Text="Client(s)"/>
+                </TextBlock>
+            </Grid>
         </Grid>
         
         <!-- Right Column -->

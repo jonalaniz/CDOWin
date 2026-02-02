@@ -164,7 +164,8 @@ public partial class ClientsViewModel : ObservableObject {
 
         var query = SearchQuery.Trim().ToLower();
         var result = _cache.Where(c =>
-        (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

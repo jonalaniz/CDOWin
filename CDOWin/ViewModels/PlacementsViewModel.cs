@@ -42,7 +42,7 @@ public partial class PlacementsViewModel : ObservableObject {
     public partial Placement? Selected { get; set; }
 
     [ObservableProperty]
-    public partial PlacementSummaryDTO? SelectedSummary { get; set; } 
+    public partial PlacementSummaryDTO? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -54,7 +54,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // Constructor
     // =========================
     public PlacementsViewModel(
-        DataCoordinator dataCoordinator, 
+        DataCoordinator dataCoordinator,
         IPlacementService service,
         ClientSelectionService clientSelectionService,
         CounselorSelectionService counselorSelectionService,
@@ -98,7 +98,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     public async Task LoadPlacementSummariesAsync(bool force = false) {
         var placements = await _dataCoordinator.GetPlacementSummariesAsync(force);
-        if(placements == null) return;
+        if (placements == null) return;
 
         var snapshot = placements.OrderBy(o => o.HireDate).ToList().AsReadOnly();
         _cache = snapshot;

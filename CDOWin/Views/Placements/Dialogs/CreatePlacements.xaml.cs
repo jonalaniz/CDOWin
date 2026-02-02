@@ -53,7 +53,7 @@ public sealed partial class CreatePlacements : Page {
 
     private async Task LoadEmployersAsync() {
         var result = await AppServices.EmployersViewModel.GetEmployers();
-        if(result == null) return;
+        if (result == null) return;
 
         _employers = result;
     }

@@ -1,12 +1,10 @@
 using CDO.Core.DTOs;
-using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Placements.Inspectors;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System.Diagnostics;
 
 namespace CDOWin.Views.Placements;
 

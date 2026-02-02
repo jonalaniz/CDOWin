@@ -11,7 +11,6 @@ using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,9 +48,11 @@ public partial class RemindersViewModel : ObservableObject {
 
     public RemindersFilter Filter {
         get => _filter;
-        set {if (SetProperty(ref _filter, value)) {
+        set {
+            if (SetProperty(ref _filter, value)) {
                 _dispatcher.TryEnqueue(ApplyFilter);
-        }}
+            }
+        }
     }
 
     // =========================
@@ -176,7 +177,7 @@ public partial class RemindersViewModel : ObservableObject {
             OnUI(() => ClientSpecific = RemoveReminder(id, ClientSpecific));
         }
 
-        OnUI (ApplyFilter);
+        OnUI(ApplyFilter);
     }
 
     private static ObservableCollection<Reminder> UpdateReminder(int id, Reminder reminder, ObservableCollection<Reminder> collection) {

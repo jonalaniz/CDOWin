@@ -79,34 +79,34 @@ public static class AppServices {
         );
 
         CounselorsViewModel = new CounselorsViewModel(
-            DataCoordinator, CounselorService, 
+            DataCoordinator, CounselorService,
             _counselorSelecitonService,
             _clientSelectionService
             );
 
         EmployersViewModel = new EmployersViewModel(
-            DataCoordinator, 
+            DataCoordinator,
             EmployerService,
             _employerSelectionService
             );
 
         SAsViewModel = new ServiceAuthorizationsViewModel(
-            DataCoordinator, 
-            SAService, 
-            _clientSelectionService, 
+            DataCoordinator,
+            SAService,
+            _clientSelectionService,
             _counselorSelecitonService
             );
 
         RemindersViewModel = new RemindersViewModel(
-            DataCoordinator, 
-            ReminderService, 
+            DataCoordinator,
+            ReminderService,
             _clientSelectionService
             );
 
         StatesViewModel = new StatesViewModel(DataCoordinator, StateService);
 
         PlacementsViewModel = new PlacementsViewModel(
-            DataCoordinator, 
+            DataCoordinator,
             PlacementService,
             _clientSelectionService,
             _counselorSelecitonService,

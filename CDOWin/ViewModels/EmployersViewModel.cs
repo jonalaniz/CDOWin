@@ -50,7 +50,7 @@ public partial class EmployersViewModel : ObservableObject {
     // Constructor
     // =========================
     public EmployersViewModel(
-        DataCoordinator dataCoordinator, 
+        DataCoordinator dataCoordinator,
         IEmployerService service,
         EmployerSelectionService selectionService) {
         _service = service;

@@ -31,6 +31,7 @@ public static class AppServices {
     private static readonly DataInvalidationService _invalidationService = new();
     private static readonly ClientSelectionService _clientSelectionService = new();
     private static readonly CounselorSelectionService _counselorSelecitonService = new();
+    private static readonly EmployerSelectionService _employerSelectionService = new();
 
     // ViewModels
     public static CalendarViewModel CalendarViewModel { get; private set; } = null!;
@@ -83,7 +84,11 @@ public static class AppServices {
             _clientSelectionService
             );
 
-        EmployersViewModel = new EmployersViewModel(DataCoordinator, EmployerService);
+        EmployersViewModel = new EmployersViewModel(
+            DataCoordinator, 
+            EmployerService,
+            _employerSelectionService
+            );
 
         SAsViewModel = new ServiceAuthorizationsViewModel(
             DataCoordinator, 
@@ -99,12 +104,15 @@ public static class AppServices {
             );
 
         StatesViewModel = new StatesViewModel(DataCoordinator, StateService);
+
         PlacementsViewModel = new PlacementsViewModel(
             DataCoordinator, 
             PlacementService,
             _clientSelectionService,
-            _counselorSelecitonService
+            _counselorSelecitonService,
+            _employerSelectionService
             );
+
         CalendarViewModel = new CalendarViewModel(RemindersViewModel);
 
     }

@@ -53,5 +53,6 @@ public sealed partial class PlacementsPage : Page {
 
     private void GoToEmployer_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
+        ViewModel.RequestEmployer(id);
     }
 }

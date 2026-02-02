@@ -3,6 +3,7 @@ using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
+using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -14,14 +15,15 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmployerService service) : ObservableObject {
+public partial class EmployersViewModel : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly IEmployerService _service = service;
-    private readonly DataCoordinator _dataCoordinator = dataCoordinator;
-    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
+    private readonly IEmployerService _service;
+    private readonly DataCoordinator _dataCoordinator;
+    private readonly EmployerSelectionService _selectionService;
+    private readonly DispatcherQueue _dispatcher;
 
     // =========================
     // Private Backing Fields
@@ -45,9 +47,32 @@ public partial class EmployersViewModel(DataCoordinator dataCoordinator, IEmploy
     public partial string SearchQuery { get; set; } = string.Empty;
 
     // =========================
+    // Constructor
+    // =========================
+    public EmployersViewModel(
+        DataCoordinator dataCoordinator, 
+        IEmployerService service,
+        EmployerSelectionService selectionService) {
+        _service = service;
+        _dataCoordinator = dataCoordinator;
+
+        _selectionService = selectionService;
+        _dispatcher = DispatcherQueue.GetForCurrentThread();
+
+        _selectionService.EmployerSelectionRequested += OnRequestSelectedEmployerChanged;
+    }
+
+    // =========================
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
+
+    private void OnRequestSelectedEmployerChanged(int employerId) {
+        if (Selected != null && Selected.Id == employerId) return;
+        SearchQuery = string.Empty;
+        ApplyFilter();
+        _ = LoadSelectedEmployerAsync(employerId);
+    }
 
     // =========================
     // Public Methods

@@ -23,6 +23,7 @@ public partial class PlacementsViewModel : ObservableObject {
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _clientSelectionService;
     private readonly CounselorSelectionService _counselorSelectionService;
+    private readonly EmployerSelectionService _employerSelectionService;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -56,13 +57,15 @@ public partial class PlacementsViewModel : ObservableObject {
         DataCoordinator dataCoordinator, 
         IPlacementService service,
         ClientSelectionService clientSelectionService,
-        CounselorSelectionService counselorSelectionService
+        CounselorSelectionService counselorSelectionService,
+        EmployerSelectionService employerSelectionService
         ) {
         _service = service;
         _dataCoordinator = dataCoordinator;
 
         _clientSelectionService = clientSelectionService;
         _counselorSelectionService = counselorSelectionService;
+        _employerSelectionService = employerSelectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
@@ -83,6 +86,11 @@ public partial class PlacementsViewModel : ObservableObject {
     public void RequestCounselor(int counselorID) {
         AppServices.Navigation.Navigate(Views.CDOFrame.Counselors);
         _counselorSelectionService.RequestSelectedCounselor(counselorID);
+    }
+
+    public void RequestEmployer(int employerID) {
+        AppServices.Navigation.Navigate(Views.CDOFrame.Employers);
+        _employerSelectionService.RequestSelectedEmployer(employerID);
     }
 
     // =========================

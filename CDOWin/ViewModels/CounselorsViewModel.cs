@@ -52,7 +52,6 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-
     public CounselorsViewModel(
         DataCoordinator dataCoordinator,
         ICounselorService service,

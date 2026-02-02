@@ -17,6 +17,10 @@ public class PlacementService : IPlacementService {
     // -----------------------------
     // GET
     // -----------------------------
+    public Task<List<PlacementSummaryDTO>?> GetAllPlacementSummariesAsync() {
+        return _network.GetAsync<List<PlacementSummaryDTO>>(Endpoints.PlacementSummaries);
+    }
+
     public Task<List<Placement>?> GetAllPlacementsAsync() {
         return _network.GetAsync<List<Placement>>(Endpoints.Placements);
     }

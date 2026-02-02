@@ -44,7 +44,7 @@ public sealed partial class PlacementInspector : Page {
             return;
         }
 
-        _ = ViewModel.ReloadPlacementAsync(ViewModel.Selected.Id);
+        _ = ViewModel.LoadSelectedPlacementAsync(ViewModel.Selected.Id);
     }
 
     private async void Delete_Click(object sender, RoutedEventArgs e) {

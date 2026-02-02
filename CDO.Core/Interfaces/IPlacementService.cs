@@ -9,6 +9,7 @@ public interface IPlacementService {
     // -----------------------------
     // GET Methods
     // -----------------------------
+    public Task<List<PlacementSummaryDTO>?> GetAllPlacementSummariesAsync();
     public Task<List<Placement>?> GetAllPlacementsAsync();
 
     public Task<Placement?> GetPlacementAsync(string id);

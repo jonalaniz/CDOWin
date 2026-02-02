@@ -55,7 +55,7 @@ public sealed partial class CreatePlacements : Page {
         if (sender is not MenuFlyoutItem item || item.Tag is not Invoice sa)
             return;
         SANumberDropDownButton.Content = sa.ServiceAuthorizationNumber;
-        ViewModel.PoNumber = sa.ServiceAuthorizationNumber;
+        ViewModel.SaNumber = sa.ServiceAuthorizationNumber;
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
@@ -95,19 +95,19 @@ public sealed partial class CreatePlacements : Page {
                     ViewModel.EndDate = offset.DateTime.Date.ToUniversalTime();
                     break;
                 case UpdateField.Day1:
-                    ViewModel.FirstFiveDays1 = dateString;
+                    ViewModel.Day1 = dateString;
                     break;
                 case UpdateField.Day2:
-                    ViewModel.FirstFiveDays2 = dateString;
+                    ViewModel.Day2 = dateString;
                     break;
                 case UpdateField.Day3:
-                    ViewModel.FirstFiveDays3 = dateString;
+                    ViewModel.Day3 = dateString;
                     break;
                 case UpdateField.Day4:
-                    ViewModel.FirstFiveDays4 = dateString;
+                    ViewModel.Day4 = dateString;
                     break;
                 case UpdateField.Day5:
-                    ViewModel.FirstFiveDays5 = dateString;
+                    ViewModel.Day5 = dateString;
                     break;
             }
         }
@@ -157,7 +157,7 @@ public sealed partial class CreatePlacements : Page {
 
         switch (field) {
             case UpdateField.Supervisor:
-                ViewModel.Supervisor = text;
+                ViewModel.SupervisorName = text;
                 break;
             case UpdateField.SupervisorPhone:
                 ViewModel.SupervisorPhone = text;
@@ -169,26 +169,26 @@ public sealed partial class CreatePlacements : Page {
                 ViewModel.Position = text;
                 break;
             case UpdateField.HoursWorked:
-                ViewModel.NumbersOfHoursWorking = text;
+                ViewModel.HoursWorking = text;
                 break;
             case UpdateField.HourlyWage:
-                ViewModel.HourlyOrMonthlyWages = text;
+                ViewModel.Wages = text;
                 break;
             case UpdateField.Website:
                 ViewModel.Website = text;
                 break;
             case UpdateField.JobDuties:
-                ViewModel.DescriptionOfDuties = text;
+                ViewModel.JobDuties = text;
                 break;
             case UpdateField.WorkSchedule:
-                ViewModel.DescriptionOfWorkSchedule = text;
+                ViewModel.WorkSchedule = text;
                 break;
         }
     }
 
     private void UpdateSelectedEmployer(Employer employer) {
         ViewModel.EmployerID = employer.Id;
-        ViewModel.Supervisor = employer.Supervisor;
+        ViewModel.SupervisorName = employer.Supervisor;
         ViewModel.SupervisorPhone = employer.SupervisorPhone;
         ViewModel.SupervisorEmail = employer.SupervisorEmail;
 

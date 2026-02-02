@@ -35,10 +35,10 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
-    public partial string? PoNumber { get; set; }
+    public partial string? SaNumber { get; set; }
 
     [ObservableProperty]
-    public partial string? Supervisor { get; set; }
+    public partial string? SupervisorName { get; set; }
 
     [ObservableProperty]
     public partial string? SupervisorEmail { get; set; }
@@ -59,31 +59,31 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public partial string? Website { get; set; }
 
     [ObservableProperty]
-    public partial string? DescriptionOfDuties { get; set; }
+    public partial string? JobDuties { get; set; }
 
     [ObservableProperty]
-    public partial string? NumbersOfHoursWorking { get; set; }
+    public partial string? HoursWorking { get; set; }
 
     [ObservableProperty]
-    public partial string? FirstFiveDays1 { get; set; }
+    public partial string? Day1 { get; set; }
 
     [ObservableProperty]
-    public partial string? FirstFiveDays2 { get; set; }
+    public partial string? Day2 { get; set; }
 
     [ObservableProperty]
-    public partial string? FirstFiveDays3 { get; set; }
+    public partial string? Day3 { get; set; }
 
     [ObservableProperty]
-    public partial string? FirstFiveDays4 { get; set; }
+    public partial string? Day4 { get; set; }
 
     [ObservableProperty]
-    public partial string? FirstFiveDays5 { get; set; }
+    public partial string? Day5 { get; set; }
 
     [ObservableProperty]
-    public partial string? DescriptionOfWorkSchedule { get; set; }
+    public partial string? WorkSchedule { get; set; }
 
     [ObservableProperty]
-    public partial string? HourlyOrMonthlyWages { get; set; }
+    public partial string? Wages { get; set; }
 
     [ObservableProperty]
     public partial DateTime? HireDate { get; set; }
@@ -97,11 +97,11 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public bool CanSave => CanSaveMethod();
 
     public bool CanSaveMethod() {
-        Debug.WriteLine($"{EmployerID == null} {Client == null} {PlacementNumber == null} {PoNumber == null}");
+        Debug.WriteLine($"{EmployerID == null} {Client == null} {PlacementNumber == null} {SaNumber == null}");
         if (EmployerID == null
             || Client == null
             || PlacementNumber == null
-            || PoNumber == null)
+            || SaNumber == null)
             return false;
 
         return true;
@@ -119,8 +119,8 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             EmployerID = EmployerID.ToString(),
             ClientID = Client.Id,
             CounselorID = Client.CounselorID,
-            PoNumber = PoNumber,
-            Supervisor = Supervisor,
+            SaNumber = SaNumber,
+            SupervisorName = SupervisorName,
             SupervisorEmail = SupervisorEmail,
             SupervisorPhone = SupervisorPhone,
             Position = Position,
@@ -130,15 +130,15 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             CounselorName = Client.CounselorReference?.Name,
             Active = true,
             Website = Website,
-            DescriptionOfDuties = DescriptionOfDuties,
-            NumbersOfHoursWorking = NumbersOfHoursWorking,
-            FirstFiveDays1 = FirstFiveDays1,
-            FirstFiveDays2 = FirstFiveDays2,
-            FirstFiveDays3 = FirstFiveDays3,
-            FirstFiveDays4 = FirstFiveDays4,
-            FirstFiveDays5 = FirstFiveDays5,
-            DescriptionOfWorkSchedule = DescriptionOfWorkSchedule,
-            HourlyOrMonthlyWages = HourlyOrMonthlyWages,
+            JobDuties = JobDuties,
+            HoursWorking = HoursWorking,
+            Day1 = Day1,
+            Day2 = Day2,
+            Day3 = Day3,
+            Day4 = Day4,
+            Day5 = Day5,
+            WorkSchedule = WorkSchedule,
+            Wages = Wages,
             HireDate = HireDate,
             EndDate = EndDate
         };

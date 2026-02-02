@@ -1,4 +1,5 @@
-﻿using CDO.Core.ErrorHandling;
+﻿using CDO.Core.DTOs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
@@ -24,17 +25,20 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<Placement> _cache = [];
+    private IReadOnlyList<PlacementSummaryDTO> _cache = [];
 
     // =========================
     // UI State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<Placement> Filtered { get; private set; } = [];
+    public partial ObservableCollection<PlacementSummaryDTO> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Placement? Selected { get; set; } = null;
+    public partial Placement? Selected { get; set; }
+
+    [ObservableProperty]
+    public partial PlacementSummaryDTO? SelectedSummary { get; set; } 
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -56,33 +60,21 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadPlacementsAsync(bool force = false) {
-        var placements = await _dataCoordinator.GetPlacementsAsync(force);
-        if (placements == null) return;
+    public async Task LoadPlacementSummariesAsync(bool force = false) {
+        var placements = await _dataCoordinator.GetPlacementSummariesAsync(force);
+        if(placements == null) return;
 
         var snapshot = placements.OrderBy(o => o.Id).ToList().AsReadOnly();
         _cache = snapshot;
         ApplyFilter();
     }
 
-    public async Task ReloadPlacementAsync(string id) {
+    public async Task LoadSelectedPlacementAsync(string id) {
+        if (Selected != null && Selected.Id == id) return;
+
         var placement = await _service.GetPlacementAsync(id);
-        if (placement == null) return;
 
-        var updated = _cache
-            .Select(p => p.Id == id ? placement : p)
-            .ToList()
-            .AsReadOnly();
-        _cache = updated;
-
-        var index = Filtered
-            .Select((p, i) => new { p, i })
-            .FirstOrDefault(x => x.p.Id == id)?.i;
-
-        OnUI(() => {
-            if (index != null) Filtered[index.Value] = placement;
-            Selected = placement;
-        });
+        OnUI(() => { Selected = placement; });
     }
 
     public async Task<Result<bool>> DeleteSelectedPlacement() {
@@ -91,7 +83,7 @@ public partial class PlacementsViewModel : ObservableObject {
 
         if (result.IsSuccess) {
             Selected = null;
-            _ = LoadPlacementsAsync(force: true);
+            _ = LoadPlacementSummariesAsync(force: true);
         }
 
         return result;
@@ -104,7 +96,7 @@ public partial class PlacementsViewModel : ObservableObject {
         string? previousSelection = Selected?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Placement>(_cache);
+            Filtered = new ObservableCollection<PlacementSummaryDTO>(_cache);
             ReSelect(previousSelection);
             return;
         }
@@ -112,13 +104,13 @@ public partial class PlacementsViewModel : ObservableObject {
         var query = SearchQuery.Trim().ToLower();
         var result = _cache.Where(r =>
         (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (r.Employer?.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (r.Supervisor ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 
         OnUI(() => {
-            Filtered = new ObservableCollection<Placement>(result);
+            Filtered = new ObservableCollection<PlacementSummaryDTO>(result);
             ReSelect(previousSelection);
         });
     }
@@ -130,7 +122,7 @@ public partial class PlacementsViewModel : ObservableObject {
 
     private void ReSelect(string? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(p => p.Id == id) is Placement selected)
-            Selected = selected;
+        if (Filtered.FirstOrDefault(p => p.Id == id) is PlacementSummaryDTO selected)
+            SelectedSummary = selected;
     }
 }

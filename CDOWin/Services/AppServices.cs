@@ -107,7 +107,7 @@ public static class AppServices {
 
     public static async Task LoadSecondaryDataAsync() {
         _ = DataCoordinator.GetSAsAsync();
-        _ = DataCoordinator.GetPlacementsAsync();
+        _ = DataCoordinator.GetPlacementSummariesAsync();
         _ = StatesViewModel.LoadStatesAsync();
     }
 

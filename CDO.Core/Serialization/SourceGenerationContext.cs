@@ -32,6 +32,9 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(List<Placement>))]
 [JsonSerializable(typeof(PlacementDTO))]
 
+[JsonSerializable(typeof(PlacementSummaryDTO))]
+[JsonSerializable(typeof(List<PlacementSummaryDTO>))]
+
 [JsonSerializable(typeof(Reminder))]
 [JsonSerializable(typeof(List<Reminder>))]
 [JsonSerializable(typeof(CreateReminderDTO))]

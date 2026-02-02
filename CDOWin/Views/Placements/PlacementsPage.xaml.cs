@@ -1,3 +1,4 @@
+using CDO.Core.DTOs;
 using CDO.Core.Models;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -27,15 +28,14 @@ public sealed partial class PlacementsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadPlacementsAsync();
+        await ViewModel.LoadPlacementSummariesAsync();
     }
 
     // =========================
     // Click Handlers
     // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if (e.ClickedItem is Placement placement) {
-            _ = ViewModel.ReloadPlacementAsync(placement.Id);
-        }
+        if (e.ClickedItem is PlacementSummaryDTO placement)
+            _ = ViewModel.LoadSelectedPlacementAsync(placement.Id);
     }
 }

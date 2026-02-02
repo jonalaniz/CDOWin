@@ -74,7 +74,7 @@
 
             <!-- Row 3: PO number + Employer ID -->
             <c:LabelPair Grid.Row="3" Grid.Column="0" Label="SA ID" 
-                         Value="{x:Bind ViewModel.Selected.PoNumber, Mode=OneWay}"/>
+                         Value="{x:Bind ViewModel.Selected.SaNumber, Mode=OneWay}"/>
             <c:LabelPair Grid.Row="3" Grid.Column="1" Label="Employer ID" 
                          Value="{x:Bind ViewModel.Selected.EmployerID, Mode=OneWay}"/>
 

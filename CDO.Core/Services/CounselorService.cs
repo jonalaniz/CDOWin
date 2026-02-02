@@ -17,12 +17,11 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // GET
     // -----------------------------
-    public Task<List<Counselor>?> GetAllCounselorsAsync() {
-        return _network.GetAsync<List<Counselor>>(Endpoints.Counselors);
-    }
-
     public Task<List<CounselorSummaryDTO>?> GetAllCounselorSummariesAsync() {
         return _network.GetAsync<List<CounselorSummaryDTO>>(Endpoints.CounselorSummaries);
+    }
+    public Task<List<Counselor>?> GetAllCounselorsAsync() {
+        return _network.GetAsync<List<Counselor>>(Endpoints.Counselors);
     }
 
     public Task<CounselorResponseDTO?> GetCounselorAsync(int id) {

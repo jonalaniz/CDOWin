@@ -81,7 +81,8 @@
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="180"/>
-                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="180"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Employer" FontWeight="SemiBold"/>
@@ -89,6 +90,7 @@
                         <TextBlock Grid.Column="2" Text="Phone" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="3" Text="Supervisor" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="4" Text="Supervisor Phone" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="Website" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -101,7 +103,8 @@
                                 <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="180"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{x:Bind Name}" TextWrapping="WrapWholeWords" 
@@ -110,6 +113,7 @@
                             <TextBlock Grid.Column="2" Text="{x:Bind Phone}"/>
                             <TextBlock Grid.Column="3" Text="{x:Bind Supervisor}" FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
                             <TextBlock Grid.Column="4" Text="{x:Bind SupervisorPhone}"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind Website}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

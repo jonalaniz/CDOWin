@@ -47,6 +47,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -71,8 +72,11 @@
             <!-- Row 3: Supervisor -->
             <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Label="Supervisor" 
                                Value="{x:Bind ViewModel.Selected.FormattedSuperviror, Mode=OneWay}"/>
-            <!-- Row 4: Notes -->
-            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Label="Notes" 
+            <!-- Row 4: Supervisor -->
+            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Label="Website" 
+                               Value="{x:Bind ViewModel.Selected.Website, Mode=OneWay}"/>
+            <!-- Row 5: Notes -->
+            <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Label="Notes" 
                                Value="{x:Bind ViewModel.Selected.Notes, Mode=OneWay}"/>
         </Grid>
     </Grid>

@@ -113,16 +113,11 @@ public partial class CounselorsViewModel : ObservableObject {
         if (Selected != null && Selected.Id == id) return;
 
         var counselor = await _service.GetCounselorAsync(id);
-        Selected = counselor;
 
         OnUI(() => {
+            Selected = counselor;
             Clients = new ObservableCollection<ClientSummaryDTO>(counselor.Clients);
         });
-    }
-
-    public async Task ReloadCounselorAsync() {
-        if (Selected == null) return;
-        Selected = await _service.GetCounselorAsync(Selected.Id);
     }
 
     public async Task<Result<Counselor>> UpdateCounselorAsync(UpdateCounselorDTO update) {
@@ -131,7 +126,7 @@ public partial class CounselorsViewModel : ObservableObject {
         var result = await _service.UpdateCounselorAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
 
-        await ReloadCounselorAsync();
+        await LoadSelectedCounselorAsync(result.Value!.Id);
         return result;
     }
 

@@ -41,6 +41,8 @@ public sealed partial class CounselorInspector : Page {
             ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;
         }
+
+        _ = ViewModel.LoadSelectedCounselorAsync(ViewModel.Selected.Id);
     }
 
     private async void SA_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {

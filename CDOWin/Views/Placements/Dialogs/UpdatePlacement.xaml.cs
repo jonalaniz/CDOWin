@@ -53,19 +53,19 @@ public sealed partial class UpdatePlacement : Page {
         if (ViewModel.Original.EndDate is DateTime endDate)
             EndDatePicker.Date = endDate;
 
-        if (TryParseDateString(ViewModel.Original.FirstFiveDays1, out var day1))
+        if (TryParseDateString(ViewModel.Original.Day1, out var day1))
             Day1Picker.Date = day1;
 
-        if (TryParseDateString(ViewModel.Original.FirstFiveDays2, out var day2))
+        if (TryParseDateString(ViewModel.Original.Day2, out var day2))
             Day2Picker.Date = day2;
 
-        if (TryParseDateString(ViewModel.Original.FirstFiveDays3, out var day3))
+        if (TryParseDateString(ViewModel.Original.Day3, out var day3))
             Day3Picker.Date = day3;
 
-        if (TryParseDateString(ViewModel.Original.FirstFiveDays4, out var day4))
+        if (TryParseDateString(ViewModel.Original.Day4, out var day4))
             Day4Picker.Date = day4;
 
-        if (TryParseDateString(ViewModel.Original.FirstFiveDays5, out var day5))
+        if (TryParseDateString(ViewModel.Original.Day5, out var day5))
             Day5Picker.Date = day5;
     }
 
@@ -76,7 +76,7 @@ public sealed partial class UpdatePlacement : Page {
         if (sender is not MenuFlyoutItem item || item.Tag is not Invoice sa)
             return;
         SANumberDropDownButton.Content = sa.ServiceAuthorizationNumber;
-        ViewModel.Updated.PoNumber = sa.ServiceAuthorizationNumber;
+        ViewModel.Updated.SaNumber = sa.ServiceAuthorizationNumber;
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
@@ -116,19 +116,19 @@ public sealed partial class UpdatePlacement : Page {
                     ViewModel.Updated.EndDate = offset.DateTime.Date.ToUniversalTime();
                     break;
                 case UpdateField.Day1:
-                    ViewModel.Updated.FirstFiveDays1 = dateString;
+                    ViewModel.Updated.Day1 = dateString;
                     break;
                 case UpdateField.Day2:
-                    ViewModel.Updated.FirstFiveDays2 = dateString;
+                    ViewModel.Updated.Day2 = dateString;
                     break;
                 case UpdateField.Day3:
-                    ViewModel.Updated.FirstFiveDays3 = dateString;
+                    ViewModel.Updated.Day3 = dateString;
                     break;
                 case UpdateField.Day4:
-                    ViewModel.Updated.FirstFiveDays4 = dateString;
+                    ViewModel.Updated.Day4 = dateString;
                     break;
                 case UpdateField.Day5:
-                    ViewModel.Updated.FirstFiveDays5 = dateString;
+                    ViewModel.Updated.Day5 = dateString;
                     break;
             }
         }
@@ -178,7 +178,7 @@ public sealed partial class UpdatePlacement : Page {
 
         switch (field) {
             case UpdateField.Supervisor:
-                ViewModel.Updated.Supervisor = text;
+                ViewModel.Updated.SupervisorName = text;
                 break;
             case UpdateField.SupervisorPhone:
                 ViewModel.Updated.SupervisorPhone = text;
@@ -190,26 +190,26 @@ public sealed partial class UpdatePlacement : Page {
                 ViewModel.Updated.Position = text;
                 break;
             case UpdateField.HoursWorked:
-                ViewModel.Updated.NumbersOfHoursWorking = text;
+                ViewModel.Updated.HoursWorking = text;
                 break;
             case UpdateField.HourlyWage:
-                ViewModel.Updated.HourlyOrMonthlyWages = text;
+                ViewModel.Updated.Wages = text;
                 break;
             case UpdateField.Website:
                 ViewModel.Updated.Website = text;
                 break;
             case UpdateField.JobDuties:
-                ViewModel.Updated.DescriptionOfDuties = text;
+                ViewModel.Updated.JobDuties = text;
                 break;
             case UpdateField.WorkSchedule:
-                ViewModel.Updated.DescriptionOfWorkSchedule = text;
+                ViewModel.Updated.WorkSchedule = text;
                 break;
         }
     }
 
     private void UpdateSelectedEmployer(Employer employer) {
         ViewModel.Updated.EmployerID = employer.Id.ToString();
-        ViewModel.Updated.Supervisor = employer.Supervisor;
+        ViewModel.Updated.SupervisorName = employer.Supervisor;
         ViewModel.Updated.SupervisorPhone = employer.SupervisorPhone;
         ViewModel.Updated.SupervisorEmail = employer.SupervisorEmail;
 

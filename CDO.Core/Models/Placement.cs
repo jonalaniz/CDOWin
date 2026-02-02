@@ -8,8 +8,9 @@ public record class Placement(
     string? EmployerID,
     int? ClientID,
     int? CounselorID,
-    string? PoNumber,
-    string? Supervisor,
+    int? InvoiceID,
+    string? SaNumber,
+    string? SupervisorName,
     string? SupervisorEmail,
     string? SupervisorPhone,
     string? Position,
@@ -17,17 +18,18 @@ public record class Placement(
     float? DaysOnJob,
     string? ClientName,
     string? CounselorName,
+    string? EmployerName,
     bool? Active,
     string? Website,
-    string? DescriptionOfDuties,
-    string? NumbersOfHoursWorking,
-    string? FirstFiveDays1,
-    string? FirstFiveDays2,
-    string? FirstFiveDays3,
-    string? FirstFiveDays4,
-    string? FirstFiveDays5,
-    string? DescriptionOfWorkSchedule,
-    string? HourlyOrMonthlyWages,
+    string? JobDuties,
+    string? HoursWorking,
+    string? Day1,
+    string? Day2,
+    string? Day3,
+    string? Day4,
+    string? Day5,
+    string? WorkSchedule,
+    string? Wages,
     DateTime? HireDate,
     DateTime? EndDate,
 
@@ -42,7 +44,7 @@ public record class Placement(
 
     public string? FormattedSupervisor {
         get {
-            var text = $"{Supervisor}\n{SupervisorPhone}\n{SupervisorEmail}";
+            var text = $"{SupervisorName}\n{SupervisorPhone}\n{SupervisorEmail}";
             if (string.IsNullOrWhiteSpace(text)) { return null; }
             return text;
         }

@@ -37,4 +37,12 @@ public class EmployerSummaryDTO {
                 return $"{City}, {State}";
         }
     }
+
+    public string? FormattedSupervisor {
+        get {
+            var text = $"{Supervisor}\n{SupervisorPhone}";
+            if (string.IsNullOrWhiteSpace(text)) { return null; }
+            return text;
+        }
+    }
 }

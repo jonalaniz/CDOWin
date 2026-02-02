@@ -46,6 +46,9 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial bool IsFiltered { get; set; } = false;
+
     // =========================
     // Constructor
     // =========================
@@ -68,6 +71,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnIsFilteredChanged(bool value) => ApplyFilter();
 
     // =========================
     // Public Methods
@@ -109,7 +113,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var serviceAuthorizations = await _dataCoordinator.GetSAsAsync();
         if (serviceAuthorizations == null) return;
 
-        var snapshot = serviceAuthorizations.OrderBy(o => o.ServiceAuthorizationNumber).ToList().AsReadOnly();
+        var snapshot = serviceAuthorizations.OrderBy(o => o.EndDate).ToList().AsReadOnly();
         _cache = snapshot;
         ApplyFilter();
     }
@@ -142,20 +146,19 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     void ApplyFilter() {
         int? previousSelection = SelectedSummary?.Id;
+        var filterDate = IsFiltered ? DateTime.Today : DateTime.MinValue;
 
-        if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<Invoice>(_cache);
-            ReSelect(previousSelection);
-            return;
+        IEnumerable<Invoice> result = _cache.Where(i => i.EndDate >= filterDate);
+
+        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+            var query = SearchQuery.Trim().ToLower();
+            result = result.Where(i =>
+            (i.ClientName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (i.CounselorName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (i.ServiceAuthorizationNumber).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (i.Description).Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            );
         }
-
-        var query = SearchQuery.Trim().ToLower();
-        var result = _cache.Where(i =>
-        (i.ClientName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (i.CounselorName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (i.ServiceAuthorizationNumber).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (i.Description).Contains(query, StringComparison.CurrentCultureIgnoreCase)
-        );
 
         OnUI(() => {
             Filtered = new ObservableCollection<Invoice>(result);

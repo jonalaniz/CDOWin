@@ -41,7 +41,17 @@ public sealed partial class PlacementsPage : Page {
             _ = ViewModel.LoadSelectedPlacementAsync(placement.Id);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e) {
+    private void GoToClient_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        ViewModel.RequestClient(id);
+    }
 
+    private void GoToCounselor_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        ViewModel.RequestCounselor(id);
+    }
+
+    private void GoToEmployer_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
     }
 }

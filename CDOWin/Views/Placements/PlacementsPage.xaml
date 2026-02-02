@@ -114,7 +114,7 @@
                                 <TextBlock Grid.Column="0" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
                                         IsEnabled="{x:Bind ClientID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="Button_Click" Tag="{x:Bind ClientID}">
+                                        Click="GoToClient_Click" Tag="{x:Bind ClientID}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
@@ -128,7 +128,7 @@
                                 <TextBlock Grid.Column="0" Text="{x:Bind EmployerName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
                                         IsEnabled="{x:Bind EmployerID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="Button_Click" Tag="{x:Bind EmployerID}">
+                                        Click="GoToEmployer_Click" Tag="{x:Bind EmployerID}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
@@ -142,7 +142,7 @@
                                 <TextBlock Grid.Column="0" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
                                         IsEnabled="{x:Bind CounselorID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="Button_Click" Tag="{x:Bind CounselorID}">
+                                        Click="GoToCounselor_Click" Tag="{x:Bind CounselorID}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>

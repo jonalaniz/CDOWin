@@ -110,7 +110,7 @@
                         <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                     </AppBarButton.Icon>
                     <AppBarButton.Flyout>
-                        <MenuFlyout >
+                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
                             <MenuFlyoutItem Text="Delete..." Click="Delete_MenuFlyoutItem_Click">
                                 <MenuFlyoutItem.Icon>
                                     <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>

@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace CDOWin.Views.Placements.Dialogs;
@@ -16,7 +17,7 @@ public sealed partial class CreatePlacements : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<Employer> _employers = AppServices.EmployersViewModel.GetEmployers();
+    private List<Employer> _employers = [];
     private readonly CreatePlacementViewModel ViewModel;
 
     // =========================
@@ -26,6 +27,8 @@ public sealed partial class CreatePlacements : Page {
         ViewModel = viewModel;
         InitializeComponent();
         BuildDropDown();
+
+        _ = LoadEmployersAsync();
     }
 
     // =========================
@@ -46,6 +49,13 @@ public sealed partial class CreatePlacements : Page {
         }
 
         SANumberDropDownButton.Flyout = flyout;
+    }
+
+    private async Task LoadEmployersAsync() {
+        var result = await AppServices.EmployersViewModel.GetEmployers();
+        if(result == null) return;
+
+        _employers = result;
     }
 
     // =========================

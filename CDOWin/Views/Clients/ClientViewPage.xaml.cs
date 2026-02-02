@@ -160,6 +160,7 @@ public sealed partial class ClientViewPage : Page {
     // Placements
     private async void CreatePlacement_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null) return;
+        Debug.WriteLine("CreatePlacement Clicked");
 
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Placement for {ViewModel.Selected.NameAndID}");
         var createPlacementVM = AppServices.CreatePlacementViewMdoel(ViewModel.Selected);

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CDOWin.Views.Placements.Dialogs;
 
@@ -16,7 +17,7 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<Employer> _employers = AppServices.EmployersViewModel.GetEmployers();
+    private List<Employer> _employers = [];
     private readonly PlacementUpdateViewModel ViewModel;
 
     // =========================
@@ -28,10 +29,12 @@ public sealed partial class UpdatePlacement : Page {
         SetupNumberBoxes();
         SetupAutoSuggestionBox();
         SetupDatePickers();
+
+        _ = LoadEmployersAsync();
     }
 
     // =========================
-    // Constructor
+    // UI Setup
     // =========================
     private void SetupNumberBoxes() {
         if (ViewModel.Original.PlacementNumber is int number)
@@ -67,6 +70,13 @@ public sealed partial class UpdatePlacement : Page {
 
         if (TryParseDateString(ViewModel.Original.Day5, out var day5))
             Day5Picker.Date = day5;
+    }
+
+    private async Task LoadEmployersAsync() {
+        var result = await AppServices.EmployersViewModel.GetEmployers();
+        if (result == null) return;
+
+        _employers = result;
     }
 
     // =========================

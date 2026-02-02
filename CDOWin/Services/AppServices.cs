@@ -77,12 +77,34 @@ public static class AppServices {
             _clientSelectionService
         );
 
-        CounselorsViewModel = new CounselorsViewModel(DataCoordinator, CounselorService, _counselorSelecitonService, _clientSelectionService);
+        CounselorsViewModel = new CounselorsViewModel(
+            DataCoordinator, CounselorService, 
+            _counselorSelecitonService,
+            _clientSelectionService
+            );
+
         EmployersViewModel = new EmployersViewModel(DataCoordinator, EmployerService);
-        SAsViewModel = new ServiceAuthorizationsViewModel(DataCoordinator, SAService, _clientSelectionService, _counselorSelecitonService);
-        RemindersViewModel = new RemindersViewModel(DataCoordinator, ReminderService, _clientSelectionService);
+
+        SAsViewModel = new ServiceAuthorizationsViewModel(
+            DataCoordinator, 
+            SAService, 
+            _clientSelectionService, 
+            _counselorSelecitonService
+            );
+
+        RemindersViewModel = new RemindersViewModel(
+            DataCoordinator, 
+            ReminderService, 
+            _clientSelectionService
+            );
+
         StatesViewModel = new StatesViewModel(DataCoordinator, StateService);
-        PlacementsViewModel = new PlacementsViewModel(DataCoordinator, PlacementService);
+        PlacementsViewModel = new PlacementsViewModel(
+            DataCoordinator, 
+            PlacementService,
+            _clientSelectionService,
+            _counselorSelecitonService
+            );
         CalendarViewModel = new CalendarViewModel(RemindersViewModel);
 
     }

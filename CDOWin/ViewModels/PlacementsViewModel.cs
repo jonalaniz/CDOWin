@@ -3,6 +3,7 @@ using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
+using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -20,7 +21,9 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     private readonly IPlacementService _service;
     private readonly DataCoordinator _dataCoordinator;
-    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
+    private readonly ClientSelectionService _clientSelectionService;
+    private readonly CounselorSelectionService _counselorSelectionService;
+    private readonly DispatcherQueue _dispatcher;
 
     // =========================
     // Private Backing Fields
@@ -49,9 +52,18 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public PlacementsViewModel(DataCoordinator dataCoordinator, IPlacementService service) {
+    public PlacementsViewModel(
+        DataCoordinator dataCoordinator, 
+        IPlacementService service,
+        ClientSelectionService clientSelectionService,
+        CounselorSelectionService counselorSelectionService
+        ) {
         _service = service;
         _dataCoordinator = dataCoordinator;
+
+        _clientSelectionService = clientSelectionService;
+        _counselorSelectionService = counselorSelectionService;
+        _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
     // =========================
@@ -59,6 +71,19 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
     partial void OnIsFilteredChanged(bool value) => ApplyFilter();
+
+    // =========================
+    // Public Methods
+    // =========================
+    public void RequestClient(int clientID) {
+        AppServices.Navigation.Navigate(Views.CDOFrame.Clients);
+        _clientSelectionService.RequestSelectedClient(clientID);
+    }
+
+    public void RequestCounselor(int counselorID) {
+        AppServices.Navigation.Navigate(Views.CDOFrame.Counselors);
+        _counselorSelectionService.RequestSelectedCounselor(counselorID);
+    }
 
     // =========================
     // CRUD Methods

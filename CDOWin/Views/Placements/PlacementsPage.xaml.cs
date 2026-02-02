@@ -41,12 +41,6 @@ public sealed partial class PlacementsPage : Page {
             _ = ViewModel.LoadSelectedPlacementAsync(placement.Id);
     }
 
-    private void Filter_Click(object sender, RoutedEventArgs e) {
-        if (sender is not AppBarToggleButton button) return;
-        // Filter this shit
-        Debug.WriteLine(button.IsChecked);
-    }
-
     private void Button_Click(object sender, RoutedEventArgs e) {
 
     }

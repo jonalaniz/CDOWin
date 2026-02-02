@@ -43,10 +43,12 @@ public partial class PlacementsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial bool IsFiltered { get; set; } = false;
+
     // =========================
     // Constructor
     // =========================
-
     public PlacementsViewModel(DataCoordinator dataCoordinator, IPlacementService service) {
         _service = service;
         _dataCoordinator = dataCoordinator;
@@ -56,6 +58,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnIsFilteredChanged(bool value) => ApplyFilter();
 
     // =========================
     // CRUD Methods
@@ -64,7 +67,7 @@ public partial class PlacementsViewModel : ObservableObject {
         var placements = await _dataCoordinator.GetPlacementSummariesAsync(force);
         if(placements == null) return;
 
-        var snapshot = placements.OrderBy(o => o.Id).ToList().AsReadOnly();
+        var snapshot = placements.OrderBy(o => o.HireDate).ToList().AsReadOnly();
         _cache = snapshot;
         ApplyFilter();
     }
@@ -94,20 +97,19 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     private void ApplyFilter() {
         string? previousSelection = Selected?.Id;
+        var filterDate = IsFiltered ? DateTime.Today : DateTime.MinValue;
 
-        if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<PlacementSummaryDTO>(_cache);
-            ReSelect(previousSelection);
-            return;
+        IEnumerable<PlacementSummaryDTO> result = _cache.Where(p => (p.HireDate ?? DateTime.MinValue.AddDays(1)) >= filterDate);
+
+        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+            var query = SearchQuery.Trim().ToLower();
+            result = _cache.Where(r =>
+            (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            );
         }
-
-        var query = SearchQuery.Trim().ToLower();
-        var result = _cache.Where(r =>
-        (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
-        );
 
         OnUI(() => {
             Filtered = new ObservableCollection<PlacementSummaryDTO>(result);

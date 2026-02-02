@@ -41,15 +41,13 @@ public sealed partial class ServiceAuthorizationsPage : Page {
         }
     }
 
-    private void GoToClient_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+    private void GoToClient_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
         ViewModel.RequestClient(id);
     }
 
-    private void GoToCounselor_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        Debug.WriteLine($"Clicked");
+    private void GoToCounselor_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        Debug.WriteLine($"Clicked: {id}");
         ViewModel.RequestCounselor(id);
     }
 }

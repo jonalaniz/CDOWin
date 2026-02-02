@@ -185,9 +185,6 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="Case Load ID:"/>
-                    <Run Text="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
-                    <Run Text=","/>
                     <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
                     <Run Text="Client(s)"/>
                 </TextBlock>

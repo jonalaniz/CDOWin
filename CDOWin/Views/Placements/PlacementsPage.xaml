@@ -73,7 +73,6 @@
                             <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="80"/>
@@ -84,10 +83,9 @@
                         <TextBlock Grid.Column="2" Text="Counselor" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="3" Text="SA Number" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="4" Text="Supervisor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" Text="Supervisor Phone" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" Text="Position" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="7" Text="Salary" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="8" Text="Hire Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="Position" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Salary" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="7" Text="Hire Date" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -100,7 +98,6 @@
                                 <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="80"/>
@@ -152,11 +149,10 @@
 
                             <!-- Fields -->
                             <TextBlock Grid.Column="3" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind SupervisorName}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="5" Text="{x:Bind SupervisorPhone}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="6" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="7" Text="{x:Bind FormattedSalary}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="8" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind FormattedSupervisor}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="6" Text="{x:Bind FormattedSalary}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="7" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

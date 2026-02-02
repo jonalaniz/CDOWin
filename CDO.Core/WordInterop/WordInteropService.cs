@@ -66,6 +66,7 @@ public sealed class WordInteropService {
             doc.SaveAs2(outputPath, Word.WdSaveFormat.wdFormatXMLDocument);
 
             app.Visible = true;
+            app.Activate();
             doc.Activate();
         } catch (Exception ex) {
             Debug.WriteLine(ex.ToString());

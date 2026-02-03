@@ -108,7 +108,7 @@
     
     <!-- DataTable (Grid) Header Style-->
     <Style x:Key="DataTableHeaderStyle" TargetType="Grid">
-        <Setter Property="Background" Value="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"/>
+        <Setter Property="Background" Value="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource DividerStrokeColorDefaultBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Padding" Value="16,8"/>

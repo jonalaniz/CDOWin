@@ -29,14 +29,14 @@ public sealed partial class Notes : Page {
     private void EditButton_Click(object sender, RoutedEventArgs e) {
         NotesBox.IsReadOnly = false;
         SaveButton.Visibility = Visibility.Visible;
-        NewButton.IsEnabled = false;
+        NewButton.Visibility = Visibility.Collapsed;
     }
 
     private async void SaveButton_Click(object sender, RoutedEventArgs e) {
         if (ViewModel == null || ViewModel.Selected == null) return;
 
         SaveButton.Visibility = Visibility.Collapsed;
-        NewButton.IsEnabled = true;
+        NewButton.Visibility = Visibility.Visible;
         NotesBox.IsReadOnly = true;
 
         var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
@@ -47,7 +47,7 @@ public sealed partial class Notes : Page {
             ErrorHandler.Handle(result, this.XamlRoot);
     }
 
-    private async void SplitButton_Click(SplitButton sender, SplitButtonClickEventArgs args) {
+    private async void NewButton_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null || sender is null) return;
         var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
 

@@ -15,7 +15,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -35,12 +34,8 @@
             </AppBarButton>
         </CommandBar>
 
-        <!-- Details Caption -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,-10,16,8"
-                   Style="{StaticResource InspectorCaptionStyle}" Text="Details"/>
-
         <!-- Detials Grid -->
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  
               Style="{StaticResource InspectorDetialsGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -100,7 +95,7 @@
         </Grid>
 
         <!-- Row 5: Button Row -->
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
               Style="{StaticResource InspectorButtonGridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

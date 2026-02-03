@@ -16,7 +16,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -37,12 +36,8 @@
             </AppBarButton>
         </CommandBar>
 
-        <!-- Counselor Caption-->
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,-10,16,8"
-                   Style="{StaticResource InspectorCaptionStyle}" Text="Counselor"/>
-
         <!-- Details Grid -->
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
               Style="{StaticResource InspectorDetialsGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -84,11 +79,11 @@
         </Grid>
 
         <!-- Counselor Caption-->
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,4,16,8"
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,4,16,8"
                    Style="{StaticResource InspectorCaptionStyle}" Text="Service Authorizations"/>
 
         <!-- Item Repeater -->
-        <ScrollViewer Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,0,12,0">
+        <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,0,12,0">
             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Invoices, Mode=OneWay}">
                 <DataTemplate x:DataType="models:Invoice">
 

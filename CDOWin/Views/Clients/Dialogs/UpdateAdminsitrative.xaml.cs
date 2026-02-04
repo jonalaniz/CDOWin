@@ -1,10 +1,8 @@
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
 using System;
-using System.Threading.Tasks;
 
 namespace CDOWin.Views.Clients.Dialogs;
 
@@ -46,7 +44,7 @@ public sealed partial class UpdateAdminsitrative : Page {
     // Property Change Methods
     // =========================
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-        if (sender is not TextBox textbox || textbox.Tag is not AdministrativeField field) 
+        if (sender is not TextBox textbox || textbox.Tag is not AdministrativeField field)
             return;
 
         var text = textbox.Text.NormalizeString();
@@ -63,7 +61,7 @@ public sealed partial class UpdateAdminsitrative : Page {
     }
 
     private void UpdateValue(string value, AdministrativeField type) {
-        switch(type) {
+        switch (type) {
             case AdministrativeField.FirstName:
                 ViewModel.UpdatedClient.FirstName = value;
                 break;

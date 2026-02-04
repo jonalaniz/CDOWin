@@ -1,6 +1,4 @@
-﻿using Microsoft.Office.Interop.Word;
-
-namespace CDO.Core.DTOs;
+﻿namespace CDO.Core.DTOs;
 
 public class PlacementSummaryDTO {
     // IDs: Optional, point to other entities in DB

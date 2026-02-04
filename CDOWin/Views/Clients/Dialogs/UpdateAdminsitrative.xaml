@@ -34,10 +34,15 @@
                  TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 1: Documents Folder Label -->
-        <controls:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Documents Folder" 
-                            Value="{x:Bind ViewModel.FolderPath, Mode=OneWay}"/>
-        
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Select Documents Folder"
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                    Spacing="8" Orientation="Horizontal">
+            <TextBlock Text="Documents Folder:"/>
+            <TextBlock Text="{x:Bind ViewModel.FolderPath, Mode=OneWay}"/>
+        </StackPanel>
+
+        <!-- Row 2: Documents Change Button -->        
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="Change Documents Folder"
                 VerticalAlignment="Top" HorizontalAlignment="Stretch"
                 Click="DocumentsButton_Click"/>
     </Grid>

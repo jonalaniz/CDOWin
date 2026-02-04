@@ -1,6 +1,7 @@
 ﻿namespace CDOWin.Views.Clients.Dialogs;
 
 public enum ClientEditType {
+    Administrative,
     Personal,
     Case,
     Employment,
@@ -8,9 +9,13 @@ public enum ClientEditType {
     Contact
 }
 
-public enum PersonalField {
+public enum AdministrativeField {
     FirstName,
     LastName,
+    DocumentsFolder
+}
+
+public enum PersonalField {
     DL,
     SSN,
     Languages,

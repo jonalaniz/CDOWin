@@ -100,10 +100,7 @@ public sealed partial class UpdatePersonalInformation : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        if (string.IsNullOrWhiteSpace(text)) return;
         UpdateValue(text, field);
     }
 
@@ -143,10 +140,7 @@ public sealed partial class UpdatePersonalInformation : Page {
     private int? ParseSSN(string value) {
         var sanitizedValue = value.Trim();
         if (sanitizedValue.Length <= 11) {
-            int x;
-            if (int.TryParse(value, out x)) {
-                return x;
-            }
+            if (int.TryParse(value, out int x)) return x;
         }
         return null;
     }

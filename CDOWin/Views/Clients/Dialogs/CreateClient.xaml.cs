@@ -95,6 +95,18 @@ public sealed partial class CreateClient : Page {
     }
 
     // =========================
+    // Administrative Field Updates
+    // =========================
+    private void AdminTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        if (sender is not TextBox textbox || textbox.Tag is not AdministrativeField field)
+            return;
+
+        var text = textbox.Text.NormalizeString();
+        if (string.IsNullOrWhiteSpace(text)) return;
+        UpdateValue(text, field);
+    }
+
+    // =========================
     // Personal Field Updates
     // =========================
     private void PNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
@@ -241,15 +253,21 @@ public sealed partial class CreateClient : Page {
     // Utility Methods
     // =========================
 
+    // Administrative Fields
+    private void UpdateValue(string value, AdministrativeField type) {
+        switch (type) {
+            case AdministrativeField.FirstName:
+                ViewModel.FirstName = value;
+                break;
+            case AdministrativeField.LastName:
+                ViewModel.LastName = value;
+                break;
+        }
+    }
+
     // Personal Fields
     private void UpdateValue(string value, PersonalField type) {
         switch (type) {
-            case PersonalField.FirstName:
-                ViewModel.FirstName = value;
-                break;
-            case PersonalField.LastName:
-                ViewModel.LastName = value;
-                break;
             case PersonalField.Languages:
                 ViewModel.FluentLanguages = value;
                 break;

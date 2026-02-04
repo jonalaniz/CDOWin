@@ -5,12 +5,20 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CDOWin.ViewModels;
 
-public partial class ClientUpdateViewModel(Client client) : ObservableObject {
+public partial class ClientUpdateViewModel : ObservableObject {
     // =========================
     // Dependencies
     // =========================
-    public Client OriginalClient = client;
+    public Client OriginalClient;
     public UpdateClientDTO UpdatedClient = new();
+
+    [ObservableProperty]
+    public partial string FolderPath { get; set; }
+
+    public ClientUpdateViewModel(Client client) {
+        OriginalClient = client;
+        FolderPath = client.DocumentsFolderPath;
+    }
 
     // =========================
     // CRUD Methods

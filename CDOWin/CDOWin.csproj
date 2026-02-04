@@ -36,6 +36,7 @@
     <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\Clients\Dialogs\CreateClient.xaml" />
+    <None Remove="Views\Clients\Dialogs\UpdateAdminsitrative.xaml" />
     <None Remove="Views\ClientViewPage.xaml" />
     <None Remove="Views\Counselors\Dialogs\CreateCounselor.xaml" />
     <None Remove="Views\Counselors\Dialogs\UpdateCounselor.xaml" />
@@ -284,6 +285,11 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Clients\Dialogs\UpdateAdminsitrative.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Placements\Dialogs\UpdatePlacement.xaml">

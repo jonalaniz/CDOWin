@@ -34,15 +34,41 @@
 
         <!-- CommandBar -->
         <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+            
+            <!-- Documents Button -->
             <AppBarButton Width="56" Label="Documents" Click="OpenDocuments_Clicked" IsCompact="False" ToolTipService.ToolTip="Open Documents">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE838;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
             </AppBarButton>
+            
+            <!-- Reminders Button -->
             <AppBarButton Width="56" Label="New Reminder" Click="CreateReminder_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Reminder">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xED0E;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
+            </AppBarButton>
+            
+            <!-- Menu Button -->
+            <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton.Icon>
+                <AppBarButton.Flyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                        <MenuFlyoutItem Text="Edit..." Click="EditButton_Clicked" Tag="{x:Bind dialogs:ClientEditType.Administrative}">
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="Edit" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator/>
+                        <MenuFlyoutItem Text="Delete...">
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
             </AppBarButton>
         </CommandBar>
 

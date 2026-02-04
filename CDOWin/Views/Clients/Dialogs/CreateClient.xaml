@@ -37,12 +37,12 @@
                     
                     <!-- Row 0: Name -->
                     <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Header="First Name" 
-                             Tag="{x:Bind dialogs:PersonalField.FirstName}"
-                             TextChanged="PTextBox_TextChanged"
+                             Tag="{x:Bind dialogs:AdministrativeField.FirstName}"
+                             TextChanged="AdminTextBox_TextChanged"
                              MaxLength="50"/>
                     <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Header="Last Name"
-                             Tag="{x:Bind dialogs:PersonalField.LastName}"
-                             TextChanged="PTextBox_TextChanged"
+                             Tag="{x:Bind dialogs:AdministrativeField.LastName}"
+                             TextChanged="AdminTextBox_TextChanged"
                              MaxLength="50"/>
 
                     <!-- Row 1: DOB/DL/SSN -->

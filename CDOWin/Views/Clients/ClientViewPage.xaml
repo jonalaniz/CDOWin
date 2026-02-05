@@ -263,15 +263,18 @@
                         <c:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Label="Case ID" 
                                      Value="{x:Bind ViewModel.Selected.CaseID, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Tier" 
-                                     Value="{x:Bind ViewModel.Selected.Status, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Case Load"
+                                     Value="{x:Bind ViewModel.Selected.CounselorReference.CaseLoadID}"/>
 
                         <!-- Benefits/Premiums Section -->
                         <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Benefits" 
                                      Value="{x:Bind ViewModel.Selected.Benefits, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Label="Premiums" 
+                        <c:LabelPair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Label="Premiums" 
                                      Value="{x:Bind ViewModel.Selected.Premiums, Mode=OneWay}"/>
+
+                        <c:LabelPair Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Label="Tier" 
+                                     Value="{x:Bind ViewModel.Selected.Status, Mode=OneWay}"/>
 
                         <!-- Counselor Section -->
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  

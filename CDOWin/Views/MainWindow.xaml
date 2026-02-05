@@ -35,7 +35,7 @@
                   IsPaneToggleButtonVisible="False"/>
 
         <!-- Left Column: Sidebar -->
-        <Frame Grid.Row="1" Grid.Column="0" Width="324" Padding="4,0,4,0"
+        <Frame Grid.Row="1" Grid.Column="0" Width="320" Padding="4,0,4,0"
                x:Name="SidebarFrame" IsNavigationStackEnabled="False"/>
 
         <!-- Right Column: Selector + Content -->

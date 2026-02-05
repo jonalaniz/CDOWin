@@ -51,6 +51,9 @@ public partial class ClientsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial bool IsFiltered { get; set; } = true;
+
 
     // =========================
     // Constructor
@@ -69,6 +72,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnIsFilteredChanged(bool value) => ApplyFilter();
 
     private void OnRequestSelectedClientChange(int clientId) {
         if (Selected != null && Selected.Id == clientId) return;
@@ -157,24 +161,22 @@ public partial class ClientsViewModel : ObservableObject {
     private void ApplyFilter() {
         int? previousSelection = Selected?.Id;
 
-        if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<ClientSummaryDTO>(_cache);
-            ReSelect(previousSelection);
-            return;
-        }
+        IEnumerable<ClientSummaryDTO> result = IsFiltered ? _cache.Where(i => i.Active == true) : _cache;
 
-        var query = SearchQuery.Trim().ToLower();
-        var result = _cache.Where(c =>
-        (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.Phone2 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.Phone3 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.EmploymentGoal ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.CaseID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
-        );
+        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+            var query = SearchQuery.Trim().ToLower();
+            result = _cache.Where(c =>
+            (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.Phone2 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.Phone3 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.EmploymentGoal ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.CaseID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            );
+        }
 
         OnUI(() => {
             Filtered = new ObservableCollection<ClientSummaryDTO>(result);

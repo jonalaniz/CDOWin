@@ -19,7 +19,7 @@
         
         <!-- Columns -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="344"/>
         </Grid.ColumnDefinitions>
@@ -47,6 +47,9 @@
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+                <AppBarToggleButton Width="56" IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" ToolTipService.ToolTip="Filter SAs">
+                    <FontIcon Glyph="&#xE71C;"/>
+                </AppBarToggleButton>
                 <AppBarButton Width="56" Click="NewClient_Click" IsCompact="False" ToolTipService.ToolTip="New Client">
                     <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton>

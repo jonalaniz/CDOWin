@@ -3,8 +3,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CDOWin.Converters;
 

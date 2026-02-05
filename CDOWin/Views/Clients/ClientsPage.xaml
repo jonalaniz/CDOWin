@@ -65,7 +65,7 @@
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:ClientSummaryDTO">
-                        <Grid Margin="0,8,8,8">
+                        <Grid Margin="0,8,8,8" Opacity="{x:Bind InActive, Converter={StaticResource BoolOpacityConverter}}">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>

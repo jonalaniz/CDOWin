@@ -7,7 +7,7 @@ public class ClientSummaryDTO {
     public required string LastName { get; init; }
     public required string City { get; init; }
     public required string State { get; init; }
-
+    public required bool Active { get; init; }
     public required bool TTW { get; init; }
 
     // Nullable fields
@@ -24,6 +24,7 @@ public class ClientSummaryDTO {
 
     // Computed Properties
     public string Name => $"{LastName}, {FirstName}";
+    public bool InActive => !Active;
     public string FormattedName => $"{FirstName} {LastName}";
     public string FormattedAddress {
         get {

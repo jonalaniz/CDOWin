@@ -4,6 +4,7 @@ namespace CDO.Core.Models;
 
 public record class Client(
     int Id,
+    bool Active,
     string FirstName,
     string LastName,
     bool TTW,
@@ -35,7 +36,6 @@ public record class Client(
     string? ClientNotes,
     string? Conditions,
     string? DocumentFolder,
-    bool? Active,
     string? EmploymentGoal,
     int? EmployerID,
     string? Status,
@@ -56,6 +56,7 @@ public record class Client(
     string? Premiums,
     UpdateCounselorDTO? CounselorReference
     ) {
+    public bool InActive => !Active;
     public string NameAndID => $"{FirstName} {LastName} ({Id})";
     public string FormattedName => $"{FirstName} {LastName}";
     public string? DocumentsFolderPath => DocumentFolder?.Replace('#', ' ').Trim();

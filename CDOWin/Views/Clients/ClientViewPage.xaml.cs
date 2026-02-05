@@ -214,10 +214,14 @@ public sealed partial class ClientViewPage : Page {
 
 
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is CheckBox checkBox && checkBox.Tag is CheckboxTag tag) {
-            var isChecked = checkBox.IsChecked;
-            _ = UpdateCheckboxAsync(tag, isChecked ?? false);
-        }
+        if (sender is not CheckBox checkBox || checkBox.Tag is not CheckboxTag tag) return;
+        var isChecked = checkBox.IsChecked;
+        _ = UpdateCheckboxAsync(tag, isChecked ?? false);
+    }
+
+    private void ToggleActive_Clicked(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem || ViewModel.Selected == null) return;
+        _ = UpdateActiveAsync(!ViewModel.Selected.Active);
     }
 
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
@@ -263,6 +267,14 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     // Utility Methods
     // =========================
+    private async Task UpdateActiveAsync(bool isActive) {
+        if (ViewModel.Selected == null) return;
+
+        var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
+        updateVM.UpdatedClient.Active = isActive;
+
+        _ = UpdateClient(updateVM.UpdatedClient);
+    }
     private async Task UpdateCheckboxAsync(CheckboxTag tag, bool isChecked) {
         if (ViewModel.Selected == null) return;
 

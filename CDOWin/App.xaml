@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
             <converters:BoolCompletedConverter x:Key="BoolCompletedConverter"/>
+            <converters:BoolActiveConverter x:Key="BoolActiveConverter"/>
             <converters:BoolTransparentConverter x:Key="BoolTransparentConverter"/>
             <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
             <converters:NullOpacityConverter x:Key="NullOpacityConverter"/>

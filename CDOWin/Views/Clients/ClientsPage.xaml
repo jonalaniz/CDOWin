@@ -47,7 +47,7 @@
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarToggleButton Width="56" IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" ToolTipService.ToolTip="Filter SAs">
+                <AppBarToggleButton Width="56" IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" ToolTipService.ToolTip="Filter Inactive">
                     <FontIcon Glyph="&#xE71C;"/>
                 </AppBarToggleButton>
                 <AppBarButton Width="56" Click="NewClient_Click" IsCompact="False" ToolTipService.ToolTip="New Client">

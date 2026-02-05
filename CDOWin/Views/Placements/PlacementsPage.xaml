@@ -43,7 +43,7 @@
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
                 <AppBarToggleButton Width="56" IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" ToolTipService.ToolTip="Filter SAs">
-                    <FontIcon Glyph="&#xE71C;"/>
+                    <FontIcon Glyph="&#xE71C;" Foreground="{x:Bind ViewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"/>
                 </AppBarToggleButton>
             </CommandBar>
 

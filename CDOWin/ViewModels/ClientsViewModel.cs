@@ -52,7 +52,7 @@ public partial class ClientsViewModel : ObservableObject {
     public partial string SearchQuery { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial bool IsFiltered { get; set; } = true;
+    public partial bool IsFiltered { get; set; } = false;
 
 
     // =========================

@@ -7,6 +7,7 @@
     xmlns:local="using:CDOWin">
     <Application.Resources>
         <ResourceDictionary>
+            <converters:BoolToSolidBrushConverter x:Key="BoolSolidBrushConverter"/>
             <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
             <converters:BoolCompletedConverter x:Key="BoolCompletedConverter"/>
             <converters:BoolActiveConverter x:Key="BoolActiveConverter"/>

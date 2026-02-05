@@ -1,6 +1,7 @@
 ﻿namespace CDO.Core.DTOs;
 
-public class ClientSummaryDTO {
+public class ClientSummaryDTO() {
+
     // Non-optional fields
     public int Id { get; init; }
     public required string FirstName { get; init; }

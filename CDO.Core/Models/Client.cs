@@ -96,4 +96,25 @@ public record class Client(
     }
 
     public string? FormattedStartDate => StartDate?.ToString(format: "MM/dd/yyyy");
+
+    public ClientSummaryDTO AsSummary() {
+        return new ClientSummaryDTO {
+            Id = Id,
+            FirstName = FirstName,
+            LastName = LastName,
+            City = City,
+            State = State,
+            Active = Active,
+            TTW = TTW,
+            Address1 = Address1,
+            Address2 = Address2,
+            Zip = Zip,
+            CounselorName = CounselorReference?.Name,
+            Phone = Phone1,
+            Phone2 = Phone2,
+            Phone3 = Phone3,
+            EmploymentGoal = EmploymentGoal,
+            CaseID = CaseID
+        };
+    }
 }

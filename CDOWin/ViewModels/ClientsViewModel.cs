@@ -127,6 +127,7 @@ public partial class ClientsViewModel : ObservableObject {
         if (!result.IsSuccess) return result;
 
         await ReloadClientAsync();
+        UpdateSummaries();
         return result;
     }
 
@@ -179,6 +180,14 @@ public partial class ClientsViewModel : ObservableObject {
             Filtered = new ObservableCollection<ClientSummaryDTO>(result);
             ReSelect(previousSelection);
         });
+    }
+
+    private void UpdateSummaries() {
+        if (Selected == null) return;
+        _cache = _cache
+            .Select(c => c.Id == Selected.Id ? Selected.AsSummary() : c)
+            .ToList();
+        ApplyFilter();
     }
 
     private void OnUI(Action action) {

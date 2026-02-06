@@ -74,7 +74,7 @@ public sealed partial class CreateServiceAuthorization : Page {
         if (string.IsNullOrWhiteSpace(text)) return;
 
         switch (field) {
-            case Field.Id:
+            case Field.SaNumber:
                 ViewModel.SANumber = text;
                 break;
             case Field.Description:

@@ -37,7 +37,7 @@
         <!-- Row 1: SA Number + Start Date + End Date -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"
                  Text="{x:Bind ViewModel.Original.ServiceAuthorizationNumber}"
-                 TextChanged="TextChanged" Tag="{x:Bind local:Field.Id}"/>
+                 TextChanged="TextChanged" Tag="{x:Bind local:Field.SaNumber}"/>
 
         <CalendarDatePicker Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
                             Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"

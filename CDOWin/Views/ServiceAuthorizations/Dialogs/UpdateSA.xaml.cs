@@ -60,6 +60,9 @@ public sealed partial class UpdateSA : Page {
         if (string.IsNullOrWhiteSpace(text)) return;
 
         switch (field) {
+            case Field.SaNumber:
+                ViewModel.Updated.ServiceAuthorizationNumber = text;
+                break;
             case Field.Description:
                 ViewModel.Updated.Description = text;
                 break;

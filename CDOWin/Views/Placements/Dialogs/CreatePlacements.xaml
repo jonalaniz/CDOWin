@@ -60,9 +60,6 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Row 0: Placement Number + Employer + SA Number -->
-                    <NumberBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Header="Placement Number"
-                               x:Name="PlacementNumber" ValueChanged="NumberBox_ValueChanged"
-                               Tag="{x:Bind local:UpdateField.PlacementNumber}"/>
                     <AutoSuggestBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Employer"
                                     x:Name="EmployerAutoSuggest" TextChanged="EmployerAutoSuggest_TextChanged"
                                     QuerySubmitted="EmployerAutoSuggest_QuerySubmitted" 
@@ -100,12 +97,12 @@
                                x:Name="SalaryNumber" ValueChanged="NumberBox_ValueChanged"
                                Tag="{x:Bind local:UpdateField.FormattedSalary}"/>
 
-                    <!-- Row 4: Hire Date + End Date -->
-                    <CalendarDatePicker Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
-                                        Header="Hire Date" HorizontalAlignment="Stretch"
+                    <!-- Row 4: Hire Date + End Date + Days on Job-->
+                    <CalendarDatePicker Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                        Header="Hire Date" x:Name="HireDatePicker" HorizontalAlignment="Stretch"
                                         DateChanged="DatePicker_DateChanged"
                                         Tag="{x:Bind local:UpdateField.FormattedHireDate}"/>
-                    <CalendarDatePicker Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"
+                    <CalendarDatePicker Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
                                         Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
                                         DateChanged="DatePicker_DateChanged"
                                         Tag="{x:Bind local:UpdateField.FormattedEndDate}"/>

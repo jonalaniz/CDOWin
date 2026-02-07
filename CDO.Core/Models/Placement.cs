@@ -5,7 +5,7 @@ namespace CDO.Core.Models;
 public record class Placement(
     string Id,
     int? PlacementNumber,
-    string? EmployerID,
+    int? EmployerID,
     int? ClientID,
     int? CounselorID,
     int? InvoiceID,

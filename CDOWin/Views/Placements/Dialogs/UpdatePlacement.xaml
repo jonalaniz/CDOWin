@@ -60,9 +60,6 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Row 0: Placement Number + Employer + SA Number -->
-                    <NumberBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Header="Placement Number"
-                               x:Name="PlacementNumber" ValueChanged="NumberBox_ValueChanged"
-                               Tag="{x:Bind local:UpdateField.PlacementNumber}"/>
                     <AutoSuggestBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Employer"
                                     x:Name="EmployerAutoSuggest" Text="{x:Bind ViewModel.Original.Employer.Name}"
                                     TextChanged="EmployerAutoSuggest_TextChanged"
@@ -147,7 +144,7 @@
                                         HorizontalAlignment="Stretch" DateChanged="DatePicker_DateChanged"
                                         x:Name="Day5Picker" Tag="{x:Bind local:UpdateField.Day5}"/>
 
-                    <!-- Row :8 Website -->
+                    <!-- Row 8: Website -->
                     <TextBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
                              MaxLength="225" TextChanged="TextChanged"
                              Text="{x:Bind ViewModel.Original.Website}"

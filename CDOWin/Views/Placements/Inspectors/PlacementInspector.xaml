@@ -53,11 +53,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Row 0: Placement + Active -->
+            <!-- Row 0: Placement -->
             <c:LabelPair Grid.Row="0" Grid.Column="0" Label="Placement" 
                          Value="{x:Bind ViewModel.Selected.PlacementNumber, Mode=OneWay}"/>
-            <c:LabelPair Grid.Row="0" Grid.Column="1" Label="Active" 
-                         Value="{x:Bind ViewModel.Selected.Active, Mode=OneWay}"/>
 
             <!-- Row 1: Employer -->
             <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Employer" 
@@ -67,11 +65,9 @@
             <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Counselor" 
                          Value="{x:Bind ViewModel.Selected.CounselorName, Mode=OneWay}"/>
 
-            <!-- Row 3: PO number + Employer ID -->
+            <!-- Row 3: PO number -->
             <c:LabelPair Grid.Row="3" Grid.Column="0" Label="SA ID" 
                          Value="{x:Bind ViewModel.Selected.SaNumber, Mode=OneWay}"/>
-            <c:LabelPair Grid.Row="3" Grid.Column="1" Label="Employer ID" 
-                         Value="{x:Bind ViewModel.Selected.EmployerID, Mode=OneWay}"/>
 
             <!-- Row 4: Supervisor -->
             <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Label="Supervisor" 

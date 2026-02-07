@@ -563,6 +563,11 @@
                 <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
                     <Run Text="ACE ID:"/>
                     <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                    <Run Text=","/>
+                </TextBlock>
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                    <Run Text="Counselor ID:"/>
+                    <Run Text="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay}"/>
                 </TextBlock>
                 <TextBlock Text="TTW" FontWeight="Bold" Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
             </StackPanel>

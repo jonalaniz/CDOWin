@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -103,6 +104,7 @@ public sealed partial class CreatePlacements : Page {
                     break;
                 case UpdateField.FormattedEndDate:
                     ViewModel.EndDate = offset.DateTime.Date.ToUniversalTime();
+                    SetDaysWorking();
                     break;
                 case UpdateField.Day1:
                     ViewModel.Day1 = dateString;
@@ -161,6 +163,15 @@ public sealed partial class CreatePlacements : Page {
     // =========================
     // Utility Methods
     // =========================
+    private void SetDaysWorking() {
+        if (HireDatePicker.Date is not DateTimeOffset startDate 
+            || EndDatePicker.Date is not DateTimeOffset endDate)
+            return;
+        var daysOnJob = endDate - startDate;
+        if(daysOnJob.Days > 0)
+            ViewModel.DaysOnJob = daysOnJob.Days;
+    }
+
     private void UpdateValue(string value, UpdateField field) {
         var text = value.NormalizeString();
         if (string.IsNullOrWhiteSpace(text)) return;

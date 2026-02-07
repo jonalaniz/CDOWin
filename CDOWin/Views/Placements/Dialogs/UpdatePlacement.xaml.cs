@@ -37,9 +37,6 @@ public sealed partial class UpdatePlacement : Page {
     // UI Setup
     // =========================
     private void SetupNumberBoxes() {
-        if (ViewModel.Original.PlacementNumber is int number)
-            PlacementNumber.Value = (double)number;
-
         if (ViewModel.Original.DaysOnJob is float days)
             DaysOnJob.Value = (double)days;
     }
@@ -124,6 +121,7 @@ public sealed partial class UpdatePlacement : Page {
                     break;
                 case UpdateField.FormattedEndDate:
                     ViewModel.Updated.EndDate = offset.DateTime.Date.ToUniversalTime();
+                    SetDaysWorking();
                     break;
                 case UpdateField.Day1:
                     ViewModel.Updated.Day1 = dateString;
@@ -182,6 +180,15 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     // Utility Methods
     // =========================
+    private void SetDaysWorking() {
+        if (HireDatePicker.Date is not DateTimeOffset startDate
+            || EndDatePicker.Date is not DateTimeOffset endDate)
+            return;
+        var daysOnJob = endDate - startDate;
+        if (daysOnJob.Days > 0 && ViewModel.Original.DaysOnJob != daysOnJob.Days)
+            ViewModel.Updated.DaysOnJob = daysOnJob.Days;
+    }
+
     private void UpdateValue(string value, UpdateField field) {
         var text = value.NormalizeString();
         if (string.IsNullOrWhiteSpace(text)) return;

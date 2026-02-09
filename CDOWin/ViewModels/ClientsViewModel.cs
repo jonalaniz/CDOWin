@@ -23,6 +23,7 @@ public partial class ClientsViewModel : ObservableObject {
     private readonly IClientService _service;
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
+    private readonly PlacementSelectionService _placementSelectionService;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -59,11 +60,15 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public ClientsViewModel(IClientService service, DataCoordinator dataCoordinator, ClientSelectionService clientSelectionService) {
+    public ClientsViewModel(IClientService service, 
+        DataCoordinator dataCoordinator, 
+        ClientSelectionService clientSelectionService,
+        PlacementSelectionService placementSelectionService) {
         _service = service;
         _dataCoordinator = dataCoordinator;
 
         _selectionService = clientSelectionService;
+        _placementSelectionService = placementSelectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
         _selectionService.ClientSelectionRequested += OnRequestSelectedClientChange;
@@ -100,6 +105,11 @@ public partial class ClientsViewModel : ObservableObject {
     // Public Methods
     // =========================
     public void NotifyNewClientCreated() => _selectionService.NotifyNewReminderCreated();
+
+    public void RequestPlacement(int placementID) {
+        AppServices.Navigation.Navigate(Views.CDOFrame.Placements);
+        _placementSelectionService.RequestSelectedPlacement(placementID);
+    }
 
     // =========================
     // CRUD Methods

@@ -32,6 +32,7 @@ public static class AppServices {
     private static readonly ClientSelectionService _clientSelectionService = new();
     private static readonly CounselorSelectionService _counselorSelecitonService = new();
     private static readonly EmployerSelectionService _employerSelectionService = new();
+    private static readonly PlacementSelectionService _placementSelectionService = new();
 
     // ViewModels
     public static CalendarViewModel CalendarViewModel { get; private set; } = null!;
@@ -75,7 +76,8 @@ public static class AppServices {
         ClientsViewModel = new ClientsViewModel(
             ClientService,
             DataCoordinator,
-            _clientSelectionService
+            _clientSelectionService,
+            _placementSelectionService
         );
 
         CounselorsViewModel = new CounselorsViewModel(
@@ -110,7 +112,8 @@ public static class AppServices {
             PlacementService,
             _clientSelectionService,
             _counselorSelecitonService,
-            _employerSelectionService
+            _employerSelectionService,
+            _placementSelectionService
             );
 
         CalendarViewModel = new CalendarViewModel(RemindersViewModel);

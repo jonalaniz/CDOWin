@@ -31,6 +31,22 @@
             <AppBarButton Click="EditButton_Click" IsCompact="False" ToolTipService.ToolTip="Edit">
                 <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
             </AppBarButton>
+
+            <!-- Edit Menu -->
+            <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton.Icon>
+                <AppBarButton.Flyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                        <MenuFlyoutItem Text="Delete..." Click="Delete_Click">
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
         </CommandBar>
 
         <!-- Detials Grid -->

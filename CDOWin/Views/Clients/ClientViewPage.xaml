@@ -452,17 +452,24 @@
                                 <DataTemplate x:DataType="placements:PlacementDetail">
 
                                     <!-- Button -->
-                                    <Button Margin="0,0,0,6" Click="Placement_Click" Tag="{x:Bind Id}"
-                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+                                    <SplitButton Margin="0,0,0,6" Click="Placement_Click" Tag="{x:Bind Id}"
+                                                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                                 BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
                                         <StackPanel Spacing="2">
                                             <TextBlock FontWeight="Bold" Text="{x:Bind EmployerName}"/>
                                             <TextBlock Text="{x:Bind EmployerPhone}"/>
                                             <TextBlock Text="{x:Bind Position}"/>
                                             <TextBlock Text="{x:Bind FormattedHireDate}"/>
                                         </StackPanel>
-                                    </Button>
+
+                                        <SplitButton.Flyout>
+                                            <!-- MenuFlyout -->
+                                            <MenuFlyout Placement="Right">
+                                                <MenuFlyoutItem Text="Go To Placement" Click="GoToPlacement_Click"  Tag="{x:Bind Id}"/>
+                                            </MenuFlyout>
+                                        </SplitButton.Flyout>
+                                    </SplitButton>
                                 </DataTemplate>
                             </ItemsRepeater>
                         </ScrollViewer>

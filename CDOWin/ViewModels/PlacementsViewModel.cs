@@ -23,6 +23,7 @@ public partial class PlacementsViewModel : ObservableObject {
     private readonly ClientSelectionService _clientSelectionService;
     private readonly CounselorSelectionService _counselorSelectionService;
     private readonly EmployerSelectionService _employerSelectionService;
+    private readonly PlacementSelectionService _placementSelectionService;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -57,7 +58,8 @@ public partial class PlacementsViewModel : ObservableObject {
         IPlacementService service,
         ClientSelectionService clientSelectionService,
         CounselorSelectionService counselorSelectionService,
-        EmployerSelectionService employerSelectionService
+        EmployerSelectionService employerSelectionService,
+        PlacementSelectionService placementSelectionService
         ) {
         _service = service;
         _dataCoordinator = dataCoordinator;
@@ -65,7 +67,10 @@ public partial class PlacementsViewModel : ObservableObject {
         _clientSelectionService = clientSelectionService;
         _counselorSelectionService = counselorSelectionService;
         _employerSelectionService = employerSelectionService;
+        _placementSelectionService = placementSelectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
+
+        _placementSelectionService.PlacementSelectionRequested += OnRequestSelectedPlacementChange;
     }
 
     // =========================
@@ -73,6 +78,13 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
     partial void OnIsFilteredChanged(bool value) => ApplyFilter();
+
+    private void OnRequestSelectedPlacementChange(int placementID) {
+        if (Selected != null && Selected.Id == placementID)  return;
+        SearchQuery = string.Empty;
+        ApplyFilter();
+        _ = LoadSelectedPlacementAsync(placementID);
+    }
 
     // =========================
     // Public Methods

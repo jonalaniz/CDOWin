@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Placements;
 using CDO.Core.Models;
 using System.Text.Json.Serialization;
 
@@ -28,12 +29,12 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(EmployerSummaryDTO))]
 [JsonSerializable(typeof(List<EmployerSummaryDTO>))]
 
-[JsonSerializable(typeof(Placement))]
-[JsonSerializable(typeof(List<Placement>))]
-[JsonSerializable(typeof(PlacementDTO))]
+[JsonSerializable(typeof(PlacementDetail))]
+[JsonSerializable(typeof(List<PlacementDetail>))]
+[JsonSerializable(typeof(PlacementUpdate))]
 
-[JsonSerializable(typeof(PlacementSummaryDTO))]
-[JsonSerializable(typeof(List<PlacementSummaryDTO>))]
+[JsonSerializable(typeof(PlacementSummary))]
+[JsonSerializable(typeof(List<PlacementSummary>))]
 
 [JsonSerializable(typeof(Reminder))]
 [JsonSerializable(typeof(List<Reminder>))]

@@ -12,7 +12,7 @@ public static class Endpoints {
     public static readonly string EmployerSummaries = "/api/employers/summaries";
     public static string ServiceAuthorization(int id) => $"{ServiceAuthorizations}/{id}";
     public static readonly string ServiceAuthorizations = "/api/pos";
-    public static string Placement(string id) => $"{Placements}/{id}";
+    public static string Placement(int id) => $"{Placements}/{id}";
     public static readonly string Placements = "/api/placements";
     public static readonly string PlacementSummaries = "/api/placements/summaries";
     public static string Reminder(int id) => $"{Reminders}/{id}";

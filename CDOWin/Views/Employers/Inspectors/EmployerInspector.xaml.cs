@@ -29,7 +29,7 @@ public sealed partial class EmployerInspector : Page {
             return;
 
         var updateVM = new EmployerUpdateViewModel(ViewModel.Selected);
-        var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Employer");
+        var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit EmployerName");
         dialog.Content = new UpdateEmployer(updateVM);
 
         var result = await dialog.ShowAsync();

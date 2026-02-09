@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CDOWin.ViewModels" 
     xmlns:models="using:CDO.Core.Models"
+    xmlns:placements="using:CDO.Core.DTOs.Placements"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
     xmlns:c="using:CDOWin.Controls"
@@ -448,7 +449,7 @@
                         <!-- Item Repeater -->
                         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
                             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
-                                <DataTemplate x:DataType="models:Placement">
+                                <DataTemplate x:DataType="placements:PlacementDetail">
 
                                     <!-- Button -->
                                     <Button Margin="0,0,0,6" Click="Placement_Click" Tag="{x:Bind Id}"
@@ -456,8 +457,8 @@
                                             Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                             BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
                                         <StackPanel Spacing="2">
-                                            <TextBlock FontWeight="Bold" Text="{x:Bind Employer.Name}"/>
-                                            <TextBlock Text="{x:Bind Employer.Phone}"/>
+                                            <TextBlock FontWeight="Bold" Text="{x:Bind EmployerName}"/>
+                                            <TextBlock Text="{x:Bind EmployerName}"/>
                                             <TextBlock Text="{x:Bind Position}"/>
                                             <TextBlock Text="{x:Bind FormattedHireDate}"/>
                                         </StackPanel>

@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -46,7 +47,7 @@ public partial class ClientsViewModel : ObservableObject {
     public partial ObservableCollection<Invoice> Invoices { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<Placement> Placements { get; private set; } = [];
+    public partial ObservableCollection<PlacementDetail> Placements { get; private set; } = [];
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -148,13 +149,13 @@ public partial class ClientsViewModel : ObservableObject {
         });
     }
 
-    private void SetupPlacements(Placement[] placements) {
+    private void SetupPlacements(PlacementDetail[] placements) {
         var sortedPlacements = placements
             .OrderBy(p => p.HireDate)
             .Reverse()
             .ToList();
         OnUI(() => {
-            Placements = new ObservableCollection<Placement>(sortedPlacements);
+            Placements = new ObservableCollection<PlacementDetail>(sortedPlacements);
         });
     }
 

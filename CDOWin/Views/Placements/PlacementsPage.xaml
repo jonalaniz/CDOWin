@@ -9,7 +9,7 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:models="using:CDO.Core.Models"
-    xmlns:dto="using:CDO.Core.DTOs"
+    xmlns:dto="using:CDO.Core.DTOs.Placements"
     mc:Ignorable="d">
 
     <Grid>
@@ -84,14 +84,14 @@
                         <TextBlock Grid.Column="3" Text="SA Number" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="4" Text="Supervisor" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="5" Text="Position" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" Text="Salary" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Wage" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="7" Text="Hire Date" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="dto:PlacementSummaryDTO">
+                    <DataTemplate x:DataType="dto:PlacementSummary">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="220"/>
@@ -151,7 +151,7 @@
                             <TextBlock Grid.Column="3" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="4" Text="{x:Bind FormattedSupervisor}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="5" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="6" Text="{x:Bind FormattedSalary}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="6" Text="{x:Bind Wages}" TextTrimming="CharacterEllipsis"/>
                             <TextBlock Grid.Column="7" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
                         </Grid>
                     </DataTemplate>

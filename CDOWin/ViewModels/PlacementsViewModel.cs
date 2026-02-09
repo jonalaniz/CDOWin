@@ -1,7 +1,6 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Data;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -29,20 +28,20 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<PlacementSummaryDTO> _cache = [];
+    private IReadOnlyList<PlacementSummary> _cache = [];
 
     // =========================
     // UI State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<PlacementSummaryDTO> Filtered { get; private set; } = [];
+    public partial ObservableCollection<PlacementSummary> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Placement? Selected { get; set; }
+    public partial PlacementDetail? Selected { get; set; }
 
     [ObservableProperty]
-    public partial PlacementSummaryDTO? SelectedSummary { get; set; }
+    public partial PlacementSummary? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -105,7 +104,7 @@ public partial class PlacementsViewModel : ObservableObject {
         ApplyFilter();
     }
 
-    public async Task LoadSelectedPlacementAsync(string id) {
+    public async Task LoadSelectedPlacementAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
 
         var placement = await _service.GetPlacementAsync(id);
@@ -129,10 +128,10 @@ public partial class PlacementsViewModel : ObservableObject {
     // Utility / Filtering
     // =========================
     private void ApplyFilter() {
-        string? previousSelection = Selected?.Id;
+        int? previousSelection = Selected?.Id;
         var filterDate = IsFiltered ? DateTime.Today : DateTime.MinValue;
 
-        IEnumerable<PlacementSummaryDTO> result = _cache.Where(p => (p.HireDate ?? DateTime.MinValue.AddDays(1)) >= filterDate);
+        IEnumerable<PlacementSummary> result = _cache.Where(p => (p.HireDate ?? DateTime.MinValue.AddDays(1)) >= filterDate);
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
@@ -145,7 +144,7 @@ public partial class PlacementsViewModel : ObservableObject {
         }
 
         OnUI(() => {
-            Filtered = new ObservableCollection<PlacementSummaryDTO>(result);
+            Filtered = new ObservableCollection<PlacementSummary>(result);
             ReSelect(previousSelection);
         });
     }
@@ -155,9 +154,9 @@ public partial class PlacementsViewModel : ObservableObject {
         else _dispatcher.TryEnqueue(() => action());
     }
 
-    private void ReSelect(string? id) {
+    private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(p => p.Id == id) is PlacementSummaryDTO selected)
+        if (Filtered.FirstOrDefault(p => p.Id == id) is PlacementSummary selected)
             SelectedSummary = selected;
     }
 }

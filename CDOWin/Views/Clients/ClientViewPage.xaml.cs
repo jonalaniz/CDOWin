@@ -190,7 +190,7 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private async void Placement_Click(object sender, RoutedEventArgs e) {
-        if (sender is not Button button || button.Tag is not string id) { return; }
+        if (sender is not Button button || button.Tag is not int id) { return; }
         var placement = ViewModel.Selected?.Placements?.FirstOrDefault(c => c.Id == id);
 
         if (placement == null) { return; }

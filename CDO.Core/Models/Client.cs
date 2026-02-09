@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Placements;
 
 namespace CDO.Core.Models;
 
@@ -9,7 +10,7 @@ public record class Client(
     string LastName,
     bool TTW,
     Reminder[] Reminders,
-    Placement[]? Placements,
+    PlacementDetail[]? Placements,
     Invoice[]? Invoices,
     DateTime? StartDate,
     int? Ssn,

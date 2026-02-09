@@ -59,7 +59,7 @@
 
             <!-- Row 1: Employer -->
             <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Employer" 
-                         Value="{x:Bind ViewModel.Selected.Employer.Name, Mode=OneWay}"/>
+                         Value="{x:Bind ViewModel.Selected.EmployerName, Mode=OneWay}"/>
             
             <!-- Row 2: Counselor -->
             <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Counselor" 
@@ -78,8 +78,8 @@
                          Value="{x:Bind ViewModel.Selected.Position, Mode=OneWay}"/>
 
             <!-- Row 6: Salary + Days on Job -->
-            <c:LabelPair Grid.Row="6" Grid.Column="0" Label="Salary" 
-                         Value="{x:Bind ViewModel.Selected.FormattedSalary, Mode=OneWay}"/>
+            <c:LabelPair Grid.Row="6" Grid.Column="0" Label="Wage" 
+                         Value="{x:Bind ViewModel.Selected.Wages, Mode=OneWay}"/>
             <c:LabelPair Grid.Row="6" Grid.Column="1" Label="Days on Job" 
                          Value="{x:Bind ViewModel.Selected.DaysOnJob, Mode=OneWay}"/>
 

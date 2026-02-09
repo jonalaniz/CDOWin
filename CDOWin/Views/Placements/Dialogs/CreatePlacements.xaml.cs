@@ -50,6 +50,9 @@ public sealed partial class CreatePlacements : Page {
         }
 
         SANumberDropDownButton.Flyout = flyout;
+
+        // TODO: Build State Dropdown
+        StateDropDownButton.Content = "TX";
     }
 
     private async Task LoadEmployersAsync() {
@@ -60,7 +63,7 @@ public sealed partial class CreatePlacements : Page {
     }
 
     // =========================
-    // Even Handlers
+    // Event Handlers
     // =========================
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item || item.Tag is not Invoice sa)
@@ -76,17 +79,13 @@ public sealed partial class CreatePlacements : Page {
             case UpdateField.PlacementNumber:
                 ViewModel.PlacementNumber = (int)sender.Value;
                 break;
-            case UpdateField.FormattedSalary:
-                ViewModel.Salary = sender.Value.ToString("C");
-                break;
             case UpdateField.DaysOnJob:
                 ViewModel.DaysOnJob = (float)sender.Value;
                 break;
-
         }
     }
 
-    private void TextChanged(object sender, TextChangedEventArgs e) {
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is not TextBox textBox || textBox.Tag is not UpdateField field)
             return;
 
@@ -99,10 +98,10 @@ public sealed partial class CreatePlacements : Page {
         if (sender.Tag is UpdateField field && sender.Date is DateTimeOffset offset) {
             var dateString = offset.DateTime.Date.ToString(format: "MM/dd/yyyy");
             switch (field) {
-                case UpdateField.FormattedHireDate:
+                case UpdateField.HireDate:
                     ViewModel.HireDate = offset.DateTime.Date.ToUniversalTime();
                     break;
-                case UpdateField.FormattedEndDate:
+                case UpdateField.EndDate:
                     ViewModel.EndDate = offset.DateTime.Date.ToUniversalTime();
                     SetDaysWorking();
                     break;
@@ -149,17 +148,6 @@ public sealed partial class CreatePlacements : Page {
         }
     }
 
-    private void EmployerAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
-        if (args.ChosenSuggestion is Employer chosenEmployer) {
-            var result = _employers.FirstOrDefault(e => e.Id == chosenEmployer.Id);
-            if (result != null) { UpdateSelectedEmployer(result); }
-        } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
-            // Optional: match typed text even if not chosen from suggestions
-            var result = _employers.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
-            if (result != null) { UpdateSelectedEmployer(result); }
-        }
-    }
-
     // =========================
     // Utility Methods
     // =========================
@@ -177,7 +165,7 @@ public sealed partial class CreatePlacements : Page {
         if (string.IsNullOrWhiteSpace(text)) return;
 
         switch (field) {
-            case UpdateField.Supervisor:
+            case UpdateField.SupervisorName:
                 ViewModel.SupervisorName = text;
                 break;
             case UpdateField.SupervisorPhone:
@@ -189,10 +177,10 @@ public sealed partial class CreatePlacements : Page {
             case UpdateField.Position:
                 ViewModel.Position = text;
                 break;
-            case UpdateField.HoursWorked:
+            case UpdateField.HoursWorking:
                 ViewModel.HoursWorking = text;
                 break;
-            case UpdateField.HourlyWage:
+            case UpdateField.Wage:
                 ViewModel.Wages = text;
                 break;
             case UpdateField.Website:

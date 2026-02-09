@@ -1,4 +1,4 @@
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Placements;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Placements.Inspectors;
@@ -35,7 +35,7 @@ public sealed partial class PlacementsPage : Page {
     // Click Handlers
     // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if (e.ClickedItem is PlacementSummaryDTO placement)
+        if (e.ClickedItem is PlacementSummary placement)
             _ = ViewModel.LoadSelectedPlacementAsync(placement.Id);
     }
 

@@ -26,7 +26,6 @@ public sealed partial class UpdatePlacement : Page {
     public UpdatePlacement(PlacementUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
-        SetupNumberBoxes();
         SetupAutoSuggestionBox();
         SetupDatePickers();
 
@@ -36,10 +35,7 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     // UI Setup
     // =========================
-    private void SetupNumberBoxes() {
-        if (ViewModel.Original.DaysOnJob is float days)
-            DaysOnJob.Value = (double)days;
-    }
+    // TODO: Build StateDropDown
 
     private void SetupAutoSuggestionBox() {
         if (ViewModel.Original.CounselorName is string name)
@@ -93,9 +89,6 @@ public sealed partial class UpdatePlacement : Page {
             case UpdateField.PlacementNumber:
                 ViewModel.Updated.PlacementNumber = (int)sender.Value;
                 break;
-            case UpdateField.FormattedSalary:
-                ViewModel.Updated.Salary = sender.Value.ToString("C");
-                break;
             case UpdateField.DaysOnJob:
                 ViewModel.Updated.DaysOnJob = (float)sender.Value;
                 break;
@@ -103,7 +96,7 @@ public sealed partial class UpdatePlacement : Page {
         }
     }
 
-    private void TextChanged(object sender, TextChangedEventArgs e) {
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is not TextBox textBox || textBox.Tag is not UpdateField field)
             return;
 
@@ -116,10 +109,10 @@ public sealed partial class UpdatePlacement : Page {
         if (sender.Tag is UpdateField field && sender.Date is DateTimeOffset offset) {
             var dateString = offset.DateTime.Date.ToString(format: "MM/dd/yyyy");
             switch (field) {
-                case UpdateField.FormattedHireDate:
+                case UpdateField.HireDate:
                     ViewModel.Updated.HireDate = offset.DateTime.Date.ToUniversalTime();
                     break;
-                case UpdateField.FormattedEndDate:
+                case UpdateField.EndDate:
                     ViewModel.Updated.EndDate = offset.DateTime.Date.ToUniversalTime();
                     SetDaysWorking();
                     break;
@@ -166,17 +159,6 @@ public sealed partial class UpdatePlacement : Page {
         }
     }
 
-    private void EmployerAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
-        if (args.ChosenSuggestion is Employer chosenEmployer) {
-            var result = _employers.FirstOrDefault(e => e.Id == chosenEmployer.Id);
-            if (result != null) { UpdateSelectedEmployer(result); }
-        } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
-            // Optional: match typed text even if not chosen from suggestions
-            var result = _employers.FirstOrDefault(c => c.Name.Equals(args.QueryText, StringComparison.OrdinalIgnoreCase));
-            if (result != null) { UpdateSelectedEmployer(result); }
-        }
-    }
-
     // =========================
     // Utility Methods
     // =========================
@@ -194,7 +176,7 @@ public sealed partial class UpdatePlacement : Page {
         if (string.IsNullOrWhiteSpace(text)) return;
 
         switch (field) {
-            case UpdateField.Supervisor:
+            case UpdateField.SupervisorName:
                 ViewModel.Updated.SupervisorName = text;
                 break;
             case UpdateField.SupervisorPhone:
@@ -206,10 +188,10 @@ public sealed partial class UpdatePlacement : Page {
             case UpdateField.Position:
                 ViewModel.Updated.Position = text;
                 break;
-            case UpdateField.HoursWorked:
+            case UpdateField.HoursWorking:
                 ViewModel.Updated.HoursWorking = text;
                 break;
-            case UpdateField.HourlyWage:
+            case UpdateField.Wage:
                 ViewModel.Updated.Wages = text;
                 break;
             case UpdateField.Website:

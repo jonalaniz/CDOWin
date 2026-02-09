@@ -124,6 +124,11 @@ public partial class PlacementsViewModel : ObservableObject {
         OnUI(() => { Selected = placement; });
     }
 
+    public async Task ReloadPlacementAsync() {
+        if (Selected == null) return;
+        Selected = await _service.GetPlacementAsync(Selected.Id);
+    }
+
     public async Task<Result<bool>> DeleteSelectedPlacement() {
         if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Placement selected.", null, null));
         var result = await _service.DeletePlacementAsync(Selected.Id);

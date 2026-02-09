@@ -176,7 +176,7 @@ public partial class ClientsViewModel : ObservableObject {
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
-            result = _cache.Where(c =>
+            result = result.Where(c =>
             (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
             (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
             (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

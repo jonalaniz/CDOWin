@@ -29,6 +29,7 @@ public sealed partial class PlacementsPage : Page {
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
         await ViewModel.LoadPlacementSummariesAsync();
+        _ = ViewModel.ReloadPlacementAsync();
     }
 
     // =========================

@@ -186,6 +186,7 @@ public sealed partial class ClientViewPage : Page {
             return;
         }
 
+        _ = AppServices.DataCoordinator.GetPlacementSummariesAsync(force: true);
         _ = ViewModel.ReloadClientAsync();
     }
 

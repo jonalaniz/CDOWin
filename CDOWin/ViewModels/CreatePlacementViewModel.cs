@@ -5,6 +5,7 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Office.Interop.Word;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -24,10 +25,6 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     // =========================
 
     // Placement Specific
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CanSave))]
-    public partial int? PlacementNumber { get; set; }
-
     [ObservableProperty]
     public partial string? Position { get; set; }
 
@@ -85,11 +82,14 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
 
     // EmployerName Specific
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial int? EmployerID { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? EmployerName { get; set; }
+
+    [ObservableProperty]
+    public partial string? EmployerPhone { get; set; }
 
     [ObservableProperty]
     public partial string? Address1 { get; set; }
@@ -124,10 +124,9 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public bool CanSave => CanSaveMethod();
 
     public bool CanSaveMethod() {
-        Debug.WriteLine($"{EmployerID == null} {Client == null} {PlacementNumber == null} {SaNumber == null}");
+        Debug.WriteLine($"{EmployerID == null} {Client == null} {SaNumber == null}");
         if (EmployerName == null
             || Client == null
-            || PlacementNumber == null
             || SaNumber == null)
             return false;
 
@@ -141,10 +140,29 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
         if (Client.CounselorID == null)
             return Result<PlacementDetail>.Fail(new AppError(ErrorKind.Validation, "Client is missing a Counselor, assign on and try again."));
 
+        int placementsNumber = 1;
+        if (Client.Placements?.Length is int length && length > 0)
+            placementsNumber = length + 1;
+
+        var placementEmployer = new PlacementEmployer {
+            EmployerID = EmployerID,
+            Name = EmployerName,
+            Phone = EmployerPhone,
+            Address1 = Address1,
+            Address2 = Address2,
+            City = City,
+            State = State,
+            Zip = Zip,
+            SupervisorName = SupervisorName,
+            SupervisorEmail = SupervisorEmail,
+            SupervisorPhone = SupervisorPhone,
+            Website = Website
+        };
+
         var placement = new NewPlacement {
             // Placement Specific
             Active = Client.Active,
-            PlacementNumber = PlacementNumber,
+            PlacementNumber = placementsNumber,
             Position = Position,
             HireDate = HireDate,
             EndDate = EndDate,
@@ -158,7 +176,22 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             HoursWorking = HoursWorking,
             WorkSchedule = WorkSchedule,
             Wages = Wages,
-            Benefits = Benefits
+            Benefits = Benefits,
+
+            // SA/Invoice Specific
+            InvoiceID = InvoiceID,
+            SaNumber = SaNumber,
+
+            // Client Specific
+            ClientID = Client.Id,
+            ClientName = $"{Client.FirstName} {Client.LastName}",
+
+            // Counselor Specific
+            CounselorID = Client.CounselorID,
+            CounselorName = Client.CounselorReference?.Name,
+
+            // Employer Specific
+            Employer = placementEmployer
         };
 
         _invalidation.InvalidatePlacements();

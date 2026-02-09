@@ -59,7 +59,7 @@
                     <!-- Row 0: Employer Data -->
                     <Expander Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Header="Employer Information"
                               IsExpanded="False" HorizontalAlignment="Stretch">
-                        <Grid Width="464" RowSpacing="10" ColumnSpacing="12" HorizontalAlignment="Stretch">
+                        <Grid Width="454" RowSpacing="10" ColumnSpacing="12" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -78,8 +78,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- Row 0: Autosuggest Box -->
-                            <AutoSuggestBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Header="Employer"
+                            <!-- Row 0: Autosuggest Box + Employer Phone -->
+                            <AutoSuggestBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Header="Employer"
                                             x:Name="EmployerAutoSuggest" Text="{x:Bind ViewModel.Original.EmployerName}"
                                             TextChanged="EmployerAutoSuggest_TextChanged"
                                             SuggestionChosen="EmployerAutoSuggest_SuggestionChosen">
@@ -89,27 +89,35 @@
                                     </DataTemplate>
                                 </AutoSuggestBox.ItemTemplate>
                             </AutoSuggestBox>
-                            
+
+                            <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Header="Employer Phone" 
+                                     Text="{x:Bind ViewModel.Original.EmployerPhone}" x:Name="EmployerPhoneTextBox"
+                                     Tag="{x:Bind local:UpdateField.EmployerPhone}"
+                                     TextChanged="TextBox_TextChanged" MaxLength="50"/>
+
                             <!-- Row 1: Address 1 + 2 -->
-                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Header="Address" 
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Header="Address"
+                                     Text="{x:Bind ViewModel.Original.Address1}" x:Name="AddressTextBox"
                                      Tag="{x:Bind local:UpdateField.Address1}"
                                      TextChanged="TextBox_TextChanged" MaxLength="50"/>
                             <TextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc." 
+                                     Text="{x:Bind ViewModel.Original.Address2}" x:Name="Address2TextBox"
                                      Tag="{x:Bind local:UpdateField.Address2}"
                                      TextChanged="TextBox_TextChanged" MaxLength="50"/>
 
                             <!-- Row 2: City + State + Zip -->
                             <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="City" 
-                                     Tag="{x:Bind local:UpdateField.City}" TextChanged="TextBox_TextChanged"
-                                     MaxLength="25"/>
+                                     MaxLength="25" TextChanged="TextBox_TextChanged" x:Name="CityTextBox"
+                                     Text="{x:Bind ViewModel.Original.City}"
+                                     Tag="{x:Bind local:UpdateField.City}"/>
                             <StackPanel Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
                                 <TextBlock Text="State"/>
                                 <DropDownButton x:Name="StateDropDownButton"
                                                 HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
                             </StackPanel>
                             <TextBox Grid.Row="2" Grid.Column="5" Header="Zip" 
-                                     Tag="{x:Bind local:UpdateField.Zip}" TextChanged="TextBox_TextChanged"
-                                     MaxLength="12"/>
+                                     MaxLength="12" TextChanged="TextBox_TextChanged" x:Name="ZipTextBox"
+                                     Text="{x:Bind ViewModel.Original.Zip}" Tag="{x:Bind local:UpdateField.Zip}"/>
                             
                             <!-- Row 3: Supervisor + Supervisor Phone -->
                             <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Header="Supervisor"
@@ -129,7 +137,7 @@
 
                             <!-- Row 5: Website -->
                             <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
-                                     MaxLength="225" TextChanged="TextBox_TextChanged"
+                                     MaxLength="225" TextChanged="TextBox_TextChanged" x:Name="WebsiteTextBox"
                                      Text="{x:Bind ViewModel.Original.Website}"
                                      Tag="{x:Bind local:UpdateField.Website}"/>
                         </Grid>

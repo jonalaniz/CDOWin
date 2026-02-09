@@ -34,7 +34,7 @@ public class PlacementUpdate {
     // Employer Specific
     public string? EmployerID { get; set; }
     public string? EmployerName { get; set; }
-    public string? EmployerPhoen { get; set; }
+    public string? EmployerPhone { get; set; }
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }
     public string? City { get; set; }

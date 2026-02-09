@@ -458,7 +458,7 @@
                                             BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
                                         <StackPanel Spacing="2">
                                             <TextBlock FontWeight="Bold" Text="{x:Bind EmployerName}"/>
-                                            <TextBlock Text="{x:Bind EmployerName}"/>
+                                            <TextBlock Text="{x:Bind EmployerPhone}"/>
                                             <TextBlock Text="{x:Bind Position}"/>
                                             <TextBlock Text="{x:Bind FormattedHireDate}"/>
                                         </StackPanel>

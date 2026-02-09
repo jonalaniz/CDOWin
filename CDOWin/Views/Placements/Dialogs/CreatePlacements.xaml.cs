@@ -20,6 +20,7 @@ public sealed partial class CreatePlacements : Page {
     // =========================
     private List<Employer> _employers = [];
     private readonly CreatePlacementViewModel ViewModel;
+    private List<State> _states = AppServices.StatesViewModel.States.ToList();
 
     // =========================
     // Constructor
@@ -28,6 +29,7 @@ public sealed partial class CreatePlacements : Page {
         ViewModel = viewModel;
         InitializeComponent();
         BuildDropDown();
+        BuildStateDropdown();
 
         _ = LoadEmployersAsync();
     }
@@ -50,15 +52,29 @@ public sealed partial class CreatePlacements : Page {
         }
 
         SANumberDropDownButton.Flyout = flyout;
+    }
 
-        // TODO: Build State Dropdown
+    private void BuildStateDropdown() {
+        var flyout = new MenuFlyout();
+
+        foreach (var state in _states) {
+            var item = new MenuFlyoutItem {
+                Text = state.ShortName,
+                Tag = state.ShortName
+            };
+
+            item.Click += StateSelected;
+            flyout.Items.Add(item);
+        }
+
         StateDropDownButton.Content = "TX";
+        ViewModel.State = "TX";
+        StateDropDownButton.Flyout = flyout;
     }
 
     private async Task LoadEmployersAsync() {
         var result = await AppServices.EmployersViewModel.GetEmployers();
         if (result == null) return;
-
         _employers = result;
     }
 
@@ -72,16 +88,11 @@ public sealed partial class CreatePlacements : Page {
         ViewModel.SaNumber = sa.ServiceAuthorizationNumber;
     }
 
-    private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
-        if (sender.Tag is not UpdateField field || double.IsNaN(sender.Value)) return;
-
-        switch (field) {
-            case UpdateField.PlacementNumber:
-                ViewModel.PlacementNumber = (int)sender.Value;
-                break;
-            case UpdateField.DaysOnJob:
-                ViewModel.DaysOnJob = (float)sender.Value;
-                break;
+    private void StateSelected(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item) {
+            var state = item.Tag.ToString();
+            ViewModel.State = state;
+            StateDropDownButton.Content = state;
         }
     }
 
@@ -129,6 +140,7 @@ public sealed partial class CreatePlacements : Page {
     // =========================
     private void EmployerAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+            ViewModel.EmployerName = sender.Text.Trim();
             var query = sender.Text.Trim().ToLower();
             var suggestions = _employers
                 .Where(c => !string.IsNullOrWhiteSpace(c.Name) && c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
@@ -156,8 +168,7 @@ public sealed partial class CreatePlacements : Page {
             || EndDatePicker.Date is not DateTimeOffset endDate)
             return;
         var daysOnJob = endDate - startDate;
-        if(daysOnJob.Days > 0)
-            ViewModel.DaysOnJob = daysOnJob.Days;
+        if(daysOnJob.Days > 0) ViewModel.DaysOnJob = daysOnJob.Days;
     }
 
     private void UpdateValue(string value, UpdateField field) {
@@ -165,6 +176,21 @@ public sealed partial class CreatePlacements : Page {
         if (string.IsNullOrWhiteSpace(text)) return;
 
         switch (field) {
+            case UpdateField.EmployerPhone:
+                ViewModel.EmployerPhone = text;
+                break;
+            case UpdateField.Address1:
+                ViewModel.Address1 = text;
+                break;
+            case UpdateField.Address2:
+                ViewModel.Address2 = text;
+                break;
+            case UpdateField.City:
+                ViewModel.City = text;
+                break;
+            case UpdateField.Zip:
+                ViewModel.Zip = text;
+                break;
             case UpdateField.SupervisorName:
                 ViewModel.SupervisorName = text;
                 break;
@@ -173,6 +199,9 @@ public sealed partial class CreatePlacements : Page {
                 break;
             case UpdateField.SupervisorEmail:
                 ViewModel.SupervisorEmail = text;
+                break;
+            case UpdateField.Website:
+                ViewModel.Website = text;
                 break;
             case UpdateField.Position:
                 ViewModel.Position = text;
@@ -183,8 +212,8 @@ public sealed partial class CreatePlacements : Page {
             case UpdateField.Wage:
                 ViewModel.Wages = text;
                 break;
-            case UpdateField.Website:
-                ViewModel.Website = text;
+            case UpdateField.Benefits:
+                ViewModel.Benefits = text;
                 break;
             case UpdateField.JobDuties:
                 ViewModel.JobDuties = text;
@@ -197,12 +226,26 @@ public sealed partial class CreatePlacements : Page {
 
     private void UpdateSelectedEmployer(Employer employer) {
         ViewModel.EmployerID = employer.Id;
+        ViewModel.EmployerName = employer.Name;
+        ViewModel.EmployerPhone = employer.Phone;
+        ViewModel.Address1 = employer.Address1;
+        ViewModel.Address2 = employer.Address2;
+        ViewModel.City = employer.City;
+        ViewModel.State = employer.State;
+        ViewModel.Zip = employer.Zip;
         ViewModel.SupervisorName = employer.Supervisor;
         ViewModel.SupervisorPhone = employer.SupervisorPhone;
         ViewModel.SupervisorEmail = employer.SupervisorEmail;
+        ViewModel.Website = employer.Website;
 
+        EmployerPhoneTextBox.Text = employer.Phone;
+        AddressTextBox.Text = employer.Address1;
+        Address2TextBox.Text = employer.Address2;
+        CityTextBox.Text = employer.City;
+        ZipTextBox.Text = employer.Zip;
         SupervisorTextBox.Text = employer.Supervisor;
         SPhoneBox.Text = employer.SupervisorPhone;
         SEmailBox.Text = employer.SupervisorEmail;
+        WebsiteTextBox.Text = employer.Website;
     }
 }

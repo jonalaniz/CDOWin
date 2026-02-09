@@ -19,6 +19,7 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     private List<Employer> _employers = [];
     private readonly PlacementUpdateViewModel ViewModel;
+    private List<State> _states = AppServices.StatesViewModel.States.ToList();
 
     // =========================
     // Constructor
@@ -26,6 +27,7 @@ public sealed partial class UpdatePlacement : Page {
     public UpdatePlacement(PlacementUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
+        BuildStateDropdown();
         SetupAutoSuggestionBox();
         SetupDatePickers();
 
@@ -35,7 +37,22 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     // UI Setup
     // =========================
-    // TODO: Build StateDropDown
+    private void BuildStateDropdown() {
+        var flyout = new MenuFlyout();
+
+        foreach (var state in _states) {
+            var item = new MenuFlyoutItem {
+                Text = state.ShortName,
+                Tag = state.ShortName
+            };
+
+            item.Click += StateSelected;
+            flyout.Items.Add(item);
+        }
+
+        StateDropDownButton.Content = ViewModel.Original.State;
+        StateDropDownButton.Flyout = flyout;
+    }
 
     private void SetupAutoSuggestionBox() {
         if (ViewModel.Original.CounselorName is string name)
@@ -68,12 +85,11 @@ public sealed partial class UpdatePlacement : Page {
     private async Task LoadEmployersAsync() {
         var result = await AppServices.EmployersViewModel.GetEmployers();
         if (result == null) return;
-
         _employers = result;
     }
 
     // =========================
-    // Even Handlers
+    // Event Handlers
     // =========================
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item || item.Tag is not Invoice sa)
@@ -82,17 +98,11 @@ public sealed partial class UpdatePlacement : Page {
         ViewModel.Updated.SaNumber = sa.ServiceAuthorizationNumber;
     }
 
-    private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
-        if (sender.Tag is not UpdateField field || double.IsNaN(sender.Value)) return;
-
-        switch (field) {
-            case UpdateField.PlacementNumber:
-                ViewModel.Updated.PlacementNumber = (int)sender.Value;
-                break;
-            case UpdateField.DaysOnJob:
-                ViewModel.Updated.DaysOnJob = (float)sender.Value;
-                break;
-
+    private void StateSelected(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item) {
+            var state = item.Tag.ToString();
+            ViewModel.Updated.State = state;
+            StateDropDownButton.Content = state;
         }
     }
 
@@ -140,6 +150,7 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     private void EmployerAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+            ViewModel.Updated.EmployerName = sender.Text;
             var query = sender.Text.Trim().ToLower();
             var suggestions = _employers
                 .Where(c => !string.IsNullOrWhiteSpace(c.Name) && c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
@@ -173,9 +184,24 @@ public sealed partial class UpdatePlacement : Page {
 
     private void UpdateValue(string value, UpdateField field) {
         var text = value.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (string.IsNullOrEmpty(text)) return;
 
         switch (field) {
+            case UpdateField.EmployerPhone:
+                ViewModel.Updated.EmployerPhone = text;
+                break;
+            case UpdateField.Address1:
+                ViewModel.Updated.Address1 = text;
+                break;
+            case UpdateField.Address2:
+                ViewModel.Updated.Address2 = text;
+                break;
+            case UpdateField.City:
+                ViewModel.Updated.City = text;
+                break;
+            case UpdateField.Zip:
+                ViewModel.Updated.Zip = text;
+                break;
             case UpdateField.SupervisorName:
                 ViewModel.Updated.SupervisorName = text;
                 break;
@@ -184,6 +210,9 @@ public sealed partial class UpdatePlacement : Page {
                 break;
             case UpdateField.SupervisorEmail:
                 ViewModel.Updated.SupervisorEmail = text;
+                break;
+            case UpdateField.Website:
+                ViewModel.Updated.Website = text;
                 break;
             case UpdateField.Position:
                 ViewModel.Updated.Position = text;
@@ -194,8 +223,8 @@ public sealed partial class UpdatePlacement : Page {
             case UpdateField.Wage:
                 ViewModel.Updated.Wages = text;
                 break;
-            case UpdateField.Website:
-                ViewModel.Updated.Website = text;
+            case UpdateField.Benefits:
+                ViewModel.Updated.Benefits = text;
                 break;
             case UpdateField.JobDuties:
                 ViewModel.Updated.JobDuties = text;
@@ -208,13 +237,27 @@ public sealed partial class UpdatePlacement : Page {
 
     private void UpdateSelectedEmployer(Employer employer) {
         ViewModel.Updated.EmployerID = employer.Id.ToString();
+        ViewModel.Updated.EmployerName = employer.Name;
+        ViewModel.Updated.EmployerPhone = employer.Phone;
+        ViewModel.Updated.Address1 = employer.Address1;
+        ViewModel.Updated.Address2 = employer.Address2;
+        ViewModel.Updated.City = employer.City;
+        ViewModel.Updated.State = employer.State;
+        ViewModel.Updated.Zip = employer.Zip;
         ViewModel.Updated.SupervisorName = employer.Supervisor;
         ViewModel.Updated.SupervisorPhone = employer.SupervisorPhone;
         ViewModel.Updated.SupervisorEmail = employer.SupervisorEmail;
+        ViewModel.Updated.Website = employer.Website;
 
+        EmployerPhoneTextBox.Text = employer.Phone;
+        AddressTextBox.Text = employer.Address1;
+        Address2TextBox.Text = employer.Address2;
+        CityTextBox.Text = employer.City;
+        ZipTextBox.Text = employer.Zip;
         SupervisorTextBox.Text = employer.Supervisor;
         SPhoneBox.Text = employer.SupervisorPhone;
         SEmailBox.Text = employer.SupervisorEmail;
+        WebsiteTextBox.Text = employer.Website;
     }
 
     // For some reason the first 5 days are stored as strings in the database.

@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -146,6 +145,19 @@ public sealed partial class UpdatePlacement : Page {
         }
     }
 
+    private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem item || item.Tag is not UpdateField field) return;
+        switch (field) {
+            case UpdateField.HireDate:
+                HireDatePicker.Date = null;
+                break;
+            case UpdateField.EndDate:
+                EndDatePicker.Date = null;
+                break;
+        }
+        SetDaysWorking();
+    }
+
     // =========================
     // AutoSuggest Box Updates
     // =========================
@@ -176,8 +188,10 @@ public sealed partial class UpdatePlacement : Page {
     // =========================
     private void SetDaysWorking() {
         if (HireDatePicker.Date is not DateTimeOffset startDate
-            || EndDatePicker.Date is not DateTimeOffset endDate)
+            || EndDatePicker.Date is not DateTimeOffset endDate) {
+            ViewModel.Updated.DaysOnJob = null;
             return;
+        }
         var daysOnJob = endDate - startDate;
         if (daysOnJob.Days > 0 && ViewModel.Original.DaysOnJob != daysOnJob.Days)
             ViewModel.Updated.DaysOnJob = daysOnJob.Days;

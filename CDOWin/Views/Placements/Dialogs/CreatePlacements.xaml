@@ -143,11 +143,23 @@
                     <CalendarDatePicker Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
                                         Header="Hire Date" x:Name="HireDatePicker" HorizontalAlignment="Stretch"
                                         DateChanged="DatePicker_DateChanged"
-                                        Tag="{x:Bind local:UpdateField.HireDate}"/>
+                                        Tag="{x:Bind local:UpdateField.HireDate}">
+                        <CalendarDatePicker.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Clear Date" Click="MenuFlyoutItem_Click" Tag="{x:Bind local:UpdateField.EndDate}"/>
+                            </MenuFlyout>
+                        </CalendarDatePicker.ContextFlyout>
+                    </CalendarDatePicker>
                     <CalendarDatePicker Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
                                         Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
                                         DateChanged="DatePicker_DateChanged"
-                                        Tag="{x:Bind local:UpdateField.EndDate}"/>
+                                        Tag="{x:Bind local:UpdateField.EndDate}">
+                        <CalendarDatePicker.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Clear Date" Click="MenuFlyoutItem_Click" Tag="{x:Bind local:UpdateField.EndDate}"/>
+                            </MenuFlyout>
+                        </CalendarDatePicker.ContextFlyout>
+                    </CalendarDatePicker>
 
                     <!-- Row 2: Position + Hours Working + Wage -->
                     <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="Position"

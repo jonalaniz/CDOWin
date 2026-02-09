@@ -1,11 +1,9 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Placements;
+﻿using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Office.Interop.Word;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;

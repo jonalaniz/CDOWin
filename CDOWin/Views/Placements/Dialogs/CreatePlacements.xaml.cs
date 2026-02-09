@@ -135,6 +135,19 @@ public sealed partial class CreatePlacements : Page {
         }
     }
 
+    private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem item || item.Tag is not UpdateField field) return;
+        switch (field) {
+            case UpdateField.HireDate:
+                HireDatePicker.Date = null;
+                break;
+            case UpdateField.EndDate:
+                EndDatePicker.Date = null;
+                break;
+        }
+        SetDaysWorking();
+    }
+
     // =========================
     // AutoSuggest Box Updates
     // =========================
@@ -164,11 +177,14 @@ public sealed partial class CreatePlacements : Page {
     // Utility Methods
     // =========================
     private void SetDaysWorking() {
-        if (HireDatePicker.Date is not DateTimeOffset startDate 
-            || EndDatePicker.Date is not DateTimeOffset endDate)
+        if (HireDatePicker.Date is not DateTimeOffset startDate
+            || EndDatePicker.Date is not DateTimeOffset endDate) {
+            ViewModel.DaysOnJob = null;
+            Debug.WriteLine("Set days to null");
             return;
+        }
         var daysOnJob = endDate - startDate;
-        if(daysOnJob.Days > 0) ViewModel.DaysOnJob = daysOnJob.Days;
+        if (daysOnJob.Days > 0) ViewModel.DaysOnJob = daysOnJob.Days;
     }
 
     private void UpdateValue(string value, UpdateField field) {

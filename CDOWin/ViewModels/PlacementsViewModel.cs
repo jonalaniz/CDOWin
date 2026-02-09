@@ -80,7 +80,7 @@ public partial class PlacementsViewModel : ObservableObject {
     partial void OnIsFilteredChanged(bool value) => ApplyFilter();
 
     private void OnRequestSelectedPlacementChange(int placementID) {
-        if (Selected != null && Selected.Id == placementID)  return;
+        if (Selected != null && Selected.Id == placementID) return;
         SearchQuery = string.Empty;
         ApplyFilter();
         _ = LoadSelectedPlacementAsync(placementID);

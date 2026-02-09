@@ -60,8 +60,8 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public ClientsViewModel(IClientService service, 
-        DataCoordinator dataCoordinator, 
+    public ClientsViewModel(IClientService service,
+        DataCoordinator dataCoordinator,
         ClientSelectionService clientSelectionService,
         PlacementSelectionService placementSelectionService) {
         _service = service;

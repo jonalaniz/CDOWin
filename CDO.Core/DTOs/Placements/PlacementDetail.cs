@@ -51,6 +51,27 @@ public record class PlacementDetail(
     public string? FormattedHireDate => HireDate?.ToString(format: "MM/dd/yyyy");
     public string? FormattedEndDate => EndDate?.ToString(format: "MM/dd/yyyy");
 
+    public string FormattedAddress {
+        get {
+            if (Address1 == null && Address2 == null)
+                return "No address on file.";
+            else if (Address2 == null) {
+                return $"{Address1}\n{FormattedCityStateZip}";
+            } else {
+                return $"{Address1} {Address2}\n{FormattedCityStateZip}";
+            }
+        }
+    }
+
+    public string FormattedCityStateZip {
+        get {
+            if (Zip != null)
+                return $"{City}, {State} {Zip}";
+            else
+                return $"{City}, {State}";
+        }
+    }
+
     public string? FormattedSupervisor {
         get {
             var text = $"{SupervisorName}\n{SupervisorPhone}\n{SupervisorEmail}";

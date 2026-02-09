@@ -37,6 +37,7 @@ public record class PlacementDetail(
     // Employer Specific
     int? EmployerID,
     string? EmployerName,
+    string? EmployerPhone,
     string? Address1,
     string? Address2,
     string? City,

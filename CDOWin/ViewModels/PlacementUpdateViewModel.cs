@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CDOWin.ViewModels;
 
 public partial class PlacementUpdateViewModel(PlacementDetail placement) : ObservableObject {
-    private IPlacementService _service = AppServices.PlacementService;
+    private readonly IPlacementService _service = AppServices.PlacementService;
     public PlacementDetail Original = placement;
     public PlacementUpdate Updated = new();
 

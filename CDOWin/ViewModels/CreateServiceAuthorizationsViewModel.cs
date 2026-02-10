@@ -1,5 +1,4 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Clients;
+﻿using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;

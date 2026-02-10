@@ -6,12 +6,12 @@ using System;
 
 namespace CDOWin.Converters;
 
-public class BoolToSolidBrushConverter : IValueConverter {
+class BoolToSolidBrushConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
         if ((bool)value)
             return new SolidColorBrush(Colors.Black);
 
-        return Application.Current.Resources["AccentAAFillColorDefaultBrush"] as SolidColorBrush;
+        return (Application.Current.Resources["AccentAAFillColorDefaultBrush"] as SolidColorBrush)!;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) {

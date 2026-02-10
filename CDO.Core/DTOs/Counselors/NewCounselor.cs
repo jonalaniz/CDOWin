@@ -2,7 +2,7 @@ namespace CDO.Core.DTOs.Counselors;
 
 public class NewCounselor {
     // Required creation fields
-    public required string name { get; init; }
+    public required string Name { get; init; }
 
     // Optional fields
     public int? CaseLoadID { get; init; }

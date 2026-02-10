@@ -1,5 +1,4 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Reminders;
+﻿using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;

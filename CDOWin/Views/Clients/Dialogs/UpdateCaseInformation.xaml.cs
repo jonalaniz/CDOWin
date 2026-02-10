@@ -106,7 +106,7 @@ public sealed partial class UpdateCaseInformation : Page {
             var result = _counselors.FirstOrDefault(c => c.Id == selectedCounselor.Id);
             if (result != null) {
                 UpdateSelectedCounselor(result);
-                sender.Text = result.ToString(); // display chosen name
+                sender.Text = result.ToString(); // display chosen Name
             }
         }
     }

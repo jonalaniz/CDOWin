@@ -12,7 +12,7 @@ public partial class ClientUpdateViewModel : ObservableObject {
     public ClientUpdate UpdatedClient = new();
 
     [ObservableProperty]
-    public partial string FolderPath { get; set; }
+    public partial string? FolderPath { get; set; }
 
     public ClientUpdateViewModel(ClientDetail client) {
         OriginalClient = client;

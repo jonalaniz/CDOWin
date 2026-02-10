@@ -1,6 +1,5 @@
 ﻿using CDOWin.Views;
 using Microsoft.UI.Xaml.Controls;
-using System;
 
 namespace CDOWin.Navigation;
 

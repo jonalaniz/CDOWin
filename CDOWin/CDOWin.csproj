@@ -81,10 +81,10 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
-    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="1.7.15" />
+    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="1.7.17" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.1-RTM" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.0.0-experimental3" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.0.0-experimental4" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>

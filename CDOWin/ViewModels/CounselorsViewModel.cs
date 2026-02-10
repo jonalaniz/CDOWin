@@ -116,7 +116,7 @@ public partial class CounselorsViewModel : ObservableObject {
 
         OnUI(() => {
             Selected = counselor;
-            Clients = new ObservableCollection<ClientSummary>(counselor.Clients);
+            Clients = new ObservableCollection<ClientSummary>(counselor?.Clients ?? []);
         });
     }
 

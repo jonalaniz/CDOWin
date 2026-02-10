@@ -67,7 +67,7 @@
                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                                          Tag="{x:Bind Id}">
-                                <Grid Opacity="{x:Bind Complete, Mode=OneWay, Converter={StaticResource BoolOpacityConverter}}">
+                                <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
@@ -80,21 +80,21 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Grid.Column="0" FontSize="14" 
-                                                   FontWeight="Bold" Text="{x:Bind ClientName, Mode=OneWay}"/>
+                                                   FontWeight="Bold" Text="{x:Bind ClientName}"/>
                                         <TextBlock Grid.Column="1" FontSize="14" 
-                                                   FontWeight="Normal" Text="{x:Bind LocalDate, Mode=OneWay}"/>
+                                                   FontWeight="Normal" Text="{x:Bind LocalDate}"/>
                                     </Grid>
 
                                     <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                FontWeight="Normal" TextWrapping="WrapWholeWords" 
-                                               Text="{x:Bind Description, Mode=OneWay}"/>
+                                               Text="{x:Bind Description}"/>
                                 </Grid>
 
                                 <!-- Split Button Flyout -->
                                 <SplitButton.Flyout>
                                     <MenuFlyout Placement="Right">
                                         <!-- Section 0: Completion / Goto Client -->
-                                        <MenuFlyoutItem Text="{x:Bind Complete, Mode=OneWay, Converter={StaticResource BoolCompletedConverter}}" 
+                                        <MenuFlyoutItem Text="{x:Bind Complete, Converter={StaticResource BoolCompletedConverter}}" 
                                                         Click="ToggleCompleted_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xF0B5;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>

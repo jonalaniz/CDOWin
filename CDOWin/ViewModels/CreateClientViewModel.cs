@@ -51,128 +51,48 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? Disability { get; set; }
-
-    [ObservableProperty]
-    public partial bool TTW { get; set; } = false;
+    public bool TTW { get; set; } = false;
 
     // Optional Fields
-
-    [ObservableProperty]
-    public partial int? Ssn { get; set; }
-
-    [ObservableProperty]
-    public partial string? CaseID { get; set; }
-
-    [ObservableProperty]
-    public partial string? Address1 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Address2 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Zip { get; set; }
-
-    [ObservableProperty]
-    public partial DateTime? Dob { get; set; }
-
-    [ObservableProperty]
-    public partial DateTime? StartDate { get; set; }
-
-    [ObservableProperty]
-    public partial string? DriversLicense { get; set; }
-
-    [ObservableProperty]
-    public partial string? Phone1 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Phone1Identity { get; set; }
-
-    [ObservableProperty]
-    public partial string? Phone2 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Phone2Identity { get; set; }
-
-    [ObservableProperty]
-    public partial string? Phone3 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Phone3Identity { get; set; }
-
-    [ObservableProperty]
-    public partial string? Email { get; set; }
-
-    [ObservableProperty]
-    public partial string? EmailIdentity { get; set; }
-
-    [ObservableProperty]
-    public partial string? Email2 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Email2Identity { get; set; }
-
-    [ObservableProperty]
-    public partial string? ClientNotes { get; set; }
-
-    [ObservableProperty]
-    public partial string? Conditions { get; set; }
-
-    [ObservableProperty]
-    public partial bool? Active { get; set; }
-
-    [ObservableProperty]
-    public partial string? EmploymentGoal { get; set; }
-
-    [ObservableProperty]
-    public partial int? EmployerID { get; set; }
-
-    [ObservableProperty]
-    public partial string? Status { get; set; }
-
-    [ObservableProperty]
-    public partial string? Benefit { get; set; }
-
-    [ObservableProperty]
-    public partial string? CriminalCharge { get; set; }
-
-    [ObservableProperty]
-    public partial string? Education { get; set; }
-
-    [ObservableProperty]
-    public partial string? Transportation { get; set; }
-
-    [ObservableProperty]
-    public partial bool? ResumeRequired { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? ResumeCompleted { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? VideoInterviewRequired { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? VideoInterviewCompleted { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? ReleasesCompleted { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? OrientationCompleted { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? DataSheetCompleted { get; set; } = false;
-
-    [ObservableProperty]
-    public partial bool? ElevatorSpeechCompleted { get; set; } = false;
-
-    [ObservableProperty]
-    public partial string? Race { get; set; }
-
-    [ObservableProperty]
-    public partial string? FluentLanguages { get; set; }
-
-    [ObservableProperty]
-    public partial string? Premium { get; set; }
+    public int? Ssn { get; set; }
+    public string? CaseID { get; set; }
+    public string? Address1 { get; set; }
+    public string? Address2 { get; set; }
+    public string? Zip { get; set; }
+    public DateTime? Dob { get; set; }
+    public DateTime? StartDate { get; set; }
+    public string? DriversLicense { get; set; }
+    public string? Phone1 { get; set; }
+    public string? Phone1Identity { get; set; }
+    public string? Phone2 { get; set; }
+    public string? Phone2Identity { get; set; }
+    public string? Phone3 { get; set; }
+    public string? Phone3Identity { get; set; }
+    public string? Email { get; set; }
+    public string? EmailIdentity { get; set; }
+    public string? Email2 { get; set; }
+    public string? Email2Identity { get; set; }
+    public string? ClientNotes { get; set; }
+    public string? Conditions { get; set; }
+    public bool? Active { get; set; }
+    public string? EmploymentGoal { get; set; }
+    public int? EmployerID { get; set; }
+    public string? Status { get; set; }
+    public string? Benefit { get; set; }
+    public string? CriminalCharge { get; set; }
+    public string? Education { get; set; }
+    public string? Transportation { get; set; }
+    public bool? ResumeRequired { get; set; } = false;
+    public bool? ResumeCompleted { get; set; } = false;
+    public bool? VideoInterviewRequired { get; set; } = false;
+    public bool? VideoInterviewCompleted { get; set; } = false;
+    public bool? ReleasesCompleted { get; set; } = false;
+    public bool? OrientationCompleted { get; set; } = false;
+    public bool? DataSheetCompleted { get; set; } = false;
+    public bool? ElevatorSpeechCompleted { get; set; } = false;
+    public string? Race { get; set; }
+    public string? FluentLanguages { get; set; }
+    public string? Premium { get; set; }
 
     // =========================
     // Input Validation

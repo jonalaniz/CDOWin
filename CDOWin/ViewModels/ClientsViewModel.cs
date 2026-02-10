@@ -3,6 +3,7 @@ using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
+using CDOWin.Composers;
 using CDOWin.Data;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -24,6 +25,7 @@ public partial class ClientsViewModel : ObservableObject {
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
     private readonly PlacementSelectionService _placementSelectionService;
+    private readonly ClientComposer _clientComposer = new();
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -140,6 +142,10 @@ public partial class ClientsViewModel : ObservableObject {
 
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
+        _ = Task.Run(() => {
+            if (result.Value == null) return;
+            _clientComposer.ComposeClientToFile(result.Value);
+        });
 
         await ReloadClientAsync();
         UpdateSummaries();

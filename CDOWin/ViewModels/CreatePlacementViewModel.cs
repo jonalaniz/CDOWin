@@ -5,7 +5,6 @@ using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -25,7 +24,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     // Placement Specific
     public string? Position { get; set; }
     public DateTime? HireDate { get; set; }
-    public  DateTime? EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
     public float? DaysOnJob { get; set; }
     public string? Day1 { get; set; }
     public string? Day2 { get; set; }

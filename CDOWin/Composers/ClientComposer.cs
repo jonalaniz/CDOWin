@@ -24,5 +24,5 @@ public sealed class ClientComposer {
         }
 
         return Result.Success();
-    } 
+    }
 }

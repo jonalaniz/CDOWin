@@ -23,51 +23,23 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     // =========================
 
     // Placement Specific
-    [ObservableProperty]
-    public partial string? Position { get; set; }
-
-    [ObservableProperty]
-    public partial DateTime? HireDate { get; set; }
-
-    [ObservableProperty]
-    public partial DateTime? EndDate { get; set; }
-
-    [ObservableProperty]
-    public partial float? DaysOnJob { get; set; }
-
-    [ObservableProperty]
-    public partial string? Day1 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Day2 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Day3 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Day4 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Day5 { get; set; }
-
-    [ObservableProperty]
-    public partial string? JobDuties { get; set; }
-
-    [ObservableProperty]
-    public partial string? HoursWorking { get; set; }
-
-    [ObservableProperty]
-    public partial string? WorkSchedule { get; set; }
-
-    [ObservableProperty]
-    public partial string? Wages { get; set; }
-
-    [ObservableProperty]
-    public partial string? Benefits { get; set; }
+    public string? Position { get; set; }
+    public DateTime? HireDate { get; set; }
+    public  DateTime? EndDate { get; set; }
+    public float? DaysOnJob { get; set; }
+    public string? Day1 { get; set; }
+    public string? Day2 { get; set; }
+    public string? Day3 { get; set; }
+    public string? Day4 { get; set; }
+    public string? Day5 { get; set; }
+    public string? JobDuties { get; set; }
+    public string? HoursWorking { get; set; }
+    public string? WorkSchedule { get; set; }
+    public string? Wages { get; set; }
+    public string? Benefits { get; set; }
 
     // SA/Invoice Specific
-    [ObservableProperty]
-    public partial int? InvoiceID { get; set; }
+    public int? InvoiceID { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -79,42 +51,21 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public partial Client Client { get; set; } = client;
 
     // EmployerName Specific
-    [ObservableProperty]
-    public partial int? EmployerID { get; set; }
+    public int? EmployerID { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? EmployerName { get; set; }
-
-    [ObservableProperty]
-    public partial string? EmployerPhone { get; set; }
-
-    [ObservableProperty]
-    public partial string? Address1 { get; set; }
-
-    [ObservableProperty]
-    public partial string? Address2 { get; set; }
-
-    [ObservableProperty]
-    public partial string? City { get; set; }
-
-    [ObservableProperty]
-    public partial string? State { get; set; } = "TX";
-
-    [ObservableProperty]
-    public partial string? Zip { get; set; }
-
-    [ObservableProperty]
-    public partial string? SupervisorName { get; set; }
-
-    [ObservableProperty]
-    public partial string? SupervisorEmail { get; set; }
-
-    [ObservableProperty]
-    public partial string? SupervisorPhone { get; set; }
-
-    [ObservableProperty]
-    public partial string? Website { get; set; }
+    public string? EmployerPhone { get; set; }
+    public string? Address1 { get; set; }
+    public string? Address2 { get; set; }
+    public string? City { get; set; }
+    public string? State { get; set; } = "TX";
+    public string? Zip { get; set; }
+    public string? SupervisorName { get; set; }
+    public string? SupervisorEmail { get; set; }
+    public string? SupervisorPhone { get; set; }
+    public string? Website { get; set; }
 
     // =========================
     // Input Validation

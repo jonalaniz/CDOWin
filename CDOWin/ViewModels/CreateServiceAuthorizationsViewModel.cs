@@ -21,8 +21,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // =========================
     // Fields
     // =========================
-    [ObservableProperty]
-    public partial Client Client { get; set; } = client;
+    public Client Client { get; set; } = client;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -39,9 +38,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial DateTime EndDate { get; set; } = DateTime.Now.Date;
-
-    [ObservableProperty]
-    public partial string? Office { get; set; }
+    public string? Office { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]

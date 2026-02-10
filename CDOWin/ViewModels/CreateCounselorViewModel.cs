@@ -21,13 +21,13 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string Name { get; set; } = string.Empty;
-    public partial int? CaseLoadId { get; set; }
-    public partial string? Email { get; set; }
-    public partial string? Phone { get; set; }
-    public partial string? Fax { get; set; }
-    public partial string? Notes { get; set; }
-    public partial string? SecretaryName { get; set; }
-    public partial string? SecretaryEmail { get; set; }
+    public int? CaseLoadId { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Fax { get; set; }
+    public string? Notes { get; set; }
+    public string? SecretaryName { get; set; }
+    public string? SecretaryEmail { get; set; }
 
     // =========================
     // Input Validation

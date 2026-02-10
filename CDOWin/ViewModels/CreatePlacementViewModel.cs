@@ -73,7 +73,6 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public bool CanSave => CanSaveMethod();
 
     public bool CanSaveMethod() {
-        Debug.WriteLine($"{EmployerID == null} {Client == null} {SaNumber == null}");
         if (EmployerName == null
             || Client == null
             || SaNumber == null)

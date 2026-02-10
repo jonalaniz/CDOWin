@@ -187,6 +187,7 @@ public sealed partial class ClientViewPage : Page {
         }
 
         _ = AppServices.DataCoordinator.GetPlacementSummariesAsync(force: true);
+        _ = AppServices.DataCoordinator.GetEmployerSummariesAsync(force: true);
         _ = ViewModel.ReloadClientAsync();
     }
 
@@ -197,7 +198,6 @@ public sealed partial class ClientViewPage : Page {
         if (placement == null) { return; }
         var updatePlacementVM = new PlacementUpdateViewModel(placement);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Placement");
-        // dialog.SecondaryButtonText = "Export";
         dialog.Content = new UpdatePlacement(updatePlacementVM);
 
         var result = await dialog.ShowAsync();

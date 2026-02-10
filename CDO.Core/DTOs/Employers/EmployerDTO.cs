@@ -1,4 +1,4 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Employers;
 
 public class EmployerDTO {
     public string? Name { get; set; }

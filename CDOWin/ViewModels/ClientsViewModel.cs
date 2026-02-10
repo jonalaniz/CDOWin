@@ -142,12 +142,12 @@ public partial class ClientsViewModel : ObservableObject {
 
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
+        await ReloadClientAsync();
+
         _ = Task.Run(() => {
-            if (result.Value == null) return;
-            _clientComposer.ComposeClientToFile(result.Value);
+            _clientComposer.ComposeClientToFile(Selected);
         });
 
-        await ReloadClientAsync();
         UpdateSummaries();
         return result;
     }

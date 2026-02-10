@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Counselors;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -38,7 +38,7 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     // CRUD Methods
     // =========================
     public async Task<Result<Counselor>> CreateCounselorAsync() {
-        var counselor = new CreateCounselorDTO {
+        var counselor = new NewCounselor {
             name = Name,
             CaseLoadID = CaseLoadId,
             Email = Email,

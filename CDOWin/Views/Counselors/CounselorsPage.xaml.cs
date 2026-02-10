@@ -1,4 +1,4 @@
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Counselors;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -69,7 +69,7 @@ public sealed partial class CounselorsPage : Page {
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if (e.ClickedItem is CounselorSummaryDTO counselor) {
+        if (e.ClickedItem is CounselorSummary counselor) {
             _ = ViewModel.LoadSelectedCounselorAsync(counselor.Id);
         }
     }

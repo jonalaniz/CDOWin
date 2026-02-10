@@ -1,5 +1,5 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -30,8 +30,8 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Reminder>> CreateRemindersAsync(CreateReminderDTO dto) {
-        var result = await _network.PostAsync<CreateReminderDTO, Reminder>(Endpoints.Reminders, dto);
+    public async Task<Result<Reminder>> CreateRemindersAsync(NewReminder dto) {
+        var result = await _network.PostAsync<NewReminder, Reminder>(Endpoints.Reminders, dto);
         if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
         return Result<Reminder>.Success(result.Value!);
     }
@@ -39,8 +39,8 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Reminder>> UpdateReminderAsync(int id, UpdateReminderDTO dto) {
-        var result = await _network.UpdateAsync<UpdateReminderDTO, Reminder>(Endpoints.Reminder(id), dto);
+    public async Task<Result<Reminder>> UpdateReminderAsync(int id, ReminderUpdate dto) {
+        var result = await _network.UpdateAsync<ReminderUpdate, Reminder>(Endpoints.Reminder(id), dto);
         if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
         return Result<Reminder>.Success(result.Value!);
     }

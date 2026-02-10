@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:dto="using:CDO.Core.DTOs"
+    xmlns:employers="using:CDO.Core.DTOs.Employers"
     mc:Ignorable="d">
 
     <Grid>
@@ -83,7 +83,7 @@
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="dto:EmployerSummaryDTO">
+                    <DataTemplate x:DataType="employers:EmployerSummary">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="180"/>

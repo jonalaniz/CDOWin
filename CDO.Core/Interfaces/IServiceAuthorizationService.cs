@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
 
@@ -16,12 +16,12 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result<Invoice>> CreateServiceAuthorizationAsync(CreateInvoiceDTO dto);
+    public Task<Result<Invoice>> CreateServiceAuthorizationAsync(NewSA dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, UpdateInvoiceDTO dto);
+    public Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, SAUpdate dto);
 
     // -----------------------------
     // DELETE Methods

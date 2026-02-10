@@ -1,4 +1,4 @@
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Employers;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -67,7 +67,7 @@ public sealed partial class EmployersPage : Page {
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if (e.ClickedItem is EmployerSummaryDTO employer) {
+        if (e.ClickedItem is EmployerSummary employer) {
             _ = ViewModel.LoadSelectedEmployerAsync(employer.Id);
         }
     }

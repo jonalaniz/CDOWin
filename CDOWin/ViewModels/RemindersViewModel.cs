@@ -1,5 +1,5 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Clients;
+﻿using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -103,7 +103,7 @@ public partial class RemindersViewModel : ObservableObject {
     public void DeferDate(int id, int days) {
         var reminder = Filtered.FirstOrDefault(r => r.Id == id);
         if (reminder != null) {
-            var update = new UpdateReminderDTO { Date = reminder.Date.AddDays(days) };
+            var update = new ReminderUpdate { Date = reminder.Date.AddDays(days) };
             _ = UpdateReminderAsync(id, update);
         }
     }
@@ -111,7 +111,7 @@ public partial class RemindersViewModel : ObservableObject {
     public void ToggleCompleted(int id) {
         var reminder = Filtered.FirstOrDefault(r => r.Id == id);
         if (reminder != null) {
-            var update = new UpdateReminderDTO { Complete = !reminder.Complete };
+            var update = new ReminderUpdate { Complete = !reminder.Complete };
             _ = UpdateReminderAsync(id, update);
         }
     }
@@ -157,7 +157,7 @@ public partial class RemindersViewModel : ObservableObject {
         _dispatcher.TryEnqueue(ApplyFilter);
     }
 
-    public async Task<Result<Reminder>> UpdateReminderAsync(int id, UpdateReminderDTO update) {
+    public async Task<Result<Reminder>> UpdateReminderAsync(int id, ReminderUpdate update) {
         var result = await _service.UpdateReminderAsync(id, update);
 
         if (!result.IsSuccess) return result;

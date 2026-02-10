@@ -13,8 +13,8 @@ public sealed class ClientComposer {
         if (client.DocumentsFolderPath == null)
             return Result.Fail(new AppError(ErrorKind.Unknown, "Missing file path.", null));
 
-        var clientSummary = client.AsSummary();
-        var yaml = _serializer.Serialize(clientSummary);
+        var clientExport = client.AsExport();
+        var yaml = _serializer.Serialize(clientExport);
         var filePath = Path.Combine(client.DocumentsFolderPath, "ClientDetail.txt");
 
         try {

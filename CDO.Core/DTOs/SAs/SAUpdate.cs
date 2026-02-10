@@ -1,6 +1,6 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.SAs;
 
-public class UpdateInvoiceDTO {
+public class SAUpdate {
     public string? ServiceAuthorizationNumber { get; set; }
     public int? ClientID { get; set; }
     public string? CaseID { get; set; }

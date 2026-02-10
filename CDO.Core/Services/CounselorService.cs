@@ -1,5 +1,5 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Counselors;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -8,7 +8,7 @@ namespace CDO.Core.Services;
 
 public class CounselorService : ICounselorService {
     private readonly INetworkService _network;
-    public List<CounselorSummaryDTO> Counselors { get; private set; } = new();
+    public List<CounselorSummary> Counselors { get; private set; } = new();
 
     public CounselorService(INetworkService network) {
         _network = network;
@@ -17,22 +17,22 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // GET
     // -----------------------------
-    public Task<List<CounselorSummaryDTO>?> GetAllCounselorSummariesAsync() {
-        return _network.GetAsync<List<CounselorSummaryDTO>>(Endpoints.CounselorSummaries);
+    public Task<List<CounselorSummary>?> GetAllCounselorSummariesAsync() {
+        return _network.GetAsync<List<CounselorSummary>>(Endpoints.CounselorSummaries);
     }
     public Task<List<Counselor>?> GetAllCounselorsAsync() {
         return _network.GetAsync<List<Counselor>>(Endpoints.Counselors);
     }
 
-    public Task<CounselorResponseDTO?> GetCounselorAsync(int id) {
-        return _network.GetAsync<CounselorResponseDTO>(Endpoints.Counselor(id));
+    public Task<CounselorDetail?> GetCounselorAsync(int id) {
+        return _network.GetAsync<CounselorDetail>(Endpoints.Counselor(id));
     }
 
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Counselor>> CreateCounselorAsync(CreateCounselorDTO dto) {
-        var result = await _network.PostAsync<CreateCounselorDTO, Counselor>(Endpoints.Counselors, dto);
+    public async Task<Result<Counselor>> CreateCounselorAsync(NewCounselor dto) {
+        var result = await _network.PostAsync<NewCounselor, Counselor>(Endpoints.Counselors, dto);
         if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
         return Result<Counselor>.Success(result.Value!);
     }
@@ -40,8 +40,8 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Counselor>> UpdateCounselorAsync(int id, UpdateCounselorDTO dto) {
-        var result = await _network.UpdateAsync<UpdateCounselorDTO, Counselor>(Endpoints.Counselor(id), dto);
+    public async Task<Result<Counselor>> UpdateCounselorAsync(int id, CounselorUpdate dto) {
+        var result = await _network.UpdateAsync<CounselorUpdate, Counselor>(Endpoints.Counselor(id), dto);
         if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
         return Result<Counselor>.Success(result.Value!);
     }

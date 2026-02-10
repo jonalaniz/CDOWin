@@ -1,5 +1,5 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Employers;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -21,8 +21,8 @@ public class EmployerService : IEmployerService {
         return _network.GetAsync<List<Employer>>(Endpoints.Employers);
     }
 
-    public Task<List<DTOs.EmployerSummaryDTO>?> GetAllEmployerSummariesAsync() {
-        return _network.GetAsync<List<EmployerSummaryDTO>>(Endpoints.EmployerSummaries);
+    public Task<List<EmployerSummary>?> GetAllEmployerSummariesAsync() {
+        return _network.GetAsync<List<EmployerSummary>>(Endpoints.EmployerSummaries);
     }
 
     public Task<Employer?> GetEmployerAsync(int id) {

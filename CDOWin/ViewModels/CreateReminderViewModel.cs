@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -34,7 +35,7 @@ public partial class CreateReminderViewModel(IReminderService service, int clien
     // CRUD Methods
     // =========================
     public async Task<Result<Reminder>> CreateReminderAsync() {
-        var reminder = new CreateReminderDTO {
+        var reminder = new NewReminder {
             ClientID = _clientId,
             Date = Date.ToUniversalTime(),
             Description = Description

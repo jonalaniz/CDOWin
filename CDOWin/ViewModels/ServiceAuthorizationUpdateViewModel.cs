@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -11,7 +11,7 @@ namespace CDOWin.ViewModels;
 public partial class ServiceAuthorizationUpdateViewModel(Invoice serviceAuthorization) : ObservableObject {
     private IServiceAuthorizationService _service = AppServices.SAService;
     public Invoice Original = serviceAuthorization;
-    public UpdateInvoiceDTO Updated = new();
+    public SAUpdate Updated = new();
 
     public async Task<Result<Invoice>> UpdateSAAsync() {
         return await _service.UpdateServiceAuthorizationAsync(Original.Id, Updated);

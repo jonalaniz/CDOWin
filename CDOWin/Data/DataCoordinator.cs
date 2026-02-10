@@ -1,5 +1,6 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Clients;
+﻿using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Counselors;
+using CDO.Core.DTOs.Employers;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -50,8 +51,8 @@ public class DataCoordinator {
     // Public Fields
     // =========================
     public CachedList<ClientSummary> Clients { get; } = new();
-    public CachedList<CounselorSummaryDTO> Counselors { get; } = new();
-    public CachedList<EmployerSummaryDTO> Employers { get; } = new();
+    public CachedList<CounselorSummary> Counselors { get; } = new();
+    public CachedList<EmployerSummary> Employers { get; } = new();
     public CachedList<PlacementSummary> Placements { get; } = new();
     public CachedList<Reminder> Reminders { get; } = new();
     public CachedList<Invoice> SAs { get; } = new();
@@ -86,7 +87,7 @@ public class DataCoordinator {
         return Clients.Data!;
     }
 
-    public async Task<IReadOnlyList<CounselorSummaryDTO>> GetCounselorsAsync(bool force = false) {
+    public async Task<IReadOnlyList<CounselorSummary>> GetCounselorsAsync(bool force = false) {
         if (force || Counselors.IsStale(CounselorTTL)) {
             var data = await _counselors.GetAllCounselorSummariesAsync();
             Counselors.Update(data);
@@ -95,7 +96,7 @@ public class DataCoordinator {
         return Counselors.Data!;
     }
 
-    public async Task<IReadOnlyList<EmployerSummaryDTO>> GetEmployerSummariesAsync(bool force = false) {
+    public async Task<IReadOnlyList<EmployerSummary>> GetEmployerSummariesAsync(bool force = false) {
         if (force || Employers.IsStale(EmployerTTL)) {
             var data = await _employers.GetAllEmployerSummariesAsync();
             Employers.Update(data);

@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Employers;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -28,20 +28,20 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<EmployerSummaryDTO> _cache = [];
+    private IReadOnlyList<EmployerSummary> _cache = [];
 
     // =========================
     // UI State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<EmployerSummaryDTO> Filtered { get; private set; } = [];
+    public partial ObservableCollection<EmployerSummary> Filtered { get; private set; } = [];
 
     [ObservableProperty]
     public partial Employer? Selected { get; set; }
 
     [ObservableProperty]
-    public partial EmployerSummaryDTO? SelectedSummary { get; set; }
+    public partial EmployerSummary? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -143,7 +143,7 @@ public partial class EmployersViewModel : ObservableObject {
         int? previousSelection = SelectedSummary?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<EmployerSummaryDTO>(_cache);
+            Filtered = new ObservableCollection<EmployerSummary>(_cache);
             ReSelect(previousSelection);
             return;
         }
@@ -157,7 +157,7 @@ public partial class EmployersViewModel : ObservableObject {
         );
 
         OnUI(() => {
-            Filtered = new ObservableCollection<EmployerSummaryDTO>(result);
+            Filtered = new ObservableCollection<EmployerSummary>(result);
             ReSelect(previousSelection);
         });
     }
@@ -169,7 +169,7 @@ public partial class EmployersViewModel : ObservableObject {
 
     private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(e => e.Id == id) is EmployerSummaryDTO selected)
+        if (Filtered.FirstOrDefault(e => e.Id == id) is EmployerSummary selected)
             SelectedSummary = selected;
     }
 }

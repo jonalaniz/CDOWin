@@ -1,6 +1,6 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.SAs;
 
-public class CreateInvoiceDTO {
+public class NewSA {
     // Required creation fields
     public required string ServiceAuthorizationNumber { get; init; }
     public required int ClientID { get; init; }

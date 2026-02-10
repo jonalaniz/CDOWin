@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Employers;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
 
@@ -8,7 +8,7 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // GET Methods
         // -----------------------------
-        public Task<List<EmployerSummaryDTO>?> GetAllEmployerSummariesAsync();
+        public Task<List<EmployerSummary>?> GetAllEmployerSummariesAsync();
         public Task<List<Employer>?> GetAllEmployersAsync();
 
         public Task<Employer?> GetEmployerAsync(int id);

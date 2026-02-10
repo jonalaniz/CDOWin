@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Reminders;
 using CDO.Core.Models;
 using CDOWin.Composers;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -58,7 +58,7 @@ public partial class CalendarViewModel(RemindersViewModel viewModel) : Observabl
 
     public Reminder? GetReminderByID(int id) => _remindersViewModel.GetReminderByID(id);
 
-    public async Task UpdateReminderAsync(int id, UpdateReminderDTO update) {
+    public async Task UpdateReminderAsync(int id, ReminderUpdate update) {
         await _remindersViewModel.UpdateReminderAsync(id, update);
         BuildCalendarDays();
         // the task above both updates and reloads the data, we need to refresh the 

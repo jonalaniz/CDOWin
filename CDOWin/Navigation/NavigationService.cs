@@ -18,8 +18,6 @@ public sealed class NavigationService : INavigationService {
     private CDOFrame? _currentFrame;
     private int _previousSelectedIndex = 0;
 
-    public event Action<CDOFrame>? NavigationRequested;
-
     public void Initialize(NavigationView navigationView, Frame frame) {
         _navigationView = navigationView;
         _frame = frame;

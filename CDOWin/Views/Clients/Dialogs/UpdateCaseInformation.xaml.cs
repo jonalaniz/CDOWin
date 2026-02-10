@@ -1,4 +1,4 @@
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Counselors;
 using CDO.Core.Models;
 using CDOWin.Extensions;
 using CDOWin.Services;
@@ -17,7 +17,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<CounselorSummaryDTO> _counselors = AppServices.CounselorsViewModel.GetCounselors();
+    private readonly List<CounselorSummary> _counselors = AppServices.CounselorsViewModel.GetCounselors();
     public ClientUpdateViewModel ViewModel { get; private set; }
 
     // =========================
@@ -102,7 +102,7 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void CounselorAutoSuggest_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
-        if (args.SelectedItem is CounselorSummaryDTO selectedCounselor) {
+        if (args.SelectedItem is CounselorSummary selectedCounselor) {
             var result = _counselors.FirstOrDefault(c => c.Id == selectedCounselor.Id);
             if (result != null) {
                 UpdateSelectedCounselor(result);
@@ -112,7 +112,7 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void CounselorAutoSuggest_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
-        if (args.ChosenSuggestion is CounselorSummaryDTO chosenCounselor) {
+        if (args.ChosenSuggestion is CounselorSummary chosenCounselor) {
             var counselor = _counselors.FirstOrDefault(c => c.Id == chosenCounselor.Id);
             if (counselor != null) { UpdateSelectedCounselor(counselor); }
         } else if (!string.IsNullOrWhiteSpace(args.QueryText)) {
@@ -160,7 +160,7 @@ public sealed partial class UpdateCaseInformation : Page {
         }
     }
 
-    private void UpdateSelectedCounselor(CounselorSummaryDTO counselor) {
+    private void UpdateSelectedCounselor(CounselorSummary counselor) {
         // Update Labels
         CPhone.Value = counselor.Phone ?? "";
         CEmail.Value = counselor.Email ?? "";

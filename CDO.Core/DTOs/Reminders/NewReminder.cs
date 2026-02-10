@@ -1,6 +1,6 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Reminders;
 
-public class CreateReminderDTO {
+public class NewReminder {
     // Required creation fields
     public required DateTime Date { get; set; }
     public required string Description { get; set; }

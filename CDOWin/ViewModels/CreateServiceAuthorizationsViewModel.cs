@@ -1,5 +1,6 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -71,7 +72,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // CRUD Methods
     // =========================
     public async Task<Result<Invoice>> CreateSAAsync() {
-        var invoice = new CreateInvoiceDTO {
+        var invoice = new NewSA {
             ServiceAuthorizationNumber = SANumber,
             ClientID = Client.Id,
             ClientName = Client.FormattedName,

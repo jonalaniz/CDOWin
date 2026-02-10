@@ -1,4 +1,5 @@
-﻿using CDO.Core.DTOs.Placements;
+﻿using CDO.Core.DTOs.Counselors;
+using CDO.Core.DTOs.Placements;
 using CDO.Core.Models;
 
 namespace CDO.Core.DTOs.Clients;
@@ -55,7 +56,7 @@ public record class ClientDetail(
     string? Race,
     string? FluentLanguages,
     string? Premiums,
-    UpdateCounselorDTO? CounselorReference
+    CounselorUpdate? CounselorReference
     ) {
     public bool InActive => !Active;
     public string NameAndID => $"{FirstName} {LastName} ({Id})";
@@ -116,6 +117,28 @@ public record class ClientDetail(
             Phone3 = Phone3,
             EmploymentGoal = EmploymentGoal,
             CaseID = CaseID
+        };
+    }
+
+    public ClientExport AsExport() {
+        return new ClientExport {
+            Id = Id,
+            FirstName = FirstName,
+            LastName = LastName,
+            City = City,
+            State = State,
+            Active = Active,
+            TTW = TTW,
+            Address1 = Address1,
+            Address2 = Address2,
+            Zip = Zip,
+            CounselorName = CounselorReference?.Name,
+            Phone = Phone1,
+            Phone2 = Phone2,
+            Phone3 = Phone3,
+            EmploymentGoal = EmploymentGoal,
+            CaseID = CaseID,
+            Invoices = Invoices
         };
     }
 }

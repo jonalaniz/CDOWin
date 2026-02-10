@@ -1,6 +1,6 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Reminders;
 
-public class UpdateReminderDTO {
+public class ReminderUpdate {
     public DateTime? Date { get; set; }
     public string? Description { get; set; }
     public int? ClientID { get; set; }

@@ -1,6 +1,10 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Counselors;
+using CDO.Core.DTOs.Employers;
 using CDO.Core.DTOs.Placements;
+using CDO.Core.DTOs.Reminders;
+using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
 using System.Text.Json.Serialization;
 
@@ -15,21 +19,21 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(List<ClientSummary>))]
 
 [JsonSerializable(typeof(Counselor))]
-[JsonSerializable(typeof(CounselorResponseDTO))]
+[JsonSerializable(typeof(CounselorDetail))]
 [JsonSerializable(typeof(List<Counselor>))]
-[JsonSerializable(typeof(CreateCounselorDTO))]
-[JsonSerializable(typeof(UpdateCounselorDTO))]
+[JsonSerializable(typeof(NewCounselor))]
+[JsonSerializable(typeof(CounselorUpdate))]
 
-[JsonSerializable(typeof(CounselorSummaryDTO))]
-[JsonSerializable(typeof(List<CounselorSummaryDTO>))]
+[JsonSerializable(typeof(CounselorSummary))]
+[JsonSerializable(typeof(List<CounselorSummary>))]
 
 [JsonSerializable(typeof(Employer))]
 [JsonSerializable(typeof(List<Employer>))]
 [JsonSerializable(typeof(EmployerDTO))]
 [JsonSerializable(typeof(PlacementEmployer))]
 
-[JsonSerializable(typeof(EmployerSummaryDTO))]
-[JsonSerializable(typeof(List<EmployerSummaryDTO>))]
+[JsonSerializable(typeof(EmployerSummary))]
+[JsonSerializable(typeof(List<EmployerSummary>))]
 
 [JsonSerializable(typeof(PlacementDetail))]
 [JsonSerializable(typeof(List<PlacementDetail>))]
@@ -41,13 +45,13 @@ namespace CDO.Core.Serialization;
 
 [JsonSerializable(typeof(Reminder))]
 [JsonSerializable(typeof(List<Reminder>))]
-[JsonSerializable(typeof(CreateReminderDTO))]
-[JsonSerializable(typeof(UpdateReminderDTO))]
+[JsonSerializable(typeof(NewReminder))]
+[JsonSerializable(typeof(ReminderUpdate))]
 
 [JsonSerializable(typeof(Invoice))]
 [JsonSerializable(typeof(List<Invoice>))]
-[JsonSerializable(typeof(CreateInvoiceDTO))]
-[JsonSerializable(typeof(UpdateInvoiceDTO))]
+[JsonSerializable(typeof(NewSA))]
+[JsonSerializable(typeof(SAUpdate))]
 
 [JsonSerializable(typeof(State))]
 [JsonSerializable(typeof(List<State>))]

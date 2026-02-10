@@ -1,5 +1,5 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -28,8 +28,8 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Invoice>> CreateServiceAuthorizationAsync(CreateInvoiceDTO dto) {
-        var result = await _network.PostAsync<CreateInvoiceDTO, Invoice>(Endpoints.ServiceAuthorizations, dto);
+    public async Task<Result<Invoice>> CreateServiceAuthorizationAsync(NewSA dto) {
+        var result = await _network.PostAsync<NewSA, Invoice>(Endpoints.ServiceAuthorizations, dto);
         if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
         return Result<Invoice>.Success(result.Value!);
     }
@@ -37,8 +37,8 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, UpdateInvoiceDTO dto) {
-        var result = await _network.UpdateAsync<UpdateInvoiceDTO, Invoice>(Endpoints.ServiceAuthorization(id), dto);
+    public async Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, SAUpdate dto) {
+        var result = await _network.UpdateAsync<SAUpdate, Invoice>(Endpoints.ServiceAuthorization(id), dto);
         if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
         return Result<Invoice>.Success(result.Value!);
     }

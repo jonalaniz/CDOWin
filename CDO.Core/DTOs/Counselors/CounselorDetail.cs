@@ -1,9 +1,9 @@
 ﻿using CDO.Core.DTOs.Clients;
 using CDO.Core.Models;
 
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Counselors;
 
-public class CounselorResponseDTO {
+public class CounselorDetail {
     // Non-optional fields
     public int Id { get; init; }
     public required string Name { get; init; }

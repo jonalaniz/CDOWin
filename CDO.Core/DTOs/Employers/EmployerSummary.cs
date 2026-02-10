@@ -1,6 +1,6 @@
-﻿namespace CDO.Core.DTOs;
+﻿namespace CDO.Core.DTOs.Employers;
 
-public class EmployerSummaryDTO {
+public class EmployerSummary {
     // Non-optional fields
     public int Id { get; init; }
 

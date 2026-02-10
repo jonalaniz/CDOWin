@@ -1,5 +1,5 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Clients;
+﻿using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Counselors;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -29,20 +29,20 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<CounselorSummaryDTO> _cache = [];
+    private IReadOnlyList<CounselorSummary> _cache = [];
 
     // =========================
     // UI State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<CounselorSummaryDTO> Filtered { get; private set; } = [];
+    public partial ObservableCollection<CounselorSummary> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial CounselorResponseDTO? Selected { get; set; }
+    public partial CounselorDetail? Selected { get; set; }
 
     [ObservableProperty]
-    public partial CounselorSummaryDTO? SelectedSummary { get; set; }
+    public partial CounselorSummary? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial ObservableCollection<ClientSummary> Clients { get; private set; } = [];
@@ -83,9 +83,9 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Public Methods
     // =========================
-    public List<CounselorSummaryDTO> All() => _cache.ToList();
+    public List<CounselorSummary> All() => _cache.ToList();
 
-    public List<CounselorSummaryDTO> GetCounselors() {
+    public List<CounselorSummary> GetCounselors() {
         if (_cache.Count == 0)
             LoadCounselorSummariesAsync().GetAwaiter().GetResult();
 
@@ -120,7 +120,7 @@ public partial class CounselorsViewModel : ObservableObject {
         });
     }
 
-    public async Task<Result<Counselor>> UpdateCounselorAsync(UpdateCounselorDTO update) {
+    public async Task<Result<Counselor>> UpdateCounselorAsync(CounselorUpdate update) {
         if (Selected == null) return Result<Counselor>.Fail(new AppError(ErrorKind.Validation, "Counselor not selected.", null));
 
         var result = await _service.UpdateCounselorAsync(Selected.Id, update);
@@ -156,7 +156,7 @@ public partial class CounselorsViewModel : ObservableObject {
         int? previousSelection = Selected?.Id;
 
         if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<CounselorSummaryDTO>(_cache);
+            Filtered = new ObservableCollection<CounselorSummary>(_cache);
             ReSelect(previousSelection);
             return;
         }
@@ -170,7 +170,7 @@ public partial class CounselorsViewModel : ObservableObject {
         );
 
         OnUI(() => {
-            Filtered = new ObservableCollection<CounselorSummaryDTO>(result);
+            Filtered = new ObservableCollection<CounselorSummary>(result);
             ReSelect(previousSelection);
         });
     }
@@ -182,7 +182,7 @@ public partial class CounselorsViewModel : ObservableObject {
 
     private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(c => c.Id == id) is CounselorSummaryDTO selected)
+        if (Filtered.FirstOrDefault(c => c.Id == id) is CounselorSummary selected)
             SelectedSummary = selected;
     }
 }

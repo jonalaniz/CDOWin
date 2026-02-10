@@ -1,6 +1,6 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Counselors;
 
-public class UpdateCounselorDTO {
+public class CounselorUpdate {
     public string? Name { get; set; }
     public int? CaseLoadID { get; set; }
     public string? Email { get; set; }

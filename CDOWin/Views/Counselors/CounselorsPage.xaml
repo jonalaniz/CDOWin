@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:dto="using:CDO.Core.DTOs"
+    xmlns:counselors="using:CDO.Core.DTOs.Counselors"
     xmlns:clients="using:CDO.Core.DTOs.Clients"
     mc:Ignorable="d">
 
@@ -59,7 +59,7 @@
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="dto:CounselorSummaryDTO">
+                    <DataTemplate x:DataType="counselors:CounselorSummary">
                         <Grid Margin="0,8,8,8">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>

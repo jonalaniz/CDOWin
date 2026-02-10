@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Employers;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 

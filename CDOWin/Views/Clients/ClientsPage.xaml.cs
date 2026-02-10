@@ -1,4 +1,4 @@
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -40,7 +40,7 @@ public sealed partial class ClientsPage : Page {
     // Click Handlers
     // =========================
     private async void NewClient_Click(object sender, RoutedEventArgs e) {
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, "New Client");
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, "New ClientDetail");
         var createClientVM = AppServices.CreateClientViewModel();
         var createClientPage = new CreateClient(createClientVM);
         dialog.Content = createClientPage;
@@ -69,7 +69,7 @@ public sealed partial class ClientsPage : Page {
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        var selection = (ClientSummaryDTO)e.ClickedItem;
+        var selection = (ClientSummary)e.ClickedItem;
         _ = ViewModel.LoadSelectedClientAsync(selection.Id);
     }
 }

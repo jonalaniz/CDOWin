@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -44,7 +45,7 @@ public partial class CounselorsViewModel : ObservableObject {
     public partial CounselorSummaryDTO? SelectedSummary { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<ClientSummaryDTO> Clients { get; private set; } = [];
+    public partial ObservableCollection<ClientSummary> Clients { get; private set; } = [];
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -115,7 +116,7 @@ public partial class CounselorsViewModel : ObservableObject {
 
         OnUI(() => {
             Selected = counselor;
-            Clients = new ObservableCollection<ClientSummaryDTO>(counselor.Clients);
+            Clients = new ObservableCollection<ClientSummary>(counselor.Clients);
         });
     }
 

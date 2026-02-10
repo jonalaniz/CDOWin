@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, DataInvalidationService dataInvalidationService, Client client) : ObservableObject {
+public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationService service, DataInvalidationService dataInvalidationService, ClientDetail client) : ObservableObject {
 
     // =========================
     // Dependencies
@@ -21,7 +22,7 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // =========================
     // Fields
     // =========================
-    public Client Client { get; set; } = client;
+    public ClientDetail Client { get; set; } = client;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]

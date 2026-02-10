@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:CDO.Core.Models" 
-    xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
+    xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
     <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
@@ -18,13 +17,13 @@
         <!-- Row 0: Employment Goals -->
         <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Employment Goals" Text="{x:Bind ViewModel.OriginalClient.EmploymentGoal}"
-                 Tag="{x:Bind dialogs:ArrangementsField.EmploymentGoal}"
+                 Tag="{x:Bind local:ArrangementsField.EmploymentGoal}"
                  TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 1: Conditions -->
         <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Conditions" Text="{x:Bind ViewModel.OriginalClient.Conditions}"
-                 Tag="{x:Bind dialogs:ArrangementsField.Conditions}"
+                 Tag="{x:Bind local:ArrangementsField.Conditions}"
                  TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Page>

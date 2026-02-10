@@ -1,7 +1,6 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Clients;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Diagnostics;
@@ -115,20 +114,20 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     // =========================
     // CRUD Methods
     // =========================
-    public async Task<Result<Client>> CreateClientAsync() {
+    public async Task<Result<ClientDetail>> CreateClientAsync() {
         if (FirstName == null
             || LastName == null
             || CounselorID == null
             || City == null
             || State == null
             || Disability == null)
-            return Result<Client>.Fail(new AppError(ErrorKind.Validation, "Missing required fields.", null));
+            return Result<ClientDetail>.Fail(new AppError(ErrorKind.Validation, "Missing required fields.", null));
 
         // Create Document folder
         var folderName = $"Z:\\DARS Clients\\{CounselorName}-{FirstName} {LastName}";
-        if (!CreateDocumentFolder(folderName)) return Result<Client>.Fail(new AppError(ErrorKind.Conflict, "Folder already exists.", null));
+        if (!CreateDocumentFolder(folderName)) return Result<ClientDetail>.Fail(new AppError(ErrorKind.Conflict, "Folder already exists.", null));
 
-        var client = new CreateClientDTO {
+        var client = new NewClient {
             FirstName = FirstName,
             LastName = LastName,
             TTW = TTW,

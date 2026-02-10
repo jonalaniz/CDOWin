@@ -1,9 +1,9 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Placements;
+﻿using CDO.Core.DTOs.Placements;
+using CDO.Core.Models;
 
-namespace CDO.Core.Models;
+namespace CDO.Core.DTOs.Clients;
 
-public record class Client(
+public record class ClientDetail(
     int Id,
     bool Active,
     string FirstName,
@@ -98,8 +98,8 @@ public record class Client(
 
     public string? FormattedStartDate => StartDate?.ToString(format: "MM/dd/yyyy");
 
-    public ClientSummaryDTO AsSummary() {
-        return new ClientSummaryDTO {
+    public ClientSummary AsSummary() {
+        return new ClientSummary {
             Id = Id,
             FirstName = FirstName,
             LastName = LastName,

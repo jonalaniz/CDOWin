@@ -1,5 +1,5 @@
-﻿using CDO.Core.Interfaces;
-using CDO.Core.Models;
+﻿using CDO.Core.DTOs.Clients;
+using CDO.Core.Interfaces;
 using CDO.Core.Services;
 using CDOWin.Data;
 using CDOWin.Navigation;
@@ -156,7 +156,7 @@ public static class AppServices {
         return new CreateEmployerViewModel(EmployerService);
     }
 
-    public static CreatePlacementViewModel CreatePlacementViewMdoel(Client client) {
+    public static CreatePlacementViewModel CreatePlacementViewMdoel(ClientDetail client) {
         return new CreatePlacementViewModel(PlacementService, _invalidationService, client);
     }
 
@@ -164,7 +164,7 @@ public static class AppServices {
         return new CreateReminderViewModel(ReminderService, clientId);
     }
 
-    public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel(Client client) {
+    public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel(ClientDetail client) {
         return new CreateServiceAuthorizationsViewModel(SAService, _invalidationService, client);
     }
 }

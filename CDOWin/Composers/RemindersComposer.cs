@@ -12,7 +12,7 @@ class RemindersComposer {
     private StringBuilder csv = new();
 
     public void BuildCSV(List<Reminder> list) {
-        csv.AppendLine("Date,Client,Description");
+        csv.AppendLine("Date,ClientDetail,Description");
 
         foreach (var reminder in list)
             csv.AppendLine(

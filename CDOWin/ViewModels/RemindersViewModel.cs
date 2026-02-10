@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -191,7 +192,7 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     // Event Handlers
     // =========================
-    private void OnClientChanged(Client? client) {
+    private void OnClientChanged(ClientDetail? client) {
         var source = client?.Reminders?
             .OrderBy(r => r.Date)
             .ToList()

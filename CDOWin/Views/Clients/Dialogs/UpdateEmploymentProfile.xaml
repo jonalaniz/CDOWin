@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:CDO.Core.Models"
-    xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
+    xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
     <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
@@ -19,18 +18,18 @@
         <!-- Row 0: Disability -->
         <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Disability" Text="{x:Bind ViewModel.OriginalClient.Disability}" 
-                 Tag="{x:Bind dialogs:EmploymentField.Disability}"
+                 Tag="{x:Bind local:EmploymentField.Disability}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="255"/>
         <!-- Row 1: Criminal Charges -->
         <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Criminal Charges" Text="{x:Bind ViewModel.OriginalClient.CriminalCharge}" 
-                 Tag="{x:Bind dialogs:EmploymentField.CriminalCharge}"
+                 Tag="{x:Bind local:EmploymentField.CriminalCharge}"
                  TextChanged="TextBox_TextChanged"/>
         <!-- Row 2: Transportation -->
         <TextBox Grid.Row="2" Grid.Column="0" Header="Transportation" 
                  Text="{x:Bind ViewModel.OriginalClient.Transportation}" 
-                 Tag="{x:Bind dialogs:EmploymentField.Transportation}"
+                 Tag="{x:Bind local:EmploymentField.Transportation}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="40"/>
     </Grid>

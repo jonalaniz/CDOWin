@@ -7,8 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:viewmodels="using:CDOWin.ViewModels"
-    xmlns:models="using:CDO.Core.Models"
     xmlns:dto="using:CDO.Core.DTOs"
     mc:Ignorable="d">
 

@@ -1,7 +1,7 @@
-﻿using CDO.Core.DTOs.Placements;
+﻿using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class CreatePlacementViewModel(IPlacementService service, DataInvalidationService dataInvalidationService, Client client) : ObservableObject {
+public partial class CreatePlacementViewModel(IPlacementService service, DataInvalidationService dataInvalidationService, ClientDetail client) : ObservableObject {
 
     // =========================
     // Dependencies
@@ -44,10 +44,10 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string? SaNumber { get; set; }
 
-    // Client Secific
+    // ClientDetail Secific
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
-    public partial Client Client { get; set; } = client;
+    public partial ClientDetail Client { get; set; } = client;
 
     // EmployerName Specific
     public int? EmployerID { get; set; }
@@ -85,7 +85,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     // =========================
     public async Task<Result<PlacementDetail>> CreatePlacementAsync() {
         if (Client.CounselorID == null)
-            return Result<PlacementDetail>.Fail(new AppError(ErrorKind.Validation, "Client is missing a Counselor, assign on and try again."));
+            return Result<PlacementDetail>.Fail(new AppError(ErrorKind.Validation, "ClientDetail is missing a Counselor, assign on and try again."));
 
         int placementsNumber = 1;
         if (Client.Placements?.Length is int length && length > 0)
@@ -129,7 +129,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             InvoiceID = InvoiceID,
             SaNumber = SaNumber,
 
-            // Client Specific
+            // ClientDetail Specific
             ClientID = Client.Id,
             ClientName = $"{Client.FirstName} {Client.LastName}",
 

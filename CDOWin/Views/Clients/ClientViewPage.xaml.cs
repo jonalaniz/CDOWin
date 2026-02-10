@@ -1,4 +1,4 @@
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.Models;
 using CDOWin.Composers;
 using CDOWin.ErrorHandling;
@@ -236,7 +236,7 @@ public sealed partial class ClientViewPage : Page {
 
             switch (tag) {
                 case ClientEditType.Administrative:
-                    dialog.Title = "Edit Client";
+                    dialog.Title = "Edit ClientDetail";
                     dialog.Content = new UpdateAdminsitrative(updateVM);
                     break;
                 case ClientEditType.Personal:
@@ -288,7 +288,7 @@ public sealed partial class ClientViewPage : Page {
         _ = UpdateClient(updateVM.UpdatedClient);
     }
 
-    private async Task UpdateClient(UpdateClientDTO update) {
+    private async Task UpdateClient(ClientUpdate update) {
         var result = await ViewModel.UpdateClientAsync(update);
         if (!result.IsSuccess) {
             ErrorHandler.Handle(result, this.XamlRoot);

@@ -1,17 +1,18 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.Models;
 using System.Text.Json.Serialization;
 
 namespace CDO.Core.Serialization;
 
-[JsonSerializable(typeof(Client))]
-[JsonSerializable(typeof(List<Client>))]
-[JsonSerializable(typeof(CreateClientDTO))]
-[JsonSerializable(typeof(UpdateClientDTO))]
+[JsonSerializable(typeof(ClientDetail))]
+[JsonSerializable(typeof(List<ClientDetail>))]
+[JsonSerializable(typeof(NewClient))]
+[JsonSerializable(typeof(ClientUpdate))]
 
-[JsonSerializable(typeof(ClientSummaryDTO))]
-[JsonSerializable(typeof(List<ClientSummaryDTO>))]
+[JsonSerializable(typeof(ClientSummary))]
+[JsonSerializable(typeof(List<ClientSummary>))]
 
 [JsonSerializable(typeof(Counselor))]
 [JsonSerializable(typeof(CounselorResponseDTO))]

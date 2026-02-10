@@ -5,10 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:CDO.Core.Models"
     xmlns:controls="using:CDOWin.Controls"
-    xmlns:dto="using:CDO.Core.DTOs"
-    xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
+    xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
     <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
@@ -33,7 +31,7 @@
                             DateChanged="StartDatePicker_DateChanged"/>
         
         <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Case ID" 
-                 Text="{x:Bind ViewModel.OriginalClient.CaseID}" Tag="{x:Bind dialogs:CaseField.CaseID}"
+                 Text="{x:Bind ViewModel.OriginalClient.CaseID}" Tag="{x:Bind local:CaseField.CaseID}"
                  TextChanged="TextBox_TextChanged"/>
         <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
             <TextBlock Text="Tier"/>
@@ -48,7 +46,7 @@
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
-                 Text="{x:Bind ViewModel.OriginalClient.Premiums}" Tag="{x:Bind dialogs:CaseField.Premiums}"
+                 Text="{x:Bind ViewModel.OriginalClient.Premiums}" Tag="{x:Bind local:CaseField.Premiums}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="255"/>
         

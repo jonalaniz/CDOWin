@@ -1,6 +1,6 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Clients;
 
-public class UpdateClientDTO {
+public class ClientUpdate {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public bool? TTW { get; set; }

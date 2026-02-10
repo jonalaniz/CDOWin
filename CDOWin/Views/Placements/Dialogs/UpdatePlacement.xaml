@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls"
     xmlns:models="using:CDO.Core.Models"
-    xmlns:viewModels="using:CDOWin.ViewModels"
     mc:Ignorable="d">
 
     <Grid Width="490" RowSpacing="12" ColumnSpacing="16">

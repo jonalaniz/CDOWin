@@ -1,4 +1,4 @@
-﻿using CDO.Core.DTOs;
+﻿using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
@@ -31,20 +31,20 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<ClientSummaryDTO> _cache = [];
+    private IReadOnlyList<ClientSummary> _cache = [];
 
     // =========================
     // UI State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<ClientSummaryDTO> Filtered { get; private set; } = [];
+    public partial ObservableCollection<ClientSummary> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Client? Selected { get; set; }
+    public partial ClientDetail? Selected { get; set; }
 
     [ObservableProperty]
-    public partial ClientSummaryDTO? SelectedSummary { get; set; }
+    public partial ClientSummary? SelectedSummary { get; set; }
 
     [ObservableProperty]
     public partial ObservableCollection<Invoice> Invoices { get; private set; } = [];
@@ -89,7 +89,7 @@ public partial class ClientsViewModel : ObservableObject {
         _ = LoadSelectedClientAsync(clientId);
     }
 
-    partial void OnSelectedChanged(Client? value) {
+    partial void OnSelectedChanged(ClientDetail? value) {
         if (value == null) return;
 
         // Notify the selection service
@@ -137,8 +137,8 @@ public partial class ClientsViewModel : ObservableObject {
         Selected = await _service.GetClientAsync(Selected.Id);
     }
 
-    public async Task<Result<Client>> UpdateClientAsync(UpdateClientDTO update) {
-        if (Selected == null) return Result<Client>.Fail(new AppError(ErrorKind.Validation, "Client not selected.", null));
+    public async Task<Result<ClientDetail>> UpdateClientAsync(ClientUpdate update) {
+        if (Selected == null) return Result<ClientDetail>.Fail(new AppError(ErrorKind.Validation, "ClientDetail not selected.", null));
 
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (!result.IsSuccess) return result;
@@ -178,7 +178,7 @@ public partial class ClientsViewModel : ObservableObject {
     private void ApplyFilter() {
         int? previousSelection = Selected?.Id;
 
-        IEnumerable<ClientSummaryDTO> result = IsFiltered ? _cache.Where(i => i.Active == true) : _cache;
+        IEnumerable<ClientSummary> result = IsFiltered ? _cache.Where(i => i.Active == true) : _cache;
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
@@ -196,7 +196,7 @@ public partial class ClientsViewModel : ObservableObject {
         }
 
         OnUI(() => {
-            Filtered = new ObservableCollection<ClientSummaryDTO>(result);
+            Filtered = new ObservableCollection<ClientSummary>(result);
             ReSelect(previousSelection);
         });
     }
@@ -216,7 +216,7 @@ public partial class ClientsViewModel : ObservableObject {
 
     private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(c => c.Id == id) is ClientSummaryDTO selected)
+        if (Filtered.FirstOrDefault(c => c.Id == id) is ClientSummary selected)
             SelectedSummary = selected;
     }
 }

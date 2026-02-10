@@ -1,6 +1,6 @@
-﻿namespace CDO.Core.DTOs;
+﻿namespace CDO.Core.DTOs.Clients;
 
-public class ClientSummaryDTO() {
+public class ClientSummary() {
 
     // Non-optional fields
     public int Id { get; init; }
@@ -41,10 +41,8 @@ public class ClientSummaryDTO() {
 
     public string FormattedCityStateZip {
         get {
-            if (Zip != null)
-                return $"{City}, {State} {Zip}";
-            else
-                return $"{City}, {State}";
+            if (Zip != null) return $"{City}, {State} {Zip}";
+            else return $"{City}, {State}";
         }
     }
 }

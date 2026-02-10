@@ -14,7 +14,7 @@ public class PlacementSummary {
     public int? InvoiceID { get; init; }
     public string? SaNumber { get; init; }
 
-    // Client Specific
+    // ClientDetail Specific
     public int? ClientID { get; init; }
     public string? ClientName { get; init; }
 

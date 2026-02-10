@@ -23,7 +23,7 @@ public enum UpdateField {
     InvoiceID,
     SANumber,
 
-    // Client Specific
+    // ClientDetail Specific
     ClientID,
     ClientName,
 

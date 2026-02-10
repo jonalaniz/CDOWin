@@ -1,14 +1,13 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 
 namespace CDO.Core.Services;
 
 public class ClientService : IClientService {
     private readonly INetworkService _network;
-    public List<Client> Clients { get; private set; } = new();
+    public List<ClientDetail> Clients { get; private set; } = new();
 
     public ClientService(INetworkService network) {
         _network = network;
@@ -17,34 +16,34 @@ public class ClientService : IClientService {
     // -----------------------------
     // GET
     // -----------------------------
-    public Task<List<Client>?> GetAllClientsAsync() {
-        return _network.GetAsync<List<Client>>(Endpoints.Clients);
+    public Task<List<ClientDetail>?> GetAllClientsAsync() {
+        return _network.GetAsync<List<ClientDetail>>(Endpoints.Clients);
     }
 
-    public Task<List<ClientSummaryDTO>?> GetAllClientSummariesAsync() {
-        return _network.GetAsync<List<ClientSummaryDTO>>(Endpoints.ClientSummaries);
+    public Task<List<ClientSummary>?> GetAllClientSummariesAsync() {
+        return _network.GetAsync<List<ClientSummary>>(Endpoints.ClientSummaries);
     }
 
-    public Task<Client?> GetClientAsync(int id) {
-        return _network.GetAsync<Client>(Endpoints.Client(id));
+    public Task<ClientDetail?> GetClientAsync(int id) {
+        return _network.GetAsync<ClientDetail>(Endpoints.Client(id));
     }
 
     // -----------------------------
     // POST
     // -----------------------------
-    public async Task<Result<Client>> CreateClientAsync(CreateClientDTO dto) {
-        var result = await _network.PostAsync<CreateClientDTO, Client>(Endpoints.Clients, dto);
-        if (!result.IsSuccess) return Result<Client>.Fail(TranslateError(result.Error!));
-        return Result<Client>.Success(result.Value!);
+    public async Task<Result<ClientDetail>> CreateClientAsync(NewClient dto) {
+        var result = await _network.PostAsync<NewClient, ClientDetail>(Endpoints.Clients, dto);
+        if (!result.IsSuccess) return Result<ClientDetail>.Fail(TranslateError(result.Error!));
+        return Result<ClientDetail>.Success(result.Value!);
     }
 
     // -----------------------------
     // PATCH
     // -----------------------------
-    public async Task<Result<Client>> UpdateClientAsync(int id, UpdateClientDTO dto) {
-        var result = await _network.UpdateAsync<UpdateClientDTO, Client>(Endpoints.Client(id), dto);
-        if (!result.IsSuccess) return Result<Client>.Fail(TranslateError(result.Error!));
-        return Result<Client>.Success(result.Value!);
+    public async Task<Result<ClientDetail>> UpdateClientAsync(int id, ClientUpdate dto) {
+        var result = await _network.UpdateAsync<ClientUpdate, ClientDetail>(Endpoints.Client(id), dto);
+        if (!result.IsSuccess) return Result<ClientDetail>.Fail(TranslateError(result.Error!));
+        return Result<ClientDetail>.Success(result.Value!);
     }
 
     // -----------------------------

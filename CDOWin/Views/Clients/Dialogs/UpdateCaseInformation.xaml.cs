@@ -165,7 +165,7 @@ public sealed partial class UpdateCaseInformation : Page {
         CPhone.Value = counselor.Phone ?? "";
         CEmail.Value = counselor.Email ?? "";
 
-        // Update Client
+        // Update ClientDetail
         ViewModel.UpdatedClient.CounselorID = counselor.Id;
     }
 }

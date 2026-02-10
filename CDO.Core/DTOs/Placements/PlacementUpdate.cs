@@ -23,7 +23,7 @@ public class PlacementUpdate {
     public int? InvoiceID { get; set; }
     public string? SaNumber { get; set; }
 
-    // Client Specific
+    // ClientDetail Specific
     public int? ClientID { get; set; }
     public string? ClientName { get; set; }
 

@@ -1,13 +1,12 @@
-namespace CDO.Core.DTOs;
+namespace CDO.Core.DTOs.Clients;
 
-public class CreateClientDTO {
+public class NewClient {
     // Required creation fields
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
     public required string City { get; init; }
     public required string State { get; init; }
     public required string Disability { get; init; }
-
     public required bool TTW { get; init; }
 
 

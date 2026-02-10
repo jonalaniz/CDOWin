@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -48,7 +49,7 @@ public class DataCoordinator {
     // =========================
     // Public Fields
     // =========================
-    public CachedList<ClientSummaryDTO> Clients { get; } = new();
+    public CachedList<ClientSummary> Clients { get; } = new();
     public CachedList<CounselorSummaryDTO> Counselors { get; } = new();
     public CachedList<EmployerSummaryDTO> Employers { get; } = new();
     public CachedList<PlacementSummary> Placements { get; } = new();
@@ -76,7 +77,7 @@ public class DataCoordinator {
     // =========================
     // Update Methods
     // =========================
-    public async Task<IReadOnlyList<ClientSummaryDTO>> GetClientsAsync(bool force = false) {
+    public async Task<IReadOnlyList<ClientSummary>> GetClientsAsync(bool force = false) {
         if (force || Clients.IsStale(ClientTTL)) {
             var data = await _clients.GetAllClientSummariesAsync();
             Clients.Update(data);

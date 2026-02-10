@@ -6,7 +6,6 @@
     xmlns:local="using:CDOWin.Views.ServiceAuthorizations.Inspectors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:control="using:CDOWin.Controls"
     mc:Ignorable="d">
 

@@ -26,7 +26,7 @@ public record class PlacementDetail(
     int? InvoiceID,
     string? SaNumber,
 
-    // Client Specific
+    // ClientDetail Specific
     int? ClientID,
     string? ClientName,
 

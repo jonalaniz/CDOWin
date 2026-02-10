@@ -7,9 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:viewmodels="using:CDOWin.ViewModels"
     xmlns:dto="using:CDO.Core.DTOs"
-    xmlns:models="using:CDO.Core.Models"
+    xmlns:clients="using:CDO.Core.DTOs.Clients"
     mc:Ignorable="d">
 
     <Grid>
@@ -150,7 +149,7 @@
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="dto:ClientSummaryDTO">
+                    <DataTemplate x:DataType="clients:ClientSummary">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="220"/>

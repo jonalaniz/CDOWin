@@ -6,8 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDOWin.Controls" 
-    xmlns:models="using:CDO.Core.Models" 
-    xmlns:dialogs="using:CDOWin.Views.Reminders.Dialogs"
     mc:Ignorable="d">
 
     <Grid Width="490" RowSpacing="12" ColumnSpacing="16">

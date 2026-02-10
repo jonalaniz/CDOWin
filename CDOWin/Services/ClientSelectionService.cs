@@ -1,15 +1,15 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs.Clients;
 using System;
 
 namespace CDOWin.Services;
 
 public class ClientSelectionService {
-    public event Action<Client?>? SelectedClientChanged;
+    public event Action<ClientDetail?>? SelectedClientChanged;
     public event Action<int>? ClientSelectionRequested;
     public event Action? NewReminderCreated;
-    private Client? _selectedClient;
+    private ClientDetail? _selectedClient;
 
-    public Client? SelectedClient {
+    public ClientDetail? SelectedClient {
         get => _selectedClient;
         set {
             if (_selectedClient != value) {

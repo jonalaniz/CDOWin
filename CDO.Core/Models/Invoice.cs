@@ -1,4 +1,6 @@
-﻿namespace CDO.Core.Models;
+﻿using CDO.Core.DTOs.Clients;
+
+namespace CDO.Core.Models;
 
 public record class Invoice(
     int Id,
@@ -12,7 +14,7 @@ public record class Invoice(
     int? ClientID,
     double? UnitCost,
     string? UnitOfMeasurement,
-    Client? Client,
+    ClientDetail? Client,
     DateTime StartDate,
     DateTime EndDate
     ) {
@@ -21,7 +23,7 @@ public record class Invoice(
     public string? FormattedCost => $"{UnitCost:C2}";
     public string? FormattedDateRange => $"Valid {FormattedStartDate} to {FormattedEndDate}";
 
-    public static Invoice InjectClient(Invoice invoice, Client client) {
+    public static Invoice InjectClient(Invoice invoice, ClientDetail client) {
         return new Invoice(
             invoice.Id,
             invoice.ServiceAuthorizationNumber,

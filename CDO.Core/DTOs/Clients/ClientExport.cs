@@ -23,5 +23,5 @@ public class ClientExport() {
     public string? EmploymentGoal { get; init; }
     public string? CaseID { get; init; }
 
-    public Invoice[]? Invoices { get; init; }
+    public SAExport[]? ServiceAuthorizations { get; init; }
 }

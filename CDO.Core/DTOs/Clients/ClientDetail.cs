@@ -138,7 +138,7 @@ public record class ClientDetail(
             Phone3 = Phone3,
             EmploymentGoal = EmploymentGoal,
             CaseID = CaseID,
-            Invoices = Invoices
+            ServiceAuthorizations = Invoices?.Select(i => i.AsExport()).ToArray()
         };
     }
 }

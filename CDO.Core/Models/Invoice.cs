@@ -41,4 +41,22 @@ public record class Invoice(
             invoice.EndDate
         );
     }
+
+    public SAExport AsExport() {
+        return new SAExport {
+            SANumber = ServiceAuthorizationNumber,
+            Description = Description,
+            StartDate = StartDate.ToString(format: "MM/dd/yyyy"),
+            EndDate = EndDate.ToString(format: "MM/dd/yyyy"),
+            Office = Office
+        };
+    }
+}
+
+public class SAExport {
+    public string? SANumber { get; init; }
+    public string? Description { get; init; }
+    public string? StartDate { get; set; }
+    public string? EndDate { get; set; }
+    public string? Office { get; set; }
 }

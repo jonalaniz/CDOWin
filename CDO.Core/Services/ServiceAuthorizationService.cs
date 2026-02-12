@@ -28,25 +28,25 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Invoice>> CreateServiceAuthorizationAsync(NewSA dto) {
-        var result = await _network.PostAsync<NewSA, Invoice>(Endpoints.ServiceAuthorizations, dto);
-        if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
-        return Result<Invoice>.Success(result.Value!);
+    public async Task<Result> CreateServiceAuthorizationAsync(NewSA dto) {
+        var result = await _network.PostAsync(Endpoints.ServiceAuthorizations, dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, SAUpdate dto) {
-        var result = await _network.UpdateAsync<SAUpdate, Invoice>(Endpoints.ServiceAuthorization(id), dto);
-        if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
-        return Result<Invoice>.Success(result.Value!);
+    public async Task<Result> UpdateServiceAuthorizationAsync(int id, SAUpdate dto) {
+        var result = await _network.UpdateAsync(Endpoints.ServiceAuthorization(id), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result<Invoice>.Success();
     }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteServiceAuthorizationAsync(int id) {
+    public Task<Result> DeleteServiceAuthorizationAsync(int id) {
         return _network.DeleteAsync(Endpoints.ServiceAuthorization(id));
     }
 

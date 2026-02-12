@@ -31,25 +31,25 @@ public class ClientService : IClientService {
     // -----------------------------
     // POST
     // -----------------------------
-    public async Task<Result<ClientDetail>> CreateClientAsync(NewClient dto) {
-        var result = await _network.PostAsync<NewClient, ClientDetail>(Endpoints.Clients, dto);
-        if (!result.IsSuccess) return Result<ClientDetail>.Fail(TranslateError(result.Error!));
-        return Result<ClientDetail>.Success(result.Value!);
+    public async Task<Result> CreateClientAsync(NewClient dto) {
+        var result = await _network.PostAsync(Endpoints.Clients, dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // PATCH
     // -----------------------------
-    public async Task<Result<ClientDetail>> UpdateClientAsync(int id, ClientUpdate dto) {
-        var result = await _network.UpdateAsync<ClientUpdate, ClientDetail>(Endpoints.Client(id), dto);
-        if (!result.IsSuccess) return Result<ClientDetail>.Fail(TranslateError(result.Error!));
-        return Result<ClientDetail>.Success(result.Value!);
+    public async Task<Result> UpdateClientAsync(int id, ClientUpdate dto) {
+        var result = await _network.UpdateAsync(Endpoints.Client(id), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteClientAsync(int id) {
+    public Task<Result> DeleteClientAsync(int id) {
         return _network.DeleteAsync(Endpoints.Client(id));
     }
 

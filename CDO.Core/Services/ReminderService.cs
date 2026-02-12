@@ -30,25 +30,25 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Reminder>> CreateRemindersAsync(NewReminder dto) {
-        var result = await _network.PostAsync<NewReminder, Reminder>(Endpoints.Reminders, dto);
-        if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
-        return Result<Reminder>.Success(result.Value!);
+    public async Task<Result> CreateRemindersAsync(NewReminder dto) {
+        var result = await _network.PostAsync(Endpoints.Reminders, dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result<Reminder>.Success();
     }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Reminder>> UpdateReminderAsync(int id, ReminderUpdate dto) {
-        var result = await _network.UpdateAsync<ReminderUpdate, Reminder>(Endpoints.Reminder(id), dto);
-        if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
-        return Result<Reminder>.Success(result.Value!);
+    public async Task<Result> UpdateReminderAsync(int id, ReminderUpdate dto) {
+        var result = await _network.UpdateAsync(Endpoints.Reminder(id), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result<Reminder>.Success();
     }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteReminderAsync(int id) {
+    public Task<Result> DeleteReminderAsync(int id) {
         return _network.DeleteAsync(Endpoints.Reminder(id));
     }
 

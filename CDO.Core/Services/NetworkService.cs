@@ -74,24 +74,24 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // POST
     // -----------------------------
-    public async Task<Result<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
+    public async Task<Result> PostAsync<T>(string endpoint, T body) {
         try {
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
             var response = await _httpClient.PostAsync(endpoint, content);
 
             if (response.IsSuccessStatusCode) {
-                var data = await response.Content.ReadFromJsonAsync<TResponse>();
-                return Result<TResponse>.Success(data!);
+                var data = await response.Content.ReadFromJsonAsync<T>();
+                return Result.Success();
             }
 
-            return Result<TResponse>.Fail(MapHttpError(response.StatusCode));
+            return Result.Fail(MapHttpError(response.StatusCode));
         } catch (TaskCanceledException ex) {
-            return Result<TResponse>.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
         } catch (HttpRequestException ex) {
-            return Result<TResponse>.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
         } catch (Exception ex) {
-            return Result<TResponse>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
         }
     }
 
@@ -99,44 +99,44 @@ public class NetworkService : INetworkService {
     // PATCH
     // -----------------------------
 
-    public async Task<Result<TResponse>> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body) {
+    public async Task<Result> UpdateAsync<T>(string endpoint, T body) {
         try {
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
             var response = await _httpClient.PatchAsync(endpoint, content);
 
             if (response.IsSuccessStatusCode) {
-                var data = await response.Content.ReadFromJsonAsync<TResponse>();
-                return Result<TResponse>.Success(data!);
+                var data = await response.Content.ReadFromJsonAsync<T>();
+                return Result.Success();
             }
 
-            return Result<TResponse>.Fail(MapHttpError(response.StatusCode));
+            return Result.Fail(MapHttpError(response.StatusCode));
         } catch (TaskCanceledException ex) {
-            return Result<TResponse>.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
         } catch (HttpRequestException ex) {
-            return Result<TResponse>.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
         } catch (Exception ex) {
-            return Result<TResponse>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
         }
     }
 
     // -----------------------------
     // DELETE
     // -----------------------------
-    public async Task<Result<bool>> DeleteAsync(string endpoint) {
+    public async Task<Result> DeleteAsync(string endpoint) {
         try {
             var response = await _httpClient.DeleteAsync(endpoint);
             if (response.IsSuccessStatusCode) {
-                return Result<bool>.Success(true);
+                return Result.Success();
             }
 
-            return Result<bool>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, null));
+            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, null));
         } catch (TaskCanceledException ex) {
-            return Result<bool>.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
         } catch (HttpRequestException ex) {
-            return Result<bool>.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
         } catch (Exception ex) {
-            return Result<bool>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
+            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
         }
     }
 

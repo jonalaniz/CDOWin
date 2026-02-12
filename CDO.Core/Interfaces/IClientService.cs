@@ -17,15 +17,15 @@ public interface IClientService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result<ClientDetail>> CreateClientAsync(NewClient dto);
+    public Task<Result> CreateClientAsync(NewClient dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<ClientDetail>> UpdateClientAsync(int id, ClientUpdate dto);
+    public Task<Result> UpdateClientAsync(int id, ClientUpdate dto);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteClientAsync(int id);
+    public Task<Result> DeleteClientAsync(int id);
 }

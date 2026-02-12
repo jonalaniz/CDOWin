@@ -31,25 +31,25 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Counselor>> CreateCounselorAsync(NewCounselor dto) {
-        var result = await _network.PostAsync<NewCounselor, Counselor>(Endpoints.Counselors, dto);
-        if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
-        return Result<Counselor>.Success(result.Value!);
+    public async Task<Result> CreateCounselorAsync(NewCounselor dto) {
+        var result = await _network.PostAsync(Endpoints.Counselors, dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Counselor>> UpdateCounselorAsync(int id, CounselorUpdate dto) {
-        var result = await _network.UpdateAsync<CounselorUpdate, Counselor>(Endpoints.Counselor(id), dto);
-        if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
-        return Result<Counselor>.Success(result.Value!);
+    public async Task<Result> UpdateCounselorAsync(int id, CounselorUpdate dto) {
+        var result = await _network.UpdateAsync(Endpoints.Counselor(id), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteCounselorAsync(int id) {
+    public Task<Result> DeleteCounselorAsync(int id) {
         return _network.DeleteAsync(Endpoints.Counselor(id));
     }
 

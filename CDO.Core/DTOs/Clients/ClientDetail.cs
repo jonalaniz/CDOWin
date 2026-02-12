@@ -14,7 +14,7 @@ public record class ClientDetail(
     PlacementDetail[]? Placements,
     Invoice[]? Invoices,
     DateTime? StartDate,
-    int? Ssn,
+    string? Ssn,
     string? CaseID,
     string? Address1,
     string? Address2,
@@ -88,7 +88,7 @@ public record class ClientDetail(
 
     public string FormattedSSN {
         get {
-            if (Ssn.ToString() is string unwrappedSSN) {
+            if (Ssn is string unwrappedSSN) {
                 if (unwrappedSSN.Length == 9) {
                     return $"{unwrappedSSN.Substring(0, 3)}-{unwrappedSSN.Substring(3, 2)}-{unwrappedSSN.Substring(5, 4)}";
                 }

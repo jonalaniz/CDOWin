@@ -32,25 +32,25 @@ public class EmployerService : IEmployerService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<Employer>> CreateEmployerAsync(EmployerDTO dto) {
-        var result = await _network.PostAsync<EmployerDTO, Employer>(Endpoints.Employers, dto);
-        if (!result.IsSuccess) return Result<Employer>.Fail(TranslateError(result.Error!));
-        return Result<Employer>.Success(result.Value!);
+    public async Task<Result> CreateEmployerAsync(EmployerDTO dto) {
+        var result = await _network.PostAsync(Endpoints.Employers, dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<Employer>> UpdateEmployerAsync(int id, EmployerDTO dto) {
-        var result = await _network.UpdateAsync<EmployerDTO, Employer>(Endpoints.Employer(id), dto);
-        if (!result.IsSuccess) return Result<Employer>.Fail(TranslateError(result.Error!));
-        return Result<Employer>.Success(result.Value!);
+    public async Task<Result> UpdateEmployerAsync(int id, EmployerDTO dto) {
+        var result = await _network.UpdateAsync(Endpoints.Employer(id), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteEmployerAsync(int id) {
+    public Task<Result> DeleteEmployerAsync(int id) {
         return _network.DeleteAsync(Endpoints.Employer(id));
     }
 

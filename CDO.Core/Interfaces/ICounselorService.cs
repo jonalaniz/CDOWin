@@ -17,16 +17,16 @@ namespace CDO.Core.Interfaces {
         // POST Methods
         // -----------------------------
         //public Task<Counselor?> CreateCounselorAsync(NewCounselor dto);
-        public Task<Result<Counselor>> CreateCounselorAsync(NewCounselor dto);
+        public Task<Result> CreateCounselorAsync(NewCounselor dto);
 
         // -----------------------------
         // PATCH Methods
         // -----------------------------
-        public Task<Result<Counselor>> UpdateCounselorAsync(int id, CounselorUpdate dto);
+        public Task<Result> UpdateCounselorAsync(int id, CounselorUpdate dto);
 
         // -----------------------------
         // DELETE Methods
         // -----------------------------
-        public Task<Result<bool>> DeleteCounselorAsync(int id);
+        public Task<Result> DeleteCounselorAsync(int id);
     }
 }

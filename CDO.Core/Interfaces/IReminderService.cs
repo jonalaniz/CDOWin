@@ -16,17 +16,16 @@ public interface IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<Reminder?> CreateReminderAsync(NewReminder dto);
-    public Task<Result<Reminder>> CreateRemindersAsync(NewReminder dto);
+    public Task<Result> CreateRemindersAsync(NewReminder dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<Reminder>> UpdateReminderAsync(int id, ReminderUpdate dto);
+    public Task<Result> UpdateReminderAsync(int id, ReminderUpdate dto);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteReminderAsync(int id);
+    public Task<Result> DeleteReminderAsync(int id);
 
 }

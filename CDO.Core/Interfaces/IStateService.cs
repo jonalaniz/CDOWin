@@ -16,17 +16,16 @@ public interface IStateService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    //public Task<State?> CreateStateAsync(CreateStateDTO dto);
-    public Task<Result<State>> CreateStateAsync(CreateStateDTO dto);
+    public Task<Result> CreateStateAsync(CreateStateDTO dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<State>> UpdateStateAsync(int id, UpdateStateDTO dto);
+    public Task<Result> UpdateStateAsync(int id, UpdateStateDTO dto);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteStateAsync(int id);
+    public Task<Result> DeleteStateAsync(int id);
 
 }

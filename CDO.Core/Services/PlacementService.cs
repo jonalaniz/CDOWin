@@ -31,25 +31,25 @@ public class PlacementService : IPlacementService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result<PlacementDetail>> CreatePlacementAsync(NewPlacement dto) {
-        var result = await _network.PostAsync<NewPlacement, PlacementDetail>(Endpoints.Placements, dto);
-        if (!result.IsSuccess) return Result<PlacementDetail>.Fail(TranslateError(result.Error!));
-        return Result<PlacementDetail>.Success(result.Value!);
+    public async Task<Result> CreatePlacementAsync(NewPlacement dto) {
+        var result = await _network.PostAsync(Endpoints.Placements, dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public async Task<Result<PlacementDetail>> UpdatePlacementAsync(int id, PlacementUpdate dto) {
-        var result = await _network.UpdateAsync<PlacementUpdate, PlacementDetail>(Endpoints.Placement(id), dto);
-        if (!result.IsSuccess) return Result<PlacementDetail>.Fail(TranslateError(result.Error!));
-        return Result<PlacementDetail>.Success(result.Value!);
+    public async Task<Result> UpdatePlacementAsync(int id, PlacementUpdate dto) {
+        var result = await _network.UpdateAsync(Endpoints.Placement(id), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
     }
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeletePlacementAsync(int id) {
+    public Task<Result> DeletePlacementAsync(int id) {
         return _network.DeleteAsync(Endpoints.Placement(id));
     }
 

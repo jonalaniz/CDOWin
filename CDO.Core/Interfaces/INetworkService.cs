@@ -17,15 +17,15 @@ public interface INetworkService {
     // -----------------------------
     // POST
     // -----------------------------
-    Task<Result<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest body);
+    Task<Result> PostAsync<T>(string endpoint, T body);
 
     // -----------------------------
     // PATCH
     // -----------------------------
-    Task<Result<TResponse>> UpdateAsync<TRequest, TResponse>(string endpoint, TRequest body);
+    Task<Result> UpdateAsync<T>(string endpoint, T body);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    Task<Result<bool>> DeleteAsync(string endpoint);
+    Task<Result> DeleteAsync(string endpoint);
 }

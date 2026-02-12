@@ -7,7 +7,7 @@ public class ClientUpdate {
     public string? City { get; set; }
     public string? Disability { get; set; }
     public string? State { get; set; }
-    public int? Ssn { get; set; }
+    public string? Ssn { get; set; }
     public string? CaseID { get; set; }
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }

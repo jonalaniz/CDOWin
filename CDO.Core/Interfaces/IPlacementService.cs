@@ -16,17 +16,16 @@ public interface IPlacementService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    // public Task<Placement?> CreatePlacementAsync(PlacementUpdate dto);
-    public Task<Result<PlacementDetail>> CreatePlacementAsync(NewPlacement dto);
+    public Task<Result> CreatePlacementAsync(NewPlacement dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<PlacementDetail>> UpdatePlacementAsync(int id, PlacementUpdate dto);
+    public Task<Result> UpdatePlacementAsync(int id, PlacementUpdate dto);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeletePlacementAsync(int id);
+    public Task<Result> DeletePlacementAsync(int id);
 
 }

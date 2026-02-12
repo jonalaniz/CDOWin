@@ -16,16 +16,16 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result<Invoice>> CreateServiceAuthorizationAsync(NewSA dto);
+    public Task<Result> CreateServiceAuthorizationAsync(NewSA dto);
 
     // -----------------------------
     // PATCH Methods
     // -----------------------------
-    public Task<Result<Invoice>> UpdateServiceAuthorizationAsync(int id, SAUpdate dto);
+    public Task<Result> UpdateServiceAuthorizationAsync(int id, SAUpdate dto);
 
     // -----------------------------
     // DELETE Methods
     // -----------------------------
-    public Task<Result<bool>> DeleteServiceAuthorizationAsync(int id);
+    public Task<Result> DeleteServiceAuthorizationAsync(int id);
 
 }

@@ -17,7 +17,7 @@ public interface IClientService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result> CreateClientAsync(NewClient dto);
+    public Task<Result<ClientDetail>> CreateClientAsync(NewClient dto);
 
     // -----------------------------
     // PATCH Methods

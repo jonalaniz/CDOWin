@@ -28,10 +28,10 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result> CreateServiceAuthorizationAsync(NewSA dto) {
-        var result = await _network.PostAsync(Endpoints.ServiceAuthorizations, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result.Success();
+    public async Task<Result<Invoice>> CreateServiceAuthorizationAsync(NewSA dto) {
+        var result = await _network.PostAsync<NewSA, Invoice>(Endpoints.ServiceAuthorizations, dto);
+        if (!result.IsSuccess) return Result<Invoice>.Fail(TranslateError(result.Error!));
+        return Result<Invoice>.Success(result.Value!);
     }
 
     // -----------------------------

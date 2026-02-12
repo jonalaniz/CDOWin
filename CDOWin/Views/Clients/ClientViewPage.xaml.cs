@@ -93,8 +93,8 @@ public sealed partial class ClientViewPage : Page {
             return;
         }
 
+        ViewModel.NotifyNewReminderCreated();
         _ = ViewModel.ReloadClientAsync();
-        ViewModel.NotifyNewClientCreated();
     }
 
     // SAs

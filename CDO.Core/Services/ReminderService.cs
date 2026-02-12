@@ -30,10 +30,10 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result> CreateRemindersAsync(NewReminder dto) {
-        var result = await _network.PostAsync(Endpoints.Reminders, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result<Reminder>.Success();
+    public async Task<Result<Reminder>> CreateRemindersAsync(NewReminder dto) {
+        var result = await _network.PostAsync<NewReminder, Reminder>(Endpoints.Reminders, dto);
+        if (!result.IsSuccess) return Result<Reminder>.Fail(TranslateError(result.Error!));
+        return Result<Reminder>.Success(result.Value!);
     }
 
     // -----------------------------

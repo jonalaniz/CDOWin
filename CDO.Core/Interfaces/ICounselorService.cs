@@ -16,8 +16,7 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // POST Methods
         // -----------------------------
-        //public Task<Counselor?> CreateCounselorAsync(NewCounselor dto);
-        public Task<Result> CreateCounselorAsync(NewCounselor dto);
+        public Task<Result<Counselor>> CreateCounselorAsync(NewCounselor dto);
 
         // -----------------------------
         // PATCH Methods

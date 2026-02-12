@@ -31,10 +31,10 @@ public class PlacementService : IPlacementService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result> CreatePlacementAsync(NewPlacement dto) {
-        var result = await _network.PostAsync(Endpoints.Placements, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result.Success();
+    public async Task<Result<PlacementDetail>> CreatePlacementAsync(NewPlacement dto) {
+        var result = await _network.PostAsync<NewPlacement, PlacementDetail>(Endpoints.Placements, dto);
+        if (!result.IsSuccess) return Result<PlacementDetail>.Fail(TranslateError(result.Error!));
+        return Result<PlacementDetail>.Success(result.Value!);
     }
 
     // -----------------------------

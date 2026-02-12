@@ -1,4 +1,5 @@
-﻿using CDO.Core.DTOs.Employers;
+﻿using CDO.Core.DTOs.Counselors;
+using CDO.Core.DTOs.Employers;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
 
@@ -16,7 +17,7 @@ namespace CDO.Core.Interfaces {
         // -----------------------------
         // POST Methods
         // -----------------------------
-        public Task<Result> CreateEmployerAsync(EmployerDTO dto);
+        public Task<Result<Employer>> CreateEmployerAsync(EmployerDTO dto);
 
         // -----------------------------
         // PATCH Methods

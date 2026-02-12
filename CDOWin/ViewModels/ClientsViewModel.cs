@@ -106,7 +106,7 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Public Methods
     // =========================
-    public void NotifyNewClientCreated() => _selectionService.NotifyNewReminderCreated();
+    public void NotifyNewReminderCreated() => _selectionService.NotifyNewReminderCreated();
 
     public void RequestPlacement(int placementID) {
         AppServices.Navigation.Navigate(Views.CDOFrame.Placements);
@@ -137,18 +137,19 @@ public partial class ClientsViewModel : ObservableObject {
         Selected = await _service.GetClientAsync(Selected.Id);
     }
 
-    public async Task<Result<ClientDetail>> UpdateClientAsync(ClientUpdate update) {
+    public async Task<Result> UpdateClientAsync(ClientUpdate update) {
         if (Selected == null) return Result<ClientDetail>.Fail(new AppError(ErrorKind.Validation, "ClientDetail not selected.", null));
 
         var result = await _service.UpdateClientAsync(Selected.Id, update);
-        if (!result.IsSuccess) return result;
-        await ReloadClientAsync();
+        if (result.IsSuccess) {
+            await ReloadClientAsync();
 
-        _ = Task.Run(() => {
-            _clientComposer.ComposeClientToFile(Selected);
-        });
+            _ = Task.Run(() => {
+                _clientComposer.ComposeClientToFile(Selected);
+            });
 
-        UpdateSummaries();
+            UpdateSummaries();
+        }
         return result;
     }
 

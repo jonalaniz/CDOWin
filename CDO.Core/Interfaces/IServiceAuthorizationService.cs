@@ -16,7 +16,7 @@ public interface IServiceAuthorizationService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result> CreateServiceAuthorizationAsync(NewSA dto);
+    public Task<Result<Invoice>> CreateServiceAuthorizationAsync(NewSA dto);
 
     // -----------------------------
     // PATCH Methods

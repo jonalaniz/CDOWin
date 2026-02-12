@@ -74,24 +74,24 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // POST
     // -----------------------------
-    public async Task<Result> PostAsync<T>(string endpoint, T body) {
+    public async Task<Result<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) {
         try {
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
             var response = await _httpClient.PostAsync(endpoint, content);
 
             if (response.IsSuccessStatusCode) {
-                var data = await response.Content.ReadFromJsonAsync<T>();
-                return Result.Success();
+                var data = await response.Content.ReadFromJsonAsync<TResponse>();
+                return Result<TResponse>.Success(data!);
             }
 
-            return Result.Fail(MapHttpError(response.StatusCode));
+            return Result<TResponse>.Fail(MapHttpError(response.StatusCode));
         } catch (TaskCanceledException ex) {
-            return Result.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
+            return Result<TResponse>.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
         } catch (HttpRequestException ex) {
-            return Result.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+            return Result<TResponse>.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
         } catch (Exception ex) {
-            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
+            return Result<TResponse>.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
         }
     }
 
@@ -105,10 +105,7 @@ public class NetworkService : INetworkService {
             var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
             var response = await _httpClient.PatchAsync(endpoint, content);
 
-            if (response.IsSuccessStatusCode) {
-                var data = await response.Content.ReadFromJsonAsync<T>();
-                return Result.Success();
-            }
+            if (response.IsSuccessStatusCode) { return Result.Success(); }
 
             return Result.Fail(MapHttpError(response.StatusCode));
         } catch (TaskCanceledException ex) {

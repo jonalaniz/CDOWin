@@ -125,7 +125,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         Selected = selectedSA;
     }
 
-    public async Task<Result<bool>> DeleteSelectedSA() {
+    public async Task<Result> DeleteSelectedSA() {
         if (SelectedSummary == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No SA selected.", null, null));
         var id = SelectedSummary.Id;
         var result = await _service.DeleteServiceAuthorizationAsync(id);

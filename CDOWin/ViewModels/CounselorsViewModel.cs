@@ -120,17 +120,20 @@ public partial class CounselorsViewModel : ObservableObject {
         });
     }
 
-    public async Task<Result<Counselor>> UpdateCounselorAsync(CounselorUpdate update) {
-        if (Selected == null) return Result<Counselor>.Fail(new AppError(ErrorKind.Validation, "Counselor not selected.", null));
+    public async Task ReloadCounselorAsync() {
+        if (Selected == null) return;
+        Selected = await _service.GetCounselorAsync(Selected.Id);
+    }
+
+    public async Task<Result> UpdateCounselorAsync(CounselorUpdate update) {
+        if (Selected == null) return Result.Fail(new AppError(ErrorKind.Validation, "Counselor not selected.", null));
 
         var result = await _service.UpdateCounselorAsync(Selected.Id, update);
-        if (!result.IsSuccess) return result;
-
-        await LoadSelectedCounselorAsync(result.Value!.Id);
+        if (result.IsSuccess) { await ReloadCounselorAsync(); }
         return result;
     }
 
-    public async Task<Result<bool>> DeleteSelectedCounselor() {
+    public async Task<Result> DeleteSelectedCounselor() {
         if (Selected == null)
             return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Counselor Selected.", null, null));
 

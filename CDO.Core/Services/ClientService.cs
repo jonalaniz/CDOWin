@@ -21,7 +21,7 @@ public class ClientService : IClientService {
     }
 
     public Task<List<ClientSummary>?> GetAllClientSummariesAsync() {
-        return _network.GetAsync<List<ClientSummary>>(Endpoints.ClientSummaries);
+        return _network.GetAsync<List<ClientSummary>>(Endpoints.Clients);
     }
 
     public Task<ClientDetail?> GetClientAsync(int id) {
@@ -31,10 +31,10 @@ public class ClientService : IClientService {
     // -----------------------------
     // POST
     // -----------------------------
-    public async Task<Result> CreateClientAsync(NewClient dto) {
-        var result = await _network.PostAsync(Endpoints.Clients, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result.Success();
+    public async Task<Result<ClientDetail>> CreateClientAsync(NewClient dto) {
+        var result = await _network.PostAsync<NewClient, ClientDetail>(Endpoints.Clients, dto);
+        if (!result.IsSuccess) return Result<ClientDetail>.Fail(TranslateError(result.Error!));
+        return Result<ClientDetail>.Success(result.Value!);
     }
 
     // -----------------------------

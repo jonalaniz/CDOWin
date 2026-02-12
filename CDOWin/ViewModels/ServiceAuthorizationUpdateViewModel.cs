@@ -13,7 +13,7 @@ public partial class ServiceAuthorizationUpdateViewModel(Invoice serviceAuthoriz
     public Invoice Original = serviceAuthorization;
     public SAUpdate Updated = new();
 
-    public async Task<Result<Invoice>> UpdateSAAsync() {
+    public async Task<Result> UpdateSAAsync() {
         return await _service.UpdateServiceAuthorizationAsync(Original.Id, Updated);
     }
 }

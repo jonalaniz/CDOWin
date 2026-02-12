@@ -107,17 +107,15 @@ public partial class EmployersViewModel : ObservableObject {
         Selected = await _service.GetEmployerAsync(Selected.Id);
     }
 
-    public async Task<Result<Employer>> UpdateEmployerAsync(EmployerDTO update) {
+    public async Task<Result> UpdateEmployerAsync(EmployerDTO update) {
         if (SelectedSummary == null) return Result<Employer>.Fail(new AppError(ErrorKind.Validation, "EmployerName not selected.", null));
 
         var result = await _service.UpdateEmployerAsync(SelectedSummary.Id, update);
-        if (!result.IsSuccess) return result;
-
-        await ReloadEmployerAsync();
+        if (result.IsSuccess) { await ReloadEmployerAsync(); }
         return result;
     }
 
-    public async Task<Result<bool>> DeleteSelectedEmployer() {
+    public async Task<Result> DeleteSelectedEmployer() {
         if (Selected == null)
             return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No EmployerName Selected.", null, null));
 

@@ -24,10 +24,10 @@ public class StateService : IStateService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result> CreateStateAsync(CreateStateDTO dto) {
-        var result = await _network.PostAsync(Endpoints.States, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result.Success();
+    public async Task<Result<State>> CreateStateAsync(CreateStateDTO dto) {
+        var result = await _network.PostAsync<CreateStateDTO, State>(Endpoints.States, dto);
+        if (!result.IsSuccess) return Result<State>.Fail(TranslateError(result.Error!));
+        return Result<State>.Success(result.Value!);
     }
 
     // -----------------------------

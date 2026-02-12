@@ -31,10 +31,10 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result> CreateCounselorAsync(NewCounselor dto) {
-        var result = await _network.PostAsync(Endpoints.Counselors, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result.Success();
+    public async Task<Result<Counselor>> CreateCounselorAsync(NewCounselor dto) {
+        var result = await _network.PostAsync<NewCounselor, Counselor>(Endpoints.Counselors, dto);
+        if (!result.IsSuccess) return Result<Counselor>.Fail(TranslateError(result.Error!));
+        return Result<Counselor>.Success(result.Value!);
     }
 
     // -----------------------------

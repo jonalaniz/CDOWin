@@ -16,7 +16,7 @@ public interface IReminderService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result> CreateRemindersAsync(NewReminder dto);
+    public Task<Result<Reminder>> CreateRemindersAsync(NewReminder dto);
 
     // -----------------------------
     // PATCH Methods

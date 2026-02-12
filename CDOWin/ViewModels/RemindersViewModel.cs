@@ -12,8 +12,10 @@ using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Gaming.Input.ForceFeedback;
 
 namespace CDOWin.ViewModels;
 
@@ -129,8 +131,8 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadRemindersAsync() {
-        var reminders = await _dataCoordinator.GetRemindersAsync();
+    public async Task LoadRemindersAsync(bool force = false) {
+        var reminders = await _dataCoordinator.GetRemindersAsync(force);
         if (reminders == null) return;
 
         var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
@@ -157,12 +159,10 @@ public partial class RemindersViewModel : ObservableObject {
         _dispatcher.TryEnqueue(ApplyFilter);
     }
 
-    public async Task<Result<Reminder>> UpdateReminderAsync(int id, ReminderUpdate update) {
+    public async Task<Result> UpdateReminderAsync(int id, ReminderUpdate update) {
         var result = await _service.UpdateReminderAsync(id, update);
 
-        if (!result.IsSuccess) return result;
-
-        await ReloadReminderAsync(id);
+        if (!result.IsSuccess) { await ReloadReminderAsync(id); }
         return result;
     }
 
@@ -211,7 +211,7 @@ public partial class RemindersViewModel : ObservableObject {
     }
 
     private void OnReminderCreated() {
-        _ = LoadRemindersAsync();
+        _ = LoadRemindersAsync(force: true);
     }
 
     // =========================

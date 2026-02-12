@@ -16,7 +16,7 @@ public interface IPlacementService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result> CreatePlacementAsync(NewPlacement dto);
+    public Task<Result<PlacementDetail>> CreatePlacementAsync(NewPlacement dto);
 
     // -----------------------------
     // PATCH Methods

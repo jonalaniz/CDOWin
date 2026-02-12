@@ -32,10 +32,10 @@ public class EmployerService : IEmployerService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public async Task<Result> CreateEmployerAsync(EmployerDTO dto) {
-        var result = await _network.PostAsync(Endpoints.Employers, dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result.Success();
+    public async Task<Result<Employer>> CreateEmployerAsync(EmployerDTO dto) {
+        var result = await _network.PostAsync<EmployerDTO, Employer>(Endpoints.Employers, dto);
+        if (!result.IsSuccess) return Result<Employer>.Fail(TranslateError(result.Error!));
+        return Result<Employer>.Success(result.Value!);
     }
 
     // -----------------------------

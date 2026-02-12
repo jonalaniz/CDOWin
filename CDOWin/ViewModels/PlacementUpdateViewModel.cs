@@ -12,7 +12,7 @@ public partial class PlacementUpdateViewModel(PlacementDetail placement) : Obser
     public PlacementDetail Original = placement;
     public PlacementUpdate Updated = new();
 
-    public async Task<Result<PlacementDetail>> UpdatePlacementAsync() {
+    public async Task<Result> UpdatePlacementAsync() {
         return await _service.UpdatePlacementAsync(Original.Id, Updated);
     }
 }

@@ -16,7 +16,7 @@ public interface IStateService {
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result> CreateStateAsync(CreateStateDTO dto);
+    public Task<Result<State>> CreateStateAsync(CreateStateDTO dto);
 
     // -----------------------------
     // PATCH Methods

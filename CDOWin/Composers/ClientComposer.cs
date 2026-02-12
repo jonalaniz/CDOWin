@@ -15,7 +15,7 @@ public sealed class ClientComposer {
 
         var clientExport = client.AsExport();
         var yaml = _serializer.Serialize(clientExport);
-        var filePath = Path.Combine(client.DocumentsFolderPath, "Client.txt");
+        var filePath = Path.Combine(client.DocumentsFolderPath, "Clients.txt");
 
         try {
             File.WriteAllText(filePath, yaml, Encoding.UTF8);

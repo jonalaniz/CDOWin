@@ -32,6 +32,28 @@
             <AppBarButton Click="EditButton_Click" IsCompact="False" ToolTipService.ToolTip="Edit">
                 <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
             </AppBarButton>
+
+            <!-- More Menu -->
+            <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton.Icon>
+                <AppBarButton.Flyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                        <MenuFlyoutItem Text="Export..." Click="Export_Click">
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="OpenFile" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator/>
+                        <MenuFlyoutItem Text="Delete..." Click="Delete_Click">
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
         </CommandBar>
 
         <!-- Detials Grid -->
@@ -82,45 +104,6 @@
             <!-- Row 6: Description -->
             <control:LabelPair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                                Label="Description" Value="{x:Bind ViewModel.Selected.Description, Mode=OneWay}"/>
-        </Grid>
-
-        <!-- Row 5: Button Row -->
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-              Style="{StaticResource InspectorButtonGridStyle}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Style="{StaticResource InspectorAccentStyle}"
-                    Click="Export_Click">
-                <StackPanel Orientation="Horizontal" Spacing="5">
-                    <SymbolIcon Symbol="Page"/>
-                    <TextBlock Text="Invoice"/>
-                </StackPanel>
-            </Button>
-
-            <Button Grid.Column="1" Style="{StaticResource InspectorCriticalStyle}"
-                    Click="Delete_Click">
-                <StackPanel Orientation="Horizontal" Spacing="5">
-                    <SymbolIcon Symbol="Delete"/>
-                    <TextBlock Text="Delete..."/>
-                </StackPanel>
-                <Button.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.ThemeDictionaries>
-                            <ResourceDictionary x:Key="Light">
-                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource SystemFillColorCritical}"/>
-                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource SystemFillColorCritical}"/>
-                            </ResourceDictionary>
-                            <ResourceDictionary x:Key="Dark">
-                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource SystemFillColorCritical}"/>
-                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource SystemFillColorCritical}"/>
-                            </ResourceDictionary>
-                        </ResourceDictionary.ThemeDictionaries>
-                    </ResourceDictionary>
-                </Button.Resources>
-            </Button>
         </Grid>
     </Grid>
 </Page>

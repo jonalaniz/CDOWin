@@ -31,7 +31,7 @@
                 <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
             </AppBarButton>
 
-            <!-- Edit Menu -->
+            <!-- More Menu -->
             <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>

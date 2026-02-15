@@ -42,7 +42,11 @@
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                        <MenuFlyoutItem Text="Edit" Icon="Edit" Click="EditButton_Click"/>
+                        <MenuFlyoutItem Text="Edit" Click="EditButton_Click">
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="Edit" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>

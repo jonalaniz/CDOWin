@@ -1,4 +1,4 @@
-using CDO.Core.Models;
+using CDO.Core.DTOs.SAs;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.ServiceAuthorizations.Inspectors;
@@ -35,7 +35,7 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     // Click Handlers
     // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-        if (e.ClickedItem is Invoice sa) {
+        if (e.ClickedItem is InvoiceSummary sa) {
             _ = ViewModel.LoadSelectedSAAsync(sa.Id);
         }
     }

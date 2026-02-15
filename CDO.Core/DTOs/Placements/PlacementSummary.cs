@@ -10,7 +10,7 @@ public class PlacementSummary {
     public DateTime? HireDate { get; init; }
     public string? Wages { get; init; }
 
-    // SA/Invoice Specific
+    // SA/InvoiceDetail Specific
     public int? InvoiceID { get; init; }
     public string? SaNumber { get; init; }
 

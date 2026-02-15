@@ -19,7 +19,7 @@ public class PlacementUpdate {
     public string? Wages { get; set; }
     public string? Benefits { get; set; }
 
-    // SA/Invoice Specific
+    // SA/InvoiceDetail Specific
     public int? InvoiceID { get; set; }
     public string? SaNumber { get; set; }
 

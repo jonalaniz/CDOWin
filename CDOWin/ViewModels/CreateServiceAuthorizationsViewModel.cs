@@ -2,11 +2,9 @@
 using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -70,22 +68,24 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // =========================
     // CRUD Methods
     // =========================
-    public async Task<Result<Invoice>> CreateSAAsync() {
+    public async Task<Result<InvoiceDetail>> CreateSAAsync() {
         var invoice = new NewSA {
             ServiceAuthorizationNumber = SANumber,
-            ClientID = Client.Id,
-            ClientName = Client.FormattedName,
-            CounselorName = Client.CounselorReference!.Name!,
-            CaseID = Client.CaseID!,
-            CounselorID = Client.CounselorID,
+            Office = Office,
             Description = Description,
             StartDate = StartDate,
             EndDate = EndDate,
-            Office = Office,
             UnitCost = UnitCost,
-            UnitOfMeasurement = UnitOfMeasurement
+            UnitOfMeasurement = UnitOfMeasurement,
+
+            ClientID = Client.Id,
+            ClientName = Client.FormattedName,
+            CaseID = Client.CaseID!,
+
+            CounselorID = Client.CounselorID,
+            CounselorName = Client.CounselorReference!.Name!,
+            SecretaryName = Client.CounselorReference.SecretaryName,
         };
-        Debug.WriteLine(invoice);
 
         _invalidation.InvalidateSAs();
         return await _service.CreateServiceAuthorizationAsync(invoice);

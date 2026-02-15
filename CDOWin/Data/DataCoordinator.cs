@@ -2,6 +2,7 @@
 using CDO.Core.DTOs.Counselors;
 using CDO.Core.DTOs.Employers;
 using CDO.Core.DTOs.Placements;
+using CDO.Core.DTOs.SAs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using System;
@@ -55,7 +56,7 @@ public class DataCoordinator {
     public CachedList<EmployerSummary> Employers { get; } = new();
     public CachedList<PlacementSummary> Placements { get; } = new();
     public CachedList<Reminder> Reminders { get; } = new();
-    public CachedList<Invoice> SAs { get; } = new();
+    public CachedList<InvoiceSummary> SAs { get; } = new();
     public CachedList<State> States { get; } = new();
 
     // =========================
@@ -123,7 +124,7 @@ public class DataCoordinator {
         return Reminders.Data!;
     }
 
-    public async Task<IReadOnlyList<Invoice>> GetSAsAsync(bool force = false) {
+    public async Task<IReadOnlyList<InvoiceSummary>> GetSAsAsync(bool force = false) {
         if (force || SAs.IsStale(SATTL)) {
             var data = await _sas.GetAllServiceAuthorizationsAsync();
             SAs.Update(data);

@@ -1,46 +1,30 @@
-﻿using CDO.Core.DTOs.Clients;
+﻿namespace CDO.Core.DTOs.SAs;
 
-namespace CDO.Core.Models;
-
-public record class Invoice(
+public record class InvoiceDetail(
+    // SA Specific
     int Id,
     string ServiceAuthorizationNumber,
-    string ClientName,
-    string CaseID,
-    string CounselorName,
-    string Description,
     string? Office,
-    int? CounselorID,
-    int? ClientID,
+    string Description,
+    DateTime StartDate,
+    DateTime EndDate,
     double? UnitCost,
     string? UnitOfMeasurement,
-    ClientDetail? Client,
-    DateTime StartDate,
-    DateTime EndDate
+
+    // Client Specific
+    int? ClientId,
+    string ClientName,
+    string CaseId,
+
+    // Counselor Specific
+    int? CounselorId,
+    string CounselorName,
+    string? SecretaryName
     ) {
     public string? FormattedStartDate => StartDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedEndDate => EndDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedCost => $"{UnitCost:C2}";
     public string? FormattedDateRange => $"Valid {FormattedStartDate} to {FormattedEndDate}";
-
-    public static Invoice InjectClient(Invoice invoice, ClientDetail client) {
-        return new Invoice(
-            invoice.Id,
-            invoice.ServiceAuthorizationNumber,
-            invoice.ClientName,
-            invoice.CaseID,
-            invoice.CounselorName,
-            invoice.Description,
-            invoice.Office,
-            invoice.CounselorID,
-            invoice.ClientID,
-            invoice.UnitCost,
-            invoice.UnitOfMeasurement,
-            client,
-            invoice.StartDate,
-            invoice.EndDate
-        );
-    }
 
     public SAExport AsExport() {
         return new SAExport {

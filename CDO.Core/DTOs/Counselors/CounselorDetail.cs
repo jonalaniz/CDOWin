@@ -1,5 +1,5 @@
 ﻿using CDO.Core.DTOs.Clients;
-using CDO.Core.Models;
+using CDO.Core.DTOs.SAs;
 
 namespace CDO.Core.DTOs.Counselors;
 
@@ -8,7 +8,7 @@ public class CounselorDetail {
     public int Id { get; init; }
     public required string Name { get; init; }
     public required ClientSummary[] Clients { get; init; }
-    public required Invoice[] Invoices { get; init; }
+    public required InvoiceDetail[] Invoices { get; init; }
 
     // Nullable fields
     public int? CaseLoadId { get; init; }

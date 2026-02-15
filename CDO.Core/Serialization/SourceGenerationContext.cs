@@ -48,8 +48,9 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(NewReminder))]
 [JsonSerializable(typeof(ReminderUpdate))]
 
-[JsonSerializable(typeof(Invoice))]
-[JsonSerializable(typeof(List<Invoice>))]
+[JsonSerializable(typeof(InvoiceDetail))]
+[JsonSerializable(typeof(InvoiceSummary))]
+[JsonSerializable(typeof(List<InvoiceSummary>))]
 [JsonSerializable(typeof(NewSA))]
 [JsonSerializable(typeof(SAUpdate))]
 

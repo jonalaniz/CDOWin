@@ -2,7 +2,6 @@
 using CDO.Core.DTOs.Counselors;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Data;
 using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;

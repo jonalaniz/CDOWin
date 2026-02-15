@@ -44,6 +44,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -55,7 +56,7 @@
             <control:LabelPair Grid.Row="0" Grid.Column="0" 
                                Label="SA Number" Value="{x:Bind ViewModel.Selected.ServiceAuthorizationNumber, Mode=OneWay}"/>
             <control:LabelPair Grid.Row="0" Grid.Column="1" 
-                               Label="Case ID" Value="{x:Bind ViewModel.Selected.CaseID, Mode=OneWay}"/>
+                               Label="Case ID" Value="{x:Bind ViewModel.Selected.CaseId, Mode=OneWay}"/>
 
             <!-- Row 1: Counselor -->
             <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
@@ -64,18 +65,22 @@
             <!-- Row 2: Counselor -->
             <control:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                Label="Office" Value="{x:Bind ViewModel.Selected.Office, Mode=OneWay}"/>
-            
-            <!-- Row 3: Start Date + End Date -->
-            <control:LabelPair Grid.Row="3" Grid.Column="0" Label="Start Date" Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
-            <control:LabelPair Grid.Row="3" Grid.Column="1" Label="End Date" Value="{x:Bind ViewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
 
-            <!-- Row 4: Unit Cost -->
-            <control:LabelPair Grid.Row="4" Grid.Column="0"
+            <!-- Row 3: Counselor -->
+            <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                               Label="Secretary" Value="{x:Bind ViewModel.Selected.SecretaryName, Mode=OneWay}"/>
+
+            <!-- Row 4: Start Date + End Date -->
+            <control:LabelPair Grid.Row="4" Grid.Column="0" Label="Start Date" Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="4" Grid.Column="1" Label="End Date" Value="{x:Bind ViewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
+
+            <!-- Row 5: Unit Cost -->
+            <control:LabelPair Grid.Row="5" Grid.Column="0"
                                Label="Unit Cost" Value="{x:Bind ViewModel.Selected.FormattedCost, Mode=OneWay}"/>
-            <control:LabelPair Grid.Row="4" Grid.Column="1"
+            <control:LabelPair Grid.Row="5" Grid.Column="1"
                                Label="U/M" Value="{x:Bind ViewModel.Selected.UnitOfMeasurement, Mode=OneWay}"/>
-            <!-- Row 5: Description -->
-            <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+            <!-- Row 6: Description -->
+            <control:LabelPair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                                Label="Description" Value="{x:Bind ViewModel.Selected.Description, Mode=OneWay}"/>
         </Grid>
 

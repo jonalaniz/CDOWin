@@ -1,4 +1,4 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs.SAs;
 
 namespace CDO.Core.DTOs.Clients;
 

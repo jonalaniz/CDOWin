@@ -22,7 +22,7 @@ public record class PlacementDetail(
     string? Wages,
     string? Benefits,
 
-    // SA/Invoice Specific
+    // SA/InvoiceDetail Specific
     int? InvoiceID,
     string? SaNumber,
 

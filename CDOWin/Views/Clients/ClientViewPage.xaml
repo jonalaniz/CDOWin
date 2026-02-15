@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:CDOWin.ViewModels" 
-    xmlns:models="using:CDO.Core.Models"
+    xmlns:sas="using:CDO.Core.DTOs.SAs"
     xmlns:placements="using:CDO.Core.DTOs.Placements"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
@@ -362,7 +361,7 @@
                         <!-- Item Repeater -->
                         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
                             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Invoices, Mode=OneWay}">
-                                <DataTemplate x:DataType="models:Invoice">
+                                <DataTemplate x:DataType="sas:InvoiceDetail">
 
                                     <!-- Button -->
                                     <Button Margin="0,0,0,6" Click="SA_Click" Tag="{x:Bind Id}"

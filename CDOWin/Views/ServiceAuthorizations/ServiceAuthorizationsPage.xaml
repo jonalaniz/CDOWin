@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:models="using:CDO.Core.Models"
+    xmlns:dto="using:CDO.Core.DTOs.SAs"
     mc:Ignorable="d">
 
     <Grid>
@@ -90,7 +90,7 @@
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Invoice">
+                    <DataTemplate x:DataType="dto:InvoiceSummary">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
@@ -112,8 +112,8 @@
                                 
                                 <TextBlock Grid.Column="0" Text="{x:Bind ClientName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
-                                        IsEnabled="{x:Bind ClientID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="GoToClient_Click" Tag="{x:Bind ClientID}">
+                                        IsEnabled="{x:Bind ClientId, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="GoToClient_Click" Tag="{x:Bind ClientId}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
@@ -126,8 +126,8 @@
 
                                 <TextBlock Grid.Column="0" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
-                                        IsEnabled="{x:Bind CounselorID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="GoToCounselor_Click" Tag="{x:Bind CounselorID}">
+                                        IsEnabled="{x:Bind CounselorId, Converter={StaticResource NullToBoolConverter}}"
+                                        Click="GoToCounselor_Click" Tag="{x:Bind CounselorId}">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>

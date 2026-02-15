@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -31,35 +32,55 @@
                         x:Name="OfficeSuggestBox" TextChanged="OfficeSuggestBox_TextChanged"
                         QuerySubmitted="OfficeSuggestBox_QuerySubmitted"
                         SuggestionChosen="OfficeSuggestBox_SuggestionChosen"/>
+        
+        <!-- Row 1: Counselor Data -->
+        <Expander Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="Counselor Information"
+                  IsExpanded="False" HorizontalAlignment="Stretch">
+            <Grid Width="454" RowSpacing="10" ColumnSpacing="12" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!-- Row 0: Counselor Name -->
+                <TextBox Grid.Row="0" Grid.Column="0" Header="Counselor Name"
+                         Text="{x:Bind ViewModel.Original.CounselorName}"
+                         TextChanged="TextChanged" Tag="{x:Bind local:Field.CounselorName}"/>
 
-        <!-- Row 1: SA Number + Start Date + End Date -->
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"
+                <!-- Row 1: Secretary Name -->
+                <TextBox Grid.Row="1" Grid.Column="0" Header="Secretary Name"
+                         Text="{x:Bind ViewModel.Original.SecretaryName}"
+                         TextChanged="TextChanged" Tag="{x:Bind local:Field.SecretaryName}"/>
+
+            </Grid>
+
+        </Expander>
+
+        <!-- Row 2: SA Number + Start Date + End Date -->
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"
                  Text="{x:Bind ViewModel.Original.ServiceAuthorizationNumber}"
                  TextChanged="TextChanged" Tag="{x:Bind local:Field.SaNumber}"/>
 
-        <CalendarDatePicker Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+        <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
                             Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
                             DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.StartDate}"/>
 
-        <CalendarDatePicker Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+        <CalendarDatePicker Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
                             Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
                             DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.EndDate}"/>
 
         <!-- Row 3: Decription -->
-        <AutoSuggestBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
+        <AutoSuggestBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
                         Text="{x:Bind ViewModel.Original.Description}" x:Name="DescriptionSuggestBox"
                         TextChanged="DescriptionSuggestBox_TextChanged"
                         QuerySubmitted="DescriptionSuggestBox_QuerySubmitted"
                         SuggestionChosen="DescriptionSuggestBox_SuggestionChosen"/>
 
-        <!-- Row 3: U/M + Cost-->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
+        <!-- Row 4: U/M + Cost-->
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
                  x:Name="UMBox" Text="{x:Bind ViewModel.Original.UnitOfMeasurement}"
                  TextChanged="TextChanged" Tag="{x:Bind local:Field.UoM}"/>
-        <NumberBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
+        <NumberBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
                    x:Name="NumberBox" PlaceholderText="0.00"
                    ValueChanged="NumberBox_ValueChanged"/>
-
-
     </Grid>
 </Page>

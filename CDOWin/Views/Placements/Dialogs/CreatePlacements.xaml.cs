@@ -1,3 +1,4 @@
+using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
 using CDOWin.Extensions;
 using CDOWin.Services;
@@ -82,7 +83,7 @@ public sealed partial class CreatePlacements : Page {
     // Event Handlers
     // =========================
     private void DropDownSelected(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem item || item.Tag is not Invoice sa)
+        if (sender is not MenuFlyoutItem item || item.Tag is not InvoiceDetail sa)
             return;
         SANumberDropDownButton.Content = sa.ServiceAuthorizationNumber;
         ViewModel.SaNumber = sa.ServiceAuthorizationNumber;

@@ -3,6 +3,8 @@
 public enum Field {
     SaNumber,
     CounselorID,
+    CounselorName,
+    SecretaryName,
     Description,
     Office,
     UoM

@@ -1,11 +1,11 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs.SAs;
 using System.Diagnostics;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace CDO.Core.WordInterop;
 
 public sealed class WordInteropService {
-    public void ExportServiceAuthorization(string templatePath, Invoice invoice) {
+    public void ExportServiceAuthorization(string templatePath, InvoiceDetail invoice) {
         Debug.WriteLine(templatePath);
 
         var app = new Word.Application();
@@ -25,7 +25,7 @@ public sealed class WordInteropService {
                         field.Result = invoice.ClientName;
                         break;
                     case "CaseID":
-                        field.Result = invoice.CaseID;
+                        field.Result = invoice.CaseId;
                         break;
                     case "StartDate":
                         field.Result = invoice.StartDate.ToString(format: "MM/dd/yyyy") ?? "";
@@ -34,7 +34,7 @@ public sealed class WordInteropService {
                         field.Result = invoice.EndDate.ToString(format: "MM/dd/yyyy") ?? "";
                         break;
                     case "SecretaryName":
-                        field.Result = invoice.Client?.CounselorReference?.SecretaryName ?? "";
+                        field.Result = invoice.SecretaryName ?? "";
                         break;
                     case "CounselorName":
                         field.Result = invoice.CounselorName;

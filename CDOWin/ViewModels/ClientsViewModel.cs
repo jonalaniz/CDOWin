@@ -1,8 +1,8 @@
 ﻿using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Placements;
+using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Composers;
 using CDOWin.Data;
 using CDOWin.Services;
@@ -47,7 +47,7 @@ public partial class ClientsViewModel : ObservableObject {
     public partial ClientSummary? SelectedSummary { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<Invoice> Invoices { get; private set; } = [];
+    public partial ObservableCollection<InvoiceDetail> Invoices { get; private set; } = [];
 
     [ObservableProperty]
     public partial ObservableCollection<PlacementDetail> Placements { get; private set; } = [];
@@ -156,13 +156,13 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Utility / Filtering
     // =========================
-    private void SetupSAs(Invoice[] invoices) {
+    private void SetupSAs(InvoiceDetail[] invoices) {
         var sortedInvoices = invoices
             .OrderBy(i => i.EndDate)
             .Reverse()
             .ToList();
         OnUI(() => {
-            Invoices = new ObservableCollection<Invoice>(sortedInvoices);
+            Invoices = new ObservableCollection<InvoiceDetail>(sortedInvoices);
         });
     }
 

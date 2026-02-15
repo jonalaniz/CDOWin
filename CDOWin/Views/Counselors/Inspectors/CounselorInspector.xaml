@@ -6,7 +6,7 @@
     xmlns:local="using:CDOWin.Views.Counselors.Inspectors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:CDO.Core.Models"
+    xmlns:dto="using:CDO.Core.DTOs.SAs"
     xmlns:control="using:CDOWin.Controls"
     mc:Ignorable="d">
 
@@ -84,7 +84,7 @@
         <!-- Item Repeater -->
         <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,0,12,0">
             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Invoices, Mode=OneWay}">
-                <DataTemplate x:DataType="models:Invoice">
+                <DataTemplate x:DataType="dto:InvoiceDetail">
 
                     <!-- Button -->
                     <Button Margin="0,0,0,6" Click="SA_Click" Tag="{x:Bind Id}"

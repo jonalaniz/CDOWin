@@ -1,6 +1,6 @@
-﻿using CDO.Core.ErrorHandling;
+﻿using CDO.Core.DTOs.SAs;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Composers;
 using CDOWin.Data;
 using CDOWin.Services;
@@ -28,20 +28,20 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<Invoice> _cache = [];
+    private IReadOnlyList<InvoiceSummary> _cache = [];
 
     // =========================
     // UI State
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<Invoice> Filtered { get; private set; } = [];
+    public partial ObservableCollection<InvoiceSummary> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial Invoice? SelectedSummary { get; set; }
+    public partial InvoiceSummary? SelectedSummary { get; set; }
 
     [ObservableProperty]
-    public partial Invoice? Selected { get; set; }
+    public partial InvoiceDetail? Selected { get; set; }
 
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -97,11 +97,6 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
             return tcs.Task;
         }
 
-        if (Selected.Client is null) {
-            tcs.SetResult(Result<string>.Fail(new AppError(ErrorKind.Validation, "This shouldn't be possible")));
-            return tcs.Task;
-        }
-
         var composer = new ServiceAuthorizationComposer(Selected);
         return composer.Compose();
     }
@@ -148,7 +143,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         int? previousSelection = SelectedSummary?.Id;
         var filterDate = IsFiltered ? DateTime.Today : DateTime.MinValue;
 
-        IEnumerable<Invoice> result = _cache.Where(i => i.EndDate >= filterDate);
+        IEnumerable<InvoiceSummary> result = _cache.Where(i => i.EndDate >= filterDate);
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
@@ -161,7 +156,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         }
 
         OnUI(() => {
-            Filtered = new ObservableCollection<Invoice>(result);
+            Filtered = new ObservableCollection<InvoiceSummary>(result);
             ReSelect(previousSelection);
         });
     }
@@ -173,7 +168,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
     private void ReSelect(int? id) {
         if (id == null) return;
-        if (Filtered.FirstOrDefault(i => i.Id == id) is Invoice selected)
+        if (Filtered.FirstOrDefault(i => i.Id == id) is InvoiceSummary selected)
             SelectedSummary = selected;
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -146,9 +147,10 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     private void ApplyFilter() {
         int? previousSelection = Selected?.Id;
-        var filterDate = IsFiltered ? DateTime.Today : DateTime.MinValue;
 
-        IEnumerable<PlacementSummary> result = _cache.Where(p => (p.HireDate ?? DateTime.MinValue.AddDays(1)) >= filterDate);
+        var result = IsFiltered
+            ? _cache.Where(r => r.Active)
+            : _cache;
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();

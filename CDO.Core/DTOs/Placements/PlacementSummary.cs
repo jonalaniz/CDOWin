@@ -5,7 +5,7 @@ public class PlacementSummary {
     public required int Id { get; init; }
 
     // Placement Specific
-    public bool? Active { get; init; }
+    public bool Active { get; init; }
     public string? Position { get; init; }
     public DateTime? HireDate { get; init; }
     public string? Wages { get; init; }

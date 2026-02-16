@@ -2,7 +2,7 @@
 
 public class NewPlacement {
     // Placement Specific
-    public bool? Active { get; init; }
+    public bool Active { get; init; }
     public int? PlacementNumber { get; init; }
     public string? Position { get; init; }
     public DateTime? HireDate { get; init; }

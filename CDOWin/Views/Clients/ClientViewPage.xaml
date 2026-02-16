@@ -338,14 +338,14 @@
                 <!-- Service Authorizations Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
                     <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,6,0">
+                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
+                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,6,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -359,12 +359,12 @@
                         </Grid>
                         
                         <!-- Item Repeater -->
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Invoices, Mode=OneWay}">
                                 <DataTemplate x:DataType="sas:InvoiceDetail">
 
                                     <!-- Button -->
-                                    <Button Margin="0,0,0,6" Click="SA_Click" Tag="{x:Bind Id}"
+                                    <Button Margin="0,0,12,6" Click="SA_Click" Tag="{x:Bind Id}"
                                             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                             Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                             BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
@@ -422,14 +422,14 @@
                 <!-- Placements Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
                     <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,6,0">
+                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
+                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,6,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -445,12 +445,12 @@
                         </Grid>
 
                         <!-- Item Repeater -->
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,4,0">
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
                                 <DataTemplate x:DataType="placements:PlacementDetail">
 
                                     <!-- Button -->
-                                    <SplitButton Margin="0,0,0,6" Click="Placement_Click" Tag="{x:Bind Id}"
+                                    <SplitButton Margin="0,0,12,6" Click="Placement_Click" Tag="{x:Bind Id}"
                                                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                                  BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">

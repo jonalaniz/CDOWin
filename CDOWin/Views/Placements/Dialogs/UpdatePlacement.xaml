@@ -180,7 +180,7 @@
                              Tag="{x:Bind local:UpdateField.HoursWorking}"/>
                     <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Hourly or Monthly Wage"
                              MaxLength="255" TextChanged="TextBox_TextChanged"
-                             Text="{x:Bind ViewModel.Original.HoursWorking}"
+                             Text="{x:Bind ViewModel.Original.Wages}"
                              Tag="{x:Bind local:UpdateField.Wage}"/>
 
                     <!-- Rows 3 & 4: First 5 days -->

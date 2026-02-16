@@ -31,10 +31,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="84"/>
+                <RowDefinition Height="74"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" Margin="8,8,8,2"
                        Foreground="White"
+                       Opacity="0.8"
                        HorizontalAlignment="Center"
                        FontWeight="SemiBold" 
                        FontSize="18"

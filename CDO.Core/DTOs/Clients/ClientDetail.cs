@@ -7,13 +7,22 @@ namespace CDO.Core.DTOs.Clients;
 
 public record class ClientDetail(
     int Id,
-    bool Active,
+
+    // Required Fields
     string FirstName,
     string LastName,
+    bool Active,
+
     bool TTW,
+
+    // Parent Object
+    CounselorUpdate? CounselorReference,
+
+    // Child Objects
     Reminder[] Reminders,
-    PlacementDetail[]? Placements,
     InvoiceDetail[]? Invoices,
+    PlacementDetail[]? Placements,
+    
     DateTime? StartDate,
     string? Ssn,
     string? CaseID,
@@ -56,8 +65,7 @@ public record class ClientDetail(
     bool? ElevatorSpeechCompleted,
     string? Race,
     string? FluentLanguages,
-    string? Premiums,
-    CounselorUpdate? CounselorReference
+    string? Premiums
     ) {
     public bool InActive => !Active;
     public string NameAndID => $"{FirstName} {LastName} ({Id})";
@@ -80,10 +88,8 @@ public record class ClientDetail(
 
     public string FormattedCityStateZip {
         get {
-            if (Zip != null)
-                return $"{City}, {State} {Zip}";
-            else
-                return $"{City}, {State}";
+            if (Zip != null) return $"{City}, {State} {Zip}";
+            else return $"{City}, {State}";
         }
     }
 
@@ -126,10 +132,14 @@ public record class ClientDetail(
             Id = Id,
             FirstName = FirstName,
             LastName = LastName,
+            DOB = FormattedDOB,
+            DL = DriversLicense,
+            SSN = Ssn,
             City = City,
             State = State,
             Active = Active,
             TTW = TTW,
+            CaseID = CaseID,
             Address1 = Address1,
             Address2 = Address2,
             Zip = Zip,
@@ -138,7 +148,6 @@ public record class ClientDetail(
             Phone2 = Phone2,
             Phone3 = Phone3,
             EmploymentGoal = EmploymentGoal,
-            CaseID = CaseID,
             ServiceAuthorizations = Invoices?.Select(i => i.AsExport()).ToArray()
         };
     }

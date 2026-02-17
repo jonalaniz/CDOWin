@@ -84,6 +84,18 @@ public record class ClientDetail(
         }
     }
 
+    public string FormattedStreetAddress {
+        get {
+            if (Address1 == null && Address2 == null)
+                return "No street address on file.";
+            else if (Address2 == null) {
+                return Address1;
+            } else {
+                return $"{Address1} {Address2}";
+            }
+        }
+    }
+
     public string? FormattedDOB => Dob?.ToString(format: "MM/dd/yyyy");
 
     public string FormattedCityStateZip {

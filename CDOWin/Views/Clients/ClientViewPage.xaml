@@ -136,8 +136,14 @@
                                      Value="{x:Bind ViewModel.Selected.Race, Mode=OneWay}"/>
 
                         <!-- Address Section -->
-                        <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Label="Address"
-                                     Value="{x:Bind ViewModel.Selected.FormattedAddress, Mode=OneWay}"/>
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
+                                    Visibility="{x:Bind ViewModel.Selected.FormattedAddress, Mode=OneWay, Converter={StaticResource StringToVisability}}">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Address"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                                       Text="{x:Bind ViewModel.Selected.FormattedStreetAddress, Mode=OneWay}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                                       Text="{x:Bind ViewModel.Selected.FormattedCityStateZip, Mode=OneWay}"/>
+                        </StackPanel>
 
                         <!-- Education Section -->
                         <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Label="Education"

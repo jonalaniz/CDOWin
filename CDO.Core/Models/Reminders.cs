@@ -4,7 +4,7 @@ public class Reminder {
     // Required creation fields
     public int Id { get; set; }
     public DateTime Date { get; set; }
-    public string Description { get; set; }
+    public required string Description { get; set; }
 
     // Optional fields
     public int ClientID { get; set; }

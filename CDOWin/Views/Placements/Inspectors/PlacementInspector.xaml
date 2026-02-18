@@ -69,6 +69,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -124,42 +126,50 @@
                     <c:LabelPair Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6" Label="Description of Duties" 
                                  Value="{x:Bind ViewModel.Selected.JobDuties, Mode=OneWay}"/>
 
-                    <!-- Row 8: Hours Working + Benefits -->
-                    <c:LabelPair Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Label="Hours Working" 
+                    <!-- Row 8: Work Environment -->
+                    <c:LabelPair Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Label="Work Environment" 
+                                 Value="{x:Bind ViewModel.Selected.WorkEnvironment, Mode=OneWay}"/>
+                    
+                    <!-- Row 9: Accomodations -->
+                    <c:LabelPair Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Label="Accommodations" 
+                                 Value="{x:Bind ViewModel.Selected.Accommodations, Mode=OneWay}"/>
+                    
+                    <!-- Row 10: Hours Working + Benefits -->
+                    <c:LabelPair Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Label="Hours Working" 
                                  Value="{x:Bind ViewModel.Selected.HoursWorking, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="3" Label="Benefits" 
+                    <c:LabelPair Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="3" Label="Benefits" 
                                  Value="{x:Bind ViewModel.Selected.Benefits, Mode=OneWay}"/>
 
-                    <!-- Row 9: Benchmark Report Title -->
-                    <TextBlock Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" 
+                    <!-- Row 11: Benchmark Report Title -->
+                    <TextBlock Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="6" 
                                Text="Benchmark Report" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                    <!-- Row 10: Hire Date + End Date + Days on Job -->
-                    <c:LabelPair Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Label="Hire Date" 
+                    <!-- Row 12: Hire Date + End Date + Days on Job -->
+                    <c:LabelPair Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Label="Hire Date" 
                                  Value="{x:Bind ViewModel.Selected.FormattedHireDate, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" Label="End Date" 
+                    <c:LabelPair Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" Label="End Date" 
                                  Value="{x:Bind ViewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="10" Grid.Column="4" Grid.ColumnSpan="2" Label="Days on Job" 
+                    <c:LabelPair Grid.Row="12" Grid.Column="4" Grid.ColumnSpan="2" Label="Days on Job" 
                                  Value="{x:Bind ViewModel.Selected.DaysOnJob, Mode=OneWay}"/>
 
-                    <!-- Row 11 & 12: Days 1 - 5 -->
-                    <c:LabelPair Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Label="Day 1" 
+                    <!-- Row 13 & 14: Days 1- 5 -->
+                    <c:LabelPair Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" Label="Day 1" 
                                  Value="{x:Bind ViewModel.Selected.Day1, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Label="Day 2" 
+                    <c:LabelPair Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" Label="Day 2" 
                                  Value="{x:Bind ViewModel.Selected.Day2, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="11" Grid.Column="4" Grid.ColumnSpan="2" Label="Day 3" 
+                    <c:LabelPair Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2" Label="Day 3" 
                                  Value="{x:Bind ViewModel.Selected.Day3, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Label="Day 4" 
+                    <c:LabelPair Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Label="Day 4" 
                                  Value="{x:Bind ViewModel.Selected.Day4, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" Label="Day 5" 
+                    <c:LabelPair Grid.Row="14" Grid.Column="2" Grid.ColumnSpan="2" Label="Day 5" 
                                  Value="{x:Bind ViewModel.Selected.Day5, Mode=OneWay}"/>
                     
-                    <!-- Row 13: Work Schedule -->
-                    <c:LabelPair Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="6" Label="Description of Work Schedule" 
+                    <!-- Row 15: Work Schedule -->
+                    <c:LabelPair Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="6" Label="Description of Work Schedule" 
                                  Value="{x:Bind ViewModel.Selected.WorkSchedule, Mode=OneWay}"/>
                     
-                    <!-- Row 14: Wages -->
-                    <c:LabelPair Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Label="Wages" 
+                    <!-- Row 16: Wages -->
+                    <c:LabelPair Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2" Label="Wages" 
                                  Value="{x:Bind ViewModel.Selected.Wages, Mode=OneWay}"/>
                     
                 </Grid>

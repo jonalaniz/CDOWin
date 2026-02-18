@@ -238,6 +238,12 @@ public sealed partial class CreatePlacements : Page {
             case UpdateField.WorkSchedule:
                 ViewModel.WorkSchedule = text;
                 break;
+            case UpdateField.WorkEnvironment:
+                ViewModel.WorkEnvironment = text;
+                break;
+            case UpdateField.Accommodations:
+                ViewModel.Accommodations = text;
+                break;
         }
     }
 

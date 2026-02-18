@@ -14,6 +14,8 @@ public enum UpdateField {
     Day4,
     Day5,
     JobDuties,
+    WorkEnvironment,
+    Accommodations,
     HoursWorking,
     WorkSchedule,
     Wage,

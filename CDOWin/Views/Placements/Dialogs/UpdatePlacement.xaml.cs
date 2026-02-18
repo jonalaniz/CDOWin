@@ -248,6 +248,12 @@ public sealed partial class UpdatePlacement : Page {
             case UpdateField.WorkSchedule:
                 ViewModel.Updated.WorkSchedule = text;
                 break;
+            case UpdateField.WorkEnvironment:
+                ViewModel.Updated.WorkEnvironment = text;
+                break;
+            case UpdateField.Accommodations:
+                ViewModel.Updated.Accommodations = text;
+                break;
         }
     }
 

@@ -44,6 +44,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -217,6 +219,18 @@
                              MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
                              TextChanged="TextBox_TextChanged" Text="{x:Bind ViewModel.Original.WorkSchedule}"
                              Tag="{x:Bind local:UpdateField.WorkSchedule}"/>
+
+                    <!-- Row 8: Work Environment -->
+                    <TextBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Header="Description of Work Environment"
+                             MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
+                             TextChanged="TextBox_TextChanged" Text="{x:Bind ViewModel.Original.WorkEnvironment}"
+                             Tag="{x:Bind local:UpdateField.WorkEnvironment}"/>
+
+                    <!-- Row 9: Accommodations -->
+                    <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Header="Accommodations"
+                             MaxLength="255" Style="{StaticResource MultiLineTextBoxStyle}" 
+                             TextChanged="TextBox_TextChanged" Text="{x:Bind ViewModel.Original.Accommodations}"
+                             Tag="{x:Bind local:UpdateField.Accommodations}"/>
                 </Grid>
             </ScrollViewer>
         </Border>

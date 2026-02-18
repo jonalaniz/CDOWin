@@ -32,6 +32,8 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public string? Day4 { get; set; }
     public string? Day5 { get; set; }
     public string? JobDuties { get; set; }
+    public string? WorkEnvironment { get; set; }
+    public string? Accommodations { get; set; }
     public string? HoursWorking { get; set; }
     public string? WorkSchedule { get; set; }
     public string? Wages { get; set; }
@@ -120,6 +122,8 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             Day4 = Day4,
             Day5 = Day5,
             JobDuties = JobDuties,
+            WorkEnvironment = WorkEnvironment,
+            Accommodations = Accommodations,
             HoursWorking = HoursWorking,
             WorkSchedule = WorkSchedule,
             Wages = Wages,

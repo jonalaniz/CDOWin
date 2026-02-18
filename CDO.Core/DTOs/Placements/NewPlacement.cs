@@ -14,6 +14,8 @@ public class NewPlacement {
     public string? Day4 { get; init; }
     public string? Day5 { get; init; }
     public string? JobDuties { get; init; }
+    public string? WorkEnvironment { get; init; }
+    public string? Accommodations { get; init; }
     public string? HoursWorking { get; init; }
     public string? WorkSchedule { get; init; }
     public string? Wages { get; init; }

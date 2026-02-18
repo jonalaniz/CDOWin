@@ -17,6 +17,8 @@ public record class PlacementDetail(
     string? Day4,
     string? Day5,
     string? JobDuties,
+    string? WorkEnvironment,
+    string? Accommodations,
     string? HoursWorking,
     string? WorkSchedule,
     string? Wages,

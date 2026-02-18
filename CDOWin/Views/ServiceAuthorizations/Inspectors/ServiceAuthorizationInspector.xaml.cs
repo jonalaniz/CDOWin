@@ -27,7 +27,7 @@ public sealed partial class ServiceAuthorizationInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.SelectedSummary == null) return;
+        if (ViewModel == null || ViewModel.SelectedSummary == null || ViewModel.Selected == null) return;
 
         var updateVM = new ServiceAuthorizationUpdateViewModel(ViewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Service Authorization");

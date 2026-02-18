@@ -89,7 +89,7 @@ public record class ClientDetail(
             if (Address1 == null && Address2 == null)
                 return "No street address on file.";
             else if (Address2 == null) {
-                return Address1;
+                return Address1 ?? "No street address on file.";
             } else {
                 return $"{Address1} {Address2}";
             }

@@ -82,7 +82,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<ClientSummary>> GetClientsAsync(bool force = false) {
         if (force || Clients.IsStale(ClientTTL)) {
             var data = await _clients.GetAllClientSummariesAsync();
-            if(data != null) Clients.Update(data);
+            if (data != null) Clients.Update(data);
         }
 
         return Clients.Data ?? [];
@@ -91,7 +91,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<CounselorSummary>> GetCounselorsAsync(bool force = false) {
         if (force || Counselors.IsStale(CounselorTTL)) {
             var data = await _counselors.GetAllCounselorSummariesAsync();
-            if(data != null) Counselors.Update(data);
+            if (data != null) Counselors.Update(data);
         }
 
         return Counselors.Data ?? [];
@@ -100,7 +100,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<EmployerSummary>> GetEmployerSummariesAsync(bool force = false) {
         if (force || Employers.IsStale(EmployerTTL)) {
             var data = await _employers.GetAllEmployerSummariesAsync();
-            if(data != null) Employers.Update(data);
+            if (data != null) Employers.Update(data);
         }
 
         return Employers.Data ?? [];
@@ -109,7 +109,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<PlacementSummary>> GetPlacementSummariesAsync(bool force = false) {
         if (force || Placements.IsStale(PlacementTTL)) {
             var data = await _placements.GetAllPlacementSummariesAsync();
-            if(data != null) Placements.Update(data);
+            if (data != null) Placements.Update(data);
         }
 
         return Placements.Data ?? [];
@@ -118,7 +118,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<Reminder>> GetRemindersAsync(bool force = false) {
         if (force || Reminders.IsStale(ReminderTTL)) {
             var data = await _reminders.GetAllRemindersAsync();
-            if(data != null) Reminders.Update(data);
+            if (data != null) Reminders.Update(data);
         }
 
         return Reminders.Data ?? [];
@@ -127,7 +127,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<InvoiceSummary>> GetSAsAsync(bool force = false) {
         if (force || SAs.IsStale(SATTL)) {
             var data = await _sas.GetAllServiceAuthorizationsAsync();
-            if(data != null) SAs.Update(data);
+            if (data != null) SAs.Update(data);
         }
 
         return SAs.Data ?? [];
@@ -136,7 +136,7 @@ public class DataCoordinator {
     public async Task<IReadOnlyList<State>> GetStatesAsync(bool force = false) {
         if (force || States.IsStale(StateTTL)) {
             var data = await _states.GetAllStatesAsync();
-            if(data != null) States.Update(data);
+            if (data != null) States.Update(data);
         }
 
         return States.Data ?? [];

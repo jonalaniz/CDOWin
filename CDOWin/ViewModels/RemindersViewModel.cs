@@ -160,7 +160,7 @@ public partial class RemindersViewModel : ObservableObject {
     public async Task<Result> UpdateReminderAsync(int id, ReminderUpdate update) {
         var result = await _service.UpdateReminderAsync(id, update);
 
-        if (!result.IsSuccess) { await ReloadReminderAsync(id); }
+        if (result.IsSuccess) await ReloadReminderAsync(id);
         return result;
     }
 

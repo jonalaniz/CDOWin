@@ -266,7 +266,7 @@ public sealed partial class UpdatePlacement : Page {
         ViewModel.Updated.City = employer.City;
         ViewModel.Updated.State = employer.State;
         ViewModel.Updated.Zip = employer.Zip;
-        ViewModel.Updated.SupervisorName = employer.Supervisor;
+        ViewModel.Updated.SupervisorName = employer.SupervisorName;
         ViewModel.Updated.SupervisorPhone = employer.SupervisorPhone;
         ViewModel.Updated.SupervisorEmail = employer.SupervisorEmail;
         ViewModel.Updated.Website = employer.Website;
@@ -276,7 +276,7 @@ public sealed partial class UpdatePlacement : Page {
         Address2TextBox.Text = employer.Address2;
         CityTextBox.Text = employer.City;
         ZipTextBox.Text = employer.Zip;
-        SupervisorTextBox.Text = employer.Supervisor;
+        SupervisorTextBox.Text = employer.SupervisorName;
         SPhoneBox.Text = employer.SupervisorPhone;
         SEmailBox.Text = employer.SupervisorEmail;
         WebsiteTextBox.Text = employer.Website;

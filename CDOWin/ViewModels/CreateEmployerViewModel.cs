@@ -5,6 +5,7 @@ using CDO.Core.Models;
 using CDOWin.Views.Employers.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
 
 namespace CDOWin.ViewModels;
 
@@ -25,7 +26,7 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }
     public string? City { get; set; }
-    public string? State { get; set; }
+    public string? State { get; set; } = "TX";
     public string? Zip { get; set; }
     public string? Phone { get; set; }
     public string? Fax { get; set; }
@@ -34,6 +35,7 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
     public string? Supervisor { get; set; }
     public string? SupervisorPhone { get; set; }
     public string? SupervisorEmail { get; set; }
+    public string? Website { get; set; }
 
 
     // =========================
@@ -56,9 +58,10 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
             Fax = Fax,
             Email = Email,
             Notes = Notes,
-            Supervisor = Supervisor,
+            SupervisorName = Supervisor,
             SupervisorPhone = SupervisorPhone,
-            SupervisorEmail = SupervisorEmail
+            SupervisorEmail = SupervisorEmail,
+            Website = Website
         };
 
         return await _service.CreateEmployerAsync(employer);
@@ -96,7 +99,7 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
             case Field.Notes:
                 Notes = value;
                 break;
-            case Field.Supervisor:
+            case Field.SupervisorName:
                 Supervisor = value;
                 break;
             case Field.SupervisorPhone:
@@ -104,6 +107,9 @@ public partial class CreateEmployerViewModel(IEmployerService service) : Observa
                 break;
             case Field.SupervisorEmail:
                 SupervisorEmail = value;
+                break;
+            case Field.Website:
+                Website = value;
                 break;
         }
     }

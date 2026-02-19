@@ -10,8 +10,9 @@ public enum Field {
     Phone,
     Fax,
     Email,
-    Supervisor,
+    SupervisorName,
     SupervisorPhone,
     SupervisorEmail,
-    Notes
+    Notes,
+    Website
 }

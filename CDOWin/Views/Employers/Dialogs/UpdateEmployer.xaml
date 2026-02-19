@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -40,6 +41,7 @@
                  Tag="{x:Bind local:Field.Phone}"
                  TextChanged="LabeledTextBox_TextChanged"
                  MaxLength="50"/>
+        
         <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Header="Fax" 
                  Text="{x:Bind ViewModel.Original.Fax}" 
                  Tag="{x:Bind local:Field.Fax}"
@@ -77,8 +79,8 @@
         
         <!-- Row 4: Supervisor Name & Phone -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="Supervisor" 
-                 Text="{x:Bind ViewModel.Original.Supervisor}" 
-                 Tag="{x:Bind local:Field.Supervisor}"
+                 Text="{x:Bind ViewModel.Original.SupervisorName}" 
+                 Tag="{x:Bind local:Field.SupervisorName}"
                  TextChanged="LabeledTextBox_TextChanged"
                  MaxLength="50"/>
         <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Header="Phone" 
@@ -93,9 +95,16 @@
                  Tag="{x:Bind local:Field.SupervisorEmail}"
                  TextChanged="LabeledTextBox_TextChanged"
                  MaxLength="50"/>
-        
-        <!-- Row 6: Notes -->
-        <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"
+
+        <!-- Row 6: Website -->
+        <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
+                 Text="{x:Bind ViewModel.Original.Website}" 
+                 Tag="{x:Bind local:Field.Website}"
+                 TextChanged="LabeledTextBox_TextChanged"
+                 MaxLength="50"/>
+
+        <!-- Row 7: Notes -->
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"
                  Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Notes" Text="{x:Bind ViewModel.Original.Notes}" 
                  Tag="{x:Bind local:Field.Notes}"

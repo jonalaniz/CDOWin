@@ -39,6 +39,7 @@ public sealed partial class CreateEmployer : Page {
             flyout.Items.Add(item);
         }
 
+        StateDropDownButton.Content = "TX";
         StateDropDownButton.Flyout = flyout;
     }
 

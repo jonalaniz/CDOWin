@@ -99,6 +99,8 @@ public partial class EmployersViewModel : ObservableObject {
         Debug.WriteLine("we up in this hoe");
 
         var selectedEmployer = await _service.GetEmployerAsync(id);
+        Debug.WriteLine("Updated");
+        Debug.WriteLine(selectedEmployer.Email);
         Selected = selectedEmployer;
     }
 
@@ -150,7 +152,7 @@ public partial class EmployersViewModel : ObservableObject {
         var result = _cache.Where(e =>
         (e.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (e.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (e.Supervisor ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+        (e.SupervisorName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
         (e.Notes ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
         );
 

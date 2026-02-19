@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -70,7 +71,7 @@
 
         <!-- Row 4: Supervisor Name & Phone -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
-                 Header="Supervisor" Tag="{x:Bind local:Field.Supervisor}"
+                 Header="Supervisor" Tag="{x:Bind local:Field.SupervisorName}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
         <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
@@ -84,8 +85,14 @@
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
-        <!-- Row 6: Notes -->
+        <!-- Row 6: Supervisor Email -->
         <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"
+                 Header="Website" Tag="{x:Bind local:Field.Website}"
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="50"/>
+
+        <!-- Row 7: Notes -->
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"
                  Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Notes" Tag="{x:Bind local:Field.Notes}"
                  TextChanged="TextBox_TextChanged"/>

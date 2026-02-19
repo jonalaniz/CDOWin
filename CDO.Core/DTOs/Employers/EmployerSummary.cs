@@ -14,7 +14,7 @@ public class EmployerSummary {
     public string? Phone { get; init; }
     public string? Website { get; init; }
     public string? Notes { get; init; }
-    public string? Supervisor { get; init; }
+    public string? SupervisorName { get; init; }
     public string? SupervisorPhone { get; init; }
 
     public string FormattedAddress {
@@ -40,7 +40,7 @@ public class EmployerSummary {
 
     public string? FormattedSupervisor {
         get {
-            var text = $"{Supervisor}\n{SupervisorPhone}";
+            var text = $"{SupervisorName}\n{SupervisorPhone}";
             if (string.IsNullOrWhiteSpace(text)) { return null; }
             return text;
         }

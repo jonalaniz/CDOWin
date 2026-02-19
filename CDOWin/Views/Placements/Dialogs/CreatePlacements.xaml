@@ -79,7 +79,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- Row 0: Autosuggest Box-->
+                            <!-- Row 0: Autosuggest Box + Phone -->
                             <AutoSuggestBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Header="Employer Name"
                                             x:Name="EmployerAutoSuggest" TextChanged="EmployerAutoSuggest_TextChanged"
                                             SuggestionChosen="EmployerAutoSuggest_SuggestionChosen">

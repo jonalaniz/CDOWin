@@ -256,7 +256,7 @@ public sealed partial class CreatePlacements : Page {
         ViewModel.City = employer.City;
         ViewModel.State = employer.State;
         ViewModel.Zip = employer.Zip;
-        ViewModel.SupervisorName = employer.Supervisor;
+        ViewModel.SupervisorName = employer.SupervisorName;
         ViewModel.SupervisorPhone = employer.SupervisorPhone;
         ViewModel.SupervisorEmail = employer.SupervisorEmail;
         ViewModel.Website = employer.Website;
@@ -266,7 +266,7 @@ public sealed partial class CreatePlacements : Page {
         Address2TextBox.Text = employer.Address2;
         CityTextBox.Text = employer.City;
         ZipTextBox.Text = employer.Zip;
-        SupervisorTextBox.Text = employer.Supervisor;
+        SupervisorTextBox.Text = employer.SupervisorName;
         SPhoneBox.Text = employer.SupervisorPhone;
         SEmailBox.Text = employer.SupervisorEmail;
         WebsiteTextBox.Text = employer.Website;

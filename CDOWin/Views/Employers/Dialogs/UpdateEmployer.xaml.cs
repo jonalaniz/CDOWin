@@ -95,9 +95,9 @@ public sealed partial class UpdateEmployer : Page {
                 if (value != ViewModel.Original.Email)
                     ViewModel.Updated.Email = value;
                 break;
-            case Field.Supervisor:
-                if (value != ViewModel.Original.Supervisor)
-                    ViewModel.Updated.Supervisor = value;
+            case Field.SupervisorName:
+                if (value != ViewModel.Original.SupervisorName)
+                    ViewModel.Updated.SupervisorName = value;
                 break;
             case Field.SupervisorPhone:
                 if (value != ViewModel.Original.SupervisorPhone)
@@ -110,6 +110,10 @@ public sealed partial class UpdateEmployer : Page {
             case Field.Notes:
                 if (value != ViewModel.Original.Notes)
                     ViewModel.Updated.Notes = value;
+                break;
+            case Field.Website:
+                if(value !=  ViewModel.Original.Website)
+                    ViewModel.Updated.Website = value;
                 break;
         }
     }

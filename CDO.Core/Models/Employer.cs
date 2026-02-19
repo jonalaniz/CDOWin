@@ -13,14 +13,14 @@ public record class Employer(
     string? Email,
     string? Website,
     string? Notes,
-    string? Supervisor,
+    string? SupervisorName,
     string? SupervisorPhone,
     string? SupervisorEmail
     ) {
 
     public string? FormattedSuperviror {
         get {
-            var text = $"{Supervisor}\n{SupervisorPhone}\n{SupervisorEmail}";
+            var text = $"{SupervisorName}\n{SupervisorPhone}\n{SupervisorEmail}";
             if (string.IsNullOrWhiteSpace(text)) { return null; }
             return text;
         }

@@ -96,11 +96,7 @@ public partial class EmployersViewModel : ObservableObject {
 
     public async Task LoadSelectedEmployerAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
-        Debug.WriteLine("we up in this hoe");
-
         var selectedEmployer = await _service.GetEmployerAsync(id);
-        Debug.WriteLine("Updated");
-        Debug.WriteLine(selectedEmployer.Email);
         Selected = selectedEmployer;
     }
 

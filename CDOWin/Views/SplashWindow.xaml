@@ -31,14 +31,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="74"/>
+                <RowDefinition Height="84"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="1" Margin="8,8,8,2"
-                       Foreground="White"
+            <TextBlock Grid.Row="1" Margin="170,8,8,2"
+                       Foreground="{ThemeResource SystemAccentColor}"
                        Opacity="0.8"
-                       HorizontalAlignment="Center"
+                       HorizontalAlignment="Left"
                        FontWeight="SemiBold" 
-                       FontSize="18"
+                       FontSize="24"
                        x:Name="VersionBlock"/>
             <ProgressBar Grid.Row="2" VerticalAlignment="Bottom"
                          Foreground="{ThemeResource SystemAccentColorLight1}"

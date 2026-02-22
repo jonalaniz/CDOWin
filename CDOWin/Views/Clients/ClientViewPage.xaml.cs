@@ -228,7 +228,6 @@ public sealed partial class ClientViewPage : Page {
 
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
         if (sender is Control button && button.Tag is ClientEditType tag && ViewModel.Selected != null) {
-            Debug.WriteLine("Pressed");
             var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "");
             var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
 

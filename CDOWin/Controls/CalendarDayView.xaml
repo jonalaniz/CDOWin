@@ -20,7 +20,8 @@
                         <DataTemplate x:DataType="models:Reminder">
                             
                             <!-- Button -->
-                            <Button Margin="0,0,0,4" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" 
+                            <Button Margin="0,0,0,4" Padding="8,4"
+                                    HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" 
                                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                     Tag="{x:Bind Id}" Click="Button_Click">
                                 <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
@@ -29,10 +30,10 @@
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{x:Bind ClientName}"/>
+                                    <TextBlock Grid.Column="0" FontSize="13" FontWeight="Bold" Text="{x:Bind ClientName}"/>
 
                                     <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               FontWeight="Normal" TextWrapping="WrapWholeWords" 
+                                               FontSize="13" FontWeight="Normal" TextWrapping="WrapWholeWords" 
                                                Text="{x:Bind Description}"/>
                                 </Grid>
                             </Button>

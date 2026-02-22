@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="MonthHeader" Margin="8,2,8,0" Style="{StaticResource PageTitleStyle}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="MonthHeader" Margin="8,0,8,0" Style="{StaticResource PageTitleStyle}"/>
             
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
                 <!-- Export Button -->

@@ -16,8 +16,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<div align="center">
+  <img src="/Images/screenshot.png" alt="Logo" width="480">
+</div>
 
 **CDO.Win** is a modern rewrite of a legacy MS Access based application designed to help organizations catalogue clients, track progress, and support workforce training and placement.
 

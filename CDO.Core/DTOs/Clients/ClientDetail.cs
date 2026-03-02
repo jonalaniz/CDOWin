@@ -22,7 +22,7 @@ public record class ClientDetail(
     Reminder[] Reminders,
     InvoiceDetail[]? Invoices,
     PlacementDetail[]? Placements,
-    
+
     DateTime? StartDate,
     string? Ssn,
     string? CaseID,

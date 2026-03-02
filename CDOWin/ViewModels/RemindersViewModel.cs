@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,14 +27,17 @@ public partial class RemindersViewModel : ObservableObject {
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher;
+    private readonly AppSuspensionService _suspensionService;
 
     // =========================
     // Private Backing Fields
     // =========================
     private IReadOnlyList<Reminder> _cache = [];
     private RemindersFilter _filter = RemindersFilter.All;
-    private readonly DispatcherTimer _refreshTimer;
+    private DispatcherTimer _refreshTimer;
     private DateTime _selectedDate = DateTime.Now;
+
+    private bool delaying = false;
 
     // =========================
     // UI State
@@ -59,7 +63,7 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public RemindersViewModel(DataCoordinator dataCoordinator, IReminderService service, ClientSelectionService clientSelectionService) {
+    public RemindersViewModel(DataCoordinator dataCoordinator, IReminderService service, ClientSelectionService clientSelectionService, AppSuspensionService suspensionService) {
         _service = service;
         _dataCoordinator = dataCoordinator;
 
@@ -68,6 +72,10 @@ public partial class RemindersViewModel : ObservableObject {
 
         _selectionService.SelectedClientChanged += OnClientChanged;
         _selectionService.NewReminderCreated += OnReminderCreated;
+
+        _suspensionService = suspensionService;
+        _suspensionService.SuspensionRequested += OnSuspension;
+        _suspensionService.ResumeRequested += OnResumeAsync;
 
         _refreshTimer = new DispatcherTimer {
             Interval = TimeSpan.FromSeconds(30)
@@ -124,6 +132,27 @@ public partial class RemindersViewModel : ObservableObject {
         Filter = RemindersFilter.Date;
         _selectedDate = date;
         ApplyFilter();
+    }
+
+    // =========================
+    // App Lifecycle
+    // =========================
+    private void OnSuspension() => OnUI(StopTimer);
+
+    private void OnResumeAsync() => _ = StartTimerAsync();
+
+    private void StopTimer() => _refreshTimer.Stop();
+
+    private async Task StartTimerAsync() {
+        try {
+            if (delaying) return;
+            delaying = true;
+            await Task.Delay(5000);
+            delaying = false;
+            OnUI(() => _refreshTimer.Start());
+        } catch (Exception ex) {
+            Debug.WriteLine(ex);
+        }
     }
 
     // =========================

@@ -3,6 +3,7 @@ using CDO.Core.Interfaces;
 using CDO.Core.Services;
 using CDOWin.Data;
 using CDOWin.Navigation;
+using CDOWin.Observers;
 using CDOWin.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,10 @@ namespace CDOWin.Services;
 public static class AppServices {
     // Network
     public static INetworkService NetworkService { get; private set; } = null!;
+
+    // Lifecycle
+    private static AppSuspensionService _suspensionService = new();
+    private static readonly PowerStateObserver _powerObserver = new(_suspensionService);
 
     // Navigation
     public static INavigationService Navigation { get; } = new NavigationService();
@@ -102,7 +107,8 @@ public static class AppServices {
         RemindersViewModel = new RemindersViewModel(
             DataCoordinator,
             ReminderService,
-            _clientSelectionService
+            _clientSelectionService,
+            _suspensionService
             );
 
         StatesViewModel = new StatesViewModel(DataCoordinator, StateService);

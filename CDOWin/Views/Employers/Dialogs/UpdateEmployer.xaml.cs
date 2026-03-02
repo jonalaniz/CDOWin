@@ -112,7 +112,7 @@ public sealed partial class UpdateEmployer : Page {
                     ViewModel.Updated.Notes = value;
                 break;
             case Field.Website:
-                if(value !=  ViewModel.Original.Website)
+                if (value != ViewModel.Original.Website)
                     ViewModel.Updated.Website = value;
                 break;
         }

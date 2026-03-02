@@ -5,7 +5,6 @@ using CDO.Core.Models;
 using CDOWin.Views.Employers.Dialogs;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Contacts;
 
 namespace CDOWin.ViewModels;
 

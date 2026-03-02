@@ -66,6 +66,7 @@
                     
                     <!-- Row 3: Address -->
                     <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="Address"
+                             Tag="{x:Bind local:PersonalField.Address1}"
                              TextChanged="PTextBox_TextChanged"
                              MaxLength="50"/>
                     <TextBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc" 

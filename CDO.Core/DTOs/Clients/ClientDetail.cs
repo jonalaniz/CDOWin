@@ -159,6 +159,10 @@ public record class ClientDetail(
             Phone = Phone1,
             Phone2 = Phone2,
             Phone3 = Phone3,
+            Email = Email,
+            EmailDescription = EmailIdentity,
+            Email2 = Email2,
+            EmailDescription2 = Email2Identity,
             EmploymentGoal = EmploymentGoal,
             ServiceAuthorizations = Invoices?.Select(i => i.AsExport()).ToArray()
         };

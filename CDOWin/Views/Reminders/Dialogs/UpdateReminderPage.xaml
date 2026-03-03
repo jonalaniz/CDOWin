@@ -19,32 +19,33 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Row 0: Date + Defers -->
+        <!-- Row 0: Date + Status -->
         <CalendarDatePicker Grid.Row="0" Grid.Column="0" x:Name="DatePicker" 
                             Header="Date" HorizontalAlignment="Stretch"
                             DateChanged="DatePicker_DateChanged"/>
-        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Spacing="8">
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="8">
+            <TextBlock Text="Status"/>
+            <CheckBox VerticalAlignment="Bottom" Content="Mark Completed" 
+                      IsChecked="{x:Bind ViewModel.Original.Complete}" Click="Checkbox_Clicked"/>
+        </StackPanel>
+        
+        <!-- Row 1: Defer Times -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Spacing="8">
             <TextBlock Text="Defer"/>
             <StackPanel Spacing="16" Orientation="Horizontal">
                 <Button Content="1 Day" Click="Button_Click" Tag="1"/>
                 <Button Content="1 Week" Click="Button_Click" Tag="7"/>
-                <Button Content="45th Day" Click="Button_Click" Tag="44"/>
-                <Button Content="90th Day" Click="Button_Click" Tag="89"/>
+                <Button Content="28 Days" Click="Button_Click" Tag="27"/>
+                <Button Content="45 Days" Click="Button_Click" Tag="44"/>
+                <Button Content="90 Days" Click="Button_Click" Tag="89"/>
             </StackPanel>
         </StackPanel>
 
-
-        <!-- Row 1: Checkbox -->
-        <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
-                  VerticalAlignment="Bottom" Content="Mark Completed" 
-                  IsChecked="{x:Bind ViewModel.Original.Complete}" Click="Checkbox_Clicked"/>
-
-
-        <!-- Row 2: Description -->
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Description" 
+        <!-- Row 3: Description -->
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Description" 
                  Text="{x:Bind ViewModel.Original.Description}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="250"/>

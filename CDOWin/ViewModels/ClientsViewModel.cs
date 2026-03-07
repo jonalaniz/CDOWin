@@ -148,7 +148,7 @@ public partial class ClientsViewModel : ObservableObject {
                 _clientComposer.ComposeClientToFile(Selected);
             });
 
-            UpdateSummaries();
+            OnUI(() => UpdateSummaries());
         }
         return result;
     }
@@ -204,10 +204,18 @@ public partial class ClientsViewModel : ObservableObject {
 
     private void UpdateSummaries() {
         if (Selected == null) return;
+
+        // Update cache
         _cache = _cache
             .Select(c => c.Id == Selected.Id ? Selected.AsSummary() : c)
             .ToList();
-        ApplyFilter();
+
+        // Update filtered list
+        if(Filtered.FirstOrDefault(c => c.Id == Selected.Id) is ClientSummary client) {
+            var i = Filtered.IndexOf(client);
+            Filtered[i] = Selected.AsSummary();
+            SelectedSummary = Filtered[i];
+        }
     }
 
     private void OnUI(Action action) {

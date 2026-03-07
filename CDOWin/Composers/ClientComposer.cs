@@ -10,13 +10,20 @@ public sealed class ClientComposer {
     private readonly Serializer _serializer = new();
 
     public Result ComposeClientToFile(ClientDetail client) {
-        if (client.DocumentsFolderPath == null)
+        // Check and create path
+        if (client.DocumentsFolderPath is not string path)
             return Result.Fail(new AppError(ErrorKind.Unknown, "Missing file path.", null));
 
+        if (!Directory.Exists(client.DocumentsFolderPath))
+            return Result.Fail(new AppError(ErrorKind.Unknown, "File path does not exist", null));
+
+        var filePath = Path.Combine(path, "Client.txt");
+
+        // Export
         var clientExport = client.AsExport();
         var yaml = _serializer.Serialize(clientExport);
-        var filePath = Path.Combine(client.DocumentsFolderPath, "Client.txt");
-
+        
+        // Write to disk
         try {
             File.WriteAllText(filePath, yaml, Encoding.UTF8);
         } catch {

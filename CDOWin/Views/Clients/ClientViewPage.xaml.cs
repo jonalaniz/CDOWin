@@ -30,6 +30,7 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     public ClientViewPage() {
         InitializeComponent();
+         
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e) {
@@ -129,7 +130,7 @@ public sealed partial class ClientViewPage : Page {
 
     private async void SA_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) { return; }
-        var invoice = ViewModel.Selected?.Invoices?.FirstOrDefault(i => i.Id == id);
+        var invoice = ViewModel.Selected?.Sas?.FirstOrDefault(i => i.Id == id);
 
         if (invoice == null) { return; }
         var updateSAVM = new ServiceAuthorizationUpdateViewModel(invoice);

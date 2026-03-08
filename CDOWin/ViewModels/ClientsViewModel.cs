@@ -96,8 +96,8 @@ public partial class ClientsViewModel : ObservableObject {
         _selectionService.SelectedClient = value;
 
         // Setup Placements/SAs
-        if (value.Invoices is not null)
-            SetupSAs(value.Invoices);
+        if (value.Sas is not null)
+            SetupSAs(value.Sas);
 
         if (value.Placements is not null)
             SetupPlacements(value.Placements);

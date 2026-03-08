@@ -41,8 +41,8 @@ public sealed partial class CreatePlacements : Page {
     private void BuildDropDown() {
         var flyout = new MenuFlyout();
 
-        if (ViewModel.Client.Invoices == null) return;
-        foreach (var sa in ViewModel.Client.Invoices) {
+        if (ViewModel.Client.Sas == null) return;
+        foreach (var sa in ViewModel.Client.Sas) {
             var item = new MenuFlyoutItem {
                 Text = sa.Description,
                 Tag = sa

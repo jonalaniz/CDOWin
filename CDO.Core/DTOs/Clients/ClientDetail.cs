@@ -12,7 +12,7 @@ public record class ClientDetail(
     string FirstName,
     string LastName,
     bool Active,
-
+    int? CounselorID,
     bool TTW,
 
     // Parent Object
@@ -20,7 +20,7 @@ public record class ClientDetail(
 
     // Child Objects
     Reminder[] Reminders,
-    SADetail[]? Invoices,
+    SADetail[]? Sas,
     PlacementDetail[]? Placements,
 
     DateTime? StartDate,
@@ -44,7 +44,6 @@ public record class ClientDetail(
     string? Email2,
     string? Email2Identity,
     string Disability,
-    int? CounselorID,
     string? ClientNotes,
     string? Conditions,
     string? DocumentFolder,
@@ -164,7 +163,7 @@ public record class ClientDetail(
             Email2 = Email2,
             EmailDescription2 = Email2Identity,
             EmploymentGoal = EmploymentGoal,
-            ServiceAuthorizations = Invoices?.Select(i => i.AsExport()).ToArray()
+            ServiceAuthorizations = Sas?.Select(i => i.AsExport()).ToArray()
         };
     }
 }

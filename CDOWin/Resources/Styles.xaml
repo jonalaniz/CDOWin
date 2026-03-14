@@ -148,7 +148,7 @@
         <Setter Property="LargeChange" Value="1"/>
     </Style>
     
-    <!-- CommanBarDefaultStyle -->
+    <!-- CommandBarDefaultStyle -->
     <Style x:Key="CommandBarDefaultStyle" TargetType="CommandBar">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="DefaultLabelPosition" Value="Collapsed"/>

@@ -13,7 +13,6 @@
         <TextBlock Text="{x:Bind Label, Mode=OneWay}" 
                    Style="{StaticResource LabelTextBlockStyle}"/>
         <TextBlock Text="{x:Bind Value, Mode=OneWay}"
-                   Style="{StaticResource ValueTextBlockStyle}"
-                   IsTextSelectionEnabled="{x:Bind IsValueSelectable, Mode=TwoWay}"/>
+                   Style="{StaticResource ValueTextBlockStyle}"/>
     </StackPanel>
 </UserControl>

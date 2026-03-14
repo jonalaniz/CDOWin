@@ -30,18 +30,6 @@ public sealed partial class LabelPair : UserControl {
             typeof(LabelPair),
             new PropertyMetadata("", OnValueChanged));
 
-    public bool IsValueSelectable {
-        get => (bool)GetValue(IsValueSelectableProperty);
-        set => SetValue(IsValueSelectableProperty, value);
-    }
-
-    public static readonly DependencyProperty IsValueSelectableProperty =
-        DependencyProperty.Register(
-            nameof(IsValueSelectable),
-            typeof(bool),
-            typeof(LabelPair),
-            new PropertyMetadata(false));
-
     public LabelPair() {
         InitializeComponent();
     }

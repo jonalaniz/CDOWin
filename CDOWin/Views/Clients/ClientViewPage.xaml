@@ -139,15 +139,14 @@
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
                                     Visibility="{x:Bind ViewModel.Selected.FormattedAddress, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Address"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.FormattedStreetAddress, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.FormattedCityStateZip, Mode=OneWay}"/>
                         </StackPanel>
 
                         <!-- Education Section -->
                         <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Label="Education"
-                                     IsValueSelectable="True"
                                      Value="{x:Bind ViewModel.Selected.Education, Mode=OneWay}"/>
                     </Grid>
                 </Grid>
@@ -285,11 +284,11 @@
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
                                     Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
                         </StackPanel>
 
@@ -297,9 +296,9 @@
                         <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
                                     Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                             <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryName, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" IsTextSelectionEnabled="True"
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryEmail, Mode=OneWay}"/>
                         </StackPanel>
                     </Grid>
@@ -333,10 +332,10 @@
                         </Grid>
 
                         <!-- Start Date/Case ID/Status Section -->
-                        <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Employment Goals" IsValueSelectable="True"
+                        <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Employment Goals"
                                      Value="{x:Bind ViewModel.Selected.EmploymentGoal, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="0" Label="Conditions" IsValueSelectable="True"
+                        <c:LabelPair Grid.Row="2" Grid.Column="0" Label="Conditions"
                                       Value="{x:Bind ViewModel.Selected.Conditions, Mode=OneWay}"/>
                     </Grid>
                 </Grid>

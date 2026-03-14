@@ -168,7 +168,7 @@
                              Tag="{x:Bind local:UpdateField.Position}"/>
                     <TextBox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Header="Hours Working"
                              MaxLength="255" TextChanged="TextBox_TextChanged" Tag="{x:Bind local:UpdateField.HoursWorking}"/>
-                    <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Hourly or Monthly Wage"
+                    <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Wage"
                              MaxLength="255" TextChanged="TextBox_TextChanged"
                              Tag="{x:Bind local:UpdateField.Wage}"/>
 

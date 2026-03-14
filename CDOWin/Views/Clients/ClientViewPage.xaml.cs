@@ -30,7 +30,7 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     public ClientViewPage() {
         InitializeComponent();
-         
+
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e) {

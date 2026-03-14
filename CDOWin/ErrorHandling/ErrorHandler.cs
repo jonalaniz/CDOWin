@@ -6,7 +6,7 @@ using System;
 namespace CDOWin.ErrorHandling;
 
 public sealed class ErrorHandler {
-    static public async void Handle(Result result, XamlRoot xamlRoot) {
+    public static async void Handle(Result result, XamlRoot xamlRoot) {
         if (result.Error is not AppError error) return;
 
         var message = error.Exception == null

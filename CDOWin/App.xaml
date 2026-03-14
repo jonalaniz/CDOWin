@@ -35,6 +35,7 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="/Resources/Styles.xaml"/>
                 <ResourceDictionary Source="/Resources/Grids.xaml"/>
+                <ResourceDictionary Source="/Resources/Dialogs.xaml"/>
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->

@@ -35,23 +35,31 @@
             </Grid.ColumnDefinitions>
 
             <!-- Title -->
-            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                       Text="Placements"/>
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Placements"
+                       Style="{StaticResource PageTitleStyle}"/>
 
             <!-- CommandBar -->
-            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarToggleButton Width="56" IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" ToolTipService.ToolTip="Filter SAs">
-                    <FontIcon Glyph="&#xE71C;" Foreground="{x:Bind ViewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"/>
+            <CommandBar Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarToggleButton Width="56"
+                                    IsCompact="False"
+                                    ToolTipService.ToolTip="Filter SAs"
+                                    IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}">
+                    <FontIcon Foreground="{x:Bind ViewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"
+                              Glyph="&#xE71C;"/>
                 </AppBarToggleButton>
             </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" PlaceholderText="Filter Placements"
+                     Margin="8,0,8,8" 
+                     PlaceholderText="Filter Placements"
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Placements Table -->
-            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView"
+            <ListView x:Name="ListView"
+                      Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
@@ -76,14 +84,30 @@
                             <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Client" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="Employer" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" Text="Counselor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="SA Number" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" Text="Supervisor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" Text="Position" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" Text="Wage" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="7" Text="Hire Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" 
+                                   Text="Client" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" 
+                                   Text="Employer" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" 
+                                   Text="Counselor" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" 
+                                   Text="SA Number" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" 
+                                   Text="Supervisor" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" 
+                                   Text="Position" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" 
+                                   Text="Wage" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="7" 
+                                   Text="Hire Date" 
+                                   FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -102,17 +126,19 @@
                                 <ColumnDefinition Width="80"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Jump Buttons-->
+                            <!-- Jump Buttons -->
                             <Grid Grid.Column="0" Margin="0,0,12,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <TextBlock Grid.Column="0" Text="{x:Bind ClientName}"  TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                <TextBlock Grid.Column="0" Text="{x:Bind ClientName}" 
+                                           TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" 
                                         IsEnabled="{x:Bind ClientID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="GoToClient_Click" Tag="{x:Bind ClientID}">
+                                        Style="{StaticResource AccentButtonStyle}" Tag="{x:Bind ClientID}"
+                                        Click="GoToClient_Click">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
@@ -123,10 +149,13 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <TextBlock Grid.Column="0" Text="{x:Bind EmployerName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                <TextBlock Grid.Column="0" 
+                                           Text="{x:Bind EmployerName}" 
+                                           TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1"
                                         IsEnabled="{x:Bind EmployerID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="GoToEmployer_Click" Tag="{x:Bind EmployerID}">
+                                        Style="{StaticResource AccentButtonStyle}" Tag="{x:Bind EmployerID}"
+                                        Click="GoToEmployer_Click">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
@@ -137,20 +166,33 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <TextBlock Grid.Column="0" Text="{x:Bind CounselorName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                <TextBlock Grid.Column="0" 
+                                           Text="{x:Bind CounselorName}" 
+                                           TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" 
                                         IsEnabled="{x:Bind CounselorID, Converter={StaticResource NullToBoolConverter}}"
-                                        Click="GoToCounselor_Click" Tag="{x:Bind CounselorID}">
+                                        Style="{StaticResource AccentButtonStyle}" Tag="{x:Bind CounselorID}"
+                                        Click="GoToCounselor_Click">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
 
                             <!-- Fields -->
-                            <TextBlock Grid.Column="3" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind FormattedSupervisor}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="5" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="6" Text="{x:Bind Wages}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="7" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="3" 
+                                       Text="{x:Bind SaNumber}" 
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="4" 
+                                       Text="{x:Bind FormattedSupervisor}" 
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="5" 
+                                       Text="{x:Bind Position}" 
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="6" 
+                                       Text="{x:Bind Wages}" 
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="7" 
+                                       Text="{x:Bind FormattedHireDate}" 
+                                       TextTrimming="CharacterEllipsis"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -167,6 +209,8 @@
         </Grid>
 
         <!-- Right Column -->
-        <Frame Grid.Column="1" x:Name="InspectorFrame" IsNavigationStackEnabled="False"/>
+        <Frame x:Name="InspectorFrame"
+               Grid.Column="1"
+               IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

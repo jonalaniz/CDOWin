@@ -115,7 +115,7 @@
                                         <!-- Section 2: Delete -->
                                         <MenuFlyoutItem Text="Delete..." Click="Delete_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
-                                                <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                                <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
                                     </MenuFlyout>

@@ -112,7 +112,7 @@
                         <MenuFlyout Placement="BottomEdgeAlignedLeft">
                             <MenuFlyoutItem Text="Delete..." Click="Delete_MenuFlyoutItem_Click">
                                 <MenuFlyoutItem.Icon>
-                                    <SymbolIcon Symbol="Delete" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                    <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                         </MenuFlyout>

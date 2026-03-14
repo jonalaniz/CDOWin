@@ -153,4 +153,10 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="DefaultLabelPosition" Value="Collapsed"/>
     </Style>
+    
+    <!-- DeleteSymbolIcon -->
+    <Style x:Key="DeleteSymbolIcon" TargetType="SymbolIcon">
+        <Setter Property="Symbol" Value="Delete"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
+    </Style>
 </ResourceDictionary>

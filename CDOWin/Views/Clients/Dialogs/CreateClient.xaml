@@ -82,7 +82,7 @@
                     <StackPanel Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
                         <TextBlock Text="State"/>
                         <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind ViewModel.State}"
-                                        HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+                                        Style="{StaticResource DropDownButtonStyle}"/>
                     </StackPanel>
                     <NumberBox Grid.Row="4" Grid.Column="5" Header="Zip"
                                Tag="{x:Bind local:PersonalField.Zip}"
@@ -192,13 +192,13 @@
                              MaxLength="20"/>
                     <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
                         <TextBlock Text="Tier"/>
-                        <DropDownButton x:Name="StatusDropDown"  HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+                        <DropDownButton x:Name="StatusDropDown"  Style="{StaticResource DropDownButtonStyle}"/>
                     </StackPanel>
 
                     <!-- Row 1: Benefits/Premiums -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="8">
                         <TextBlock Text="Benefits"/>
-                        <DropDownButton x:Name="BenefitDropDown" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+                        <DropDownButton x:Name="BenefitDropDown" Style="{StaticResource DropDownButtonStyle}"/>
                     </StackPanel>
                     <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
                              Tag="{x:Bind local:CaseField.Premiums}" TextChanged="TextBox_TextChanged"

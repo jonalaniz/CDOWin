@@ -159,4 +159,10 @@
         <Setter Property="Symbol" Value="Delete"/>
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
     </Style>
+    
+    <!-- DropDownButtonStyle -->
+    <Style x:Key="DropDownButtonStyle" TargetType="DropDownButton">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
 </ResourceDictionary>

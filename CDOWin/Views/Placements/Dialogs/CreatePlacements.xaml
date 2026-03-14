@@ -37,7 +37,7 @@
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                 Style="{StaticResource DialogBorderWithDividerStyle}">
             <ScrollViewer Style="{StaticResource DialogScrollViewerStyle}">
-                <Grid RowSpacing="12" ColumnSpacing="16">
+                <Grid Style="{StaticResource DialogScrollViewerInnerGridStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -128,7 +128,7 @@
                                         Spacing="8">
                                 <TextBlock Text="State"/>
                                 <DropDownButton x:Name="StateDropDownButton"
-                                                HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+                                                Style="{StaticResource DropDownButtonStyle}"/>
                             </StackPanel>
                             <TextBox x:Name="ZipTextBox"
                                      Grid.Row="2" Grid.Column="5" 
@@ -174,7 +174,7 @@
                                 Spacing="8">
                         <TextBlock Text="Service Authorization"/>
                         <DropDownButton x:Name="SANumberDropDownButton"
-                                        HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"
+                                        Style="{StaticResource DropDownButtonStyle}"
                                         Content="Select an SA"/>
                     </StackPanel>
                     <CalendarDatePicker x:Name="HireDatePicker"

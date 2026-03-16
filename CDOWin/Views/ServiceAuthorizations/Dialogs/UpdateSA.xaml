@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Width="480" RowSpacing="12" ColumnSpacing="16">
+    <Grid Style="{StaticResource DialogRootGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -27,60 +27,74 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0: Office Address -->
-        <AutoSuggestBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Header="Office Address"
-                        Text="{x:Bind ViewModel.Original.Office}"
-                        x:Name="OfficeSuggestBox" TextChanged="OfficeSuggestBox_TextChanged"
+        <AutoSuggestBox x:Name="OfficeSuggestBox"
+                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" 
+                        Header="Office Address" Text="{x:Bind ViewModel.Original.Office}"
+                        TextChanged="OfficeSuggestBox_TextChanged"
                         QuerySubmitted="OfficeSuggestBox_QuerySubmitted"
                         SuggestionChosen="OfficeSuggestBox_SuggestionChosen"/>
         
         <!-- Row 1: Counselor Data -->
-        <Expander Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="Counselor Information"
-                  IsExpanded="False" HorizontalAlignment="Stretch">
-            <Grid Width="454" RowSpacing="10" ColumnSpacing="12" HorizontalAlignment="Stretch">
+        <Expander Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" 
+                  Header="Counselor Information"
+                  Style="{StaticResource DialogExpanderStyle}">
+            <Grid Style="{StaticResource ExpanderRootGridStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <!-- Row 0: Counselor Name -->
-                <TextBox Grid.Row="0" Grid.Column="0" Header="Counselor Name"
-                         Text="{x:Bind ViewModel.Original.CounselorName}"
-                         TextChanged="TextChanged" Tag="{x:Bind local:Field.CounselorName}"/>
+                <TextBox Grid.Row="0"
+                         Header="Counselor Name" Text="{x:Bind ViewModel.Original.CounselorName}"
+                         Tag="{x:Bind local:Field.CounselorName}"
+                         TextChanged="TextChanged"/>
 
                 <!-- Row 1: Secretary Name -->
-                <TextBox Grid.Row="1" Grid.Column="0" Header="Secretary Name"
-                         Text="{x:Bind ViewModel.Original.SecretaryName}"
-                         TextChanged="TextChanged" Tag="{x:Bind local:Field.SecretaryName}"/>
-
+                <TextBox Grid.Row="1"
+                         Header="Secretary Name" Text="{x:Bind ViewModel.Original.SecretaryName}"
+                         Tag="{x:Bind local:Field.SecretaryName}"
+                         TextChanged="TextChanged"/>
             </Grid>
-
         </Expander>
 
         <!-- Row 2: SA Number + Start Date + End Date -->
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="SA Number"
-                 Text="{x:Bind ViewModel.Original.ServiceAuthorizationNumber}"
-                 TextChanged="TextChanged" Tag="{x:Bind local:Field.SaNumber}"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                 Header="SA Number" Text="{x:Bind ViewModel.Original.ServiceAuthorizationNumber}"
+                 MaxLength="15"
+                 Tag="{x:Bind local:Field.SaNumber}"
+                 TextChanged="TextChanged"/>
 
-        <CalendarDatePicker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
-                            Header="Start Date" x:Name="StartDatePicker" HorizontalAlignment="Stretch"
-                            DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.StartDate}"/>
+        <CalendarDatePicker x:Name="StartDatePicker"
+                            Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
+                            HorizontalAlignment="Stretch"
+                            Header="Start Date"
+                            Tag="{x:Bind local:DateType.StartDate}"
+                            DateChanged="DatePicker_DateChanged"/>
 
-        <CalendarDatePicker Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
-                            Header="End Date" x:Name="EndDatePicker" HorizontalAlignment="Stretch"
-                            DateChanged="DatePicker_DateChanged" Tag="{x:Bind local:DateType.EndDate}"/>
+        <CalendarDatePicker x:Name="EndDatePicker"
+                            Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
+                            HorizontalAlignment="Stretch"
+                            Header="End Date"
+                            Tag="{x:Bind local:DateType.EndDate}"
+                            DateChanged="DatePicker_DateChanged"/>
 
-        <!-- Row 3: Decription -->
-        <AutoSuggestBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Header="Description"
-                        Text="{x:Bind ViewModel.Original.Description}" x:Name="DescriptionSuggestBox"
+        <!-- Row 3: Description -->
+        <AutoSuggestBox x:Name="DescriptionSuggestBox"
+                        Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" 
+                        Header="Description" Text="{x:Bind ViewModel.Original.Description}"
                         TextChanged="DescriptionSuggestBox_TextChanged"
                         QuerySubmitted="DescriptionSuggestBox_QuerySubmitted"
                         SuggestionChosen="DescriptionSuggestBox_SuggestionChosen"/>
 
         <!-- Row 4: U/M + Cost-->
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Header="U/M"
-                 x:Name="UMBox" Text="{x:Bind ViewModel.Original.UnitOfMeasurement}"
-                 TextChanged="TextChanged" Tag="{x:Bind local:Field.UoM}"/>
-        <NumberBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Header="Unit Cost"
-                   x:Name="NumberBox" PlaceholderText="0.00"
+        <TextBox x:Name="UMBox"
+                 Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                 Header="U/M" Text="{x:Bind ViewModel.Original.UnitOfMeasurement}"
+                 Tag="{x:Bind local:Field.UoM}"
+                 TextChanged="TextChanged"/>
+        <NumberBox x:Name="NumberBox"
+                   Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" 
+                   Header="Unit Cost" PlaceholderText="0.00"
                    ValueChanged="NumberBox_ValueChanged"/>
     </Grid>
 </Page>

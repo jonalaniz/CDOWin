@@ -35,23 +35,31 @@
             </Grid.ColumnDefinitions>
 
             <!-- Title -->
-            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                       Text="Employers"/>
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Employers"
+                       Style="{StaticResource PageTitleStyle}"/>
 
             <!-- CommandBar -->
-            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton Width="56" Click="NewEmployer_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Employer">
-                    <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
+            <CommandBar Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton Width="56"
+                              IsCompact="False"
+                              ToolTipService.ToolTip="New Employer"
+                              Click="NewEmployer_ClickAsync">
+                    <FontIcon Style="{StaticResource SingleIconFontStyle}"
+                              Glyph="&#xE710;"/>
                 </AppBarButton>
             </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" PlaceholderText="Filter Employers"
+                     Margin="8,0,8,8" 
+                     PlaceholderText="Filter Employers"
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Employers Table -->
-            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ListView"
+            <ListView x:Name="ListView"
+                      Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
                       SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}" 
@@ -73,18 +81,28 @@
                             <ColumnDefinition Width="180"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Employer" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="Address" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" Text="Phone" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="Supervisor" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" Text="Website" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" 
+                                   Text="Employer" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" 
+                                   Text="Address" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" 
+                                   Text="Phone"
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" 
+                                   Text="Supervisor" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" 
+                                   Text="Website" 
+                                   FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
                 <!-- Content -->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="employers:EmployerSummary">
-                        <Grid Padding="12,8">
+                        <Grid Style="{StaticResource ListViewGridTablePadding}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="180"/>
@@ -93,20 +111,27 @@
                                 <ColumnDefinition Width="180"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{x:Bind Name}" TextWrapping="WrapWholeWords" 
-                                       FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind FormattedAddress}" TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind Phone}"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind FormattedSupervisor}" TextWrapping="WrapWholeWords"/>
-                            <TextBlock Grid.Column="4" Text="{x:Bind Website}"/>
+                            <TextBlock Grid.Column="0" 
+                                       Text="{x:Bind Name}" 
+                                       TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" 
+                                       Text="{x:Bind FormattedAddress}" 
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="2" 
+                                       Text="{x:Bind Phone}"/>
+                            <TextBlock Grid.Column="3" 
+                                       Text="{x:Bind FormattedSupervisor}" 
+                                       TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="4" 
+                                       Text="{x:Bind Website}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Row 2: Status Bar -->
+            <!-- Row 3: Status Bar -->
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-              Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <StackPanel Orientation="Horizontal" Spacing="8" 
                             VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
@@ -118,6 +143,8 @@
         </Grid>
 
         <!-- Right Column -->
-        <Frame Grid.Column="1" x:Name="InspectorFrame" IsNavigationStackEnabled="False"/>
+        <Frame x:Name="InspectorFrame" 
+               Grid.Column="1"
+               IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

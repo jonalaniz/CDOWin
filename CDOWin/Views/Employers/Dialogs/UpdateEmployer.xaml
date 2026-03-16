@@ -8,7 +8,7 @@
     xmlns:local="using:CDOWin.Views.Employers.Dialogs"
     mc:Ignorable="d">
 
-    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
+    <Grid Style="{StaticResource DialogRootGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -29,84 +29,86 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0: Name -->
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Header="Name" 
-                 Text="{x:Bind ViewModel.Original.Name}" 
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+                 Header="Name" Text="{x:Bind ViewModel.Original.Name}"
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.Name}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
         
         <!-- Row 1: Phone & Fax -->
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Header="Phone" 
-                 Text="{x:Bind ViewModel.Original.Phone}" 
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
+                 Header="Phone" Text="{x:Bind ViewModel.Original.Phone}"
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.Phone}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
         
-        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Header="Fax" 
-                 Text="{x:Bind ViewModel.Original.Fax}" 
+        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" 
+                 Header="Fax" Text="{x:Bind ViewModel.Original.Fax}"
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.Fax}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
 
         <!-- Row 2: Address 1 & 2 -->
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Address" 
-                 Text="{x:Bind ViewModel.Original.Address1}" 
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" 
+                 Header="Address" Text="{x:Bind ViewModel.Original.Address1}" 
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.Address1}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
-        <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Header="Apt, ste, etc." 
-                 Text="{x:Bind ViewModel.Original.Address2}" 
+                 TextChanged="LabeledTextBox_TextChanged"/>
+        <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" 
+                 Header="Apt, ste, etc." Text="{x:Bind ViewModel.Original.Address2}" 
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.Address2}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
         
         <!-- Row 3: City/State/Zip -->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="City" 
-                 Text="{x:Bind ViewModel.Original.City}" 
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" 
+                 Header="City" Text="{x:Bind ViewModel.Original.City}"
+                 MaxLength="25"
                  Tag="{x:Bind local:Field.City}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="25"/>
-        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
+                 TextChanged="LabeledTextBox_TextChanged"/>
+        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" 
+                    Spacing="8">
             <TextBlock Text="State"/>
-            <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind ViewModel.Original.State}"
-                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+            <DropDownButton x:Name="StateDropDownButton" 
+                            Style="{StaticResource DropDownButtonStyle}"
+                            Content="{x:Bind ViewModel.Original.State}"/>
         </StackPanel>
-        <TextBox Grid.Row="3" Grid.Column="5" Header="Zip" 
-                 Text="{x:Bind ViewModel.Original.Zip}" 
+        <TextBox Grid.Row="3" Grid.Column="5" 
+                 Header="Zip" Text="{x:Bind ViewModel.Original.Zip}"
+                 MaxLength="12"
                  Tag="{x:Bind local:Field.Zip}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="12"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
         
         <!-- Row 4: Supervisor Name & Phone -->
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="Supervisor" 
-                 Text="{x:Bind ViewModel.Original.SupervisorName}" 
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" 
+                 Header="Supervisor" Text="{x:Bind ViewModel.Original.SupervisorName}"
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.SupervisorName}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
-        <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Header="Phone" 
-                 Text="{x:Bind ViewModel.Original.SupervisorPhone}" 
+                 TextChanged="LabeledTextBox_TextChanged"/>
+        <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" 
+                 Header="Phone" Text="{x:Bind ViewModel.Original.SupervisorPhone}"
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.SupervisorPhone}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
 
         <!-- Row 5: Supervisor Email -->
-        <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" Header="Email"
-                 Text="{x:Bind ViewModel.Original.SupervisorEmail}" 
+        <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" 
+                 Header="Email" Text="{x:Bind ViewModel.Original.SupervisorEmail}"
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.SupervisorEmail}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
 
         <!-- Row 6: Website -->
-        <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Header="Website"
-                 Text="{x:Bind ViewModel.Original.Website}" 
+        <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" 
+                 Header="Website" Text="{x:Bind ViewModel.Original.Website}" 
+                 MaxLength="50"
                  Tag="{x:Bind local:Field.Website}"
-                 TextChanged="LabeledTextBox_TextChanged"
-                 MaxLength="50"/>
+                 TextChanged="LabeledTextBox_TextChanged"/>
 
         <!-- Row 7: Notes -->
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"
-                 Style="{StaticResource MultiLineTextBoxStyle}"
                  Header="Notes" Text="{x:Bind ViewModel.Original.Notes}" 
+                 Style="{StaticResource MultiLineTextBoxStyle}"
                  Tag="{x:Bind local:Field.Notes}"
                  TextChanged="LabeledTextBox_TextChanged"/>
     </Grid>

@@ -8,93 +8,110 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Style="{StaticResource DialogRootGridStyle}">
+        <ScrollViewer Style="{StaticResource DialogScrollViewerStyle}">
+            <Grid Style="{StaticResource DialogScrollViewerInnerGridStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-        <!-- Row 0: Name -->
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
-                 Header="Name" Tag="{x:Bind local:Field.Name}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
+                <!-- Row 0: Name -->
+                <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+                         Header="Name" 
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.Name}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 1: Phone & Fax -->
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                 Header="Phone" Tag="{x:Bind local:Field.Phone}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
-        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3"
-                 Header="Fax" Tag="{x:Bind local:Field.Fax}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
+                <!-- Row 1: Phone & Fax -->
+                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                         Header="Phone" 
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.Phone}"
+                         TextChanged="TextBox_TextChanged"/>
+                <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3"
+                         Header="Fax" 
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.Fax}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 2: Address 1 & 2 -->
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
-                 Header="Address" Tag="{x:Bind local:Field.Address1}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
-        <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
-                 Header="Apt, ste, etc." Tag="{x:Bind local:Field.Address2}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
+                <!-- Row 2: Address 1 & 2 -->
+                <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                         Header="Address"
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.Address1}"
+                         TextChanged="TextBox_TextChanged"/>
+                <TextBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
+                         Header="Apt, ste, etc."
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.Address2}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 3: City/State/Zip -->
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
-                 Header="City" Tag="{x:Bind local:Field.City}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="25"/>
-        <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
-            <TextBlock Text="State"/>
-            <DropDownButton x:Name="StateDropDownButton"
-                            HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
-        </StackPanel>
-        <TextBox Grid.Row="3" Grid.Column="5"
-                 Header="Zip" Tag="{x:Bind local:Field.Zip}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="12"/>
+                <!-- Row 3: City/State/Zip -->
+                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                         Header="City"
+                         MaxLength="25"
+                         Tag="{x:Bind local:Field.City}"
+                         TextChanged="TextBox_TextChanged"/>
+                <StackPanel Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" 
+                            Spacing="8">
+                    <TextBlock Text="State"/>
+                    <DropDownButton x:Name="StateDropDownButton"
+                                    Style="{StaticResource DropDownButtonStyle}"/>
+                </StackPanel>
+                <TextBox Grid.Row="3" Grid.Column="5"
+                         Header="Zip"
+                         MaxLength="12"
+                         Tag="{x:Bind local:Field.Zip}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 4: Supervisor Name & Phone -->
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
-                 Header="Supervisor" Tag="{x:Bind local:Field.SupervisorName}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
-        <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
-                 Header="Phone" Tag="{x:Bind local:Field.SupervisorPhone}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
+                <!-- Row 4: Supervisor Name & Phone -->
+                <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                         Header="Supervisor"
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.SupervisorName}"
+                         TextChanged="TextBox_TextChanged"/>
+                <TextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
+                         Header="Phone"
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.SupervisorPhone}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 5: Supervisor Email -->
-        <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"
-                 Header="Email" Tag="{x:Bind local:Field.SupervisorEmail}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
+                <!-- Row 5: Supervisor Email -->
+                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"
+                         Header="Email"
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.SupervisorEmail}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 6: Supervisor Email -->
-        <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"
-                 Header="Website" Tag="{x:Bind local:Field.Website}"
-                 TextChanged="TextBox_TextChanged"
-                 MaxLength="50"/>
+                <!-- Row 6: Website -->
+                <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6"
+                         Header="Website"
+                         MaxLength="50"
+                         Tag="{x:Bind local:Field.Website}"
+                         TextChanged="TextBox_TextChanged"/>
 
-        <!-- Row 7: Notes -->
-        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"
-                 Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Notes" Tag="{x:Bind local:Field.Notes}"
-                 TextChanged="TextBox_TextChanged"/>
+                <!-- Row 7: Notes -->
+                <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"
+                         Style="{StaticResource MultiLineTextBoxStyle}"
+                         Header="Notes" 
+                         Tag="{x:Bind local:Field.Notes}"
+                         TextChanged="TextBox_TextChanged"/>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -37,27 +37,34 @@
             </Grid.ColumnDefinitions>
 
             <!-- Title -->
-            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource PageTitleStyle}"
                        Text="Counselors"/>
             
             <!-- CommandBar -->
-            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton Width="56" Click="NewCounselor_ClickAsync" IsCompact="False" ToolTipService.ToolTip="New Counselor">
-                    <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
+            <CommandBar Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton Width="56"
+                              IsCompact="False" 
+                              ToolTipService.ToolTip="New Counselor"
+                              Click="NewCounselor_ClickAsync">
+                    <FontIcon Style="{StaticResource SingleIconFontStyle}"
+                              Glyph="&#xE710;"/>
                 </AppBarButton>
             </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" PlaceholderText="Filter Counselors"
+                     Margin="8,0,8,8" 
+                     PlaceholderText="Filter Counselors"
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Counselors List -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                      Style="{StaticResource SummaryListViewStyle}"
                       SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
-                      IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
+                      ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="counselors:CounselorSummary">
                         <Grid Margin="0,8,8,8">
@@ -66,18 +73,22 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontWeight="Bold" Text="{x:Bind Name}" 
+                            <TextBlock Grid.Row="0"
+                                       Text="{x:Bind Name}"
+                                       FontWeight="Bold" 
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                            <TextBlock Grid.Row="1" Text="{x:Bind FormattedCaseLoadID}"
+                            <TextBlock Grid.Row="1" 
+                                       Text="{x:Bind FormattedCaseLoadID}"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                            <TextBlock Grid.Row="2" Text="{x:Bind Phone}"
+                            <TextBlock Grid.Row="2" 
+                                       Text="{x:Bind Phone}"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                         </Grid>                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Statu Bar -->
+            <!-- Status Bar -->
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
@@ -88,7 +99,7 @@
         </Grid>
 
         <!-- Middle Column -->
-        <Grid Grid.Row="0" Grid.Column="1" BorderThickness="0,0,1,0"
+        <Grid Grid.Column="1" BorderThickness="0,0,1,0"
               BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
               Visibility="{x:Bind ViewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
 
@@ -98,19 +109,30 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
             <!-- Title -->
-            <TextBlock Grid.Row="0"  Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                       Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"
+                       Style="{StaticResource PageTitleStyle}"/>
 
             <!-- CommandBar -->
-            <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
+            <CommandBar Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton Width="56" 
+                              IsCompact="False" 
+                              ToolTipService.ToolTip="More">
                     <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
+                        <FontIcon Style="{StaticResource SingleIconFontStyle}"
+                                  Glyph="&#xE712;"/>
                     </AppBarButton.Icon>
                     <AppBarButton.Flyout>
                         <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                            <MenuFlyoutItem Text="Delete..." Click="Delete_MenuFlyoutItem_Click">
+                            <MenuFlyoutItem Text="Delete..." 
+                                            Click="Delete_MenuFlyoutItem_Click">
                                 <MenuFlyoutItem.Icon>
                                     <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
                                 </MenuFlyoutItem.Icon>
@@ -121,7 +143,8 @@
             </CommandBar>
 
             <!-- Clients Table -->
-            <ListView Grid.Row="1" x:Name="ListView"
+            <ListView x:Name="ListView"
+                      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                       ItemsSource="{x:Bind ViewModel.Clients, Mode=OneWay}"
                       Style="{StaticResource DataTableStyle}">
 
@@ -140,10 +163,18 @@
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Name" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="Case ID" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" Text="Address" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="Phone" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" 
+                                   Text="Name" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" 
+                                   Text="Case ID" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" 
+                                   Text="Address" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" 
+                                   Text="Phone" 
+                                   FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -164,22 +195,30 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="{x:Bind FormattedName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
-                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
-                                        Click="GoToClient_Click" Tag="{x:Bind Id}">
+                                <TextBlock Grid.Column="0" 
+                                           Text="{x:Bind FormattedName}"
+                                           TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" 
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        Tag="{x:Bind Id}"
+                                        Click="GoToClient_Click">
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
-                            <TextBlock Grid.Column="1" Text="{x:Bind CaseID}"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind FormattedAddress}" TextWrapping="WrapWholeWords"/>
-                            <TextBlock Grid.Column="3" Text="{x:Bind Phone}"/>
+                            <TextBlock Grid.Column="1" 
+                                       Text="{x:Bind CaseID}"/>
+                            <TextBlock Grid.Column="2" 
+                                       Text="{x:Bind FormattedAddress}" 
+                                       TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="3" 
+                                       Text="{x:Bind Phone}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Statu Bar -->
-            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+            <!-- Status Bar -->
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
                     <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
@@ -189,6 +228,8 @@
         </Grid>
         
         <!-- Right Column -->
-        <Frame Grid.Column="2" x:Name="InspectorFrame" IsNavigationStackEnabled="False"/>
+        <Frame x:Name="InspectorFrame"
+               Grid.Column="2"
+               IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

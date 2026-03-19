@@ -33,7 +33,8 @@
                    x:Name="Header" RightTapped="TextBlock_RightTapped"/>
 
         <!-- CommandBar -->
-        <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
+        <CommandBar Grid.Row="0" Grid.Column="1" 
+                    Style="{StaticResource CommandBarDefaultStyle}">
             
             <!-- Documents Button -->
             <AppBarButton Width="56" Label="Documents" Click="OpenDocuments_Clicked" IsCompact="False" ToolTipService.ToolTip="Open Documents">

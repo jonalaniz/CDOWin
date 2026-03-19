@@ -102,7 +102,7 @@ public sealed partial class CreateClient : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
         UpdateValue(text, field);
     }
 
@@ -137,7 +137,8 @@ public sealed partial class CreateClient : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
+        Debug.WriteLine(text);
         UpdateValue(text, field);
     }
 
@@ -157,7 +158,7 @@ public sealed partial class CreateClient : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
         UpdateValue(text, field);
     }
 
@@ -221,7 +222,7 @@ public sealed partial class CreateClient : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
         UpdateValue(text, field);
     }
 
@@ -233,7 +234,7 @@ public sealed partial class CreateClient : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
         UpdateValue(text, field);
     }
 
@@ -245,7 +246,7 @@ public sealed partial class CreateClient : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
         UpdateValue(text, field);
     }
 

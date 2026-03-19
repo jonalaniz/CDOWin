@@ -18,7 +18,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // Dependencies
     // =========================
     private List<CounselorSummary> _counselors = [];
-    public ClientUpdateViewModel ViewModel { get; private set; }
+    private ClientUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

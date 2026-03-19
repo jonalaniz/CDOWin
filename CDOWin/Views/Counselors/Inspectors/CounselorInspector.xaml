@@ -29,8 +29,11 @@
                    Text="Details"/>
 
         <!-- CommandBar -->
-        <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-            <AppBarButton Click="EditButton_Click" IsCompact="False" ToolTipService.ToolTip="Edit">
+        <CommandBar Grid.Row="0" Grid.Column="1"
+                    Style="{StaticResource CommandBarDefaultStyle}">
+            <AppBarButton IsCompact="False" 
+                          ToolTipService.ToolTip="Edit"
+                          Click="EditButton_Click">
                 <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
             </AppBarButton>
         </CommandBar>
@@ -52,45 +55,62 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Row 2: Phone + Fax -->
-            <control:LabelPair Grid.Row="0" Grid.Column="0" Label="ACE ID" Value="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
-            <control:LabelPair Grid.Row="0" Grid.Column="1" Label="Case Load" Value="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
+            <!-- Row 2: ACE ID + Case Load -->
+            <control:LabelPair Grid.Row="0" Grid.Column="0"
+                               Label="ACE ID" 
+                               Value="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="0" Grid.Column="1" 
+                               Label="Case Load" 
+                               Value="{x:Bind ViewModel.Selected.CaseLoadId, Mode=OneWay}"/>
             
             <!-- Row 1: Email -->
-            <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Email" 
+            <control:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Label="Email" 
                                Value="{x:Bind ViewModel.Selected.Email, Mode=OneWay}"/>
 
             <!-- Row 2: Phone + Fax -->
-            <control:LabelPair Grid.Row="2" Grid.Column="0" Label="Phone" Value="{x:Bind ViewModel.Selected.Phone, Mode=OneWay}"/>
-            <control:LabelPair Grid.Row="2" Grid.Column="1" Label="Fax" Value="{x:Bind ViewModel.Selected.Fax, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="2" Grid.Column="0" 
+                               Label="Phone" 
+                               Value="{x:Bind ViewModel.Selected.Phone, Mode=OneWay}"/>
+            <control:LabelPair Grid.Row="2" Grid.Column="1" 
+                               Label="Fax" 
+                               Value="{x:Bind ViewModel.Selected.Fax, Mode=OneWay}"/>
 
             <!-- Row 3: Secretary -->
-            <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Label="Secretary" 
+            <control:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Label="Secretary" 
                                Value="{x:Bind ViewModel.Selected.SecretaryName, Mode=OneWay}"/>
 
             <!-- Row 4: Secretary -->
-            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Label="Secretary Email" 
+            <control:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Label="Secretary Email" 
                                Value="{x:Bind ViewModel.Selected.SecretaryEmail, Mode=OneWay}"/>
 
             <!-- Row 5: Notes -->
-            <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Label="Notes" 
+            <control:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Label="Notes" 
                                Value="{x:Bind ViewModel.Selected.Notes, Mode=OneWay}"/>
         </Grid>
 
         <!-- Counselor Caption-->
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="16,4,16,8"
-                   Style="{StaticResource InspectorCaptionStyle}" Text="Service Authorizations"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Margin="16,4,16,8"
+                   Style="{StaticResource InspectorCaptionStyle}" 
+                   Text="Service Authorizations"/>
 
         <!-- Item Repeater -->
-        <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,0,12,0">
+        <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                      Margin="12,0,12,0">
             <ItemsRepeater ItemsSource="{x:Bind ViewModel.Selected.Sas, Mode=OneWay}">
                 <DataTemplate x:DataType="dto:SADetail">
 
                     <!-- Button -->
-                    <Button Margin="0,0,0,6" Padding="10,6" Click="SA_Click" Tag="{x:Bind Id}"
+                    <Button Margin="0,0,0,6" Padding="10,6"
                             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                             Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                            Tag="{x:Bind Id}"
+                            Click="SA_Click">
                         <StackPanel Spacing="2">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -98,8 +118,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <TextBlock Grid.Column="0" FontWeight="Bold" Text="{x:Bind ClientName}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ServiceAuthorizationNumber}"/>
+                                <TextBlock Grid.Column="0"
+                                           Text="{x:Bind ClientName}"
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="1" 
+                                           Text="{x:Bind ServiceAuthorizationNumber}"/>
                             </Grid>
                             <TextBlock Text="{x:Bind Description}"/>
                             <TextBlock Text="{x:Bind FormattedDateRange}"/>

@@ -57,19 +57,22 @@ public sealed partial class UpdateSA : Page {
 
         var text = textBox.Text.NormalizeString();
 
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
 
         switch (field) {
             case Field.SaNumber:
+                if (string.IsNullOrWhiteSpace(text)) return;
                 ViewModel.Updated.ServiceAuthorizationNumber = text;
                 break;
             case Field.CounselorName:
+                if (string.IsNullOrWhiteSpace(text)) return;
                 ViewModel.Updated.CounselorName = text;
                 break;
             case Field.SecretaryName:
                 ViewModel.Updated.SecretaryName = text;
                 break;
             case Field.Description:
+                if (string.IsNullOrWhiteSpace(text)) return;
                 ViewModel.Updated.Description = text;
                 break;
             case Field.Office:

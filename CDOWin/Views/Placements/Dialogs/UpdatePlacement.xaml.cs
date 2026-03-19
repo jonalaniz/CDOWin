@@ -112,7 +112,8 @@ public sealed partial class UpdatePlacement : Page {
             return;
 
         var text = textBox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        // Single null check, optional values are allowed
+        if (text == null) return;
         UpdateValue(text, field);
     }
 

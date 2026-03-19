@@ -51,9 +51,8 @@ public sealed partial class UpdateEmployer : Page {
 
         var text = textbox.Text.NormalizeString();
 
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        // Check if not null, all fields are optional so whitespace is allowed
+        if (text == null) return;
         UpdateModel(text, field);
     }
 

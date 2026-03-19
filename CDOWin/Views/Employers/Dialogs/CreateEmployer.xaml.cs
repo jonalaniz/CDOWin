@@ -60,9 +60,8 @@ public sealed partial class CreateEmployer : Page {
 
         var text = textbox.Text.NormalizeString();
 
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        // Null check only, all fiends are optional
+        if (text == null) return;
         ViewModel.UpdateField(field, text);
     }
 }

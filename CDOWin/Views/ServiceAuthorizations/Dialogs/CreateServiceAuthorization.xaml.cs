@@ -70,8 +70,7 @@ public sealed partial class CreateServiceAuthorization : Page {
             return;
 
         var text = textBox.Text.NormalizeString();
-
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if (text == null) return;
 
         switch (field) {
             case Field.SaNumber:

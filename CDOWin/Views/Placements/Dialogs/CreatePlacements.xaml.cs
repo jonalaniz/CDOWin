@@ -102,7 +102,8 @@ public sealed partial class CreatePlacements : Page {
             return;
 
         var text = textBox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        // Single null check, optionals are allowed
+        if (text == null) return;
         UpdateValue(text, field);
     }
 

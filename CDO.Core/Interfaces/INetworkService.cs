@@ -12,7 +12,7 @@ public interface INetworkService {
     // -----------------------------
     // GET
     // -----------------------------
-    Task<T?> GetAsync<T>(string endpoint);
+    Task<T?> GetAsync<T>(string endpoint, CancellationToken ct = default);
 
     // -----------------------------
     // POST

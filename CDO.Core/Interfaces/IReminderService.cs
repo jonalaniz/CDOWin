@@ -9,7 +9,7 @@ public interface IReminderService {
     // -----------------------------
     // GET Methods
     // -----------------------------
-    public Task<List<Reminder>?> GetAllRemindersAsync();
+    public Task<List<Reminder>?> GetAllRemindersAsync(CancellationToken ct);
 
     public Task<Reminder?> GetReminderAsync(int id);
 

@@ -21,7 +21,7 @@ public class NetworkService : INetworkService {
     private readonly String MediaType = "application/json";
 
     public NetworkService() {
-        _httpClient = new HttpClient();
+        _httpClient = CreateHttpClient();
         _jsonOptions = new JsonSerializerOptions {
             TypeInfoResolver = SourceGenerationContext.Default,
             PropertyNameCaseInsensitive = true,
@@ -47,27 +47,26 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // GET
     // -----------------------------
-    public async Task<T?> GetAsync<T>(string endpoint) {
+    public async Task<T?> GetAsync<T>(string endpoint, CancellationToken ct = default) {
         try {
-            var response = await _httpClient.GetAsync(endpoint);
+            var response = await _httpClient.GetAsync(endpoint, ct);
+            if (!response.IsSuccessStatusCode) { return default; }
 
-            if (!response.IsSuccessStatusCode) {
-                return default;
-            }
-
-            var stream = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions);
+            var stream = await response.Content.ReadAsStreamAsync(ct);
+            return await JsonSerializer.DeserializeAsync<T>(stream, _jsonOptions, ct);
+        } catch (OperationCanceledException) {
+            Debug.WriteLine("GetAsync cancelled.");
+            return default;
         } catch (JsonException ex) {
             Debug.WriteLine("JSON DESERIALIZATION ERROR:");
             Debug.WriteLine($"Message: {ex.Message}");
             Debug.WriteLine($"Path: {ex.Path}");
             Debug.WriteLine($"LineNumber: {ex.LineNumber}");
             Debug.WriteLine($"BytePositionInLine: {ex.BytePositionInLine}");
-
-            throw;
+            return default;
         } catch (Exception ex) {
             Debug.WriteLine(ex.Message);
-            throw;
+            return default;
         }
     }
 
@@ -148,4 +147,14 @@ public class NetworkService : INetworkService {
         HttpStatusCode.InternalServerError => new(ErrorKind.Server, "Invalid request.", (int)status),
         _ => new(ErrorKind.Unknown, "Request failed.", (int)status)
     };
+
+    public static HttpClient CreateHttpClient() {
+        var handler = new SocketsHttpHandler() {
+            PooledConnectionLifetime = TimeSpan.FromMinutes(2),
+            PooledConnectionIdleTimeout = TimeSpan.FromMinutes(1),
+            ConnectTimeout = TimeSpan.FromSeconds(10)
+        };
+
+        return new HttpClient(handler);
+    }
 }

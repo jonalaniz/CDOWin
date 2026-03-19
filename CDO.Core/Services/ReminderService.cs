@@ -17,10 +17,10 @@ public class ReminderService : IReminderService {
     // -----------------------------
     // GET
     // -----------------------------
-    public Task<List<Reminder>?> GetAllRemindersAsync() {
+    public Task<List<Reminder>?> GetAllRemindersAsync(CancellationToken ct) {
         var endpoint = Endpoints.Reminders;
         endpoint += "?includeClients=true";
-        return _network.GetAsync<List<Reminder>>(endpoint);
+        return _network.GetAsync<List<Reminder>>(endpoint, ct);
     }
 
     public Task<Reminder?> GetReminderAsync(int id) {

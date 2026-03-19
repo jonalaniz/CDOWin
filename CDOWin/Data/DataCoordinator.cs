@@ -7,6 +7,7 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.Data;
@@ -115,9 +116,9 @@ public class DataCoordinator {
         return Placements.Data ?? [];
     }
 
-    public async Task<IReadOnlyList<Reminder>> GetRemindersAsync(bool force = false) {
+    public async Task<IReadOnlyList<Reminder>> GetRemindersAsync(CancellationToken ct = default, bool force = false) {
         if (force || Reminders.IsStale(ReminderTTL)) {
-            var data = await _reminders.GetAllRemindersAsync();
+            var data = await _reminders.GetAllRemindersAsync(ct);
             if (data != null) Reminders.Update(data);
         }
 

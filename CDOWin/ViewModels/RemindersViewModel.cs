@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -38,6 +39,7 @@ public partial class RemindersViewModel : ObservableObject {
     private DateTime _selectedDate = DateTime.Now;
 
     private bool delaying = false;
+    private CancellationTokenSource _ctSource = new CancellationTokenSource();
 
     // =========================
     // UI State
@@ -137,9 +139,16 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     // App Lifecycle
     // =========================
-    private void OnSuspension() => OnUI(StopTimer);
+    private void OnSuspension() {
+        _ctSource.Cancel();
+        _ctSource.Dispose();
+        OnUI(StopTimer);
+    }
 
-    private void OnResumeAsync() => _ = StartTimerAsync();
+    private void OnResumeAsync() {
+        _ctSource = new CancellationTokenSource();
+        _ = StartTimerAsync();
+    }
 
     private void StopTimer() => _refreshTimer.Stop();
 
@@ -159,7 +168,7 @@ public partial class RemindersViewModel : ObservableObject {
     // CRUD Methods
     // =========================
     public async Task LoadRemindersAsync(bool force = false) {
-        var reminders = await _dataCoordinator.GetRemindersAsync(force);
+        var reminders = await _dataCoordinator.GetRemindersAsync(_ctSource.Token, force);
         if (reminders == null) return;
 
         var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();

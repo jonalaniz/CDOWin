@@ -36,9 +36,7 @@ public sealed partial class UpdateCounselor : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-
-        if (string.IsNullOrWhiteSpace(text))
-            return;
+        if (text == null) return;
 
         UpdateModel(text, field);
     }
@@ -54,7 +52,7 @@ public sealed partial class UpdateCounselor : Page {
     private void UpdateModel(string value, Field field) {
         switch (field) {
             case Field.Name:
-                if (value != ViewModel.Original.Name)
+                if (value != ViewModel.Original.Name || !string.IsNullOrWhiteSpace(value))
                     ViewModel.Updated.Name = value;
                 break;
             case Field.Email:

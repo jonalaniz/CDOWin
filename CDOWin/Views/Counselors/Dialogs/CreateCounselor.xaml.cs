@@ -27,10 +27,7 @@ public sealed partial class CreateCounselor : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        if (text == null) return;
         ViewModel.UpdateField(field, text);
     }
 

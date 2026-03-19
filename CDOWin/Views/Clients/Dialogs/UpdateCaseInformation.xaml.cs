@@ -17,7 +17,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<CounselorSummary> _counselors = AppServices.CounselorsViewModel.GetCounselors();
+    private List<CounselorSummary> _counselors = [];
     public ClientUpdateViewModel ViewModel { get; private set; }
 
     // =========================
@@ -26,6 +26,7 @@ public sealed partial class UpdateCaseInformation : Page {
     public UpdateCaseInformation(ClientUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
+        GetCounselorSummaries();
         BuildDropDowns();
         SetupAutoSuggestBox();
         SetupDatePicker();
@@ -34,6 +35,10 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     // UI Setup
     // =========================
+    private async void GetCounselorSummaries() {
+        _counselors = await AppServices.CounselorsViewModel.GetCounselors();
+    }
+
     private void BuildDropDowns() {
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);

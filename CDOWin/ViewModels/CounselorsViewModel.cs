@@ -84,9 +84,10 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     public List<CounselorSummary> All() => _cache.ToList();
 
-    public List<CounselorSummary> GetCounselors() {
+    // Get method for CreateCounselor.xaml.cs
+    public async Task<List<CounselorSummary>> GetCounselors() {
         if (_cache.Count == 0)
-            LoadCounselorSummariesAsync().GetAwaiter().GetResult();
+            await LoadCounselorSummariesAsync();
 
         return _cache.ToList();
     }

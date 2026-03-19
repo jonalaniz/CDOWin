@@ -20,17 +20,18 @@ public sealed partial class CreateClient : Page {
     // Dependencies
     // =========================
     private readonly CreateClientViewModel ViewModel;
-    private readonly List<CounselorSummary> _counselors = AppServices.CounselorsViewModel.GetCounselors();
+    private List<CounselorSummary> _counselors = [];
     private readonly List<State> _states = AppServices.StatesViewModel.GetStates();
 
 
     // =========================
-    // View
+    // Initializer
     // =========================
 
     public CreateClient(CreateClientViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
+        GetCounselorSummaries();
         BuildDropDowns();
         SetupAutoSuggestBox();
     }
@@ -38,6 +39,9 @@ public sealed partial class CreateClient : Page {
     // =========================
     // UI Setup
     // =========================
+    private async void GetCounselorSummaries() {
+        _counselors = await AppServices.CounselorsViewModel.GetCounselors();
+    }
     private void BuildDropDowns() {
         BuildStateDrowdown();
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);

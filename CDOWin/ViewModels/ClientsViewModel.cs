@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -32,6 +33,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Private Backing Fields
     // =========================
     private IReadOnlyList<ClientSummary> _cache = [];
+    private CancellationTokenSource _ctSource = new();
 
     // =========================
     // UI State
@@ -127,8 +129,9 @@ public partial class ClientsViewModel : ObservableObject {
 
     public async Task LoadSelectedClientAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
+        ResetCancellationToken();
 
-        var selectedClient = await _service.GetClientAsync(id);
+        var selectedClient = await _service.GetClientAsync(id, _ctSource.Token);
         Selected = selectedClient;
     }
 
@@ -200,6 +203,12 @@ public partial class ClientsViewModel : ObservableObject {
             Filtered = new ObservableCollection<ClientSummary>(result);
             ReSelect(previousSelection);
         });
+    }
+
+    private void ResetCancellationToken() {
+        _ctSource.Cancel();
+        _ctSource.Dispose();
+        _ctSource = new CancellationTokenSource();
     }
 
     private void UpdateSummaries() {

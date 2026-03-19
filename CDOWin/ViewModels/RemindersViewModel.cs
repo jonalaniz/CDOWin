@@ -39,7 +39,7 @@ public partial class RemindersViewModel : ObservableObject {
     private DateTime _selectedDate = DateTime.Now;
 
     private bool delaying = false;
-    private CancellationTokenSource _ctSource = new CancellationTokenSource();
+    private CancellationTokenSource _ctSource = new();
 
     // =========================
     // UI State

@@ -12,7 +12,7 @@ public interface IClientService {
 
     public Task<List<ClientDetail>?> GetAllClientsAsync();
 
-    public Task<ClientDetail?> GetClientAsync(int id);
+    public Task<ClientDetail?> GetClientAsync(int id, CancellationToken ct = default);
 
     // -----------------------------
     // POST Methods

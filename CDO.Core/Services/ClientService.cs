@@ -24,8 +24,8 @@ public class ClientService : IClientService {
         return _network.GetAsync<List<ClientSummary>>(Endpoints.Clients);
     }
 
-    public Task<ClientDetail?> GetClientAsync(int id) {
-        return _network.GetAsync<ClientDetail>(Endpoints.Client(id));
+    public Task<ClientDetail?> GetClientAsync(int id, CancellationToken ct = default) {
+        return _network.GetAsync<ClientDetail>(Endpoints.Client(id), ct);
     }
 
     // -----------------------------

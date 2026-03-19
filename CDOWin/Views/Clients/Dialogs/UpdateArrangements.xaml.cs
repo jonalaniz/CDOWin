@@ -28,8 +28,8 @@ public sealed partial class UpdateArrangements : Page {
 
         var text = textbox.Text.NormalizeString();
 
-        if (string.IsNullOrWhiteSpace(text)) return;
-
+        // Arrangements are all optional fields, allow empty variablies
+        if (text == null) return;
         UpdateValue(text, field);
     }
 

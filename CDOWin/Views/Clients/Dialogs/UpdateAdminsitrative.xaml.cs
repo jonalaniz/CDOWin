@@ -48,6 +48,7 @@ public sealed partial class UpdateAdminsitrative : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
+        // Administrative items are all non-nullable fields, do not allow user to input blank spaces
         if (string.IsNullOrWhiteSpace(text)) return;
         UpdateValue(text, field);
     }

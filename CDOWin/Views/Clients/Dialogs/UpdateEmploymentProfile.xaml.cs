@@ -28,9 +28,8 @@ public sealed partial class UpdateEmploymentProfile : Page {
 
         var text = textbox.Text.NormalizeString();
 
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        // Ensure item is not null, some values ARE optional
+        if (text == null) return;
         UpdateValue(text, field);
     }
 
@@ -40,6 +39,8 @@ public sealed partial class UpdateEmploymentProfile : Page {
     private void UpdateValue(string value, EmploymentField type) {
         switch (type) {
             case EmploymentField.Disability:
+                // Non-optional field, ensure item is not empty
+                if (string.IsNullOrWhiteSpace(value)) return;
                 ViewModel.UpdatedClient.Disability = value;
                 break;
             case EmploymentField.CriminalCharge:

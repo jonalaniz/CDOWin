@@ -27,9 +27,7 @@ public sealed partial class UpdateContacts : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-
-        if (string.IsNullOrWhiteSpace(text))
-            return;
+        if (text == null) return;
 
         UpdateValue(text, field);
     }

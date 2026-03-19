@@ -140,9 +140,8 @@ public sealed partial class UpdateCaseInformation : Page {
 
         var text = textbox.Text.NormalizeString();
 
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        // All values are optional, allow for blank values
+        if (text == null) return;
         UpdateValue(text, field);
     }
 

@@ -100,7 +100,8 @@ public sealed partial class UpdatePersonalInformation : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if (string.IsNullOrWhiteSpace(text)) return;
+        if(text == null) return;
+
         UpdateValue(text, field);
     }
 
@@ -122,6 +123,7 @@ public sealed partial class UpdatePersonalInformation : Page {
                 ViewModel.UpdatedClient.Address2 = value;
                 break;
             case PersonalField.City:
+                if (string.IsNullOrWhiteSpace(value)) return;
                 ViewModel.UpdatedClient.City = value;
                 break;
             case PersonalField.Education:

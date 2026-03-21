@@ -14,6 +14,8 @@ public class SASummary {
     public required string ClientName { get; init; }
     public string? CaseID { get; init; }
 
+    public bool Active { get; init; }
+
     // Counselor Specific
     public int? CounselorId { get; init; }
     public required string CounselorName { get; init; }

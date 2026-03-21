@@ -141,9 +141,10 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     void ApplyFilter() {
         int? previousSelection = SelectedSummary?.Id;
-        var filterDate = IsFiltered ? DateTime.Today : DateTime.MinValue;
 
-        IEnumerable<SASummary> result = _cache.Where(i => i.EndDate >= filterDate);
+        var result = IsFiltered
+            ? _cache.Where(r => r.Active)
+            : _cache; 
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();

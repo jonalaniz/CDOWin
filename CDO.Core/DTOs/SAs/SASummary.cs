@@ -13,7 +13,6 @@ public class SASummary {
     public int ClientId { get; init; }
     public required string ClientName { get; init; }
     public string? CaseID { get; init; }
-
     public bool Active { get; init; }
 
     // Counselor Specific
@@ -24,4 +23,5 @@ public class SASummary {
     public string? FormattedStartDate => StartDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedEndDate => EndDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedCost => $"{UnitCost:C2}";
+    public bool InActive => !Active;
 }

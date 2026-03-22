@@ -114,7 +114,8 @@
                 <!-- Content -->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:PlacementSummary">
-                        <Grid Style="{StaticResource ListViewGridTablePadding}">
+                        <Grid Style="{StaticResource ListViewGridTablePadding}"
+                              Opacity="{x:Bind InActive, Converter={StaticResource BoolOpacityConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="220"/>

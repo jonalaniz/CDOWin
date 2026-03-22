@@ -107,7 +107,7 @@
                 <!-- Content -->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:SASummary">
-                        <Grid Padding="12,8">
+                        <Grid Padding="12,8" Opacity="{x:Bind InActive, Converter={StaticResource BoolOpacityConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="220"/>

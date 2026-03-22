@@ -38,4 +38,5 @@ public class PlacementSummary {
             return text;
         }
     }
+    public bool InActive => !Active;
 }

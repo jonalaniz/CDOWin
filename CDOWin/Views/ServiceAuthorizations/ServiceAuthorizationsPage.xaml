@@ -45,7 +45,7 @@
                         Style="{StaticResource CommandBarDefaultStyle}">
                 <AppBarToggleButton Width="56"
                                     IsCompact="False"
-                                    ToolTipService.ToolTip="Filter SAs" 
+                                    ToolTipService.ToolTip="Filter ACtive" 
                                     IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}">
                     <FontIcon Foreground="{x:Bind ViewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"
                               Glyph="&#xE71C;"/>

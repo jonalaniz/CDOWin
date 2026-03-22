@@ -48,7 +48,7 @@ public partial class PlacementsViewModel : ObservableObject {
     public partial string SearchQuery { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial bool IsFiltered { get; set; } = false;
+    public partial bool IsFiltered { get; set; } = true;
 
     // =========================
     // Constructor

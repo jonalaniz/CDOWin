@@ -100,7 +100,7 @@ public sealed partial class UpdatePersonalInformation : Page {
             return;
 
         var text = textbox.Text.NormalizeString();
-        if(text == null) return;
+        if (text == null) return;
 
         UpdateValue(text, field);
     }

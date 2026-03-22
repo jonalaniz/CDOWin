@@ -144,7 +144,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
 
         var result = IsFiltered
             ? _cache.Where(r => r.Active)
-            : _cache; 
+            : _cache;
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();

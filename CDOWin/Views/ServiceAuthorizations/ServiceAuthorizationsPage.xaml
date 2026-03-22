@@ -158,7 +158,8 @@
                             <TextBlock Grid.Column="4" 
                                        Text="{x:Bind FormattedStartDate}"/>
                             <TextBlock Grid.Column="5" 
-                                       Text="{x:Bind FormattedEndDate}"/>
+                                       Text="{x:Bind FormattedEndDate}"
+                                       FontWeight="Bold"/>
                             <TextBlock Grid.Column="6" 
                                        Text="{x:Bind FormattedCost}"/>
                             <TextBlock Grid.Column="7" 

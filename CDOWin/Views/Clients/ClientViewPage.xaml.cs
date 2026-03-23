@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.VoiceCommands;
 
 namespace CDOWin.Views.Clients;
 
@@ -30,7 +31,6 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     public ClientViewPage() {
         InitializeComponent();
-
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e) {
@@ -235,6 +235,17 @@ public sealed partial class ClientViewPage : Page {
         } else {
             _ = UpdateActiveAsync(true);
         }
+    }
+
+    private async void Delete_Clicked(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem || ViewModel.Selected == null) return;
+
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, $"Delete {ViewModel.Selected.FormattedName}?");
+        dialog.Content = "Deleting this client will remove all existing reminders. This action cannot be undone.";
+
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+            _ = ViewModel.DeleteClientAsync(ViewModel.Selected.Id);
     }
 
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {

@@ -156,6 +156,13 @@ public partial class ClientsViewModel : ObservableObject {
         return result;
     }
 
+    public async Task<Result> DeleteClientAsync(int id) {
+        var result = await _service.DeleteClientAsync(id);
+        if(result.IsSuccess)
+            OnUI(() => RemoveDeletedClient(id));
+        return result;
+    }
+
     // =========================
     // Utility / Filtering
     // =========================
@@ -209,6 +216,18 @@ public partial class ClientsViewModel : ObservableObject {
         _ctSource.Cancel();
         _ctSource.Dispose();
         _ctSource = new CancellationTokenSource();
+    }
+
+    private void RemoveDeletedClient(int id) {
+        _cache = _cache
+            .Where(c => c.Id != id)
+            .ToList();
+
+        if(Filtered.FirstOrDefault(c => c.Id == id) is ClientSummary client) {
+            Filtered.Remove(client);
+            Selected = null;
+            SelectedSummary = null;
+        }
     }
 
     private void UpdateSummaries() {

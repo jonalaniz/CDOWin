@@ -82,8 +82,8 @@ public sealed partial class CounselorsPage : Page {
     private async void Delete_MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null) return;
 
-        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Counselor?");
-        dialog.Content = new DeletePage();
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, $"Delete {ViewModel.Selected.Name}?");
+        dialog.Content = "Deleting this counselor will disassociate any linked Clients. This action cannot be undone.";
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary) {

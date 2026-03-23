@@ -148,12 +148,12 @@ public partial class PlacementsViewModel : ObservableObject {
         int? previousSelection = Selected?.Id;
 
         var result = IsFiltered
-            ? _cache.Where(r => r.Active)
+            ? _cache.Where(p => p.Active)
             : _cache;
 
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
-            result = _cache.Where(r =>
+            result = result.Where(r =>
             (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
             (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
             (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

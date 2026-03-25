@@ -32,6 +32,7 @@ public class DataCoordinator {
         _states = states;
         _invalidationService = invalidationService;
 
+        _invalidationService.ClientsInvalidated += InvalidateClients;
         _invalidationService.SAsInvalidated += InvalidateSAs;
         _invalidationService.PlacementsInvalidated += InvalidatePlacements;
 
@@ -74,6 +75,7 @@ public class DataCoordinator {
     // =========================
     // Invalidation Methods
     // =========================
+    private void InvalidateClients() => Clients.Invalidate();
     private void InvalidatePlacements() => Placements.Invalidate();
     private void InvalidateSAs() => SAs.Invalidate();
 

@@ -183,8 +183,7 @@ public partial class RemindersViewModel : ObservableObject {
 
         var updated = _cache
             .Select(r => r.Id == id ? reminder : r)
-            .ToList()
-            .AsReadOnly();
+            .ToList();
 
         _cache = updated;
 
@@ -229,17 +228,17 @@ public partial class RemindersViewModel : ObservableObject {
     // Event Handlers
     // =========================
     private void OnClientChanged(ClientDetail? client) {
-        var source = client?.Reminders?
+        var reminders = client?.Reminders?
             .OrderBy(r => r.Date)
-            .ToList()
-            .AsReadOnly();
-
-        if (source == null) return;
+            .ToList();
 
         OnUI(() => {
             ClientSpecific.Clear();
-            foreach (var reminder in source)
-                ClientSpecific.Add(reminder);
+
+            if (reminders != null) {
+                foreach (var reminder in reminders)
+                    ClientSpecific.Add(reminder);
+            }
 
             if (Filter == RemindersFilter.Client)
                 ApplyFilter();

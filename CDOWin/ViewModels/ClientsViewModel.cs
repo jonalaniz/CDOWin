@@ -24,6 +24,7 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     private readonly IClientService _service;
     private readonly DataCoordinator _dataCoordinator;
+    private readonly DataInvalidationService _invalidationService;
     private readonly ClientSelectionService _selectionService;
     private readonly PlacementSelectionService _placementSelectionService;
     private readonly ClientComposer _clientComposer = new();
@@ -67,9 +68,11 @@ public partial class ClientsViewModel : ObservableObject {
     public ClientsViewModel(IClientService service,
         DataCoordinator dataCoordinator,
         ClientSelectionService clientSelectionService,
-        PlacementSelectionService placementSelectionService) {
+        PlacementSelectionService placementSelectionService,
+        DataInvalidationService invalidationService) {
         _service = service;
         _dataCoordinator = dataCoordinator;
+        _invalidationService = invalidationService;
 
         _selectionService = clientSelectionService;
         _placementSelectionService = placementSelectionService;
@@ -228,17 +231,18 @@ public partial class ClientsViewModel : ObservableObject {
             Selected = null;
             SelectedSummary = null;
         }
+
+        _invalidationService.InvalidateClients();
+        _selectionService.SelectedClient = null;
     }
 
     private void UpdateSummaries() {
         if (Selected == null) return;
 
-        // Update cache
         _cache = _cache
             .Select(c => c.Id == Selected.Id ? Selected.AsSummary() : c)
             .ToList();
 
-        // Update filtered list
         if (Filtered.FirstOrDefault(c => c.Id == Selected.Id) is ClientSummary client) {
             var i = Filtered.IndexOf(client);
             Filtered[i] = Selected.AsSummary();

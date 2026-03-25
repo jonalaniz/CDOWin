@@ -82,7 +82,8 @@ public static class AppServices {
             ClientService,
             DataCoordinator,
             _clientSelectionService,
-            _placementSelectionService
+            _placementSelectionService,
+            _invalidationService
         );
 
         CounselorsViewModel = new CounselorsViewModel(

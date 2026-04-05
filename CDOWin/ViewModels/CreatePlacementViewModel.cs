@@ -40,7 +40,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
     public string? Benefits { get; set; }
 
     // SA/SADetail Specific
-    public int? InvoiceID { get; set; }
+    public int? SaID { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -130,7 +130,7 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             Benefits = Benefits,
 
             // SA/SADetail Specific
-            InvoiceID = InvoiceID,
+            SaID = SaID,
             SaNumber = SaNumber,
 
             // ClientDetail Specific

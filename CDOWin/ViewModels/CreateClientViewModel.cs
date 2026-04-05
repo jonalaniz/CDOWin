@@ -77,7 +77,7 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     public string? EmploymentGoal { get; set; }
     public int? EmployerID { get; set; }
     public string? Status { get; set; }
-    public string? Benefit { get; set; }
+    public string? Benefits { get; set; }
     public string? CriminalCharge { get; set; }
     public string? Education { get; set; }
     public string? Transportation { get; set; }
@@ -160,7 +160,7 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
             EmploymentGoal = EmploymentGoal,
             EmployerID = EmployerID,
             Status = Status,
-            Benefit = Benefit,
+            Benefits = Benefits,
             CriminalCharge = CriminalCharge,
             Education = Education,
             Transportation = Transportation,

@@ -11,6 +11,7 @@ public class CounselorSummary {
     public string? Email { get; init; }
     public string? SecretaryName { get; init; }
 
+    // Computed Properties
     public string FormattedCaseLoadID => CaseLoadID == null ? "No case load ID on file." : $"Case Load: {CaseLoadID}";
 
     public override string ToString() {

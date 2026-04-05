@@ -212,7 +212,7 @@ public sealed partial class CreateClient : Page {
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             if (item.Tag is Benefit benefit) {
-                ViewModel.Benefit = benefit.Value;
+                ViewModel.Benefits = benefit.Value;
                 BenefitDropDown.Content = benefit.Value;
             } else if (item.Tag is Status status) {
                 ViewModel.Status = status.Value;

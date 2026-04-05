@@ -17,11 +17,8 @@ public class CounselorService : ICounselorService {
     // -----------------------------
     // GET
     // -----------------------------
-    public Task<List<CounselorSummary>?> GetAllCounselorSummariesAsync() {
+    public Task<List<CounselorSummary>?> GetAllCounselorsAsync() {
         return _network.GetAsync<List<CounselorSummary>>(Endpoints.CounselorSummaries);
-    }
-    public Task<List<Counselor>?> GetAllCounselorsAsync() {
-        return _network.GetAsync<List<Counselor>>(Endpoints.Counselors);
     }
 
     public Task<CounselorDetail?> GetCounselorAsync(int id) {

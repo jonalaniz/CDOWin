@@ -10,6 +10,7 @@ public class CounselorUpdate {
     public string? SecretaryName { get; set; }
     public string? SecretaryEmail { get; set; }
 
+    // Computed Properties
     public override string? ToString() {
         return CaseLoadID == null ? Name : $"{Name}, Case Load: {CaseLoadID}";
     }

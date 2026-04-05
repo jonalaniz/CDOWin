@@ -37,7 +37,7 @@ public class NewClient {
     public string? EmploymentGoal { get; init; }
     public int? EmployerID { get; init; }
     public string? Status { get; init; }
-    public string? Benefit { get; init; }
+    public string? Benefits { get; init; }
     public string? CriminalCharge { get; init; }
     public string? Education { get; init; }
     public string? Transportation { get; init; }

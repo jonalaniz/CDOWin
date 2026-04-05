@@ -54,10 +54,6 @@ public class ClientService : IClientService {
     }
 
     // -----------------------------
-    // DELETE Methods
-    // -----------------------------
-
-    // -----------------------------
     // Utility Methods
     // -----------------------------
     private static AppError TranslateError(AppError error) =>

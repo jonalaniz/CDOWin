@@ -13,7 +13,6 @@ public class ClientExport() {
     public required string State { get; init; }
     public required bool Active { get; init; }
     public required bool TTW { get; init; }
-
     public string? CaseID { get; init; }
     public string? Address1 { get; init; }
     public string? Address2 { get; init; }
@@ -23,13 +22,9 @@ public class ClientExport() {
     public string? Phone2 { get; init; }
     public string? Phone3 { get; init; }
     public string? EmploymentGoal { get; init; }
-
     public string? Email { get; init; }
     public string? EmailDescription { get; init; }
     public string? Email2 { get; init; }
     public string? EmailDescription2 { get; init; }
-
     public SAExport[]? ServiceAuthorizations { get; init; }
-
-    // add placements export
 }

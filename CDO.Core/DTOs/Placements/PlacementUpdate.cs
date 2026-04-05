@@ -22,7 +22,7 @@ public class PlacementUpdate {
     public string? Benefits { get; set; }
 
     // SA/SADetail Specific
-    public int? InvoiceID { get; set; }
+    public int? SaID { get; set; }
     public string? SaNumber { get; set; }
 
     // ClientDetail Specific

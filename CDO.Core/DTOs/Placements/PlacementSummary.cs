@@ -11,7 +11,7 @@ public class PlacementSummary {
     public string? Wages { get; init; }
 
     // SA/SADetail Specific
-    public int? InvoiceID { get; init; }
+    public int? SaID { get; init; }
     public string? SaNumber { get; init; }
 
     // ClientDetail Specific

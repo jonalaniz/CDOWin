@@ -93,7 +93,7 @@ public class DataCoordinator {
 
     public async Task<IReadOnlyList<CounselorSummary>> GetCounselorsAsync(bool force = false) {
         if (force || Counselors.IsStale(CounselorTTL)) {
-            var data = await _counselors.GetAllCounselorSummariesAsync();
+            var data = await _counselors.GetAllCounselorsAsync();
             if (data != null) Counselors.Update(data);
         }
 

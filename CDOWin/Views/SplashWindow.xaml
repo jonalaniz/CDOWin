@@ -30,17 +30,21 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="84"/>
+                <RowDefinition Height="12"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="1" Margin="170,8,8,2"
+            <TextBlock Grid.Row="1" Margin="160,8,8,2"
+                       Text="v1.0, Build 10"
                        Foreground="{ThemeResource SystemAccentColor}"
                        Opacity="0.8"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" 
-                       FontSize="24"
+                       FontSize="18"
                        x:Name="VersionBlock"/>
-            <ProgressBar Grid.Row="2" VerticalAlignment="Bottom"
+            <TextBlock Grid.Row="2" Margin="10,0"
+                       Text="Loading..."/>
+            <ProgressBar Grid.Row="3" VerticalAlignment="Bottom"
                          Foreground="{ThemeResource SystemAccentColorLight1}"
                          IsIndeterminate="True"/>
         </Grid>

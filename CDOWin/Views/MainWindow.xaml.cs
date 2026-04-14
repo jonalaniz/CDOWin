@@ -57,6 +57,6 @@ public sealed partial class MainWindow : Window {
 
     private string GetAppVersion() {
         var version = Package.Current.Id.Version;
-        return $"Beta {version.Major}.{version.Minor}.{version.Build}";
+        return $"Version {version.Major}.{version.Minor}";
     }
 }

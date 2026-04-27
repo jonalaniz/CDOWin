@@ -10,7 +10,7 @@ public record class PlacementDetail(
     string? Position,
     DateTime? HireDate,
     DateTime? EndDate,
-    float? DaysOnJob,
+    int? DaysOnJob,
     string? Day1,
     string? Day2,
     string? Day3,

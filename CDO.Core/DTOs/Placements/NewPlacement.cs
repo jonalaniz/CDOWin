@@ -7,7 +7,7 @@ public class NewPlacement {
     public string? Position { get; init; }
     public DateTime? HireDate { get; init; }
     public DateTime? EndDate { get; init; }
-    public float? DaysOnJob { get; init; }
+    public int? DaysOnJob { get; init; }
     public string? Day1 { get; init; }
     public string? Day2 { get; init; }
     public string? Day3 { get; init; }

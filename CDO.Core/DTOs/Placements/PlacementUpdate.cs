@@ -7,7 +7,7 @@ public class PlacementUpdate {
     public string? Position { get; set; }
     public DateTime? HireDate { get; set; }
     public DateTime? EndDate { get; set; }
-    public float? DaysOnJob { get; set; }
+    public int? DaysOnJob { get; set; }
     public string? Day1 { get; set; }
     public string? Day2 { get; set; }
     public string? Day3 { get; set; }

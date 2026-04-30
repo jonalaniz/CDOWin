@@ -1,4 +1,5 @@
-﻿using CDO.Core.DTOs.Counselors;
+﻿using CDO.Core.DTOs.Clients.Notes;
+using CDO.Core.DTOs.Counselors;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
@@ -22,6 +23,7 @@ public record class ClientDetail(
     Reminder[] Reminders,
     SADetail[]? Sas,
     PlacementDetail[]? Placements,
+    ClientNote[]? ClientNotes,
 
     DateTime? StartDate,
     string? Ssn,
@@ -44,7 +46,6 @@ public record class ClientDetail(
     string? Email2,
     string? Email2Identity,
     string Disability,
-    string? ClientNotes,
     string? Conditions,
     string? DocumentFolder,
     string? EmploymentGoal,

@@ -27,7 +27,6 @@ public sealed partial class Notes : Page {
     // Click Handlers
     // =========================
     private void EditButton_Click(object sender, RoutedEventArgs e) {
-        NotesBox.IsReadOnly = false;
         SaveButton.Visibility = Visibility.Visible;
         NewButton.Visibility = Visibility.Collapsed;
     }
@@ -37,10 +36,9 @@ public sealed partial class Notes : Page {
 
         SaveButton.Visibility = Visibility.Collapsed;
         NewButton.Visibility = Visibility.Visible;
-        NotesBox.IsReadOnly = true;
 
         var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
-        updateVM.UpdatedClient.ClientNotes = NotesBox.Text.NormalizeString();
+        // updateVM.UpdatedClient.ClientNotes = NotesBox.Text.NormalizeString();
 
         var result = await ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
         if (!result.IsSuccess)

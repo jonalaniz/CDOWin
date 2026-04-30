@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notes="using:CDO.Core.DTOs.Clients.Notes"
     mc:Ignorable="d">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -51,11 +53,44 @@
                 </AppBarButton.Flyout>
             </AppBarButton>
         </CommandBar>
-
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,0,12,12"
-                 IsReadOnly="True" CornerRadius="4" VerticalAlignment="Stretch"
-                 Style="{StaticResource MultiLineTextBoxStyle}"
-                 TextWrapping="Wrap" MaxHeight="1500" x:Name="NotesBox"
-                 Text="{x:Bind ViewModel.Selected.ClientNotes, Mode=OneWay}"/>
+        
+        <!-- Search Bar -->
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 Margin="8,0,8,8" PlaceholderText="Search Notes"
+                 Text=""/>
+        
+        <!-- Notes List -->
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,2,8,0"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                  ItemsSource="{x:Bind ViewModel.Selected.ClientNotes, Mode=OneWay}"
+                  IsItemClickEnabled="False" SelectionMode="None"
+                  BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                  BorderThickness="1,1,1,0"
+                  CornerRadius="4,4,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="notes:ClientNote">
+                    <Grid Margin="0,10,10,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Bold" 
+                                   Text="{x:Bind FormattedDate}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold" 
+                                   Text="{x:Bind Author}"
+                                   Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,4,0,0"
+                                   Text="{x:Bind Note}" TextWrapping="WrapWholeWords"
+                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

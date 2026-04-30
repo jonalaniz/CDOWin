@@ -8,5 +8,5 @@ public class ClientNote() {
     required public string Note { get; init; }
     public string? Author { get; init; }
 
-    public string FormattedDate => $"{Date.ToShortDateString()} {Date.ToShortTimeString()}";
+    public string FormattedDate => $"{Date.ToLocalTime()}";
 }

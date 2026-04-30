@@ -1,21 +1,20 @@
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
 using Microsoft.UI.Xaml.Controls;
-using System;
 
 namespace CDOWin.Views.Clients.Dialogs;
 
-public sealed partial class UpdateNotes : Page {
+public sealed partial class CreateNote : Page {
 
     // =========================
     // Dependencies
     // =========================
-    public ClientUpdateViewModel ViewModel;
+    public CreateNoteViewModel ViewModel;
 
     // =========================
     // Constructor
     // =========================
-    public UpdateNotes(ClientUpdateViewModel viewModel) {
+    public CreateNote(CreateNoteViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
     }
@@ -32,17 +31,6 @@ public sealed partial class UpdateNotes : Page {
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        var notes = BuildNotes(text);
-        ViewModel.UpdatedClient.ClientNotes = notes;
-    }
-
-    // =========================
-    // Utility Methods
-    // =========================
-    private string BuildNotes(string note) {
-        var date = DateTime.Now;
-        var end = "++++++++++++++++++++++++";
-        var newNote = $"{date.ToString()}\n\n{note}\n\n{end}\n\n";
-        return newNote + ViewModel.OriginalClient.ClientNotes;
+        ViewModel.Note = text;
     }
 }

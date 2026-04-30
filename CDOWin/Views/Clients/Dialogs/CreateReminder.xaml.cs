@@ -54,6 +54,6 @@ public sealed partial class CreateReminder : Page {
         // Set our date
         var newDate = offset.AddDays(days);
         DatePicker.Date = newDate;
-        ViewModel.Date = newDate.DateTime.Date.ToUniversalTime();
+        ViewModel.Date = newDate.DateTime.Date;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CDO.Core.DTOs;
 using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Counselors;
 using CDO.Core.DTOs.Employers;
 using CDO.Core.DTOs.Placements;
@@ -17,6 +18,10 @@ namespace CDO.Core.Serialization;
 
 [JsonSerializable(typeof(ClientSummary))]
 [JsonSerializable(typeof(List<ClientSummary>))]
+
+[JsonSerializable(typeof(ClientNote))]
+[JsonSerializable(typeof(NewNote))]
+[JsonSerializable(typeof(NoteUpdate))]
 
 [JsonSerializable(typeof(Counselor))]
 [JsonSerializable(typeof(CounselorDetail))]

@@ -1,5 +1,6 @@
 ﻿using CDO.Core.Constants;
 using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 
@@ -37,6 +38,12 @@ public class ClientService : IClientService {
         return Result<ClientDetail>.Success(result.Value!);
     }
 
+    public async Task<Result<ClientNote>> CreateClientNoteAsync(NewNote dto, int clientId) {
+        var result = await _network.PostAsync<NewNote, ClientNote>(Endpoints.Note(clientId), dto);
+        if (!result.IsSuccess) return Result<ClientNote>.Fail(TranslateError(result.Error!));
+        return Result<ClientNote>.Success(result.Value!);
+    }
+
     // -----------------------------
     // PATCH
     // -----------------------------
@@ -46,11 +53,21 @@ public class ClientService : IClientService {
         return Result.Success();
     }
 
+    public async Task<Result> UpdateClientNote(NewNote dto, int clientId, int noteId) {
+        var result = await _network.UpdateAsync(Endpoints.Note(clientId, noteId), dto);
+        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
+        return Result.Success();
+    }
+
     // -----------------------------
     // DELETE Methods
     // -----------------------------
     public Task<Result> DeleteClientAsync(int id) {
         return _network.DeleteAsync(Endpoints.Client(id));
+    }
+
+    public Task<Result> DeleteClientNoteAsync(int clientId, int noteId) {
+        return _network.DeleteAsync(Endpoints.Note(clientId, noteId));
     }
 
     // -----------------------------

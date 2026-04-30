@@ -1,5 +1,4 @@
 using CDOWin.ErrorHandling;
-using CDOWin.Extensions;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
@@ -47,23 +46,25 @@ public sealed partial class Notes : Page {
 
     private async void NewButton_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null || sender is null) return;
-        var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
+        var createVM = new CreateNoteViewModel(AppServices.ClientService, ViewModel.Selected.Id);
 
         ContentDialog dialog = new() {
             XamlRoot = this.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            PrimaryButtonText = "Add to Notes",
+            PrimaryButtonText = "Create Note",
             CloseButtonText = "Cancel",
             DefaultButton = ContentDialogButton.Primary,
-            Title = "Add New Note",
-            Content = new UpdateNotes(updateVM)
+            Title = "New Note",
+            Content = new CreateNote(createVM)
         };
 
         var result = await dialog.ShowAsync();
         if (result != ContentDialogResult.Primary) return;
 
-        var updateResult = await ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
+        var updateResult = await createVM.CreateClientNoteAsync();
         if (!updateResult.IsSuccess)
             ErrorHandler.Handle(updateResult, this.XamlRoot);
+
+        _ = ViewModel.ReloadClientAsync();
     }
 }

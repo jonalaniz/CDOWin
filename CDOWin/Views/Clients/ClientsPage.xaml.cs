@@ -40,7 +40,7 @@ public sealed partial class ClientsPage : Page {
     // Click Handlers
     // =========================
     private async void NewClient_Click(object sender, RoutedEventArgs e) {
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, "New ClientDetail");
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, "New Client");
         var createClientVM = AppServices.CreateClientViewModel();
         var createClientPage = new CreateClient(createClientVM);
         dialog.Content = createClientPage;

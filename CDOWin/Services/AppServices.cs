@@ -159,6 +159,10 @@ public static class AppServices {
         return new CreateClientViewModel(ClientService);
     }
 
+    public static CreateNoteViewModel CreateNoteViewModel(int id) {
+        return new CreateNoteViewModel(ClientService, id);
+    }
+
     public static CreateEmployerViewModel CreateEmployerViewModel() {
         return new CreateEmployerViewModel(EmployerService);
     }

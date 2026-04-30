@@ -5,6 +5,7 @@ using CDOWin.Views.Clients.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.ComponentModel;
 
 namespace CDOWin.Views.Clients.Inspectors;
 
@@ -46,24 +47,29 @@ public sealed partial class Notes : Page {
 
     private async void NewButton_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null || sender is null) return;
-        var createVM = new CreateNoteViewModel(AppServices.ClientService, ViewModel.Selected.Id);
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, "New Note");
+        var createNoteVM = AppServices.CreateNoteViewModel(ViewModel.Selected.Id);
+        var createNotePage = new CreateNote(createNoteVM);
+        dialog.Content = createNotePage;
+        dialog.IsPrimaryButtonEnabled = createNoteVM.CanSave;
 
-        ContentDialog dialog = new() {
-            XamlRoot = this.XamlRoot,
-            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            PrimaryButtonText = "Create Note",
-            CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
-            Title = "New Note",
-            Content = new CreateNote(createVM)
+        PropertyChangedEventHandler handler = (_, args) => {
+            if (args.PropertyName == nameof(createNoteVM.CanSave))
+                dialog.IsPrimaryButtonEnabled = createNoteVM.CanSave;
         };
 
+        createNoteVM.PropertyChanged += handler;
+
         var result = await dialog.ShowAsync();
+        createNoteVM.PropertyChanged -= handler;
+
         if (result != ContentDialogResult.Primary) return;
 
-        var updateResult = await createVM.CreateClientNoteAsync();
-        if (!updateResult.IsSuccess)
+        var updateResult = await createNoteVM.CreateClientNoteAsync();
+        if (!updateResult.IsSuccess) {
             ErrorHandler.Handle(updateResult, this.XamlRoot);
+            return;
+        }
 
         _ = ViewModel.ReloadClientAsync();
     }

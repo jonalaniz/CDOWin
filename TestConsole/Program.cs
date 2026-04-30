@@ -9,10 +9,20 @@ var network = new NetworkService();
 network.Initialize("https://api.jonalaniz.com", apiKey);
 //network.Initialize("http://127.0.0.1:8080", "RISgMANlIwHwqLPvOTDs8ecmz37VyW8O");
 
-IServiceAuthorizationService _service = new ServiceAuthorizationService(network);
+IClientService _service = new ClientService(network);
 
-var invoices = await _service.GetAllServiceAuthorizationsAsync();
+var clients = await _service.GetAllClientsAsync();
 
-foreach (var invoice in invoices) {
-    Console.WriteLine($"{invoice.CounselorName}: {invoice.CounselorID}");
+var size = 0;
+var note = "";
+
+foreach (var client in clients) {
+    if (client.ClientNotes.Length > size)
+    {
+        size = client.ClientNotes.Length;
+        note = client.ClientNotes;
+    }
 }
+
+Console.WriteLine($"Longest note: {note}");
+Console.WriteLine($"Size: {size}");

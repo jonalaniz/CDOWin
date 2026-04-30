@@ -161,7 +161,7 @@ public partial class ClientsViewModel : ObservableObject {
 
     public async Task<Result> DeleteClientAsync(int id) {
         var result = await _service.DeleteClientAsync(id);
-        if(result.IsSuccess)
+        if (result.IsSuccess)
             OnUI(() => RemoveDeletedClient(id));
         return result;
     }
@@ -226,7 +226,7 @@ public partial class ClientsViewModel : ObservableObject {
             .Where(c => c.Id != id)
             .ToList();
 
-        if(Filtered.FirstOrDefault(c => c.Id == id) is ClientSummary client) {
+        if (Filtered.FirstOrDefault(c => c.Id == id) is ClientSummary client) {
             Filtered.Remove(client);
             Selected = null;
             SelectedSummary = null;

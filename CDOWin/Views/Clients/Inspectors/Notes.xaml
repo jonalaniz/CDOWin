@@ -26,27 +26,21 @@
 
         <!-- CommandBar -->
         <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-            <!-- Save Note -->
-            <AppBarButton Width="56" x:Name="SaveButton" IsCompact="False" Visibility="Collapsed"
-                          Click="SaveButton_Click" ToolTipService.ToolTip="Save">
-                <FontIcon Glyph="&#xE74E;" Style="{StaticResource SingleIconFontStyle}"/>
-            </AppBarButton>
-
             <!-- New Note -->
             <AppBarButton Width="56" Click="NewButton_Click" x:Name="NewButton" IsCompact="False" ToolTipService.ToolTip="New Client">
                 <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
             </AppBarButton>
 
-            <!-- Edit Menu -->
+            <!-- Export Menu -->
             <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                        <MenuFlyoutItem Text="Edit" Click="EditButton_Click">
+                        <MenuFlyoutItem Text="Export Notes" Click="Export_Click">
                             <MenuFlyoutItem.Icon>
-                                <SymbolIcon Symbol="Edit" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                <FontIcon Glyph="&#xEDE1;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                     </MenuFlyout>

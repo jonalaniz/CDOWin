@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace CDOWin.Views.Clients.Inspectors;
 
@@ -26,23 +27,8 @@ public sealed partial class Notes : Page {
     // =========================
     // Click Handlers
     // =========================
-    private void EditButton_Click(object sender, RoutedEventArgs e) {
-        SaveButton.Visibility = Visibility.Visible;
-        NewButton.Visibility = Visibility.Collapsed;
-    }
-
-    private async void SaveButton_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.Selected == null) return;
-
-        SaveButton.Visibility = Visibility.Collapsed;
-        NewButton.Visibility = Visibility.Visible;
-
-        var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
-        // updateVM.UpdatedClient.ClientNotes = NotesBox.Text.NormalizeString();
-
-        var result = await ViewModel.UpdateClientAsync(updateVM.UpdatedClient);
-        if (!result.IsSuccess)
-            ErrorHandler.Handle(result, this.XamlRoot);
+    private void Export_Click(object sender, RoutedEventArgs e) {
+        Debug.WriteLine("Export all notes");
     }
 
     private async void NewButton_Click(object sender, RoutedEventArgs e) {

@@ -7,14 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
+    <Grid Width="400" RowSpacing="10" ColumnSpacing="12">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!-- Row 0: Notes -->
-        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="New Note" TextChanged="LabeledMultiLinePair_TextChanged"/>
+
+        <!-- Row 0: Date Picker -->
+        <DatePicker Grid.Row="0" x:Name="DatePicker" Margin="0" Padding="0"
+                    HorizontalAlignment="Stretch"
+                    Header="Date"/>
+
+        <!-- Row 1: Time Picker -->
+        <TimePicker Grid.Row="1" x:Name="TimePicker" Margin="0" Padding="0"
+                    HorizontalAlignment="Stretch"
+                    Header="Time"/>
+        
+        <!-- Row 1: Notes -->
+        <TextBox Grid.Row="2"
+                 Style="{StaticResource MultiLineTextBoxStyle}"
+                 Header="Note" TextChanged="LabeledMultiLinePair_TextChanged"/>
     </Grid>
 </Page>

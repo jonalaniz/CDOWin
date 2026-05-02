@@ -27,7 +27,7 @@ public interface IClientService {
     // -----------------------------
     public Task<Result> UpdateClientAsync(int id, ClientUpdate dto);
 
-    public Task<Result> UpdateClientNote(NewNote dto, int clientId, int noteId);
+    public Task<Result> UpdateClientNote(NoteUpdate dto, int clientId, int noteId);
 
     // -----------------------------
     // DELETE Methods

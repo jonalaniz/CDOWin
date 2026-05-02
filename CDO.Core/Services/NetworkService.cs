@@ -104,6 +104,8 @@ public class NetworkService : INetworkService {
             var content = new StringContent(json, encoding: Encoding.UTF8, MediaType);
             var response = await _httpClient.PatchAsync(endpoint, content);
 
+            Debug.WriteLine(json.ToString());
+
             if (response.IsSuccessStatusCode) { return Result.Success(); }
 
             return Result.Fail(MapHttpError(response.StatusCode));

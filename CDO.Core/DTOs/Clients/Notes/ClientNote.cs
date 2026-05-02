@@ -8,5 +8,5 @@ public class ClientNote() {
     required public string Note { get; init; }
     public string? Author { get; init; }
 
-    public string FormattedDate => $"{Date.ToLocalTime()}";
+    public string FormattedDate => $"{Date.ToLocalTime().ToString("MM/dd/yyyy hh:mm tt")}";
 }

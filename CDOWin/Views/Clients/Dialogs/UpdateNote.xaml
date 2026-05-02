@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="CDOWin.Views.Clients.Dialogs.CreateNote"
+    x:Class="CDOWin.Views.Clients.Dialogs.UpdateNote"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -16,17 +17,18 @@
 
         <!-- Row 0: Date Picker -->
         <DatePicker Grid.Row="0" x:Name="DatePicker" Margin="0" Padding="0"
-                    HorizontalAlignment="Stretch"
-                    Header="Date"/>
+                    HorizontalAlignment="Stretch" Header="Date" 
+                    DateChanged="DatePicker_DateChanged"/>
 
         <!-- Row 1: Time Picker -->
         <TimePicker Grid.Row="1" x:Name="TimePicker" Margin="0" Padding="0"
-                    HorizontalAlignment="Stretch"
-                    Header="Time"/>
-        
+                    HorizontalAlignment="Stretch" Header="Time"
+                    TimeChanged="TimePicker_TimeChanged"/>
+
         <!-- Row 1: Notes -->
         <TextBox Grid.Row="2" MaxHeight="200"
                  Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Note" TextChanged="LabeledMultiLinePair_TextChanged"/>
+                 Header="Note" Text="{x:Bind ViewModel.Original.Note}"
+                 TextChanged="Note_TextChanged"/>
     </Grid>
 </Page>

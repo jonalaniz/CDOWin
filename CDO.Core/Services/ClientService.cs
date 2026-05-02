@@ -53,7 +53,7 @@ public class ClientService : IClientService {
         return Result.Success();
     }
 
-    public async Task<Result> UpdateClientNote(NewNote dto, int clientId, int noteId) {
+    public async Task<Result> UpdateClientNote(NoteUpdate dto, int clientId, int noteId) {
         var result = await _network.UpdateAsync(Endpoints.Note(clientId, noteId), dto);
         if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
         return Result.Success();

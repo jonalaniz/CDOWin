@@ -1,3 +1,5 @@
+using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Clients.Notes;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -7,6 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CDOWin.Views.Clients.Inspectors;
 
@@ -58,5 +61,29 @@ public sealed partial class Notes : Page {
         }
 
         _ = ViewModel.ReloadClientAsync();
+    }
+
+    private async void Note_Click(object sender, RoutedEventArgs e) {
+        if (sender is Button button
+            && button.Tag is int id
+            && ViewModel.Selected is ClientDetail selected
+            && selected.ClientNotes != null
+            && selected.ClientNotes.FirstOrDefault(x => x.Id == id) is ClientNote note) {
+            var updateVM = new NoteUpdateViewModel(note);
+            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Note");
+            dialog.Content = new UpdateNote(updateVM);
+
+            var result = await dialog.ShowAsync();
+
+            if (result != ContentDialogResult.Primary) return;
+
+            var updateResult = await ViewModel.UpdateNoteAsync(updateVM.Updated, selected.Id, note.Id);
+            if (!updateResult.IsSuccess) {
+                ErrorHandler.Handle(updateResult, this.XamlRoot);
+                return;
+            }
+
+            _ = ViewModel.ReloadClientAsync();
+        }
     }
 }

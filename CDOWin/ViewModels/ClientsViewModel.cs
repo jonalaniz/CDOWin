@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs.Clients;
+using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
@@ -156,6 +157,11 @@ public partial class ClientsViewModel : ObservableObject {
 
             OnUI(() => UpdateSummaries());
         }
+        return result;
+    }
+
+    public async Task<Result> UpdateNoteAsync(NoteUpdate update, int clientId, int noteId) {
+        var result = await _service.UpdateClientNote(update, clientId, noteId);
         return result;
     }
 

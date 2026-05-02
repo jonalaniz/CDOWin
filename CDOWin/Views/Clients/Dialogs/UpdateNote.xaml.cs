@@ -27,7 +27,6 @@ public sealed partial class UpdateNote : Page {
     // =========================
     private void SetupTimeAndDatePickers() {
         var localDate = LocalOriginalTime();
-
         DatePicker.Date = new DateTimeOffset(localDate);
         TimePicker.Time = localDate.TimeOfDay;
     }
@@ -53,7 +52,6 @@ public sealed partial class UpdateNote : Page {
 
     private void TimePicker_TimeChanged(object sender, TimePickerValueChangedEventArgs e) {
         if (LocalOriginalTime().TimeOfDay == TimePicker.Time) return;
-
         UpdateDateAndTime();
     }
 

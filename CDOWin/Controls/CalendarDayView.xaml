@@ -9,38 +9,44 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Border Padding="6,6,6,0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="1">
+    <Border Padding="0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="1">
         <Grid Opacity="{x:Bind IsCurrentMonth, Mode=OneWay, Converter={StaticResource BoolTransparentConverter}}">
             <TextBlock Margin="0,0,-6,-20" Text="{x:Bind Date.Day, Mode=OneWay}" FontSize="82" FontWeight="SemiBold"
                        Opacity="0.2" Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                        HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-            <ScrollViewer>
-                <ItemsRepeater ItemsSource="{x:Bind Reminders, Mode=OneWay}">
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate x:DataType="models:Reminder">
-                            
-                            <!-- Button -->
-                            <Button Margin="0,0,0,4" Padding="8,4"
-                                    HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    Tag="{x:Bind Id}" Click="Button_Click">
-                                <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
+            <ListView CornerRadius="0" BorderThickness="0" SelectionMode="None"
+                      ItemsSource="{x:Bind Reminders, Mode=OneWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Reminder">
+                        <!-- Button -->
+                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
+                                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Tag="{x:Bind Id}" Click="Button_Click">
+                            <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                                    <TextBlock Grid.Column="0" FontSize="13" FontWeight="Bold" Text="{x:Bind ClientName}"/>
+                                <TextBlock Grid.Column="0" FontSize="13" FontWeight="Bold" Text="{x:Bind ClientName}"/>
 
-                                    <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               FontSize="13" FontWeight="Normal" TextWrapping="WrapWholeWords" 
-                                               Text="{x:Bind Description}"/>
-                                </Grid>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
-            </ScrollViewer>
+                                <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           FontSize="13" FontWeight="Normal" TextWrapping="WrapWholeWords" 
+                                           Text="{x:Bind Description}"/>
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Border>
 </UserControl>

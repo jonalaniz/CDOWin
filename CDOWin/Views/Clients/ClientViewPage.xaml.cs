@@ -254,7 +254,7 @@ public sealed partial class ClientViewPage : Page {
 
             switch (tag) {
                 case ClientEditType.Administrative:
-                    dialog.Title = "Edit ClientDetail";
+                    dialog.Title = "Edit Client";
                     dialog.Content = new UpdateAdminsitrative(updateVM);
                     break;
                 case ClientEditType.Personal:

@@ -25,7 +25,7 @@ public partial class CreateNoteViewModel(IClientService service, int clientId) :
 
     public DateTime Date = DateTime.UtcNow;
 
-    public string Author = Environment.UserName;
+    public string Author = char.ToUpper(Environment.UserName[0]) + Environment.UserName[1..];
 
     // =========================
     // Input Validation

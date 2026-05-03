@@ -110,7 +110,7 @@ public sealed partial class Notes : Page {
             && selected.ClientNotes != null
             && selected.ClientNotes.FirstOrDefault(x => x.Id == id) is ClientNote note) {
             var updateVM = new NoteUpdateViewModel(note);
-            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Note");
+            var dialog = DialogFactory.UpdateDialog(this.XamlRoot, $"Edit Note #{note.Id}");
             dialog.Content = new UpdateNote(updateVM);
 
             var result = await dialog.ShowAsync();

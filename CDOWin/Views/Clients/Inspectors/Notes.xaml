@@ -28,7 +28,7 @@
         <!-- CommandBar -->
         <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
             <!-- New Note -->
-            <AppBarButton Width="56" Click="NewButton_Click" x:Name="NewButton" IsCompact="False" ToolTipService.ToolTip="New Client">
+            <AppBarButton Width="56" Click="NewButton_Click" x:Name="NewButton" IsCompact="False" ToolTipService.ToolTip="New Note">
                 <FontIcon Glyph="&#xE710;" Style="{StaticResource SingleIconFontStyle}"/>
             </AppBarButton>
 
@@ -96,10 +96,10 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Bold"
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="4,0,0,0" FontWeight="Bold"
                                        Text="{x:Bind FormattedDate}"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold"
+                            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,4,0" FontWeight="Bold"
                                        Text="{x:Bind Author}"
                                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
                             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,4,0,0"

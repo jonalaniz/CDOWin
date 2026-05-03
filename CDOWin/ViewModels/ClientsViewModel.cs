@@ -144,6 +144,8 @@ public partial class ClientsViewModel : ObservableObject {
         Selected = await _service.GetClientAsync(Selected.Id);
     }
 
+
+    // Update Methods
     public async Task<Result> UpdateClientAsync(ClientUpdate update) {
         if (Selected == null) return Result<ClientDetail>.Fail(new AppError(ErrorKind.Validation, "ClientDetail not selected.", null));
 
@@ -165,10 +167,16 @@ public partial class ClientsViewModel : ObservableObject {
         return result;
     }
 
+    // Delete Methods
     public async Task<Result> DeleteClientAsync(int id) {
         var result = await _service.DeleteClientAsync(id);
         if (result.IsSuccess)
             OnUI(() => RemoveDeletedClient(id));
+        return result;
+    }
+
+    public async Task<Result> DeleteNoteAsync(int clientId, int noteId) {
+        var result = await _service.DeleteClientNoteAsync(clientId, noteId);
         return result;
     }
 

@@ -22,6 +22,7 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(ClientNote))]
 [JsonSerializable(typeof(NewNote))]
 [JsonSerializable(typeof(NoteUpdate))]
+[JsonSerializable(typeof(FormattedNote))]
 
 [JsonSerializable(typeof(Counselor))]
 [JsonSerializable(typeof(CounselorDetail))]

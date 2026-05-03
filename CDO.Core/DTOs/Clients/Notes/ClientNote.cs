@@ -9,4 +9,16 @@ public class ClientNote() {
     public string? Author { get; init; }
 
     public string FormattedDate => $"{Date.ToLocalTime().ToString("MM/dd/yyyy hh:mm tt")}";
+
+    public FormattedNote AsFormattedNote() {
+        return new FormattedNote {
+            Date = FormattedDate,
+            Note = Note
+        };
+    }
+}
+
+public class FormattedNote() {
+    required public String Date { get; init; }
+    required public string Note { get; init; }
 }

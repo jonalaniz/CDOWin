@@ -8,7 +8,7 @@
     xmlns:notes="using:CDO.Core.DTOs.Clients.Notes"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Visibility="{x:Bind ViewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -68,10 +68,25 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="notes:ClientNote">
-                    <Button Margin="0" CornerRadius="0"
-                            Background="Transparent" BorderThickness="0,1,0,0"
+                    <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
+                            Background="Transparent" 
                             HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
                             Click="Note_Click" Tag="{x:Bind Id}">
+                        <Button.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Edit..." Click="Edit_Click" Tag="{x:Bind Id}">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Symbol="Edit" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="Delete..." Click="Delete_Click" Tag="{x:Bind Id}">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.ContextFlyout>
                         <Grid Margin="0,4,0,4" RowSpacing="4" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>

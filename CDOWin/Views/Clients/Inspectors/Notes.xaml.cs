@@ -1,14 +1,15 @@
 using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
+using CDOWin.Composers;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
+using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 
 namespace CDOWin.Views.Clients.Inspectors;
@@ -32,7 +33,10 @@ public sealed partial class Notes : Page {
     // Click Handlers
     // =========================
     private void Export_Click(object sender, RoutedEventArgs e) {
-        Debug.WriteLine("Export all notes");
+        if (ViewModel.Selected is ClientDetail selected
+            && selected.ClientNotes != null) {
+            ExportNotes(selected.ClientNotes);
+        }
     }
 
     private async void NewButton_Click(object sender, RoutedEventArgs e) {
@@ -65,9 +69,46 @@ public sealed partial class Notes : Page {
     }
 
     private async void Note_Click(object sender, RoutedEventArgs e) {
-        if (sender is Button button
-            && button.Tag is int id
-            && ViewModel.Selected is ClientDetail selected
+        if (sender is Button button && button.Tag is int id)
+            ShowEditPageFor(id);
+    }
+
+    private async void Edit_Click(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item && item.Tag is int id)
+            ShowEditPageFor(id);
+
+    }
+
+    private async void Delete_Click(object sender, RoutedEventArgs e) {
+        if (sender is MenuFlyoutItem item && item.Tag is int id)
+            ShowDeletePageFor(id);
+    }
+
+    // =========================
+    // Utility Methods
+    // =========================
+    private async void ShowDeletePageFor(int id) {
+        if (ViewModel.Selected is ClientDetail selected
+            && selected.ClientNotes != null
+            && selected.ClientNotes.FirstOrDefault(x => x.Id == id) is ClientNote note) {
+            var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Note");
+            dialog.Content = new DeletePage();
+
+            var result = await dialog.ShowAsync();
+            if (result != ContentDialogResult.Primary) return;
+
+            var deleteResult = await ViewModel.DeleteNoteAsync(selected.Id, note.Id);
+            if (!deleteResult.IsSuccess) {
+                ErrorHandler.Handle(deleteResult, this.XamlRoot);
+                return;
+            }
+
+            _ = ViewModel.ReloadClientAsync();
+        }
+    }
+
+    private async void ShowEditPageFor(int id) {
+        if (ViewModel.Selected is ClientDetail selected
             && selected.ClientNotes != null
             && selected.ClientNotes.FirstOrDefault(x => x.Id == id) is ClientNote note) {
             var updateVM = new NoteUpdateViewModel(note);
@@ -75,7 +116,6 @@ public sealed partial class Notes : Page {
             dialog.Content = new UpdateNote(updateVM);
 
             var result = await dialog.ShowAsync();
-
             if (result != ContentDialogResult.Primary) return;
 
             var updateResult = await ViewModel.UpdateNoteAsync(updateVM.Updated, selected.Id, note.Id);
@@ -86,5 +126,11 @@ public sealed partial class Notes : Page {
 
             _ = ViewModel.ReloadClientAsync();
         }
+    }
+
+    private async void ExportNotes(ClientNote[] notes) {
+        var composer = new NotesComposer();
+        var result = composer.ComposeNotesToFile(notes);
+        if (!result.IsSuccess) ErrorHandler.Handle(result, this.XamlRoot);
     }
 }

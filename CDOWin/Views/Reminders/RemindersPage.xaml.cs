@@ -142,9 +142,8 @@ public sealed partial class RemindersPage : Page {
             dialog.Content = new DeletePage();
 
             var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary) {
+            if (result == ContentDialogResult.Primary)
                 await ViewModel.DeleteReminderAsync(id);
-            }
         }
     }
 

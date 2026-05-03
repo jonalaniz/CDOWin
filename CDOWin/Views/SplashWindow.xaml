@@ -30,15 +30,15 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="12"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="1" Margin="160,8,8,2"
-                       Text="v1.0, Build 10"
-                       Foreground="{ThemeResource SystemAccentColor}"
-                       Opacity="0.8"
-                       HorizontalAlignment="Left"
+            <TextBlock Grid.Row="1" Margin="0,8,46,2"
+                       Text="Version 1.1.0"
+                       Foreground="GhostWhite"
+                       Opacity="0.9"
+                       HorizontalAlignment="Right"
                        FontWeight="SemiBold" 
                        FontSize="18"
                        x:Name="VersionBlock"/>

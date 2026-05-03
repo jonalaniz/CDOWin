@@ -24,6 +24,6 @@ public sealed partial class SplashWindow : WinUIEx.WindowEx {
 
     private string GetAppVersion() {
         var version = Package.Current.Id.Version;
-        return $"v{version.Major}.{version.Minor} Build {version.Build}";
+        return $"Version {version.Major}.{version.Minor}.{version.Build}";
     }
 }

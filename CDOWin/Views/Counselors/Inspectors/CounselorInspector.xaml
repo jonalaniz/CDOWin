@@ -10,7 +10,7 @@
     xmlns:control="using:CDOWin.Controls"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="{ThemeResource CardBackgroundFillColorSecondary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

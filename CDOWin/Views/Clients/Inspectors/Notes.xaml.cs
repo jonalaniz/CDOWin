@@ -32,9 +32,8 @@ public sealed partial class Notes : Page {
     // Click Handlers
     // =========================
     private void Export_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected is ClientDetail selected
-            && selected.ClientNotes != null) {
-            ExportNotes(selected.ClientNotes);
+        if (ViewModel.FilteredNotes.Count > 0) {
+            ExportNotes(ViewModel.FilteredNotes.ToArray());
         }
     }
 

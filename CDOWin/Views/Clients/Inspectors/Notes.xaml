@@ -49,49 +49,53 @@
         </CommandBar>
         
         <!-- Search Bar -->
+        
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                  Margin="10,0,10,8" PlaceholderText="Search Notes"
                  Text=""/>
+        
+        <!-- Notes ListView -->
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                  CornerRadius="0" BorderThickness="0" SelectionMode="None"
+                  ItemsSource="{x:Bind ViewModel.Selected.ClientNotes, Mode=OneWay}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="notes:ClientNote">
+                    <Button Margin="0" CornerRadius="0"
+                            Background="Transparent" BorderThickness="0,1,0,0"
+                            HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                            Click="Note_Click" Tag="{x:Bind Id}">
+                        <Grid Margin="0,4,0,4" RowSpacing="4" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Bold"
+                                       Text="{x:Bind FormattedDate}"
+                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold"
+                                       Text="{x:Bind Author}"
+                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,4,0,0"
+                                       Text="{x:Bind Note}" TextWrapping="Wrap"
+                                       IsReadOnly="True"
+                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
 
-        <!-- Notes ItemRepeater -->
-        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                Margin="10,2,10,0" CornerRadius="4,4,0,0" BorderThickness="1,1,0,1"
-                Background="{ThemeResource CardBackgroundFillColorDefault}"
-                BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
-            <ScrollViewer>
-                    <ItemsRepeater Grid.Row="0" ItemsSource="{x:Bind ViewModel.Selected.ClientNotes, Mode=OneWay}">
-                        <ItemsRepeater.ItemTemplate>
-                            <DataTemplate x:DataType="notes:ClientNote">
-                                <Button Margin="0" CornerRadius="0" 
-                                        Background="Transparent" BorderThickness="0,0,0,1"
-                                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                        Click="Note_Click" Tag="{x:Bind Id}">
-                                    <Grid Margin="0,4,0,4">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Bold"
-                                               Text="{x:Bind FormattedDate}"
-                                               Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold"
-                                               Text="{x:Bind Author}"
-                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,4,0,0"
-                                               Text="{x:Bind Note}" TextWrapping="WrapWholeWords"
-                                               IsTextSelectionEnabled="True"
-                                               Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-
-                                    </Grid>
-                                </Button>
-                            </DataTemplate>
-                        </ItemsRepeater.ItemTemplate>
-                    </ItemsRepeater>
-            </ScrollViewer>
-        </Border>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

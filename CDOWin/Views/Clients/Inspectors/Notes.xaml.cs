@@ -26,7 +26,6 @@ public sealed partial class Notes : Page {
     // =========================
     public Notes() {
         InitializeComponent();
-        // update when new item selected
     }
 
     // =========================

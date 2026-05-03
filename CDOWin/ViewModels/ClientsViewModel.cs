@@ -62,6 +62,13 @@ public partial class ClientsViewModel : ObservableObject {
     [ObservableProperty]
     public partial bool IsFiltered { get; set; } = true;
 
+    // Notes Specific
+    [ObservableProperty]
+    public partial ObservableCollection<ClientNote> FilteredNotes { get; private set; } = [];
+
+    [ObservableProperty]
+    public partial string NotesSearchQuery { get; set; } = string.Empty;
+
 
     // =========================
     // Constructor
@@ -86,6 +93,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Property Change Methods
     // =========================
     partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnNotesSearchQueryChanged(string value) => ApplyNotesFilter();
     partial void OnIsFilteredChanged(bool value) => ApplyFilter();
 
     private void OnRequestSelectedClientChange(int clientId) {
@@ -101,12 +109,14 @@ public partial class ClientsViewModel : ObservableObject {
         // Notify the selection service
         _selectionService.SelectedClient = value;
 
-        // Setup Placements/SAs
+        // Setup Placements/SAs/Notes
         if (value.Sas is not null)
             SetupSAs(value.Sas);
 
         if (value.Placements is not null)
             SetupPlacements(value.Placements);
+
+        ApplyNotesFilter();
     }
 
     // =========================
@@ -226,6 +236,20 @@ public partial class ClientsViewModel : ObservableObject {
         OnUI(() => {
             Filtered = new ObservableCollection<ClientSummary>(result);
             ReSelect(previousSelection);
+        });
+    }
+
+    private void ApplyNotesFilter() {
+        if (Selected == null || Selected.ClientNotes == null) return;
+
+        IEnumerable<ClientNote> result = Selected.ClientNotes;
+        if (!string.IsNullOrWhiteSpace(NotesSearchQuery)) {
+            var query = NotesSearchQuery.Trim().ToLower();
+            result = result.Where(n => n.Note.Contains(query, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        OnUI(() => {
+            FilteredNotes = new ObservableCollection<ClientNote>(result);
         });
     }
 

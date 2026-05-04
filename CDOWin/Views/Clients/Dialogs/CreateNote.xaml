@@ -16,13 +16,13 @@
 
         <!-- Row 0: Date Picker -->
         <DatePicker Grid.Row="0" x:Name="DatePicker" Margin="0" Padding="0"
-                    HorizontalAlignment="Stretch"
-                    Header="Date"/>
+                    HorizontalAlignment="Stretch" Header="Date"
+                    DateChanged="DatePicker_DateChanged"/>
 
         <!-- Row 1: Time Picker -->
         <TimePicker Grid.Row="1" x:Name="TimePicker" Margin="0" Padding="0"
-                    HorizontalAlignment="Stretch"
-                    Header="Time"/>
+                    HorizontalAlignment="Stretch" Header="Time"
+                    TimeChanged="TimePicker_TimeChanged"/>
         
         <!-- Row 1: Notes -->
         <TextBox Grid.Row="2" MaxHeight="200"

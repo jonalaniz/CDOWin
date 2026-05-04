@@ -41,4 +41,26 @@ public sealed partial class CreateNote : Page {
 
         ViewModel.Note = text;
     }
+
+    private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e) {
+        UpdateDateAndTime();
+    }
+
+    private void TimePicker_TimeChanged(object sender, TimePickerValueChangedEventArgs e) {
+        UpdateDateAndTime();
+    }
+
+    private void UpdateDateAndTime() {
+        if (TimePicker.Time is TimeSpan timeSpan && DatePicker.Date is DateTimeOffset offset) {
+            ViewModel.Date = new DateTime(
+                    offset.Year,
+                    offset.Month,
+                    offset.Day,
+                    timeSpan.Hours,
+                    timeSpan.Minutes,
+                    timeSpan.Seconds,
+                    DateTimeKind.Local
+                    ).ToUniversalTime();
+        }
+    }
 }

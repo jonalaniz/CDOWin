@@ -42,6 +42,14 @@
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1"
                         Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton Width="56"
+                              x:Name="ToogleSortButton"
+                              IsCompact="False"
+                              ToolTipService.ToolTip="Sort"
+                              Click="ToggleSort_Click">
+                    <FontIcon Style="{StaticResource SingleIconFontStyle}"
+                              Glyph="&#xE8CB;"/>
+                </AppBarButton>
                 <AppBarToggleButton Width="56"
                                     IsCompact="False"
                                     ToolTipService.ToolTip="Filter Active"

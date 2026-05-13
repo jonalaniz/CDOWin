@@ -187,9 +187,9 @@ public partial class RemindersViewModel : ObservableObject {
 
         _cache = updated;
 
-        if (Filter == RemindersFilter.Client) {
+        // Check if reminders for client specific contains the note
+        if (ClientSpecific.FirstOrDefault(r => r.Id == id) != null)
             _dispatcher.TryEnqueue(() => ClientSpecific = UpdateReminder(id, reminder, ClientSpecific));
-        }
 
         _dispatcher.TryEnqueue(ApplyFilter);
     }

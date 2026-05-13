@@ -54,4 +54,11 @@ public sealed partial class PlacementsPage : Page {
         if (sender is not Button button || button.Tag is not int id) return;
         ViewModel.RequestEmployer(id);
     }
+
+    private async void ToggleSort_Click(object sender, RoutedEventArgs e) {
+        if (sender is not AppBarButton button) return;
+        button.IsEnabled = false;
+        await ViewModel.ToggleSortAsync();
+        button.IsEnabled = true;
+    }
 }

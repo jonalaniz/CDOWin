@@ -31,6 +31,8 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     private IReadOnlyList<PlacementSummary> _cache = [];
 
+    private bool Reversed { get; set; } = true;
+
     // =========================
     // UI State
     // =========================
@@ -104,6 +106,13 @@ public partial class PlacementsViewModel : ObservableObject {
         _employerSelectionService.RequestSelectedEmployer(employerID);
     }
 
+    public async
+    Task
+ToggleSortAsync() {
+        Reversed = !Reversed;
+        await LoadPlacementSummariesAsync();
+    }
+
     // =========================
     // CRUD Methods
     // =========================
@@ -111,8 +120,9 @@ public partial class PlacementsViewModel : ObservableObject {
         var placements = await _dataCoordinator.GetPlacementSummariesAsync(force);
         if (placements == null) return;
 
-        var snapshot = placements.OrderBy(o => o.HireDate).ToList().AsReadOnly();
-        _cache = snapshot;
+        var snapshot = placements.OrderBy(o => o.HireDate).ToList();
+        if (Reversed) { snapshot.Reverse(); }
+        _cache = snapshot.AsReadOnly();
         ApplyFilter();
     }
 

@@ -30,6 +30,8 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     private IReadOnlyList<SASummary> _cache = [];
 
+    private bool Reversed { get; set; } = true;
+
     // =========================
     // UI State
     // =========================
@@ -86,6 +88,13 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         _counselorSelectionService.RequestSelectedCounselor(counselorID);
     }
 
+    public async
+    Task
+ToggleSortAsync() {
+        Reversed = !Reversed;
+        await LoadServiceAuthorizationsAsync();
+    }
+
     // =========================
     // Export Methods
     // =========================
@@ -108,8 +117,9 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         var serviceAuthorizations = await _dataCoordinator.GetSAsAsync();
         if (serviceAuthorizations == null) return;
 
-        var snapshot = serviceAuthorizations.OrderBy(o => o.EndDate).ToList().AsReadOnly();
-        _cache = snapshot;
+        var snapshot = serviceAuthorizations.OrderBy(o => o.EndDate).ToList();
+        if (Reversed) { snapshot.Reverse(); }
+        _cache = snapshot.AsReadOnly();
         ApplyFilter();
     }
 

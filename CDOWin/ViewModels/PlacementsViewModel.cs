@@ -106,9 +106,7 @@ public partial class PlacementsViewModel : ObservableObject {
         _employerSelectionService.RequestSelectedEmployer(employerID);
     }
 
-    public async
-    Task
-ToggleSortAsync() {
+    public async Task ToggleSortAsync() {
         Reversed = !Reversed;
         await LoadPlacementSummariesAsync();
     }

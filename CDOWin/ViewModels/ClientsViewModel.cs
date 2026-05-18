@@ -161,6 +161,7 @@ public partial class ClientsViewModel : ObservableObject {
 
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (result.IsSuccess) {
+            if (update.Active is bool) { InvalidateCache(); }
             await ReloadClientAsync();
 
             _ = Task.Run(() => {
@@ -182,6 +183,7 @@ public partial class ClientsViewModel : ObservableObject {
         var result = await _service.DeleteClientAsync(id);
         if (result.IsSuccess)
             OnUI(() => RemoveDeletedClient(id));
+        InvalidateCache();
         return result;
     }
 
@@ -237,6 +239,11 @@ public partial class ClientsViewModel : ObservableObject {
             Filtered = new ObservableCollection<ClientSummary>(result);
             ReSelect(previousSelection);
         });
+    }
+
+    private void InvalidateCache() {
+        _invalidationService.InvalidateSAs();
+        _invalidationService.InvalidatePlacements();
     }
 
     private void ApplyNotesFilter() {

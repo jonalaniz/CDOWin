@@ -7,7 +7,7 @@ public static class Endpoints {
     public static string Note(int id, int noteId) => $"{Clients}/{id}/notes/{noteId}/";
     public static string Counselor(int id) => $"{Counselors}/{id}";
     public static readonly string Counselors = "/api/counselors";
-    public static readonly string CounselorSummaries = "/api/counselors/summaries";
+    // public static readonly string CounselorSummaries = "/api/counselors/summaries";
     public static string Employer(int id) => $"{Employers}/{id}";
     public static readonly string Employers = "/api/employers";
     public static readonly string EmployerSummaries = "/api/employers/summaries";
@@ -15,7 +15,7 @@ public static class Endpoints {
     public static readonly string ServiceAuthorizations = "/api/sas";
     public static string Placement(int id) => $"{Placements}/{id}";
     public static readonly string Placements = "/api/placements";
-    public static readonly string PlacementSummaries = "/api/placements/summaries";
+    // public static readonly string PlacementSummaries = "/api/placements/summaries";
     public static string Reminder(int id) => $"{Reminders}/{id}";
     public static readonly string Reminders = "/api/reminders";
     public static string State(int id) => $"{States}/{id}";

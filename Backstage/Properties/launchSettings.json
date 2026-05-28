@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Backstage (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Backstage (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

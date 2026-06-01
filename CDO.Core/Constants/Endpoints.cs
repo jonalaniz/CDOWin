@@ -47,4 +47,5 @@ public static class Endpoints {
     
     // Users: Full endpoints, base returns all users as summaries
     public static readonly string Users = $"{Admin}/users";
+    public static string User(string id) => $"{Users}/{id}";
 }

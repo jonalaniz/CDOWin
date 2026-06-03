@@ -8,7 +8,6 @@ namespace CDO.Core.Services;
 
 public class ClientService : IClientService {
     private readonly INetworkService _network;
-    public List<ClientDetail> Clients { get; private set; } = new();
 
     public ClientService(INetworkService network) {
         _network = network;

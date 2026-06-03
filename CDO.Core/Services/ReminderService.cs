@@ -8,7 +8,6 @@ namespace CDO.Core.Services;
 
 public class ReminderService : IReminderService {
     private readonly INetworkService _network;
-    public List<Reminder> Reminders { get; private set; } = new();
 
     public ReminderService(INetworkService network) {
         _network = network;

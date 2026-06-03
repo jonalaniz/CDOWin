@@ -7,7 +7,6 @@ namespace CDO.Core.Services;
 
 public class PlacementService : IPlacementService {
     private readonly INetworkService _network;
-    public List<PlacementDetail> Placements { get; private set; } = new();
 
     public PlacementService(INetworkService network) {
         _network = network;

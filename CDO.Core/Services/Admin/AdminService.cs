@@ -11,7 +11,6 @@ using CDO.Core.ErrorHandling;
 public class AdminService {
     private readonly INetworkService _network;
 
-
     public AdminService(INetworkService network) {
         _network = network;
     }

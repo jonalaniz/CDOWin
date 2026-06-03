@@ -7,7 +7,6 @@ namespace CDO.Core.Services;
 
 public class ServiceAuthorizationService : IServiceAuthorizationService {
     private readonly INetworkService _network;
-    public List<SADetail> ServiceAuthorizations { get; private set; } = new();
 
     public ServiceAuthorizationService(INetworkService network) {
         _network = network;

@@ -8,7 +8,6 @@ namespace CDO.Core.Services;
 
 public class CounselorService : ICounselorService {
     private readonly INetworkService _network;
-    public List<CounselorSummary> Counselors { get; private set; } = new();
 
     public CounselorService(INetworkService network) {
         _network = network;

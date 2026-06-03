@@ -9,7 +9,6 @@ namespace CDO.Core.Services.Admin;
 
 public class UserService : IUserService {
     private readonly INetworkService _network;
-    public List<UserSummary> Users { get; private set; } = new();
 
     public UserService(INetworkService network) {
         _network = network;

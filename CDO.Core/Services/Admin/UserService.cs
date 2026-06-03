@@ -5,7 +5,7 @@ using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Interfaces.Admin;
 
-namespace CDO.Core.Services;
+namespace CDO.Core.Services.Admin;
 
 public class UserService : IUserService {
     private readonly INetworkService _network;

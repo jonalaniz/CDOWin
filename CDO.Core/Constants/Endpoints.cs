@@ -1,7 +1,7 @@
 ﻿namespace CDO.Core.Constants;
 
 public static class Endpoints {
-    
+
     // -----------------------------
     // API Endpoints
     // -----------------------------
@@ -22,29 +22,29 @@ public static class Endpoints {
     public static readonly string Reminders = "/api/reminders";
     public static string State(int id) => $"{States}/{id}";
     public static readonly string States = "/api/states";
-    
+
     // -----------------------------
     // Administrative Endpoints
     // -----------------------------
-    
+
     // Base Endpoint
     public static readonly string Admin = "/api/admin";
-    
+
     // Clients: Base endpoint returns clients updated in the past 24 hours or
     // specific date if date is appended as parameter
     public static readonly string AdminClients = $"{Admin}/clients";
     public static readonly string AdminAllClients = $"{AdminClients}/all";
     public static readonly string AdminStaleClients = $"{AdminClients}/stale";
-    
+
     // Reminders: Base endpoint returns reminders updated in the past 24 hours or
     // specific date if date is appended as parameter
     public static readonly string AdminReminders = $"{Admin}/reminders";
-    
+
     // Notes: Base endpoint returns notes updated in the past 24 hours or
     // specific date if date is appended as parameter
     public static readonly string AdminNotes = $"{Admin}/notes";
     public static string AdminUserNotes(string author) => $"{AdminNotes}/{author}";
-    
+
     // Users: Full endpoints, base returns all users as summaries
     public static readonly string Users = $"{Admin}/users";
     public static string User(string id) => $"{Users}/{id}";

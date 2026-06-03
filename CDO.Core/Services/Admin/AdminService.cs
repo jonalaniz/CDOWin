@@ -5,6 +5,7 @@ using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
 namespace CDO.Core.Services.Admin;
+
 using CDO.Core.ErrorHandling;
 
 public class AdminService {
@@ -14,11 +15,11 @@ public class AdminService {
     public AdminService(INetworkService network) {
         _network = network;
     }
-    
+
     // -----------------------------
     // GET Methods
     // -----------------------------
-    
+
     // Returns client summaries for given date (or today if no date present)
     public Task<List<AdminClientSummary>?> GetDailyClientSummariesAsync(string? date) {
         var endpoint = Endpoints.AdminClients;
@@ -49,7 +50,7 @@ public class AdminService {
     public Task<List<Reminder>?> GetDailyRemindersAsync(string? date) {
         return _network.GetAsync<List<Reminder>>(Endpoints.AdminReminders);
     }
-    
+
     // -----------------------------
     // Utility Methods
     // -----------------------------

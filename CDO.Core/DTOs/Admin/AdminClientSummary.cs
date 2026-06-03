@@ -1,4 +1,5 @@
-﻿namespace CDO.Core.DTOs.Admin; 
+﻿namespace CDO.Core.DTOs.Admin;
+
 public class AdminClientSummary {
     // Non-optional fields
     public int Id { get; init; }

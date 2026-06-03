@@ -42,12 +42,12 @@ public class AdminClientDetail {
     public string? Education { get; init; }
     public string? Transportation { get; init; }
     public bool? ResumeRequired { get; init; }
-    public bool? ResumeCompleted { get; init; } 
-    public bool? VideoInterviewRequired { get; init; } 
-    public bool? VideoInterviewCompleted { get; init; } 
-    public bool? ReleasesCompleted { get; init; } 
-    public bool? OrientationCompleted { get; init; } 
-    public bool? DataSheetCompleted { get; init; } 
+    public bool? ResumeCompleted { get; init; }
+    public bool? VideoInterviewRequired { get; init; }
+    public bool? VideoInterviewCompleted { get; init; }
+    public bool? ReleasesCompleted { get; init; }
+    public bool? OrientationCompleted { get; init; }
+    public bool? DataSheetCompleted { get; init; }
     public bool? ElevatorSpeechCompleted { get; init; }
     public string? Race { get; init; }
     public string? FluentLanguages { get; init; }

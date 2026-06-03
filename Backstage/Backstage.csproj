@@ -46,6 +46,9 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
     <PackageReference Include="WinUIEx" Version="2.9.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
+  </ItemGroup>
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution

@@ -13,31 +13,6 @@ using System.Threading.Tasks;
 namespace CDOWin.Data;
 
 public class DataCoordinator {
-
-    public DataCoordinator(
-        IClientService clients,
-        ICounselorService counselors,
-        IEmployerService employers,
-        IPlacementService placements,
-        IReminderService reminders,
-        IServiceAuthorizationService sas,
-        IStateService states,
-        DataInvalidationService invalidationService) {
-        _clients = clients;
-        _counselors = counselors;
-        _employers = employers;
-        _placements = placements;
-        _reminders = reminders;
-        _sas = sas;
-        _states = states;
-        _invalidationService = invalidationService;
-
-        _invalidationService.ClientsInvalidated += InvalidateClients;
-        _invalidationService.SAsInvalidated += InvalidateSAs;
-        _invalidationService.PlacementsInvalidated += InvalidatePlacements;
-
-    }
-
     // =========================
     // Services
     // =========================
@@ -71,6 +46,32 @@ public class DataCoordinator {
     private static readonly TimeSpan ReminderTTL = TimeSpan.FromSeconds(45);
     private static readonly TimeSpan SATTL = TimeSpan.FromMinutes(10);
     private static readonly TimeSpan StateTTL = TimeSpan.FromDays(365);
+
+    // =========================
+    // Constructor
+    // =========================
+    public DataCoordinator(
+        IClientService clients,
+        ICounselorService counselors,
+        IEmployerService employers,
+        IPlacementService placements,
+        IReminderService reminders,
+        IServiceAuthorizationService sas,
+        IStateService states,
+        DataInvalidationService invalidationService) {
+        _clients = clients;
+        _counselors = counselors;
+        _employers = employers;
+        _placements = placements;
+        _reminders = reminders;
+        _sas = sas;
+        _states = states;
+        _invalidationService = invalidationService;
+
+        _invalidationService.ClientsInvalidated += InvalidateClients;
+        _invalidationService.SAsInvalidated += InvalidateSAs;
+        _invalidationService.PlacementsInvalidated += InvalidatePlacements;
+    }
 
     // =========================
     // Invalidation Methods

@@ -91,6 +91,7 @@
     <PackageReference Include="YamlDotNet" Version="18.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CDO.Abstractions\CDO.Abstractions.csproj" />
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

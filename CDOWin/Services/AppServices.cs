@@ -1,10 +1,12 @@
-﻿using CDO.Core.DTOs.Clients;
+﻿using CDO.Abstractions.Navigation;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.Interfaces;
 using CDO.Core.Services;
 using CDOWin.Data;
 using CDOWin.Navigation;
 using CDOWin.Observers;
 using CDOWin.ViewModels;
+using CDOWin.Views;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ public static class AppServices {
     private static readonly PowerStateObserver _powerObserver = new(_suspensionService);
 
     // Navigation
-    public static INavigationService Navigation { get; } = new NavigationService();
+    public static INavigationService<CDOFrame> Navigation { get; } = new NavigationService();
 
     // Services (Network-based)
     public static IClientService ClientService { get; private set; } = null!;

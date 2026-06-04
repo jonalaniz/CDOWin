@@ -1,4 +1,4 @@
-using CDOWin.Navigation;
+using CDO.Abstractions.Navigation;
 using CDOWin.Services;
 using CDOWin.Views.Reminders;
 using CommunityToolkit.WinUI;
@@ -12,7 +12,7 @@ using Windows.UI.ViewManagement;
 namespace CDOWin.Views;
 
 public sealed partial class MainWindow : Window {
-    private readonly INavigationService _navigationService;
+    private readonly INavigationService<CDOFrame> _navigationService;
 
     // =========================
     // Constructor

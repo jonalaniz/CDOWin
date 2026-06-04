@@ -65,7 +65,7 @@ public partial class UserViewModel : ObservableObject {
         OnUI(() => {
             Filtered = new ObservableCollection<UserSummary>(_cache);
             ReSelect(previousSelection);
-        }
+        });
     }
 
     private void OnUI(Action action) {

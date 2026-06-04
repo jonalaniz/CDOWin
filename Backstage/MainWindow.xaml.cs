@@ -1,21 +1,27 @@
+using Backstage.Services;
 using Backstage.Views;
+using CDO.Abstractions.Navigation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Diagnostics;
+using System.Linq;
 using Windows.ApplicationModel;
 
 namespace Backstage;
 
 public sealed partial class MainWindow : Window {
-        // =========================
-        // Constructor
-        // =========================
-        public MainWindow() {
+    private readonly INavigationService<BackstageView> _navigationService;
+
+    // =========================
+    // Constructor
+    // =========================
+    public MainWindow() {
         InitializeComponent();
+        _navigationService = AppServices.Navigation;
+        _navigationService.Initialize(NavigationView, ContentFrame);
         SetupWindow();
 
-        // Set the initial page
-        contentFrame.Navigate(typeof(UsersPage));
+        Activated += OnActivated;
     }
 
     // =========================
@@ -31,6 +37,10 @@ public sealed partial class MainWindow : Window {
         AppWindow.TitleBar.PreferredHeightOption = Microsoft.UI.Windowing.TitleBarHeightOption.Tall;
     }
 
+    private void OnActivated(object sender, WindowActivatedEventArgs args) {
+        NavigationView.SelectedItem = NavigationView.MenuItems.First();
+    }
+
     // =========================
     // Utility Methods
     // =========================
@@ -41,7 +51,7 @@ public sealed partial class MainWindow : Window {
     }
 
     private void PaneToggleRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args) {
-        MainNavigationView.IsPaneOpen = !MainNavigationView.IsPaneOpen;
+        NavigationView.IsPaneOpen = !NavigationView.IsPaneOpen;
     }
 
     private void nvSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {

@@ -1,4 +1,7 @@
-﻿using CDO.Core.Interfaces;
+﻿using Backstage.Navigation;
+using Backstage.Views;
+using CDO.Abstractions.Navigation;
+using CDO.Core.Interfaces;
 using CDO.Core.Interfaces.Admin;
 
 namespace Backstage.Services;
@@ -8,7 +11,7 @@ public static class AppServices {
     public static INetworkService NetworkService { get; private set; } = null!;
 
     // Navigation
-    // TODO: Create a navigation service
+    public static INavigationService<BackstageView> Navigation { get; } = new NavigationService();
 
     // Services (Network-based)
     public static IAdminService AdminService { get; private set; } = null!;

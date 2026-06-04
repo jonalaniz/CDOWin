@@ -6,6 +6,7 @@
     xmlns:local="using:Backstage"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Backstage.Views"
     mc:Ignorable="d"
     Title="Backstage">
 
@@ -29,15 +30,15 @@
             </TitleBar.IconSource>
         </TitleBar>
 
-        <NavigationView Grid.Row="1" x:Name="MainNavigationView"
+        <NavigationView Grid.Row="1" x:Name="NavigationView"
                         IsBackButtonVisible="Collapsed" 
                         IsPaneToggleButtonVisible="False"
                         SelectionChanged="nvSample_SelectionChanged">
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="ContactInfo" Content="Clients" Tag="SamplePage1" />
-                <NavigationViewItem Icon="People" Content="Users" Tag="SamplePage2" />
+                <NavigationViewItem Icon="Home" Content="Home" Tag="{x:Bind views:BackstageView.Home}"/>
+                <NavigationViewItem Icon="People" Content="Users" Tag="{x:Bind views:BackstageView.Users}" />
             </NavigationView.MenuItems>
-            <Frame x:Name="contentFrame"/>
+            <Frame x:Name="ContentFrame"/>
         </NavigationView>
     </Grid>
 </Window>

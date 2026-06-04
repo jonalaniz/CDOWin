@@ -30,7 +30,7 @@ public sealed class NavigationService : INavigationService<BackstageView> {
         if (frame == _currentFrame) return;
         if (!_pages.TryGetValue(frame, out var page)) return;
 
-        _frame.Navigate(page.GetType());
+        _frame.Navigate(page);
         _currentFrame = frame;
     }
 

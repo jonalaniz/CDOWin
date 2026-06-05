@@ -17,7 +17,9 @@ public sealed class NavigationService : INavigationService<BackstageView> {
         _frame = frame;
 
         // Seed our page types
-        _pages[BackstageView.Home] = typeof(AdminPage);
+        _pages[BackstageView.Home] = typeof(HomePage);
+        _pages[BackstageView.Billing] = typeof(BillingPage);
+        _pages[BackstageView.Clients] = typeof(ClientsPage);
         _pages[BackstageView.Users] = typeof(UsersPage);
         _pages[BackstageView.Settings] = typeof(SettingsPage);
 

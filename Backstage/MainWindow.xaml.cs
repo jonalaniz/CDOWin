@@ -50,7 +50,7 @@ public sealed partial class MainWindow : Window {
         return $"Version {version.Major}.{version.Minor}.{version.Build}";
     }
 
-    private void PaneToggleRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args) {
+    private void PaneToggleRequested(TitleBar sender, object args) {
         NavigationView.IsPaneOpen = !NavigationView.IsPaneOpen;
     }
 

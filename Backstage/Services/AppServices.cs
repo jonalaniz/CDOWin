@@ -20,6 +20,7 @@ public static class AppServices {
 
     // Services (Network-based)
     public static BillingService BillingService { get; private set; } = null!;
+    public static AdminClientService ClientService { get; private set; } = null!;
     public static AdminReminderService ReminderService { get; private set; } = null!;
     public static UserService UserService { get; private set; } = null!;
 
@@ -37,12 +38,14 @@ public static class AppServices {
 
         // Initialize child services
         BillingService = new BillingService(network);
+        ClientService = new AdminClientService(network);
         ReminderService = new AdminReminderService(network);
         UserService = new UserService(network);
 
         // Inject Services into DataCoordinator
         DataCoordinator = new DataCoordinator(
             BillingService,
+            ClientService,
             ReminderService,
             UserService
             );

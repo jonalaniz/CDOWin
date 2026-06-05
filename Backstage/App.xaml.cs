@@ -1,4 +1,9 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Backstage.Services;
+using CDO.Core.Constants;
+using Meziantou.Framework.Win32;
+using Microsoft.UI.Xaml;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Backstage {
     public partial class App : Application {
@@ -8,11 +13,14 @@ namespace Backstage {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args) {
+        protected override async void OnLaunched(LaunchActivatedEventArgs args) {
+            // Check for stored credentials from CDO.Win
+            if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
+                Debug.WriteLine($"Found stored credentials for {AppConstants.AppName}, initializing services...");
+                AppServices.InitializeServices(creds.UserName!, creds.Password!);
+
+                var loaded = await AppServices.LoadDataAsync();
+            }
             _window = new MainWindow();
             _window.Activate();
         }

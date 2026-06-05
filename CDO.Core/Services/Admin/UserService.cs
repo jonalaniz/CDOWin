@@ -3,11 +3,10 @@ using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Users;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Interfaces.Admin;
 
 namespace CDO.Core.Services.Admin;
 
-public class UserService : IUserService {
+public class UserService {
     private readonly INetworkService _network;
 
     public UserService(INetworkService network) {

@@ -1,6 +1,5 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
-using CDO.Core.DTOs.Counselors;
 using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -8,11 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Backstage.ViewModels; 
+namespace Backstage.ViewModels;
+
 public partial class UserViewModel : ObservableObject {
     // =========================
     // Dependencies

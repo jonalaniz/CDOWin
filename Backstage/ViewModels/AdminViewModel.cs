@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Backstage.ViewModels;
 
-namespace Backstage.ViewModels; 
 internal class AdminViewModel {
 }

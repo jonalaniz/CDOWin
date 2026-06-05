@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Backstage.Views;
+﻿namespace Backstage.Views;
 
 public enum BackstageView {
     Home,

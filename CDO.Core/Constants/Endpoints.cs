@@ -45,6 +45,11 @@ public static class Endpoints {
     public static readonly string AdminNotes = $"{Admin}/notes";
     public static string AdminUserNotes(string author) => $"{AdminNotes}/{author}";
 
+    // Billing Endpoints, returns unbilled SAs and Placements
+    public static readonly string Billing = $"{Admin}/billing";
+    public static readonly string BillingSAs = $"{Billing}/sas";
+    public static readonly string BillingPlacements = $"{Billing}/placements";
+
     // Users: Full endpoints, base returns all users as summaries
     public static readonly string Users = $"{Admin}/users";
     public static string User(string id) => $"{Users}/{id}";

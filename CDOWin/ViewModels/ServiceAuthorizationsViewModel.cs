@@ -159,10 +159,10 @@ ToggleSortAsync() {
         if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
             result = result.Where(i =>
-            (i.ClientName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (i.CounselorName).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (i.ServiceAuthorizationNumber).Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (i.Description).Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            i.ClientName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            i.CounselorName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            i.ServiceAuthorizationNumber.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            i.Description.Contains(query, StringComparison.CurrentCultureIgnoreCase)
             );
         }
 

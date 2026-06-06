@@ -33,6 +33,9 @@ public partial class UserViewModel : ObservableObject {
     [ObservableProperty]
     public partial UserSummary? Selected { get; set; }
 
+    [ObservableProperty]
+    public partial string SearchQuery { get; set; } = string.Empty;
+
     // =========================
     // Constructor
     // =========================
@@ -43,6 +46,11 @@ public partial class UserViewModel : ObservableObject {
     }
 
     // =========================
+    // Property Change Methods
+    // =========================
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
+
+    // =========================
     // CRUD Methods
     // =========================
     public async Task LoadUserSummariesAsync(bool force = false) {
@@ -51,17 +59,28 @@ public partial class UserViewModel : ObservableObject {
 
         var snapshot = users.OrderBy(u => u.FirstName).ToList().AsReadOnly();
         _cache = snapshot;
-
+        ApplyFilter();
     }
 
     // =========================
     // Utility / Helpers
     // =========================
-    private void Applyfilter() {
+    private void ApplyFilter() {
         string? previousSelection = Selected?.Id;
 
+        IEnumerable<UserSummary> result = _cache;
+
+        if(!string.IsNullOrWhiteSpace(SearchQuery)) {
+            var query = SearchQuery.Trim().ToLower();
+            result = result.Where(u =>
+            u.Username.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (u.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (u.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            );
+        }
+
         OnUI(() => {
-            Filtered = new ObservableCollection<UserSummary>(_cache);
+            Filtered = new ObservableCollection<UserSummary>(result);
             ReSelect(previousSelection);
         });
     }

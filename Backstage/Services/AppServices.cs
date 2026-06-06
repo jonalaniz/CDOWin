@@ -1,5 +1,6 @@
 ﻿using Backstage.Data;
 using Backstage.Navigation;
+using Backstage.ViewModels;
 using Backstage.Views;
 using CDO.Abstractions.Navigation;
 using CDO.Core.Interfaces;
@@ -28,7 +29,7 @@ public static class AppServices {
     public static DataCoordinator DataCoordinator { get; private set; } = null!;
 
     // ViewModels
-    // TODO: Create view models
+    public static UserViewModel UserViewModel { get; private set; } = null!;
 
     public static void InitializeServices(string baseAddress, string apiKey) {
         // Initialize network service
@@ -49,6 +50,8 @@ public static class AppServices {
             ReminderService,
             UserService
             );
+
+        // Initialize ViewModels
     }
 
     public static async Task<bool> LoadDataAsync() {

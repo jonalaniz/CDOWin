@@ -1,12 +1,12 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Data;
+﻿using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace CDOWin.Converters;
+namespace CDO.UI.Shared.Converters;
 
-public partial class StringNullVisibilityConverter : IValueConverter {
+public partial class BoolActiveConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
-        return value is null ? Visibility.Collapsed : Visibility.Visible;
+        if (value is not bool b) return string.Empty;
+        return b == true ? "Mark Inactive..." : "Mark Active...";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) {

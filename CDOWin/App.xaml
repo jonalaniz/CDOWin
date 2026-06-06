@@ -3,7 +3,7 @@
     x:Class="CDOWin.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="using:CDOWin.Converters"
+    xmlns:converters="using:CDO.UI.Shared.Converters"
     xmlns:local="using:CDOWin">
     <Application.Resources>
         <ResourceDictionary>

@@ -1,12 +1,11 @@
 ﻿using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace CDOWin.Converters;
+namespace CDO.UI.Shared.Converters;
 
-class BoolActiveConverter : IValueConverter {
+public partial class NullToBoolConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
-        if (value is not bool b) return string.Empty;
-        return b == true ? "Mark Inactive..." : "Mark Active...";
+        return value == null ? false : true;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) {

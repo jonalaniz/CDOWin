@@ -1,12 +1,11 @@
 ﻿using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace CDOWin.Converters;
+namespace CDO.UI.Shared.Converters;
 
-class BoolCompletedConverter : IValueConverter {
+public partial class NullOpacityConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
-        if (value is not bool b) return string.Empty;
-        return b == true ? "Mark Incomplete" : "Mark Complete";
+        return value == null ? 0.5 : 1.0;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) {

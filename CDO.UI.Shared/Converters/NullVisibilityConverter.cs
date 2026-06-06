@@ -1,15 +1,12 @@
-﻿using Microsoft.UI.Xaml.Data;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace CDOWin.Converters;
+namespace CDO.UI.Shared.Converters;
 
-class BoolOpacityConverter : IValueConverter {
+public partial class NullVisibilityConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
-        if (value is bool b) {
-            return b == true ? 0.4 : 1.0;
-        }
-
-        return 1.0;
+        return value == null ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) {

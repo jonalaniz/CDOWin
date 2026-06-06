@@ -1,12 +1,12 @@
 ﻿using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace CDOWin.Converters;
+namespace CDO.UI.Shared.Converters;
 
-class BoolTransparentConverter : IValueConverter {
+public partial class BoolOpacityConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
         if (value is bool b) {
-            return b == true ? 1.0 : 0.0;
+            return b == true ? 0.4 : 1.0;
         }
 
         return 1.0;

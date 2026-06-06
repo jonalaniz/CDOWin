@@ -4,9 +4,9 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System;
 
-namespace CDOWin.Converters;
+namespace CDO.UI.Shared.Converters;
 
-class BoolToSolidBrushConverter : IValueConverter {
+public partial class BoolToSolidBrushConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, string language) {
         if ((bool)value)
             return new SolidColorBrush(Colors.Black);

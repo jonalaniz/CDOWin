@@ -52,6 +52,10 @@ public static class AppServices {
             );
 
         // Initialize ViewModels
+        UserViewModel = new UserViewModel(
+            DataCoordinator,
+            UserService
+            );
     }
 
     public static async Task<bool> LoadDataAsync() {

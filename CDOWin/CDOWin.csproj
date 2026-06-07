@@ -32,9 +32,6 @@
     <None Remove="Assets\CDO_Dark.png" />
     <None Remove="Assets\CDO_Light.png" />
     <None Remove="Controls\CalendarDayView.xaml" />
-    <None Remove="Resources\Dialogs.xaml" />
-    <None Remove="Resources\Grids.xaml" />
-    <None Remove="Resources\Styles.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\Clients\Dialogs\CreateClient.xaml" />
     <None Remove="Views\Clients\Dialogs\UpdateAdminsitrative.xaml" />
@@ -93,6 +90,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CDO.Abstractions\CDO.Abstractions.csproj" />
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
+    <ProjectReference Include="..\CDO.UI.Shared\CDO.UI.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\CDO_Dark.png">
@@ -144,11 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -242,11 +235,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Resources\Grids.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\Clients\Dialogs\CreateReminder.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,11 +280,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Clients\Dialogs\UpdateNote.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Resources\Dialogs.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

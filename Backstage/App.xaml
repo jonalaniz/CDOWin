@@ -3,11 +3,26 @@
     x:Class="Backstage.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:CDO.UI.Shared.Converters"
     xmlns:local="using:Backstage">
     <Application.Resources>
         <ResourceDictionary>
+            <converters:BoolToSolidBrushConverter x:Key="BoolSolidBrushConverter"/>
+            <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
+            <converters:BoolCompletedConverter x:Key="BoolCompletedConverter"/>
+            <converters:BoolActiveConverter x:Key="BoolActiveConverter"/>
+            <converters:BoolTransparentConverter x:Key="BoolTransparentConverter"/>
+            <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+            <converters:NullOpacityConverter x:Key="NullOpacityConverter"/>
+            <converters:StringNullVisibilityConverter x:Key="StringToVisability"/>
+            <converters:NullVisibilityConverter x:Key="NullToVisability"/>
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter"/>
+            
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="ms-appx:///CDO.UI.Shared/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="ms-appx:///CDO.UI.Shared/Resources/Grids.xaml"/>
+                <ResourceDictionary Source="ms-appx:///CDO.UI.Shared/Resources/Dialogs.xaml"/>
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->

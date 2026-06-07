@@ -3,6 +3,7 @@ namespace CDO.Core.DTOs.Placements;
 public class PlacementUpdate {
     // Placement Specific
     public bool? Active { get; set; }
+    public bool? Billed { get; set; }
     public int? PlacementNumber { get; set; }
     public string? Position { get; set; }
     public DateTime? HireDate { get; set; }

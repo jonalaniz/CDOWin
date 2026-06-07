@@ -1,6 +1,7 @@
 using CDO.Core.Models.Enums;
 using CDOWin.Extensions;
 using CDOWin.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Linq;
@@ -82,6 +83,11 @@ public sealed partial class UpdateSA : Page {
                 ViewModel.Updated.UnitOfMeasurement = text;
                 break;
         }
+    }
+
+    private void BilledCheckbox_Click(object sender, RoutedEventArgs e) {
+        if (sender is not CheckBox checkbox) return;
+        ViewModel.Updated.Billed = checkbox.IsChecked;
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {

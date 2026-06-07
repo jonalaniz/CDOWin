@@ -3,6 +3,8 @@
 public record class SADetail(
     // SA Specific
     int Id,
+    bool Active,
+    bool Billed,
     string ServiceAuthorizationNumber,
     string? Office,
     string Description,

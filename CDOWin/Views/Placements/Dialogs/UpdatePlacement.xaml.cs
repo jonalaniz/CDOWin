@@ -258,6 +258,11 @@ public sealed partial class UpdatePlacement : Page {
         }
     }
 
+    private void BilledCheckbox_Click(object sender, RoutedEventArgs e) {
+        if (sender is not CheckBox checkbox) return;
+        ViewModel.Updated.Billed = checkbox.IsChecked;
+    }
+
     private void UpdateSelectedEmployer(Employer employer) {
         ViewModel.Updated.EmployerID = employer.Id.ToString();
         ViewModel.Updated.EmployerName = employer.Name;

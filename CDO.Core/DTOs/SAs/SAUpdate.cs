@@ -2,6 +2,8 @@ namespace CDO.Core.DTOs.SAs;
 
 public class SAUpdate {
     // SA Specific
+    public bool? Active { get; set; }
+    public bool? Billed { get; set; }
     public string? ServiceAuthorizationNumber { get; set; }
     public string? Office { get; set; }
     public string? Description { get; set; }

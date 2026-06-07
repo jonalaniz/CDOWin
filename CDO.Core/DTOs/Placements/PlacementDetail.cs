@@ -6,6 +6,7 @@ public record class PlacementDetail(
 
     // Placement Specific
     bool Active,
+    bool Billed,
     int? PlacementNumber,
     string? Position,
     DateTime? HireDate,

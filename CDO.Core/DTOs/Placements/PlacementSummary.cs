@@ -6,6 +6,7 @@ public class PlacementSummary {
 
     // Placement Specific
     public bool Active { get; init; }
+    public bool Billed { get; init; }
     public string? Position { get; init; }
     public DateTime? HireDate { get; init; }
     public string? Wages { get; init; }

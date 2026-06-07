@@ -3,6 +3,7 @@
 public class SASummary {
     // SA Specific
     public int Id { get; init; }
+    public bool Active { get; init; }
     public required string ServiceAuthorizationNumber { get; init; }
     public DateTime StartDate { get; init; }
     public DateTime EndDate { get; init; }
@@ -13,7 +14,6 @@ public class SASummary {
     public int ClientId { get; init; }
     public required string ClientName { get; init; }
     public string? CaseID { get; init; }
-    public bool Active { get; init; }
 
     // Counselor Specific
     public int? CounselorId { get; init; }

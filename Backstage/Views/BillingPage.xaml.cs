@@ -1,15 +1,29 @@
+using Backstage.Services;
+using Backstage.ViewModels;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace Backstage.Views; 
 
-namespace Backstage.Views {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class BillingPage : Page {
-        public BillingPage() {
-            InitializeComponent();
-        }
+public sealed partial class BillingPage : Page {
+
+    // =========================
+    // ViewModel
+    // =========================
+    public BillingViewModel ViewModel { get; } = AppServices.BillingViewModel;
+
+    // =========================
+    // Constructor
+    // =========================
+    public BillingPage() {
+        InitializeComponent();
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    protected override async void OnNavigatedTo(NavigationEventArgs e) {
+        base.OnNavigatedTo(e);
+        await ViewModel.LoadSASummariesAsync();
     }
 }

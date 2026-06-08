@@ -6,9 +6,65 @@
     xmlns:local="using:Backstage.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sas="using:CDO.Core.DTOs.SAs"
     mc:Ignorable="d">
 
-    <Grid>
-        <TextBlock Text="Billing Page" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Padding="16,8,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Padding="0,0,0,8" 
+                   Text="Billing" FontSize="32" FontWeight="Black"/>
+        <ScrollViewer Grid.Row="1"
+                  VerticalScrollMode="Enabled" 
+                  HorizontalScrollMode="Disabled">
+            <Grid RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10">
+                    <TextBlock Text="Service Authorizations" FontSize="16" FontWeight="SemiBold"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.SAs, Mode=OneWay}">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Orientation="Horizontal" Spacing="8"/>
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="sas:SASummary">
+                                    <!-- SA Card -->
+                                    <Grid Style="{StaticResource CardContainerGridStyle}">
+
+                                        <!-- Inner Grid -->
+                                        <Grid Style="{StaticResource CardInnerGridStyle}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!-- Header -->
+                                            <TextBlock Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </ScrollViewer>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
+                    <TextBlock Text="Stale Clients" FontSize="16" FontWeight="SemiBold"/>
+                    <ItemsRepeater>
+                        <ItemsRepeater.Layout>
+                            <StackLayout Orientation="Horizontal" Spacing="8"/>
+                        </ItemsRepeater.Layout>
+                    </ItemsRepeater>
+                    
+                    
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

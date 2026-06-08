@@ -38,6 +38,7 @@ public sealed partial class MainWindow : Window {
     }
 
     private void OnActivated(object sender, WindowActivatedEventArgs args) {
+        Activated -= OnActivated;
         NavigationView.SelectedItem = NavigationView.MenuItems.First();
     }
 

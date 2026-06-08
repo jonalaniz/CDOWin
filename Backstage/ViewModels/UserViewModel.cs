@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace Backstage.ViewModels;
 
 public partial class UserViewModel : ObservableObject {
+
     // =========================
     // Dependencies
     // =========================

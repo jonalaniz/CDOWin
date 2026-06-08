@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace CDOWin.ViewModels;
 
 public partial class ClientUpdateViewModel : ObservableObject {
+
     // =========================
     // Dependencies
     // =========================

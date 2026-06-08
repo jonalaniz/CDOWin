@@ -3,7 +3,6 @@ using CDO.Core.Constants;
 using Meziantou.Framework.Win32;
 using Microsoft.UI.Xaml;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Backstage {
     public partial class App : Application {

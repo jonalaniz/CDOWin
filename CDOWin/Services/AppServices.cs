@@ -89,7 +89,7 @@ public static class AppServices {
         );
 
         CounselorsViewModel = new CounselorsViewModel(
-            DataCoordinator, 
+            DataCoordinator,
             CounselorService,
             _counselorSelecitonService,
             _clientSelectionService

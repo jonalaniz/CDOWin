@@ -3,14 +3,10 @@ using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.SAs;
-using CDO.Core.Services;
 using CDO.Core.Services.Admin;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Devices.PointOfService;
 
 namespace Backstage.Data;
 

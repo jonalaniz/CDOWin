@@ -70,7 +70,7 @@ public partial class UserViewModel : ObservableObject {
 
         IEnumerable<UserSummary> result = _cache;
 
-        if(!string.IsNullOrWhiteSpace(SearchQuery)) {
+        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
             var query = SearchQuery.Trim().ToLower();
             result = result.Where(u =>
             u.Username.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

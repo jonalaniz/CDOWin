@@ -1,7 +1,7 @@
 using CDO.Core.Constants;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
-using CDO.Core.ErrorHandling;
 
 namespace CDO.Core.Services.Admin;
 

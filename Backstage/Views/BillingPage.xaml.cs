@@ -25,5 +25,6 @@ public sealed partial class BillingPage : Page {
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
         await ViewModel.LoadSASummariesAsync();
+        await ViewModel.LoadPlacementSummariesAsync();
     }
 }

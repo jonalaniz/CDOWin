@@ -26,6 +26,8 @@ namespace Backstage.Views {
             await ViewModel.LoadUserSummariesAsync();
         }
 
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
 
+        }
     }
 }

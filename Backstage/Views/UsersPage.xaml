@@ -6,9 +6,114 @@
     xmlns:local="using:Backstage.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:dto="using:CDO.Core.DTOs.Admin"
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="Users Page" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!-- Columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="336"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column -->
+        <Grid Style="{StaticResource ContentRightBorderStyle}">
+
+            <!-- Rows -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <!-- Columns -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Users"
+                       Style="{StaticResource PageTitleStyle}"/>
+
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" 
+                        Style="{StaticResource CommandBarDefaultStyle}">
+            </CommandBar>
+
+            <!-- Search Bar -->
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     Margin="8,0,8,8" 
+                     PlaceholderText="Filter Users"
+                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!-- ServiceAuthorizations Table -->
+            <ListView x:Name="ListView"
+                      Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      Style="{StaticResource DataTableStyle}" 
+                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
+                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" 
+                      ItemClick="ListView_ItemClick">
+
+                <!-- Header -->
+                <ListView.Header>
+                    <Grid Style="{StaticResource DataTableHeaderStyle}">
+
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:StickyHeaderBehavior/>
+                        </interactivity:Interaction.Behaviors>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Username" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="First Name" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Last Name" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="Admin" FontWeight="SemiBold"/>
+                    </Grid>
+                </ListView.Header>
+
+                <!-- Content -->
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:UserSummary">
+                        <Grid Padding="12,8" Opacity="{x:Bind Active, Converter={StaticResource BoolOpacityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{x:Bind Username}"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind FirstName}"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind LastName}"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind Admin}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Row 3: Status Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <TextBlock Style="{StaticResource ListStatusBarStyle}">
+                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="Users"/>
+                </TextBlock>
+            </Grid>
+        </Grid>
+
+        <!-- Right Column -->
+        <Frame x:Name="InspectorFrame"
+               Grid.Column="1"
+               IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

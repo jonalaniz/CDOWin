@@ -55,6 +55,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CDO.Abstractions\CDO.Abstractions.csproj" />
     <ProjectReference Include="..\CDO.Core\CDO.Core.csproj" />
+    <ProjectReference Include="..\CDO.UI.Shared\CDO.UI.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\ClientsPage.xaml">

@@ -29,5 +29,9 @@ namespace Backstage.Views {
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
 
         }
+
+        private void Refresh_ItemCLick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+            _ = ViewModel.LoadUserSummariesAsync(force: true);
+        }
     }
 }

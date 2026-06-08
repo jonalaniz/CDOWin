@@ -84,7 +84,7 @@ public class DataCoordinator {
         return RecentClients.Data ?? [];
     }
 
-    private async Task<IReadOnlyList<AdminClientSummary>> GetStaleClientsAsync(bool force = false) {
+    public async Task<IReadOnlyList<AdminClientSummary>> GetStaleClientsAsync(bool force = false) {
         if (force || StaleClients.IsStale(BaseTTL)) {
             var data = await _clientService.GetStaleClientsAsync();
             if (data != null) StaleClients.Update(data);
@@ -93,7 +93,7 @@ public class DataCoordinator {
         return StaleClients.Data ?? [];
     }
 
-    private async Task<IReadOnlyList<ClientNote>> GetRecentNotesAsync(bool force = false) {
+    public async Task<IReadOnlyList<ClientNote>> GetRecentNotesAsync(bool force = false) {
         if (force || RecentNotes.IsStale(BaseTTL)) {
             var data = await _clientService.GetRecentClientNotesAsync();
             if (data != null) RecentNotes.Update(data);

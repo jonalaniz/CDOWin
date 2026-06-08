@@ -3,7 +3,7 @@ using Backstage.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace Backstage.Views; 
+namespace Backstage.Views;
 
 public sealed partial class BillingPage : Page {
 

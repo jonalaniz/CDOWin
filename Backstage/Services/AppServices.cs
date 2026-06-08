@@ -30,6 +30,7 @@ public static class AppServices {
 
     // ViewModels
     public static BillingViewModel BillingViewModel { get; private set; } = null!;
+    public static ClientViewModel ClientViewModel { get; private set; } = null!;
     public static UserViewModel UserViewModel { get; private set; } = null!;
 
     public static void InitializeServices(string baseAddress, string apiKey) {
@@ -58,6 +59,11 @@ public static class AppServices {
             BillingService
             );
 
+        ClientViewModel = new ClientViewModel(
+            DataCoordinator,
+            ClientService
+            );
+
         UserViewModel = new UserViewModel(
             DataCoordinator,
             UserService
@@ -70,7 +76,9 @@ public static class AppServices {
         var tasks = new List<Task> {
             DataCoordinator.GetUsersAsync(),
             DataCoordinator.GetUnbilledSAsAsync(),
-            DataCoordinator.GetUnbilledPlacementsAsync()
+            DataCoordinator.GetUnbilledPlacementsAsync(),
+            DataCoordinator.GetRecentClientsAsync(),
+            DataCoordinator.GetStaleClientsAsync()
         };
 
         await Task.WhenAll(tasks);

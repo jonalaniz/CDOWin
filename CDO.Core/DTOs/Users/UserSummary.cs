@@ -10,4 +10,6 @@ public class UserSummary {
     // Nullable fields
     public string? FirstName { get; init; }
     public string? LastName { get; init; }
+
+    public bool Inactive => !Active;
 }

@@ -43,6 +43,9 @@
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" 
                         Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton Width="56" Click="Refresh_ItemCLick"  IsCompact="False" ToolTipService.ToolTip="New Client">
+                    <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton>
             </CommandBar>
 
             <!-- Search Bar -->
@@ -84,7 +87,7 @@
                 <!-- Content -->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:UserSummary">
-                        <Grid Padding="12,8" Opacity="{x:Bind Active, Converter={StaticResource BoolOpacityConverter}}">
+                        <Grid Padding="12,8" Opacity="{x:Bind Inactive, Converter={StaticResource BoolOpacityConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="100"/>

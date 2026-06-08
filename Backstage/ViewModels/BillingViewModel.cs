@@ -48,7 +48,8 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // Public Methods
     // =========================
-    // Here we will add the getter for the 
+    public List<SASummary> UnbilledSAs() => _saCache.ToList();
+    public List<PlacementSummary> UnbilledPlacements() => _placementCache.ToList();
 
     // =========================
     // CRUD Methods
@@ -58,6 +59,7 @@ public partial class BillingViewModel : ObservableObject {
         if (sas == null) return;
 
         var snapshot = sas.OrderBy(s => s.StartDate).ToList().AsReadOnly();
+        _saCache = snapshot;
         OnUI(() => {
             SAs = new ObservableCollection<SASummary>(snapshot);
         });
@@ -68,6 +70,7 @@ public partial class BillingViewModel : ObservableObject {
         if (placements == null) return;
 
         var snapshot = placements.OrderBy(p => p.Id).ToList().AsReadOnly();
+        _placementCache = snapshot;
         OnUI(() => {
             Placements = new ObservableCollection<PlacementSummary>(snapshot);
         });

@@ -1,4 +1,5 @@
 ﻿using CDO.Core.DTOs;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Counselors;
@@ -6,6 +7,7 @@ using CDO.Core.DTOs.Employers;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.Reminders;
 using CDO.Core.DTOs.SAs;
+using CDO.Core.DTOs.Users;
 using CDO.Core.Models;
 using System.Text.Json.Serialization;
 
@@ -64,5 +66,14 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(List<State>))]
 [JsonSerializable(typeof(CreateStateDTO))]
 [JsonSerializable(typeof(UpdateStateDTO))]
+
+[JsonSerializable(typeof(AdminClientDetail))]
+[JsonSerializable(typeof(List<AdminClientDetail>))]
+[JsonSerializable(typeof(AdminClientSummary))]
+[JsonSerializable(typeof(List<AdminClientSummary>))]
+[JsonSerializable(typeof(UserSummary))]
+[JsonSerializable(typeof(List<UserSummary>))]
+[JsonSerializable(typeof(NewUser))]
+[JsonSerializable(typeof(UserUpdate))]
 
 public partial class SourceGenerationContext : JsonSerializerContext { }

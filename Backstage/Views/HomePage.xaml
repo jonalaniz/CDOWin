@@ -6,6 +6,9 @@
     xmlns:local="using:Backstage.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dtos="using:CDO.Core.DTOs.Admin"
+    xmlns:notes="using:CDO.Core.DTOs.Clients.Notes"
+    xmlns:models="using:CDO.Core.Models"
     mc:Ignorable="d">
 
     <Grid Padding="16,8,0,0">
@@ -28,54 +31,110 @@
                 <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10">
                     <TextBlock Text="Today" FontSize="16" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal" Spacing="10">
+                        
                         <!-- Recent Clients Card -->
                         <Grid Style="{StaticResource CardContainerGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                            <!-- Inner Grid -->
-                            <Grid Style="{StaticResource CardInnerGridStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                            <!-- Header -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Clients" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                            </StackPanel>
+                                
+                            <!-- Item Repeater -->
+                            <ScrollViewer Grid.Row="1">
+                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentClients, Mode=OneWay}">
+                                    <DataTemplate x:DataType="dtos:AdminClientSummary">
 
-                                <!-- Header -->
-                                <TextBlock Text="Clients" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </Grid>
+                                        <!-- Button -->
+                                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
+                                                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                Tag="{x:Bind Id}">
+                                            <StackPanel Spacing="2" Margin="0,0,0,0">
+                                                <TextBlock FontWeight="Bold" Text="{x:Bind Name}"/>
+                                                <TextBlock Text="{x:Bind FormattedID}"/>
+                                                <TextBlock Text="{x:Bind FormattedStartDate}"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater>
+                            </ScrollViewer>
                         </Grid>
 
                         <!-- Recent Notes Card -->
                         <Grid Style="{StaticResource CardContainerGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                            <!-- Inner Grid -->
-                            <Grid Style="{StaticResource CardInnerGridStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                            <!-- Header -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Notes" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                            </StackPanel>
 
-                                <!-- Header -->
-                                <TextBlock Text="Notes" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </Grid>
+                            <!-- Item Repeater -->
+                            <ScrollViewer Grid.Row="1">
+                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentNotes, Mode=OneWay}">
+                                    <DataTemplate x:DataType="notes:ClientNote">
+
+                                        <!-- Button -->
+                                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
+                                                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                Tag="{x:Bind Id}">
+                                            <StackPanel Spacing="2" Margin="0,0,0,0">
+                                                <TextBlock FontWeight="Bold" Text="{x:Bind Author}"/>
+                                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Note}"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater>
+                            </ScrollViewer>
                         </Grid>
                         
                         <!-- Recent Reminders Card -->
                         <Grid Style="{StaticResource CardContainerGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                            <!-- Inner Grid -->
-                            <Grid Style="{StaticResource CardInnerGridStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                            <!-- Header -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Reminders" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                            </StackPanel>
 
-                                <!-- Header -->
-                                <TextBlock Text="Reminders" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </Grid>
+                            <!-- Item Repeater -->
+                            <ScrollViewer Grid.Row="1">
+                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.Reminders, Mode=OneWay}">
+                                    <DataTemplate x:DataType="models:Reminder">
+
+                                        <!-- Button -->
+                                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
+                                                Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}"
+                                                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                Tag="{x:Bind Id}">
+                                            <StackPanel Spacing="2" Margin="0,0,0,0">
+                                                <TextBlock FontWeight="Bold" Text="{x:Bind ClientName}"/>
+                                                <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater>
+                            </ScrollViewer>
                         </Grid>
                     </StackPanel>
                 </StackPanel>
+                
+                <!-- Expiring Soon Section -->
                 <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
-                    <TextBlock Text="Billing" FontSize="16" FontWeight="SemiBold"/>
+                    <TextBlock Text="Expiring Soon" FontSize="16" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <!-- Service Authorizations Card -->
                         <Grid Style="{StaticResource CardContainerGridStyle}">

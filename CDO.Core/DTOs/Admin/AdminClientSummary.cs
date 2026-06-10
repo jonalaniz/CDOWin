@@ -13,4 +13,9 @@ public class AdminClientSummary {
     public DateTime? UpdatedAt { get; init; }
     public DateTime? StartDate { get; init; }
     public string? CaseID { get; init; }
+
+    // Computed Properties
+    public string Name => $"{FirstName} {LastName}";
+    public string FormattedID => $"ID: {Id}";
+    public string FormattedStartDate => $"Start Date: {StartDate?.ToString(format: "MM/dd/yyyy")}";
 }

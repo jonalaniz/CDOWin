@@ -20,6 +20,7 @@ public static class AppServices {
     public static INavigationService<BackstageView> Navigation { get; } = new NavigationService();
 
     // Services (Network-based)
+    public static HomeViewModel HomeViewModel { get; private set; } = null!;
     public static BillingService BillingService { get; private set; } = null!;
     public static AdminClientService ClientService { get; private set; } = null!;
     public static AdminReminderService ReminderService { get; private set; } = null!;
@@ -54,6 +55,8 @@ public static class AppServices {
             );
 
         // Initialize ViewModels
+        HomeViewModel = new HomeViewModel(DataCoordinator);
+
         BillingViewModel = new BillingViewModel(
             DataCoordinator,
             BillingService

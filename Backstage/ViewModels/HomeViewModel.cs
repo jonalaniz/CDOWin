@@ -1,23 +1,24 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
-using CDO.Core.Services.Admin;
+using CDO.Core.Models;
+using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.PointOfService;
 
-namespace Backstage.ViewModels;
-
-public partial class ClientViewModel : ObservableObject {
+namespace Backstage.ViewModels; 
+public partial class HomeViewModel : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly AdminClientService _service;
     private readonly DataCoordinator _dataCoordinator;
     private readonly DispatcherQueue _dispatcher;
 
@@ -25,33 +26,28 @@ public partial class ClientViewModel : ObservableObject {
     // Private Backing Fields
     // =========================
     private IReadOnlyList<AdminClientSummary> _recentClients = [];
-    private IReadOnlyList<AdminClientSummary> _staleClients = [];
     private IReadOnlyList<ClientNote> _recentNotes = [];
+    private IReadOnlyList<Reminder> _reminders = [];
 
     // =========================
     // UI State
     // =========================
-
     [ObservableProperty]
     public partial ObservableCollection<AdminClientSummary> RecentClients { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<AdminClientSummary> StaleClients { get; private set; } = [];
+    public partial ObservableCollection<ClientNote> RecentNotes { get; private set; } = [];
+
+    [ObservableProperty]
+    public partial ObservableCollection<Reminder> Reminders { get; private set; } = [];
 
     // =========================
     // Constructor
     // =========================
-    public ClientViewModel(DataCoordinator dataCoordinator, AdminClientService clientService) {
+    public HomeViewModel(DataCoordinator dataCoordinator) {
         _dataCoordinator = dataCoordinator;
-        _service = clientService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
-
-    // =========================
-    // Public Methods
-    // =========================
-    public List<AdminClientSummary> CachedRecentClients() => _recentClients.ToList();
-    public List<AdminClientSummary> CachedStaleClients() => _staleClients.ToList();
 
     // =========================
     // CRUD Methods
@@ -67,16 +63,28 @@ public partial class ClientViewModel : ObservableObject {
         });
     }
 
-    public async Task LoadStaleClientsAsync(bool force = false) {
-        var clients = await _dataCoordinator.GetStaleClientsAsync(force);
-        if (clients == null) return;
+    public async Task LoadRecentNotesAsync(bool force = false) {
+        var notes = await _dataCoordinator.GetRecentNotesAsync(force);
+        if (notes == null) return;
 
-        var snapshot = clients.OrderBy(c => c.UpdatedAt).ToList().AsReadOnly();
-        _staleClients = snapshot;
+        var snapshot = notes.OrderBy(n => n.Date).ToList().AsReadOnly();
+        _recentNotes = snapshot;
         OnUI(() => {
-            StaleClients = new ObservableCollection<AdminClientSummary>(snapshot);
+            RecentNotes = new ObservableCollection<ClientNote>(snapshot);
         });
     }
+    
+    public async Task LoadRecentRemindersAsync(bool force = false) {
+        var reminders = await _dataCoordinator.GetRemindersAsync(force);
+        if (reminders == null) return;
+
+        var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
+        _reminders = snapshot;
+        OnUI(() => {
+            Reminders = new ObservableCollection<Reminder>(snapshot);
+        });
+    }
+
 
     private void OnUI(Action action) {
         if (_dispatcher.HasThreadAccess) action();

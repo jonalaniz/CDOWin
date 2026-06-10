@@ -3,6 +3,7 @@ using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.SAs;
+using CDO.Core.Models;
 using CDO.Core.Services.Admin;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ public class DataCoordinator {
     public CachedList<AdminClientSummary> RecentClients { get; } = new();
     public CachedList<ClientNote> RecentNotes { get; } = new();
     public CachedList<AdminClientSummary> StaleClients { get; } = new();
+    public CachedList<Reminder> Reminders { get; } = new();
     public CachedList<UserSummary> Users { get; } = new();
 
     // =========================
@@ -54,7 +56,6 @@ public class DataCoordinator {
     // =========================
 
     // Billing
-
     public async Task<IReadOnlyList<SASummary>> GetUnbilledSAsAsync(bool force = false) {
         if (force || UnbilledSAs.IsStale(BaseTTL)) {
             var data = await _billingService.GetUnbilledSAsAsync();
@@ -74,7 +75,6 @@ public class DataCoordinator {
     }
 
     // Clients
-
     public async Task<IReadOnlyList<AdminClientSummary>> GetRecentClientsAsync(bool force = false) {
         if (force || RecentClients.IsStale(BaseTTL)) {
             var data = await _clientService.GetRecentClientSummariesAsync(date: null);
@@ -100,6 +100,16 @@ public class DataCoordinator {
         }
 
         return RecentNotes.Data ?? [];
+    }
+
+    // Reminders
+    public async Task<IReadOnlyList<Reminder>> GetRemindersAsync(bool force = false) {
+        if (force || Reminders.IsStale(BaseTTL)) {
+            var data = await _reminderService.GetDailyRemindersAsync();
+            if (data != null) Reminders.Update(data);
+        }
+
+        return Reminders.Data ?? [];
     }
 
     // Users

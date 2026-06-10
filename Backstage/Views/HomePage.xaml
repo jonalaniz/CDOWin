@@ -9,6 +9,7 @@
     xmlns:dtos="using:CDO.Core.DTOs.Admin"
     xmlns:notes="using:CDO.Core.DTOs.Clients.Notes"
     xmlns:models="using:CDO.Core.Models"
+    xmlns:sas="using:CDO.Core.DTOs.SAs"
     mc:Ignorable="d">
 
     <Grid Padding="16,8,0,0">
@@ -132,40 +133,34 @@
                     </StackPanel>
                 </StackPanel>
                 
-                <!-- Expiring Soon Section -->
+                <!-- Expiring SAs Section -->
                 <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
-                    <TextBlock Text="Expiring Soon" FontSize="16" FontWeight="SemiBold"/>
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                        <!-- Service Authorizations Card -->
-                        <Grid Style="{StaticResource CardContainerGridStyle}">
+                    <TextBlock Text="Expiring Service Authorizations" FontSize="16" FontWeight="SemiBold"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled">
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.ExpiringSAs, Mode=OneWay}">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Orientation="Horizontal" Spacing="8"/>
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="sas:SASummary">
+                                    <!-- SA Card -->
+                                    <Grid Style="{StaticResource CardContainerGridStyle}">
 
-                            <!-- Inner Grid -->
-                            <Grid Style="{StaticResource CardInnerGridStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                        <!-- Inner Grid -->
+                                        <Grid Style="{StaticResource CardInnerGridStyle}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
 
-                                <!-- Header -->
-                                <TextBlock Text="Service Authorizations" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </Grid>
-                        </Grid>
-
-                        <!-- Placement Card -->
-                        <Grid Style="{StaticResource CardContainerGridStyle}">
-
-                            <!-- Inner Grid -->
-                            <Grid Style="{StaticResource CardInnerGridStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <!-- Header -->
-                                <TextBlock Text="Placements" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </Grid>
-                        </Grid>
-                    </StackPanel>
+                                            <!-- Header -->
+                                            <TextBlock Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </ScrollViewer>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Vertical" Spacing="10">
                     <TextBlock Text="Stale Clients" FontSize="16" FontWeight="SemiBold"/>

@@ -1,6 +1,7 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
+using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
 using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -28,6 +29,7 @@ public partial class HomeViewModel : ObservableObject {
     private IReadOnlyList<AdminClientSummary> _recentClients = [];
     private IReadOnlyList<ClientNote> _recentNotes = [];
     private IReadOnlyList<Reminder> _reminders = [];
+    private IReadOnlyList<SASummary> _expiringSAs = [];
 
     // =========================
     // UI State
@@ -40,6 +42,9 @@ public partial class HomeViewModel : ObservableObject {
 
     [ObservableProperty]
     public partial ObservableCollection<Reminder> Reminders { get; private set; } = [];
+
+    [ObservableProperty]
+    public partial ObservableCollection<SASummary> ExpiringSAs { get; private set; } = [];
 
     // =========================
     // Constructor
@@ -85,6 +90,16 @@ public partial class HomeViewModel : ObservableObject {
         });
     }
 
+    public async Task LoadExpiringSAsAsync(bool force = false) {
+        var sas = await _dataCoordinator.GetExpiringSAsAsync(force);
+        if (sas == null) return;
+
+        var snapshot = sas.OrderBy(s => s.EndDate).ToList().AsReadOnly();
+        _expiringSAs = snapshot;
+        OnUI(() => {
+            ExpiringSAs = new ObservableCollection<SASummary>(snapshot);
+        });
+    }
 
     private void OnUI(Action action) {
         if (_dispatcher.HasThreadAccess) action();

@@ -48,6 +48,7 @@ public static class Endpoints {
     // Billing Endpoints, returns unbilled SAs and Placements
     public static readonly string Billing = $"{Admin}/billing";
     public static readonly string BillingSAs = $"{Billing}/sas";
+    public static readonly string BillingExpiringSAs = $"{BillingSAs}/expiring";
     public static readonly string BillingPlacements = $"{Billing}/placements";
 
     // Users: Full endpoints, base returns all users as summaries

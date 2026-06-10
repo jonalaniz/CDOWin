@@ -80,6 +80,7 @@ public static class AppServices {
             DataCoordinator.GetUsersAsync(),
             DataCoordinator.GetUnbilledSAsAsync(),
             DataCoordinator.GetUnbilledPlacementsAsync(),
+            DataCoordinator.GetExpiringSAsAsync(),
             DataCoordinator.GetRecentClientsAsync(),
             DataCoordinator.GetStaleClientsAsync()
         };

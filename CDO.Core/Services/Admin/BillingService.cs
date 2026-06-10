@@ -16,6 +16,10 @@ public class BillingService {
     // GET Methods
     // -----------------------------
 
+    public Task<List<SASummary>?> GetExpiringSAsAsync() {
+        return _network.GetAsync<List<SASummary>>(Endpoints.BillingExpiringSAs);
+    } 
+
     public Task<List<SASummary>?> GetUnbilledSAsAsync() {
         return _network.GetAsync<List<SASummary>>(Endpoints.BillingSAs);
     }

@@ -3,6 +3,7 @@ using Backstage.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Diagnostics;
 
 namespace Backstage.Views;
 
@@ -29,6 +30,8 @@ public sealed partial class HomePage : Page {
         await ViewModel.LoadRecentClientsAsync();
         await ViewModel.LoadRecentNotesAsync();
         await ViewModel.LoadRecentRemindersAsync();
+        await ViewModel.LoadExpiringSAsAsync();
+        Debug.WriteLine($"Expired SAs: {ViewModel.ExpiringSAs.Count}");
     }
 
     private void SetupHelloText() {

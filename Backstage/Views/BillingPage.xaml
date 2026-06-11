@@ -6,6 +6,7 @@
     xmlns:local="using:Backstage.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CDO.UI.Shared.Controls"
     xmlns:sas="using:CDO.Core.DTOs.SAs"
     xmlns:placements="using:CDO.Core.DTOs.Placements"
     mc:Ignorable="d">
@@ -43,10 +44,37 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
 
                                             <!-- Header -->
                                             <TextBlock Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <Grid Grid.Row="1" RowSpacing="8" Margin="4,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="SA ID" Value="{x:Bind Id}"/>
+                                                <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Client ID" Value="{x:Bind ClientId}"/>
+                                                <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Start Date" Value="{x:Bind FormattedStartDate}"/>
+                                                <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="End Date" Value="{x:Bind FormattedEndDate}"/>
+                                                <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Issued By" Value="{x:Bind CounselorName}"/>
+                                                <controls:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Label="Description" Value="{x:Bind Description}"/>
+                                            </Grid>
+                                            <Grid Grid.Row="2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me" Style="{StaticResource AccentButtonStyle}"/>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
@@ -81,8 +109,6 @@
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
                     </ScrollViewer>
-                    
-                    
                 </StackPanel>
             </Grid>
         </ScrollViewer>

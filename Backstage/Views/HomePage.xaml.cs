@@ -31,7 +31,7 @@ public sealed partial class HomePage : Page {
         await ViewModel.LoadRecentNotesAsync();
         await ViewModel.LoadRecentRemindersAsync();
         await ViewModel.LoadExpiringSAsAsync();
-        Debug.WriteLine($"Expired SAs: {ViewModel.ExpiringSAs.Count}");
+        await ViewModel.LoadStaleClientsAsync();
     }
 
     private void SetupHelloText() {

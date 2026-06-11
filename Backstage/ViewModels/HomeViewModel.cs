@@ -24,14 +24,6 @@ public partial class HomeViewModel : ObservableObject {
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
-    // Private Backing Fields
-    // =========================
-    private IReadOnlyList<AdminClientSummary> _recentClients = [];
-    private IReadOnlyList<ClientNote> _recentNotes = [];
-    private IReadOnlyList<Reminder> _reminders = [];
-    private IReadOnlyList<SASummary> _expiringSAs = [];
-
-    // =========================
     // UI State
     // =========================
     [ObservableProperty]
@@ -45,6 +37,9 @@ public partial class HomeViewModel : ObservableObject {
 
     [ObservableProperty]
     public partial ObservableCollection<SASummary> ExpiringSAs { get; private set; } = [];
+
+    [ObservableProperty]
+    public partial ObservableCollection<AdminClientSummary> StaleClients { get; private set; } = [];
 
     // =========================
     // Constructor
@@ -62,7 +57,6 @@ public partial class HomeViewModel : ObservableObject {
         if (clients == null) return;
 
         var snapshot = clients.OrderBy(c => c.UpdatedAt).ToList().AsReadOnly();
-        _recentClients = snapshot;
         OnUI(() => {
             RecentClients = new ObservableCollection<AdminClientSummary>(snapshot);
         });
@@ -73,7 +67,6 @@ public partial class HomeViewModel : ObservableObject {
         if (notes == null) return;
 
         var snapshot = notes.OrderBy(n => n.Date).ToList().AsReadOnly();
-        _recentNotes = snapshot;
         OnUI(() => {
             RecentNotes = new ObservableCollection<ClientNote>(snapshot);
         });
@@ -84,7 +77,6 @@ public partial class HomeViewModel : ObservableObject {
         if (reminders == null) return;
 
         var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
-        _reminders = snapshot;
         OnUI(() => {
             Reminders = new ObservableCollection<Reminder>(snapshot);
         });
@@ -95,9 +87,18 @@ public partial class HomeViewModel : ObservableObject {
         if (sas == null) return;
 
         var snapshot = sas.OrderBy(s => s.EndDate).ToList().AsReadOnly();
-        _expiringSAs = snapshot;
         OnUI(() => {
             ExpiringSAs = new ObservableCollection<SASummary>(snapshot);
+        });
+    }
+
+    public async Task LoadStaleClientsAsync(bool force = false) {
+        var clients = await _dataCoordinator.GetStaleClientsAsync(force);
+        if (clients == null) return;
+
+        var snapshot = clients.OrderBy(c => c.UpdatedAt).ToList().AsReadOnly();
+        OnUI(() => {
+            StaleClients = new ObservableCollection<AdminClientSummary>(snapshot);
         });
     }
 

@@ -28,8 +28,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10">
+
+                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10" Padding="0,0,0,10">
                     <TextBlock Text="Today" FontSize="16" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         
@@ -42,7 +42,7 @@
 
                             <!-- Header -->
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Clients" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                <TextBlock Text="Updated Clients" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
                             </StackPanel>
                                 
                             <!-- Item Repeater -->
@@ -75,7 +75,7 @@
 
                             <!-- Header -->
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Notes" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                <TextBlock Text="New Notes" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
                             </StackPanel>
 
                             <!-- Item Repeater -->
@@ -134,7 +134,7 @@
                 </StackPanel>
                 
                 <!-- Expiring SAs Section -->
-                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
+                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10" Padding="0,0,0,10">
                     <TextBlock Text="Expiring Service Authorizations" FontSize="16" FontWeight="SemiBold"/>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.ExpiringSAs, Mode=OneWay}">
@@ -147,14 +147,23 @@
                                     <Grid Style="{StaticResource CardContainerGridStyle}">
 
                                         <!-- Inner Grid -->
-                                        <Grid Style="{StaticResource CardInnerGridStyle}">
+                                        <Grid Margin="8" Style="{StaticResource CardInnerGridStyle}">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
 
                                             <!-- Header -->
-                                            <TextBlock Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <TextBlock Margin="4,0" Grid.Row="0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <Grid Grid.Row="2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me"/>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
@@ -162,13 +171,42 @@
                         </ItemsRepeater>
                     </ScrollViewer>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Orientation="Vertical" Spacing="10">
+                <StackPanel Grid.Row="2" Orientation="Vertical" Spacing="10" Padding="0,0,0,10">
                     <TextBlock Text="Stale Clients" FontSize="16" FontWeight="SemiBold"/>
-                    <ItemsRepeater>
-                        <ItemsRepeater.Layout>
-                            <StackLayout Orientation="Horizontal" Spacing="8"/>
-                        </ItemsRepeater.Layout>
-                    </ItemsRepeater>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled">
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Orientation="Horizontal" Spacing="8"/>
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="dtos:AdminClientSummary">
+                                    <!-- SA Card -->
+                                    <Grid Style="{StaticResource CardContainerGridStyle}">
+
+                                        <!-- Inner Grid -->
+                                        <Grid Margin="8" Style="{StaticResource CardInnerGridStyle}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!-- Header -->
+                                            <TextBlock Margin="4,0" Grid.Row="0" Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <Grid Grid.Row="2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me"/>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Inactive"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </ScrollViewer>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

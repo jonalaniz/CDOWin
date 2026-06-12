@@ -42,11 +42,13 @@
                         <FontIcon Glyph="&#xE8C7;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <!--
                 <NavigationViewItem Content="Clients" Tag="{x:Bind views:BackstageView.Clients}">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE779;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                -->
                 <NavigationViewItem Icon="People" Content="Users" Tag="{x:Bind views:BackstageView.Users}"/>
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame"/>

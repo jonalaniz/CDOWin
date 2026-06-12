@@ -2,6 +2,11 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Backstage Content View Grid -->
+    <Style x:Key="BackstageContentViewStyle" TargetType="Grid">
+        <Setter Property="Padding" Value="16,8,0,0"/>
+    </Style>
 
     <!-- Basic Card Container Grid Style -->
     <Style x:Key="BasicCardContainerGridStyle" TargetType="Grid">

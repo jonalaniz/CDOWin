@@ -13,16 +13,13 @@
     xmlns:sas="using:CDO.Core.DTOs.SAs"
     mc:Ignorable="d">
 
-    <Grid Padding="16,8,0,0">
+    <Grid Style="{StaticResource BackstageContentViewStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Padding="0,0,0,8"
-                   x:Name="HelloText" FontSize="32" FontWeight="Black"/>
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollMode="Enabled" 
-                      HorizontalScrollMode="Disabled">
+        <TextBlock Grid.Row="0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
+        <ScrollViewer Grid.Row="1" Style="{StaticResource VerticalScrollViewer}">
             <Grid RowSpacing="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -30,8 +27,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10" Padding="0,0,0,8">
-                    <TextBlock Text="Today" FontSize="24" FontWeight="SemiBold"/>
+                <!-- Today Section -->
+                <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
+                    <TextBlock Text="Today" Style="{StaticResource BackstageSubHeader}"/>
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         
                         <!-- Recent Clients Card -->
@@ -42,19 +40,23 @@
                             </Grid.RowDefinitions>
 
                             <!-- Header -->
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Updated Clients" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </StackPanel>
-                                
+                            <Grid Grid.Row="0" Padding="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="Updated Clients" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentClients.Count}" Style="{StaticResource BackstageCardTitle}"/>
+                            </Grid>
+
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
                                 <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentClients, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminClientSummary">
 
                                         <!-- Button -->
-                                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
-                                                Background="{ThemeResource CardBackgroundFillColorDefault}"
-                                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                                        <Button Style="{StaticResource BackstageListButton}"
                                                 Tag="{x:Bind Id}">
                                             <StackPanel Spacing="2" Margin="0,0,0,0">
                                                 <TextBlock FontWeight="Bold" Text="{x:Bind Name}"/>
@@ -74,9 +76,14 @@
                             </Grid.RowDefinitions>
 
                             <!-- Header -->
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="New Notes" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </StackPanel>
+                            <Grid Grid.Row="0" Padding="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="New Notes" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentNotes.Count}" Style="{StaticResource BackstageCardTitle}"/>
+                            </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
@@ -84,11 +91,9 @@
                                     <DataTemplate x:DataType="notes:ClientNote">
 
                                         <!-- Button -->
-                                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
-                                                Background="{ThemeResource CardBackgroundFillColorDefault}"
-                                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                                        <Button Style="{StaticResource BackstageListButton}"
                                                 Tag="{x:Bind Id}">
-                                            <StackPanel Spacing="2" Margin="0,0,0,0">
+                                            <StackPanel Spacing="2">
                                                 <TextBlock FontWeight="Bold" Text="{x:Bind Author}"/>
                                                 <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Note}"/>
                                             </StackPanel>
@@ -98,7 +103,7 @@
                             </ScrollViewer>
                         </Grid>
                         
-                        <!-- Recent Reminders Card -->
+                        <!-- Reminders Card -->
                         <Grid Style="{StaticResource CardContainerGridStyle}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -106,9 +111,14 @@
                             </Grid.RowDefinitions>
 
                             <!-- Header -->
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Reminders" Padding="12,6" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            </StackPanel>
+                            <Grid Grid.Row="0" Padding="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Reminders" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Reminders.Count}" Style="{StaticResource BackstageCardTitle}"/>
+                            </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
@@ -116,12 +126,10 @@
                                     <DataTemplate x:DataType="models:Reminder">
 
                                         <!-- Button -->
-                                        <Button Margin="0" CornerRadius="0" BorderThickness="0,1,0,0"
+                                        <Button Style="{StaticResource BackstageListButton}"
                                                 Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}"
-                                                Background="{ThemeResource CardBackgroundFillColorDefault}"
-                                                HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
                                                 Tag="{x:Bind Id}">
-                                            <StackPanel Spacing="2" Margin="0,0,0,0">
+                                            <StackPanel Spacing="2" >
                                                 <TextBlock FontWeight="Bold" Text="{x:Bind ClientName}"/>
                                                 <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
                                             </StackPanel>
@@ -134,9 +142,9 @@
                 </StackPanel>
                 
                 <!-- Expiring SAs Section -->
-                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
-                    <TextBlock Text="Expiring Service Authorizations" FontSize="24" FontWeight="SemiBold"/>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" Padding="0,0,0,16">
+                <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
+                    <TextBlock Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
+                    <ScrollViewer Style="{StaticResource HorizontalScrollViewer}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.ExpiringSAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -189,9 +197,11 @@
                         </ItemsRepeater>
                     </ScrollViewer>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Orientation="Vertical" Spacing="10" Margin="0,-10,0,0">
-                    <TextBlock Text="Stale Clients" FontSize="24" FontWeight="SemiBold"/>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" Padding="0,0,0,16">
+                
+                <!-- Stale Clients Section -->
+                <StackPanel Grid.Row="2" Style="{StaticResource VerticalScrollViewerContent}" Margin="0,-10,0,0">
+                    <TextBlock Text="Stale Clients" Style="{StaticResource BackstageSubHeader}"/>
+                    <ScrollViewer Style="{StaticResource HorizontalScrollViewer}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -225,8 +235,7 @@
                                                 <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{x:Bind CaseID}"/>
                                                 <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Created On" Value="{x:Bind FormattedCreatedDate}"/>
                                                 <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="Last Updated" Value="{x:Bind FormattedUpdatedDate}"/>
-                                                <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                                                                    Label="Address" Value="{x:Bind FormattedAddress}"/>
+                                                <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Address" Value="{x:Bind FormattedAddress}"/>
                                             </Grid>
                                             <Grid Grid.Row="2" ColumnSpacing="8">
                                                 <Grid.ColumnDefinitions>

@@ -11,15 +11,13 @@
     xmlns:placements="using:CDO.Core.DTOs.Placements"
     mc:Ignorable="d">
 
-    <Grid Padding="16,8,0,0">
+    <Grid Style="{StaticResource BackstageContentViewStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Padding="0,0,0,8" 
-                   Text="Billing" FontSize="32" FontWeight="Black"/>
-        <ScrollViewer Grid.Row="1"
-                  VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled">
+        <TextBlock Grid.Row="0" Text="Billing" Style="{StaticResource BackstageHeader}"/>
+        <ScrollViewer Grid.Row="1" Style="{StaticResource VerticalScrollViewer}">
             <Grid RowSpacing="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -27,9 +25,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10">
-                    <TextBlock Text="Unbilled Service Authorizations" FontSize="16" FontWeight="SemiBold"/>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled">
+                <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
+                    <TextBlock Text="Unbilled Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
+                    <ScrollViewer Style="{StaticResource HorizontalScrollViewer}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.SAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -40,7 +38,7 @@
                                     <Grid Style="{StaticResource CardContainerGridStyle}">
 
                                         <!-- Inner Grid -->
-                                        <Grid Style="{StaticResource CardInnerGridStyle}">
+                                        <Grid Margin="8" Style="{StaticResource CardInnerGridStyle}">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
@@ -48,7 +46,7 @@
                                             </Grid.RowDefinitions>
 
                                             <!-- Header -->
-                                            <TextBlock Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <TextBlock Margin="4,0" Grid.Row="0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
                                             <Grid Grid.Row="1" RowSpacing="8" Margin="4,0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
@@ -82,9 +80,9 @@
                         </ItemsRepeater>
                     </ScrollViewer>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
-                    <TextBlock Text="Unbilled Placements" FontSize="16" FontWeight="SemiBold"/>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled">
+                <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
+                    <TextBlock Text="Unbilled Placements" Style="{StaticResource BackstageSubHeader}"/>
+                    <ScrollViewer Style="{StaticResource HorizontalScrollViewer}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -99,10 +97,36 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
 
                                             <!-- Header -->
-                                            <TextBlock Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <TextBlock Margin="4,0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <Grid Grid.Row="1" RowSpacing="8" Margin="4,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="Placement ID" Value="{x:Bind Id}"/>
+                                                <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Client ID" Value="{x:Bind ClientID}"/>
+                                                <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Employer" Value="{x:Bind EmployerName}"/>
+                                                <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="Hire Date" Value="{x:Bind FormattedHireDate}"/>
+                                                <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Counselor" Value="{x:Bind CounselorName}"/>
+                                            </Grid>
+                                            <Grid Grid.Row="2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me" Style="{StaticResource AccentButtonStyle}"/>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>

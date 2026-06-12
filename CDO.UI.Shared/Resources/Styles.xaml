@@ -178,4 +178,51 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="IsItemClickEnabled" Value="True"/>
     </Style>
+    
+    <!-- Backstage Header Style -->
+    <Style x:Key="BackstageHeader" TargetType="TextBlock">
+        <Setter Property="Padding" Value="0,0,0,8"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontWeight" Value="Black"/>
+    </Style>
+    
+    <!-- Backstage Subheader Style -->
+    <Style x:Key="BackstageSubHeader" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    
+    <!-- Backstage Card Title Style -->
+    <Style x:Key="BackstageCardTitle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextBlockStyle}">
+        <Setter Property="Padding" Value="12,6"/>
+    </Style>
+    
+    <!-- Backstage Vertical ScrollViewer -->
+    <Style x:Key="VerticalScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="VerticalScrollMode" Value="Enabled"/>
+        <Setter Property="HorizontalScrollMode" Value="Disabled"/>
+    </Style>
+    
+    <!-- Backstage Horizontal ScrollViewer -->
+    <Style x:Key="HorizontalScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="VerticalScrollMode" Value="Disabled"/>
+        <Setter Property="Padding" Value="0,0,0,16"/>
+    </Style>
+    
+    <!-- Backstage Vertical ScrollViewer Content -->
+    <Style x:Key="VerticalScrollViewerContent" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Vertical"/>
+        <Setter Property="Spacing" Value="10"/>
+        <Setter Property="Padding" Value="0,0,0,8"/>
+    </Style>
+    
+    <!-- Backstage Button -->
+    <Style x:Key="BackstageListButton" TargetType="Button">
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+        <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefault}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
 </ResourceDictionary>

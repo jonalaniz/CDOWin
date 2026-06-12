@@ -3,18 +3,15 @@ using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
-using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Devices.PointOfService;
 
-namespace Backstage.ViewModels; 
+namespace Backstage.ViewModels;
+
 public partial class HomeViewModel : ObservableObject {
 
     // =========================
@@ -71,7 +68,7 @@ public partial class HomeViewModel : ObservableObject {
             RecentNotes = new ObservableCollection<ClientNote>(snapshot);
         });
     }
-    
+
     public async Task LoadRecentRemindersAsync(bool force = false) {
         var reminders = await _dataCoordinator.GetRemindersAsync(force);
         if (reminders == null) return;

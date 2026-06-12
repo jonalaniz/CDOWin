@@ -3,7 +3,8 @@ using Backstage.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Diagnostics;
+using System.Threading.Tasks;
+using Windows.Gaming.Input.ForceFeedback;
 
 namespace Backstage.Views;
 
@@ -27,12 +28,17 @@ public sealed partial class HomePage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadRecentClientsAsync();
-        await ViewModel.LoadRecentNotesAsync();
-        await ViewModel.LoadRecentRemindersAsync();
-        await ViewModel.LoadExpiringSAsAsync();
-        await ViewModel.LoadStaleClientsAsync();
+        await RefreshAsync();
     }
+
+    private async Task RefreshAsync(bool force = false) {
+        await ViewModel.LoadRecentClientsAsync(force);
+        await ViewModel.LoadRecentNotesAsync(force);
+        await ViewModel.LoadRecentRemindersAsync(force);
+        await ViewModel.LoadExpiringSAsAsync(force);
+        await ViewModel.LoadStaleClientsAsync(force);
+    }
+
 
     private void SetupHelloText() {
         HelloText.Text = $"Hello, {UserName()}";
@@ -40,5 +46,11 @@ public sealed partial class HomePage : Page {
 
     private string UserName() {
         return char.ToUpper(Environment.UserName[0]) + Environment.UserName[1..];
+    }
+
+    private async void Refresh_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+        RefreshButton.IsEnabled = false;
+        await RefreshAsync(force: true);
+        RefreshButton.IsEnabled = true;
     }
 }

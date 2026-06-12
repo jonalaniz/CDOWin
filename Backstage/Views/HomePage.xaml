@@ -18,7 +18,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
+        <Grid Grid.Row="0" Margin="0,0,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
+            <CommandBar Grid.Column="1" Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton x:Name="RefreshButton" Width="56" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
         <ScrollViewer Grid.Row="1" Style="{StaticResource VerticalScrollViewer}">
             <Grid RowSpacing="8">
                 <Grid.RowDefinitions>
@@ -29,7 +42,7 @@
 
                 <!-- Today Section -->
                 <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
-                    <TextBlock Text="Today" Style="{StaticResource BackstageSubHeader}"/>
+                    <TextBlock Text="Today" VerticalAlignment="Center" Style="{StaticResource BackstageSubHeader}"/>
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         
                         <!-- Recent Clients Card -->

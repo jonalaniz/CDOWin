@@ -6,9 +6,9 @@ using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -29,7 +29,7 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<PlacementSummary> _cache = [];
+    private CancellationTokenSource? _filterCts;
 
     private bool Reversed { get; set; } = true;
 
@@ -78,13 +78,13 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) => ApplyFilter();
-    partial void OnIsFilteredChanged(bool value) => ApplyFilter();
+    partial void OnSearchQueryChanged(string value) => _ = RefreshAsync();
+    partial void OnIsFilteredChanged(bool value) => _ = RefreshAsync();
 
     private void OnRequestSelectedPlacementChange(int placementID) {
         if (Selected != null && Selected.Id == placementID) return;
         SearchQuery = string.Empty;
-        ApplyFilter();
+        RefreshAsync();
         _ = LoadSelectedPlacementAsync(placementID);
     }
 
@@ -108,22 +108,12 @@ public partial class PlacementsViewModel : ObservableObject {
 
     public async Task ToggleSortAsync() {
         Reversed = !Reversed;
-        await LoadPlacementSummariesAsync();
+        await RefreshAsync();
     }
 
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadPlacementSummariesAsync(bool force = false) {
-        var placements = await _dataCoordinator.GetPlacementSummariesAsync(force);
-        if (placements == null) return;
-
-        var snapshot = placements.OrderBy(o => o.HireDate).ToList();
-        if (Reversed) { snapshot.Reverse(); }
-        _cache = snapshot.AsReadOnly();
-        ApplyFilter();
-    }
-
     public async Task LoadSelectedPlacementAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
 
@@ -139,12 +129,10 @@ public partial class PlacementsViewModel : ObservableObject {
 
     public async Task<Result> DeleteSelectedPlacement() {
         if (Selected == null) return Result<bool>.Fail(new AppError(ErrorKind.Validation, "No Placement selected.", null, null));
-        var result = await _service.DeletePlacementAsync(Selected.Id);
+        var id = SelectedSummary.Id;
+        var result = await _service.DeletePlacementAsync(id);
 
-        if (result.IsSuccess) {
-            Selected = null;
-            _ = LoadPlacementSummariesAsync(force: true);
-        }
+        if (result.IsSuccess) OnUI(() => RemoveDeletedPlacement(id));
 
         return result;
     }
@@ -152,27 +140,50 @@ public partial class PlacementsViewModel : ObservableObject {
     // =========================
     // Utility / Filtering
     // =========================
-    private void ApplyFilter() {
-        int? previousSelection = Selected?.Id;
+    public async Task RefreshAsync(bool force = false) {
+        _filterCts?.Cancel();
+        _filterCts = new CancellationTokenSource();
+        var token = _filterCts.Token;
 
-        var result = IsFiltered
-            ? _cache.Where(p => p.Active)
-            : _cache;
+        try {
+            await Task.Delay(150, token);
+            if (token.IsCancellationRequested) return;
 
-        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-            var query = SearchQuery.Trim().ToLower();
-            result = result.Where(r =>
-            (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
-            );
+            var snapshot = await _dataCoordinator.GetPlacementSummariesAsync(force);
+            if (token.IsCancellationRequested) return;
+
+            int? previousSelection = Selected?.Id;
+
+            snapshot = IsFiltered ? snapshot.Where(i => i.Active == true).ToList() : snapshot;
+
+            snapshot = snapshot.OrderBy(p => p.HireDate).ToList();
+            if (Reversed) snapshot = snapshot.Reverse().ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+                var query = SearchQuery.Trim().ToLower();
+                snapshot = snapshot.Where(r =>
+                (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
+                ).ToList();
+            }
+
+            OnUI(() => {
+                Filtered = new ObservableCollection<PlacementSummary>(snapshot);
+                ReSelect(previousSelection);
+            });
+        } catch (OperationCanceledException) { }
+    }
+
+    private void RemoveDeletedPlacement(int id) {
+        // Update our cache
+        _ = _dataCoordinator.GetClientsAsync(force: true);
+
+        if (Filtered.FirstOrDefault(p => p.Id == id) is PlacementSummary placement) {
+            Filtered.Remove(placement);
+            Selected = null;
         }
-
-        OnUI(() => {
-            Filtered = new ObservableCollection<PlacementSummary>(result);
-            ReSelect(previousSelection);
-        });
     }
 
     private void OnUI(Action action) {

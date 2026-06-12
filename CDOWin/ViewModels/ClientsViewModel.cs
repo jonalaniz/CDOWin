@@ -34,8 +34,8 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<ClientSummary> _cache = [];
     private CancellationTokenSource _ctSource = new();
+    private CancellationTokenSource? _filterCts;
 
     // =========================
     // UI State
@@ -69,7 +69,6 @@ public partial class ClientsViewModel : ObservableObject {
     [ObservableProperty]
     public partial string NotesSearchQuery { get; set; } = string.Empty;
 
-
     // =========================
     // Constructor
     // =========================
@@ -92,14 +91,13 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnSearchQueryChanged(string value) => _ = RefreshAsync();
     partial void OnNotesSearchQueryChanged(string value) => ApplyNotesFilter();
-    partial void OnIsFilteredChanged(bool value) => ApplyFilter();
+    partial void OnIsFilteredChanged(bool value) => _ = RefreshAsync();
 
     private void OnRequestSelectedClientChange(int clientId) {
         if (Selected != null && Selected.Id == clientId) return;
         SearchQuery = string.Empty;
-        ApplyFilter();
         _ = LoadSelectedClientAsync(clientId);
     }
 
@@ -132,15 +130,6 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadClientSummariesAsync(bool force = false) {
-        var clients = await _dataCoordinator.GetClientsAsync(force);
-        if (clients == null) return;
-
-        var snapshot = clients.OrderBy(c => c.Name).ToList().AsReadOnly();
-        _cache = snapshot;
-        ApplyFilter();
-    }
-
     public async Task LoadSelectedClientAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
         ResetCancellationToken();
@@ -181,8 +170,7 @@ public partial class ClientsViewModel : ObservableObject {
     // Delete Methods
     public async Task<Result> DeleteClientAsync(int id) {
         var result = await _service.DeleteClientAsync(id);
-        if (result.IsSuccess)
-            OnUI(() => RemoveDeletedClient(id));
+        if (result.IsSuccess) OnUI(() => RemoveDeletedClient(id));
         InvalidateCache();
         return result;
     }
@@ -215,30 +203,44 @@ public partial class ClientsViewModel : ObservableObject {
         });
     }
 
-    private void ApplyFilter() {
-        int? previousSelection = Selected?.Id;
+    public async Task RefreshAsync(bool force = false) {
+        _filterCts?.Cancel();
+        _filterCts = new CancellationTokenSource();
+        var token = _filterCts.Token;
 
-        IEnumerable<ClientSummary> result = IsFiltered ? _cache.Where(i => i.Active == true) : _cache;
+        try {
+            await Task.Delay(150, token);
+            if (token.IsCancellationRequested) return;
 
-        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-            var query = SearchQuery.Trim().ToLower();
-            result = result.Where(c =>
-            (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.Phone2 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.Phone3 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.EmploymentGoal ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            (c.CaseID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
-            );
-        }
+            var snapshot = await _dataCoordinator.GetClientsAsync(force);
+            if (token.IsCancellationRequested) return;
 
-        OnUI(() => {
-            Filtered = new ObservableCollection<ClientSummary>(result);
-            ReSelect(previousSelection);
-        });
+            int? previousSelection = Selected?.Id;
+
+            snapshot = IsFiltered ? snapshot.Where(i => i.Active == true).ToList() : snapshot;
+
+            if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+                var query = SearchQuery.Trim().ToLower();
+                snapshot = snapshot.Where(c =>
+                (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.Id.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.Phone ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.Phone2 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.Phone3 ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.EmploymentGoal ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (c.CaseID ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
+                ).ToList();
+            }
+
+            OnUI(() => {
+                Filtered = new ObservableCollection<ClientSummary>(
+                    snapshot.OrderBy(c => c.Name)
+                    );
+                ReSelect(previousSelection);
+            });
+        } catch (OperationCanceledException) { }
     }
 
     private void InvalidateCache() {
@@ -267,9 +269,8 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     private void RemoveDeletedClient(int id) {
-        _cache = _cache
-            .Where(c => c.Id != id)
-            .ToList();
+        // Update our cache
+        _ = _dataCoordinator.GetClientsAsync(force: true);
 
         if (Filtered.FirstOrDefault(c => c.Id == id) is ClientSummary client) {
             Filtered.Remove(client);
@@ -284,10 +285,10 @@ public partial class ClientsViewModel : ObservableObject {
     private void UpdateSummaries() {
         if (Selected == null) return;
 
-        _cache = _cache
-            .Select(c => c.Id == Selected.Id ? Selected.AsSummary() : c)
-            .ToList();
+        // Update the cache
+        _ = _dataCoordinator.GetClientsAsync();
 
+        // Update our filter
         if (Filtered.FirstOrDefault(c => c.Id == Selected.Id) is ClientSummary client) {
             var i = Filtered.IndexOf(client);
             Filtered[i] = Selected.AsSummary();

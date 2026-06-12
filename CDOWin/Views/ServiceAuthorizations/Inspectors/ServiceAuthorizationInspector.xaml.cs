@@ -45,7 +45,7 @@ public sealed partial class ServiceAuthorizationInspector : Page {
         }
 
         _ = ViewModel.LoadSelectedSAAsync(ViewModel.SelectedSummary.Id);
-        _ = ViewModel.LoadServiceAuthorizationsAsync(force: true);
+        _ = ViewModel.RefreshAsync(force: true);
     }
 
     private async void Export_Click(object sender, RoutedEventArgs e) {

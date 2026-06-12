@@ -33,7 +33,7 @@ public sealed partial class ClientsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadClientSummariesAsync();
+        await ViewModel.RefreshAsync();
     }
 
     // =========================
@@ -64,7 +64,7 @@ public sealed partial class ClientsPage : Page {
             return;
         }
 
-        await ViewModel.LoadClientSummariesAsync(force: true);
+        await ViewModel.RefreshAsync(force: true);
         ViewModel.Selected = updateResult.Value;
     }
 

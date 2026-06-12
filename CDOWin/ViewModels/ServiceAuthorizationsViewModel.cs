@@ -7,9 +7,9 @@ using CDOWin.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -28,7 +28,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<SASummary> _cache = [];
+    private CancellationTokenSource? _filterCts;
 
     private bool Reversed { get; set; } = true;
 
@@ -54,7 +54,6 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-
     public ServiceAuthorizationsViewModel(
         DataCoordinator dataCoordinator,
         IServiceAuthorizationService service,
@@ -72,8 +71,8 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) => ApplyFilter();
-    partial void OnIsFilteredChanged(bool value) => ApplyFilter();
+    partial void OnSearchQueryChanged(string value) => _ = RefreshAsync();
+    partial void OnIsFilteredChanged(bool value) => _ = RefreshAsync();
 
     // =========================
     // Public Methods
@@ -88,11 +87,9 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
         _counselorSelectionService.RequestSelectedCounselor(counselorID);
     }
 
-    public async
-    Task
-ToggleSortAsync() {
+    public async Task ToggleSortAsync() {
         Reversed = !Reversed;
-        await LoadServiceAuthorizationsAsync();
+        await RefreshAsync();
     }
 
     // =========================
@@ -113,16 +110,6 @@ ToggleSortAsync() {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadServiceAuthorizationsAsync(bool force = false) {
-        var serviceAuthorizations = await _dataCoordinator.GetSAsAsync();
-        if (serviceAuthorizations == null) return;
-
-        var snapshot = serviceAuthorizations.OrderBy(o => o.EndDate).ToList();
-        if (Reversed) { snapshot.Reverse(); }
-        _cache = snapshot.AsReadOnly();
-        ApplyFilter();
-    }
-
     public async Task LoadSelectedSAAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
 
@@ -135,13 +122,7 @@ ToggleSortAsync() {
         var id = SelectedSummary.Id;
         var result = await _service.DeleteServiceAuthorizationAsync(id);
 
-        if (result.IsSuccess) {
-            OnUI(() => {
-                Selected = null;
-                SelectedSummary = null;
-            });
-            _ = LoadServiceAuthorizationsAsync(force: true);
-        }
+        if (result.IsSuccess) OnUI(() => RemoveDeletedSA(id));
 
         return result;
     }
@@ -149,27 +130,51 @@ ToggleSortAsync() {
     // =========================
     // Utility / Filtering
     // =========================
-    void ApplyFilter() {
-        int? previousSelection = SelectedSummary?.Id;
+    public async Task RefreshAsync(bool force = false) {
+        _filterCts?.Cancel();
+        _filterCts = new CancellationTokenSource();
+        var token = _filterCts.Token;
 
-        var result = IsFiltered
-            ? _cache.Where(r => r.Active)
-            : _cache;
+        try {
+            await Task.Delay(150, token);
+            if (token.IsCancellationRequested) return;
 
-        if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-            var query = SearchQuery.Trim().ToLower();
-            result = result.Where(i =>
-            i.ClientName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            i.CounselorName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            i.ServiceAuthorizationNumber.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-            i.Description.Contains(query, StringComparison.CurrentCultureIgnoreCase)
-            );
+            var snapshot = await _dataCoordinator.GetSAsAsync(force);
+            if (token.IsCancellationRequested) return;
+
+            int? previousSelection = SelectedSummary?.Id;
+
+            snapshot = IsFiltered ? snapshot.Where(r => r.Active).ToList() : snapshot;
+
+            snapshot = snapshot.OrderBy(o => o.EndDate).ToList();
+            if (Reversed) snapshot = snapshot.Reverse().ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+                var query = SearchQuery.Trim().ToLower();
+                snapshot = snapshot.Where(i =>
+                i.ClientName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                i.CounselorName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                i.ServiceAuthorizationNumber.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                i.Description.Contains(query, StringComparison.CurrentCultureIgnoreCase)
+                ).ToList();
+            }
+
+            OnUI(() => {
+                Filtered = new ObservableCollection<SASummary>(snapshot);
+                ReSelect(previousSelection);
+            });
+        } catch (OperationCanceledException) { }
+    }
+
+    private void RemoveDeletedSA(int id) {
+        // Update our cache
+        _ = _dataCoordinator.GetSAsAsync(force: true);
+
+        if (Filtered.FirstOrDefault(s => s.Id == id) is SASummary sa) {
+            Filtered.Remove(sa);
+            Selected = null;
+            SelectedSummary = null;
         }
-
-        OnUI(() => {
-            Filtered = new ObservableCollection<SASummary>(result);
-            ReSelect(previousSelection);
-        });
     }
 
     private void OnUI(Action action) {

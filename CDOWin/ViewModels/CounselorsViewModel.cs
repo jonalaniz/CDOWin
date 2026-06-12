@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -28,7 +29,7 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<CounselorSummary> _cache = [];
+    private CancellationTokenSource? _filterCts;
 
     // =========================
     // UI State
@@ -70,26 +71,22 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnSearchQueryChanged(string value) => _ = RefreshAsync();
 
     private void OnRequestSelectedCounselorChange(int counselorId) {
         if (Selected != null && Selected.Id == counselorId) return;
         SearchQuery = string.Empty;
-        ApplyFilter();
         _ = LoadSelectedCounselorAsync(counselorId);
     }
 
     // =========================
     // Public Methods
     // =========================
-    public List<CounselorSummary> All() => _cache.ToList();
 
     // Get method for CreateCounselor.xaml.cs
     public async Task<List<CounselorSummary>> GetCounselors() {
-        if (_cache.Count == 0)
-            await LoadCounselorSummariesAsync();
-
-        return _cache.ToList();
+        var counselors = await _dataCoordinator.GetCounselorsAsync();
+        return counselors.ToList();
     }
 
     public void RequestClient(int clientID) {
@@ -100,15 +97,6 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadCounselorSummariesAsync(bool force = false) {
-        var counselors = await _dataCoordinator.GetCounselorsAsync(force);
-        if (counselors == null) return;
-
-        var snapshot = counselors.OrderBy(o => o.Name).ToList().AsReadOnly();
-        _cache = snapshot;
-        ApplyFilter();
-    }
-
     public async Task LoadSelectedCounselorAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
 
@@ -140,13 +128,7 @@ public partial class CounselorsViewModel : ObservableObject {
         var id = Selected.Id;
         var result = await _service.DeleteCounselorAsync(id);
 
-        if (result.IsSuccess) {
-            OnUI(() => {
-                Selected = null;
-                SelectedSummary = null;
-            });
-            _ = LoadCounselorSummariesAsync(force: true);
-        }
+        if (result.IsSuccess) OnUI(() => RemoveDeletedCounselor(id));
 
         return result;
     }
@@ -154,28 +136,56 @@ public partial class CounselorsViewModel : ObservableObject {
     // =========================
     // Utility / Helpers
     // =========================
+    public async Task RefreshAsync(bool force = false) {
+        _filterCts?.Cancel();
+        _filterCts = new CancellationTokenSource();
+        var token = _filterCts.Token;
 
-    private void ApplyFilter() {
-        int? previousSelection = Selected?.Id;
+        try {
+            await Task.Delay(150, token);
+            if (token.IsCancellationRequested) return;
 
-        if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<CounselorSummary>(_cache);
-            ReSelect(previousSelection);
-            return;
+            var snapshot = await _dataCoordinator.GetCounselorsAsync(force);
+            if (token.IsCancellationRequested) return;
+
+            int? previousSelection = Selected?.Id;
+
+            if (string.IsNullOrWhiteSpace(SearchQuery)) {
+                OnUI(() => {
+                    Filtered = new ObservableCollection<CounselorSummary>(
+                        snapshot.OrderBy(s => s.Name)
+                        );
+                    ReSelect(previousSelection);
+                });
+                return;
+            }
+
+            var query = SearchQuery.Trim().ToLower();
+            var result = snapshot.Where(c =>
+            (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.CaseLoadID.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.SecretaryName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (c.Email ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            );
+
+            OnUI(() => {
+                Filtered = new ObservableCollection<CounselorSummary>(
+                    result.OrderBy(s => s.Name)
+                    );
+                ReSelect(previousSelection);
+            });
+        } catch (OperationCanceledException) { }
+    }
+
+    private void RemoveDeletedCounselor(int id) {
+        // Update our cache
+        _ = _dataCoordinator.GetCounselorsAsync(force: true);
+
+        if (Filtered.FirstOrDefault(c => c.Id == id) is CounselorSummary counselor) {
+            Filtered.Remove(counselor);
+            Selected = null;
+            SelectedSummary = null;
         }
-
-        var query = SearchQuery.Trim().ToLower();
-        var result = _cache.Where(c =>
-        (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.CaseLoadID.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.SecretaryName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (c.Email ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
-        );
-
-        OnUI(() => {
-            Filtered = new ObservableCollection<CounselorSummary>(result);
-            ReSelect(previousSelection);
-        });
     }
 
     private void OnUI(Action action) {

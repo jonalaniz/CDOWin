@@ -31,7 +31,7 @@ public sealed partial class EmployersPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadEmployerSummariesAsync();
+        await ViewModel.RefreshAsync();
     }
 
     // =========================
@@ -62,7 +62,7 @@ public sealed partial class EmployersPage : Page {
             return;
         }
 
-        await ViewModel.LoadEmployerSummariesAsync(force: true);
+        await ViewModel.RefreshAsync(force: true);
         _ = ViewModel.LoadSelectedEmployerAsync(updateResult.Value!.Id);
     }
 

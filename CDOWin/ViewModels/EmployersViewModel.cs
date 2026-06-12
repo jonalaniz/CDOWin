@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
@@ -27,7 +28,7 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<EmployerSummary> _cache = [];
+    private CancellationTokenSource? _filterCts;
 
     // =========================
     // UI State
@@ -64,12 +65,11 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     // Property Change Methods
     // =========================
-    partial void OnSearchQueryChanged(string value) => ApplyFilter();
+    partial void OnSearchQueryChanged(string value) => _ = RefreshAsync();
 
     private void OnRequestSelectedEmployerChanged(int employerId) {
         if (Selected != null && Selected.Id == employerId) return;
         SearchQuery = string.Empty;
-        ApplyFilter();
         _ = LoadSelectedEmployerAsync(employerId);
     }
 
@@ -84,14 +84,6 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     // CRUD Methods
     // =========================
-    public async Task LoadEmployerSummariesAsync(bool force = false) {
-        var employers = await _dataCoordinator.GetEmployerSummariesAsync(force);
-        if (employers == null) return;
-
-        var snapshot = employers.OrderBy(e => e.Name).ToList().AsReadOnly();
-        _cache = snapshot;
-        ApplyFilter();
-    }
 
     public async Task LoadSelectedEmployerAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
@@ -119,13 +111,7 @@ public partial class EmployersViewModel : ObservableObject {
         var id = Selected.Id;
         var result = await _service.DeleteEmployerAsync(id);
 
-        if (result.IsSuccess) {
-            OnUI(() => {
-                Selected = null;
-                SelectedSummary = null;
-            });
-            _ = LoadEmployerSummariesAsync(force: true);
-        }
+        if (result.IsSuccess) OnUI(() => RemoveDeletedEmployer(id));
 
         return result;
     }
@@ -133,28 +119,54 @@ public partial class EmployersViewModel : ObservableObject {
     // =========================
     // Utility / Filtering
     // =========================
+    public async Task RefreshAsync(bool force = false) {
+        _filterCts?.Cancel();
+        _filterCts = new CancellationTokenSource();
+        var token = _filterCts.Token;
 
-    private void ApplyFilter() {
-        int? previousSelection = SelectedSummary?.Id;
+        try {
+            await Task.Delay(150, token);
+            if (token.IsCancellationRequested) return;
 
-        if (string.IsNullOrWhiteSpace(SearchQuery)) {
-            Filtered = new ObservableCollection<EmployerSummary>(_cache);
-            ReSelect(previousSelection);
-            return;
+            var snapshot = await _dataCoordinator.GetEmployerSummariesAsync(force);
+            if (token.IsCancellationRequested) return;
+
+            int? previousSelection = SelectedSummary?.Id;
+
+            if (string.IsNullOrWhiteSpace(SearchQuery)) {
+                Filtered = new ObservableCollection<EmployerSummary>(
+                    snapshot.OrderBy(e => e.Name)
+                    );
+                ReSelect(previousSelection);
+                return;
+            }
+
+            var query = SearchQuery.Trim().ToLower();
+            var result = snapshot.Where(e =>
+            (e.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (e.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (e.SupervisorName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+            (e.Notes ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
+            );
+
+            OnUI(() => {
+                Filtered = new ObservableCollection<EmployerSummary>(
+                    snapshot.OrderBy(e => e.Name)
+                    );
+                ReSelect(previousSelection);
+            });
+        } catch (OperationCanceledException) { }
+    }
+
+    private void RemoveDeletedEmployer(int id) {
+        // Update our cache
+        _ = _dataCoordinator.GetPlacementSummariesAsync(force: true);
+
+        if (Filtered.FirstOrDefault(p => p.Id == id) is EmployerSummary employer) {
+            Filtered.Remove(employer);
+            Selected = null;
+            SelectedSummary = null;
         }
-
-        var query = SearchQuery.Trim().ToLower();
-        var result = _cache.Where(e =>
-        (e.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (e.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (e.SupervisorName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-        (e.Notes ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
-        );
-
-        OnUI(() => {
-            Filtered = new ObservableCollection<EmployerSummary>(result);
-            ReSelect(previousSelection);
-        });
     }
 
     private void OnUI(Action action) {

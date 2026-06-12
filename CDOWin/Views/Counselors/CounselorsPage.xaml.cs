@@ -32,7 +32,7 @@ public sealed partial class CounselorsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadCounselorSummariesAsync();
+        await ViewModel.RefreshAsync();
     }
 
     // =========================
@@ -63,7 +63,7 @@ public sealed partial class CounselorsPage : Page {
             return;
         }
 
-        await ViewModel.LoadCounselorSummariesAsync(force: true);
+        await ViewModel.RefreshAsync(force: true);
         _ = ViewModel.LoadSelectedCounselorAsync(updateResult.Value!.Id);
     }
 

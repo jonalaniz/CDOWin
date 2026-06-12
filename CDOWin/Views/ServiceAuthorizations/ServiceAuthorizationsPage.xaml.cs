@@ -28,7 +28,7 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadServiceAuthorizationsAsync();
+        await ViewModel.RefreshAsync();
     }
 
     // =========================

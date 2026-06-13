@@ -156,7 +156,7 @@
                 <!-- Expiring SAs Section -->
                 <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
                     <TextBlock Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
-                    <ScrollView ContentOrientation="Horizontal">
+                    <ScrollView Style="{StaticResource HorizontalScrollView}>
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.ExpiringSAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -213,7 +213,7 @@
                 <!-- Stale Clients Section -->
                 <StackPanel Grid.Row="2" Style="{StaticResource VerticalScrollViewerContent}" Margin="0,-10,0,0">
                     <TextBlock Text="Stale Clients" Style="{StaticResource BackstageSubHeader}"/>
-                    <ScrollView ContentOrientation="Horizontal">
+                    <ScrollView Style="{StaticResource HorizontalScrollView}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>

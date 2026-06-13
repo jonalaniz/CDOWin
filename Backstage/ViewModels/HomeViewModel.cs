@@ -1,7 +1,6 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
-using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -33,7 +32,7 @@ public partial class HomeViewModel : ObservableObject {
     public partial ObservableCollection<Reminder> Reminders { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<SASummary> ExpiringSAs { get; private set; } = [];
+    public partial ObservableCollection<AdminSASummary> ExpiringSAs { get; private set; } = [];
 
     [ObservableProperty]
     public partial ObservableCollection<AdminClientSummary> StaleClients { get; private set; } = [];
@@ -85,7 +84,7 @@ public partial class HomeViewModel : ObservableObject {
 
         var snapshot = sas.OrderBy(s => s.EndDate).ToList().AsReadOnly();
         OnUI(() => {
-            ExpiringSAs = new ObservableCollection<SASummary>(snapshot);
+            ExpiringSAs = new ObservableCollection<AdminSASummary>(snapshot);
         });
     }
 

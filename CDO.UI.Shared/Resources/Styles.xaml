@@ -201,12 +201,18 @@
     <Style x:Key="VerticalScrollViewer" TargetType="ScrollViewer">
         <Setter Property="VerticalScrollMode" Value="Enabled"/>
         <Setter Property="HorizontalScrollMode" Value="Disabled"/>
+        <Setter Property="IsHorizontalScrollChainingEnabled" Value="False"/>
+        <Setter Property="IsVerticalScrollChainingEnabled" Value="False"/>
     </Style>
     
     <!-- Backstage Horizontal ScrollViewer -->
     <Style x:Key="HorizontalScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="HorizontalScrollMode" Value="Enabled"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="VerticalScrollMode" Value="Disabled"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="IsVerticalScrollChainingEnabled" Value="False"/>
+        <Setter Property="IsHorizontalScrollChainingEnabled" Value="False"/>
         <Setter Property="Padding" Value="0,0,0,16"/>
     </Style>
     

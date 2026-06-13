@@ -72,6 +72,8 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(List<AdminClientDetail>))]
 [JsonSerializable(typeof(AdminClientSummary))]
 [JsonSerializable(typeof(List<AdminClientSummary>))]
+[JsonSerializable(typeof(AdminSASummary))]
+[JsonSerializable(typeof(List<AdminSASummary>))]
 [JsonSerializable(typeof(UserSummary))]
 [JsonSerializable(typeof(List<UserSummary>))]
 [JsonSerializable(typeof(NewUser))]

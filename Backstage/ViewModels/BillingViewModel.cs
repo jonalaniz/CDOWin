@@ -1,11 +1,10 @@
 ﻿using Backstage.Data;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Placements;
-using CDO.Core.DTOs.SAs;
 using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,16 +21,10 @@ public partial class BillingViewModel : ObservableObject {
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
-    // Private Backing Fields
-    // =========================
-    private IReadOnlyList<SASummary> _saCache = [];
-    private IReadOnlyList<PlacementSummary> _placementCache = [];
-
-    // =========================
     // UI State
     // =========================
     [ObservableProperty]
-    public partial ObservableCollection<SASummary> SAs { get; private set; } = [];
+    public partial ObservableCollection<AdminSASummary> SAs { get; private set; } = [];
 
     [ObservableProperty]
     public partial ObservableCollection<PlacementSummary> Placements { get; private set; } = [];
@@ -46,12 +39,6 @@ public partial class BillingViewModel : ObservableObject {
     }
 
     // =========================
-    // Public Methods
-    // =========================
-    public List<SASummary> UnbilledSAs() => _saCache.ToList();
-    public List<PlacementSummary> UnbilledPlacements() => _placementCache.ToList();
-
-    // =========================
     // CRUD Methods
     // =========================
     public async Task LoadSASummariesAsync(bool force = false) {
@@ -59,9 +46,8 @@ public partial class BillingViewModel : ObservableObject {
         if (sas == null) return;
 
         var snapshot = sas.OrderBy(s => s.StartDate).ToList().AsReadOnly();
-        _saCache = snapshot;
         OnUI(() => {
-            SAs = new ObservableCollection<SASummary>(snapshot);
+            SAs = new ObservableCollection<AdminSASummary>(snapshot);
         });
     }
 
@@ -70,7 +56,6 @@ public partial class BillingViewModel : ObservableObject {
         if (placements == null) return;
 
         var snapshot = placements.OrderBy(p => p.Id).ToList().AsReadOnly();
-        _placementCache = snapshot;
         OnUI(() => {
             Placements = new ObservableCollection<PlacementSummary>(snapshot);
         });

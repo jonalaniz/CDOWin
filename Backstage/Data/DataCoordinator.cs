@@ -2,7 +2,6 @@
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Placements;
-using CDO.Core.DTOs.SAs;
 using CDO.Core.Models;
 using CDO.Core.Services.Admin;
 using System;
@@ -23,8 +22,8 @@ public class DataCoordinator {
     // =========================
     // Public Fields
     // =========================
-    public CachedList<SASummary> ExpiringSAs { get; } = new();
-    public CachedList<SASummary> UnbilledSAs { get; } = new();
+    public CachedList<AdminSASummary> ExpiringSAs { get; } = new();
+    public CachedList<AdminSASummary> UnbilledSAs { get; } = new();
     public CachedList<PlacementSummary> UnbilledPlacements { get; } = new();
     public CachedList<AdminClientSummary> RecentClients { get; } = new();
     public CachedList<ClientNote> RecentNotes { get; } = new();
@@ -57,7 +56,7 @@ public class DataCoordinator {
     // =========================
 
     // Billing
-    public async Task<IReadOnlyList<SASummary>> GetExpiringSAsAsync(bool force = false) {
+    public async Task<IReadOnlyList<AdminSASummary>> GetExpiringSAsAsync(bool force = false) {
         if (force || ExpiringSAs.IsStale(BaseTTL)) {
             var data = await _billingService.GetExpiringSAsAsync();
             if (data != null) ExpiringSAs.Update(data);
@@ -66,7 +65,7 @@ public class DataCoordinator {
         return ExpiringSAs.Data ?? [];
     }
 
-    public async Task<IReadOnlyList<SASummary>> GetUnbilledSAsAsync(bool force = false) {
+    public async Task<IReadOnlyList<AdminSASummary>> GetUnbilledSAsAsync(bool force = false) {
         if (force || UnbilledSAs.IsStale(BaseTTL)) {
             var data = await _billingService.GetUnbilledSAsAsync();
             if (data != null) UnbilledSAs.Update(data);

@@ -3,7 +3,6 @@
 public class AdminClientSummary {
     // Non-optional fields
     public int Id { get; init; }
-    public required bool Active { get; init; }
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
     public required string City { get; init; }

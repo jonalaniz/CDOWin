@@ -6,7 +6,7 @@
     xmlns:local="using:CDOWin.Views.Placements.Inspectors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:c="using:CDOWin.Controls"
+    xmlns:c="using:CDO.UI.Shared.Controls"
     mc:Ignorable="d">
 
     <Grid RowSpacing="0" Background="{ThemeResource CardBackgroundFillColorSecondary}">

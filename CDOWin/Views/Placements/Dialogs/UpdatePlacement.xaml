@@ -6,7 +6,7 @@
     xmlns:local="using:CDOWin.Views.Placements.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls"
+    xmlns:c="using:CDO.UI.Shared.Controls"
     xmlns:models="using:CDO.Core.Models"
     mc:Ignorable="d">
 
@@ -23,15 +23,15 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Case ID + Tier + Counselor (Non Editable) -->
-        <controls:LabelPair Grid.Row="0" Grid.Column="0"
-                            Label="Client" 
-                            Value="{x:Bind ViewModel.Original.ClientName}"/>
-        <controls:LabelPair Grid.Row="0" Grid.Column="1" 
-                            Label="Issued By" 
-                            Value="{x:Bind ViewModel.Original.CounselorName}"/>
-        <controls:LabelPair Grid.Row="0" Grid.Column="2"
-                            Label="SA Number" 
-                            Value="{x:Bind ViewModel.Original.SaNumber}"/>
+        <c:LabelPair Grid.Row="0" Grid.Column="0"
+                     Label="Client" 
+                     Value="{x:Bind ViewModel.Original.ClientName}"/>
+        <c:LabelPair Grid.Row="0" Grid.Column="1" 
+                     Label="Issued By" 
+                     Value="{x:Bind ViewModel.Original.CounselorName}"/>
+        <c:LabelPair Grid.Row="0" Grid.Column="2"
+                     Label="SA Number" 
+                     Value="{x:Bind ViewModel.Original.SaNumber}"/>
 
         <!-- Row 1: Border + Content -->
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"

@@ -9,7 +9,7 @@
     xmlns:placements="using:CDO.Core.DTOs.Placements"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:dialogs="using:CDOWin.Views.Clients.Dialogs"
-    xmlns:c="using:CDOWin.Controls"
+    xmlns:c="using:CDO.UI.Shared.Controls"
     mc:Ignorable="d">
 
     <Grid BorderThickness="0, 0, 1, 0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"

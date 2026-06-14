@@ -6,7 +6,7 @@
     xmlns:local="using:CDOWin.Views.ServiceAuthorizations.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls"
+    xmlns:c="using:CDO.UI.Shared.Controls"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource DialogRootGridStyle}">
@@ -22,13 +22,13 @@
         </Grid.ColumnDefinitions>
 
         <!-- Row 0: Case ID + Tier + Counselor (Non Editable) -->
-        <controls:LabelPair Grid.Row="0" Grid.Column="0"
+        <c:LabelPair Grid.Row="0" Grid.Column="0"
                             Label="Issued By" 
                             Value="{x:Bind ViewModel.Client.CounselorReference.Name}"/>
-        <controls:LabelPair Grid.Row="0" Grid.Column="1"
+        <c:LabelPair Grid.Row="0" Grid.Column="1"
                             Label="Tier Level" 
                             Value="{x:Bind ViewModel.Client.Status}"/>
-        <controls:LabelPair Grid.Row="0" Grid.Column="2"
+        <c:LabelPair Grid.Row="0" Grid.Column="2"
                             Label="Case ID" 
                             Value="{x:Bind ViewModel.Client.CaseID}"/>
 

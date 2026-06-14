@@ -146,11 +146,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\LabelPair.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\Inspectors\Placements.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

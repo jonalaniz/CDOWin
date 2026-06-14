@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CDOWin.Controls"
+    xmlns:c="using:CDO.UI.Shared.Controls"
     xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
@@ -60,12 +60,12 @@
         </AutoSuggestBox>
         
         <!-- Row 3: Counselor Information -->
-        <controls:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                            Label="Counselor Phone" x:Name="CPhone"
-                            Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Phone}"/>
-        <controls:LabelPair Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4"
-                            Label="Counselor Email" x:Name="CEmail"
-                            Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Email}"/>
+        <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                     Label="Counselor Phone" x:Name="CPhone"
+                     Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Phone}"/>
+        <c:LabelPair Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4"
+                     Label="Counselor Email" x:Name="CEmail"
+                     Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Email}"/>
 
     </Grid>
 </Page>

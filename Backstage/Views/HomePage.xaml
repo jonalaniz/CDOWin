@@ -156,7 +156,7 @@
                 <!-- Expiring SAs Section -->
                 <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
                     <TextBlock Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
-                    <ScrollView Style="{StaticResource HorizontalScrollView}>
+                    <ScrollView Style="{StaticResource HorizontalScrollView}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.ExpiringSAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -254,7 +254,14 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me" Style="{StaticResource AccentButtonStyle}"/>
+                                                <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
+                                                    <DropDownButton.Flyout>
+                                                        <MenuFlyout Placement="Top">
+                                                            <MenuFlyoutItem Text="Today"/>
+                                                            <MenuFlyoutItem Text="Tomorrow"/>
+                                                        </MenuFlyout>
+                                                    </DropDownButton.Flyout>
+                                                </DropDownButton>
                                                 <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Inactive"/>
                                             </Grid>
                                         </Grid>

@@ -1,5 +1,5 @@
 ﻿using CDO.Core.ErrorHandling;
-using CDOWin.Views;
+using CDO.UI.Shared.Factories;
 using Microsoft.UI.Xaml;
 using System;
 

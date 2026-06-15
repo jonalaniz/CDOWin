@@ -1,4 +1,5 @@
 using CDO.Core.DTOs.Clients;
+using CDO.UI.Shared.Factories;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;

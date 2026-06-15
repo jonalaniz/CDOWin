@@ -1,5 +1,6 @@
 using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
+using CDO.UI.Shared.Factories;
 using CDOWin.Composers;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;

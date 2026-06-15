@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace CDOWin.Views;
+namespace CDO.UI.Shared.Factories;
 
 public static class DialogFactory {
     public static ContentDialog UpdateDialog(XamlRoot root, string title) {

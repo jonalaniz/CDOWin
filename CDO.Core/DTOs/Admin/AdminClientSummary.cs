@@ -22,6 +22,10 @@ public class AdminClientSummary {
     public string FormattedID => $"ID: {Id}";
     public string FormattedCreatedDate => CreatedAt?.ToString(format: "MM/dd/yyyy") ?? "No Date On File";
     public string FormattedUpdatedDate => UpdatedAt?.ToString(format: "MM/dd/yyyy") ?? "No Date On File";
+    public string FormattedUpdatedAtTime() {
+        if (Time(UpdatedAt) is not string time) return "No Time On File";
+        return $"Updated at: {time}";
+    }
     public string FormattedAddress {
         get {
             if (Address1 == null && Address2 == null)
@@ -39,5 +43,9 @@ public class AdminClientSummary {
             if (Zip != null) return $"{City}, {State} {Zip}";
             else return $"{City}, {State}";
         }
+    }
+
+    private string? Time(DateTime? date) {
+        return date?.ToString(format: "hh:mm tt");
     }
 }

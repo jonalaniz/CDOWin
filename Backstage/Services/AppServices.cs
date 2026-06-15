@@ -23,7 +23,8 @@ public static class AppServices {
     public static HomeViewModel HomeViewModel { get; private set; } = null!;
     public static BillingService BillingService { get; private set; } = null!;
     public static AdminClientService ClientService { get; private set; } = null!;
-    public static AdminReminderService ReminderService { get; private set; } = null!;
+    public static AdminReminderService AdminReminderService { get; private set; } = null!;
+    public static ReminderService ReminderService { get; private set; } = null!;
     public static UserService UserService { get; private set; } = null!;
 
     // Data Coordination
@@ -43,19 +44,23 @@ public static class AppServices {
         // Initialize child services
         BillingService = new BillingService(network);
         ClientService = new AdminClientService(network);
-        ReminderService = new AdminReminderService(network);
+        AdminReminderService = new AdminReminderService(network);
+        ReminderService = new ReminderService(network);
         UserService = new UserService(network);
 
         // Inject Services into DataCoordinator
         DataCoordinator = new DataCoordinator(
             BillingService,
             ClientService,
-            ReminderService,
+            AdminReminderService,
             UserService
             );
 
         // Initialize ViewModels
-        HomeViewModel = new HomeViewModel(DataCoordinator);
+        HomeViewModel = new HomeViewModel(
+            DataCoordinator,
+            ReminderService
+            );
 
         BillingViewModel = new BillingViewModel(
             DataCoordinator,

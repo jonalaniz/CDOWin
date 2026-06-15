@@ -59,7 +59,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="Updated Clients" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentClients.Count}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentClients.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
@@ -70,10 +70,21 @@
                                         <!-- Button -->
                                         <Button Style="{StaticResource BackstageListButton}"
                                                 Tag="{x:Bind Id}">
-                                            <StackPanel Spacing="2" Margin="0,0,0,0">
-                                                <TextBlock FontWeight="Bold" Text="{x:Bind Name}"/>
-                                                <TextBlock Text="{x:Bind FormattedID}"/>
-                                            </StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,0,0">
+                                                    <TextBlock FontWeight="Bold" Text="{x:Bind Name}"/>
+                                                    <TextBlock Text="{x:Bind FormattedUpdatedAtTime()}"/>
+                                                </StackPanel>
+                                                <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
+                                                        IsEnabled="{x:Bind Id, Converter={StaticResource NullToBoolConverter}}"
+                                                        Tag="{x:Bind Id}">
+                                                    <FontIcon Glyph="&#xE76C;"/>
+                                                </Button>
+                                            </Grid>
                                         </Button>
                                     </DataTemplate>
                                 </ItemsRepeater>
@@ -94,7 +105,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="New Notes" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentNotes.Count}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentNotes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
@@ -129,7 +140,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Reminders" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Reminders.Count}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Reminders.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
@@ -199,8 +210,15 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me" Style="{StaticResource AccentButtonStyle}"/>
-                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed"/>
+                                                <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
+                                                    <DropDownButton.Flyout>
+                                                        <MenuFlyout Placement="Top">
+                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind ClientID}" Click="CreateSAReminder_Today_Click"/>
+                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind ClientID}" Click="CreateSAReminder_Tomorrow_Click"/>
+                                                        </MenuFlyout>
+                                                    </DropDownButton.Flyout>
+                                                </DropDownButton>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed" Tag="{x:Bind Id}" Click="MarkBilled_Click"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -257,12 +275,12 @@
                                                 <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
                                                     <DropDownButton.Flyout>
                                                         <MenuFlyout Placement="Top">
-                                                            <MenuFlyoutItem Text="Today"/>
-                                                            <MenuFlyoutItem Text="Tomorrow"/>
+                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateClientReminder_Today_Click"/>
+                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateClientReminder_Tomorrow_Click"/>
                                                         </MenuFlyout>
                                                     </DropDownButton.Flyout>
                                                 </DropDownButton>
-                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Inactive"/>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Inactive" Tag="{x:Bind Id}" Click="MarkInactive_Click"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -273,5 +291,13 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
+        <Grid Grid.Row="1" x:Name="InfoBarContainer" Margin="16" Width="400"
+              VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+        </Grid>
     </Grid>
 </Page>

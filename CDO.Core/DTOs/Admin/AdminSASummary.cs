@@ -12,6 +12,7 @@ public class AdminSASummary {
 
     // Client Specific
     public required string ClientName { get; init; }
+    public int ClientID { get; init; }
     public string? CaseID { get; init; }
 
     // Counselor Specific

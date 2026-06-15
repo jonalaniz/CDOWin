@@ -1,7 +1,10 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients.Notes;
+using CDO.Core.DTOs.Reminders;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
+using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -17,6 +20,7 @@ public partial class HomeViewModel : ObservableObject {
     // Dependencies
     // =========================
     private readonly DataCoordinator _dataCoordinator;
+    private readonly ReminderService _reminderService;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -40,8 +44,9 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public HomeViewModel(DataCoordinator dataCoordinator) {
+    public HomeViewModel(DataCoordinator dataCoordinator, ReminderService reminderService) {
         _dataCoordinator = dataCoordinator;
+        _reminderService = reminderService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
@@ -98,8 +103,20 @@ public partial class HomeViewModel : ObservableObject {
         });
     }
 
+    public async Task<Result<Reminder>> CreateReminderAsync(NewReminder reminder) {
+        return await _reminderService.CreateRemindersAsync(reminder);
+    }
+
+    // =========================
+    // Utility Methods
+    // =========================
+
     private void OnUI(Action action) {
         if (_dispatcher.HasThreadAccess) action();
         else _dispatcher.TryEnqueue(() => action());
+    }
+
+    public string? SANumberForId(int id) {
+        return ExpiringSAs.FirstOrDefault(sa => sa.Id == id)?.ServiceAuthorizationNumber;
     }
 }

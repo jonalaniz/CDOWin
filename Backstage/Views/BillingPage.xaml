@@ -70,7 +70,8 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Remind Me" Style="{StaticResource AccentButtonStyle}"/>
+                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Tag="{x:Bind ClientID}"
+                                                        Style="{StaticResource AccentButtonStyle}" Click="SA_Reminder_Click"/>
                                                 <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed"/>
                                             </Grid>
                                         </Grid>

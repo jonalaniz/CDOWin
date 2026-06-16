@@ -1,6 +1,7 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
-using CDO.Core.DTOs.Placements;
+using CDO.Core.ErrorHandling;
+using CDO.Core.Services;
 using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -16,7 +17,8 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // Dependencies
     // =========================
-    private readonly BillingService _service;
+    private readonly BillingService _billingService;
+    private readonly ServiceAuthorizationService _saService;
     private readonly DataCoordinator _dataCoordinator;
     private readonly DispatcherQueue _dispatcher;
 
@@ -24,41 +26,75 @@ public partial class BillingViewModel : ObservableObject {
     // UI State
     // =========================
     [ObservableProperty]
-    public partial ObservableCollection<AdminSASummary> SAs { get; private set; } = [];
+    public partial ObservableCollection<AdminSASummary> ExpiringSAs { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<PlacementSummary> Placements { get; private set; } = [];
+    public partial ObservableCollection<AdminSASummary> UnbilledSAs { get; private set; } = [];
+
 
     // =========================
     // Constructor
     // =========================
-    public BillingViewModel(DataCoordinator dataCoordinator, BillingService billingService) {
+    public BillingViewModel(DataCoordinator dataCoordinator, BillingService billingService, ServiceAuthorizationService saService) {
         _dataCoordinator = dataCoordinator;
-        _service = billingService;
+        _billingService = billingService;
+        _saService = saService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 
     // =========================
-    // CRUD Methods
+    // Get Methods
     // =========================
-    public async Task LoadSASummariesAsync(bool force = false) {
+    public async Task LoadUnbilledSAs(bool force = false) {
         var sas = await _dataCoordinator.GetUnbilledSAsAsync(force);
         if (sas == null) return;
 
         var snapshot = sas.OrderBy(s => s.StartDate).ToList().AsReadOnly();
         OnUI(() => {
-            SAs = new ObservableCollection<AdminSASummary>(snapshot);
+            UnbilledSAs = new ObservableCollection<AdminSASummary>(snapshot);
         });
     }
 
-    public async Task LoadPlacementSummariesAsync(bool force = false) {
-        var placements = await _dataCoordinator.GetUnbilledPlacementsAsync(force);
-        if (placements == null) return;
+    public async Task LoadExpiringSAsAsync(bool force = false) {
+        var sas = await _dataCoordinator.GetExpiringSAsAsync(force);
+        if (sas == null) return;
 
-        var snapshot = placements.OrderBy(p => p.Id).ToList().AsReadOnly();
+        var snapshot = sas.OrderBy(s => s.EndDate).ToList().AsReadOnly();
         OnUI(() => {
-            Placements = new ObservableCollection<PlacementSummary>(snapshot);
+            ExpiringSAs = new ObservableCollection<AdminSASummary>(snapshot);
         });
+    }
+
+    // =========================
+    // Post Methods
+    // =========================
+    public async Task<Result> MarkSABilled(int id) {
+        return await _saService.MarkSABilled(id);
+    }
+
+    public async Task<Result> MarkSAUnbilled(int id) {
+        return await _saService.MarkSAUnbilled(id);
+    }
+
+    // =========================
+    // Utility Methods
+    // =========================
+    public AdminSASummary? ExpiredSA(int id) {
+        return ExpiringSAs.FirstOrDefault(sa => sa.Id == id);
+    }
+
+    public AdminSASummary? UnbilledSA(int id) {
+        return UnbilledSAs.FirstOrDefault(sa => sa.Id == id);
+    }
+
+    public void RemoveExpiredSA(int id) {
+        if (ExpiringSAs.FirstOrDefault(sa => sa.Id == id) is not AdminSASummary sa) return;
+        OnUI(() => ExpiringSAs.Remove(sa));
+    }
+
+    public void RemoveUnbilledSA(int id) {
+        if (UnbilledSAs.FirstOrDefault(sa => sa.Id == id) is not AdminSASummary sa) return;
+        OnUI(() => UnbilledSAs.Remove(sa));
     }
 
     private void OnUI(Action action) {

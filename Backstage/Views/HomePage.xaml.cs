@@ -9,7 +9,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Backstage.Views;
@@ -20,6 +19,8 @@ public sealed partial class HomePage : Page {
     // ViewModel
     // =========================
     public HomeViewModel ViewModel { get; } = AppServices.HomeViewModel;
+    public BillingViewModel BillingViewModel { get; } = AppServices.BillingViewModel;
+    public ReminderViewModel ReminderViewModel { get; } = AppServices.ReminderViewModel;
 
     // =========================
     // Constructor
@@ -41,8 +42,8 @@ public sealed partial class HomePage : Page {
         var tasks = new List<Task> {
             ViewModel.LoadRecentClientsAsync(force),
             ViewModel.LoadRecentNotesAsync(force),
-            ViewModel.LoadRecentRemindersAsync(force),
-            ViewModel.LoadExpiringSAsAsync(force),
+            ReminderViewModel.LoadRecentRemindersAsync(force),
+            BillingViewModel.LoadExpiringSAsAsync(force),
             ViewModel.LoadStaleClientsAsync(force),
         };
 
@@ -58,7 +59,6 @@ public sealed partial class HomePage : Page {
         return char.ToUpper(Environment.UserName[0]) + Environment.UserName[1..];
     }
 
-
     // =========================
     // Click Handlers
     // =========================
@@ -70,8 +70,8 @@ public sealed partial class HomePage : Page {
 
     private async void MarkBilled_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        var result = await ViewModel.MarkSABilled(id);
-        if (result.IsSuccess) ViewModel.RemoveSA(id);
+        var result = await BillingViewModel.MarkSABilled(id);
+        if (result.IsSuccess) BillingViewModel.RemoveExpiredSA(id);
         await ShowMessage(MessageType.MarkedBilled, result.IsSuccess);
     }
 
@@ -87,7 +87,7 @@ public sealed partial class HomePage : Page {
     private async void CreateSAReminder_Today_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || ViewModel.SAForId(id) is not AdminSASummary sa) return;
+            || BillingViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
         var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Today, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
@@ -95,7 +95,7 @@ public sealed partial class HomePage : Page {
     private async void CreateSAReminder_Tomorrow_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || ViewModel.SAForId(id) is not AdminSASummary sa) return;
+            || BillingViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
         var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Tomorrow, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
@@ -113,14 +113,13 @@ public sealed partial class HomePage : Page {
     }
 
     private async Task CreateReminder(NewReminder reminder) {
-        var result = await ViewModel.CreateReminderAsync(reminder);
+        var result = await ReminderViewModel.CreateReminderAsync(reminder);
         await ShowMessage(MessageType.CreatedReminder, result.IsSuccess);
     }
 
     // Utility Methods
 
     private async Task ShowMessage(MessageType type, bool success) {
-        Debug.WriteLine("showing message");
         var infoBar = new InfoBar {
             Title = success ? "Success" : "Failed",
             Severity = success ? InfoBarSeverity.Success : InfoBarSeverity.Error,

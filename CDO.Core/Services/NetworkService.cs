@@ -97,7 +97,7 @@ public class NetworkService : INetworkService {
     public async Task<Result> PostAsync(string endpoint) {
         try {
             var response = await _httpClient.PostAsync(endpoint, null);
-            if(response.IsSuccessStatusCode) return Result.Success();
+            if (response.IsSuccessStatusCode) return Result.Success();
 
             return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, null));
         } catch (TaskCanceledException ex) {

@@ -35,6 +35,7 @@ public static class AppServices {
     // ViewModels
     public static BillingViewModel BillingViewModel { get; private set; } = null!;
     public static ClientViewModel ClientViewModel { get; private set; } = null!;
+    public static ReminderViewModel ReminderViewModel { get; private set; } = null!;
     public static UserViewModel UserViewModel { get; private set; } = null!;
 
     public static void InitializeServices(string baseAddress, string apiKey) {
@@ -63,19 +64,23 @@ public static class AppServices {
         // Initialize ViewModels
         HomeViewModel = new HomeViewModel(
             DataCoordinator,
-            ClientService,
-            SAService,
-            ReminderService
+            ClientService
             );
 
         BillingViewModel = new BillingViewModel(
             DataCoordinator,
-            BillingService
+            BillingService,
+            SAService
             );
 
         ClientViewModel = new ClientViewModel(
             DataCoordinator,
             AdminClientService
+            );
+
+        ReminderViewModel = new ReminderViewModel(
+            DataCoordinator,
+            ReminderService
             );
 
         UserViewModel = new UserViewModel(

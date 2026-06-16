@@ -16,7 +16,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Billing" Style="{StaticResource BackstageHeader}"/>
+        <Grid Grid.Row="0" Margin="0,0,10,0">
+            <TextBlock Grid.Row="0" Text="Billing" Style="{StaticResource BackstageHeader}"/>
+            <CommandBar Grid.Column="1" Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton x:Name="RefreshButton" Width="56" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+        
         <ScrollViewer Grid.Row="1" Style="{StaticResource VerticalScrollViewer}">
             <Grid RowSpacing="8">
                 <Grid.RowDefinitions>
@@ -28,7 +38,7 @@
                 <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
                     <TextBlock Text="Unbilled Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.SAs, Mode=OneWay}">
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.UnbilledSAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
                             </ItemsRepeater.Layout>
@@ -70,9 +80,15 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Tag="{x:Bind ClientID}"
-                                                        Style="{StaticResource AccentButtonStyle}" Click="SA_Reminder_Click"/>
-                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed"/>
+                                                <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
+                                                    <DropDownButton.Flyout>
+                                                        <MenuFlyout Placement="Top">
+                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateSAReminder_Today_Click"/>
+                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateSAReminder_Tomorrow_Click"/>
+                                                        </MenuFlyout>
+                                                    </DropDownButton.Flyout>
+                                                </DropDownButton>
+                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed" Tag="{x:Bind Id}" Click="MarkBilled_Click"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -83,5 +99,13 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
+        <Grid Grid.Row="1" x:Name="InfoBarContainer" Margin="16" Width="400"
+              VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+        </Grid>
     </Grid>
 </Page>

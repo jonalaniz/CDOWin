@@ -146,12 +146,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Reminders" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Reminders.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ReminderViewModel.Reminders.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.Reminders, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind ReminderViewModel.Reminders, Mode=OneWay}">
                                     <DataTemplate x:DataType="models:Reminder">
 
                                         <!-- Button -->
@@ -174,7 +174,7 @@
                 <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
                     <TextBlock Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.ExpiringSAs, Mode=OneWay}">
+                        <ItemsRepeater ItemsSource="{x:Bind BillingViewModel.ExpiringSAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
                             </ItemsRepeater.Layout>

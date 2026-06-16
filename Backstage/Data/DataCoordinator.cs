@@ -26,7 +26,7 @@ public class DataCoordinator {
     public CachedList<AdminSASummary> UnbilledSAs { get; } = new();
     public CachedList<PlacementSummary> UnbilledPlacements { get; } = new();
     public CachedList<AdminClientSummary> RecentClients { get; } = new();
-    public CachedList<ClientNote> RecentNotes { get; } = new();
+    public CachedList<AdminClientNote> RecentNotes { get; } = new();
     public CachedList<AdminClientSummary> StaleClients { get; } = new();
     public CachedList<Reminder> Reminders { get; } = new();
     public CachedList<UserSummary> Users { get; } = new();
@@ -102,7 +102,7 @@ public class DataCoordinator {
         return StaleClients.Data ?? [];
     }
 
-    public async Task<IReadOnlyList<ClientNote>> GetRecentNotesAsync(bool force = false) {
+    public async Task<IReadOnlyList<AdminClientNote>> GetRecentNotesAsync(bool force = false) {
         if (force || RecentNotes.IsStale(BaseTTL)) {
             var data = await _clientService.GetRecentClientNotesAsync();
             if (data != null) RecentNotes.Update(data);

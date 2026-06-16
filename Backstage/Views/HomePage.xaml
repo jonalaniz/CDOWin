@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CDO.UI.Shared.Controls"
     xmlns:dtos="using:CDO.Core.DTOs.Admin"
-    xmlns:notes="using:CDO.Core.DTOs.Clients.Notes"
     xmlns:models="using:CDO.Core.Models"
     mc:Ignorable="d">
 
@@ -111,13 +110,20 @@
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
                                 <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentNotes, Mode=OneWay}">
-                                    <DataTemplate x:DataType="notes:ClientNote">
+                                    <DataTemplate x:DataType="dtos:AdminClientNote">
 
                                         <!-- Button -->
                                         <Button Style="{StaticResource BackstageListButton}"
                                                 Tag="{x:Bind Id}">
                                             <StackPanel Spacing="2">
-                                                <TextBlock FontWeight="Bold" Text="{x:Bind Author}"/>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" FontWeight="Bold" Text="{x:Bind ClientName}"/>
+                                                    <TextBlock Grid.Column="1" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" FontWeight="Bold" Text="{x:Bind Author}"/>
+                                                </Grid>
                                                 <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Note}"/>
                                             </StackPanel>
                                         </Button>
@@ -213,8 +219,8 @@
                                                 <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
                                                     <DropDownButton.Flyout>
                                                         <MenuFlyout Placement="Top">
-                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind ClientID}" Click="CreateSAReminder_Today_Click"/>
-                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind ClientID}" Click="CreateSAReminder_Tomorrow_Click"/>
+                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateSAReminder_Today_Click"/>
+                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateSAReminder_Tomorrow_Click"/>
                                                         </MenuFlyout>
                                                     </DropDownButton.Flyout>
                                                 </DropDownButton>

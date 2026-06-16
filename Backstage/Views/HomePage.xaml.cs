@@ -2,6 +2,7 @@ using Backstage.Factories;
 using Backstage.Services;
 using Backstage.ViewModels;
 using CDO.Core.Constants;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Reminders;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -67,9 +68,11 @@ public sealed partial class HomePage : Page {
         RefreshButton.IsEnabled = true;
     }
 
-    private void MarkBilled_Click(object sender, RoutedEventArgs e) {
+    private async void MarkBilled_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        Debug.WriteLine($"Mark SA: {id} as billed.");
+        var result = await ViewModel.MarkSABilled(id);
+        if (result.IsSuccess) ViewModel.RemoveSA(id);
+        await ShowMessage(MessageType.MarkedBilled, result.IsSuccess);
     }
 
     private async void MarkInactive_Click(object sender, RoutedEventArgs e) {
@@ -84,16 +87,16 @@ public sealed partial class HomePage : Page {
     private async void CreateSAReminder_Today_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || ViewModel.SANumberForId(id) is not string saNumber) return;
-        var reminder = ReminderFactory.CreateSAReminder(id, ReminderDate.Today, saNumber, SAReminderType.StaleSA);
+            || ViewModel.SAForId(id) is not AdminSASummary sa) return;
+        var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Today, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
 
     private async void CreateSAReminder_Tomorrow_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || ViewModel.SANumberForId(id) is not string saNumber) return;
-        var reminder = ReminderFactory.CreateSAReminder(id, ReminderDate.Tomorrow, saNumber, SAReminderType.StaleSA);
+            || ViewModel.SAForId(id) is not AdminSASummary sa) return;
+        var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Tomorrow, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
 
@@ -117,6 +120,7 @@ public sealed partial class HomePage : Page {
     // Utility Methods
 
     private async Task ShowMessage(MessageType type, bool success) {
+        Debug.WriteLine("showing message");
         var infoBar = new InfoBar {
             Title = success ? "Success" : "Failed",
             Severity = success ? InfoBarSeverity.Success : InfoBarSeverity.Error,

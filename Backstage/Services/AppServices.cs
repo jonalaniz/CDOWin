@@ -22,6 +22,7 @@ public static class AppServices {
     // Services (Network-based)
     public static HomeViewModel HomeViewModel { get; private set; } = null!;
     public static BillingService BillingService { get; private set; } = null!;
+    public static ServiceAuthorizationService SAService { get; private set; } = null!;
     public static AdminClientService AdminClientService { get; private set; } = null!;
     public static ClientService ClientService { get; private set; } = null!;
     public static AdminReminderService AdminReminderService { get; private set; } = null!;
@@ -44,6 +45,7 @@ public static class AppServices {
 
         // Initialize child services
         BillingService = new BillingService(network);
+        SAService = new ServiceAuthorizationService(network);
         AdminClientService = new AdminClientService(network);
         ClientService = new ClientService(network);
         AdminReminderService = new AdminReminderService(network);
@@ -62,6 +64,7 @@ public static class AppServices {
         HomeViewModel = new HomeViewModel(
             DataCoordinator,
             ClientService,
+            SAService,
             ReminderService
             );
 

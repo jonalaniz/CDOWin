@@ -27,7 +27,7 @@
 
                 <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
                     <TextBlock Text="Unbilled Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
-                    <ScrollViewer Style="{StaticResource HorizontalScrollViewer}">
+                    <ScrollView Style="{StaticResource HorizontalScrollView}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.SAs, Mode=OneWay}">
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -79,7 +79,7 @@
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
-                    </ScrollViewer>
+                    </ScrollView>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

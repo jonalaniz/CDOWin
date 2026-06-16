@@ -32,6 +32,14 @@ public class ServiceAuthorizationService : IServiceAuthorizationService {
         return Result<SADetail>.Success(result.Value!);
     }
 
+    public Task<Result>MarkSABilled(int id) {
+        return _network.PostAsync(Endpoints.SAMarkBilled(id));
+    }
+
+    public Task<Result>MarkSAUnbilled(int id) {
+        return _network.PostAsync(Endpoints.SAMarkUnbilled(id));
+    }
+
     // -----------------------------
     // PATCH Methods
     // -----------------------------

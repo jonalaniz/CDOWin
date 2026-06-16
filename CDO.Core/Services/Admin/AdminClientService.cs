@@ -40,8 +40,8 @@ public class AdminClientService {
     /// Returns client notes for the workday.
     /// </summary>
     /// <returns>A list of <see cref="ClientNote"/>.</returns>
-    public Task<List<ClientNote>?> GetRecentClientNotesAsync() {
-        return _network.GetAsync<List<ClientNote>>(Endpoints.AdminNotes);
+    public Task<List<AdminClientNote>?> GetRecentClientNotesAsync() {
+        return _network.GetAsync<List<AdminClientNote>>(Endpoints.AdminNotes);
     }
 
     // =============================

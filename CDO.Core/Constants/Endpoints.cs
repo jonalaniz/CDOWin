@@ -21,6 +21,10 @@ public static class Endpoints {
     public static readonly string EmployerSummaries = "/api/employers/summaries";
     public static string ServiceAuthorization(int id) => $"{ServiceAuthorizations}/{id}";
     public static readonly string ServiceAuthorizations = "/api/sas";
+
+    // Service Authorization Convenience Endpoints
+    public static string SAMarkBilled(int id) => $"{ServiceAuthorizations}/{id}/mark-billed";
+    public static string SAMarkUnbilled(int id) => $"{ServiceAuthorizations}/{id}/mark-unbilled";
     public static string Placement(int id) => $"{Placements}/{id}";
     public static readonly string Placements = "/api/placements";
     public static string Reminder(int id) => $"{Reminders}/{id}";

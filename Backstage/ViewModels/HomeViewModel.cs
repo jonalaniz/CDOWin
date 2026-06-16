@@ -21,6 +21,7 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientService _clientService;
+    private readonly ServiceAuthorizationService _saService;
     private readonly ReminderService _reminderService;
     private readonly DispatcherQueue _dispatcher;
 
@@ -31,7 +32,7 @@ public partial class HomeViewModel : ObservableObject {
     public partial ObservableCollection<AdminClientSummary> RecentClients { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<ClientNote> RecentNotes { get; private set; } = [];
+    public partial ObservableCollection<AdminClientNote> RecentNotes { get; private set; } = [];
 
     [ObservableProperty]
     public partial ObservableCollection<Reminder> Reminders { get; private set; } = [];
@@ -45,9 +46,10 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public HomeViewModel(DataCoordinator dataCoordinator, ClientService clientService, ReminderService reminderService) {
+    public HomeViewModel(DataCoordinator dataCoordinator, ClientService clientService, ServiceAuthorizationService saService, ReminderService reminderService) {
         _dataCoordinator = dataCoordinator;
         _clientService = clientService;
+        _saService = saService;
         _reminderService = reminderService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
@@ -71,7 +73,7 @@ public partial class HomeViewModel : ObservableObject {
 
         var snapshot = notes.OrderBy(n => n.Date).ToList().AsReadOnly();
         OnUI(() => {
-            RecentNotes = new ObservableCollection<ClientNote>(snapshot);
+            RecentNotes = new ObservableCollection<AdminClientNote>(snapshot);
         });
     }
 
@@ -115,6 +117,14 @@ public partial class HomeViewModel : ObservableObject {
         return await _clientService.MarkClientInactiveAsync(id);
     }
 
+    public async Task<Result> MarkSABilled(int id) {
+        return await _saService.MarkSABilled(id);
+    }
+
+    public async Task<Result> MarkSAUnbilled(int id) {
+        return await _saService.MarkSAUnbilled(id);
+    }
+
     public async Task<Result<Reminder>> CreateReminderAsync(NewReminder reminder) {
         return await _reminderService.CreateRemindersAsync(reminder);
     }
@@ -128,12 +138,17 @@ public partial class HomeViewModel : ObservableObject {
         else _dispatcher.TryEnqueue(() => action());
     }
 
-    public string? SANumberForId(int id) {
-        return ExpiringSAs.FirstOrDefault(sa => sa.Id == id)?.ServiceAuthorizationNumber;
+    public AdminSASummary? SAForId(int id) {
+        return ExpiringSAs.FirstOrDefault(sa => sa.Id == id);
     }
 
     public void RemoveClient(int id) {
         if (StaleClients.FirstOrDefault(c => c.Id == id) is not AdminClientSummary client) return;
         StaleClients.Remove(client);
+    }
+
+    public void RemoveSA(int id) {
+        if (ExpiringSAs.FirstOrDefault(sa => sa.Id == id) is not AdminSASummary sa) return;
+        ExpiringSAs.Remove(sa);
     }
 }

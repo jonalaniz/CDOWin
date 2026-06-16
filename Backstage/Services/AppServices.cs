@@ -22,7 +22,8 @@ public static class AppServices {
     // Services (Network-based)
     public static HomeViewModel HomeViewModel { get; private set; } = null!;
     public static BillingService BillingService { get; private set; } = null!;
-    public static AdminClientService ClientService { get; private set; } = null!;
+    public static AdminClientService AdminClientService { get; private set; } = null!;
+    public static ClientService ClientService { get; private set; } = null!;
     public static AdminReminderService AdminReminderService { get; private set; } = null!;
     public static ReminderService ReminderService { get; private set; } = null!;
     public static UserService UserService { get; private set; } = null!;
@@ -43,7 +44,8 @@ public static class AppServices {
 
         // Initialize child services
         BillingService = new BillingService(network);
-        ClientService = new AdminClientService(network);
+        AdminClientService = new AdminClientService(network);
+        ClientService = new ClientService(network);
         AdminReminderService = new AdminReminderService(network);
         ReminderService = new ReminderService(network);
         UserService = new UserService(network);
@@ -51,7 +53,7 @@ public static class AppServices {
         // Inject Services into DataCoordinator
         DataCoordinator = new DataCoordinator(
             BillingService,
-            ClientService,
+            AdminClientService,
             AdminReminderService,
             UserService
             );
@@ -59,6 +61,7 @@ public static class AppServices {
         // Initialize ViewModels
         HomeViewModel = new HomeViewModel(
             DataCoordinator,
+            ClientService,
             ReminderService
             );
 
@@ -69,7 +72,7 @@ public static class AppServices {
 
         ClientViewModel = new ClientViewModel(
             DataCoordinator,
-            ClientService
+            AdminClientService
             );
 
         UserViewModel = new UserViewModel(

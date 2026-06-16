@@ -72,9 +72,11 @@ public sealed partial class HomePage : Page {
         Debug.WriteLine($"Mark SA: {id} as billed.");
     }
 
-    private void MarkInactive_Click(object sender, RoutedEventArgs e) {
+    private async void MarkInactive_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        Debug.WriteLine($"Mark {id} inactive.");
+        var result = await ViewModel.MarkClientInactive(id);
+        if (result.IsSuccess) ViewModel.RemoveClient(id);
+        await ShowMessage(MessageType.MarkedInactive, result.IsSuccess);
     }
 
     // Reminders
@@ -83,7 +85,6 @@ public sealed partial class HomePage : Page {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
             || ViewModel.SANumberForId(id) is not string saNumber) return;
-        Debug.WriteLine("fuck ass shit");
         var reminder = ReminderFactory.CreateSAReminder(id, ReminderDate.Today, saNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }

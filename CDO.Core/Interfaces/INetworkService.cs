@@ -19,6 +19,8 @@ public interface INetworkService {
     // -----------------------------
     Task<Result<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest body);
 
+    Task<Result> PostAsync(string endpoint);
+
     // -----------------------------
     // PATCH
     // -----------------------------

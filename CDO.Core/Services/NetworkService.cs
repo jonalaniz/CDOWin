@@ -94,6 +94,21 @@ public class NetworkService : INetworkService {
         }
     }
 
+    public async Task<Result> PostAsync(string endpoint) {
+        try {
+            var response = await _httpClient.PostAsync(endpoint, null);
+            if(response.IsSuccessStatusCode) return Result.Success();
+
+            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, null));
+        } catch (TaskCanceledException ex) {
+            return Result.Fail(new AppError(ErrorKind.Timeout, "The request timd out.", null, ex));
+        } catch (HttpRequestException ex) {
+            return Result.Fail(new AppError(ErrorKind.Network, "Unable to reach the server.", null, ex));
+        } catch (Exception ex) {
+            return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, ex));
+        }
+    }
+
     // -----------------------------
     // PATCH
     // -----------------------------
@@ -124,9 +139,7 @@ public class NetworkService : INetworkService {
     public async Task<Result> DeleteAsync(string endpoint) {
         try {
             var response = await _httpClient.DeleteAsync(endpoint);
-            if (response.IsSuccessStatusCode) {
-                return Result.Success();
-            }
+            if (response.IsSuccessStatusCode) return Result.Success();
 
             return Result.Fail(new AppError(ErrorKind.Unknown, "Unexpected error occurred.", null, null));
         } catch (TaskCanceledException ex) {

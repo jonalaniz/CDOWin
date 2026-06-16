@@ -43,6 +43,14 @@ public class ClientService : IClientService {
         return Result<ClientNote>.Success(result.Value!);
     }
 
+    public Task<Result> MarkClientActiveAsync(int clientId) {
+        return _network.PostAsync(Endpoints.ClientMarkActive(clientId));
+    }
+
+    public Task<Result> MarkClientInactiveAsync(int clientId) {
+        return _network.PostAsync(Endpoints.ClientMarkInactive(clientId));
+    }
+
     // -----------------------------
     // PATCH
     // -----------------------------

@@ -7,6 +7,11 @@ public static class Endpoints {
     // -----------------------------
     public static string Client(int id) => $"{Clients}/{id}";
     public static readonly string Clients = "/api/clients";
+
+    // Client Convenience Endpoints
+    public static string ClientMarkActive(int id) => $"{Clients}/{id}/mark-active";
+    public static string ClientMarkInactive(int id) => $"{Clients}/{id}/mark-inactive";
+
     public static string Note(int id) => $"{Clients}/{id}/notes";
     public static string Note(int id, int noteId) => $"{Clients}/{id}/notes/{noteId}/";
     public static string Counselor(int id) => $"{Counselors}/{id}";

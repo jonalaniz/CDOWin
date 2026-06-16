@@ -20,6 +20,7 @@ public partial class HomeViewModel : ObservableObject {
     // Dependencies
     // =========================
     private readonly DataCoordinator _dataCoordinator;
+    private readonly ClientService _clientService;
     private readonly ReminderService _reminderService;
     private readonly DispatcherQueue _dispatcher;
 
@@ -44,8 +45,9 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public HomeViewModel(DataCoordinator dataCoordinator, ReminderService reminderService) {
+    public HomeViewModel(DataCoordinator dataCoordinator, ClientService clientService, ReminderService reminderService) {
         _dataCoordinator = dataCoordinator;
+        _clientService = clientService;
         _reminderService = reminderService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
@@ -103,6 +105,16 @@ public partial class HomeViewModel : ObservableObject {
         });
     }
 
+    // Post Methods
+
+    public async Task<Result> MarkClientActive(int id) {
+        return await _clientService.MarkClientActiveAsync(id);
+    }
+
+    public async Task<Result> MarkClientInactive(int id) {
+        return await _clientService.MarkClientInactiveAsync(id);
+    }
+
     public async Task<Result<Reminder>> CreateReminderAsync(NewReminder reminder) {
         return await _reminderService.CreateRemindersAsync(reminder);
     }
@@ -118,5 +130,10 @@ public partial class HomeViewModel : ObservableObject {
 
     public string? SANumberForId(int id) {
         return ExpiringSAs.FirstOrDefault(sa => sa.Id == id)?.ServiceAuthorizationNumber;
+    }
+
+    public void RemoveClient(int id) {
+        if (StaleClients.FirstOrDefault(c => c.Id == id) is not AdminClientSummary client) return;
+        StaleClients.Remove(client);
     }
 }

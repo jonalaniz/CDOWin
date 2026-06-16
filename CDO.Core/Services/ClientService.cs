@@ -37,18 +37,22 @@ public class ClientService : IClientService {
         return Result<ClientDetail>.Success(result.Value!);
     }
 
-    public async Task<Result<ClientNote>> CreateClientNoteAsync(NewNote dto, int clientId) {
-        var result = await _network.PostAsync<NewNote, ClientNote>(Endpoints.Note(clientId), dto);
+    public async Task<Result<ClientNote>> CreateClientNoteAsync(NewNote dto, int id) {
+        var result = await _network.PostAsync<NewNote, ClientNote>(Endpoints.Note(id), dto);
         if (!result.IsSuccess) return Result<ClientNote>.Fail(TranslateError(result.Error!));
         return Result<ClientNote>.Success(result.Value!);
     }
 
-    public Task<Result> MarkClientActiveAsync(int clientId) {
-        return _network.PostAsync(Endpoints.ClientMarkActive(clientId));
+    public Task<Result> MarkClientActiveAsync(int id) {
+        return _network.PostAsync(Endpoints.ClientMarkActive(id));
     }
 
-    public Task<Result> MarkClientInactiveAsync(int clientId) {
-        return _network.PostAsync(Endpoints.ClientMarkInactive(clientId));
+    public Task<Result> MarkClientInactiveAsync(int id) {
+        return _network.PostAsync(Endpoints.ClientMarkInactive(id));
+    }
+
+    public Task<Result> MarkClientTTWAsync(int id) {
+        return _network.PostAsync(Endpoints.ClientMarkTTW(id));
     }
 
     // -----------------------------

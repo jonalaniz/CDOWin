@@ -85,6 +85,10 @@ public partial class HomeViewModel : ObservableObject {
         return await _service.MarkClientInactiveAsync(id);
     }
 
+    public async Task<Result> MarkClientTTW(int id) {
+        return await _service.MarkClientTTWAsync(id);
+    }
+
     // =========================
     // Utility Methods
     // =========================

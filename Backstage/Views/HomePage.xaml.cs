@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Backstage.Views;
@@ -80,6 +81,14 @@ public sealed partial class HomePage : Page {
         var result = await ViewModel.MarkClientInactive(id);
         if (result.IsSuccess) ViewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedInactive, result.IsSuccess);
+    }
+
+    private async void MarkTTW_Click(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem item || item.Tag is not int id) return;
+        Debug.WriteLine("we made it bros");
+        var result = await ViewModel.MarkClientTTW(id);
+        if (result.IsSuccess) ViewModel.RemoveClient(id);
+        await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
 
     // Reminders

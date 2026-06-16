@@ -256,7 +256,22 @@
                                             </Grid.RowDefinitions>
 
                                             <!-- Header -->
-                                            <TextBlock Margin="4,0" Grid.Row="0" Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Margin="4,0" Grid.Column="0" Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                                <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="More">
+                                                    <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                                    <Button.Flyout>
+                                                        <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                                            <MenuFlyoutItem Text="Mark TTW" Click="MarkTTW_Click" Tag="{x:Bind Id}"/>
+                                                        </MenuFlyout>
+                                                    </Button.Flyout>
+                                                </Button>
+                                            </Grid>
                                             <Grid Grid.Row="1" RowSpacing="8" Margin="4,0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>

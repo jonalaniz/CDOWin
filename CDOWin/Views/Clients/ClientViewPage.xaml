@@ -584,7 +584,8 @@
                     <Run Text="Counselor ID:"/>
                     <Run Text="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay}"/>
                 </TextBlock>
-                <TextBlock Text="TTW" FontWeight="Bold" Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
+                <TextBlock Text="TTW" FontWeight="Bold" Style="{StaticResource PageSubtitleStyle}" Margin="0"
+                           Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>

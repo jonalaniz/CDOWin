@@ -1,6 +1,5 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
-using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -26,7 +25,6 @@ public partial class ClientViewModel : ObservableObject {
     // =========================
     private IReadOnlyList<AdminClientSummary> _recentClients = [];
     private IReadOnlyList<AdminClientSummary> _staleClients = [];
-    private IReadOnlyList<ClientNote> _recentNotes = [];
 
     // =========================
     // UI State

@@ -11,7 +11,7 @@
   <Identity
     Name="97e4a154-72d0-4aab-b38a-fe9ae762a06a"
     Publisher="CN=Alaniz Technology Services"
-    Version="0.3.0.0" />
+    Version="0.4.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="97e4a154-72d0-4aab-b38a-fe9ae762a06a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

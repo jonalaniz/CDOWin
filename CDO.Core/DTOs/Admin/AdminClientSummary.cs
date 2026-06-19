@@ -50,4 +50,41 @@ public class AdminClientSummary {
     private string? Time(DateTime? date) {
         return date?.ToString(format: "hh:mm tt");
     }
+
+    // Convenience Methods
+    public AdminClientSummary ToggleActive() {
+        return new AdminClientSummary {
+            Id = Id,
+            Active = !Active,
+            FirstName = FirstName,
+            LastName = LastName,
+            City = City,
+            State = State,
+            Ttw = Ttw,
+            CreatedAt = CreatedAt,
+            UpdatedAt = UpdatedAt,
+            Address1 = Address1,
+            Address2 = Address2,
+            Zip = Zip,
+            CaseID = CaseID
+        };
+    }
+
+    public AdminClientSummary ToggleTTW() {
+        return new AdminClientSummary {
+            Id = Id,
+            Active = Active,
+            FirstName = FirstName,
+            LastName = LastName,
+            City = City,
+            State = State,
+            Ttw = !Ttw,
+            CreatedAt = CreatedAt,
+            UpdatedAt = UpdatedAt,
+            Address1 = Address1,
+            Address2 = Address2,
+            Zip = Zip,
+            CaseID = CaseID
+        };
+    }
 }

@@ -11,6 +11,7 @@
             <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
             <converters:BoolCompletedConverter x:Key="BoolCompletedConverter"/>
             <converters:BoolActiveConverter x:Key="BoolActiveConverter"/>
+            <converters:BoolTTWConverter x:Key="BoolTTWConverter"/>
             <converters:BoolTransparentConverter x:Key="BoolTransparentConverter"/>
             <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
             <converters:NullOpacityConverter x:Key="NullOpacityConverter"/>

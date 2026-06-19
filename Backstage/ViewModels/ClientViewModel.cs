@@ -1,12 +1,16 @@
-﻿using Backstage.Data;
+﻿using Backstage.Composers;
+using Backstage.Data;
 using Backstage.Services;
 using CDO.Core.DTOs.Admin;
+using CDO.Core.ErrorHandling;
+using CDO.Core.Services;
 using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +21,8 @@ public partial class ClientViewModel : ObservableObject {
     // =========================
     // Dependencies
     // =========================
-    private readonly AdminClientService _service;
+    private readonly AdminClientService _adminClientService;
+    private readonly ClientService _clientService;
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
     private readonly DispatcherQueue _dispatcher;
@@ -49,10 +54,11 @@ public partial class ClientViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public ClientViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService, AdminClientService clientService) {
+    public ClientViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService, AdminClientService adminClientService, ClientService clientService) {
         _dataCoordinator = dataCoordinator;
         _selectionService = selectionService;
-        _service = clientService;
+        _adminClientService = adminClientService;
+        _clientService = clientService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
         _selectionService.ClientSelectionRequested += OnRequesteSelectedClientChange;
@@ -74,7 +80,19 @@ public partial class ClientViewModel : ObservableObject {
     }
 
     // =========================
-    // CRUD Methods
+    // Client Export
+    // =========================
+    public async Task<Result> ExportClients() {
+        var list = await _adminClientService.GetAllClientRecordsAsync();
+        if (list == null) return Result.Fail(new AppError(ErrorKind.Unknown, "Client Export empty", null));
+        var composer = new ClientComposer();
+        composer.BuildCSV(list);
+        return Result.Success();
+
+    }
+
+    // =========================
+    // Get Methods
     // =========================
     public async Task LoadRecentClientsAsync(bool force = false) {
         var clients = await _dataCoordinator.GetRecentClientsAsync(force);
@@ -94,6 +112,25 @@ public partial class ClientViewModel : ObservableObject {
         OnUI(() => {
             StaleClients = new ObservableCollection<AdminClientSummary>(snapshot);
         });
+    }
+
+    // =========================
+    // Post Methods
+    // =========================
+    public async Task<Result> MarkClientActive(int id) {
+        return await _clientService.MarkClientActiveAsync(id);
+    }
+
+    public async Task<Result> MarkClientInactive(int id) {
+        return await _clientService.MarkClientInactiveAsync(id);
+    }
+
+    public async Task<Result> MarkClientTTW(int id) {
+        return await _clientService.MarkClientTTWAsync(id);
+    }
+
+    public async Task<Result> UnmarkClientTTW(int id) {
+        return await _clientService.MarkClientTTWAsync(id);
     }
 
     // =========================
@@ -134,6 +171,24 @@ public partial class ClientViewModel : ObservableObject {
         } catch (OperationCanceledException) { }
     }
 
+    public void ToggleActive(int clientId) {
+        if (ClientSummaries.FirstOrDefault(c => c.Id == clientId) is not AdminClientSummary summary) return;
+        var index = ClientSummaries.IndexOf(summary);
+
+        summary = summary.ToggleActive();
+
+        UpdateClient(summary, index);
+    }
+
+    public void ToggleTTW(int clientId) {
+        if (ClientSummaries.FirstOrDefault(c => c.Id == clientId) is not AdminClientSummary summary) return;
+        var index = ClientSummaries.IndexOf(summary);
+
+        summary = summary.ToggleTTW();
+
+        UpdateClient(summary, index);
+    }
+
     private void OnUI(Action action) {
         if (_dispatcher.HasThreadAccess) action();
         else _dispatcher.TryEnqueue(() => action());
@@ -143,5 +198,15 @@ public partial class ClientViewModel : ObservableObject {
         if (id == null) return;
         if (ClientSummaries.FirstOrDefault(c => c.Id == id) is AdminClientSummary selected)
             Selected = selected;
+    }
+
+    private void UpdateClient(AdminClientSummary summary, int index) {
+        OnUI(() => {
+            ClientSummaries[index] = summary;
+            Selected = summary;
+        });
+
+        // Update in the background WITHOUT updating our cache
+        _ = _dataCoordinator.GetClientSummariesAsync(force: true);
     }
 }

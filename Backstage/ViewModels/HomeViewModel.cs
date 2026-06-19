@@ -84,21 +84,6 @@ public partial class HomeViewModel : ObservableObject {
     }
 
     // =========================
-    // Post Methods
-    // =========================
-    public async Task<Result> MarkClientActive(int id) {
-        return await _service.MarkClientActiveAsync(id);
-    }
-
-    public async Task<Result> MarkClientInactive(int id) {
-        return await _service.MarkClientInactiveAsync(id);
-    }
-
-    public async Task<Result> MarkClientTTW(int id) {
-        return await _service.MarkClientTTWAsync(id);
-    }
-
-    // =========================
     // Utility Methods
     // =========================
     public void RemoveClient(int id) {

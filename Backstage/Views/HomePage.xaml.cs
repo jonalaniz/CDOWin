@@ -21,6 +21,7 @@ public sealed partial class HomePage : Page {
     // =========================
     public HomeViewModel ViewModel { get; } = AppServices.HomeViewModel;
     public BillingViewModel BillingViewModel { get; } = AppServices.BillingViewModel;
+    public ClientViewModel ClientViewModel { get; } = AppServices.ClientViewModel;
     public ReminderViewModel ReminderViewModel { get; } = AppServices.ReminderViewModel;
 
     // =========================
@@ -78,7 +79,7 @@ public sealed partial class HomePage : Page {
 
     private async void MarkInactive_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        var result = await ViewModel.MarkClientInactive(id);
+        var result = await ClientViewModel.MarkClientInactive(id);
         if (result.IsSuccess) ViewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedInactive, result.IsSuccess);
     }
@@ -86,7 +87,7 @@ public sealed partial class HomePage : Page {
     private async void MarkTTW_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item || item.Tag is not int id) return;
         Debug.WriteLine("we made it bros");
-        var result = await ViewModel.MarkClientTTW(id);
+        var result = await ClientViewModel.MarkClientTTW(id);
         if (result.IsSuccess) ViewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
@@ -128,6 +129,12 @@ public sealed partial class HomePage : Page {
 
     // Utility Methods
 
+    private void ClientButton_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        ViewModel.RequestClient(id);
+        AppServices.Navigation.Navigate(BackstageView.Clients);
+    }
+
     private async Task ShowMessage(MessageType type, bool success) {
         var infoBar = new InfoBar {
             Title = success ? "Success" : "Failed",
@@ -140,11 +147,5 @@ public sealed partial class HomePage : Page {
 
         await Task.Delay(3000);
         InfoBarContainer.Children.Remove(infoBar);
-    }
-
-    private void ClientButton_Click(object sender, RoutedEventArgs e) {
-        if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestClient(id);
-        AppServices.Navigation.Navigate(BackstageView.Clients);
     }
 }

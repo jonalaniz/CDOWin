@@ -46,15 +46,9 @@
                         <FontIcon Glyph="&#xEDE1;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                         <AppBarButton.Flyout>
                             <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                <MenuFlyoutItem Text="Export...">
+                                <MenuFlyoutItem Text="Export All Clients..." Click="ExportAllClients_Click">
                                     <MenuFlyoutItem.Icon>
                                         <SymbolIcon Symbol="OpenFile" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                                    </MenuFlyoutItem.Icon>
-                                </MenuFlyoutItem>
-                                <MenuFlyoutSeparator/>
-                                <MenuFlyoutItem Text="Delete...">
-                                    <MenuFlyoutItem.Icon>
-                                        <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
                                     </MenuFlyoutItem.Icon>
                                 </MenuFlyoutItem>
                             </MenuFlyout>
@@ -127,17 +121,16 @@
                     
                     <!-- Export Menu -->
                     <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
-                        <FontIcon Glyph="&#xEDE1;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                         <AppBarButton.Flyout>
-                            <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                                <MenuFlyoutItem Text="Export...">
-                                    <MenuFlyoutItem.Icon>
-                                        <SymbolIcon Symbol="OpenFile" 
-                                        Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                                    </MenuFlyoutItem.Icon>
-                                </MenuFlyoutItem>
+                            <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
+                                                Click="ToggleTTW_Click"/>
                                 <MenuFlyoutSeparator/>
-                                <MenuFlyoutItem Text="Delete...">
+                                <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
+                                                Click="ToggleInactive_Click"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="Delete..." >
                                     <MenuFlyoutItem.Icon>
                                         <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
                                     </MenuFlyoutItem.Icon>
@@ -175,6 +168,14 @@
                                Visibility="{x:Bind ViewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
                 </StackPanel>
             </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" x:Name="InfoBarContainer" Margin="16" Width="400"
+              VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
         </Grid>
     </Grid>
 </Page>

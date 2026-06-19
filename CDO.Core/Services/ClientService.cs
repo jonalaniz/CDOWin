@@ -1,4 +1,5 @@
 ﻿using CDO.Core.Constants;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.ErrorHandling;
@@ -53,6 +54,10 @@ public class ClientService : IClientService {
 
     public Task<Result> MarkClientTTWAsync(int id) {
         return _network.PostAsync(Endpoints.ClientMarkTTW(id));
+    }
+
+    public Task<Result> UnMarkClientTTWAsync(int id) {
+        return _network.PostAsync(Endpoints.ClientUnmarkTTW(id));
     }
 
     // -----------------------------

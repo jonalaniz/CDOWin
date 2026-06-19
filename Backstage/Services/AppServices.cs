@@ -78,7 +78,8 @@ public static class AppServices {
         ClientViewModel = new ClientViewModel(
             DataCoordinator,
             _clientSelectionService,
-            AdminClientService
+            AdminClientService,
+            ClientService
             );
 
         ReminderViewModel = new ReminderViewModel(

@@ -33,7 +33,6 @@ public class AdminClientDetail {
     public string? EmailIdentity { get; init; }
     public string? Email2 { get; init; }
     public string? Email2Identity { get; init; }
-    public string? Email3 { get; init; }
     public string? Conditions { get; init; }
     public string? EmploymentGoal { get; init; }
     public string? Status { get; init; }

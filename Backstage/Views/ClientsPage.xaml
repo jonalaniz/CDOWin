@@ -126,7 +126,6 @@
                             <MenuFlyout Placement="BottomEdgeAlignedRight">
                                 <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
                                                 Click="ToggleTTW_Click"/>
-                                <MenuFlyoutSeparator/>
                                 <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
                                                 Click="ToggleInactive_Click"/>
                                 <MenuFlyoutSeparator/>

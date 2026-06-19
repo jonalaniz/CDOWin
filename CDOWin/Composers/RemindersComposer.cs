@@ -8,8 +8,8 @@ using System.Text;
 namespace CDOWin.Composers;
 
 class RemindersComposer {
-    private string _filePath = System.IO.Path.GetTempPath() + "export.csv";
-    private StringBuilder csv = new();
+    private readonly string _filePath = Path.GetTempPath() + "export.csv";
+    private readonly StringBuilder csv = new();
 
     public void BuildCSV(List<Reminder> list) {
         csv.AppendLine("Date,ClientDetail,Description");

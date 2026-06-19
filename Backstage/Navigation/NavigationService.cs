@@ -3,6 +3,7 @@ using CDO.Abstractions.Navigation;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Backstage.Navigation;
 
@@ -37,5 +38,13 @@ public sealed class NavigationService : INavigationService<BackstageView> {
     }
 
     // To be added at a future date
-    public void Navigate(BackstageView frame) { }
+    public void Navigate(BackstageView frame) {
+        if (_frame == null || _navigationView == null) return;
+
+        var item = _navigationView.MenuItems
+            .OfType<NavigationViewItem>()
+            .FirstOrDefault(item => item.Tag is BackstageView view && frame == view);
+
+        if (item != null) _navigationView.SelectedItem = item;
+    }
 }

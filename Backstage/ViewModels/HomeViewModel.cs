@@ -1,4 +1,5 @@
 ﻿using Backstage.Data;
+using Backstage.Services;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Services;
@@ -17,6 +18,7 @@ public partial class HomeViewModel : ObservableObject {
     // Dependencies
     // =========================
     private readonly DataCoordinator _dataCoordinator;
+    private readonly ClientSelectionService _selectionService;
     private readonly ClientService _service;
     private readonly DispatcherQueue _dispatcher;
 
@@ -35,11 +37,18 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public HomeViewModel(DataCoordinator dataCoordinator, ClientService clientService) {
+    public HomeViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService, ClientService clientService) {
         _dataCoordinator = dataCoordinator;
+        _selectionService = selectionService;
         _service = clientService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
+
+    // =========================
+    // Public Methods
+    // =========================
+
+    public void RequestClient(int clientId) => _selectionService.RequestSelectedClient(clientId);
 
     // =========================
     // Get Methods

@@ -21,7 +21,6 @@ public sealed partial class ClientsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadRecentClientsAsync();
-        await ViewModel.LoadStaleClientsAsync();
+        await ViewModel.RefreshAsync();
     }
 }

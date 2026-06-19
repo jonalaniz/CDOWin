@@ -80,7 +80,7 @@
                                                 </StackPanel>
                                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
                                                         IsEnabled="{x:Bind Id, Converter={StaticResource NullToBoolConverter}}"
-                                                        Tag="{x:Bind Id}">
+                                                        Tag="{x:Bind Id}" Click="ClientButton_Click">
                                                     <FontIcon Glyph="&#xE76C;"/>
                                                 </Button>
                                             </Grid>

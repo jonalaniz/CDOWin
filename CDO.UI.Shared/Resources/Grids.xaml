@@ -5,7 +5,7 @@
     
     <!-- Backstage Content View Grid -->
     <Style x:Key="BackstageContentViewStyle" TargetType="Grid">
-        <Setter Property="Padding" Value="16,8,0,0"/>
+        <Setter Property="Padding" Value="16,0,0,0"/>
     </Style>
 
     <!-- Basic Card Container Grid Style -->

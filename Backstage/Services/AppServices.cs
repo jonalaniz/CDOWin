@@ -31,6 +31,7 @@ public static class AppServices {
 
     // Data Coordination
     public static DataCoordinator DataCoordinator { get; private set; } = null!;
+    public static readonly ClientSelectionService _clientSelectionService = new();
 
     // ViewModels
     public static BillingViewModel BillingViewModel { get; private set; } = null!;
@@ -64,6 +65,7 @@ public static class AppServices {
         // Initialize ViewModels
         HomeViewModel = new HomeViewModel(
             DataCoordinator,
+            _clientSelectionService,
             ClientService
             );
 
@@ -75,6 +77,7 @@ public static class AppServices {
 
         ClientViewModel = new ClientViewModel(
             DataCoordinator,
+            _clientSelectionService,
             AdminClientService
             );
 
@@ -93,11 +96,13 @@ public static class AppServices {
         var sw = Stopwatch.StartNew();
 
         var tasks = new List<Task> {
+            // TODO: Call this from all the view models and NOT the coordinator so that the VMs are loaded
             DataCoordinator.GetUsersAsync(),
             DataCoordinator.GetUnbilledSAsAsync(),
             DataCoordinator.GetUnbilledPlacementsAsync(),
             DataCoordinator.GetExpiringSAsAsync(),
             DataCoordinator.GetRecentClientsAsync(),
+            ClientViewModel.RefreshAsync(),
             DataCoordinator.GetStaleClientsAsync()
         };
 

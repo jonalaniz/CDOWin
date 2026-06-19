@@ -3,6 +3,7 @@
 public class AdminClientSummary {
     // Non-optional fields
     public int Id { get; init; }
+    public bool Active { get; init; }
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
     public required string City { get; init; }
@@ -19,6 +20,7 @@ public class AdminClientSummary {
 
     // Computed Properties
     public string Name => $"{FirstName} {LastName}";
+    public bool InActive => !Active;
     public string FormattedID => $"ID: {Id}";
     public string FormattedCreatedDate => CreatedAt?.ToString(format: "MM/dd/yyyy") ?? "No Date On File";
     public string FormattedUpdatedDate => UpdatedAt?.ToString(format: "MM/dd/yyyy") ?? "No Date On File";

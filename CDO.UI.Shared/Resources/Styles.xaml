@@ -181,7 +181,7 @@
     
     <!-- Backstage Header Style -->
     <Style x:Key="BackstageHeader" TargetType="TextBlock">
-        <Setter Property="Padding" Value="0,0,0,8"/>
+        <Setter Property="Padding" Value="0,8,0,8"/>
         <Setter Property="FontSize" Value="32"/>
         <Setter Property="FontWeight" Value="Black"/>
     </Style>

@@ -36,6 +36,10 @@ public class AdminClientService {
         return _network.GetAsync<List<AdminClientSummary>>(Endpoints.AdminStaleClients);
     }
 
+    public Task<List<AdminClientSummary>?> GetAllClientSummariesAsync() {
+        return _network.GetAsync<List<AdminClientSummary>>(Endpoints.AdminAllClientSummaries);
+    }
+
     /// <summary>
     /// Returns client notes for the workday.
     /// </summary>
@@ -45,7 +49,7 @@ public class AdminClientService {
     }
 
     // =============================
-    // GET — Audit / Export (no cache_
+    // GET — Audit / Export (no cache)
     // =============================
 
     /// <summary>
@@ -53,7 +57,7 @@ public class AdminClientService {
     /// </summary>
     /// <returns>A list of AdminClientDetail</returns>
     public Task<List<AdminClientDetail>?> GetAllClientRecordsAsync() {
-        return _network.GetAsync<List<AdminClientDetail>>(Endpoints.AdminAllClients);
+        return _network.GetAsync<List<AdminClientDetail>>(Endpoints.AdminClientExport);
     }
 
     /// <summary>

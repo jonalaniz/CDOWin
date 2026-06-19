@@ -6,9 +6,175 @@
     xmlns:local="using:Backstage.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dtos="using:CDO.Core.DTOs.Admin"
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="Clients Page" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column -->
+        <Grid Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource ContentRightBorderStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Header -->
+            <Grid Grid.Row="0" Padding="8,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Title -->
+                <TextBlock Grid.Column="0" Text="Clients" Padding="8" Style="{StaticResource BackstageHeader}"/>
+
+                <!-- Command Bar -->
+                <CommandBar Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
+                    <!-- Export Menu -->
+                    <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="Export Clients">
+                        <FontIcon Glyph="&#xEDE1;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        <AppBarButton.Flyout>
+                            <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                <MenuFlyoutItem Text="Export...">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Symbol="OpenFile" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="Delete...">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                </CommandBar>
+            </Grid>
+            
+            <!-- Search Bar -->
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     Margin="8,0,8,8" PlaceholderText="Filter Clients"
+                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <!-- Clients List -->
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0"
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
+                      ItemsSource="{x:Bind ViewModel.ClientSummaries, Mode=OneWay}"
+                      IsItemClickEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="dtos:AdminClientSummary">
+                        <Grid Margin="0,10,0,10" Opacity="{x:Bind InActive, Converter={StaticResource BoolOpacityConverter}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontWeight="Bold" Text="{x:Bind Name}"
+                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock Grid.Row="1" TextWrapping="WrapWholeWords"
+                                       Text="{x:Bind FormattedAddress}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Status Bar -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <TextBlock Style="{StaticResource ListStatusBarStyle}">
+                    <Run Text="{x:Bind ViewModel.ClientSummaries.Count, Mode=OneWay}"/>
+                    <Run Text="Clients"/>
+                </TextBlock>
+            </Grid>
+
+        </Grid>
+        
+        <!-- Right Column -->
+        <Grid Grid.RowSpan="2" Grid.Column="1" Padding="0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Command Bar -->
+            <Grid Grid.Row="0" Grid.Column="1" BorderThickness="0,0,0,1" Padding="8,0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Client Name -->
+                <TextBlock Grid.Column="0" Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}" Padding="8" Style="{StaticResource BackstageHeader}"/>
+                <CommandBar Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="AliceBlue" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
+                    
+                    <!-- Export Menu -->
+                    <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
+                        <FontIcon Glyph="&#xEDE1;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        <AppBarButton.Flyout>
+                            <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                <MenuFlyoutItem Text="Export...">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Symbol="OpenFile" 
+                                        Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="Delete...">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                </CommandBar>
+            </Grid>
+
+            <!-- Client Activity -->
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Coming Soon" FontWeight="SemiBold"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <!-- Row 2: Status Bar -->
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                <StackPanel Orientation="Horizontal" Spacing="8" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                        <Run Text="ACE ID:"/>
+                        <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                        <Run Text=" |"/>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                        <Run Text="Created:"/>
+                        <Run Text="{x:Bind ViewModel.Selected.FormattedCreatedDate, Mode=OneWay}"/>
+                        <Run Text=" |"/>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
+                        <Run Text="Last Updated:"/>
+                        <Run Text="{x:Bind ViewModel.Selected.FormattedUpdatedDate, Mode=OneWay}"/>
+                        <Run Text=" |"/>
+                    </TextBlock>
+                    <TextBlock Text="TTW" FontWeight="Bold" Style="{StaticResource PageSubtitleStyle}" Margin="0"
+                               Visibility="{x:Bind ViewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

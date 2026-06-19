@@ -45,7 +45,8 @@ public static class Endpoints {
     // Clients: Base endpoint returns clients updated in the past 24 hours or
     // specific date if date is appended as parameter
     public static readonly string AdminClients = $"{Admin}/clients";
-    public static readonly string AdminAllClients = $"{AdminClients}/all";
+    public static readonly string AdminAllClientSummaries = $"{AdminClients}/all";
+    public static readonly string AdminClientExport = $"{AdminClients}/export";
     public static readonly string AdminStaleClients = $"{AdminClients}/stale";
 
     // Reminders: Base endpoint returns reminders updated in the past 24 hours or

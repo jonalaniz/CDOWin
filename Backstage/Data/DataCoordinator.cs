@@ -27,6 +27,7 @@ public class DataCoordinator {
     public CachedList<AdminClientSummary> RecentClients { get; } = new();
     public CachedList<AdminClientNote> RecentNotes { get; } = new();
     public CachedList<AdminClientSummary> StaleClients { get; } = new();
+    public CachedList<AdminClientSummary> ClientSummaries { get; } = new();
     public CachedList<Reminder> Reminders { get; } = new();
     public CachedList<UserSummary> Users { get; } = new();
 
@@ -99,6 +100,15 @@ public class DataCoordinator {
         }
 
         return StaleClients.Data ?? [];
+    }
+
+    public async Task<IReadOnlyList<AdminClientSummary>> GetClientSummariesAsync(bool force = false) {
+        if (force || ClientSummaries.IsStale(BaseTTL)) {
+            var data = await _clientService.GetAllClientSummariesAsync();
+            if (data != null) ClientSummaries.Update(data);
+        }
+
+        return ClientSummaries.Data ?? [];
     }
 
     public async Task<IReadOnlyList<AdminClientNote>> GetRecentNotesAsync(bool force = false) {

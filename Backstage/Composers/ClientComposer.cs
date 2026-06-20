@@ -1,13 +1,12 @@
 ﻿using CDO.Core.DTOs.Admin;
-using CDO.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Windows.Storage.Pickers.Provider;
 
-namespace Backstage.Composers; 
+namespace Backstage.Composers;
+
 class ClientComposer {
     private string _filePath = Path.GetTempPath() + "all_clients.csv";
     private StringBuilder csv = new();
@@ -88,5 +87,5 @@ class ClientComposer {
     private string? FormatText(string? text) {
         if (text == null) return string.Empty;
         return text.Replace("\"", "\"\"").Replace("\r\n\r\n", "\r\n");
-    } 
+    }
 }

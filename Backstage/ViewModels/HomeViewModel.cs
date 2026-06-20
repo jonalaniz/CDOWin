@@ -1,7 +1,6 @@
 ﻿using Backstage.Data;
 using Backstage.Services;
 using CDO.Core.DTOs.Admin;
-using CDO.Core.ErrorHandling;
 using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;

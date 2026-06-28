@@ -81,4 +81,7 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(NewUser))]
 [JsonSerializable(typeof(UserUpdate))]
 
+[JsonSerializable(typeof(SessionToken))]
+[JsonSerializable(typeof(UserStub))]
+
 public partial class SourceGenerationContext : JsonSerializerContext { }

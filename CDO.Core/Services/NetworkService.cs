@@ -1,6 +1,9 @@
-﻿using CDO.Core.ErrorHandling;
+﻿using CDO.Core.Constants;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
+using CDO.Core.Models;
 using CDO.Core.Serialization;
+using CDO.Core.Utilities;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Json;
@@ -33,8 +36,8 @@ public class NetworkService : INetworkService {
     // -----------------------------
     // Service Initialization Tasks
     // -----------------------------
-    public void Initialize(string baseAddress, string apiKey) {
-        if (_instance != null) return;
+    public async Task<Result> Initialize(string baseAddress, string apiKey) {
+        if (_instance != null) return Result.Fail(new AppError(ErrorKind.Unauthorized, "User does not exist."));
 
         // Initialize HttpClient
         _httpClient.BaseAddress = new Uri(baseAddress);
@@ -42,6 +45,14 @@ public class NetworkService : INetworkService {
         _httpClient.DefaultRequestHeaders.Add("x-api-key", apiKey);
 
         _instance = this;
+
+        // Get the Session Token
+        var token = await GetAsync<SessionToken>(Endpoints.Session + UserHelper.UsernameQuery);
+        if (token == null) return Result.Fail(new AppError(ErrorKind.Unknown, $"User: {UserHelper.Username} not found."));
+
+        _httpClient.DefaultRequestHeaders.Add("x-session-id", token.Id);
+
+        return Result.Success();
     }
 
     // -----------------------------

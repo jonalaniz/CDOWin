@@ -1,6 +1,7 @@
 ﻿using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
+using CDO.Core.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ public partial class CreateNoteViewModel(IClientService service, int clientId) :
 
     public DateTime Date = DateTime.UtcNow;
 
-    public string Author = char.ToUpper(Environment.UserName[0]) + Environment.UserName[1..];
+    public string Author = UserHelper.Username;
 
     // =========================
     // Input Validation

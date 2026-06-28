@@ -35,6 +35,9 @@ public static class Endpoints {
     public static string State(int id) => $"{States}/{id}";
     public static readonly string States = "/api/states";
 
+    // Session Endpoints
+    public static string Session => "/api/session";
+
     // -----------------------------
     // Administrative Endpoints
     // -----------------------------

@@ -7,7 +7,7 @@ public interface INetworkService {
     // -----------------------------
     // Service Initialization Tasks
     // -----------------------------
-    void Initialize(string baseAddress, string apiKey);
+    Task<Result> Initialize(string baseAddress, string apiKey);
 
     // -----------------------------
     // GET

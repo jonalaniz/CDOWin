@@ -86,82 +86,107 @@
 
                 <!-- Personal Information Card-->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
-                    
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+                            
+                        <TextBlock Grid.Column="0" Text="Personal Information"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                Tag="{x:Bind dialogs:ClientEditType.Personal}" Click="EditButton_Clicked"
+                                ToolTipService.ToolTip="Edit">
+                            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        </Button>
+                    </Grid>
+                        
+                    <!-- Content -->
+                    <ScrollView Grid.Row="1">
+                        <Grid Style="{StaticResource CDOCardContentContainerStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <TextBlock Grid.Column="0" Text="Personal Information"
-                                       Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Personal}" Click="EditButton_Clicked"
-                                    ToolTipService.ToolTip="Edit">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                            </Button>
-                        </Grid>
 
-                        <!-- Date of Birth/DL/SSN -->
-                        <c:LabelPair Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="2" Label="DOB"
+                            <!-- Date of Birth/DL/SSN -->
+                            <c:LabelPair Grid.Row ="0" Grid.Column="0" Grid.ColumnSpan="2" Label="DOB"
                                      Value="{x:Bind ViewModel.Selected.FormattedDOB, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Label="DL/ID"
+                            <c:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Label="DL/ID"
                                      Value="{x:Bind ViewModel.Selected.DriversLicense, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="SSN"
+                            <c:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Label="SSN"
                                      Value="{x:Bind ViewModel.Selected.FormattedSSN, Mode=OneWay}"/>
 
-                        <!-- Fluent Languages/Race -->
-                        <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Label="Fluent Languages"
+                            <!-- Fluent Languages/Race -->
+                            <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Label="Fluent Languages"
                                      Value="{x:Bind ViewModel.Selected.FluentLanguages, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Label="Race"
+                            <c:LabelPair Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Label="Race"
                                      Value="{x:Bind ViewModel.Selected.Race, Mode=OneWay}"/>
 
-                        <!-- Address Section -->
-                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
+                            <!-- Address Section -->
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"  
                                     Visibility="{x:Bind ViewModel.Selected.FormattedAddress, Mode=OneWay, Converter={StaticResource StringToVisability}}">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Address"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Address"/>
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.FormattedStreetAddress, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.FormattedCityStateZip, Mode=OneWay}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Education Section -->
-                        <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Label="Education"
+                            <!-- Education Section -->
+                            <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Label="Education"
                                      Value="{x:Bind ViewModel.Selected.Education, Mode=OneWay}"/>
-                    </Grid>
+                        </Grid>
+                    </ScrollView>
                 </Grid>
 
                 <!-- Contact Information Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}">
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Contact Information" Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+                        <!-- Edit Contact Information Button -->
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" 
+                                Tag="{x:Bind dialogs:ClientEditType.Contact}" Click="EditButton_Clicked"
+                                ToolTipService.ToolTip="Edit">
+                            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        </Button>
+                    </Grid>
+                    
+                    <!-- Content -->
+                    <Grid Grid.Row="1" Style="{StaticResource CDOCardContentContainerStyle}" RowSpacing="8" ColumnSpacing="16">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -174,54 +199,37 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Column="0" Text="Contact Information" Style="{StaticResource SubtitleTextBlockStyle}"/>
-
-                            <!-- Edit Contact Information Button -->
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" 
-                                    Tag="{x:Bind dialogs:ClientEditType.Contact}" Click="EditButton_Clicked"
-                                    ToolTipService.ToolTip="Edit">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                            </Button>
-                        </Grid>
-
                         <!-- Phone 1 -->
-                        <FontIcon Grid.Row="1" Grid.Column="0" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" Glyph="&#xE717;"
+                        <FontIcon Grid.Row="0" Grid.Column="0" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" Glyph="&#xE717;"
                                   Visibility="{x:Bind ViewModel.Selected.Phone1, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
-                        <c:LabelPair Grid.Row="1" Grid.Column="1" 
+                        <c:LabelPair Grid.Row="0" Grid.Column="1" 
                                      Label="{x:Bind ViewModel.Selected.Phone1Identity, Mode=OneWay}" 
                                      Value="{x:Bind ViewModel.Selected.Phone1, Mode=OneWay}" 
                                      Visibility="{x:Bind ViewModel.Selected.Phone1, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 2 -->
-                        <c:LabelPair Grid.Row="2" Grid.Column="1"
+                        <c:LabelPair Grid.Row="1" Grid.Column="1"
                                      Label="{x:Bind ViewModel.Selected.Phone2Identity, Mode=OneWay}" 
                                      Value="{x:Bind ViewModel.Selected.Phone2, Mode=OneWay}"
                                      Visibility="{x:Bind ViewModel.Selected.Phone2, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 3 -->
-                        <c:LabelPair Grid.Row="3" Grid.Column="1"
-                                     Label="{x:Bind ViewModel.Selected.Phone3Identity, Mode=OneWay}" 
-                                     Value="{x:Bind ViewModel.Selected.Phone3, Mode=OneWay}"
-                                     Visibility="{x:Bind ViewModel.Selected.Phone3, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                        <c:LabelPair Grid.Row="2" Grid.Column="1"
+                                    Label="{x:Bind ViewModel.Selected.Phone3Identity, Mode=OneWay}" 
+                                    Value="{x:Bind ViewModel.Selected.Phone3, Mode=OneWay}"
+                                    Visibility="{x:Bind ViewModel.Selected.Phone3, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 1 -->
-                        <FontIcon Grid.Row="4" Grid.Column="0" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" Glyph="&#xE715;" 
-                                  Visibility="{x:Bind ViewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                        <FontIcon Grid.Row="3" Grid.Column="0" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" Glyph="&#xE715;" 
+                                Visibility="{x:Bind ViewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
-                        <c:LabelPair Grid.Row="4" Grid.Column="1"
-                                     Label="{x:Bind ViewModel.Selected.EmailIdentity, Mode=OneWay}" 
-                                     Value="{x:Bind ViewModel.Selected.Email, Mode=OneWay}"
-                                     Visibility="{x:Bind ViewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                        <c:LabelPair Grid.Row="3" Grid.Column="1"
+                                    Label="{x:Bind ViewModel.Selected.EmailIdentity, Mode=OneWay}" 
+                                    Value="{x:Bind ViewModel.Selected.Email, Mode=OneWay}"
+                                    Visibility="{x:Bind ViewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 2 -->
-                        <c:LabelPair Grid.Row="5" Grid.Column="1"
+                        <c:LabelPair Grid.Row="4" Grid.Column="1"
                                      Label="{x:Bind ViewModel.Selected.Email2Identity, Mode=OneWay}" 
                                      Value="{x:Bind ViewModel.Selected.Email2, Mode=OneWay}"
                                      Visibility="{x:Bind ViewModel.Selected.Email2, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
@@ -230,118 +238,128 @@
 
                 <!-- Case Information Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
-                    
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
+                        <TextBlock Grid.Column="0" Text="Case Information" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="Edit"
+                                    Tag="{x:Bind dialogs:ClientEditType.Case}" Click="EditButton_Clicked">
+                            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        </Button>
+                    </Grid>
+
+                    <!-- Content -->
+                    <ScrollView Grid.Row="1">
+                        <Grid Style="{StaticResource CDOCardContentContainerStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Case Information" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="Edit"
-                                    Tag="{x:Bind dialogs:ClientEditType.Case}" Click="EditButton_Clicked">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                            </Button>
-                        </Grid>
-
-                        <!-- Start Date/Case ID/Tier Section -->
-                        <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Start Date" 
+                            <!-- Start Date/Case ID/Tier Section -->
+                            <c:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Label="Start Date" 
                                      Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Label="Case ID" 
+                            <c:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Label="Case ID" 
                                      Value="{x:Bind ViewModel.Selected.CaseID, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Case Load"
+                            <c:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Label="Case Load"
                                      Value="{x:Bind ViewModel.Selected.CounselorReference.CaseLoadID, Mode=OneWay}"/>
 
-                        <!-- Benefits/Premiums Section -->
-                        <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Benefits" 
+                            <!-- Benefits/Premiums Section -->
+                            <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Benefits" 
                                      Value="{x:Bind ViewModel.Selected.Benefits, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Label="Premiums" 
+                            <c:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Label="Premiums" 
                                      Value="{x:Bind ViewModel.Selected.Premiums, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Label="Tier" 
+                            <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Tier" 
                                      Value="{x:Bind ViewModel.Selected.Status, Mode=OneWay}"/>
 
-                        <!-- Counselor Section -->
-                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"  
+                            <!-- Counselor Section -->
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"  
                                     Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Secretary Section -->
-                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
+                            <!-- Secretary Section -->
+                            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
                                     Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
-                            <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryName, Mode=OneWay}"/>
-                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryEmail, Mode=OneWay}"/>
-                        </StackPanel>
-                    </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollView>
                 </Grid>
 
                 <!-- Conditions Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Text="Conditions"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                Tag="{x:Bind dialogs:ClientEditType.Conditions}" Click="EditButton_Clicked"
+                                ToolTipService.ToolTip="Edit">
+                            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        </Button>
+                    </Grid>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                    <!-- Content -->
+                    <ScrollView Grid.Row="1">
+                        <Grid Grid.Row="1" Style="{StaticResource CDOCardContentContainerStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Conditions"
-                                       Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Tag="{x:Bind dialogs:ClientEditType.Conditions}" Click="EditButton_Clicked"
-                                    ToolTipService.ToolTip="Edit">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                            </Button>
-                        </Grid>
-
-                        <!-- Start Date/Case ID/Status Section -->
-                        <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Employment Goals"
+                            <!-- Start Date/Case ID/Status Section -->
+                            <c:LabelPair Grid.Row="0" Grid.Column="0" Label="Employment Goals"
                                      Value="{x:Bind ViewModel.Selected.EmploymentGoal, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="0" Label="Conditions"
+                            <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Conditions"
                                       Value="{x:Bind ViewModel.Selected.Conditions, Mode=OneWay}"/>
-                    </Grid>
+                        </Grid>
+                    </ScrollView>
                 </Grid>
 
                 <!-- Service Authorizations Card -->
@@ -386,49 +404,55 @@
                 
                 <!-- Employment Profile Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Column="0" Text="Employment Profile"
-                                       Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                        <TextBlock Grid.Column="0" Text="Employment Profile"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
                                     Tag="{x:Bind dialogs:ClientEditType.Employment}" Click="EditButton_Clicked"
                                     ToolTipService.ToolTip="Edit">
-                                <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                            </Button>
-                        </Grid>
-                        <!-- Start Date/Case ID/Status Section -->
-                        <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Disability" 
+                            <FontIcon Glyph="&#xE70F;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        </Button>
+                    </Grid>
+
+                    <!-- Content -->
+                    <ScrollView Grid.Row="1">
+                        <Grid Style="{StaticResource CDOCardContentContainerStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Start Date/Case ID/Status Section -->
+                            <c:LabelPair Grid.Row="0" Grid.Column="0" Label="Disability" 
                                      Value="{x:Bind ViewModel.Selected.Disability, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="2" Grid.Column="0" Label="Criminal Charges" 
+                            <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Criminal Charges" 
                                      Value="{x:Bind ViewModel.Selected.CriminalCharge, Mode=OneWay}"/>
 
-                        <c:LabelPair Grid.Row="3" Grid.Column="0" Label="Transportation" 
+                            <c:LabelPair Grid.Row="2" Grid.Column="0" Label="Transportation" 
                                      Value="{x:Bind ViewModel.Selected.Transportation, Mode=OneWay}"/>
-                    </Grid>
+                        </Grid>
+                    </ScrollView>
                 </Grid>
 
                 <!-- Placements Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
                     <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
                         <!-- Header -->
                     <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="12,6,6,6">
@@ -485,11 +509,21 @@
 
                 <!-- Checklist Card-->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
-                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Height="42" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Checklists"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    </Grid>
+
+
                     <!-- Inner Grid -->
-                    <Grid Margin="12,6,12,6" Style="{StaticResource ChecklistsCardInnerGridStyle}">
+                    <Grid Grid.Row="1" RowSpacing="4" Style="{StaticResource CDOCardContentContainerStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -505,63 +539,61 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Header -->
-                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                   Margin="0,1,0,5" Text="Checklists"
-                                   Style="{StaticResource SubtitleTextBlockStyle}"/>
+
                         
                         <!-- Resume Section -->
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Resume" FontWeight="Bold"/>
-                        <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource LeftCheckboxStyle}"
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Resume" FontWeight="Bold"/>
+                        
+                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource LeftCheckboxStyle}"
                                   Content="Required" Tag="{x:Bind dialogs:CheckboxTag.ResumeRequired}"
                                   IsChecked="{x:Bind ViewModel.Selected.ResumeRequired, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
-                        <CheckBox Grid.Row="2" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
+                        <CheckBox Grid.Row="1" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.ResumeCompleted}"
                                   IsChecked="{x:Bind ViewModel.Selected.ResumeCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Video Interviews Section -->
-                        <TextBlock Grid.Row="3" Grid.Column="0"
+                        <TextBlock Grid.Row="2" Grid.Column="0"
                                    Text="Video Interviews"
                                    FontWeight="Bold"/>
-                        <CheckBox Grid.Row="4" Grid.Column="0" Style="{StaticResource LeftCheckboxStyle}"
+                        <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource LeftCheckboxStyle}"
                                   Content="Required" Tag="{x:Bind dialogs:CheckboxTag.VideoInterviewRequired}"
                                   IsChecked="{x:Bind ViewModel.Selected.VideoInterviewRequired, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
-                        <CheckBox Grid.Row="4" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
+                        <CheckBox Grid.Row="3" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.VideoInterviewCompleted}"
                                   IsChecked="{x:Bind ViewModel.Selected.VideoInterviewCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Releases Section -->
-                        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"
+                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"
                                    Text="Releases" FontWeight="Bold"/>
-                        <CheckBox Grid.Row="5" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
+                        <CheckBox Grid.Row="4" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.ReleasesCompleted}"
                                   IsChecked="{x:Bind ViewModel.Selected.ReleasesCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Orientation Section -->
-                        <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"
+                        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"
                                    Text="Orientation" FontWeight="Bold"/>
-                        <CheckBox Grid.Row="6" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
+                        <CheckBox Grid.Row="5" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.OrientationCompleted}"
                                   IsChecked="{x:Bind ViewModel.Selected.OrientationCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- 1850 Data Sheet Section -->
-                        <TextBlock Grid.Row="7"  Grid.Column="0" VerticalAlignment="Center"
+                        <TextBlock Grid.Row="6"  Grid.Column="0" VerticalAlignment="Center"
                                    Text="1850 Data Sheet" FontWeight="Bold"/>
-                        <CheckBox Grid.Row="7"  Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
+                        <CheckBox Grid.Row="6"  Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.DataSheetCompleted}"
                                   IsChecked="{x:Bind ViewModel.Selected.DataSheetCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Elevator Speech Section -->
-                        <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center"
+                        <TextBlock Grid.Row="7" Grid.Column="0" VerticalAlignment="Center"
                                    Text="Elevator Speech" FontWeight="Bold"/>
-                        <CheckBox Grid.Row="8" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
+                        <CheckBox Grid.Row="7" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.ElevatorSpeechCompleted}"
                                   IsChecked="{x:Bind ViewModel.Selected.ElevatorSpeechCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>

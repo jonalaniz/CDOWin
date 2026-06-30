@@ -190,8 +190,8 @@ public sealed partial class ClientViewPage : Page {
         _ = ViewModel.ReloadClientAsync();
     }
 
-    private async void Placement_Click(SplitButton sender, SplitButtonClickEventArgs args) {
-        if (sender.Tag is not int id) { return; }
+    private async void Placement_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) { return; }
         var placement = ViewModel.Selected?.Placements?.FirstOrDefault(c => c.Id == id);
 
         if (placement == null) { return; }
@@ -210,7 +210,7 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private void GoToPlacement_Click(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem menuItem || menuItem.Tag is not int id) return;
+        if (sender is not Button button || button.Tag is not int id) { return; }
         ViewModel.RequestPlacement(id);
     }
 

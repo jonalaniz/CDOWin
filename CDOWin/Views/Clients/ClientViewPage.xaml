@@ -346,50 +346,44 @@
 
                 <!-- Service Authorizations Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,6,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                    <!-- Header -->
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="12,6,6,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Service Authorizations" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Click="CreateSA_Click" ToolTipService.ToolTip="New Service Authorization">
-                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                            </Button>
-                        </Grid>
-                        
-                        <!-- Item Repeater -->
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Invoices, Mode=OneWay}">
-                                <DataTemplate x:DataType="sas:SADetail">
-
-                                    <!-- Button -->
-                                    <Button Margin="0,0,12,6" Click="SA_Click" Tag="{x:Bind Id}"
-                                            Opacity="{x:Bind Billed, Converter={StaticResource BoolOpacityConverter}}"
-                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
-                                        <StackPanel Spacing="2">
-                                            <TextBlock FontWeight="Bold" Text="{x:Bind ServiceAuthorizationNumber}"/>
-                                            <TextBlock Text="{x:Bind Description}"/>
-                                            <TextBlock Text="{x:Bind FormattedDateRange}"/>
-                                        </StackPanel>
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsRepeater>
-                        </ScrollViewer>
+                        <TextBlock Grid.Column="0" Text="Service Authorizations" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                Click="CreateSA_Click" ToolTipService.ToolTip="New Service Authorization">
+                            <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                        </Button>
                     </Grid>
-                </Grid>
 
+                    <!-- Item Repeater -->
+                    <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.Invoices, Mode=OneWay}">
+                            <DataTemplate x:DataType="sas:SADetail">
+
+                                <!-- Button -->
+                                <Button Style="{StaticResource BackstageListButton}" 
+                                        Click="SA_Click" Tag="{x:Bind Id}">
+                                    <StackPanel Spacing="2">
+                                        <TextBlock FontWeight="Bold" Text="{x:Bind ServiceAuthorizationNumber}"/>
+                                        <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="{x:Bind FormattedDateRange}"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsRepeater>
+                    </ScrollViewer>
+                </Grid>
+                
                 <!-- Employment Profile Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
 
@@ -431,58 +425,62 @@
 
                 <!-- Placements Card -->
                 <Grid Style="{StaticResource CardContainerGridStyle}">
-                    <!-- Inner Grid -->
-                    <Grid Style="{StaticResource CardInnerGridStyle}" Margin="12,6,0,0">
-                        <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <!-- Header -->
-                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,6,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="12,6,6,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="Placements"
-                                       Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
-                                    Click="CreatePlacement_Click">
-                                <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"
-                                          ToolTipService.ToolTip="New Placement"/>
-                            </Button>
-                        </Grid>
+                        <TextBlock Grid.Column="0" Text="Placements"
+                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}"
+                                Click="CreatePlacement_Click">
+                            <FontIcon Glyph="&#xE710;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"
+                                        ToolTipService.ToolTip="New Placement"/>
+                        </Button>
+                    </Grid>
 
                         <!-- Item Repeater -->
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
-                                <DataTemplate x:DataType="placements:PlacementDetail">
+                    <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
+                            <DataTemplate x:DataType="placements:PlacementDetail">
 
-                                    <!-- Button -->
-                                    <SplitButton Margin="0,0,12,6" Click="Placement_Click" Tag="{x:Bind Id}"
-                                                 Opacity="{x:Bind Billed, Converter={StaticResource BoolOpacityConverter}}"
-                                                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                                 BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}">
-                                        <StackPanel Spacing="2">
-                                            <TextBlock FontWeight="Bold" Text="{x:Bind EmployerName}"/>
+                                <!-- Button -->
+                                <Button Style="{StaticResource BackstageListButton}" 
+                                        Click="Placement_Click" Tag="{x:Bind Id}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" Text="{x:Bind EmployerName}"/>
+                                        <StackPanel Grid.Column="0" Grid.Row="1" Spacing="2" Margin="0">
                                             <TextBlock Text="{x:Bind EmployerPhone}"/>
-                                            <TextBlock Text="{x:Bind Position}"/>
+                                            <TextBlock Text="{x:Bind Position}" TextWrapping="WrapWholeWords"/>
                                             <TextBlock Text="{x:Bind FormattedHireDate}"/>
                                         </StackPanel>
-
-                                        <SplitButton.Flyout>
-                                            <!-- MenuFlyout -->
-                                            <MenuFlyout Placement="Right">
-                                                <MenuFlyoutItem Text="Go To Placement" Click="GoToPlacement_Click"  Tag="{x:Bind Id}"/>
-                                            </MenuFlyout>
-                                        </SplitButton.Flyout>
-                                    </SplitButton>
-                                </DataTemplate>
-                            </ItemsRepeater>
-                        </ScrollViewer>
-                    </Grid>
+                                        <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center"
+                                                Style="{StaticResource AccentButtonStyle}"
+                                                IsEnabled="{x:Bind Id, Converter={StaticResource NullToBoolConverter}}"
+                                                Tag="{x:Bind Id}" Click="GoToPlacement_Click">
+                                            <FontIcon Glyph="&#xE76C;"/>
+                                        </Button>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsRepeater>
+                    </ScrollViewer>
                 </Grid>
 
                 <!-- Checklist Card-->

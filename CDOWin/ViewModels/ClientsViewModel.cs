@@ -4,6 +4,7 @@ using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
+using CDO.Core.Services;
 using CDOWin.Composers;
 using CDOWin.Data;
 using CDOWin.Services;
@@ -128,7 +129,7 @@ public partial class ClientsViewModel : ObservableObject {
     }
 
     // =========================
-    // CRUD Methods
+    // Get Methods
     // =========================
     public async Task LoadSelectedClientAsync(int id) {
         if (Selected != null && Selected.Id == id) return;
@@ -141,6 +142,37 @@ public partial class ClientsViewModel : ObservableObject {
     public async Task ReloadClientAsync() {
         if (Selected == null) return;
         Selected = await _service.GetClientAsync(Selected.Id);
+        OnUI(() => UpdateSummaries());
+    }
+
+    // =========================
+    // Post Methods
+    // =========================
+    public async Task<Result> MarkClientActive(int id) {
+        var result = await _service.MarkClientActiveAsync(id);
+
+        // Update our cache silently so data is in sync with active status
+        _ = _dataCoordinator.GetClientsAsync(force: true);
+
+        return result; 
+    }
+
+    public async Task<Result> MarkClientInactive(int id) {
+        InvalidateCache();
+        var result = await _service.MarkClientInactiveAsync(id);
+
+        // Update our cache silently so data is in sync with active status
+        _ = _dataCoordinator.GetClientsAsync(force: true);
+
+        return result; 
+    }
+
+    public async Task<Result> MarkClientTTW(int id) {
+        return await _service.MarkClientTTWAsync(id);
+    }
+
+    public async Task<Result> UnmarkClientTTW(int id) {
+        return await _service.UnMarkClientTTWAsync(id);
     }
 
 
@@ -150,14 +182,11 @@ public partial class ClientsViewModel : ObservableObject {
 
         var result = await _service.UpdateClientAsync(Selected.Id, update);
         if (result.IsSuccess) {
-            if (update.Active is bool) { InvalidateCache(); }
             await ReloadClientAsync();
 
             _ = Task.Run(() => {
                 _clientComposer.ComposeClientToFile(Selected);
             });
-
-            OnUI(() => UpdateSummaries());
         }
         return result;
     }

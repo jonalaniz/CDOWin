@@ -3,7 +3,6 @@ namespace CDO.Core.DTOs.Clients;
 public class ClientUpdate {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
-    public bool? TTW { get; set; }
     public string? City { get; set; }
     public string? Disability { get; set; }
     public string? State { get; set; }
@@ -29,7 +28,6 @@ public class ClientUpdate {
     public string? ClientNotes { get; set; }
     public string? Conditions { get; set; }
     public string? DocumentFolder { get; set; }
-    public bool? Active { get; set; }
     public string? EmploymentGoal { get; set; }
     public int? EmployerID { get; set; }
     public string? Status { get; set; }

@@ -1,6 +1,8 @@
-﻿using CDO.Core.DTOs.Clients;
+﻿using CDO.Core.Constants;
+using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.ErrorHandling;
+using System.Net;
 
 namespace CDO.Core.Interfaces;
 
@@ -21,6 +23,14 @@ public interface IClientService {
     public Task<Result<ClientDetail>> CreateClientAsync(NewClient dto);
 
     public Task<Result<ClientNote>> CreateClientNoteAsync(NewNote dto, int clientId);
+
+    public Task<Result> MarkClientActiveAsync(int id);
+
+    public Task<Result> MarkClientInactiveAsync(int id);
+
+    public Task<Result> MarkClientTTWAsync(int id);
+
+    public Task<Result> UnMarkClientTTWAsync(int id);
 
     // -----------------------------
     // PATCH Methods

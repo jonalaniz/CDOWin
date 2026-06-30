@@ -223,18 +223,23 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private async void ToggleActive_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem || ViewModel.Selected == null) return;
+        if (sender is not MenuFlyoutItem || ViewModel.Selected?.Active is not bool isActive) return;
 
-        if (ViewModel.Selected.Active) {
+        if (isActive) {
             var dialog = DialogFactory.MarkInactiveDialog(this.XamlRoot, "Mark Client Inactive?");
             dialog.Content = "Marking this client inactive will remove all existing reminders. This action cannot be undone.";
 
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
-                _ = UpdateActiveAsync(false);
+                _ = ToggleActiveAsync(isActive);
         } else {
-            _ = UpdateActiveAsync(true);
+            _ = ToggleActiveAsync(isActive);
         }
+    }
+
+    private async void ToggleTTW_Clicked(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem || ViewModel.Selected?.TTW is not bool isTTW) return;
+        _ = ToggleTTWAsync(isTTW);
     }
 
     private async void Delete_Clicked(object sender, RoutedEventArgs e) {
@@ -290,14 +295,36 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     // Utility Methods
     // =========================
-    private async Task UpdateActiveAsync(bool isActive) {
-        if (ViewModel.Selected == null) return;
+    private async Task ToggleActiveAsync(bool isActive) {
+        if (ViewModel.Selected?.Id is not int id) return;
+        Debug.WriteLine($"Client Active: {isActive}");
+        var result = isActive 
+            ? await ViewModel.MarkClientInactive(id)
+            : await ViewModel.MarkClientActive(id);
 
-        var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
-        updateVM.UpdatedClient.Active = isActive;
+        if (!result.IsSuccess) {
+            ErrorHandler.Handle(result, this.XamlRoot);
+            return;
+        }
 
-        _ = UpdateClient(updateVM.UpdatedClient);
+        _ = ViewModel.ReloadClientAsync();
     }
+
+    private async Task ToggleTTWAsync(bool isTTW) {
+        if (ViewModel.Selected?.Id is not int id) return;
+
+        var result = isTTW
+            ? await ViewModel.UnmarkClientTTW(id)
+            : await ViewModel.MarkClientTTW(id);
+
+        if (!result.IsSuccess) {
+            ErrorHandler.Handle(result, this.XamlRoot);
+            return;
+        }
+
+        _ = ViewModel.ReloadClientAsync();
+    }
+
     private async Task UpdateCheckboxAsync(CheckboxTag tag, bool isChecked) {
         if (ViewModel.Selected == null) return;
 

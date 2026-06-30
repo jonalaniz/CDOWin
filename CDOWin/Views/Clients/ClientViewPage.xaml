@@ -64,6 +64,8 @@
                         </MenuFlyoutItem>
                         <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
                                         Click="ToggleActive_Clicked"/>
+                        <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
+                                        Click="ToggleTTW_Clicked"/>
                         <MenuFlyoutSeparator/>
                         <MenuFlyoutItem Text="Delete..."
                                         Click="Delete_Clicked">

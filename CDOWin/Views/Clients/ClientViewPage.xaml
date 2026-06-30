@@ -590,5 +590,14 @@
                            Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
             </StackPanel>
         </Grid>
+
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" x:Name="InfoBarContainer" Margin="16" Width="400"
+              VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+        </Grid>
     </Grid>
 </Page>

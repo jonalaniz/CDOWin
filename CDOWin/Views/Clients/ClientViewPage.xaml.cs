@@ -1,4 +1,6 @@
+using CDO.Core.Constants;
 using CDO.Core.DTOs.Clients;
+using CDO.Core.ErrorHandling;
 using CDO.UI.Shared.Factories;
 using CDOWin.Composers;
 using CDOWin.ErrorHandling;
@@ -13,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
@@ -59,7 +62,12 @@ public sealed partial class ClientViewPage : Page {
 
     // Documents
     private void OpenDocuments_Clicked(object sender, RoutedEventArgs e) {
-        Process.Start("explorer.exe", $"{ViewModel.Selected?.DocumentsFolderPath}");
+        if(ViewModel.Selected?.DocumentsFolderPath is not string path || !Directory.Exists(path)) {
+            _ = ShowMessage(ClientPageMessageType.DocumentsFolderMissing, false);
+            return;
+        }
+            
+        Process.Start("explorer.exe", $"{path}");
     }
 
     // Reminders
@@ -88,10 +96,9 @@ public sealed partial class ClientViewPage : Page {
         if (result != ContentDialogResult.Primary) return;
 
         var reminderResult = await createReminderVM.CreateReminderAsync();
-        if (!reminderResult.IsSuccess) {
-            ErrorHandler.Handle(reminderResult, this.XamlRoot);
-            return;
-        }
+        _ = ShowMessage(ClientPageMessageType.CreatedReminder, reminderResult.IsSuccess);
+
+        if (!reminderResult.IsSuccess) return;
 
         ViewModel.NotifyNewReminderCreated();
         _ = ViewModel.ReloadClientAsync();
@@ -119,11 +126,9 @@ public sealed partial class ClientViewPage : Page {
 
         if (result != ContentDialogResult.Primary) return;
         var sAResult = await createSAVM.CreateSAAsync();
+        _ = ShowMessage(ClientPageMessageType.CreatedSA, sAResult.IsSuccess);
 
-        if (!sAResult.IsSuccess) {
-            ErrorHandler.Handle(sAResult, this.XamlRoot);
-            return;
-        }
+        if (!sAResult.IsSuccess) return;
 
         _ = ViewModel.ReloadClientAsync();
     }
@@ -142,24 +147,21 @@ public sealed partial class ClientViewPage : Page {
 
         if (result == ContentDialogResult.Primary) {
             var updateResult = await updateSAVM.UpdateSAAsync();
-            if (!updateResult.IsSuccess) {
-                ErrorHandler.Handle(updateResult, this.XamlRoot);
-                return;
-            }
+            _ = ShowMessage(ClientPageMessageType.UpdatedSA, updateResult.IsSuccess);
+            if (!updateResult.IsSuccess) return;
             _ = ViewModel.ReloadClientAsync();
         } else if (result == ContentDialogResult.Secondary) {
             var composer = new ServiceAuthorizationComposer(invoice);
             var composerResult = await composer.Compose();
 
+            _ = ShowMessage(ClientPageMessageType.ExportedSA, composerResult.IsSuccess);
             if (composerResult.IsSuccess) return;
-            ErrorHandler.Handle(composerResult, this.XamlRoot);
         }
     }
 
     // Placements
     private async void CreatePlacement_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null) return;
-        Debug.WriteLine("CreatePlacement Clicked");
 
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Placement for {ViewModel.Selected.NameAndID}");
         var createPlacementVM = AppServices.CreatePlacementViewMdoel(ViewModel.Selected);
@@ -179,11 +181,9 @@ public sealed partial class ClientViewPage : Page {
 
         if (result != ContentDialogResult.Primary) return;
         var placementResult = await createPlacementVM.CreatePlacementAsync();
+        _ = ShowMessage(ClientPageMessageType.CreatedPlacement, placementResult.IsSuccess);
 
-        if (!placementResult.IsSuccess) {
-            ErrorHandler.Handle(placementResult, this.XamlRoot);
-            return;
-        }
+        if (!placementResult.IsSuccess) return;
 
         _ = AppServices.DataCoordinator.GetPlacementSummariesAsync(force: true);
         _ = AppServices.DataCoordinator.GetEmployerSummariesAsync(force: true);
@@ -203,10 +203,8 @@ public sealed partial class ClientViewPage : Page {
 
         if (result == ContentDialogResult.Primary) {
             var updateResult = await updatePlacementVM.UpdatePlacementAsync();
-            if (!updateResult.IsSuccess) {
-                ErrorHandler.Handle(updateResult, this.XamlRoot);
-                return;
-            }
+            _ = ShowMessage(ClientPageMessageType.UpdatedPlacement, updateResult.IsSuccess);
+            if (!updateResult.IsSuccess) return;
             _ = ViewModel.ReloadClientAsync();
         }
     }
@@ -249,8 +247,10 @@ public sealed partial class ClientViewPage : Page {
         dialog.Content = "Deleting this client will remove all existing reminders. This action cannot be undone.";
 
         var result = await dialog.ShowAsync();
-        if (result == ContentDialogResult.Primary)
-            _ = ViewModel.DeleteClientAsync(ViewModel.Selected.Id);
+        if (result == ContentDialogResult.Primary) {
+            var deleteResult = await ViewModel.DeleteClientAsync(ViewModel.Selected.Id);
+            _ = ShowMessage(ClientPageMessageType.DeletedClient, deleteResult.IsSuccess);
+        }
     }
 
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
@@ -302,10 +302,8 @@ public sealed partial class ClientViewPage : Page {
             ? await ViewModel.MarkClientInactive(id)
             : await ViewModel.MarkClientActive(id);
 
-        if (!result.IsSuccess) {
-            ErrorHandler.Handle(result, this.XamlRoot);
-            return;
-        }
+        _ = ShowMessage(isActive ? ClientPageMessageType.MarkedInactive : ClientPageMessageType.MarkedActive, result.IsSuccess);
+        if (!result.IsSuccess) return;
 
         _ = ViewModel.ReloadClientAsync();
     }
@@ -317,10 +315,8 @@ public sealed partial class ClientViewPage : Page {
             ? await ViewModel.UnmarkClientTTW(id)
             : await ViewModel.MarkClientTTW(id);
 
-        if (!result.IsSuccess) {
-            ErrorHandler.Handle(result, this.XamlRoot);
-            return;
-        }
+        _ = ShowMessage(isTTW ? ClientPageMessageType.UnmarkedTTW : ClientPageMessageType.MarkedTTW, result.IsSuccess);
+        if (!result.IsSuccess) return;
 
         _ = ViewModel.ReloadClientAsync();
     }
@@ -336,9 +332,20 @@ public sealed partial class ClientViewPage : Page {
 
     private async Task UpdateClient(ClientUpdate update) {
         var result = await ViewModel.UpdateClientAsync(update);
-        if (!result.IsSuccess) {
-            ErrorHandler.Handle(result, this.XamlRoot);
-            return;
-        }
+        _ = ShowMessage(ClientPageMessageType.UpdatedClient, result.IsSuccess);
+    }
+
+    private async Task ShowMessage(ClientPageMessageType type, bool success) {
+        var infoBar = new InfoBar {
+            Title = success ? "Success" : "Failed",
+            Severity = success ? InfoBarSeverity.Success : InfoBarSeverity.Error,
+            Message = Messages.MessageForType(type, success),
+            IsOpen = true
+        };
+
+        InfoBarContainer.Children.Add(infoBar);
+
+        await Task.Delay(success ? 2000 : 3000);
+        InfoBarContainer.Children.Remove(infoBar);
     }
 }

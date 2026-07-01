@@ -6,6 +6,8 @@
     xmlns:local="using:Backstage.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:dtos="using:CDO.Core.DTOs.Admin"
     mc:Ignorable="d">
 
@@ -118,7 +120,7 @@
                 <!-- Client Name -->
                 <TextBlock Grid.Column="0" Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}" Padding="8" Style="{StaticResource BackstageHeader}"/>
                 <CommandBar Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="AliceBlue" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
-                    
+
                     <!-- Export Menu -->
                     <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
                         <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
@@ -140,8 +142,58 @@
                 </CommandBar>
             </Grid>
 
-            <!-- Client Activity -->
-            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Coming Soon" FontWeight="SemiBold"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <!-- Client History Table -->
+            <ListView x:Name="ListView" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                      ItemsSource="{x:Bind ViewModel.SelectedClientHistory.Activities, Mode=OneWay}"
+                      Style="{StaticResource DataTableStyle}">
+                
+                <!-- Header -->
+                <ListView.Header>
+                    <Grid Style="{StaticResource DataTableHeaderStyle}">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:StickyHeaderBehavior/>
+                        </interactivity:Interaction.Behaviors>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="User" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Activity" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Date" FontWeight="SemiBold"/>
+                    </Grid>
+                </ListView.Header>
+                
+                <!-- Content -->
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="dtos:ClientActivity">
+                        <Grid Padding="12,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="0,0,12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{x:Bind UserName}" TextWrapping="WrapWholeWords" FontWeight="Bold"/>
+                                <Button Grid.Column="1" 
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        Tag="{x:Bind Id}">
+                                    <FontIcon Glyph="&#xE76C;"/>
+                                </Button>
+                            </Grid>
+                            <TextBlock Grid.Column="1" Text="{x:Bind Action}" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind Date}" TextWrapping="WrapWholeWords"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <!-- Row 2: Status Bar -->
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 

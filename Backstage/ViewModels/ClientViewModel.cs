@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,6 +49,9 @@ public partial class ClientViewModel : ObservableObject {
     public partial AdminClientSummary? Selected { get; set; }
 
     [ObservableProperty]
+    public partial ClientHistory? SelectedClientHistory { get; set; }
+
+    [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
 
     // =========================
@@ -76,6 +80,11 @@ public partial class ClientViewModel : ObservableObject {
                 Selected = summary;
         }
         );
+    }
+
+    partial void OnSelectedChanged(AdminClientSummary? value) {
+        if (value == null) return;
+        _ = LoadSelectedClientHistory(value.Id);
     }
 
     // =========================
@@ -111,6 +120,14 @@ public partial class ClientViewModel : ObservableObject {
         OnUI(() => {
             StaleClients = new ObservableCollection<AdminClientSummary>(snapshot);
         });
+    }
+
+    public async Task LoadSelectedClientHistory(int id) {
+        // TODO: Implement cancellation tokens
+
+        var clientHistory = await _adminClientService.GetClientHistory(id);
+        OnUI(() => SelectedClientHistory = clientHistory);
+        
     }
 
     // =========================

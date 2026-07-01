@@ -52,6 +52,9 @@ public static class Endpoints {
     public static readonly string AdminClientExport = $"{AdminClients}/export";
     public static readonly string AdminStaleClients = $"{AdminClients}/stale";
 
+    // Client History: Returns an AdminClientSummary with all edit history.
+    public static string ClientHistory(int id) => $"{AdminClients}/{id}";
+
     // Reminders: Base endpoint returns reminders updated in the past 24 hours or
     // specific date if date is appended as parameter
     public static readonly string AdminReminders = $"{Admin}/reminders";

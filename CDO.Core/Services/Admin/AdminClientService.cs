@@ -79,6 +79,10 @@ public class AdminClientService {
         return _network.GetAsync<List<ClientNote>>(Endpoints.AdminUserNotes(author));
     }
 
+    public Task<ClientHistory?> GetClientHistory(int id) {
+        return _network.GetAsync<ClientHistory>(Endpoints.ClientHistory(id));
+    }
+
     // -----------------------------
     // Utility Methods
     // -----------------------------

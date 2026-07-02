@@ -189,7 +189,7 @@
                                 </Button>
                             </Grid>
                             <TextBlock Grid.Column="1" Text="{x:Bind Action}" TextWrapping="WrapWholeWords"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind Date}" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind FormattedDate}" TextWrapping="WrapWholeWords"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

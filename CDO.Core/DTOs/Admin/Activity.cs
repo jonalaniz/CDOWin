@@ -11,4 +11,7 @@ public record class ClientActivity(
     string UserName,
     string UserID,
     string Action
-    );
+    ) {
+
+    public string FormattedDate => Date.ToLocalTime().ToString();
+}

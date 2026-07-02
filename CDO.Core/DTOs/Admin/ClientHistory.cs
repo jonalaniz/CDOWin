@@ -18,8 +18,8 @@ public class ClientHistory {
     public required ClientActivity[] Activities { get; init; }
 
     // Nullable fields
-    public DateTime? CreatedAt { get; init; }
-    public DateTime? UpdatedAt { get; init; }
+    public DateTime CreatedAt { get; init; }
+    public DateTime UpdatedAt { get; init; }
     public string? Address1 { get; init; }
     public string? Address2 { get; init; }
     public string? Zip { get; init; }
@@ -29,8 +29,8 @@ public class ClientHistory {
     public string Name => $"{FirstName} {LastName}";
     public bool InActive => !Active;
     public string FormattedID => $"ID: {Id}";
-    public string FormattedCreatedDate => CreatedAt?.ToString(format: "MM/dd/yyyy") ?? "No Date On File";
-    public string FormattedUpdatedDate => UpdatedAt?.ToString(format: "MM/dd/yyyy") ?? "No Date On File";
+    public string FormattedCreatedDate => CreatedAt.ToLocalTime().ToString(format: "MM/dd/yyyy") ?? "No Date On File";
+    public string FormattedUpdatedDate => UpdatedAt.ToLocalTime().ToString(format: "MM/dd/yyyy") ?? "No Date On File";
     public string FormattedUpdatedAtTime() {
         if (Time(UpdatedAt) is not string time) return "No Time On File";
         return $"Updated at: {time}";
@@ -54,8 +54,8 @@ public class ClientHistory {
         }
     }
 
-    private string? Time(DateTime? date) {
-        return date?.ToString(format: "hh:mm tt");
+    private string? Time(DateTime date) {
+        return date.ToLocalTime().ToString(format: "hh:mm tt");
     }
 
     // Convenience Methods

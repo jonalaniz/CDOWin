@@ -134,19 +134,28 @@ public partial class ClientViewModel : ObservableObject {
     // Post Methods
     // =========================
     public async Task<Result> MarkClientActive(int id) {
-        return await _clientService.MarkClientActiveAsync(id);
+        var result = await _clientService.MarkClientActiveAsync(id);
+        _dataCoordinator.ExpiringSAs.Invalidate();
+        return result;
     }
 
     public async Task<Result> MarkClientInactive(int id) {
-        return await _clientService.MarkClientInactiveAsync(id);
+        var result = await _clientService.MarkClientInactiveAsync(id);
+        _dataCoordinator.ExpiringSAs.Invalidate();
+        return result;
     }
 
     public async Task<Result> MarkClientTTW(int id) {
-        return await _clientService.MarkClientTTWAsync(id);
+        var result = await _clientService.MarkClientTTWAsync(id);
+        _dataCoordinator.ExpiringSAs.Invalidate();
+
+        return result;
     }
 
     public async Task<Result> UnmarkClientTTW(int id) {
-        return await _clientService.MarkClientTTWAsync(id);
+        var result = await _clientService.MarkClientTTWAsync(id);
+        _dataCoordinator.ExpiringSAs.Invalidate();
+        return result;
     }
 
     // =========================

@@ -30,6 +30,8 @@
                 </AppBarButton>
             </CommandBar>
         </Grid>
+        
+        <!-- Main Scroll Viewer Content -->
         <ScrollViewer Grid.Row="1" Style="{StaticResource VerticalScrollViewer}">
             <Grid RowSpacing="8">
                 <Grid.RowDefinitions>
@@ -172,60 +174,91 @@
                 
                 <!-- Expiring SAs Section -->
                 <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
-                    <TextBlock Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
+                    
+                    <!-- Section Title -->
+                    <Grid Margin="0,0,16,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind BillingViewModel.ExpiringSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
+                    </Grid>
+                    
+                    <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
                         <ItemsRepeater ItemsSource="{x:Bind BillingViewModel.ExpiringSAs, Mode=OneWay}">
+                            
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
                             </ItemsRepeater.Layout>
+                            
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate x:DataType="dtos:AdminSASummary">
                                     <!-- SA Card -->
                                     <Grid Style="{StaticResource CardContainerGridStyle}">
 
-                                        <!-- Inner Grid -->
-                                        <Grid Margin="8" Style="{StaticResource CardInnerGridStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Header -->
+                                        <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <TextBlock Grid.Row="0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            
+                                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="More">
+                                                <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                                <Button.Flyout>
+                                                    <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                                        <MenuFlyoutItem Text="Go to Client" Click="ClientButton_Click" Tag="{x:Bind Id}"/>
+                                                    </MenuFlyout>
+                                                </Button.Flyout>
+                                            </Button>
+                                        </Grid>
+
+                                        <!-- Content -->
+                                        <Grid Grid.Row="1" RowSpacing="8" Style="{StaticResource CDOCardContentContainerStyle}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-
-                                            <!-- Header -->
-                                            <TextBlock Margin="4,0" Grid.Row="0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                            <Grid Grid.Row="1" RowSpacing="8" Margin="4,0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="SA Number" Value="{x:Bind ServiceAuthorizationNumber}"/>
-                                                <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{x:Bind CaseID}"/>
-                                                <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Start Date" Value="{x:Bind FormattedStartDate}"/>
-                                                <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="End Date" Value="{x:Bind FormattedEndDate}"/>
-                                                <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Issued By" Value="{x:Bind CounselorName}"/>
-                                                <controls:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Label="Description" Value="{x:Bind Description}"/>
-                                            </Grid>
-                                            <Grid Grid.Row="2" ColumnSpacing="8">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
-                                                    <DropDownButton.Flyout>
-                                                        <MenuFlyout Placement="Top">
-                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateSAReminder_Today_Click"/>
-                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateSAReminder_Tomorrow_Click"/>
-                                                        </MenuFlyout>
-                                                    </DropDownButton.Flyout>
-                                                </DropDownButton>
-                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed" Tag="{x:Bind Id}" Click="MarkBilled_Click"/>
-                                            </Grid>
+                                            <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="SA Number" Value="{x:Bind ServiceAuthorizationNumber}"/>
+                                            <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{x:Bind CaseID}"/>
+                                            <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Start Date" Value="{x:Bind FormattedStartDate}"/>
+                                            <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="End Date" Value="{x:Bind FormattedEndDate}"/>
+                                            <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Issued By" Value="{x:Bind CounselorName}"/>
+                                            <controls:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Label="Description" Value="{x:Bind Description}"/>
+                                        </Grid>
+                                        
+                                        <!-- Buttons -->
+                                        <Grid Grid.Row="2" ColumnSpacing="8" Padding="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
+                                                <DropDownButton.Flyout>
+                                                    <MenuFlyout Placement="Top">
+                                                        <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateSAReminder_Today_Click"/>
+                                                        <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateSAReminder_Tomorrow_Click"/>
+                                                    </MenuFlyout>
+                                                </DropDownButton.Flyout>
+                                            </DropDownButton>
+                                            <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Billed" Tag="{x:Bind Id}" Click="MarkBilled_Click"/>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
@@ -236,73 +269,92 @@
                 
                 <!-- Stale Clients Section -->
                 <StackPanel Grid.Row="2" Style="{StaticResource VerticalScrollViewerContent}" Margin="0,-10,0,0">
-                    <TextBlock Text="Stale Clients" Style="{StaticResource BackstageSubHeader}"/>
+                    
+                    <!-- Section Title -->
+                    <Grid Margin="0,0,16,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="Stale Clients" Style="{StaticResource BackstageSubHeader}"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.StaleClients.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
+                    </Grid>
+                    
+                    <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
+                            
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
                             </ItemsRepeater.Layout>
+                            
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate x:DataType="dtos:AdminClientSummary">
                                     <!-- SA Card -->
                                     <Grid Style="{StaticResource CardContainerGridStyle}">
 
-                                        <!-- Inner Grid -->
-                                        <Grid Margin="8" Style="{StaticResource CardInnerGridStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Header -->
+                                        <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Column="0" Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            
+                                            <!-- Menu -->
+                                            <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="More">
+                                                <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                                <Button.Flyout>
+                                                    <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                                        <MenuFlyoutItem Text="Go to Client" Click="ClientButton_Click" Tag="{x:Bind Id}"/>
+                                                        <MenuFlyoutSeparator/>
+                                                        <MenuFlyoutItem Text="Mark TTW" Click="MarkTTW_Click" Tag="{x:Bind Id}"/>
+                                                    </MenuFlyout>
+                                                </Button.Flyout>
+                                            </Button>
+                                        </Grid>
+                                        
+                                        <!-- Content -->
+                                        <Grid Grid.Row="1" RowSpacing="8" Style="{StaticResource CDOCardContentContainerStyle}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-
-                                            <!-- Header -->
-                                            <Grid Grid.Row="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock Margin="4,0" Grid.Column="0" Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                                <Button Grid.Column="1" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="More">
-                                                    <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
-                                                    <Button.Flyout>
-                                                        <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                            <MenuFlyoutItem Text="Mark TTW" Click="MarkTTW_Click" Tag="{x:Bind Id}"/>
-                                                        </MenuFlyout>
-                                                    </Button.Flyout>
-                                                </Button>
-                                            </Grid>
-                                            <Grid Grid.Row="1" RowSpacing="8" Margin="4,0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="ACE ID" Value="{x:Bind Id}"/>
-                                                <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{x:Bind CaseID}"/>
-                                                <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Created On" Value="{x:Bind FormattedCreatedDate}"/>
-                                                <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="Last Updated" Value="{x:Bind FormattedUpdatedDate}"/>
-                                                <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Address" Value="{x:Bind FormattedAddress}"/>
-                                            </Grid>
-                                            <Grid Grid.Row="2" ColumnSpacing="8">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
-                                                    <DropDownButton.Flyout>
-                                                        <MenuFlyout Placement="Top">
-                                                            <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateClientReminder_Today_Click"/>
-                                                            <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateClientReminder_Tomorrow_Click"/>
-                                                        </MenuFlyout>
-                                                    </DropDownButton.Flyout>
-                                                </DropDownButton>
-                                                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Inactive" Tag="{x:Bind Id}" Click="MarkInactive_Click"/>
-                                            </Grid>
+                                            <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="ACE ID" Value="{x:Bind Id}"/>
+                                            <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{x:Bind CaseID}"/>
+                                            <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Created On" Value="{x:Bind FormattedCreatedDate}"/>
+                                            <controls:LabelPair Grid.Row="1" Grid.Column="1" Label="Last Updated" Value="{x:Bind FormattedUpdatedDate}"/>
+                                            <controls:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Label="Address" Value="{x:Bind FormattedAddress}"/>
+                                        </Grid>
+                                        
+                                        <!-- Buttons -->
+                                        <Grid Grid.Row="2" ColumnSpacing="8" Padding="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <DropDownButton Grid.Column="0" HorizontalAlignment="Stretch" Content="Create Reminder" Style="{StaticResource AccentButtonStyle}">
+                                                <DropDownButton.Flyout>
+                                                    <MenuFlyout Placement="Top">
+                                                        <MenuFlyoutItem Text="Today" Tag="{x:Bind Id}" Click="CreateClientReminder_Today_Click"/>
+                                                        <MenuFlyoutItem Text="Tomorrow" Tag="{x:Bind Id}" Click="CreateClientReminder_Tomorrow_Click"/>
+                                                    </MenuFlyout>
+                                                </DropDownButton.Flyout>
+                                            </DropDownButton>
+                                            <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Mark Inactive" Tag="{x:Bind Id}" Click="MarkInactive_Click"/>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>

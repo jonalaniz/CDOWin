@@ -130,7 +130,7 @@ public sealed partial class HomePage : Page {
     // Utility Methods
 
     private void ClientButton_Click(object sender, RoutedEventArgs e) {
-        if (sender is not Button button || button.Tag is not int id) return;
+        if (sender is not Control control || control.Tag is not int id) return;
         ViewModel.RequestClient(id);
         AppServices.Navigation.Navigate(BackstageView.Clients);
     }

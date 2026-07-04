@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
-            <CommandBar Grid.Column="1" Style="{StaticResource CommandBarDefaultStyle}">
+            <CommandBar Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
                 <AppBarButton x:Name="RefreshButton" Width="56" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>

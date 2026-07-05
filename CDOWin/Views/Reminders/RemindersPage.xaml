@@ -18,13 +18,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-
         <!-- Header Text -->
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8,8,8,4"
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,8,8,4"
                    Style="{StaticResource PageTitleStyle}" Text="Reminders"/>
 
         <!-- Calendar -->
@@ -35,20 +30,28 @@
                       CalendarViewDayItemChanging="RemindersCalendar_CalendarViewDayItemChanging"
                       CalendarIdentifier="GregorianCalendar"/>
 
-        <!-- Selection Bar + Calendar View Button: Used to filter our reminders -->
-        <SelectorBar Grid.Row="2" Grid.Column="0" x:Name="SelectionBar" SelectionChanged="SelectionChanged">
-            <SelectorBarItem Text="All" IsSelected="True" Tag="{x:Bind reminders:RemindersFilter.All}"/>
-            <SelectorBarItem Text="Upcoming" Tag="{x:Bind reminders:RemindersFilter.Upcoming}"/>
-            <SelectorBarItem Text="Client" IsEnabled="False" Tag="{x:Bind reminders:RemindersFilter.Client}"/>
-            <SelectorBarItem Text="Date" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
-        </SelectorBar>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Selection Bar + Calendar View Button: Used to filter our reminders -->
+            <SelectorBar Grid.Column="0" Margin="4,0" 
+                         x:Name="SelectionBar" SelectionChanged="SelectionChanged">
+                <SelectorBarItem Text="All" IsSelected="True" Tag="{x:Bind reminders:RemindersFilter.All}"/>
+                <SelectorBarItem Text="Upcoming" Tag="{x:Bind reminders:RemindersFilter.Upcoming}"/>
+                <SelectorBarItem Text="Client" IsEnabled="False" Tag="{x:Bind reminders:RemindersFilter.Client}"/>
+                <SelectorBarItem Text="Date" IsEnabled="True" Tag="{x:Bind reminders:RemindersFilter.Date}"/>
+            </SelectorBar>
 
-        <Button Grid.Row="2" Grid.Column="2" Margin="8,4,8,0" 
+            <Button Grid.Column="2" Margin="8,4,12,0" 
                 Style="{StaticResource SingleIconButtonStyle}"
                 Click="Calendar_Click"
                 ToolTipService.ToolTip="Open Calendar">
-            <FontIcon Glyph="&#xF763;" Style="{StaticResource SingleIconFontStyle}"/>
-        </Button>
+                <FontIcon Glyph="&#xF763;" Style="{StaticResource SingleIconFontStyle}"/>
+            </Button>
+        </Grid>
 
         <!-- Reminders List -->
         <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">

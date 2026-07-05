@@ -394,7 +394,7 @@
                                     <StackPanel Spacing="2">
                                         <TextBlock FontWeight="Bold" Text="{x:Bind ServiceAuthorizationNumber}"/>
                                         <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Text="{x:Bind FormattedDateRange}"/>
+                                        <TextBlock FontWeight="SemiBold" Text="{x:Bind FormattedDateRange}"/>
                                     </StackPanel>
                                 </Button>
                             </DataTemplate>

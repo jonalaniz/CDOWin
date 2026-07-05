@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Border Padding="0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="1">
+    <Border Padding="0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="1,1,0,0">
         <Grid Opacity="{x:Bind IsCurrentMonth, Mode=OneWay, Converter={StaticResource BoolTransparentConverter}}">
             <TextBlock Margin="0,0,-6,-20" Text="{x:Bind Date.Day, Mode=OneWay}" FontSize="82" FontWeight="SemiBold"
                        Opacity="0.2" Foreground="{ThemeResource TextFillColorPrimaryBrush}"

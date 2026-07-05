@@ -254,10 +254,6 @@
                                         Header="Day 5"
                                         Tag="{x:Bind local:UpdateField.Day5}"
                                         DateChanged="DatePicker_DateChanged"/>
-                    <CheckBox x:Name="BilledCheckbox" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                              Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
-                              Content="Billed" IsChecked="{x:Bind ViewModel.Original.Billed, Mode=OneWay}"
-                              Click="BilledCheckbox_Click"/>
 
                     <!-- Row 5: Employee Benefits -->
                     <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" 

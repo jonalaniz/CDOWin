@@ -12,7 +12,7 @@
     Title="Calendar">
 
     <Window.SystemBackdrop>
-        <MicaBackdrop Kind="BaseAlt"/>
+        <MicaBackdrop Kind="Base"/>
     </Window.SystemBackdrop>
 
     <Grid>
@@ -40,7 +40,7 @@
         </TitleBar>
 
         <!-- Header Text -->
-        <Grid Grid.Row="1" Grid.Column="0" Margin="8,4">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="12,4">
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="MonthHeader" Margin="8,0,8,0" Style="{StaticResource PageTitleStyle}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="MonthHeader" Margin="0" Style="{StaticResource PageTitleStyle}"/>
             
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
                 <!-- Export Button -->
@@ -86,7 +86,7 @@
         
         
         <!-- Calendar Header -->
-        <Grid Grid.Row="2" Grid.Column="0" Margin="12,0,12,0">
+        <Grid Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Padding="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -100,18 +100,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Sunday"/>
-            <TextBlock Grid.Column="1" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Monday"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Tuesday"/>
-            <TextBlock Grid.Column="3" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Wednesday"/>
-            <TextBlock Grid.Column="4" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Thursday"/>
-            <TextBlock Grid.Column="5" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Friday"/>
-            <TextBlock Grid.Column="6" Grid.Row="0" Margin="8,0" FontWeight="SemiBold" Text="Saturday"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Sunday"/>
+            <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Monday"/>
+            <TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Tuesday"/>
+            <TextBlock Grid.Column="3" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Wednesday"/>
+            <TextBlock Grid.Column="4" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Thursday"/>
+            <TextBlock Grid.Column="5" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Friday"/>
+            <TextBlock Grid.Column="6" Grid.Row="0" Style="{StaticResource CalendarDayHeaderStyle}" Text="Saturday"/>
         </Grid>
 
-        <Border Grid.Row="3" CornerRadius="8" Margin="12,8,12,12" BorderThickness="1" 
-                BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"    
-                Background="{ThemeResource LayerFillColorDefaultBrush}">
+        <Border Grid.Row="3" Margin="0,8,0,0" Background="{ThemeResource LayerFillColorDefaultBrush}">
             <Grid x:Name="CalendarGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

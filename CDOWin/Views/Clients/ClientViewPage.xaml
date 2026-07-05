@@ -490,9 +490,8 @@
 
                                         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" Text="{x:Bind EmployerName}"/>
                                         <StackPanel Grid.Column="0" Grid.Row="1" Spacing="2" Margin="0">
-                                            <TextBlock Text="{x:Bind EmployerPhone}"/>
                                             <TextBlock Text="{x:Bind Position}" TextWrapping="WrapWholeWords"/>
-                                            <TextBlock Text="{x:Bind FormattedHireDate}"/>
+                                            <TextBlock Text="{x:Bind FormattedHireDate}" FontWeight="SemiBold"/>
                                         </StackPanel>
                                         <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center"
                                                 Style="{StaticResource AccentButtonStyle}"

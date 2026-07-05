@@ -56,7 +56,7 @@
                     <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                    <MenuFlyout Placement="BottomEdgeAlignedRight">
                         <MenuFlyoutItem Text="Edit..." Click="EditButton_Clicked" Tag="{x:Bind dialogs:ClientEditType.Administrative}">
                             <MenuFlyoutItem.Icon>
                                 <SymbolIcon Symbol="Edit" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>

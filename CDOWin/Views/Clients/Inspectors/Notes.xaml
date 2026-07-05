@@ -38,7 +38,7 @@
                     <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                    <MenuFlyout Placement="BottomEdgeAlignedRight">
                         <MenuFlyoutItem Text="Export Notes" Click="Export_Click">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon Glyph="&#xEDE1;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>

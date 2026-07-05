@@ -44,7 +44,7 @@
                               Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                    <MenuFlyout Placement="BottomEdgeAlignedRight">
                         <MenuFlyoutItem Text="Delete..." 
                                         Click="Delete_Click">
                             <MenuFlyoutItem.Icon>

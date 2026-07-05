@@ -46,7 +46,7 @@
                               Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                    <MenuFlyout Placement="BottomEdgeAlignedRight">
                         <MenuFlyoutItem Text="Export..." 
                                         Click="Export_Click">
                             <MenuFlyoutItem.Icon>

@@ -130,7 +130,7 @@
                                   Glyph="&#xE712;"/>
                     </AppBarButton.Icon>
                     <AppBarButton.Flyout>
-                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                        <MenuFlyout Placement="BottomEdgeAlignedRight">
                             <MenuFlyoutItem Text="Delete..." 
                                             Click="Delete_MenuFlyoutItem_Click">
                                 <MenuFlyoutItem.Icon>

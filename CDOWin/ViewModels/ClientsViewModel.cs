@@ -4,7 +4,6 @@ using CDO.Core.DTOs.Placements;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Services;
 using CDOWin.Composers;
 using CDOWin.Data;
 using CDOWin.Services;
@@ -154,7 +153,7 @@ public partial class ClientsViewModel : ObservableObject {
         // Update our cache silently so data is in sync with active status
         _ = _dataCoordinator.GetClientsAsync(force: true);
 
-        return result; 
+        return result;
     }
 
     public async Task<Result> MarkClientInactive(int id) {
@@ -164,7 +163,7 @@ public partial class ClientsViewModel : ObservableObject {
         // Update our cache silently so data is in sync with active status
         _ = _dataCoordinator.GetClientsAsync(force: true);
 
-        return result; 
+        return result;
     }
 
     public async Task<Result> MarkClientTTW(int id) {

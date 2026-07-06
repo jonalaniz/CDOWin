@@ -1,9 +1,7 @@
 using CDO.Core.Constants;
 using CDO.Core.DTOs.Clients;
-using CDO.Core.ErrorHandling;
 using CDO.UI.Shared.Factories;
 using CDOWin.Composers;
-using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
 using CDOWin.Views.Clients.Dialogs;
@@ -62,11 +60,11 @@ public sealed partial class ClientViewPage : Page {
 
     // Documents
     private void OpenDocuments_Clicked(object sender, RoutedEventArgs e) {
-        if(ViewModel.Selected?.DocumentsFolderPath is not string path || !Directory.Exists(path)) {
+        if (ViewModel.Selected?.DocumentsFolderPath is not string path || !Directory.Exists(path)) {
             _ = ShowMessage(ClientPageMessageType.DocumentsFolderMissing, false);
             return;
         }
-            
+
         Process.Start("explorer.exe", $"{path}");
     }
 
@@ -298,7 +296,7 @@ public sealed partial class ClientViewPage : Page {
     private async Task ToggleActiveAsync(bool isActive) {
         if (ViewModel.Selected?.Id is not int id) return;
         Debug.WriteLine($"Client Active: {isActive}");
-        var result = isActive 
+        var result = isActive
             ? await ViewModel.MarkClientInactive(id)
             : await ViewModel.MarkClientActive(id);
 

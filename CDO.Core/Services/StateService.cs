@@ -1,6 +1,4 @@
 ﻿using CDO.Core.Constants;
-using CDO.Core.DTOs;
-using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
 
@@ -16,43 +14,4 @@ public class StateService : IStateService {
     public Task<List<State>?> GetAllStatesAsync() {
         return _network.GetAsync<List<State>>(Endpoints.States);
     }
-
-    public Task<State?> GetStateAsync(int id) {
-        return _network.GetAsync<State>(Endpoints.State(id));
-    }
-
-    // -----------------------------
-    // POST Methods
-    // -----------------------------
-    public async Task<Result<State>> CreateStateAsync(CreateStateDTO dto) {
-        var result = await _network.PostAsync<CreateStateDTO, State>(Endpoints.States, dto);
-        if (!result.IsSuccess) return Result<State>.Fail(TranslateError(result.Error!));
-        return Result<State>.Success(result.Value!);
-    }
-
-    // -----------------------------
-    // PATCH Methods
-    // -----------------------------
-    public async Task<Result> UpdateStateAsync(int id, UpdateStateDTO dto) {
-        var result = await _network.UpdateAsync(Endpoints.State(id), dto);
-        if (!result.IsSuccess) return Result.Fail(TranslateError(result.Error!));
-        return Result<State>.Success();
-    }
-
-    // -----------------------------
-    // DELETE Methods
-    // -----------------------------
-    public Task<Result> DeleteStateAsync(int id) {
-        return _network.DeleteAsync(Endpoints.State(id));
-    }
-
-    // -----------------------------
-    // Utility Methods
-    // -----------------------------
-    private static AppError TranslateError(AppError error) =>
-        error.Kind switch {
-            ErrorKind.Conflict => error with { Message = "A state with this value already exists." },
-            ErrorKind.Validation => error with { Message = "Invalid data." },
-            _ => error
-        };
 }

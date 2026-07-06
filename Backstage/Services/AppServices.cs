@@ -39,10 +39,12 @@ public static class AppServices {
     public static ReminderViewModel ReminderViewModel { get; private set; } = null!;
     public static UserViewModel UserViewModel { get; private set; } = null!;
 
-    public static void InitializeServices(string baseAddress, string apiKey) {
+    public static async
+    Task
+InitializeServicesAsync(string baseAddress, string apiKey) {
         // Initialize network service
         var network = new NetworkService();
-        network.Initialize(baseAddress, apiKey);
+        await network.Initialize(baseAddress, apiKey);
         NetworkService = network;
 
         // Initialize child services
@@ -71,7 +73,6 @@ public static class AppServices {
 
         BillingViewModel = new BillingViewModel(
             DataCoordinator,
-            BillingService,
             SAService
             );
 
@@ -100,18 +101,24 @@ public static class AppServices {
             // TODO: Call this from all the view models and NOT the coordinator so that the VMs are loaded
             DataCoordinator.GetUsersAsync(),
             DataCoordinator.GetUnbilledSAsAsync(),
-            DataCoordinator.GetUnbilledPlacementsAsync(),
             DataCoordinator.GetExpiringSAsAsync(),
             DataCoordinator.GetRecentClientsAsync(),
-            ClientViewModel.RefreshAsync(),
             DataCoordinator.GetStaleClientsAsync()
         };
 
         await Task.WhenAll(tasks);
 
-        // _ = LoadSecondaryDataAsync();
         sw.Stop();
         Debug.WriteLine($"LoadDataAsync completed in {sw.ElapsedMilliseconds}");
+
+        _ = LoadSecondaryDataAsync();
+
         return true;
+    }
+
+    public static async Task LoadSecondaryDataAsync() {
+        _ = ClientViewModel.RefreshAsync();
+        _ = DataCoordinator.GetRecentSAsAsync();
+        _ = DataCoordinator.GetNewPlacements();
     }
 }

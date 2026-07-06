@@ -42,7 +42,11 @@
 
                 <!-- Today Section -->
                 <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
+                    
+                    <!-- Header -->
                     <TextBlock Text="Today" VerticalAlignment="Center" Style="{StaticResource BackstageSubHeader}"/>
+                    
+                    <!-- Content -->
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         
                         <!-- Recent Clients Card -->

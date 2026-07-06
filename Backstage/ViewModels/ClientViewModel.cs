@@ -9,7 +9,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -127,7 +126,7 @@ public partial class ClientViewModel : ObservableObject {
 
         var clientHistory = await _adminClientService.GetClientHistory(id);
         OnUI(() => SelectedClientHistory = clientHistory);
-        
+
     }
 
     // =========================

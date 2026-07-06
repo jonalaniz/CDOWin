@@ -1,8 +1,8 @@
 ﻿using Backstage.Data;
 using CDO.Core.DTOs.Admin;
+using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Services;
-using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -17,7 +17,6 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // Dependencies
     // =========================
-    private readonly BillingService _billingService;
     private readonly ServiceAuthorizationService _saService;
     private readonly DataCoordinator _dataCoordinator;
     private readonly DispatcherQueue _dispatcher;
@@ -25,6 +24,12 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // UI State
     // =========================
+    [ObservableProperty]
+    public partial ObservableCollection<AdminSASummary> RecentSAs { get; set; } = [];
+
+    [ObservableProperty]
+    public partial ObservableCollection<PlacementSummary> NewPlacements { get; set; } = [];
+
     [ObservableProperty]
     public partial ObservableCollection<AdminSASummary> ExpiringSAs { get; private set; } = [];
 
@@ -35,9 +40,8 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public BillingViewModel(DataCoordinator dataCoordinator, BillingService billingService, ServiceAuthorizationService saService) {
+    public BillingViewModel(DataCoordinator dataCoordinator, ServiceAuthorizationService saService) {
         _dataCoordinator = dataCoordinator;
-        _billingService = billingService;
         _saService = saService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
@@ -45,6 +49,24 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // Get Methods
     // =========================
+    public async Task LoadRecentSAs(bool force = false) {
+        var sas = await _dataCoordinator.GetRecentSAsAsync(force);
+        if (sas == null) return;
+
+        var snapshot = sas.OrderBy(s => s.StartDate).ToList().AsReadOnly();
+        OnUI(() => {
+            RecentSAs = new ObservableCollection<AdminSASummary>(snapshot);
+        });
+    }
+    public async Task LoadNewPlacements(bool force = false) {
+        var placements = await _dataCoordinator.GetNewPlacements(force);
+        if (placements == null) return;
+
+        var snapshot = placements.OrderBy(p => p.HireDate).ToList().AsReadOnly();
+        OnUI(() => {
+            NewPlacements = new ObservableCollection<PlacementSummary>(snapshot);
+        });
+    }
     public async Task LoadUnbilledSAs(bool force = false) {
         var sas = await _dataCoordinator.GetUnbilledSAsAsync(force);
         if (sas == null) return;

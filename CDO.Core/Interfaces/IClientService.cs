@@ -1,8 +1,6 @@
-﻿using CDO.Core.Constants;
-using CDO.Core.DTOs.Clients;
+﻿using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.ErrorHandling;
-using System.Net;
 
 namespace CDO.Core.Interfaces;
 

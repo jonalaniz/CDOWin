@@ -20,8 +20,16 @@ public class BillingService {
         return _network.GetAsync<List<AdminSASummary>>(Endpoints.BillingExpiringSAs);
     }
 
+    public Task<List<AdminSASummary>?> GetRecentSAsAsync() {
+        return _network.GetAsync<List<AdminSASummary>>(Endpoints.BillingRecentSAs);
+    }
+
     public Task<List<AdminSASummary>?> GetUnbilledSAsAsync() {
         return _network.GetAsync<List<AdminSASummary>>(Endpoints.BillingSAs);
+    }
+
+    public Task<List<PlacementSummary>?> GetNewPlacements() {
+        return _network.GetAsync<List<PlacementSummary>>(Endpoints.BillingNewPlacements);
     }
 
     public Task<List<PlacementSummary>?> GetUnbilledPlacementsAsync() {

@@ -36,9 +36,98 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
+                <!-- Updated Today Section -->
+                <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
+                    
+                    <!-- Header -->
+                    <TextBlock Text="Updated Today" VerticalAlignment="Center" Style="{StaticResource BackstageSubHeader}"/>
+                    
+                    <!-- Content -->
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        
+                        <!-- Recent SAs Card -->
+                        <Grid Style="{StaticResource CardContainerGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Header -->
+                            <Grid Grid.Row="0" Padding="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="Updated SAs" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                            </Grid>
+
+                            <!-- Item Repeater -->
+                            <ScrollViewer Grid.Row="1">
+                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentSAs, Mode=OneWay}">
+                                    <DataTemplate x:DataType="dtos:AdminSASummary">
+
+                                        <!-- Button -->
+                                        <Button Style="{StaticResource BackstageListButton}"
+                                                Tag="{x:Bind Id}">
+                                            <Grid>
+                                                <StackPanel Spacing="2" Margin="0">
+                                                    <TextBlock FontWeight="Bold" Text="{x:Bind ServiceAuthorizationNumber}"/>
+                                                    <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock FontWeight="SemiBold" Text="{x:Bind FormattedDateRange}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater>
+                            </ScrollViewer>
+                        </Grid>
+                        
+                        <!-- New Placements Card -->
+                        <Grid Style="{StaticResource CardContainerGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Header -->
+                            <Grid Grid.Row="0" Padding="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="New Placements" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.NewPlacements.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                            </Grid>
+
+                            <!-- Item Repeater -->
+                            <ScrollViewer Grid.Row="1">
+                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.NewPlacements, Mode=OneWay}">
+                                    <DataTemplate x:DataType="placements:PlacementSummary">
+
+                                        <!-- Button -->
+                                        <Button Style="{StaticResource BackstageListButton}"
+                                                Tag="{x:Bind Id}">
+                                            <Grid>
+                                                <StackPanel Spacing="2">
+                                                    <TextBlock Text="{x:Bind FormattedSANumber}" FontWeight="Bold"/>
+                                                    <TextBlock Text="{x:Bind Position}" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Text="{x:Bind FormattedHireDate}" FontWeight="SemiBold"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater>
+                            </ScrollViewer>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
 
                 <!-- Unbilled SAs Section -->
-                <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
+                <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
                     
                     <!-- Section Title -->
                     <Grid Margin="0,0,16,0">

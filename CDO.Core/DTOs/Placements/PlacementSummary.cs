@@ -31,6 +31,7 @@ public class PlacementSummary {
     public string? Website { get; init; }
 
     // Computed Properties
+    public string FormattedSANumber => $"Assocaited SA: {SaNumber}";
     public string? FormattedHireDate => HireDate?.ToString(format: "MM/dd/yyyy");
     public string? FormattedSupervisor {
         get {

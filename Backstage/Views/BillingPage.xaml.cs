@@ -37,6 +37,8 @@ public sealed partial class BillingPage : Page {
 
     private async Task RefreshAsync(bool force = false) {
         var tasks = new List<Task> {
+            ViewModel.LoadRecentSAs(force),
+            ViewModel.LoadNewPlacements(force),
             ViewModel.LoadUnbilledSAs(force),
             ViewModel.LoadExpiringSAsAsync(force)
         };

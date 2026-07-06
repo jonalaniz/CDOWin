@@ -23,11 +23,12 @@ public class DataCoordinator {
     // =========================
     public CachedList<AdminSASummary> ExpiringSAs { get; } = new();
     public CachedList<AdminSASummary> UnbilledSAs { get; } = new();
-    public CachedList<PlacementSummary> UnbilledPlacements { get; } = new();
     public CachedList<AdminClientSummary> RecentClients { get; } = new();
     public CachedList<AdminClientNote> RecentNotes { get; } = new();
     public CachedList<AdminClientSummary> StaleClients { get; } = new();
     public CachedList<AdminClientSummary> ClientSummaries { get; } = new();
+    public CachedList<AdminSASummary> RecentSAs { get; } = new();
+    public CachedList<PlacementSummary> RecentPlacements { get; } = new();
     public CachedList<Reminder> Reminders { get; } = new();
     public CachedList<UserSummary> Users { get; } = new();
 
@@ -74,13 +75,22 @@ public class DataCoordinator {
         return UnbilledSAs.Data ?? [];
     }
 
-    public async Task<IReadOnlyList<PlacementSummary>> GetUnbilledPlacementsAsync(bool force = false) {
-        if (force || UnbilledPlacements.IsStale(BaseTTL)) {
-            var data = await _billingService.GetUnbilledPlacementsAsync();
-            if (data != null) UnbilledPlacements.Update(data);
+    public async Task<IReadOnlyList<AdminSASummary>> GetRecentSAsAsync(bool force = false) {
+        if (force || RecentSAs.IsStale(BaseTTL)) {
+            var data = await _billingService.GetRecentSAsAsync();
+            if (data != null) RecentSAs.Update(data);
         }
 
-        return UnbilledPlacements.Data ?? [];
+        return RecentSAs.Data ?? [];
+    }
+
+    public async Task<IReadOnlyList<PlacementSummary>> GetNewPlacements(bool force = false) {
+        if (force || RecentPlacements.IsStale(BaseTTL)) {
+            var data = await _billingService.GetNewPlacements();
+            if (data != null) RecentPlacements.Update(data);
+        }
+
+        return RecentPlacements.Data ?? [];
     }
 
     // Clients

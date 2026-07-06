@@ -16,7 +16,7 @@ namespace Backstage {
             // Check for stored credentials from CDO.Win
             if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
                 Debug.WriteLine($"Found stored credentials for {AppConstants.AppName}, initializing services...");
-                AppServices.InitializeServices(creds.UserName!, creds.Password!);
+                await AppServices.InitializeServicesAsync(creds.UserName!, creds.Password!);
 
                 var loaded = await AppServices.LoadDataAsync();
             }

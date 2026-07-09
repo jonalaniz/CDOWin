@@ -1,7 +1,6 @@
 ﻿using CDO.Core.Data;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Placements;
-using CDO.Core.Models;
 using CDO.Core.Services.Admin;
 using System;
 using System.Collections.Generic;

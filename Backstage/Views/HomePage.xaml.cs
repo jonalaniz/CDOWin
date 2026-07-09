@@ -69,7 +69,7 @@ public sealed partial class HomePage : Page {
         if (sender is not Button button || button.Tag is not int id) return;
         var reminder = ReminderViewModel.Reminders.FirstOrDefault(r => r.Id == id);
         if (reminder == null) return;
-        foreach(var log in reminder.Logs) {
+        foreach (var log in reminder.Logs) {
             Debug.WriteLine($"{log.Text}");
         }
     }

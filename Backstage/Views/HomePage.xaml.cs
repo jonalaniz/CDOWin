@@ -1,9 +1,11 @@
+using Backstage.Dialogs;
 using Backstage.Factories;
 using Backstage.Services;
 using Backstage.ViewModels;
 using CDO.Core.Constants;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Reminders;
+using CDO.UI.Shared.Factories;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
@@ -65,13 +67,15 @@ public sealed partial class HomePage : Page {
     // =========================
     // Click Handlers
     // =========================
-    private void Reminder_Click(object sender, RoutedEventArgs e) {
+    private async void Reminder_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
         var reminder = ReminderViewModel.Reminders.FirstOrDefault(r => r.Id == id);
         if (reminder == null) return;
-        foreach (var log in reminder.Logs) {
-            Debug.WriteLine($"{log.Text}");
-        }
+
+        var dialog = DialogFactory.InformationDialog(this.XamlRoot, "Reminder Detail");
+        dialog.Content = new ReminderDetailPage(reminder);
+
+        var result = await dialog.ShowAsync();
     }
 
     private async void Refresh_Click(object sender, RoutedEventArgs e) {

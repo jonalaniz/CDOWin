@@ -6,9 +6,96 @@
     xmlns:local="using:Backstage.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:dtos="using:CDO.Core.DTOs.Admin"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource DialogGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition MaxHeight="320"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Reminder -->
+        <Grid Grid.Row="0" Padding="18,12" Background="{StaticResource SolidBackgroundFillColorTertiaryBrush}"
+              BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+              Style="{StaticResource DialogGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Row 0: Name + Date -->
+            <TextBlock Grid.Row="0" Grid.Column="0" 
+                       HorizontalAlignment="Left" FontWeight="Bold" Text="{x:Bind Reminder.ClientName}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                       HorizontalAlignment="Right" FontWeight="Bold" Text="{x:Bind Reminder.LocalDate}"/>
+            
+            <!-- Row 1: Text -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                       TextWrapping="WrapWholeWords" Text="{x:Bind Reminder.Description}"/>
+        </Grid>
+        
+        <!-- Header -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BackstageCardTitle}" Text="History"/>
+
+        <!-- Reminder History Table -->
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                  Style="{StaticResource DataTableStyle}"
+                  ItemsSource="{x:Bind Reminder.Logs}" SelectionMode="None">
+            
+            <!-- Header -->
+            <ListView.Header>
+                <Grid Style="{StaticResource DataTableHeaderStyle}">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:StickyHeaderBehavior/>
+                    </interactivity:Interaction.Behaviors>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="83"/>
+                        <ColumnDefinition Width="158"/>
+                        <ColumnDefinition Width="83"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="User" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="1" Text="Date" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="2" Text="Description" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="3" Text="Event Date" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="4" Text="Complete" FontWeight="SemiBold"/>
+                    
+                </Grid>
+            </ListView.Header>
+            
+            <!-- Content -->
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="dtos:ReminderLog">
+                    <Grid Padding="12,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="83"/>
+                            <ColumnDefinition Width="158"/>
+                            <ColumnDefinition Width="83"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{x:Bind User.Username}" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind LocalDate}"/>
+                        <TextBlock Grid.Column="2" Padding="0,0,4,0" TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
+                        <TextBlock Grid.Column="3" Text="{x:Bind LocalActionDate}"/>
+                        <TextBlock Grid.Column="4" Text="{x:Bind Complete.ToString()}"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

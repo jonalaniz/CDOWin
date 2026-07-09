@@ -1,15 +1,19 @@
+using CDO.Core.DTOs.Admin;
 using Microsoft.UI.Xaml.Controls;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace Backstage.Dialogs; 
+public sealed partial class ReminderDetailPage : Page {
 
-namespace Backstage.Dialogs {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class ReminderDetailPage : Page {
-        public ReminderDetailPage() {
-            InitializeComponent();
-        }
+    // =========================
+    // Dependencies
+    // =========================
+    private AdminReminderDetail Reminder;
+
+    // =========================
+    // Constructor
+    // =========================
+    public ReminderDetailPage(AdminReminderDetail reminder) {
+        Reminder = reminder;
+        InitializeComponent();
     }
 }

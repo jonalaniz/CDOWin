@@ -4,6 +4,12 @@ using Microsoft.UI.Xaml.Controls;
 namespace CDO.UI.Shared.Factories;
 
 public static class DialogFactory {
+    public static ContentDialog InformationDialog(XamlRoot root, string title) {
+        ContentDialog dialog = BaseDialog(root, title);
+        dialog.PrimaryButtonText = "OK";
+        dialog.Title = title;
+        return dialog;
+    }
     public static ContentDialog UpdateDialog(XamlRoot root, string title) {
         ContentDialog dialog = Dialog(root, title);
         dialog.PrimaryButtonText = "Save";
@@ -47,6 +53,15 @@ public static class DialogFactory {
         dialog.XamlRoot = root;
         dialog.Style = dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
         dialog.CloseButtonText = "Cancel";
+        dialog.DefaultButton = ContentDialogButton.Primary;
+        dialog.Title = title;
+        return dialog;
+    }
+
+    private static ContentDialog BaseDialog(XamlRoot root, string title) {
+        ContentDialog dialog = new();
+        dialog.XamlRoot = root;
+        dialog.Style = dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
         dialog.DefaultButton = ContentDialogButton.Primary;
         dialog.Title = title;
         return dialog;

@@ -11,7 +11,7 @@ public sealed partial class UpdateAdminsitrative : Page {
     // =========================
     // Dependencies
     // =========================
-    public ClientUpdateViewModel ViewModel { get; private set; }
+    private ClientUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

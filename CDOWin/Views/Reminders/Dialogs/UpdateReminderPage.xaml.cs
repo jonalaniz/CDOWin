@@ -11,7 +11,7 @@ public sealed partial class UpdateReminderPage : Page {
     // =========================
     // Dependencies
     // =========================
-    public ReminderUpdateViewModel ViewModel;
+    private ReminderUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

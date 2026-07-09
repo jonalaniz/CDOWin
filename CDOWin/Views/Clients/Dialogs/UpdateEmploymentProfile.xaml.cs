@@ -9,7 +9,7 @@ public sealed partial class UpdateEmploymentProfile : Page {
     // =========================
     // Dependencies
     // =========================
-    public ClientUpdateViewModel ViewModel { get; private set; }
+    private ClientUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

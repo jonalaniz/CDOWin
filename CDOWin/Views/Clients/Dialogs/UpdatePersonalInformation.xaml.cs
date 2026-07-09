@@ -16,7 +16,7 @@ public sealed partial class UpdatePersonalInformation : Page {
     // Dependencies
     // =========================
     private readonly List<State> _states = AppServices.StatesViewModel.States.ToList();
-    public ClientUpdateViewModel ViewModel { get; private set; }
+    private ClientUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

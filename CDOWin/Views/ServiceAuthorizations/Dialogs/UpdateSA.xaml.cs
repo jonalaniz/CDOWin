@@ -14,7 +14,7 @@ public sealed partial class UpdateSA : Page {
     // =========================
     // Dependencies
     // =========================
-    public ServiceAuthorizationUpdateViewModel ViewModel;
+    private ServiceAuthorizationUpdateViewModel ViewModel;
     private readonly SAType[] _descriptions = SAType.AllItems();
     private readonly DARSOffice[] _offices = DARSOffice.AllItems();
 

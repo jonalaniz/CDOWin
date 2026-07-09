@@ -9,7 +9,7 @@ public sealed partial class UpdateArrangements : Page {
     // =========================
     // Dependencies
     // =========================
-    public ClientUpdateViewModel ViewModel;
+    private ClientUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

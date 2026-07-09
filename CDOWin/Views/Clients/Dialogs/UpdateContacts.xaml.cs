@@ -9,7 +9,7 @@ public sealed partial class UpdateContacts : Page {
     // =========================
     // Dependencies
     // =========================
-    public ClientUpdateViewModel ViewModel { get; private set; }
+    private ClientUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

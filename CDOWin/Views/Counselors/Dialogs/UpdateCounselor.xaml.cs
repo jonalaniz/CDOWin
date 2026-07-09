@@ -9,7 +9,7 @@ public sealed partial class UpdateCounselor : Page {
     // =========================
     // Dependencies
     // =========================
-    public CounselorUpdateViewModel ViewModel;
+    private CounselorUpdateViewModel ViewModel;
 
     // =========================
     // Constructor

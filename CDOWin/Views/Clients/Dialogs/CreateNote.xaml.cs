@@ -10,7 +10,7 @@ public sealed partial class CreateNote : Page {
     // =========================
     // Dependencies
     // =========================
-    public CreateNoteViewModel ViewModel;
+    private CreateNoteViewModel ViewModel;
 
     // =========================
     // Constructor

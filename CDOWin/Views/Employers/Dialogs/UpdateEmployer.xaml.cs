@@ -10,17 +10,25 @@ using System.Linq;
 namespace CDOWin.Views.Employers.Dialogs;
 
 public sealed partial class UpdateEmployer : Page {
+
+    // =========================
+    // Dependencies
+    // =========================
     private List<State> _states = AppServices.StatesViewModel.States.ToList();
+    private EmployerUpdateViewModel ViewModel;
 
-    public EmployerUpdateViewModel ViewModel;
-
+    // =========================
     // Constructor
+    // =========================
     public UpdateEmployer(EmployerUpdateViewModel viewModel) {
         ViewModel = viewModel;
         InitializeComponent();
         BuildStateDropdown();
     }
 
+    // =========================
+    // UI Setup
+    // =========================
     private void BuildStateDropdown() {
         var flyout = new MenuFlyout();
 
@@ -45,6 +53,9 @@ public sealed partial class UpdateEmployer : Page {
         }
     }
 
+    // =========================
+    // Property Change Methods
+    // =========================
     private void LabeledTextBox_TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is not TextBox textbox || textbox.Tag is not Field field)
             return;
@@ -56,6 +67,9 @@ public sealed partial class UpdateEmployer : Page {
         UpdateModel(text, field);
     }
 
+    // =========================
+    // Utility Methods
+    // =========================
     private void UpdateModel(string value, Field field) {
         switch (field) {
             case Field.Name:

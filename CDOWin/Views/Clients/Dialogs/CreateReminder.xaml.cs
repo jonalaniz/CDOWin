@@ -11,7 +11,7 @@ public sealed partial class CreateReminder : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly CreateReminderViewModel ViewModel;
+    private CreateReminderViewModel ViewModel;
 
     // =========================
     // Constructor

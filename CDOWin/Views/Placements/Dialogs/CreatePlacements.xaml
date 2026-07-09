@@ -10,7 +10,7 @@
     xmlns:models="using:CDO.Core.Models"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource DialogRootGridStyle}">
+    <Grid Style="{StaticResource DialogGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

@@ -39,7 +39,7 @@ public sealed partial class EmployersPage : Page {
     // Click Handlers
     // =========================
     private async void NewEmployer_ClickAsync(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"Create EmployerName");
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"Create Employer");
         var createEmployerVM = AppServices.CreateEmployerViewModel();
         var createEmployerPage = new CreateEmployer(createEmployerVM);
         dialog.Content = createEmployerPage;

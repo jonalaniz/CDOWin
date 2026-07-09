@@ -8,7 +8,7 @@
     xmlns:local="using:CDOWin.Views.Employers.Dialogs"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource DialogRootGridStyle}">
+    <Grid Style="{StaticResource DialogGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

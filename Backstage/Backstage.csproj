@@ -14,6 +14,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Dialogs\ReminderDetailPage.xaml" />
     <None Remove="Views\BillingPage.xaml" />
     <None Remove="Views\ClientsPage.xaml" />
     <None Remove="Views\SettingsPage.xaml" />
@@ -79,6 +80,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\UsersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\ReminderDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

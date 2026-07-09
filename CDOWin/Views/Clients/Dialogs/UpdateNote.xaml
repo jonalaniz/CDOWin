@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Width="460" RowSpacing="10" ColumnSpacing="12">
+    <Grid Style="{StaticResource DialogGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

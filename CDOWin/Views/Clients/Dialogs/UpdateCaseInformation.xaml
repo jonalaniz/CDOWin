@@ -9,7 +9,7 @@
     xmlns:local="using:CDOWin.Views.Clients.Dialogs"
     mc:Ignorable="d">
 
-    <Grid Width="480" RowSpacing="10" ColumnSpacing="12">
+    <Grid Style="{StaticResource DialogGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Backstage.Views;
@@ -64,6 +65,15 @@ public sealed partial class HomePage : Page {
     // =========================
     // Click Handlers
     // =========================
+    private void Reminder_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        var reminder = ReminderViewModel.Reminders.FirstOrDefault(r => r.Id == id);
+        if (reminder == null) return;
+        foreach(var log in reminder.Logs) {
+            Debug.WriteLine($"{log.Text}");
+        }
+    }
+
     private async void Refresh_Click(object sender, RoutedEventArgs e) {
         RefreshButton.IsEnabled = false;
         await RefreshAsync(force: true);

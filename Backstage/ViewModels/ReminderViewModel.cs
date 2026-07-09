@@ -1,4 +1,5 @@
 ﻿using Backstage.Data;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Models;
@@ -25,7 +26,7 @@ public partial class ReminderViewModel : ObservableObject {
     // UI State
     // =========================
     [ObservableProperty]
-    public partial ObservableCollection<Reminder> Reminders { get; private set; } = [];
+    public partial ObservableCollection<AdminReminderDetail> Reminders { get; private set; } = [];
 
     // =========================
     // Constructor
@@ -45,7 +46,7 @@ public partial class ReminderViewModel : ObservableObject {
 
         var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
         OnUI(() => {
-            Reminders = new ObservableCollection<Reminder>(snapshot);
+            Reminders = new ObservableCollection<AdminReminderDetail>(snapshot);
         });
     }
 

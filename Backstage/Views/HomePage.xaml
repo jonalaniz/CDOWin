@@ -158,12 +158,12 @@
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
                                 <ItemsRepeater ItemsSource="{x:Bind ReminderViewModel.Reminders, Mode=OneWay}">
-                                    <DataTemplate x:DataType="models:Reminder">
+                                    <DataTemplate x:DataType="dtos:AdminReminderDetail">
 
                                         <!-- Button -->
                                         <Button Style="{StaticResource BackstageListButton}"
                                                 Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}"
-                                                Tag="{x:Bind Id}">
+                                                Tag="{x:Bind Id}" Click="Reminder_Click">
                                             <StackPanel Spacing="2" >
                                                 <TextBlock FontWeight="Bold" Text="{x:Bind ClientName}"/>
                                                 <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>

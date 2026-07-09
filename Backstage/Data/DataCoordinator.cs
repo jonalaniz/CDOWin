@@ -29,7 +29,7 @@ public class DataCoordinator {
     public CachedList<AdminClientSummary> ClientSummaries { get; } = new();
     public CachedList<AdminSASummary> RecentSAs { get; } = new();
     public CachedList<PlacementSummary> RecentPlacements { get; } = new();
-    public CachedList<Reminder> Reminders { get; } = new();
+    public CachedList<AdminReminderDetail> Reminders { get; } = new();
     public CachedList<UserSummary> Users { get; } = new();
 
     // =========================
@@ -131,7 +131,7 @@ public class DataCoordinator {
     }
 
     // Reminders
-    public async Task<IReadOnlyList<Reminder>> GetRemindersAsync(bool force = false) {
+    public async Task<IReadOnlyList<AdminReminderDetail>> GetRemindersAsync(bool force = false) {
         if (force || Reminders.IsStale(BaseTTL)) {
             var data = await _reminderService.GetDailyRemindersAsync();
             if (data != null) Reminders.Update(data);

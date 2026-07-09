@@ -1,4 +1,5 @@
 using CDO.Core.Constants;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -17,8 +18,8 @@ public class AdminReminderService {
     // -----------------------------
 
     // Returns reminders for the workday
-    public Task<List<Reminder>?> GetDailyRemindersAsync() {
-        return _network.GetAsync<List<Reminder>>(Endpoints.AdminReminders);
+    public Task<List<AdminReminderDetail>?> GetDailyRemindersAsync() {
+        return _network.GetAsync<List<AdminReminderDetail>>(Endpoints.AdminReminders);
     }
 
     // Returns reminders for the given day

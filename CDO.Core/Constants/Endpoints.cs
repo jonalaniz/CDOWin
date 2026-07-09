@@ -69,8 +69,7 @@ public static class Endpoints {
     public static readonly string BillingSAs = $"{Billing}/sas";
     public static readonly string BillingExpiringSAs = $"{BillingSAs}/expiring";
     public static readonly string BillingRecentSAs = $"{BillingSAs}/recent";
-    public static readonly string BillingPlacements = $"{Billing}/placements";
-    public static readonly string BillingNewPlacements = $"{BillingPlacements}/new";
+    public static readonly string BillingNewPlacements = $"{Billing}/placements/new";
 
     // Users: Full endpoints, base returns all users as summaries
     public static readonly string Users = $"{Admin}/users";

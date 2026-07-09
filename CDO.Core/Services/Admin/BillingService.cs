@@ -31,8 +31,4 @@ public class BillingService {
     public Task<List<PlacementSummary>?> GetNewPlacements() {
         return _network.GetAsync<List<PlacementSummary>>(Endpoints.BillingNewPlacements);
     }
-
-    public Task<List<PlacementSummary>?> GetUnbilledPlacementsAsync() {
-        return _network.GetAsync<List<PlacementSummary>>(Endpoints.BillingPlacements);
-    }
 }

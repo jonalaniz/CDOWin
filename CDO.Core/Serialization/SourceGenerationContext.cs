@@ -83,6 +83,11 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(NewUser))]
 [JsonSerializable(typeof(UserUpdate))]
 
+[JsonSerializable(typeof(AdminReminderDetail))]
+[JsonSerializable(typeof(List<AdminReminderDetail>))]
+[JsonSerializable(typeof(ReminderLog))]
+[JsonSerializable(typeof(List<ReminderLog>))]
+
 [JsonSerializable(typeof(SessionToken))]
 [JsonSerializable(typeof(UserStub))]
 

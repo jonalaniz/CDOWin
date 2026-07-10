@@ -65,8 +65,6 @@ namespace CDO.Core.Serialization;
 
 [JsonSerializable(typeof(State))]
 [JsonSerializable(typeof(List<State>))]
-[JsonSerializable(typeof(CreateStateDTO))]
-[JsonSerializable(typeof(UpdateStateDTO))]
 
 [JsonSerializable(typeof(AdminClientDetail))]
 [JsonSerializable(typeof(List<AdminClientDetail>))]

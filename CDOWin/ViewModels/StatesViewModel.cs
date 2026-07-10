@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CDOWin.ViewModels;
 
-public partial class StatesViewModel(DataCoordinator dataCoordinator, IStateService service) : ObservableObject {
+public partial class StatesViewModel(DataCoordinator dataCoordinator) : ObservableObject {
     private readonly DataCoordinator _dataCoordinator = dataCoordinator;
 
     [ObservableProperty]

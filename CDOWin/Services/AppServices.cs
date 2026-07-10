@@ -115,7 +115,7 @@ public static class AppServices {
             _suspensionService
             );
 
-        StatesViewModel = new StatesViewModel(DataCoordinator, StateService);
+        StatesViewModel = new StatesViewModel(DataCoordinator);
 
         PlacementsViewModel = new PlacementsViewModel(
             DataCoordinator,

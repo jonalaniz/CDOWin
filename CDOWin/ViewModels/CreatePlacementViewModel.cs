@@ -98,16 +98,16 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
             Name: EmployerName,
             Phone: EmployerPhone,
             Address1: Address1,
-            Address2: Address2, 
-            City: City, 
-            State: State, 
+            Address2: Address2,
+            City: City,
+            State: State,
             Zip: Zip,
             Fax: null,
             Email: null,
             Notes: null,
-            SupervisorName: SupervisorName, 
-            SupervisorEmail: SupervisorEmail, 
-            SupervisorPhone: SupervisorPhone, 
+            SupervisorName: SupervisorName,
+            SupervisorEmail: SupervisorEmail,
+            SupervisorPhone: SupervisorPhone,
             Website: Website
             );
 

@@ -1,5 +1,4 @@
-﻿using CDO.Core.Interfaces;
-using CDO.Core.Models;
+﻿using CDO.Core.Models;
 using CDOWin.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;

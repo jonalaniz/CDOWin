@@ -39,13 +39,13 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     // =========================
     public async Task<Result<Counselor>> CreateCounselorAsync() {
         NewCounselor counselor = new(
-            Name: Name, 
-            CaseLoadID: CaseLoadId, 
-            Email: Email, 
-            Phone: Phone, 
-            Fax: Fax, 
-            Notes: Notes, 
-            SecretaryName: SecretaryName, 
+            Name: Name,
+            CaseLoadID: CaseLoadId,
+            Email: Email,
+            Phone: Phone,
+            Fax: Fax,
+            Notes: Notes,
+            SecretaryName: SecretaryName,
             SecretaryEmail: SecretaryEmail
             );
 

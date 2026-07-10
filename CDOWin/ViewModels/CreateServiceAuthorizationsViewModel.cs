@@ -77,10 +77,10 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
             EndDate: EndDate,
             UnitCost: UnitCost,
             UnitOfMeasurement: UnitOfMeasurement,
-            ClientID: Client.Id, 
-            ClientName: Client.FormattedName, 
-            CaseID: Client.CaseID!, 
-            CounselorID: Client.CounselorID, 
+            ClientID: Client.Id,
+            ClientName: Client.FormattedName,
+            CaseID: Client.CaseID!,
+            CounselorID: Client.CounselorID,
             CounselorName: Client.CounselorReference!.Name!,
             SecretaryName: Client.CounselorReference.SecretaryName
             );

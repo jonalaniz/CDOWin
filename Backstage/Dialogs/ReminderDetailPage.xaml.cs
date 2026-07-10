@@ -1,7 +1,8 @@
 using CDO.Core.DTOs.Admin;
 using Microsoft.UI.Xaml.Controls;
 
-namespace Backstage.Dialogs; 
+namespace Backstage.Dialogs;
+
 public sealed partial class ReminderDetailPage : Page {
 
     // =========================

@@ -1,5 +1,4 @@
-﻿using CDO.Core.DTOs;
-using CDO.Core.DTOs.Admin;
+﻿using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Counselors;

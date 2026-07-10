@@ -1,25 +1,21 @@
 ﻿namespace CDO.Core.DTOs.Admin;
 
-public class ClientHistory {
-    // Non-optional fields
-    public int Id { get; init; }
-    public bool Active { get; init; }
-    public required string FirstName { get; init; }
-    public required string LastName { get; init; }
-    public required string City { get; init; }
-    public required string State { get; init; }
-    public required bool Ttw { get; init; }
-
-    // ADD Activity
-    public required ClientActivity[] Activities { get; init; }
-
-    // Nullable fields
-    public DateTime CreatedAt { get; init; }
-    public DateTime UpdatedAt { get; init; }
-    public string? Address1 { get; init; }
-    public string? Address2 { get; init; }
-    public string? Zip { get; init; }
-    public string? CaseID { get; init; }
+public record class ClientHistory(
+    int Id,
+    bool Active,
+    string FirstName,
+    string LastName,
+    string City,
+    string State,
+    bool Ttw,
+    ClientActivity[] Activities,
+    DateTime CreatedAt,
+    DateTime UpdatedAt,
+    string? Address1,
+    string? Address2,
+    string? Zip,
+    string? CaseID
+    ) {
 
     // Computed Properties
     public string Name => $"{FirstName} {LastName}";
@@ -31,6 +27,7 @@ public class ClientHistory {
         if (Time(UpdatedAt) is not string time) return "No Time On File";
         return $"Updated at: {time}";
     }
+
     public string FormattedAddress {
         get {
             if (Address1 == null && Address2 == null)
@@ -56,38 +53,38 @@ public class ClientHistory {
 
     // Convenience Methods
     public AdminClientSummary ToggleActive() {
-        return new AdminClientSummary {
-            Id = Id,
-            Active = !Active,
-            FirstName = FirstName,
-            LastName = LastName,
-            City = City,
-            State = State,
-            Ttw = Ttw,
-            CreatedAt = CreatedAt,
-            UpdatedAt = UpdatedAt,
-            Address1 = Address1,
-            Address2 = Address2,
-            Zip = Zip,
-            CaseID = CaseID
-        };
+        return new AdminClientSummary(
+            Id,
+            !Active,
+            FirstName,
+            LastName,
+            City,
+            State,
+            Ttw,
+            CreatedAt,
+            UpdatedAt,
+            Address1,
+            Address2,
+            Zip,
+            CaseID
+            );
     }
 
     public AdminClientSummary ToggleTTW() {
-        return new AdminClientSummary {
-            Id = Id,
-            Active = Active,
-            FirstName = FirstName,
-            LastName = LastName,
-            City = City,
-            State = State,
-            Ttw = !Ttw,
-            CreatedAt = CreatedAt,
-            UpdatedAt = UpdatedAt,
-            Address1 = Address1,
-            Address2 = Address2,
-            Zip = Zip,
-            CaseID = CaseID
-        };
+        return new AdminClientSummary(
+            Id,
+            Active,
+            FirstName,
+            LastName,
+            City,
+            State,
+            !Ttw,
+            CreatedAt,
+            UpdatedAt,
+            Address1,
+            Address2,
+            Zip,
+            CaseID
+            );
     }
 }

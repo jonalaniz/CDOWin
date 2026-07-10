@@ -69,23 +69,21 @@ public partial class CreateServiceAuthorizationsViewModel(IServiceAuthorizationS
     // CRUD Methods
     // =========================
     public async Task<Result<SADetail>> CreateSAAsync() {
-        var invoice = new NewSA {
-            ServiceAuthorizationNumber = SANumber,
-            Office = Office,
-            Description = Description,
-            StartDate = StartDate,
-            EndDate = EndDate,
-            UnitCost = UnitCost,
-            UnitOfMeasurement = UnitOfMeasurement,
-
-            ClientID = Client.Id,
-            ClientName = Client.FormattedName,
-            CaseID = Client.CaseID!,
-
-            CounselorID = Client.CounselorID,
-            CounselorName = Client.CounselorReference!.Name!,
-            SecretaryName = Client.CounselorReference.SecretaryName,
-        };
+        NewSA invoice = new(
+            ServiceAuthorizationNumber: SANumber,
+            Office: Office,
+            Description: Description,
+            StartDate: StartDate,
+            EndDate: EndDate,
+            UnitCost: UnitCost,
+            UnitOfMeasurement: UnitOfMeasurement,
+            ClientID: Client.Id, 
+            ClientName: Client.FormattedName, 
+            CaseID: Client.CaseID!, 
+            CounselorID: Client.CounselorID, 
+            CounselorName: Client.CounselorReference!.Name!,
+            SecretaryName: Client.CounselorReference.SecretaryName
+            );
 
         _invalidation.InvalidateSAs();
         return await _service.CreateServiceAuthorizationAsync(invoice);

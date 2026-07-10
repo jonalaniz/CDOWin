@@ -38,16 +38,17 @@ public partial class CreateCounselorViewModel(ICounselorService service) : Obser
     // CRUD Methods
     // =========================
     public async Task<Result<Counselor>> CreateCounselorAsync() {
-        var counselor = new NewCounselor {
-            Name = Name,
-            CaseLoadID = CaseLoadId,
-            Email = Email,
-            Phone = Phone,
-            Fax = Fax,
-            Notes = Notes,
-            SecretaryName = SecretaryName,
-            SecretaryEmail = SecretaryEmail
-        };
+        NewCounselor counselor = new(
+            Name: Name, 
+            CaseLoadID: CaseLoadId, 
+            Email: Email, 
+            Phone: Phone, 
+            Fax: Fax, 
+            Notes: Notes, 
+            SecretaryName: SecretaryName, 
+            SecretaryEmail: SecretaryEmail
+            );
+
 
         return await _service.CreateCounselorAsync(counselor);
     }

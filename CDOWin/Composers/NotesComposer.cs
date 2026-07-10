@@ -16,7 +16,7 @@ public sealed class NotesComposer {
         var path = Path.Combine(Path.GetTempPath(), "Notes.txt");
 
         // Format Notes
-        var formattedNotes = notes.Select(n => n.AsFormattedNote()).ToArray();
+        var formattedNotes = notes.Select(n => n.FormattedNote).ToArray();
 
         // Serialize Notes
         var yaml = _serializer.Serialize(formattedNotes);

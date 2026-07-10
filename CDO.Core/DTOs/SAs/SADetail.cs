@@ -29,20 +29,20 @@ public record class SADetail(
     public string? FormattedDateRange => $"Valid {FormattedStartDate} to {FormattedEndDate}";
 
     public SAExport AsExport() {
-        return new SAExport {
-            SANumber = ServiceAuthorizationNumber,
-            Description = Description,
-            StartDate = StartDate.ToString(format: "MM/dd/yyyy"),
-            EndDate = EndDate.ToString(format: "MM/dd/yyyy"),
-            Office = Office
-        };
+        return new(
+            ServiceAuthorizationNumber,
+            Description,
+            StartDate.ToString(format: "MM/dd/yyyy"),
+            EndDate.ToString(format: "MM/dd/yyyy"),
+            Office
+            );
     }
 }
 
-public class SAExport {
-    public string? SANumber { get; init; }
-    public string? Description { get; init; }
-    public string? StartDate { get; set; }
-    public string? EndDate { get; set; }
-    public string? Office { get; set; }
-}
+public record class SAExport(
+    string? SANumber,
+    string? Description,
+    string? StartDate,
+    string? EndDate,
+    string? Office
+);

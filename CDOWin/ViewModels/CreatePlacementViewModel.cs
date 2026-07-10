@@ -89,61 +89,55 @@ public partial class CreatePlacementViewModel(IPlacementService service, DataInv
         if (Client.CounselorID == null)
             return Result<PlacementDetail>.Fail(new AppError(ErrorKind.Validation, "ClientDetail is missing a Counselor, assign on and try again."));
 
-        int placementsNumber = 1;
+        int placementNumber = 1;
         if (Client.Placements?.Length is int length && length > 0)
-            placementsNumber = length + 1;
+            placementNumber = length + 1;
 
-        var placementEmployer = new PlacementEmployer {
-            EmployerID = EmployerID,
-            Name = EmployerName,
-            Phone = EmployerPhone,
-            Address1 = Address1,
-            Address2 = Address2,
-            City = City,
-            State = State,
-            Zip = Zip,
-            SupervisorName = SupervisorName,
-            SupervisorEmail = SupervisorEmail,
-            SupervisorPhone = SupervisorPhone,
-            Website = Website
-        };
+        PlacementEmployer placementEmployer = new(
+            EmployerID: EmployerID,
+            Name: EmployerName,
+            Phone: EmployerPhone,
+            Address1: Address1,
+            Address2: Address2, 
+            City: City, 
+            State: State, 
+            Zip: Zip,
+            Fax: null,
+            Email: null,
+            Notes: null,
+            SupervisorName: SupervisorName, 
+            SupervisorEmail: SupervisorEmail, 
+            SupervisorPhone: SupervisorPhone, 
+            Website: Website
+            );
 
-        var placement = new NewPlacement {
-            // Placement Specific
-            Active = Client.Active,
-            PlacementNumber = placementsNumber,
-            Position = Position,
-            HireDate = HireDate,
-            EndDate = EndDate,
-            DaysOnJob = DaysOnJob,
-            Day1 = Day1,
-            Day2 = Day2,
-            Day3 = Day3,
-            Day4 = Day4,
-            Day5 = Day5,
-            JobDuties = JobDuties,
-            WorkEnvironment = WorkEnvironment,
-            Accommodations = Accommodations,
-            HoursWorking = HoursWorking,
-            WorkSchedule = WorkSchedule,
-            Wages = Wages,
-            Benefits = Benefits,
-
-            // SA/SADetail Specific
-            SaID = SaID,
-            SaNumber = SaNumber,
-
-            // ClientDetail Specific
-            ClientID = Client.Id,
-            ClientName = $"{Client.FirstName} {Client.LastName}",
-
-            // Counselor Specific
-            CounselorID = Client.CounselorID,
-            CounselorName = Client.CounselorReference?.Name,
-
-            // Employer Specific
-            Employer = placementEmployer
-        };
+        NewPlacement placement = new(
+            Active: Client.Active,
+            PlacementNumber: placementNumber,
+            Position: Position,
+            HireDate: HireDate,
+            EndDate: EndDate,
+            DaysOnJob: DaysOnJob,
+            Day1: Day1,
+            Day2: Day2,
+            Day3: Day3,
+            Day4: Day4,
+            Day5: Day5,
+            JobDuties: JobDuties,
+            WorkEnvironment: WorkEnvironment,
+            Accommodations: Accommodations,
+            HoursWorking: HoursWorking,
+            WorkSchedule: WorkSchedule,
+            Wages: Wages,
+            Benefits: Benefits,
+            SaID: SaID,
+            SaNumber: SaNumber,
+            ClientID: Client.Id,
+            ClientName: $"{Client.FirstName} {Client.LastName}",
+            CounselorID: Client.CounselorID,
+            CounselorName: Client.CounselorReference?.Name,
+            Employer: placementEmployer
+            );
 
         _invalidation.InvalidatePlacements();
         return await _service.CreatePlacementAsync(placement);

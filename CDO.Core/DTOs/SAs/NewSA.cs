@@ -1,22 +1,22 @@
 namespace CDO.Core.DTOs.SAs;
 
-public class NewSA {
+public record class NewSA(
     // SA Specific
-    public required string ServiceAuthorizationNumber { get; init; }
-    public string? Office { get; init; }
-    public required string Description { get; init; }
-    public required DateTime StartDate { get; init; }
-    public required DateTime EndDate { get; init; }
-    public double? UnitCost { get; init; }
-    public string? UnitOfMeasurement { get; init; }
+    string ServiceAuthorizationNumber,
+    string? Office,
+    string Description,
+    DateTime StartDate,
+    DateTime EndDate,
+    double? UnitCost,
+    string? UnitOfMeasurement,
 
     // Client Specific
-    public required int ClientID { get; init; }
-    public required string ClientName { get; init; }
-    public required string CaseID { get; init; }
+    int ClientID,
+    string ClientName,
+    string CaseID,
 
     // Counselor Specific
-    public int? CounselorID { get; init; }
-    public required string CounselorName { get; init; }
-    public string? SecretaryName { get; init; }
-}
+    int? CounselorID,
+    string CounselorName,
+    string? SecretaryName
+);

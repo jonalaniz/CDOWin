@@ -1,57 +1,56 @@
 ﻿namespace CDO.Core.DTOs.Placements;
 
-public class NewPlacement {
+public record class NewPlacement(
     // Placement Specific
-    public bool Active { get; init; }
-    public int? PlacementNumber { get; init; }
-    public string? Position { get; init; }
-    public DateTime? HireDate { get; init; }
-    public DateTime? EndDate { get; init; }
-    public int? DaysOnJob { get; init; }
-    public string? Day1 { get; init; }
-    public string? Day2 { get; init; }
-    public string? Day3 { get; init; }
-    public string? Day4 { get; init; }
-    public string? Day5 { get; init; }
-    public string? JobDuties { get; init; }
-    public string? WorkEnvironment { get; init; }
-    public string? Accommodations { get; init; }
-    public string? HoursWorking { get; init; }
-    public string? WorkSchedule { get; init; }
-    public string? Wages { get; init; }
-    public string? Benefits { get; init; }
+    bool Active,
+    int? PlacementNumber,
+    string? Position,
+    DateTime? HireDate,
+    DateTime? EndDate,
+    int? DaysOnJob,
+    string? Day1,
+    string? Day2,
+    string? Day3,
+    string? Day4,
+    string? Day5,
+    string? JobDuties,
+    string? WorkEnvironment,
+    string? Accommodations,
+    string? HoursWorking,
+    string? WorkSchedule,
+    string? Wages,
+    string? Benefits,
 
     // SA/SADetail Specific
-    public int? SaID { get; init; }
-    public string? SaNumber { get; init; }
+    int? SaID,
+    string? SaNumber,
 
     // ClientDetail Specific
-    public int? ClientID { get; init; }
-    public string? ClientName { get; init; }
+    int? ClientID,
+    string? ClientName,
 
     // Counselor Specific
-    public int? CounselorID { get; init; }
-    public string? CounselorName { get; init; }
+    int? CounselorID,
+    string? CounselorName,
 
     // Employer Specific
-    public PlacementEmployer Employer { get; init; } = default!;
+    PlacementEmployer Employer = default!
+);
 
-}
-
-public class PlacementEmployer {
-    public int? EmployerID { get; init; }
-    public string? Name { get; init; }
-    public string? Phone { get; init; }
-    public string? Address1 { get; init; }
-    public string? Address2 { get; init; }
-    public string? City { get; init; }
-    public string? State { get; init; }
-    public string? Zip { get; init; }
-    public string? Fax { get; init; }
-    public string? Email { get; init; }
-    public string? Notes { get; init; }
-    public string? SupervisorName { get; init; }
-    public string? SupervisorEmail { get; init; }
-    public string? SupervisorPhone { get; init; }
-    public string? Website { get; init; }
-}
+public record class PlacementEmployer(
+    int? EmployerID,
+    string? Name,
+    string? Phone,
+    string? Address1,
+    string? Address2,
+    string? City,
+    string? State,
+    string? Zip,
+    string? Fax,
+    string? Email,
+    string? Notes,
+    string? SupervisorName,
+    string? SupervisorEmail,
+    string? SupervisorPhone,
+    string? Website
+);

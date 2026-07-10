@@ -34,12 +34,7 @@ public partial class CreateReminderViewModel(IReminderService service, int clien
     // CRUD Methods
     // =========================
     public async Task<Result<Reminder>> CreateReminderAsync() {
-        var reminder = new NewReminder {
-            ClientID = _clientId,
-            Date = Date.ToUniversalTime(),
-            Description = Description
-        };
-
+        NewReminder reminder = new(ClientID: _clientId, Date: Date.ToUniversalTime(), Description: Description);
         return await _service.CreateRemindersAsync(reminder);
     }
 }

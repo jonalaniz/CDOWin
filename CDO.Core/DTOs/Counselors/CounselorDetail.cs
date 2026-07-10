@@ -3,19 +3,16 @@ using CDO.Core.DTOs.SAs;
 
 namespace CDO.Core.DTOs.Counselors;
 
-public class CounselorDetail {
-    // Non-optional fields
-    public int Id { get; init; }
-    public required string Name { get; init; }
-    public required ClientSummary[] Clients { get; init; }
-    public required SADetail[] Sas { get; init; }
-
-    // Nullable fields
-    public int? CaseLoadId { get; init; }
-    public string? Phone { get; init; }
-    public string? Email { get; init; }
-    public string? Fax { get; init; }
-    public string? Notes { get; init; }
-    public string? SecretaryName { get; init; }
-    public string? SecretaryEmail { get; init; }
-}
+public record class CounselorDetail(
+    int Id,
+    string Name,
+    ClientSummary[] Clients,
+    SADetail[] Sas,
+    int? CaseLoadId,
+    string? Phone,
+    string? Email,
+    string? Fax,
+    string? Notes,
+    string? SecretaryName,
+    string? SecretaryEmail
+);

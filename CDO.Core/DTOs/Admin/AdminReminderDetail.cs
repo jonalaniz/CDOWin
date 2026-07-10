@@ -7,8 +7,6 @@ public record class AdminReminderDetail(
     int ClientID,
     bool Complete,
     ReminderLog[] Logs,
-
-    // Optional Fields
     string? ClientName
     ) {
     public string LocalDate => Date.ToString(format: "MM/dd/yyyy");

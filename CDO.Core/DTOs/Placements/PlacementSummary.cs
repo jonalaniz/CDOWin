@@ -1,35 +1,35 @@
 ﻿namespace CDO.Core.DTOs.Placements;
 
-public class PlacementSummary {
+public record class PlacementSummary(
     // ID
-    public required int Id { get; init; }
+    int Id,
 
     // Placement Specific
-    public bool Active { get; init; }
-    public bool Billed { get; init; }
-    public string? Position { get; init; }
-    public DateTime? HireDate { get; init; }
-    public string? Wages { get; init; }
+    bool Active,
+    bool Billed,
+    string? Position,
+    DateTime? HireDate,
+    string? Wages,
 
     // SA/SADetail Specific
-    public int? SaID { get; init; }
-    public string? SaNumber { get; init; }
+    int? SaID,
+    string? SaNumber,
 
     // ClientDetail Specific
-    public int? ClientID { get; init; }
-    public string? ClientName { get; init; }
+    int? ClientID,
+    string? ClientName,
 
     // Counselor Specific
-    public int? CounselorID { get; init; }
-    public string? CounselorName { get; init; }
+    int? CounselorID,
+    string? CounselorName,
 
     // Employer Specific
-    public int? EmployerID { get; init; }
-    public string? EmployerName { get; init; }
-    public string? SupervisorName { get; init; }
-    public string? SupervisorPhone { get; init; }
-    public string? Website { get; init; }
-
+    int? EmployerID,
+    string? EmployerName,
+    string? SupervisorName,
+    string? SupervisorPhone,
+    string? Website
+) {
     // Computed Properties
     public string FormattedSANumber => $"Assocaited SA: {SaNumber}";
     public string? FormattedHireDate => HireDate?.ToString(format: "MM/dd/yyyy");

@@ -1,24 +1,24 @@
 ﻿namespace CDO.Core.DTOs.SAs;
 
-public class SASummary {
+public record class SASummary(
     // SA Specific
-    public int Id { get; init; }
-    public bool Active { get; init; }
-    public required string ServiceAuthorizationNumber { get; init; }
-    public DateTime StartDate { get; init; }
-    public DateTime EndDate { get; init; }
-    public double? UnitCost { get; init; }
-    public required string Description { get; init; }
+    int Id,
+    bool Active,
+    string ServiceAuthorizationNumber,
+    DateTime StartDate,
+    DateTime EndDate,
+    double? UnitCost,
+    string Description,
 
     // Client Specific
-    public int ClientId { get; init; }
-    public required string ClientName { get; init; }
-    public string? CaseID { get; init; }
+    int ClientId,
+    string ClientName,
+    string? CaseID,
 
     // Counselor Specific
-    public int? CounselorId { get; init; }
-    public required string CounselorName { get; init; }
-
+    int? CounselorId,
+    string CounselorName
+) {
     // Computed Properties
     public string? FormattedStartDate => StartDate.ToString(format: "MM/dd/yyyy");
     public string? FormattedEndDate => EndDate.ToString(format: "MM/dd/yyyy");

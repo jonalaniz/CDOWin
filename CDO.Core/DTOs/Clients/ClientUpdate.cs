@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs.Clients;
 
-public class ClientUpdate {
+public record class ClientUpdate {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? City { get; set; }

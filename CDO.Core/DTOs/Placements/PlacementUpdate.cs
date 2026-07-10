@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs.Placements;
 
-public class PlacementUpdate {
+public record class PlacementUpdate {
     // Placement Specific
     public bool? Active { get; set; }
     public bool? Billed { get; set; }

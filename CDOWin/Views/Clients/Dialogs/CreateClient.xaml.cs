@@ -337,7 +337,7 @@ public sealed partial class CreateClient : Page {
                 ViewModel.CaseID = value;
                 break;
             case CaseField.Premiums:
-                ViewModel.Premium = value;
+                ViewModel.Premiums = value;
                 break;
         }
     }

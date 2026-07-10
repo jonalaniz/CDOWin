@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs.SAs;
 
-public class SAUpdate {
+public record class SAUpdate {
     // SA Specific
     public bool? Active { get; set; }
     public bool? Billed { get; set; }

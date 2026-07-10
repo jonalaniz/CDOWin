@@ -1,24 +1,16 @@
 ﻿namespace CDO.Core.DTOs.Clients.Notes;
 
-public class ClientNote() {
+public record class ClientNote(
     // Non-optional fields
-    required public int Id { get; init; }
-    required public int ClientId { get; init; }
-    required public DateTime Date { get; init; }
-    required public string Note { get; init; }
-    public string? Author { get; init; }
-
+    int Id,
+    int ClientId,
+    DateTime Date,
+    string Note,
+    string? Author
+) {
     public string FormattedDate => $"{Date.ToLocalTime().ToString("MM/dd/yyyy hh:mm tt")}";
 
-    public FormattedNote AsFormattedNote() {
-        return new FormattedNote {
-            Date = FormattedDate,
-            Note = Note
-        };
-    }
+    public FormattedNote FormattedNote => new(FormattedDate, Note);
 }
 
-public class FormattedNote() {
-    required public String Date { get; init; }
-    required public string Note { get; init; }
-}
+public record class FormattedNote(string Date, string Note);

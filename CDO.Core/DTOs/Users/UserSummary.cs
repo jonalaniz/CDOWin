@@ -1,15 +1,12 @@
 namespace CDO.Core.DTOs.Admin;
 
-public class UserSummary {
-    // Non-optional fields
-    public required string Id { get; init; }
-    public required string Username { get; init; }
-    public required bool Admin { get; init; }
-    public required bool Active { get; init; }
-
-    // Nullable fields
-    public string? FirstName { get; init; }
-    public string? LastName { get; init; }
-
+public record class UserSummary(
+    string Id,
+    string Username,
+    bool Admin,
+    bool Active,
+    string? FirstName,
+    string? LastName
+) {
     public bool Inactive => !Active;
 }

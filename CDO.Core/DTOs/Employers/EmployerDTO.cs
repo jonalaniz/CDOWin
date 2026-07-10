@@ -1,6 +1,6 @@
 namespace CDO.Core.DTOs.Employers;
 
-public class EmployerDTO {
+public record class EmployerDTO {
     public string? Name { get; set; }
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }

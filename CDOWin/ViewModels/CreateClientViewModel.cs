@@ -91,7 +91,7 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
     public bool? ElevatorSpeechCompleted { get; set; } = false;
     public string? Race { get; set; }
     public string? FluentLanguages { get; set; }
-    public string? Premium { get; set; }
+    public string? Premiums { get; set; }
 
     // =========================
     // Input Validation
@@ -127,55 +127,55 @@ public partial class CreateClientViewModel(IClientService service) : ObservableO
         var folderName = $"Z:\\DARS Clients\\{CounselorName}-{FirstName} {LastName}";
         if (!CreateDocumentFolder(folderName)) return Result<ClientDetail>.Fail(new AppError(ErrorKind.Conflict, "Folder already exists.", null));
 
-        var client = new NewClient {
-            FirstName = FirstName,
-            LastName = LastName,
-            TTW = TTW,
-            City = City,
-            State = State,
-            Disability = Disability,
-            Ssn = Ssn,
-            CaseID = CaseID,
-            Address1 = Address1,
-            Address2 = Address2,
-            Zip = Zip,
-            Dob = Dob,
-            StartDate = StartDate,
-            DriversLicense = DriversLicense,
-            Phone1 = Phone1,
-            Phone1Identity = Phone1Identity,
-            Phone2 = Phone2,
-            Phone2Identity = Phone2Identity,
-            Phone3 = Phone3,
-            Phone3Identity = Phone3Identity,
-            Email = Email,
-            EmailIdentity = EmailIdentity,
-            Email2 = Email2,
-            Email2Identity = Email2Identity,
-            CounselorID = CounselorID,
-            ClientNotes = ClientNotes,
-            Conditions = Conditions,
-            DocumentFolder = folderName,
-            Active = Active,
-            EmploymentGoal = EmploymentGoal,
-            EmployerID = EmployerID,
-            Status = Status,
-            Benefits = Benefits,
-            CriminalCharge = CriminalCharge,
-            Education = Education,
-            Transportation = Transportation,
-            ResumeRequired = ResumeRequired,
-            ResumeCompleted = ResumeCompleted,
-            VideoInterviewRequired = VideoInterviewRequired,
-            VideoInterviewCompleted = VideoInterviewCompleted,
-            ReleasesCompleted = ReleasesCompleted,
-            OrientationCompleted = OrientationCompleted,
-            DataSheetCompleted = DataSheetCompleted,
-            ElevatorSpeechCompleted = ElevatorSpeechCompleted,
-            Race = Race,
-            FluentLanguages = FluentLanguages,
-            Premium = Premium
-        };
+        NewClient client = new(
+            FirstName: FirstName,
+            LastName: LastName,
+            City: City,
+            State: State,
+            Disability: Disability,
+            TTW: TTW,
+            Ssn: Ssn,
+            CaseID: CaseID,
+            Address1: Address1,
+            Address2: Address2,
+            Zip: Zip,
+            Dob: Dob,
+            StartDate: StartDate,
+            DriversLicense: DriversLicense,
+            Phone1: Phone1,
+            Phone1Identity: Phone1Identity,
+            Phone2: Phone2,
+            Phone2Identity: Phone2Identity,
+            Phone3: Phone3,
+            Phone3Identity: Phone3Identity,
+            Email: Email,
+            EmailIdentity: EmailIdentity,
+            Email2: Email2,
+            Email2Identity: Email2Identity,
+            CounselorID: CounselorID,
+            ClientNotes: ClientNotes,
+            Conditions: Conditions,
+            DocumentFolder: folderName,
+            Active: Active,
+            EmploymentGoal: EmploymentGoal,
+            EmployerID: EmployerID,
+            Status: Status,
+            Benefits: Benefits,
+            CriminalCharge: CriminalCharge,
+            Education: Education,
+            Transportation: Transportation,
+            ResumeRequired: ResumeRequired,
+            ResumeCompleted: ResumeCompleted,
+            VideoInterviewRequired: VideoInterviewRequired,
+            VideoInterviewCompleted: VideoInterviewCompleted,
+            ReleasesCompleted: ReleasesCompleted,
+            OrientationCompleted: OrientationCompleted,
+            DataSheetCompleted: DataSheetCompleted,
+            ElevatorSpeechCompleted: ElevatorSpeechCompleted,
+            Race: Race,
+            FluentLanguages: FluentLanguages,
+            Premiums: Premiums
+            );
 
         return await _service.CreateClientAsync(client);
     }

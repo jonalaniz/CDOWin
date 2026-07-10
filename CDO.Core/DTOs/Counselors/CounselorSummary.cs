@@ -1,16 +1,13 @@
 ﻿namespace CDO.Core.DTOs.Counselors;
 
-public class CounselorSummary {
-    // Non-optional fields
-    public int Id { get; init; }
-    public required string Name { get; init; }
-
-    // Nullable fields
-    public int? CaseLoadID { get; init; }
-    public string? Phone { get; init; }
-    public string? Email { get; init; }
-    public string? SecretaryName { get; init; }
-
+public record class CounselorSummary(
+    int Id,
+    string Name,
+    int? CaseLoadID,
+    string? Phone,
+    string? Email,
+    string? SecretaryName
+) {
     // Computed Properties
     public string FormattedCaseLoadID => CaseLoadID == null ? "No case load ID on file." : $"Case Load: {CaseLoadID}";
 

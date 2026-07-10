@@ -1,21 +1,22 @@
 ﻿namespace CDO.Core.DTOs.Employers;
 
-public class EmployerSummary {
+public record class EmployerSummary(
     // Non-optional fields
-    public int Id { get; init; }
+    int Id,
 
     // Nullable fields
-    public string? Name { get; init; }
-    public string? Address1 { get; init; }
-    public string? Address2 { get; init; }
-    public string? City { get; init; }
-    public string? State { get; init; }
-    public string? Zip { get; init; }
-    public string? Phone { get; init; }
-    public string? Website { get; init; }
-    public string? Notes { get; init; }
-    public string? SupervisorName { get; init; }
-    public string? SupervisorPhone { get; init; }
+    string? Name,
+    string? Address1,
+    string? Address2,
+    string? City,
+    string? State,
+    string? Zip,
+    string? Phone,
+    string? Website,
+    string? Notes,
+    string? SupervisorName,
+    string? SupervisorPhone
+    ) {
 
     public string FormattedAddress {
         get {

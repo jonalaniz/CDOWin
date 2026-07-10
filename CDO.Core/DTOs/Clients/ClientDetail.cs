@@ -119,52 +119,52 @@ public record class ClientDetail(
     public string? FormattedStartDate => StartDate?.ToString(format: "MM/dd/yyyy");
 
     public ClientSummary AsSummary() {
-        return new ClientSummary {
-            Id = Id,
-            FirstName = FirstName,
-            LastName = LastName,
-            City = City,
-            State = State,
-            Active = Active,
-            TTW = TTW,
-            Address1 = Address1,
-            Address2 = Address2,
-            Zip = Zip,
-            CounselorName = CounselorReference?.Name,
-            Phone = Phone1,
-            Phone2 = Phone2,
-            Phone3 = Phone3,
-            EmploymentGoal = EmploymentGoal,
-            CaseID = CaseID
-        };
+        return new ClientSummary(
+            Id,
+            FirstName,
+            LastName,
+            City,
+            State,
+            Active,
+            TTW,
+            Address1,
+            Address2,
+            Zip,
+            CounselorReference?.Name,
+            Phone1,
+            Phone2,
+            Phone3,
+            EmploymentGoal,
+            CaseID
+            );
     }
 
     public ClientExport AsExport() {
-        return new ClientExport {
-            Id = Id,
-            FirstName = FirstName,
-            LastName = LastName,
-            DOB = FormattedDOB,
-            DL = DriversLicense,
-            SSN = Ssn,
-            City = City,
-            State = State,
-            Active = Active,
-            TTW = TTW,
-            CaseID = CaseID,
-            Address1 = Address1,
-            Address2 = Address2,
-            Zip = Zip,
-            CounselorName = CounselorReference?.Name,
-            Phone = Phone1,
-            Phone2 = Phone2,
-            Phone3 = Phone3,
-            Email = Email,
-            EmailDescription = EmailIdentity,
-            Email2 = Email2,
-            EmailDescription2 = Email2Identity,
-            EmploymentGoal = EmploymentGoal,
-            ServiceAuthorizations = Sas?.Select(i => i.AsExport()).ToArray()
-        };
+        return new ClientExport(
+            Id,
+            FirstName,
+            LastName,
+            FormattedDOB,
+            DriversLicense,
+            Ssn,
+            City,
+            State,
+            Active,
+            TTW,
+            CaseID,
+            Address1,
+            Address2,
+            Zip,
+            CounselorReference?.Name,
+            Phone1,
+            Phone2,
+            Phone3,
+            Email,
+            EmailIdentity,
+            Email2,
+            Email2Identity,
+            EmploymentGoal,
+            Sas?.Select(i => i.AsExport()).ToArray()
+            );
     }
 }

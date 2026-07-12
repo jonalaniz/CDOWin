@@ -161,7 +161,7 @@
 
                                         <!-- Header -->
                                         <Grid Grid.Row="0" Style="{StaticResource CDOCardHeaderContainerStyle}">
-                                            <TextBlock Margin="4,0" Grid.Row="0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <TextBlock Grid.Row="0" Text="{x:Bind ClientName}" Style="{StaticResource SubtitleTextBlockStyle}"/>
                                             <!-- Button goes here -->
                                         </Grid>
                                         

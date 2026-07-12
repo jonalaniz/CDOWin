@@ -68,6 +68,8 @@
 
             <!-- ServiceAuthorizations Table -->
             <ListView x:Name="ListView"
+                      BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+                      BorderThickness="0,1"
                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
@@ -93,22 +95,14 @@
                             <ColumnDefinition Width="350"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="SA Number" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="Client" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" Text="Case ID" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" Text="Issued By"
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" Text="Start Date" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" Text="End Date" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" Text="Unit Cost" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="7" Text="Description" 
-                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" Text="SA Number" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Client" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Case ID" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="Issued By" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" Text="Start Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="End Date" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Unit Cost" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="7" Text="Description" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -163,15 +157,10 @@
                                     <FontIcon Glyph="&#xE76C;"/>
                                 </Button>
                             </Grid>
-                            <TextBlock Grid.Column="4" 
-                                       Text="{x:Bind FormattedStartDate}"/>
-                            <TextBlock Grid.Column="5" 
-                                       Text="{x:Bind FormattedEndDate}"
-                                       FontWeight="Bold"/>
-                            <TextBlock Grid.Column="6" 
-                                       Text="{x:Bind FormattedCost}"/>
-                            <TextBlock Grid.Column="7" 
-                                       Text="{x:Bind Description}"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind FormattedStartDate}"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind FormattedEndDate}" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="6" Text="{x:Bind FormattedCost}"/>
+                            <TextBlock Grid.Column="7" Text="{x:Bind Description}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -188,8 +177,7 @@
         </Grid>
         
         <!-- Right Column -->
-        <Frame x:Name="InspectorFrame"
-               Grid.Column="1"
+        <Frame x:Name="InspectorFrame" Grid.Column="1"
                IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

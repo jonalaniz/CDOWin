@@ -58,7 +58,9 @@
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Employers Table -->
-            <ListView x:Name="ListView"
+            <ListView x:Name="ListView" 
+                      BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+                      BorderThickness="0,1"
                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 

@@ -144,6 +144,8 @@
 
             <!-- Clients Table -->
             <ListView x:Name="ListView"
+                      BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+                      BorderThickness="0,1"
                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                       ItemsSource="{x:Bind ViewModel.Clients, Mode=OneWay}"
                       Style="{StaticResource DataTableStyle}">

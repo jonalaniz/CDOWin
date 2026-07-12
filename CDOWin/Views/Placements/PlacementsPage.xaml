@@ -36,22 +36,19 @@
 
             <!-- Title -->
             <TextBlock Grid.Row="0" Grid.Column="0"
-                       Text="Placements"
-                       Style="{StaticResource PageTitleStyle}"/>
+                       Text="Placements" Style="{StaticResource PageTitleStyle}"/>
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1"
                         Style="{StaticResource CommandBarDefaultStyle}">
-                <AppBarButton Width="56"
-                              x:Name="ToogleSortButton"
+                <AppBarButton x:Name="ToogleSortButton" Width="56"
                               IsCompact="False"
                               ToolTipService.ToolTip="Sort"
                               Click="ToggleSort_Click">
                     <FontIcon Style="{StaticResource SingleIconFontStyle}"
                               Glyph="&#xE8CB;"/>
                 </AppBarButton>
-                <AppBarToggleButton Width="56"
-                                    IsCompact="False"
+                <AppBarToggleButton Width="56" IsCompact="False"
                                     ToolTipService.ToolTip="Filter Active"
                                     IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}">
                     <FontIcon Foreground="{x:Bind ViewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"
@@ -61,13 +58,13 @@
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" 
-                     PlaceholderText="Filter Placements"
+                     Margin="8,0,8,8" PlaceholderText="Filter Placements"
                      Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Placements Table -->
-            <ListView x:Name="ListView"
-                      Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            <ListView x:Name="ListView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+                      BorderThickness="0,1"
                       Style="{StaticResource DataTableStyle}" 
                       ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
@@ -92,30 +89,14 @@
                             <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" 
-                                   Text="Client" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" 
-                                   Text="Employer" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" 
-                                   Text="Counselor" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" 
-                                   Text="SA Number" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="4" 
-                                   Text="Supervisor" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="5" 
-                                   Text="Position" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="6" 
-                                   Text="Wage" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="7" 
-                                   Text="Hire Date" 
-                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" Text="Client" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Employer" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Counselor" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="SA Number" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="4" Text="Supervisor" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="Position" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Wage" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="7" Text="Hire Date" FontWeight="SemiBold"/>
                     </Grid>
                 </ListView.Header>
 
@@ -142,8 +123,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <TextBlock Grid.Column="0" 
-                                           Text="{x:Bind ClientName}" 
+                                <TextBlock Grid.Column="0" Text="{x:Bind ClientName}" 
                                            TextWrapping="WrapWholeWords" FontWeight="Bold"/>
                                 <Button Grid.Column="1" 
                                         IsEnabled="{x:Bind ClientID, Converter={StaticResource NullToBoolConverter}}"
@@ -188,21 +168,11 @@
                             </Grid>
 
                             <!-- Fields -->
-                            <TextBlock Grid.Column="3" 
-                                       Text="{x:Bind SaNumber}" 
-                                       TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="4" 
-                                       Text="{x:Bind FormattedSupervisor}" 
-                                       TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="5" 
-                                       Text="{x:Bind Position}" 
-                                       TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="6" 
-                                       Text="{x:Bind Wages}" 
-                                       TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Grid.Column="7" 
-                                       Text="{x:Bind FormattedHireDate}" 
-                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind SaNumber}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind FormattedSupervisor}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="5" Text="{x:Bind Position}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="6" Text="{x:Bind Wages}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="7" Text="{x:Bind FormattedHireDate}" TextTrimming="CharacterEllipsis"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -219,8 +189,7 @@
         </Grid>
 
         <!-- Right Column -->
-        <Frame x:Name="InspectorFrame"
-               Grid.Column="1"
+        <Frame Grid.Column="1"  x:Name="InspectorFrame"
                IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

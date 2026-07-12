@@ -211,8 +211,8 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     // Utility / Filtering
     // =========================
-    private void SetupSAs(SADetail[] invoices) {
-        var sortedInvoices = invoices
+    private void SetupSAs(SADetail[] sas) {
+        var sortedInvoices = sas
             .OrderBy(i => i.EndDate)
             .Reverse()
             .ToList();

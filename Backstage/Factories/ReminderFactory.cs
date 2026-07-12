@@ -19,19 +19,19 @@ public enum SAReminderType {
 
 public static class ReminderFactory {
     public static NewReminder CreateClientReminder(int clientId, ReminderDate date) {
-        return new NewReminder {
-            Date = Date(date),
-            Description = Description(ClientReminderType.StaleClient),
-            ClientID = clientId
-        };
+        return new NewReminder(
+            ClientID: clientId, 
+            Date: Date(date), 
+            Description: Description(ClientReminderType.StaleClient)
+            );
     }
 
     public static NewReminder CreateSAReminder(int clientId, ReminderDate date, string saNumber, SAReminderType type) {
-        return new NewReminder {
-            Date = Date(date),
-            Description = Description(type, saNumber),
-            ClientID = clientId
-        };
+        return new NewReminder(
+            ClientID: clientId, 
+            Date: Date(date), 
+            Description: Description(type, saNumber)
+            );
     }
 
     private static DateTime Date(ReminderDate reminderDate) {

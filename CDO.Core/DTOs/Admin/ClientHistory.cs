@@ -9,6 +9,7 @@ public record class ClientHistory(
     string State,
     bool Ttw,
     ClientActivity[] Activities,
+    AdminReminderDetail[] Reminders,
     DateTime CreatedAt,
     DateTime UpdatedAt,
     string? Address1,

@@ -102,6 +102,12 @@ public sealed partial class ClientViewPage : Page {
         _ = ViewModel.ReloadClientAsync();
     }
 
+    // Counselors
+    private void GoToCounselor_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        ViewModel.RequestCounselor(id);
+    }
+
     // SAs
     private async void CreateSA_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected == null) return;

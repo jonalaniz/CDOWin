@@ -27,6 +27,7 @@ public partial class ClientsViewModel : ObservableObject {
     private readonly DataCoordinator _dataCoordinator;
     private readonly DataInvalidationService _invalidationService;
     private readonly ClientSelectionService _selectionService;
+    private readonly CounselorSelectionService _counselorSelectionService;
     private readonly PlacementSelectionService _placementSelectionService;
     private readonly ClientComposer _clientComposer = new();
     private readonly DispatcherQueue _dispatcher;
@@ -75,6 +76,7 @@ public partial class ClientsViewModel : ObservableObject {
     public ClientsViewModel(IClientService service,
         DataCoordinator dataCoordinator,
         ClientSelectionService clientSelectionService,
+        CounselorSelectionService counselorSelectionService,
         PlacementSelectionService placementSelectionService,
         DataInvalidationService invalidationService) {
         _service = service;
@@ -82,6 +84,7 @@ public partial class ClientsViewModel : ObservableObject {
         _invalidationService = invalidationService;
 
         _selectionService = clientSelectionService;
+        _counselorSelectionService = counselorSelectionService;
         _placementSelectionService = placementSelectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
@@ -121,6 +124,11 @@ public partial class ClientsViewModel : ObservableObject {
     // Public Methods
     // =========================
     public void NotifyNewReminderCreated() => _selectionService.NotifyNewReminderCreated();
+
+    public void RequestCounselor(int counselorID) {
+        AppServices.Navigation.Navigate(Views.CDOFrame.Counselors);
+        _counselorSelectionService.RequestSelectedCounselor(counselorID);
+    }
 
     public void RequestPlacement(int placementID) {
         AppServices.Navigation.Navigate(Views.CDOFrame.Placements);

@@ -84,6 +84,7 @@ public static class AppServices {
             ClientService,
             DataCoordinator,
             _clientSelectionService,
+            _counselorSelecitonService,
             _placementSelectionService,
             _invalidationService
         );

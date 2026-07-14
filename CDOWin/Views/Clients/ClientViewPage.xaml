@@ -259,7 +259,7 @@
 
                     <!-- Content -->
                     <ScrollView Grid.Row="1">
-                        <Grid Style="{StaticResource CDOCardContentContainerStyle}">
+                        <Grid Style="{StaticResource CDOCardContentContainerStyle}" ColumnSpacing="8">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -297,18 +297,37 @@
                                      Value="{x:Bind ViewModel.Selected.Status, Mode=OneWay}"/>
 
                             <!-- Counselor Section -->
-                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"  
-                                    Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
+                                        Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                                 <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
-                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
-                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
-                                <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
-                            </StackPanel>
 
-                            <!-- Secretary Section -->
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="1" VerticalAlignment="Top" Margin="0,6,12,0"
+                                            Style="{StaticResource AccentButtonStyle}"
+                                            IsEnabled="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
+                                            Tag="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay}" Click="GoToCounselor_Click">
+                                        <FontIcon Glyph="&#xE76C;"/>
+                                    </Button>
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                        <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                                   Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
+                                        <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                                   Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
+                                        <TextBlock TextWrapping="Wrap" Style="{StaticResource ValueTextBlockStyle}"
+                                                   Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                            
+                            
+
+                                <!-- Secretary Section -->
                             <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
                                     Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                                 <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>

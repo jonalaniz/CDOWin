@@ -1,10 +1,14 @@
+using Backstage.Dialogs;
 using Backstage.Services;
 using Backstage.ViewModels;
 using CDO.Core.Constants;
 using CDO.Core.DTOs.Admin;
+using CDO.UI.Shared.Factories;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Backstage.Views;
@@ -27,6 +31,10 @@ public sealed partial class ClientsPage : Page {
         base.OnNavigatedTo(e);
         await ViewModel.RefreshAsync();
     }
+
+    // =========================
+    // Click Handlers
+    // =========================
 
     private async void ToggleInactive_Click(object sender, RoutedEventArgs e) {
         if (ViewModel.Selected is not AdminClientSummary summary) return;
@@ -64,6 +72,18 @@ public sealed partial class ClientsPage : Page {
         InfoBarContainer.Children.Remove(infoBar);
 
         await ShowMessage(MessageType.ExportedClients, result.IsSuccess);
+    }
+
+    private async void Reminder_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        if (ViewModel.SelectedClientHistory is null) return;
+        var reminder = ViewModel.SelectedClientHistory.Reminders.Where(r => r.Id == id).First();
+        if (reminder == null) return;
+
+        var dialog = DialogFactory.InformationDialog(this.XamlRoot, "Reminder Detail");
+        dialog.Content = new ReminderDetailPage(reminder);
+
+        var result = await dialog.ShowAsync();
     }
 
     private async Task ShowMessage(MessageType type, bool success) {

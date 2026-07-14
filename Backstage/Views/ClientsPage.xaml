@@ -20,6 +20,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
 
         <!-- Left Column -->
@@ -95,11 +96,10 @@
                     <Run Text="Clients"/>
                 </TextBlock>
             </Grid>
-
         </Grid>
         
-        <!-- Right Column -->
-        <Grid Grid.RowSpan="2" Grid.Column="1" Padding="0,0">
+        <!-- Middle Column -->
+        <Grid Grid.RowSpan="2" Grid.Column="1" Padding="0,0" Style="{StaticResource ContentRightBorderStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -220,6 +220,65 @@
                 </StackPanel>
             </Grid>
         </Grid>
+
+        <!-- Right Column -->
+        <Grid Grid.RowSpan="2" Grid.Column="2" Style="{StaticResource ContentRightBorderStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Text="Details" Padding="12,8" Style="{StaticResource BackstageHeader}"/>
+
+            <!-- Reminders List -->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Border BorderThickness="0,1" BorderBrush="{StaticResource DividerStrokeColorDefault}"
+                        Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                    <TextBlock Grid.Row="0" Padding="12,8" FontWeight="Bold" Text="Reminders"/>
+                </Border>
+                <ScrollViewer Grid.Row="1">
+                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.SelectedClientHistory.Reminders, Mode=OneWay}">
+                        <DataTemplate x:DataType="dtos:AdminReminderDetail">
+
+                            <!-- Button -->
+                            <Button Style="{StaticResource BackstageListButton}" BorderThickness="0,0,0,1"
+                                Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}"
+                                Tag="{x:Bind Id}" Click="Reminder_Click">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Row 0: Name + Date -->
+                                    <TextBlock Grid.Row="0" Grid.Column="0" 
+                                           HorizontalAlignment="Left" FontWeight="Bold" Text="{x:Bind ClientName}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1"
+                                           HorizontalAlignment="Right" FontWeight="Bold" Text="{x:Bind LocalDate}"/>
+
+                                    <!-- Row 1: Text -->
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                           Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsRepeater>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <!-- InfoBar -->
         <Grid Grid.Row="1" Grid.ColumnSpan="2" x:Name="InfoBarContainer" Margin="16" Width="400"
               VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Grid.ChildrenTransitions>

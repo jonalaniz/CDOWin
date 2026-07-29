@@ -12,6 +12,7 @@ public sealed class NavigationService : INavigationService<BackstageView> {
     private Frame? _frame;
     private readonly Dictionary<BackstageView, Type> _pages = new();
     private BackstageView? _currentFrame;
+    private List<BackstageView> _history = [];
 
     public void Initialize(NavigationView navigationView, Frame frame) {
         _navigationView = navigationView;
@@ -34,11 +35,34 @@ public sealed class NavigationService : INavigationService<BackstageView> {
         if (!_pages.TryGetValue(frame, out var page)) return;
 
         _frame.Navigate(page);
+
+        if (_currentFrame is BackstageView oldFrame)
+            _history.Add(oldFrame);
+
         _currentFrame = frame;
     }
 
-    // To be added at a future date
+    public void BackRequested() {
+        if (_history.Count == 0) return;
+        if (_frame == null) return;
+        var frame = _history.LastOrDefault();
+        _history.RemoveAt(_history.Count - 1);
+
+        if (_navigationView == null) return;
+        if (!_pages.TryGetValue(frame, out var page)) return;
+
+        _frame.Navigate(page);
+        _currentFrame = frame;
+
+        var item = _navigationView.MenuItems
+            .OfType<NavigationViewItem>()
+            .FirstOrDefault(item => item.Tag is BackstageView view && frame == view);
+
+        if (item != null) _navigationView.SelectedItem = item;
+    }
+
     public void Navigate(BackstageView frame) {
+        // This is essentially acting as "select item"
         if (_frame == null || _navigationView == null) return;
 
         var item = _navigationView.MenuItems

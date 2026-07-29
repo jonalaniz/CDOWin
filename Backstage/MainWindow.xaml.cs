@@ -58,4 +58,8 @@ public sealed partial class MainWindow : Window {
     private void nvSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {
         Debug.WriteLine($"Selected: {sender.SelectedItem}");
     }
+
+    private void Tbar_BackRequested(TitleBar sender, object args) {
+        _navigationService.BackRequested();
+    }
 }

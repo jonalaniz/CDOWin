@@ -24,6 +24,7 @@
         <TitleBar Grid.Row="0" x:Name="Tbar" Height="48"
                   Title="Backstage" Subtitle="Beta"
                   IsBackButtonVisible="True"
+                  IsBackButtonEnabled="{x:Bind _navigationService.CanNavigate, Mode=OneWay}"
                   BackRequested="Tbar_BackRequested"
                   IsPaneToggleButtonVisible="True"
                   PaneToggleRequested="PaneToggleRequested">

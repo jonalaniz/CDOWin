@@ -1,18 +1,27 @@
 ﻿using Backstage.Views;
 using CDO.Abstractions.Navigation;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Backstage.Navigation;
 
-public sealed class NavigationService : INavigationService<BackstageView> {
+public partial class NavigationService : ObservableObject, INavigationService<BackstageView> {
     private NavigationView? _navigationView;
     private Frame? _frame;
     private readonly Dictionary<BackstageView, Type> _pages = new();
     private BackstageView? _currentFrame;
-    private List<BackstageView> _history = [];
+
+    private ObservableCollection<BackstageView> _history = [];
+
+    public bool CanNavigate => _history.Count != 0;
+
+    public NavigationService() {
+        _history.CollectionChanged += (_, _) => OnPropertyChanged(nameof(CanNavigate));
+    }
 
     public void Initialize(NavigationView navigationView, Frame frame) {
         _navigationView = navigationView;

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Backstage.Services; 
+namespace Backstage.Services;
+
 public class UserSelectionService {
     public event Action<string>? UserSelectionRequested;
 

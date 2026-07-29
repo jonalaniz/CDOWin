@@ -126,12 +126,12 @@ public partial class ClientsViewModel : ObservableObject {
     public void NotifyNewReminderCreated() => _selectionService.NotifyNewReminderCreated();
 
     public void RequestCounselor(int counselorID) {
-        AppServices.Navigation.Navigate(Views.CDOFrame.Counselors);
+        AppServices.Navigation.RequestNavigation(Views.CDOFrame.Counselors);
         _counselorSelectionService.RequestSelectedCounselor(counselorID);
     }
 
     public void RequestPlacement(int placementID) {
-        AppServices.Navigation.Navigate(Views.CDOFrame.Placements);
+        AppServices.Navigation.RequestNavigation(Views.CDOFrame.Placements);
         _placementSelectionService.RequestSelectedPlacement(placementID);
     }
 

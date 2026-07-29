@@ -34,7 +34,7 @@ public sealed class NavigationService : INavigationService<CDOFrame> {
         _navigationView.SelectionChanged += SelectionChanged;
     }
 
-    public void Navigate(CDOFrame frame) {
+    public void RequestNavigation(CDOFrame frame) {
         SelectPage(frame);
     }
 

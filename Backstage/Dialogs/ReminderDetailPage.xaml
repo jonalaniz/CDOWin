@@ -28,19 +28,22 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
             <!-- Row 0: Name + Date -->
-            <TextBlock Grid.Row="0" Grid.Column="0" 
+            <TextBlock Grid.Row="0" Grid.Column="0"
                        HorizontalAlignment="Left" FontWeight="Bold" Text="{x:Bind Reminder.ClientName}"/>
-            <TextBlock Grid.Row="0" Grid.Column="1"
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0"
                        HorizontalAlignment="Right" FontWeight="Bold" Text="{x:Bind Reminder.LocalDate}"/>
             
             <!-- Row 1: Text -->
-            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+            <TextBlock Grid.Row="1" Grid.Column="0"
                        TextWrapping="WrapWholeWords" Text="{x:Bind Reminder.Description}"/>
+            <CheckBox Grid.Row="1" Grid.Column="1" Margin="0,-4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                      MinWidth="0" IsEnabled="False" Content="Done" IsChecked="{x:Bind Reminder.Complete}"/>
+
         </Grid>
         
         <!-- Header -->
@@ -59,18 +62,18 @@
                     </interactivity:Interaction.Behaviors>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="83"/>
-                        <ColumnDefinition Width="158"/>
-                        <ColumnDefinition Width="83"/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="82"/>
+                        <ColumnDefinition Width="82"/>
+                        <ColumnDefinition Width="184"/>
+                        <ColumnDefinition Width="82"/>
+                        <ColumnDefinition Width="36"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="User" FontWeight="SemiBold"/>
-                    <TextBlock Grid.Column="1" Text="Date" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="1" Text="Edited On" FontWeight="SemiBold"/>
                     <TextBlock Grid.Column="2" Text="Description" FontWeight="SemiBold"/>
-                    <TextBlock Grid.Column="3" Text="Event Date" FontWeight="SemiBold"/>
-                    <TextBlock Grid.Column="4" Text="Complete" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="3" Text="Date" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Column="4" Text="Done" FontWeight="SemiBold"/>
                     
                 </Grid>
             </ListView.Header>
@@ -80,19 +83,18 @@
                 <DataTemplate x:DataType="dtos:ReminderLog">
                     <Grid Padding="12,8">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="83"/>
-                            <ColumnDefinition Width="158"/>
-                            <ColumnDefinition Width="83"/>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="82"/>
+                            <ColumnDefinition Width="82"/>
+                            <ColumnDefinition Width="184"/>
+                            <ColumnDefinition Width="82"/>
+                            <ColumnDefinition Width="36"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="{x:Bind User.Username}" FontWeight="SemiBold"/>
                         <TextBlock Grid.Column="1" Text="{x:Bind LocalDate}"/>
                         <TextBlock Grid.Column="2" Padding="0,0,4,0" TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
                         <TextBlock Grid.Column="3" Text="{x:Bind LocalActionDate}"/>
-                        <TextBlock Grid.Column="4" Text="{x:Bind Complete.ToString()}"/>
-
+                        <CheckBox Grid.Column="4" Padding="0" HorizontalAlignment="Center" MinWidth="0" IsEnabled="False" IsChecked="{x:Bind Complete}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -126,7 +126,6 @@ public partial class ClientViewModel : ObservableObject {
 
         var clientHistory = await _adminClientService.GetClientHistory(id);
         OnUI(() => SelectedClientHistory = clientHistory);
-
     }
 
     // =========================
@@ -188,7 +187,7 @@ public partial class ClientViewModel : ObservableObject {
 
             OnUI(() => {
                 ClientSummaries = new ObservableCollection<AdminClientSummary>(
-                    snapshot.OrderBy(c => c.Name)
+                    snapshot.OrderBy(c => c.LastName)
                     );
                 ReSelect(previousSelection);
             });

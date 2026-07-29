@@ -7,6 +7,6 @@ public record class ReminderLog(
     string Text,
     bool Complete
     ) {
-    public string LocalDate => Date.ToString(format: "MM/dd/yyyy");
-    public string LocalActionDate => ActionDate.ToString(format: "MM/dd/yyyy");
+    public string LocalDate => Date.ToString(format: "MM/dd/yy");
+    public string LocalActionDate => ActionDate.ToString(format: "MM/dd/yy");
 }

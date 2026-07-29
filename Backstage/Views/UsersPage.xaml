@@ -58,7 +58,7 @@
             <ListView x:Name="ListView"
                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
-                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
+                      ItemsSource="{x:Bind ViewModel.Users, Mode=OneWay}" 
                       SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" 
                       ItemClick="ListView_ItemClick">
 
@@ -108,7 +108,7 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind ViewModel.Users.Count, Mode=OneWay}"/>
                     <Run Text="Users"/>
                 </TextBlock>
             </Grid>

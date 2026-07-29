@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -84,6 +85,12 @@ public sealed partial class ClientsPage : Page {
         dialog.Content = new ReminderDetailPage(reminder);
 
         var result = await dialog.ShowAsync();
+    }
+
+    private void User_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not string id) return;
+        ViewModel.RequestUser(id);
+        AppServices.Navigation.Navigate(BackstageView.Users);
     }
 
     private async Task ShowMessage(MessageType type, bool success) {

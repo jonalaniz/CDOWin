@@ -23,7 +23,7 @@ namespace Backstage.Views {
         // =========================
         protected override async void OnNavigatedTo(NavigationEventArgs e) {
             base.OnNavigatedTo(e);
-            await ViewModel.LoadUserSummariesAsync();
+            await ViewModel.RefreshAsync();
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
@@ -31,7 +31,7 @@ namespace Backstage.Views {
         }
 
         private void Refresh_ItemCLick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-            _ = ViewModel.LoadUserSummariesAsync(force: true);
+            _ = ViewModel.RefreshAsync(force: true);
         }
     }
 }

@@ -18,7 +18,6 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
-    private readonly ClientService _service;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -39,7 +38,6 @@ public partial class HomeViewModel : ObservableObject {
     public HomeViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService, ClientService clientService) {
         _dataCoordinator = dataCoordinator;
         _selectionService = selectionService;
-        _service = clientService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
     }
 

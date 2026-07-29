@@ -24,6 +24,7 @@ public partial class ClientViewModel : ObservableObject {
     private readonly ClientService _clientService;
     private readonly DataCoordinator _dataCoordinator;
     private readonly ClientSelectionService _selectionService;
+    private readonly UserSelectionService _userSelectionService;
     private readonly DispatcherQueue _dispatcher;
 
     // =========================
@@ -56,14 +57,21 @@ public partial class ClientViewModel : ObservableObject {
     // =========================
     // Constructor
     // =========================
-    public ClientViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService, AdminClientService adminClientService, ClientService clientService) {
+    public ClientViewModel(
+        DataCoordinator dataCoordinator, 
+        ClientSelectionService selectionService, 
+        UserSelectionService userSelectionService, 
+        AdminClientService adminClientService, 
+        ClientService clientService
+        ) {
         _dataCoordinator = dataCoordinator;
         _selectionService = selectionService;
+        _userSelectionService = userSelectionService;
         _adminClientService = adminClientService;
         _clientService = clientService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();
 
-        _selectionService.ClientSelectionRequested += OnRequesteSelectedClientChange;
+        _selectionService.ClientSelectionRequested += OnRequestSelectedClient;
     }
 
     // =========================
@@ -71,7 +79,7 @@ public partial class ClientViewModel : ObservableObject {
     // =========================
     partial void OnSearchQueryChanged(string value) => _ = RefreshAsync();
 
-    private void OnRequesteSelectedClientChange(int clientId) {
+    private void OnRequestSelectedClient(int clientId) {
         if (Selected != null && Selected.Id == clientId) return;
         SearchQuery = string.Empty;
         OnUI(() => {
@@ -87,8 +95,10 @@ public partial class ClientViewModel : ObservableObject {
     }
 
     // =========================
-    // Client Export
+    // Public Methods
     // =========================
+    public void RequestUser(string userId) => _userSelectionService.RequestSelectedUser(userId);
+
     public async Task<Result> ExportClients() {
         var list = await _adminClientService.GetAllClientRecordsAsync();
         if (list == null) return Result.Fail(new AppError(ErrorKind.Unknown, "Client Export empty", null));

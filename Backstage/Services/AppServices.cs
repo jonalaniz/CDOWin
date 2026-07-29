@@ -32,6 +32,7 @@ public static class AppServices {
     // Data Coordination
     public static DataCoordinator DataCoordinator { get; private set; } = null!;
     public static readonly ClientSelectionService _clientSelectionService = new();
+    public static readonly UserSelectionService _userSelectionService = new();
 
     // ViewModels
     public static BillingViewModel BillingViewModel { get; private set; } = null!;
@@ -39,9 +40,7 @@ public static class AppServices {
     public static ReminderViewModel ReminderViewModel { get; private set; } = null!;
     public static UserViewModel UserViewModel { get; private set; } = null!;
 
-    public static async
-    Task
-InitializeServicesAsync(string baseAddress, string apiKey) {
+    public static async Task InitializeServicesAsync(string baseAddress, string apiKey) {
         // Initialize network service
         var network = new NetworkService();
         await network.Initialize(baseAddress, apiKey);
@@ -79,6 +78,7 @@ InitializeServicesAsync(string baseAddress, string apiKey) {
         ClientViewModel = new ClientViewModel(
             DataCoordinator,
             _clientSelectionService,
+            _userSelectionService,
             AdminClientService,
             ClientService
             );
@@ -90,6 +90,7 @@ InitializeServicesAsync(string baseAddress, string apiKey) {
 
         UserViewModel = new UserViewModel(
             DataCoordinator,
+            _userSelectionService,
             UserService
             );
     }
@@ -118,6 +119,7 @@ InitializeServicesAsync(string baseAddress, string apiKey) {
 
     public static async Task LoadSecondaryDataAsync() {
         _ = ClientViewModel.RefreshAsync();
+        _ = UserViewModel.RefreshAsync();
         _ = DataCoordinator.GetRecentSAsAsync();
         _ = DataCoordinator.GetNewPlacements();
     }

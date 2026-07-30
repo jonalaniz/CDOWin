@@ -73,10 +73,7 @@ public partial class NavigationService : ObservableObject, INavigationService<Ba
         _history.RemoveAt(_history.Count - 1);
         NavigateTo(view);
 
-        // Set our current view
         _currentView = view;
-
-        // Grabs the item from NavigationView and selects it.
         SelectView(view);
     }
 
@@ -98,7 +95,7 @@ public partial class NavigationService : ObservableObject, INavigationService<Ba
         if (_navigationView == null) return;
         var item = _navigationView.MenuItems
             .OfType<NavigationViewItem>()
-            .FirstOrDefault(item => item.Tag is BackstageView viewItem && view == viewItem);
+            .FirstOrDefault(item => item.Tag is BackstageView viewItem && viewItem == view);
         if (item != null) _navigationView.SelectedItem = item;
     }
 }

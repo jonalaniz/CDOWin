@@ -59,4 +59,8 @@ public sealed partial class MainWindow : Window {
         var version = Package.Current.Id.Version;
         return $"Version {version.Major}.{version.Minor}.{version.Build}";
     }
+
+    private void Tbar_BackRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args) {
+        _navigationService.BackRequested();
+    }
 }

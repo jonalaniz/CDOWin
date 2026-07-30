@@ -5,7 +5,6 @@ using CDO.UI.Shared.Helpers;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System.Diagnostics;
 using System.Linq;
 using Windows.ApplicationModel;
 
@@ -29,7 +28,7 @@ public sealed partial class MainWindow : Window {
     // =========================
     // Window Setup
     // =========================
-    private void SetupWindow() {        
+    private void SetupWindow() {
         Tbar.Subtitle = GetAppVersion();
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(Tbar);
@@ -52,10 +51,6 @@ public sealed partial class MainWindow : Window {
 
     private void PaneToggleRequested(TitleBar sender, object args) {
         NavigationView.IsPaneOpen = !NavigationView.IsPaneOpen;
-    }
-
-    private void nvSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {
-        Debug.WriteLine($"Selected: {sender.SelectedItem}");
     }
 
     private void Tbar_BackRequested(TitleBar sender, object args) {

@@ -36,8 +36,7 @@
         <NavigationView Grid.Row="1" x:Name="NavigationView"
                         OpenPaneLength="200"
                         IsBackButtonVisible="Collapsed" 
-                        IsPaneToggleButtonVisible="False"
-                        SelectionChanged="nvSample_SelectionChanged">
+                        IsPaneToggleButtonVisible="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Home" Content="Home" Tag="{x:Bind views:BackstageView.Home}"/>
                 <NavigationViewItem Content="Billing" Tag="{x:Bind views:BackstageView.Billing}">

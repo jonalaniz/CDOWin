@@ -1,4 +1,11 @@
-﻿using Microsoft.UI.Windowing;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using WinRT;
+using Microsoft.UI;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using System.ComponentModel;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
 namespace CDO.UI.Shared.Helpers;
@@ -25,5 +32,27 @@ public class WindowHelper {
         var minHeight = height * scale;
         presenter.PreferredMinimumWidth = (int)minWidth;
         presenter.PreferredMinimumHeight = (int)minHeight;
+    }
+    static public void SetWindowMaxSize(Window window, double width, double height) {
+        if (window.Content is not FrameworkElement windowContent) {
+            System.Diagnostics.Debug.WriteLine("Window content is not a FrameworkElement.");
+            return;
+        }
+
+        if (windowContent.XamlRoot is null) {
+            System.Diagnostics.Debug.WriteLine("Window content's XamlRoot is null.");
+            return;
+        }
+
+        if (window.AppWindow.Presenter is not OverlappedPresenter presenter) {
+            System.Diagnostics.Debug.WriteLine("Window's AppWindow.Presenter is not an OverlappedPresenter.");
+            return;
+        }
+
+        var scale = windowContent.XamlRoot.RasterizationScale;
+        var maxWidth = width * scale;
+        var maxHeight = height * scale;
+        presenter.PreferredMaximumWidth = (int)maxWidth;
+        presenter.PreferredMaximumHeight = (int)maxHeight;
     }
 }

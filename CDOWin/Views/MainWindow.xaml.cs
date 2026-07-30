@@ -1,4 +1,5 @@
 using CDO.Abstractions.Navigation;
+using CDO.UI.Shared.Helpers;
 using CDOWin.Services;
 using CDOWin.Views.Reminders;
 using CommunityToolkit.WinUI;
@@ -32,10 +33,6 @@ public sealed partial class MainWindow : Window {
     // =========================
     private void SetupWindow() {
         ExtendsContentIntoTitleBar = true;
-
-        var manager = WinUIEx.WindowManager.Get(this);
-        manager.MinHeight = 800;
-        manager.MinWidth = 1200;
         Tbar.Subtitle = GetAppVersion();
     }
 
@@ -62,5 +59,10 @@ public sealed partial class MainWindow : Window {
 
     private void Tbar_BackRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args) {
         _navigationService.BackRequested();
+    }
+
+    private void RootGrid_Loaded(object sender, RoutedEventArgs e) {
+        // We need to set the minimum size here because the XamlRoot is not available in the constructor.
+        WindowHelper.SetWindowMinSize(this, 1200, 800);
     }
 }

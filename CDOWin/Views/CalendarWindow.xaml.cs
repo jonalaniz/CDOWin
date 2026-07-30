@@ -1,5 +1,6 @@
 using CDO.Core.Models;
 using CDO.UI.Shared.Factories;
+using CDO.UI.Shared.Helpers;
 using CDOWin.Controls;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -38,10 +39,6 @@ public sealed partial class CalendarWindow : Window {
     // =========================
     private void SetupWindow() {
         ExtendsContentIntoTitleBar = true;
-
-        var manager = WinUIEx.WindowManager.Get(this);
-        manager.MinHeight = 600;
-        manager.MinWidth = 800;
     }
 
     private async Task SetupTitleBarAsync() {
@@ -113,5 +110,10 @@ public sealed partial class CalendarWindow : Window {
 
     private void ExportButton_Click(object sender, RoutedEventArgs e) {
         ViewModel.ExportReminders();
+    }
+
+    private void RootGrid_Loaded(object sender, RoutedEventArgs e) {
+        // We need to set the minimum size here because the XamlRoot is not available in the constructor.
+        WindowHelper.SetWindowMinSize(this, 1200, 800);
     }
 }

@@ -1,6 +1,8 @@
 using Backstage.Services;
 using Backstage.Views;
 using CDO.Abstractions.Navigation;
+using CDO.UI.Shared.Helpers;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Diagnostics;
@@ -27,14 +29,11 @@ public sealed partial class MainWindow : Window {
     // =========================
     // Window Setup
     // =========================
-    private void SetupWindow() {
-        ExtendsContentIntoTitleBar = true;
-
-        var manager = WinUIEx.WindowManager.Get(this);
-        manager.MinHeight = 800;
-        manager.MinWidth = 1200;
+    private void SetupWindow() {        
         Tbar.Subtitle = GetAppVersion();
-        AppWindow.TitleBar.PreferredHeightOption = Microsoft.UI.Windowing.TitleBarHeightOption.Tall;
+        ExtendsContentIntoTitleBar = true;
+        SetTitleBar(Tbar);
+        AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
     }
 
     private void OnActivated(object sender, WindowActivatedEventArgs args) {
@@ -61,5 +60,10 @@ public sealed partial class MainWindow : Window {
 
     private void Tbar_BackRequested(TitleBar sender, object args) {
         _navigationService.BackRequested();
+    }
+
+    private void RootGrid_Loaded(object sender, RoutedEventArgs e) {
+        // We need to set the minimum size here because the XamlRoot is not available in the constructor.
+        WindowHelper.SetWindowMinSize(this, 1200, 800);
     }
 }

@@ -14,15 +14,15 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid>
+    <Grid x:Name="RootGrid" Loaded="RootGrid_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Title Bar -->
-        <TitleBar Grid.Row="0" x:Name="Tbar" Height="48"
-                  Title="Backstage" Subtitle="Beta"
+        <TitleBar x:Name="Tbar" Height="48"
+                  Title="Backstage"
                   IsBackButtonVisible="True"
                   IsBackButtonEnabled="{x:Bind _navigationService.CanGoBack, Mode=OneWay}"
                   BackRequested="Tbar_BackRequested"

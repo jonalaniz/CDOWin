@@ -57,7 +57,7 @@ public partial class NavigationService : ObservableObject, INavigationService<CD
             view == _currentView) return;
 
         NavigateTo(view);
-        if(_currentView is CDOFrame oldFrame) { _history.Add(oldFrame); }
+        if (_currentView is CDOFrame oldFrame) { _history.Add(oldFrame); }
         _currentView = view;
     }
 

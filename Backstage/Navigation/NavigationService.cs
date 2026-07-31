@@ -78,7 +78,7 @@ public partial class NavigationService : ObservableObject, INavigationService<Ba
     }
 
     public void RequestNavigation(BackstageView view) {
-        if (_frame == null || _navigationView == null) return;
+        if (_frame == null || _navigationView == null || _currentView == view) return;
         NavigateTo(view);
         SelectView(view);
     }

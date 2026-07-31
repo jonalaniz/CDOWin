@@ -83,7 +83,7 @@ public partial class NavigationService : ObservableObject, INavigationService<CD
     }
 
     public void RequestNavigation(CDOFrame view) {
-        if (_frame == null || _navigationView == null) return;
+        if (_frame == null || _navigationView == null || _currentView == view) return;
         NavigateTo(view);
         SelectView(view);
     }

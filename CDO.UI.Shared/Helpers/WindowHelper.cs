@@ -1,11 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using WinRT;
-using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using System.ComponentModel;
-using Microsoft.UI.Windowing;
+﻿using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
 namespace CDO.UI.Shared.Helpers;

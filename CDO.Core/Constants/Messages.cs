@@ -3,6 +3,7 @@
 public enum MessageType {
     CreatedReminder,
     ExportedClients,
+    ExportedSAs,
     MarkedBilled,
     MarkedInactive,
     MarkedTTW
@@ -30,6 +31,8 @@ public static class Messages {
         (MessageType.CreatedReminder, false) => "Unable to create reminder.",
         (MessageType.ExportedClients, true) => "Successfully exported Clients.",
         (MessageType.ExportedClients, false) => "Unable to export Clients.",
+        (MessageType.ExportedSAs, true) => "Successfully exported SAs.",
+        (MessageType.ExportedSAs, false) => "Unable to export SAs.",
         (MessageType.MarkedBilled, true) => "Successfully marked SA as billed.",
         (MessageType.MarkedBilled, false) => "Unable to mark SA as billed.",
         (MessageType.MarkedInactive, true) => "Successfully marked Client inactive.",

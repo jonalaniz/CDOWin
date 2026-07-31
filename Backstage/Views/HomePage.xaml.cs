@@ -106,6 +106,27 @@ public sealed partial class HomePage : Page {
         await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
 
+    // SAs
+    private async void ExportExpiringSAs_Click(object sender, RoutedEventArgs e) {
+        if (sender is not MenuFlyoutItem item) return;
+        item.IsEnabled = false;
+
+        var infoBar = new InfoBar {
+            Title = "Exporting",
+            Severity = InfoBarSeverity.Informational,
+            Message = "This may take a while",
+            IsOpen = true
+        };
+
+        InfoBarContainer.Children.Add(infoBar);
+
+        var result = await ViewModel.ExportSAs();
+        item.IsEnabled = true;
+        InfoBarContainer.Children.Remove(infoBar);
+
+        await ShowMessage(MessageType.ExportedSAs, result.IsSuccess);
+    }
+
     // Reminders
 
     private async void CreateSAReminder_Today_Click(object sender, RoutedEventArgs e) {

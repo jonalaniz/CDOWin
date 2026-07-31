@@ -180,14 +180,23 @@
                 <StackPanel Grid.Row="1" Style="{StaticResource VerticalScrollViewerContent}">
                     
                     <!-- Section Title -->
-                    <Grid Margin="0,0,16,0">
+                    <Grid Margin="0,0,16,0" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
                         <TextBlock Grid.Column="0" Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
-                        <TextBlock Grid.Column="1" Text="{x:Bind BillingViewModel.ExpiringSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
+                        <Button Grid.Column="1" VerticalAlignment="Bottom" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="More">
+                            <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                            <Button.Flyout>
+                                <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                    <MenuFlyoutItem Text="Export SAs" Click="ExportExpiringSAs_Click"/>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{x:Bind BillingViewModel.ExpiringSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
                     </Grid>
                     
                     <!-- Horizontal ScrollView Content -->

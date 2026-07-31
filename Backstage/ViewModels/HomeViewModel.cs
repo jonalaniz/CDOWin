@@ -1,6 +1,8 @@
-﻿using Backstage.Data;
+﻿using Backstage.Composers;
+using Backstage.Data;
 using Backstage.Services;
 using CDO.Core.DTOs.Admin;
+using CDO.Core.ErrorHandling;
 using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -44,8 +46,15 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     // Public Methods
     // =========================
-
     public void RequestClient(int clientId) => _selectionService.RequestSelectedClient(clientId);
+
+    public async Task<Result> ExportSAs() {
+        var list = await _dataCoordinator.GetExpiringSAsAsync();
+        if (list == null) return Result.Fail(new AppError(ErrorKind.Unknown, "SA Export empty", null));
+        var composer = new SAComposer();
+        composer.BuildCSV(list.ToList());
+        return Result.Success();
+    }
 
     // =========================
     // Get Methods

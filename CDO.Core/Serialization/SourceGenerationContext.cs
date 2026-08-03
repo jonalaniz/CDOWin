@@ -1,4 +1,5 @@
-﻿using CDO.Core.DTOs.Admin;
+﻿using CDO.Core.DTOs.Activities;
+using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Clients;
 using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Counselors;
@@ -88,4 +89,8 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(SessionToken))]
 [JsonSerializable(typeof(UserStub))]
 
+
+[JsonSerializable(typeof(UserDetail))]
+[JsonSerializable(typeof(UserActivity))]
+[JsonSerializable(typeof(List<UserActivity>))]
 public partial class SourceGenerationContext : JsonSerializerContext { }

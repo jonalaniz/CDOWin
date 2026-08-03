@@ -9,6 +9,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:dtos="using:CDO.Core.DTOs.Admin"
+    xmlns:activities="using:CDO.Core.DTOs.Activities"
     mc:Ignorable="d">
 
     <Grid>
@@ -168,7 +169,7 @@
                 
                 <!-- Content -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="dtos:ClientActivity">
+                    <DataTemplate x:DataType="activities:ClientActivity">
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="180"/>

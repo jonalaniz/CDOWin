@@ -1,4 +1,4 @@
-﻿namespace CDO.Core.DTOs.Admin;
+﻿namespace CDO.Core.DTOs.Activities;
 
 public record class ClientActivity(
     string Id,

@@ -1,4 +1,6 @@
-﻿namespace CDO.Core.DTOs.Admin;
+﻿using CDO.Core.DTOs.Activities;
+
+namespace CDO.Core.DTOs.Admin;
 
 public record class ClientHistory(
     int Id,

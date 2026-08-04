@@ -2,7 +2,7 @@
 
 namespace CDO.Core.DTOs.Users;
 
-public record class UserDetail(
+public record class UserHistory(
         string Id,
         string Username,
         bool Admin,

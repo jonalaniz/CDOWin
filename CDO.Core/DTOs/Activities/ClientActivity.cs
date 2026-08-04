@@ -7,6 +7,5 @@ public record class ClientActivity(
     string UserID,
     string Action
     ) {
-
     public string FormattedDate => Date.ToLocalTime().ToString();
 }

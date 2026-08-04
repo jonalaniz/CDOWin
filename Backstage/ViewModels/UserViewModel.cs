@@ -1,6 +1,7 @@
 ﻿using Backstage.Data;
 using Backstage.Services;
 using CDO.Core.DTOs.Admin;
+using CDO.Core.DTOs.Users;
 using CDO.Core.Services.Admin;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -37,7 +38,11 @@ public partial class UserViewModel : ObservableObject {
     public partial UserSummary? Selected { get; set; }
 
     [ObservableProperty]
+    public partial UserHistory? SelectedUserHistory { get; set; }
+
+    [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
+
 
     // =========================
     // Constructor
@@ -64,6 +69,11 @@ public partial class UserViewModel : ObservableObject {
                 Selected = summary;
         }
         );
+    }
+
+    partial void OnSelectedChanged(UserSummary? value) {
+        if (value == null) return;
+        _ = LoadSelectedUserHistory(value.Id);
     }
 
     // =========================
@@ -97,6 +107,12 @@ public partial class UserViewModel : ObservableObject {
                 ReSelect(previousSelection);
             });
         } catch (OperationCanceledException) { }
+    }
+
+    public async Task LoadSelectedUserHistory(string id) {
+        var userHistory = await _service.GetUserHistory(id);
+        if (userHistory is null) return;
+        OnUI(() => SelectedUserHistory = userHistory);
     }
 
     // =========================

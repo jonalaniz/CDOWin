@@ -90,7 +90,7 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(UserStub))]
 
 
-[JsonSerializable(typeof(UserDetail))]
+[JsonSerializable(typeof(UserHistory))]
 [JsonSerializable(typeof(UserActivity))]
 [JsonSerializable(typeof(List<UserActivity>))]
 public partial class SourceGenerationContext : JsonSerializerContext { }

@@ -20,6 +20,10 @@ public class UserService {
         return _network.GetAsync<List<UserSummary>>(Endpoints.Users);
     }
 
+    public Task<UserHistory?> GetUserHistory(string id) {
+        return _network.GetAsync<UserHistory>(Endpoints.User(id));
+    }
+
     // -----------------------------
     // POST
     // -----------------------------

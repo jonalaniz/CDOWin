@@ -17,7 +17,7 @@ public static class AppServices {
     public static INetworkService NetworkService { get; private set; } = null!;
 
     // Navigation
-    public static INavigationService<BackstageView> Navigation { get; } = new NavigationService();
+    public static INavigationService<BackstageView> Navigation { get; private set; } = null!;
 
     // Services (Network-based)
     public static HomeViewModel HomeViewModel { get; private set; } = null!;
@@ -62,6 +62,11 @@ public static class AppServices {
             AdminReminderService,
             UserService
             );
+
+        // Initialize NavigationService
+        var navigation = new NavigationService();
+        navigation.AddNavigationHandlers(_clientSelectionService, _userSelectionService);
+        Navigation = navigation;
 
         // Initialize ViewModels
         HomeViewModel = new HomeViewModel(

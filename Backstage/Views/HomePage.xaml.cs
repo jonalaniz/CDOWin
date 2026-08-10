@@ -167,7 +167,6 @@ public sealed partial class HomePage : Page {
     private void ClientButton_Click(object sender, RoutedEventArgs e) {
         if (sender is not Control control || control.Tag is not int id) return;
         ViewModel.RequestClient(id);
-        AppServices.Navigation.RequestNavigation(BackstageView.Clients);
     }
 
     private async Task ShowMessage(MessageType type, bool success) {

@@ -1,4 +1,5 @@
-﻿using Backstage.Views;
+﻿using Backstage.Services;
+using Backstage.Views;
 using CDO.Abstractions.Navigation;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
@@ -9,13 +10,23 @@ using System.Linq;
 
 namespace Backstage.Navigation;
 
-public partial class NavigationService : ObservableObject, INavigationService<BackstageView> {
+public interface IBackstageNavigationHanlder {
+    void AddNavigationHandlers(ClientSelectionService clientSelectionService, UserSelectionService userSelectionService);
+}
+
+public partial class NavigationService : ObservableObject, INavigationService<BackstageView>, IBackstageNavigationHanlder {
 
     // =========================
     // Dependencies
     // =========================
     private NavigationView? _navigationView;
     private Frame? _frame;
+
+    // =========================
+    // Selection Services
+    // =========================
+    private ClientSelectionService? _clientSelectionService;
+    private UserSelectionService? _userSelectionService;
 
     // =========================
     // State
@@ -63,6 +74,14 @@ public partial class NavigationService : ObservableObject, INavigationService<Ba
         _navigationView = navigationView;
         _frame = frame;
         _navigationView.SelectionChanged += OnSelectionChanged;
+    }
+
+    public void AddNavigationHandlers(ClientSelectionService clientSelectionService, UserSelectionService userSelectionService) {
+        _clientSelectionService = clientSelectionService;
+        _clientSelectionService.ClientSelectionRequested += (_) => RequestNavigation(BackstageView.Clients);
+
+        _userSelectionService = userSelectionService;
+        _userSelectionService.UserSelectionRequested += (_) => RequestNavigation(BackstageView.Users);
     }
 
     public void BackRequested() {

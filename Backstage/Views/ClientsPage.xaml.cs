@@ -89,7 +89,6 @@ public sealed partial class ClientsPage : Page {
     private void User_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not string id) return;
         ViewModel.RequestUser(id);
-        AppServices.Navigation.RequestNavigation(BackstageView.Users);
     }
 
     private async Task ShowMessage(MessageType type, bool success) {

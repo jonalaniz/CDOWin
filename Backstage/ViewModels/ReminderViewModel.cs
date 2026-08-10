@@ -44,9 +44,8 @@ public partial class ReminderViewModel : ObservableObject {
         var reminders = await _dataCoordinator.GetRemindersAsync(force);
         if (reminders == null) return;
 
-        var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
         OnUI(() => {
-            Reminders = new ObservableCollection<AdminReminderDetail>(snapshot);
+            Reminders = new ObservableCollection<AdminReminderDetail>(reminders);
         });
     }
 

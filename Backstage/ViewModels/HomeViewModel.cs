@@ -73,9 +73,8 @@ public partial class HomeViewModel : ObservableObject {
         var notes = await _dataCoordinator.GetRecentNotesAsync(force);
         if (notes == null) return;
 
-        var snapshot = notes.OrderBy(n => n.Date).ToList().AsReadOnly();
         OnUI(() => {
-            RecentNotes = new ObservableCollection<AdminClientNote>(snapshot);
+            RecentNotes = new ObservableCollection<AdminClientNote>(notes);
         });
     }
 

@@ -115,9 +115,8 @@ public partial class ClientViewModel : ObservableObject {
         var clients = await _dataCoordinator.GetRecentClientsAsync(force);
         if (clients == null) return;
 
-        var snapshot = clients.OrderBy(c => c.UpdatedAt).ToList().AsReadOnly();
         OnUI(() => {
-            RecentClients = new ObservableCollection<AdminClientSummary>(snapshot);
+            RecentClients = new ObservableCollection<AdminClientSummary>(clients);
         });
     }
 

@@ -231,7 +231,7 @@
                                                 <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                                                 <Button.Flyout>
                                                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                        <MenuFlyoutItem Text="Go to Client" Click="ClientButton_Click" Tag="{x:Bind Id}"/>
+                                                        <MenuFlyoutItem Text="Go to Client" Click="ClientButton_Click" Tag="{x:Bind ClientID}"/>
                                                     </MenuFlyout>
                                                 </Button.Flyout>
                                             </Button>

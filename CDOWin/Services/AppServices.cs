@@ -22,7 +22,7 @@ public static class AppServices {
     private static readonly PowerStateObserver _powerObserver = new(_suspensionService);
 
     // Navigation
-    public static INavigationService<CDOFrame> Navigation { get; } = new NavigationService();
+    public static INavigationService<CDOFrame>? Navigation { get; private set; }
 
     // Services (Network-based)
     public static IClientService ClientService { get; private set; } = null!;
@@ -78,6 +78,16 @@ public static class AppServices {
             StateService,
             _invalidationService
         );
+
+        // Initialize NavigationService
+        var navigation = new NavigationService();
+        navigation.AddNavigationHandlers(
+            _clientSelectionService, 
+            _counselorSelecitonService, 
+            _employerSelectionService, 
+            _placementSelectionService
+            );
+        Navigation = navigation;
 
         // Initialize ViewModels
         ClientsViewModel = new ClientsViewModel(

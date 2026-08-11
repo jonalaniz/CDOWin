@@ -1,4 +1,5 @@
 ﻿using CDO.Abstractions.Navigation;
+using CDOWin.Services;
 using CDOWin.Views;
 using CDOWin.Views.Clients;
 using CDOWin.Views.Counselors;
@@ -22,6 +23,11 @@ public partial class NavigationService : ObservableObject, INavigationService<CD
     // =========================
     private NavigationView? _navigationView;
     private Frame? _frame;
+
+    private ClientSelectionService? _clientSelectionService;
+    private CounselorSelectionService? _counselorSelectionService;
+    private EmployerSelectionService? _employerSelectionService;
+    private PlacementSelectionService? _placementSelectionService;
 
     // =========================
     // State
@@ -68,6 +74,24 @@ public partial class NavigationService : ObservableObject, INavigationService<CD
         _navigationView = navigationView;
         _frame = frame;
         _navigationView.SelectionChanged += OnSelectionChanged;
+    }
+
+    public void AddNavigationHandlers(
+        ClientSelectionService clientSelectionService, 
+        CounselorSelectionService counselorSelectionService, 
+        EmployerSelectionService employerSelectionService, 
+        PlacementSelectionService placementSelectionService) {
+        _clientSelectionService = clientSelectionService;
+        _clientSelectionService.ClientSelectionRequested += (_) => RequestNavigation(CDOFrame.Clients);
+
+        _counselorSelectionService = counselorSelectionService;
+        _counselorSelectionService.CounselorSelectionRequested += (_) => RequestNavigation(CDOFrame.Counselors);
+
+        _employerSelectionService = employerSelectionService;
+        _employerSelectionService.EmployerSelectionRequested += (_) => RequestNavigation(CDOFrame.Employers);
+
+        _placementSelectionService = placementSelectionService;
+        _placementSelectionService.PlacementSelectionRequested += (_) => RequestNavigation(CDOFrame.Placements);
     }
 
     public void BackRequested() {

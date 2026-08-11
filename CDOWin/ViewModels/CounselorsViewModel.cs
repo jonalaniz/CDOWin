@@ -90,7 +90,6 @@ public partial class CounselorsViewModel : ObservableObject {
     }
 
     public void RequestClient(int clientID) {
-        AppServices.Navigation.RequestNavigation(Views.CDOFrame.Clients);
         _clientSelectionService.RequestSelectedClient(clientID);
     }
 

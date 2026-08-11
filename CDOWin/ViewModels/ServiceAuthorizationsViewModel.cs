@@ -78,12 +78,10 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // Public Methods
     // =========================
     public void RequestClient(int clientID) {
-        AppServices.Navigation.RequestNavigation(Views.CDOFrame.Clients);
         _clientSelectionService.RequestSelectedClient(clientID);
     }
 
     public void RequestCounselor(int counselorID) {
-        AppServices.Navigation.RequestNavigation(Views.CDOFrame.Counselors);
         _counselorSelectionService.RequestSelectedCounselor(counselorID);
     }
 

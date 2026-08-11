@@ -10,11 +10,7 @@ using System.Linq;
 
 namespace Backstage.Navigation;
 
-public interface IBackstageNavigationHanlder {
-    void AddNavigationHandlers(ClientSelectionService clientSelectionService, UserSelectionService userSelectionService);
-}
-
-public partial class NavigationService : ObservableObject, INavigationService<BackstageView>, IBackstageNavigationHanlder {
+public partial class NavigationService : ObservableObject, INavigationService<BackstageView> {
 
     // =========================
     // Dependencies

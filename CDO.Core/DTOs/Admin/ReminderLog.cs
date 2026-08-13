@@ -5,7 +5,7 @@ public record class ReminderLog(
     DateTime Date,
     DateTime ActionDate,
     string Text,
-    bool Complete
+    bool Completed
     ) {
     public string LocalDate => Date.ToString(format: "MM/dd/yy");
     public string LocalActionDate => ActionDate.ToString(format: "MM/dd/yy");

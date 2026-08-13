@@ -2,12 +2,12 @@
 
 public record class AdminReminderDetail(
     int Id,
-    DateTime Date,
-    string Description,
+    DateTime ActionDate,
+    string Text,
     int ClientID,
-    bool Complete,
+    bool Completed,
     ReminderLog[] Logs,
     string? ClientName
     ) {
-    public string LocalDate => Date.ToString(format: "MM/dd/yyyy");
+    public string LocalDate => ActionDate.ToString(format: "MM/dd/yyyy");
 }

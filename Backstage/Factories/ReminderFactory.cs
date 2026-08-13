@@ -21,16 +21,16 @@ public static class ReminderFactory {
     public static NewReminder CreateClientReminder(int clientId, ReminderDate date) {
         return new NewReminder(
             ClientID: clientId,
-            Date: Date(date),
-            Description: Description(ClientReminderType.StaleClient)
+            ActionDate: Date(date),
+            Text: Description(ClientReminderType.StaleClient)
             );
     }
 
     public static NewReminder CreateSAReminder(int clientId, ReminderDate date, string saNumber, SAReminderType type) {
         return new NewReminder(
             ClientID: clientId,
-            Date: Date(date),
-            Description: Description(type, saNumber)
+            ActionDate: Date(date),
+            Text: Description(type, saNumber)
             );
     }
 

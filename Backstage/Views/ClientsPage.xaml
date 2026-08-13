@@ -248,7 +248,7 @@
 
                             <!-- Button -->
                             <Button Style="{StaticResource BackstageListButton}" BorderThickness="0,0,0,1"
-                                    Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}"
+                                    Opacity="{x:Bind Completed, Converter={StaticResource BoolOpacityConverter}}"
                                     Tag="{x:Bind Id}" Click="Reminder_Click">
                                 <Grid RowSpacing="4">
                                     <Grid.RowDefinitions>
@@ -269,7 +269,7 @@
 
                                     <!-- Row 1: Text -->
                                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                                           Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
+                                           Text="{x:Bind Text}" TextWrapping="WrapWholeWords"/>
                                 </Grid>
                             </Button>
                         </DataTemplate>

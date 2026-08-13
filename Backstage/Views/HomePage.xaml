@@ -162,11 +162,11 @@
 
                                         <!-- Button -->
                                         <Button Style="{StaticResource BackstageListButton}"
-                                                Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}"
+                                                Opacity="{x:Bind Completed, Converter={StaticResource BoolOpacityConverter}}"
                                                 Tag="{x:Bind Id}" Click="Reminder_Click">
                                             <StackPanel Spacing="4">
                                                 <TextBlock FontWeight="Bold" Text="{x:Bind ClientName}"/>
-                                                <TextBlock Text="{x:Bind Description}" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Text="{x:Bind Text}" TextWrapping="WrapWholeWords"/>
                                             </StackPanel>
                                         </Button>
                                     </DataTemplate>

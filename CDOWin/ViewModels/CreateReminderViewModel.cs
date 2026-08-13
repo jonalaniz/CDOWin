@@ -19,7 +19,7 @@ public partial class CreateReminderViewModel(IReminderService service, int clien
     // =========================
     // Fields
     // =========================
-    public DateTime Date = DateTime.Now.Date;
+    public DateTime ActionDate = DateTime.Now.Date;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -34,7 +34,7 @@ public partial class CreateReminderViewModel(IReminderService service, int clien
     // CRUD Methods
     // =========================
     public async Task<Result<Reminder>> CreateReminderAsync() {
-        NewReminder reminder = new(ClientID: _clientId, Date: Date.ToUniversalTime(), Description: Description);
+        NewReminder reminder = new(ClientID: _clientId, ActionDate: ActionDate.ToUniversalTime(), Text: Description);
         return await _service.CreateRemindersAsync(reminder);
     }
 }

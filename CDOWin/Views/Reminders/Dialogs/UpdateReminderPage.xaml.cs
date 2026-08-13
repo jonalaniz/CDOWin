@@ -26,7 +26,7 @@ public sealed partial class UpdateReminderPage : Page {
     // UI Setup
     // =========================
     private void SetupDatePicker() {
-        if (ViewModel.Original.Date is DateTime date) {
+        if (ViewModel.Original.ActionDate is DateTime date) {
             DatePicker.Date = date;
         }
     }
@@ -35,12 +35,12 @@ public sealed partial class UpdateReminderPage : Page {
     // Property Change Methods
     // =========================
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-        if (ViewModel.Original.Date is DateTime date) {
+        if (ViewModel.Original.ActionDate is DateTime date) {
             if (date == DatePicker.Date)
                 return;
 
             if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-                ViewModel.Updated.Date = offset.DateTime.Date.ToUniversalTime();
+                ViewModel.Updated.ActionDate = offset.DateTime.Date.ToUniversalTime();
             }
         }
     }
@@ -54,12 +54,12 @@ public sealed partial class UpdateReminderPage : Page {
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        ViewModel.Updated.Description = text;
+        ViewModel.Updated.Text = text;
     }
 
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
         if (sender is CheckBox checkbox) {
-            ViewModel.Updated.Complete = checkbox.IsChecked;
+            ViewModel.Updated.Completed = checkbox.IsChecked;
         }
     }
 
@@ -73,6 +73,6 @@ public sealed partial class UpdateReminderPage : Page {
         // Set our date
         var newDate = offset.AddDays(days);
         DatePicker.Date = newDate;
-        ViewModel.Updated.Date = newDate.DateTime.Date.ToUniversalTime();
+        ViewModel.Updated.ActionDate = newDate.DateTime.Date.ToUniversalTime();
     }
 }

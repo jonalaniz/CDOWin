@@ -28,7 +28,7 @@
         <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Spacing="8">
             <TextBlock Text="Status"/>
             <CheckBox VerticalAlignment="Bottom" Content="Mark Completed" 
-                      IsChecked="{x:Bind ViewModel.Original.Complete}" Click="Checkbox_Clicked"/>
+                      IsChecked="{x:Bind ViewModel.Original.Completed}" Click="Checkbox_Clicked"/>
         </StackPanel>
         
         <!-- Row 1: Defer Times -->
@@ -45,7 +45,7 @@
 
         <!-- Row 3: Description -->
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Description" 
-                 Text="{x:Bind ViewModel.Original.Description}"
+                 Text="{x:Bind ViewModel.Original.Text}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="250"/>
     </Grid>

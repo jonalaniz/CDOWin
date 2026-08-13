@@ -12,13 +12,13 @@ class RemindersComposer {
     private readonly StringBuilder csv = new();
 
     public void BuildCSV(List<Reminder> list) {
-        csv.AppendLine("Date,ClientDetail,Description");
+        csv.AppendLine("ActionDate,ClientDetail,Text");
 
         foreach (var reminder in list)
             csv.AppendLine(
-                $"{reminder.Date:yyyy-MM-dd}," +
+                $"{reminder.ActionDate:yyyy-MM-dd}," +
                 $"{reminder.ClientName}," +
-                $"\"{reminder.Description?.Replace("\"", "\"\"")}\""
+                $"\"{reminder.Text?.Replace("\"", "\"\"")}\""
                 );
 
         File.WriteAllText(_filePath, csv.ToString(), Encoding.UTF8);

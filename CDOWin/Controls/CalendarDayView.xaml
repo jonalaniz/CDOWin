@@ -31,7 +31,7 @@
                                 Background="{ThemeResource CardBackgroundFillColorDefault}"
                                 HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Tag="{x:Bind Id}" Click="Button_Click">
-                            <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
+                            <Grid Opacity="{x:Bind Completed, Converter={StaticResource BoolOpacityConverter}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -41,7 +41,7 @@
 
                                 <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            FontSize="13" FontWeight="Normal" TextWrapping="WrapWholeWords" 
-                                           Text="{x:Bind Description}"/>
+                                           Text="{x:Bind Text}"/>
                             </Grid>
                         </Button>
                     </DataTemplate>

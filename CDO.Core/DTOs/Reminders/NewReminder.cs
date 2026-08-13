@@ -2,6 +2,6 @@ namespace CDO.Core.DTOs.Reminders;
 
 public record class NewReminder(
     int ClientID,
-    DateTime Date,
-    string Description
+    DateTime ActionDate,
+    string Text
 );

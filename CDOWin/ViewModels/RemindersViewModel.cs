@@ -94,8 +94,8 @@ public partial class RemindersViewModel : ObservableObject {
     public IReadOnlyDictionary<DateTime, IReadOnlyList<Reminder>> GetRemindersByMonth(DateTime month) {
         var dict = new Dictionary<DateTime, IReadOnlyList<Reminder>>();
         foreach (var group in _cache
-            .Where(r => r.Date.Month == month.Month)
-            .GroupBy(r => r.Date.Date)
+            .Where(r => r.ActionDate.Month == month.Month)
+            .GroupBy(r => r.ActionDate.Date)
             .OrderBy(g => g.Key)) {
             dict[group.Key] = group.ToList();
         }
@@ -104,7 +104,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     public List<Reminder> GetRemindsListForMonth(DateTime month) {
         return _cache
-            .Where(r => r.Date.Date.Month == month.Month)
+            .Where(r => r.ActionDate.Date.Month == month.Month)
             .ToList();
     }
 
@@ -113,7 +113,7 @@ public partial class RemindersViewModel : ObservableObject {
     public void DeferDate(int id, int days) {
         var reminder = Filtered.FirstOrDefault(r => r.Id == id);
         if (reminder != null) {
-            var update = new ReminderUpdate { Date = reminder.Date.AddDays(days) };
+            var update = new ReminderUpdate { ActionDate = reminder.ActionDate.AddDays(days) };
             _ = UpdateReminderAsync(id, update);
         }
     }
@@ -121,14 +121,14 @@ public partial class RemindersViewModel : ObservableObject {
     public void ToggleCompleted(int id) {
         var reminder = Filtered.FirstOrDefault(r => r.Id == id);
         if (reminder != null) {
-            var update = new ReminderUpdate { Complete = !reminder.Complete };
+            var update = new ReminderUpdate { Completed = !reminder.Completed };
             _ = UpdateReminderAsync(id, update);
         }
     }
 
     public Reminder? GetReminderByID(int id) => _cache.FirstOrDefault(r => r.Id == id);
 
-    public bool DateHasReminders(DateTime date) => _cache.Any(r => r.Date.Date == date.Date);
+    public bool DateHasReminders(DateTime date) => _cache.Any(r => r.ActionDate.Date == date.Date);
 
     public void ApplyDateFilter(DateTime date) {
         Filter = RemindersFilter.Date;
@@ -171,7 +171,7 @@ public partial class RemindersViewModel : ObservableObject {
         var reminders = await _dataCoordinator.GetRemindersAsync(_ctSource.Token, force);
         if (reminders == null) return;
 
-        var snapshot = reminders.OrderBy(r => r.Date).ToList().AsReadOnly();
+        var snapshot = reminders.OrderBy(r => r.ActionDate).ToList().AsReadOnly();
         _cache = snapshot;
 
         _dispatcher.TryEnqueue(ApplyFilter);
@@ -229,7 +229,7 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     private void OnClientChanged(ClientDetail? client) {
         var reminders = client?.Reminders?
-            .OrderBy(r => r.Date)
+            .OrderBy(r => r.ActionDate)
             .ToList();
 
         OnUI(() => {
@@ -255,7 +255,7 @@ public partial class RemindersViewModel : ObservableObject {
     private void ApplyFilter() {
         IEnumerable<Reminder> source = _filter switch {
             RemindersFilter.All => _cache,
-            RemindersFilter.Upcoming => _cache.Where(r => r.Date > DateTime.Now.AddDays(-1)),
+            RemindersFilter.Upcoming => _cache.Where(r => r.ActionDate > DateTime.Now.AddDays(-1)),
             RemindersFilter.Client => ClientSpecific,
             RemindersFilter.Date => DateSpecifc(),
             _ => []
@@ -270,7 +270,7 @@ public partial class RemindersViewModel : ObservableObject {
 
     private IReadOnlyList<Reminder> DateSpecifc() {
         return _cache
-            .Where(r => r.Date.Date == _selectedDate.Date)
+            .Where(r => r.ActionDate.Date == _selectedDate.Date)
             .ToList()
             .AsReadOnly();
     }

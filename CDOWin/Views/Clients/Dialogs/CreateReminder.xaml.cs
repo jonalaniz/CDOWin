@@ -35,7 +35,7 @@ public sealed partial class CreateReminder : Page {
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
         if (sender is CalendarDatePicker datePicker && datePicker.Date is DateTimeOffset dateTimeOffset) {
             var dateTime = dateTimeOffset.DateTime.Date;
-            ViewModel.Date = dateTime;
+            ViewModel.ActionDate = dateTime;
         }
     }
 
@@ -54,6 +54,6 @@ public sealed partial class CreateReminder : Page {
         // Set our date
         var newDate = offset.AddDays(days);
         DatePicker.Date = newDate;
-        ViewModel.Date = newDate.DateTime.Date;
+        ViewModel.ActionDate = newDate.DateTime.Date;
     }
 }

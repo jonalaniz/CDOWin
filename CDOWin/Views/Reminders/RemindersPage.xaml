@@ -70,7 +70,7 @@
                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                          BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                                          Tag="{x:Bind Id}">
-                                <Grid Opacity="{x:Bind Complete, Converter={StaticResource BoolOpacityConverter}}">
+                                <Grid Opacity="{x:Bind Completed, Converter={StaticResource BoolOpacityConverter}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
@@ -90,14 +90,14 @@
 
                                     <TextBlock Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                FontWeight="Normal" TextWrapping="WrapWholeWords" 
-                                               Text="{x:Bind Description}"/>
+                                               Text="{x:Bind Text}"/>
                                 </Grid>
 
                                 <!-- Split Button Flyout -->
                                 <SplitButton.Flyout>
                                     <MenuFlyout Placement="Right">
                                         <!-- Section 0: Completion / Goto Client -->
-                                        <MenuFlyoutItem Text="{x:Bind Complete, Converter={StaticResource BoolCompletedConverter}}" 
+                                        <MenuFlyoutItem Text="{x:Bind Completed, Converter={StaticResource BoolCompletedConverter}}" 
                                                         Click="ToggleCompleted_Click" Tag="{x:Bind Id}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xF0B5;" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>

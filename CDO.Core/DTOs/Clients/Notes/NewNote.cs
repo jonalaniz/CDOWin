@@ -2,6 +2,6 @@
 
 public record class NewNote(
     DateTime Date,
-    string Note,
+    string Text,
     string? Author
 );

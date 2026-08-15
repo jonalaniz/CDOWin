@@ -48,7 +48,7 @@ public partial class CreateNoteViewModel(IClientService service, int clientId) :
         if (!CanSave)
             return Result<ClientNote>.Fail(new AppError(ErrorKind.Validation, "Missing required fields.", null));
 
-        NewNote note = new(Date: Date, Note: Note, Author: Author);
+        NewNote note = new(Date: Date, Text: Note, Author: Author);
         return await _service.CreateClientNoteAsync(note, clientId);
     }
 }

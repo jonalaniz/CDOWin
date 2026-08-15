@@ -5,6 +5,6 @@ public record class AdminClientNote(
     string ClientName,
     int ClientId,
     DateTime Date,
-    string Note,
+    string Text,
     string? Author
 );

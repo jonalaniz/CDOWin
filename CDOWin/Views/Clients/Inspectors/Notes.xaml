@@ -103,7 +103,7 @@
                                        Text="{x:Bind Author}"
                                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
                             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,4,0,0"
-                                       Text="{x:Bind Note}" TextWrapping="Wrap"
+                                       Text="{x:Bind Text}" TextWrapping="Wrap"
                                        IsReadOnly="True" BorderThickness="1"
                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
 

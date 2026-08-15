@@ -28,7 +28,7 @@
         <!-- Row 1: Notes -->
         <TextBox Grid.Row="2" MaxHeight="200"
                  Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Note" Text="{x:Bind ViewModel.Original.Note}"
+                 Header="Note" Text="{x:Bind ViewModel.Original.Text}"
                  TextChanged="Note_TextChanged"/>
     </Grid>
 </Page>

@@ -39,7 +39,7 @@ public sealed partial class UpdateNote : Page {
         var text = textbox.Text.NormalizeString();
 
         if (string.IsNullOrWhiteSpace(text)) return;
-        ViewModel.Updated.Note = text;
+        ViewModel.Updated.Text = text;
     }
 
     private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e) {

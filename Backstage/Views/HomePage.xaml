@@ -130,7 +130,7 @@
                                                     <TextBlock Grid.Column="0" FontWeight="Bold" Text="{x:Bind ClientName}"/>
                                                     <TextBlock Grid.Column="1" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" FontWeight="Bold" Text="{x:Bind Author}"/>
                                                 </Grid>
-                                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Note}"/>
+                                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
                                             </StackPanel>
                                         </Button>
                                     </DataTemplate>

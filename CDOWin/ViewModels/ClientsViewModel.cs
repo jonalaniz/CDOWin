@@ -288,7 +288,7 @@ public partial class ClientsViewModel : ObservableObject {
         IEnumerable<ClientNote> result = Selected.ClientNotes;
         if (!string.IsNullOrWhiteSpace(NotesSearchQuery)) {
             var query = NotesSearchQuery.Trim().ToLower();
-            result = result.Where(n => n.Note.Contains(query, StringComparison.CurrentCultureIgnoreCase));
+            result = result.Where(n => n.Text.Contains(query, StringComparison.CurrentCultureIgnoreCase));
         }
 
         OnUI(() => {

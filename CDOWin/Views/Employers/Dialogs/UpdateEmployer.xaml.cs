@@ -14,14 +14,14 @@ public sealed partial class UpdateEmployer : Page {
     // =========================
     // Dependencies
     // =========================
-    private List<State> _states = AppServices.StatesViewModel.States.ToList();
-    private EmployerUpdateViewModel ViewModel;
+    private List<State> _states = AppServices.States();
+    private readonly EmployerUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateEmployer(EmployerUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         BuildStateDropdown();
     }
@@ -48,7 +48,7 @@ public sealed partial class UpdateEmployer : Page {
     private void StateSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             var state = item.Tag.ToString();
-            ViewModel.Updated.State = state;
+            _viewModel.Updated.State = state;
             StateDropDownButton.Content = state;
         }
     }
@@ -73,60 +73,60 @@ public sealed partial class UpdateEmployer : Page {
     private void UpdateModel(string value, Field field) {
         switch (field) {
             case Field.Name:
-                if (value != ViewModel.Original.Name)
-                    ViewModel.Updated.Name = value;
+                if (value != _viewModel.Original.Name)
+                    _viewModel.Updated.Name = value;
                 break;
             case Field.Address1:
-                if (value != ViewModel.Original.Address1)
-                    ViewModel.Updated.Address1 = value;
+                if (value != _viewModel.Original.Address1)
+                    _viewModel.Updated.Address1 = value;
                 break;
             case Field.Address2:
-                if (value != ViewModel.Original.Address2)
-                    ViewModel.Updated.Address2 = value;
+                if (value != _viewModel.Original.Address2)
+                    _viewModel.Updated.Address2 = value;
                 break;
             case Field.City:
-                if (value != ViewModel.Original.City)
-                    ViewModel.Updated.City = value;
+                if (value != _viewModel.Original.City)
+                    _viewModel.Updated.City = value;
                 break;
             case Field.State:
-                if (value != ViewModel.Original.State)
-                    ViewModel.Updated.State = value;
+                if (value != _viewModel.Original.State)
+                    _viewModel.Updated.State = value;
                 break;
             case Field.Zip:
-                if (value != ViewModel.Original.Zip)
-                    ViewModel.Updated.Zip = value;
+                if (value != _viewModel.Original.Zip)
+                    _viewModel.Updated.Zip = value;
                 break;
             case Field.Phone:
-                if (value != ViewModel.Original.Phone)
-                    ViewModel.Updated.Phone = value;
+                if (value != _viewModel.Original.Phone)
+                    _viewModel.Updated.Phone = value;
                 break;
             case Field.Fax:
-                if (value != ViewModel.Original.Fax)
-                    ViewModel.Updated.Fax = value;
+                if (value != _viewModel.Original.Fax)
+                    _viewModel.Updated.Fax = value;
                 break;
             case Field.Email:
-                if (value != ViewModel.Original.Email)
-                    ViewModel.Updated.Email = value;
+                if (value != _viewModel.Original.Email)
+                    _viewModel.Updated.Email = value;
                 break;
             case Field.SupervisorName:
-                if (value != ViewModel.Original.SupervisorName)
-                    ViewModel.Updated.SupervisorName = value;
+                if (value != _viewModel.Original.SupervisorName)
+                    _viewModel.Updated.SupervisorName = value;
                 break;
             case Field.SupervisorPhone:
-                if (value != ViewModel.Original.SupervisorPhone)
-                    ViewModel.Updated.SupervisorPhone = value;
+                if (value != _viewModel.Original.SupervisorPhone)
+                    _viewModel.Updated.SupervisorPhone = value;
                 break;
             case Field.SupervisorEmail:
-                if (value != ViewModel.Original.SupervisorEmail)
-                    ViewModel.Updated.SupervisorEmail = value;
+                if (value != _viewModel.Original.SupervisorEmail)
+                    _viewModel.Updated.SupervisorEmail = value;
                 break;
             case Field.Notes:
-                if (value != ViewModel.Original.Notes)
-                    ViewModel.Updated.Notes = value;
+                if (value != _viewModel.Original.Notes)
+                    _viewModel.Updated.Notes = value;
                 break;
             case Field.Website:
-                if (value != ViewModel.Original.Website)
-                    ViewModel.Updated.Website = value;
+                if (value != _viewModel.Original.Website)
+                    _viewModel.Updated.Website = value;
                 break;
         }
     }

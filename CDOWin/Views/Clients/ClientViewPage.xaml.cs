@@ -25,19 +25,20 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public ClientsViewModel ViewModel { get; } = AppServices.ClientsViewModel;
+    private readonly ClientsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public ClientViewPage() {
+        _viewModel = AppServices.ClientsViewModel;
         InitializeComponent();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        if (ViewModel.Selected == null) return;
-        _ = ViewModel.ReloadClientAsync();
+        if (_viewModel.Selected == null) return;
+        _ = _viewModel.ReloadClientAsync();
     }
 
     // =========================
@@ -46,11 +47,11 @@ public sealed partial class ClientViewPage : Page {
 
     // Header
     private async void TextBlock_RightTapped(object sender, Microsoft.UI.Xaml.Input.RightTappedRoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
         var old = Header.Text;
         var data = new DataPackage();
-        data.SetText($"{ViewModel.Selected.FirstName} {ViewModel.Selected.LastName}");
+        data.SetText($"{_viewModel.Selected.FirstName} {_viewModel.Selected.LastName}");
 
         Clipboard.SetContent(data);
         Header.Text = "Copied!";
@@ -60,7 +61,7 @@ public sealed partial class ClientViewPage : Page {
 
     // Documents
     private void OpenDocuments_Clicked(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected?.DocumentsFolderPath is not string path || !Directory.Exists(path)) {
+        if (_viewModel.Selected?.DocumentsFolderPath is not string path || !Directory.Exists(path)) {
             _ = ShowMessage(ClientPageMessageType.DocumentsFolderMissing, false);
             return;
         }
@@ -70,11 +71,11 @@ public sealed partial class ClientViewPage : Page {
 
     // Reminders
     private async void CreateReminder_ClickAsync(object sender, RoutedEventArgs e) {
-        if (sender is not Button || ViewModel.Selected == null) return;
+        if (sender is not Button || _viewModel.Selected == null) return;
 
         // Initialize our dialog/vm/page
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"Create Reminder for {ViewModel.Selected.NameAndID}");
-        var createReminderVM = AppServices.CreateReminderViewModel(ViewModel.Selected.Id);
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"Create Reminder for {_viewModel.Selected.NameAndID}");
+        var createReminderVM = AppServices.CreateReminderViewModel(_viewModel.Selected.Id);
         var createReminderPage = new CreateReminder(createReminderVM);
 
         // Set the content
@@ -98,22 +99,22 @@ public sealed partial class ClientViewPage : Page {
 
         if (!reminderResult.IsSuccess) return;
 
-        ViewModel.NotifyNewReminderCreated();
-        _ = ViewModel.ReloadClientAsync();
+        _viewModel.NotifyNewReminderCreated();
+        _ = _viewModel.ReloadClientAsync();
     }
 
     // Counselors
     private void GoToCounselor_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestCounselor(id);
+        _viewModel.RequestCounselor(id);
     }
 
     // SAs
     private async void CreateSA_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Service Authorization for {ViewModel.Selected.NameAndID}");
-        var createSAVM = AppServices.CreateServiceAuthorizationsViewModel(ViewModel.Selected);
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Service Authorization for {_viewModel.Selected.NameAndID}");
+        var createSAVM = AppServices.CreateServiceAuthorizationsViewModel(_viewModel.Selected);
         var createSAPage = new CreateServiceAuthorization(createSAVM);
         dialog.Content = createSAPage;
         dialog.IsPrimaryButtonEnabled = createSAVM.CanSave;
@@ -134,12 +135,12 @@ public sealed partial class ClientViewPage : Page {
 
         if (!sAResult.IsSuccess) return;
 
-        _ = ViewModel.ReloadClientAsync();
+        _ = _viewModel.ReloadClientAsync();
     }
 
     private async void SA_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) { return; }
-        var invoice = ViewModel.Selected?.Sas?.FirstOrDefault(i => i.Id == id);
+        var invoice = _viewModel.Selected?.Sas?.FirstOrDefault(i => i.Id == id);
 
         if (invoice == null) { return; }
         var updateSAVM = new ServiceAuthorizationUpdateViewModel(invoice);
@@ -153,7 +154,7 @@ public sealed partial class ClientViewPage : Page {
             var updateResult = await updateSAVM.UpdateSAAsync();
             _ = ShowMessage(ClientPageMessageType.UpdatedSA, updateResult.IsSuccess);
             if (!updateResult.IsSuccess) return;
-            _ = ViewModel.ReloadClientAsync();
+            _ = _viewModel.ReloadClientAsync();
         } else if (result == ContentDialogResult.Secondary) {
             var composer = new ServiceAuthorizationComposer(invoice);
             var composerResult = await composer.Compose();
@@ -165,10 +166,10 @@ public sealed partial class ClientViewPage : Page {
 
     // Placements
     private async void CreatePlacement_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
-        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Placement for {ViewModel.Selected.NameAndID}");
-        var createPlacementVM = AppServices.CreatePlacementViewMdoel(ViewModel.Selected);
+        var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Placement for {_viewModel.Selected.NameAndID}");
+        var createPlacementVM = AppServices.CreatePlacementViewMdoel(_viewModel.Selected);
         var createPage = new CreatePlacements(createPlacementVM);
         dialog.Content = createPage;
         dialog.IsPrimaryButtonEnabled = createPlacementVM.CanSave;
@@ -191,12 +192,12 @@ public sealed partial class ClientViewPage : Page {
 
         _ = AppServices.DataCoordinator.GetPlacementSummariesAsync(force: true);
         _ = AppServices.DataCoordinator.GetEmployerSummariesAsync(force: true);
-        _ = ViewModel.ReloadClientAsync();
+        _ = _viewModel.ReloadClientAsync();
     }
 
     private async void Placement_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) { return; }
-        var placement = ViewModel.Selected?.Placements?.FirstOrDefault(c => c.Id == id);
+        var placement = _viewModel.Selected?.Placements?.FirstOrDefault(c => c.Id == id);
 
         if (placement == null) { return; }
         var updatePlacementVM = new PlacementUpdateViewModel(placement);
@@ -209,13 +210,13 @@ public sealed partial class ClientViewPage : Page {
             var updateResult = await updatePlacementVM.UpdatePlacementAsync();
             _ = ShowMessage(ClientPageMessageType.UpdatedPlacement, updateResult.IsSuccess);
             if (!updateResult.IsSuccess) return;
-            _ = ViewModel.ReloadClientAsync();
+            _ = _viewModel.ReloadClientAsync();
         }
     }
 
     private void GoToPlacement_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) { return; }
-        ViewModel.RequestPlacement(id);
+        _viewModel.RequestPlacement(id);
     }
 
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
@@ -225,7 +226,7 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private async void ToggleActive_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem || ViewModel.Selected?.Active is not bool isActive) return;
+        if (sender is not MenuFlyoutItem || _viewModel.Selected?.Active is not bool isActive) return;
 
         if (isActive) {
             var dialog = DialogFactory.MarkInactiveDialog(this.XamlRoot, "Mark Client Inactive?");
@@ -240,27 +241,27 @@ public sealed partial class ClientViewPage : Page {
     }
 
     private async void ToggleTTW_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem || ViewModel.Selected?.TTW is not bool isTTW) return;
+        if (sender is not MenuFlyoutItem || _viewModel.Selected?.TTW is not bool isTTW) return;
         _ = ToggleTTWAsync(isTTW);
     }
 
     private async void Delete_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is not MenuFlyoutItem || ViewModel.Selected == null) return;
+        if (sender is not MenuFlyoutItem || _viewModel.Selected == null) return;
 
-        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, $"Delete {ViewModel.Selected.FormattedName}?");
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, $"Delete {_viewModel.Selected.FormattedName}?");
         dialog.Content = "Deleting this client will remove all existing reminders. This action cannot be undone.";
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary) {
-            var deleteResult = await ViewModel.DeleteClientAsync(ViewModel.Selected.Id);
+            var deleteResult = await _viewModel.DeleteClientAsync(_viewModel.Selected.Id);
             _ = ShowMessage(ClientPageMessageType.DeletedClient, deleteResult.IsSuccess);
         }
     }
 
     private async void EditButton_Clicked(object sender, RoutedEventArgs e) {
-        if (sender is Control button && button.Tag is ClientEditType tag && ViewModel.Selected != null) {
+        if (sender is Control button && button.Tag is ClientEditType tag && _viewModel.Selected != null) {
             var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "");
-            var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
+            var updateVM = new ClientUpdateViewModel(_viewModel.Selected);
 
             switch (tag) {
                 case ClientEditType.Administrative:
@@ -300,42 +301,42 @@ public sealed partial class ClientViewPage : Page {
     // Utility Methods
     // =========================
     private async Task ToggleActiveAsync(bool isActive) {
-        if (ViewModel.Selected?.Id is not int id) return;
+        if (_viewModel.Selected?.Id is not int id) return;
         Debug.WriteLine($"Client Active: {isActive}");
         var result = isActive
-            ? await ViewModel.MarkClientInactive(id)
-            : await ViewModel.MarkClientActive(id);
+            ? await _viewModel.MarkClientInactive(id)
+            : await _viewModel.MarkClientActive(id);
 
         _ = ShowMessage(isActive ? ClientPageMessageType.MarkedInactive : ClientPageMessageType.MarkedActive, result.IsSuccess);
         if (!result.IsSuccess) return;
 
-        _ = ViewModel.ReloadClientAsync();
+        _ = _viewModel.ReloadClientAsync();
     }
 
     private async Task ToggleTTWAsync(bool isTTW) {
-        if (ViewModel.Selected?.Id is not int id) return;
+        if (_viewModel.Selected?.Id is not int id) return;
 
         var result = isTTW
-            ? await ViewModel.UnmarkClientTTW(id)
-            : await ViewModel.MarkClientTTW(id);
+            ? await _viewModel.UnmarkClientTTW(id)
+            : await _viewModel.MarkClientTTW(id);
 
         _ = ShowMessage(isTTW ? ClientPageMessageType.UnmarkedTTW : ClientPageMessageType.MarkedTTW, result.IsSuccess);
         if (!result.IsSuccess) return;
 
-        _ = ViewModel.ReloadClientAsync();
+        _ = _viewModel.ReloadClientAsync();
     }
 
     private async Task UpdateCheckboxAsync(CheckboxTag tag, bool isChecked) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
-        var updateVM = new ClientUpdateViewModel(ViewModel.Selected);
+        var updateVM = new ClientUpdateViewModel(_viewModel.Selected);
         updateVM.UpdateCheckbox(tag, isChecked);
 
         _ = UpdateClient(updateVM.UpdatedClient);
     }
 
     private async Task UpdateClient(ClientUpdate update) {
-        var result = await ViewModel.UpdateClientAsync(update);
+        var result = await _viewModel.UpdateClientAsync(update);
         _ = ShowMessage(ClientPageMessageType.UpdatedClient, result.IsSuccess);
     }
 

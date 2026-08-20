@@ -23,7 +23,7 @@
         
         <!-- Row 0: Name + Case Load -->
         <TextBox Grid.Row="0" Grid.Column="0" Header="Name" 
-                 Text="{x:Bind ViewModel.Original.Name}" 
+                 Text="{x:Bind _viewModel.Original.Name}" 
                  Tag="{x:Bind local:Field.Name}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
@@ -34,31 +34,31 @@
         
         <!-- Row 1: Enail -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Email"
-                 Text="{x:Bind ViewModel.Original.Email}" 
+                 Text="{x:Bind _viewModel.Original.Email}" 
                  Tag="{x:Bind local:Field.Email}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
         <!-- Row 2: Phone + Fax -->
         <TextBox Grid.Row="2" Grid.Column="0" Header="Phone"
-                 Text="{x:Bind ViewModel.Original.Phone}" 
+                 Text="{x:Bind _viewModel.Original.Phone}" 
                  Tag="{x:Bind local:Field.Phone}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
         <TextBox Grid.Row="2" Grid.Column="1" Header="Fax"
-                 Text="{x:Bind ViewModel.Original.Fax}" 
+                 Text="{x:Bind _viewModel.Original.Fax}" 
                  Tag="{x:Bind local:Field.Fax}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
 
         <!-- Row 3: Secretary + Secretary Email -->
         <TextBox Grid.Row="3" Grid.Column="0" Header="Secretary" 
-                 Text="{x:Bind ViewModel.Original.SecretaryName}" 
+                 Text="{x:Bind _viewModel.Original.SecretaryName}" 
                  Tag="{x:Bind local:Field.Secretary}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
         <TextBox Grid.Row="3" Grid.Column="1" Header="Secretary Email"
-                 Text="{x:Bind ViewModel.Original.SecretaryEmail}" 
+                 Text="{x:Bind _viewModel.Original.SecretaryEmail}" 
                  Tag="{x:Bind local:Field.SecretaryEmail}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="50"/>
@@ -66,7 +66,7 @@
         <!--Row 4:  Notes -->
         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                  Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Notes" Text="{x:Bind ViewModel.Original.Notes}" 
+                 Header="Notes" Text="{x:Bind _viewModel.Original.Notes}" 
                  Tag="{x:Bind local:Field.Notes}"
                  TextChanged="TextBox_TextChanged"/>
     </Grid>

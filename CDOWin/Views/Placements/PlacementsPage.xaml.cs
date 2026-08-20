@@ -13,14 +13,15 @@ public sealed partial class PlacementsPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public PlacementsViewModel ViewModel { get; } = AppServices.PlacementsViewModel;
+    private readonly PlacementsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public PlacementsPage() {
+        _viewModel = AppServices.PlacementsViewModel;
         InitializeComponent();
-        InspectorFrame.Navigate(typeof(PlacementInspector), ViewModel);
+        InspectorFrame.Navigate(typeof(PlacementInspector), _viewModel);
     }
 
     // =========================
@@ -28,8 +29,8 @@ public sealed partial class PlacementsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.RefreshAsync();
-        _ = ViewModel.ReloadPlacementAsync();
+        await _viewModel.RefreshAsync();
+        _ = _viewModel.ReloadPlacementAsync();
     }
 
     // =========================
@@ -37,28 +38,28 @@ public sealed partial class PlacementsPage : Page {
     // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is PlacementSummary placement)
-            _ = ViewModel.LoadSelectedPlacementAsync(placement.Id);
+            _ = _viewModel.LoadSelectedPlacementAsync(placement.Id);
     }
 
     private void GoToClient_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestClient(id);
+        _viewModel.RequestClient(id);
     }
 
     private void GoToCounselor_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestCounselor(id);
+        _viewModel.RequestCounselor(id);
     }
 
     private void GoToEmployer_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestEmployer(id);
+        _viewModel.RequestEmployer(id);
     }
 
     private async void ToggleSort_Click(object sender, RoutedEventArgs e) {
         if (sender is not AppBarButton button) return;
         button.IsEnabled = false;
-        await ViewModel.ToggleSortAsync();
+        await _viewModel.ToggleSortAsync();
         button.IsEnabled = true;
     }
 }

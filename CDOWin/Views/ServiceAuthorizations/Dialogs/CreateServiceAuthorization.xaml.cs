@@ -13,7 +13,7 @@ public sealed partial class CreateServiceAuthorization : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly CreateServiceAuthorizationsViewModel ViewModel;
+    private readonly CreateServiceAuthorizationsViewModel _viewModel;
     private readonly DARSOffice[] _offices = DARSOffice.AllItems();
     private readonly SAType[] _descriptions = SAType.AllItems();
 
@@ -21,7 +21,7 @@ public sealed partial class CreateServiceAuthorization : Page {
     // Constructor
     // =========================
     public CreateServiceAuthorization(CreateServiceAuthorizationsViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupDatePickers();
         SetupNumberBox();
@@ -56,10 +56,10 @@ public sealed partial class CreateServiceAuthorization : Page {
         if (datePicker.Date is DateTimeOffset offset) {
             switch (dateType) {
                 case DateType.StartDate:
-                    ViewModel.StartDate = offset.Date.ToUniversalTime();
+                    _viewModel.StartDate = offset.Date.ToUniversalTime();
                     break;
                 case DateType.EndDate:
-                    ViewModel.EndDate = offset.Date.ToUniversalTime();
+                    _viewModel.EndDate = offset.Date.ToUniversalTime();
                     break;
             }
         }
@@ -74,16 +74,16 @@ public sealed partial class CreateServiceAuthorization : Page {
 
         switch (field) {
             case Field.SaNumber:
-                ViewModel.SANumber = text;
+                _viewModel.SANumber = text;
                 break;
             case Field.Description:
-                ViewModel.Description = text;
+                _viewModel.Description = text;
                 break;
             case Field.Office:
-                ViewModel.Office = text;
+                _viewModel.Office = text;
                 break;
             case Field.UoM:
-                ViewModel.UnitOfMeasurement = text;
+                _viewModel.UnitOfMeasurement = text;
                 break;
         }
     }
@@ -91,7 +91,7 @@ public sealed partial class CreateServiceAuthorization : Page {
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
         if (sender is not NumberBox numberBox || numberBox.Value <= 0.00) return;
 
-        ViewModel.UnitCost = numberBox.Value;
+        _viewModel.UnitCost = numberBox.Value;
     }
 
     private void DescriptionSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
@@ -104,13 +104,13 @@ public sealed partial class CreateServiceAuthorization : Page {
             sender.ItemsSource = suggestions;
 
             // Also set the description to the text in case they do not ever select.
-            ViewModel.Description = sender.Text;
+            _viewModel.Description = sender.Text;
         }
     }
 
     private void DescriptionSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
         if (args.ChosenSuggestion is SAType saType) {
-            ViewModel.Description = saType.Description;
+            _viewModel.Description = saType.Description;
             NumberBox.Value = (double)saType.Value;
             UMBox.Text = saType.UM;
         }
@@ -119,7 +119,7 @@ public sealed partial class CreateServiceAuthorization : Page {
     private void DescriptionSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
         if (args.SelectedItem is SAType saType) {
             sender.Text = saType.Description;
-            ViewModel.Description = saType.Description;
+            _viewModel.Description = saType.Description;
             NumberBox.Value = (double)saType.Value;
             UMBox.Text = saType.UM;
         }
@@ -135,17 +135,17 @@ public sealed partial class CreateServiceAuthorization : Page {
             sender.ItemsSource = suggestions;
 
             // Also set the description to the text in case they do not ever select.
-            ViewModel.Office = sender.Text;
+            _viewModel.Office = sender.Text;
         }
     }
 
     private void OfficeSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
         if (args.ChosenSuggestion is DARSOffice office)
-            ViewModel.Office = office.Address;
+            _viewModel.Office = office.Address;
     }
 
     private void OfficeSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
         if (args.SelectedItem is DARSOffice office)
-            ViewModel.Office = office.Address;
+            _viewModel.Office = office.Address;
     }
 }

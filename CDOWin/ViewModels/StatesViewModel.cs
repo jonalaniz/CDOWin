@@ -10,15 +10,13 @@ namespace CDOWin.ViewModels;
 
 public partial class StatesViewModel(DataCoordinator dataCoordinator) : ObservableObject {
     private readonly DataCoordinator _dataCoordinator = dataCoordinator;
-
-    [ObservableProperty]
-    public partial ObservableCollection<State> States { get; private set; } = [];
+    public List<State> States { get; private set; } = [];
 
     public List<State> GetStates() {
         if (States.Count == 0)
             LoadStatesAsync().GetAwaiter().GetResult();
 
-        return States.ToList();
+        return States;
     }
 
     public async Task LoadStatesAsync() {

@@ -17,12 +17,13 @@ public sealed partial class EmployersPage : Page {
     // =========================
     // ViewModel
     // =========================
-    private EmployersViewModel ViewModel { get; } = AppServices.EmployersViewModel;
+    private readonly EmployersViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public EmployersPage() {
+        _viewModel = AppServices.EmployersViewModel;
         InitializeComponent();
         InspectorFrame.Navigate(typeof(EmployerInspector));
     }
@@ -32,7 +33,7 @@ public sealed partial class EmployersPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.RefreshAsync();
+        await _viewModel.RefreshAsync();
     }
 
     // =========================
@@ -63,13 +64,13 @@ public sealed partial class EmployersPage : Page {
             return;
         }
 
-        await ViewModel.RefreshAsync(force: true);
-        _ = ViewModel.LoadSelectedEmployerAsync(updateResult.Value!.Id);
+        await _viewModel.RefreshAsync(force: true);
+        _ = _viewModel.LoadSelectedEmployerAsync(updateResult.Value!.Id);
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is EmployerSummary employer) {
-            _ = ViewModel.LoadSelectedEmployerAsync(employer.Id);
+            _ = _viewModel.LoadSelectedEmployerAsync(employer.Id);
         }
     }
 }

@@ -9,13 +9,13 @@ public sealed partial class UpdateArrangements : Page {
     // =========================
     // Dependencies
     // =========================
-    private ClientUpdateViewModel ViewModel;
+    private readonly ClientUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateArrangements(ClientUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
     }
 
@@ -39,10 +39,10 @@ public sealed partial class UpdateArrangements : Page {
     private void UpdateValue(string value, ArrangementsField type) {
         switch (type) {
             case ArrangementsField.EmploymentGoal:
-                ViewModel.UpdatedClient.EmploymentGoal = value;
+                _viewModel.UpdatedClient.EmploymentGoal = value;
                 break;
             case ArrangementsField.Conditions:
-                ViewModel.UpdatedClient.Conditions = value;
+                _viewModel.UpdatedClient.Conditions = value;
                 break;
         }
     }

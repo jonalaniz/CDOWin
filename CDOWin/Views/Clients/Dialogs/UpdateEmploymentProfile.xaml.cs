@@ -9,13 +9,13 @@ public sealed partial class UpdateEmploymentProfile : Page {
     // =========================
     // Dependencies
     // =========================
-    private ClientUpdateViewModel ViewModel;
+    private readonly ClientUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateEmploymentProfile(ClientUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
     }
 
@@ -41,13 +41,13 @@ public sealed partial class UpdateEmploymentProfile : Page {
             case EmploymentField.Disability:
                 // Non-optional field, ensure item is not empty
                 if (string.IsNullOrWhiteSpace(value)) return;
-                ViewModel.UpdatedClient.Disability = value;
+                _viewModel.UpdatedClient.Disability = value;
                 break;
             case EmploymentField.CriminalCharge:
-                ViewModel.UpdatedClient.CriminalCharge = value;
+                _viewModel.UpdatedClient.CriminalCharge = value;
                 break;
             case EmploymentField.Transportation:
-                ViewModel.UpdatedClient.Transportation = value;
+                _viewModel.UpdatedClient.Transportation = value;
                 break;
         }
     }

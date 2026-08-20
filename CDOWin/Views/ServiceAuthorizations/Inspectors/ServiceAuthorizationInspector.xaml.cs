@@ -15,12 +15,13 @@ public sealed partial class ServiceAuthorizationInspector : Page {
     // =========================
     // ViewModel
     // =========================
-    public ServiceAuthorizationsViewModel ViewModel { get; } = AppServices.SAsViewModel;
+    private readonly ServiceAuthorizationsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public ServiceAuthorizationInspector() {
+        _viewModel = AppServices.SAsViewModel;
         InitializeComponent();
     }
 
@@ -28,9 +29,9 @@ public sealed partial class ServiceAuthorizationInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.SelectedSummary == null || ViewModel.Selected == null) return;
+        if (_viewModel == null || _viewModel.SelectedSummary == null || _viewModel.Selected == null) return;
 
-        var updateVM = new ServiceAuthorizationUpdateViewModel(ViewModel.Selected);
+        var updateVM = new ServiceAuthorizationUpdateViewModel(_viewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Service Authorization");
         dialog.Content = new UpdateSA(updateVM);
 
@@ -45,26 +46,26 @@ public sealed partial class ServiceAuthorizationInspector : Page {
             return;
         }
 
-        _ = ViewModel.LoadSelectedSAAsync(ViewModel.SelectedSummary.Id);
-        _ = ViewModel.RefreshAsync(force: true);
+        _ = _viewModel.LoadSelectedSAAsync(_viewModel.SelectedSummary.Id);
+        _ = _viewModel.RefreshAsync(force: true);
     }
 
     private async void Export_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
-        var result = await ViewModel.ExportSelectedAsync();
+        var result = await _viewModel.ExportSelectedAsync();
         if (!result.IsSuccess) ErrorHandler.Handle(result, this.XamlRoot);
     }
 
     private async void Delete_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.SelectedSummary == null) return;
+        if (_viewModel.SelectedSummary == null) return;
 
         var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Placement?");
         dialog.Content = new DeletePage();
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary) {
-            var deleteResult = await ViewModel.DeleteSelectedSA();
+            var deleteResult = await _viewModel.DeleteSelectedSA();
             if (!deleteResult.IsSuccess)
                 ErrorHandler.Handle(deleteResult, this.XamlRoot);
         }

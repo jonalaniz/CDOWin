@@ -23,7 +23,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.Column="0"
                    Style="{StaticResource PageTitleStyle}"
-                   Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"
+                   Text="{x:Bind _viewModel.Selected.Name, Mode=OneWay}"
                    TextWrapping="WrapWholeWords"/>
 
         <!-- CommandBar -->
@@ -57,28 +57,28 @@
             <!-- Row 0: Address -->
             <c:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
                                Label="Address"
-                               Value="{x:Bind ViewModel.Selected.FormattedAddress, Mode=OneWay}"/>
+                               Value="{x:Bind _viewModel.Selected.FormattedAddress, Mode=OneWay}"/>
 
             <!-- Row 1: Phone + Fax -->
             <c:LabelPair Grid.Row="1" Grid.Column="0" 
                                Label="Phone" 
-                               Value="{x:Bind ViewModel.Selected.Phone, Mode=OneWay}"/>
+                               Value="{x:Bind _viewModel.Selected.Phone, Mode=OneWay}"/>
             <c:LabelPair Grid.Row="1" Grid.Column="1" 
                                Label="Fax" 
-                               Value="{x:Bind ViewModel.Selected.Fax, Mode=OneWay}"/>
+                               Value="{x:Bind _viewModel.Selected.Fax, Mode=OneWay}"/>
 
             <!-- Row 2: Supervisor -->
             <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
                                Label="Supervisor" 
-                               Value="{x:Bind ViewModel.Selected.FormattedSuperviror, Mode=OneWay}"/>
+                               Value="{x:Bind _viewModel.Selected.FormattedSuperviror, Mode=OneWay}"/>
             <!-- Row 3: Website -->
             <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                                Label="Website" 
-                               Value="{x:Bind ViewModel.Selected.Website, Mode=OneWay}"/>
+                               Value="{x:Bind _viewModel.Selected.Website, Mode=OneWay}"/>
             <!-- Row 4: Notes -->
             <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
                                Label="Notes" 
-                               Value="{x:Bind ViewModel.Selected.Notes, Mode=OneWay}"/>
+                               Value="{x:Bind _viewModel.Selected.Notes, Mode=OneWay}"/>
         </Grid>
     </Grid>
 </Page>

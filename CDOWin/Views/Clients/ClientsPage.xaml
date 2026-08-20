@@ -44,9 +44,9 @@
 
             <!-- CommandBar -->
             <CommandBar Grid.Row="0" Grid.Column="1" DefaultLabelPosition="Collapsed" Background="Transparent">
-                <AppBarToggleButton Width="56" IsChecked="{x:Bind ViewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" 
+                <AppBarToggleButton Width="56" IsChecked="{x:Bind _viewModel.IsFiltered, Mode=TwoWay}" IsCompact="False" 
                                     ToolTipService.ToolTip="Filter Active">
-                    <FontIcon Glyph="&#xE71C;" Foreground="{x:Bind ViewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"/>
+                    <FontIcon Glyph="&#xE71C;" Foreground="{x:Bind _viewModel.IsFiltered, Mode=OneWay, Converter={StaticResource BoolSolidBrushConverter}}"/>
                 </AppBarToggleButton>
                 
                 <AppBarButton Width="56" Click="NewClient_Click" IsCompact="False" ToolTipService.ToolTip="New Client">
@@ -57,13 +57,13 @@
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8, 0, 8, 8" PlaceholderText="Filter Clients"
-                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{x:Bind _viewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Clients List -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
-                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
+                      SelectedItem="{x:Bind _viewModel.SelectedSummary, Mode=TwoWay}"
+                      ItemsSource="{x:Bind _viewModel.Filtered, Mode=OneWay}"
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dto:ClientSummary">
@@ -86,7 +86,7 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Clients"/>
                 </TextBlock>
             </Grid>

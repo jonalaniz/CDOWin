@@ -15,14 +15,14 @@ public sealed partial class UpdatePersonalInformation : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly List<State> _states = AppServices.StatesViewModel.States.ToList();
-    private ClientUpdateViewModel ViewModel;
+    private readonly List<State> _states = AppServices.States();
+    private readonly ClientUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdatePersonalInformation(ClientUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         BuildStateDrowdown();
         SetupDatePicker();
@@ -48,7 +48,7 @@ public sealed partial class UpdatePersonalInformation : Page {
     }
 
     private void SetupDatePicker() {
-        if (ViewModel.OriginalClient.Dob is DateTime dob)
+        if (_viewModel.OriginalClient.Dob is DateTime dob)
             DOBPicker.Date = dob;
     }
 
@@ -56,21 +56,21 @@ public sealed partial class UpdatePersonalInformation : Page {
     // Property Change Methods
     // =========================
     private void DOBPicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-        if (ViewModel.OriginalClient.Dob is DateTime dob) {
+        if (_viewModel.OriginalClient.Dob is DateTime dob) {
             if (dob == DOBPicker.Date)
                 return;
         }
         if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
             // We call DateTime.Date to get the Date with the time zeroed out then
             // .ToUniversalTime to ensure it is in the correct format for the API.
-            ViewModel.UpdatedClient.Dob = offset.DateTime.Date.ToUniversalTime();
+            _viewModel.UpdatedClient.Dob = offset.DateTime.Date.ToUniversalTime();
         }
     }
 
     private void StateSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             var state = item.Tag.ToString();
-            ViewModel.UpdatedClient.State = state;
+            _viewModel.UpdatedClient.State = state;
             StateDropDownButton.Content = state;
         }
     }
@@ -84,13 +84,13 @@ public sealed partial class UpdatePersonalInformation : Page {
 
         switch (field) {
             case PersonalField.DL:
-                ViewModel.UpdatedClient.DriversLicense = stringValue;
+                _viewModel.UpdatedClient.DriversLicense = stringValue;
                 break;
             case PersonalField.SSN:
-                ViewModel.UpdatedClient.Ssn = stringValue;
+                _viewModel.UpdatedClient.Ssn = stringValue;
                 break;
             case PersonalField.Zip:
-                ViewModel.UpdatedClient.Zip = stringValue;
+                _viewModel.UpdatedClient.Zip = stringValue;
                 break;
         }
     }
@@ -111,23 +111,23 @@ public sealed partial class UpdatePersonalInformation : Page {
     private void UpdateValue(string value, PersonalField type) {
         switch (type) {
             case PersonalField.Languages:
-                ViewModel.UpdatedClient.FluentLanguages = value;
+                _viewModel.UpdatedClient.FluentLanguages = value;
                 break;
             case PersonalField.Race:
-                ViewModel.UpdatedClient.Race = value;
+                _viewModel.UpdatedClient.Race = value;
                 break;
             case PersonalField.Address1:
-                ViewModel.UpdatedClient.Address1 = value;
+                _viewModel.UpdatedClient.Address1 = value;
                 break;
             case PersonalField.Address2:
-                ViewModel.UpdatedClient.Address2 = value;
+                _viewModel.UpdatedClient.Address2 = value;
                 break;
             case PersonalField.City:
                 if (string.IsNullOrWhiteSpace(value)) return;
-                ViewModel.UpdatedClient.City = value;
+                _viewModel.UpdatedClient.City = value;
                 break;
             case PersonalField.Education:
-                ViewModel.UpdatedClient.Education = value;
+                _viewModel.UpdatedClient.Education = value;
                 break;
         }
     }

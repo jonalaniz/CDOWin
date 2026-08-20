@@ -10,13 +10,13 @@ public sealed partial class CreateNote : Page {
     // =========================
     // Dependencies
     // =========================
-    private CreateNoteViewModel ViewModel;
+    private readonly CreateNoteViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public CreateNote(CreateNoteViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupDateAndTime();
     }
@@ -39,7 +39,7 @@ public sealed partial class CreateNote : Page {
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        ViewModel.Note = text;
+        _viewModel.Note = text;
     }
 
     private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e) {
@@ -52,7 +52,7 @@ public sealed partial class CreateNote : Page {
 
     private void UpdateDateAndTime() {
         if (TimePicker.Time is TimeSpan timeSpan && DatePicker.Date is DateTimeOffset offset) {
-            ViewModel.Date = new DateTime(
+            _viewModel.Date = new DateTime(
                     offset.Year,
                     offset.Month,
                     offset.Day,

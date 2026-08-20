@@ -1,6 +1,7 @@
 ﻿using CDO.Abstractions.Navigation;
 using CDO.Core.DTOs.Clients;
 using CDO.Core.Interfaces;
+using CDO.Core.Models;
 using CDO.Core.Services;
 using CDOWin.Data;
 using CDOWin.Navigation;
@@ -192,4 +193,6 @@ public static class AppServices {
     public static CreateServiceAuthorizationsViewModel CreateServiceAuthorizationsViewModel(ClientDetail client) {
         return new CreateServiceAuthorizationsViewModel(SAService, _invalidationService, client);
     }
+
+    public static List<State> States() => StatesViewModel.GetStates();
 }

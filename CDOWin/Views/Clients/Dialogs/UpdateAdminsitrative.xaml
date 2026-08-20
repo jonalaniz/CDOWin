@@ -22,11 +22,11 @@
 
         <!-- Row 0: Name -->
         <TextBox Grid.Row="0" Grid.Column="0" Header="First Name" MaxLength="50"
-                 Text="{x:Bind ViewModel.OriginalClient.FirstName}"
+                 Text="{x:Bind _viewModel.OriginalClient.FirstName}"
                  Tag="{x:Bind local:AdministrativeField.FirstName}"
                  TextChanged="TextBox_TextChanged"/>
         <TextBox Grid.Row="0" Grid.Column="1" Header="Last Name" MaxLength="50"
-                 Text="{x:Bind ViewModel.OriginalClient.LastName}"
+                 Text="{x:Bind _viewModel.OriginalClient.LastName}"
                  Tag="{x:Bind local:AdministrativeField.LastName}"
                  TextChanged="TextBox_TextChanged"/>
 
@@ -34,7 +34,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
                     Spacing="8" Orientation="Horizontal">
             <TextBlock Text="Documents Folder:"/>
-            <TextBlock Text="{x:Bind ViewModel.FolderPath, Mode=OneWay}"/>
+            <TextBlock Text="{x:Bind _viewModel.FolderPath, Mode=OneWay}"/>
         </StackPanel>
 
         <!-- Row 2: Documents Change Button -->        

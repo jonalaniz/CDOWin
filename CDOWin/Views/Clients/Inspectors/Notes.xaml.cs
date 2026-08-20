@@ -20,12 +20,13 @@ public sealed partial class Notes : Page {
     // =========================
     // ViewModel
     // =========================
-    public ClientsViewModel ViewModel { get; private set; } = AppServices.ClientsViewModel!;
+    private readonly ClientsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public Notes() {
+        _viewModel = AppServices.ClientsViewModel;
         InitializeComponent();
     }
 
@@ -33,15 +34,15 @@ public sealed partial class Notes : Page {
     // Click Handlers
     // =========================
     private void Export_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.FilteredNotes.Count > 0) {
-            ExportNotes(ViewModel.FilteredNotes.ToArray());
+        if (_viewModel.FilteredNotes.Count > 0) {
+            ExportNotes(_viewModel.FilteredNotes.ToArray());
         }
     }
 
     private async void NewButton_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null || sender is null) return;
+        if (_viewModel.Selected == null || sender is null) return;
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, "New Note");
-        var createNoteVM = AppServices.CreateNoteViewModel(ViewModel.Selected.Id);
+        var createNoteVM = AppServices.CreateNoteViewModel(_viewModel.Selected.Id);
         var createNotePage = new CreateNote(createNoteVM);
         dialog.Content = createNotePage;
         dialog.IsPrimaryButtonEnabled = createNoteVM.CanSave;
@@ -64,7 +65,7 @@ public sealed partial class Notes : Page {
             return;
         }
 
-        _ = ViewModel.ReloadClientAsync();
+        _ = _viewModel.ReloadClientAsync();
     }
 
     private async void Note_Click(object sender, RoutedEventArgs e) {
@@ -87,7 +88,7 @@ public sealed partial class Notes : Page {
     // Utility Methods
     // =========================
     private async void ShowDeletePageFor(int id) {
-        if (ViewModel.Selected is ClientDetail selected
+        if (_viewModel.Selected is ClientDetail selected
             && selected.ClientNotes != null
             && selected.ClientNotes.FirstOrDefault(x => x.Id == id) is ClientNote note) {
             var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Note");
@@ -96,18 +97,18 @@ public sealed partial class Notes : Page {
             var result = await dialog.ShowAsync();
             if (result != ContentDialogResult.Primary) return;
 
-            var deleteResult = await ViewModel.DeleteNoteAsync(selected.Id, note.Id);
+            var deleteResult = await _viewModel.DeleteNoteAsync(selected.Id, note.Id);
             if (!deleteResult.IsSuccess) {
                 ErrorHandler.Handle(deleteResult, this.XamlRoot);
                 return;
             }
 
-            _ = ViewModel.ReloadClientAsync();
+            _ = _viewModel.ReloadClientAsync();
         }
     }
 
     private async void ShowEditPageFor(int id) {
-        if (ViewModel.Selected is ClientDetail selected
+        if (_viewModel.Selected is ClientDetail selected
             && selected.ClientNotes != null
             && selected.ClientNotes.FirstOrDefault(x => x.Id == id) is ClientNote note) {
             var updateVM = new NoteUpdateViewModel(note);
@@ -117,13 +118,13 @@ public sealed partial class Notes : Page {
             var result = await dialog.ShowAsync();
             if (result != ContentDialogResult.Primary) return;
 
-            var updateResult = await ViewModel.UpdateNoteAsync(updateVM.Updated, selected.Id, note.Id);
+            var updateResult = await _viewModel.UpdateNoteAsync(updateVM.Updated, selected.Id, note.Id);
             if (!updateResult.IsSuccess) {
                 ErrorHandler.Handle(updateResult, this.XamlRoot);
                 return;
             }
 
-            _ = ViewModel.ReloadClientAsync();
+            _ = _viewModel.ReloadClientAsync();
         }
     }
 

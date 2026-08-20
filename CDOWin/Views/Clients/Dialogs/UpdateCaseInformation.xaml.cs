@@ -18,13 +18,13 @@ public sealed partial class UpdateCaseInformation : Page {
     // Dependencies
     // =========================
     private List<CounselorSummary> _counselors = [];
-    private ClientUpdateViewModel ViewModel;
+    private readonly ClientUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateCaseInformation(ClientUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         GetCounselorSummaries();
         BuildDropDowns();
@@ -43,8 +43,8 @@ public sealed partial class UpdateCaseInformation : Page {
         BenefitDropDown.Flyout = BuildFlyout(Benefit.All);
         StatusDropDown.Flyout = BuildFlyout(Status.All);
 
-        var benefits = ViewModel.OriginalClient.Benefits;
-        var status = ViewModel.OriginalClient.Status;
+        var benefits = _viewModel.OriginalClient.Benefits;
+        var status = _viewModel.OriginalClient.Status;
 
         StatusDropDown.Content = string.IsNullOrWhiteSpace(status) ? "None Set" : status;
         BenefitDropDown.Content = string.IsNullOrWhiteSpace(benefits) ? "None Set" : benefits;
@@ -66,12 +66,12 @@ public sealed partial class UpdateCaseInformation : Page {
     }
 
     private void SetupAutoSuggestBox() {
-        if (ViewModel.OriginalClient.CounselorReference is null) return;
-        CounselorAutoSuggest.PlaceholderText = ViewModel.OriginalClient.CounselorReference.ToString() ?? "Type to search counselors";
+        if (_viewModel.OriginalClient.CounselorReference is null) return;
+        CounselorAutoSuggest.PlaceholderText = _viewModel.OriginalClient.CounselorReference.ToString() ?? "Type to search counselors";
     }
 
     private void SetupDatePicker() {
-        if (ViewModel.OriginalClient.StartDate is DateTime startDate)
+        if (_viewModel.OriginalClient.StartDate is DateTime startDate)
             StartDatePicker.Date = startDate;
     }
 
@@ -79,7 +79,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // Property Change Methods
     // =========================
     private void StartDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-        if (ViewModel.OriginalClient.StartDate is DateTime startDate) {
+        if (_viewModel.OriginalClient.StartDate is DateTime startDate) {
             if (startDate == StartDatePicker.Date)
                 return;
 
@@ -87,7 +87,7 @@ public sealed partial class UpdateCaseInformation : Page {
                 // We call DateTime.Date to get the Date with the time zeroed out then
                 // .ToUniversalTime to ensure it si in the correct format for the API
                 Debug.WriteLine(offset.Date.ToUniversalTime());
-                ViewModel.UpdatedClient.StartDate = offset.DateTime.Date.ToUniversalTime();
+                _viewModel.UpdatedClient.StartDate = offset.DateTime.Date.ToUniversalTime();
             }
         }
     }
@@ -130,10 +130,10 @@ public sealed partial class UpdateCaseInformation : Page {
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             if (item.Tag is Benefit benefit) {
-                ViewModel.UpdatedClient.Benefits = benefit.Value;
+                _viewModel.UpdatedClient.Benefits = benefit.Value;
                 BenefitDropDown.Content = benefit.Value;
             } else if (item.Tag is Status status) {
-                ViewModel.UpdatedClient.Status = status.Value;
+                _viewModel.UpdatedClient.Status = status.Value;
                 StatusDropDown.Content = status.Value;
             }
         }
@@ -156,10 +156,10 @@ public sealed partial class UpdateCaseInformation : Page {
     private void UpdateValue(string value, CaseField type) {
         switch (type) {
             case CaseField.CaseID:
-                ViewModel.UpdatedClient.CaseID = value;
+                _viewModel.UpdatedClient.CaseID = value;
                 break;
             case CaseField.Premiums:
-                ViewModel.UpdatedClient.Premiums = value;
+                _viewModel.UpdatedClient.Premiums = value;
                 break;
         }
     }
@@ -170,6 +170,6 @@ public sealed partial class UpdateCaseInformation : Page {
         CEmail.Value = counselor.Email ?? "";
 
         // Update ClientDetail
-        ViewModel.UpdatedClient.CounselorID = counselor.Id;
+        _viewModel.UpdatedClient.CounselorID = counselor.Id;
     }
 }

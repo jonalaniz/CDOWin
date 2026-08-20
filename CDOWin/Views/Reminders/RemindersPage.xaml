@@ -60,7 +60,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ItemsRepeater Grid.Row="0" ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" HorizontalAlignment="Stretch">
+                <ItemsRepeater Grid.Row="0" ItemsSource="{x:Bind _viewModel.Filtered, Mode=OneWay}" HorizontalAlignment="Stretch">
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="models:Reminder">
                             
@@ -130,7 +130,7 @@
                 <TextBlock Grid.Row="1" Margin="8,8,8,24" HorizontalAlignment="Center"
                            x:Name="EndTextField"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           Text="{x:Bind ViewModel.EndText, Mode=OneWay}"/>
+                           Text="{x:Bind _viewModel.EndText, Mode=OneWay}"/>
             </Grid>
         </ScrollViewer>
     </Grid>

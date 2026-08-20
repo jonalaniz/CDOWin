@@ -24,13 +24,13 @@
         <!-- Row 0: Case ID + Tier + Counselor (Non Editable) -->
         <c:LabelPair Grid.Row="0" Grid.Column="0"
                             Label="Issued By" 
-                            Value="{x:Bind ViewModel.Client.CounselorReference.Name}"/>
+                            Value="{x:Bind _viewModel.Client.CounselorReference.Name}"/>
         <c:LabelPair Grid.Row="0" Grid.Column="1"
                             Label="Tier Level" 
-                            Value="{x:Bind ViewModel.Client.Status}"/>
+                            Value="{x:Bind _viewModel.Client.Status}"/>
         <c:LabelPair Grid.Row="0" Grid.Column="2"
                             Label="Case ID" 
-                            Value="{x:Bind ViewModel.Client.CaseID}"/>
+                            Value="{x:Bind _viewModel.Client.CaseID}"/>
 
         <!-- Row 1: Border + Content -->
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"

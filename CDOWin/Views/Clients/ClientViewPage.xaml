@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Grid BorderThickness="0, 0, 1, 0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-          Visibility="{x:Bind ViewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
+          Visibility="{x:Bind _viewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,8 +28,8 @@
 
         <!-- Row 0: Title + Buttons -->
         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource PageTitleStyle}"
-                   Opacity="{x:Bind ViewModel.Selected.InActive, Mode=OneWay, Converter={StaticResource BoolOpacityConverter}}"
-                   Text="{x:Bind ViewModel.Selected.FormattedName, Mode=OneWay}"
+                   Opacity="{x:Bind _viewModel.Selected.InActive, Mode=OneWay, Converter={StaticResource BoolOpacityConverter}}"
+                   Text="{x:Bind _viewModel.Selected.FormattedName, Mode=OneWay}"
                    x:Name="Header" RightTapped="TextBlock_RightTapped"/>
 
         <!-- CommandBar -->
@@ -62,9 +62,9 @@
                                 <SymbolIcon Symbol="Edit" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
+                        <MenuFlyoutItem Text="{x:Bind _viewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
                                         Click="ToggleActive_Clicked"/>
-                        <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
+                        <MenuFlyoutItem Text="{x:Bind _viewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
                                         Click="ToggleTTW_Clicked"/>
                         <MenuFlyoutSeparator/>
                         <MenuFlyoutItem Text="Delete..."
@@ -128,34 +128,34 @@
 
                             <!-- Date of Birth/DL/SSN -->
                             <c:LabelPair Grid.Row ="0" Grid.Column="0" Grid.ColumnSpan="2" Label="DOB"
-                                     Value="{x:Bind ViewModel.Selected.FormattedDOB, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.FormattedDOB, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Label="DL/ID"
-                                     Value="{x:Bind ViewModel.Selected.DriversLicense, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.DriversLicense, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Label="SSN"
-                                     Value="{x:Bind ViewModel.Selected.FormattedSSN, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.FormattedSSN, Mode=OneWay}"/>
 
                             <!-- Fluent Languages/Race -->
                             <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Label="Fluent Languages"
-                                     Value="{x:Bind ViewModel.Selected.FluentLanguages, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.FluentLanguages, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Label="Race"
-                                     Value="{x:Bind ViewModel.Selected.Race, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Race, Mode=OneWay}"/>
 
                             <!-- Address Section -->
                             <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"  
-                                    Visibility="{x:Bind ViewModel.Selected.FormattedAddress, Mode=OneWay, Converter={StaticResource StringToVisability}}">
+                                    Visibility="{x:Bind _viewModel.Selected.FormattedAddress, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                                 <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Address"/>
                                 <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.FormattedStreetAddress, Mode=OneWay}"/>
+                                       Text="{x:Bind _viewModel.Selected.FormattedStreetAddress, Mode=OneWay}"/>
                                 <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.FormattedCityStateZip, Mode=OneWay}"/>
+                                       Text="{x:Bind _viewModel.Selected.FormattedCityStateZip, Mode=OneWay}"/>
                             </StackPanel>
 
                             <!-- Education Section -->
                             <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Label="Education"
-                                     Value="{x:Bind ViewModel.Selected.Education, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Education, Mode=OneWay}"/>
                         </Grid>
                     </ScrollView>
                 </Grid>
@@ -201,38 +201,38 @@
 
                         <!-- Phone 1 -->
                         <FontIcon Grid.Row="0" Grid.Column="0" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" Glyph="&#xE717;"
-                                  Visibility="{x:Bind ViewModel.Selected.Phone1, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                  Visibility="{x:Bind _viewModel.Selected.Phone1, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
                         <c:LabelPair Grid.Row="0" Grid.Column="1" 
-                                     Label="{x:Bind ViewModel.Selected.Phone1Identity, Mode=OneWay}" 
-                                     Value="{x:Bind ViewModel.Selected.Phone1, Mode=OneWay}" 
-                                     Visibility="{x:Bind ViewModel.Selected.Phone1, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                     Label="{x:Bind _viewModel.Selected.Phone1Identity, Mode=OneWay}" 
+                                     Value="{x:Bind _viewModel.Selected.Phone1, Mode=OneWay}" 
+                                     Visibility="{x:Bind _viewModel.Selected.Phone1, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 2 -->
                         <c:LabelPair Grid.Row="1" Grid.Column="1"
-                                     Label="{x:Bind ViewModel.Selected.Phone2Identity, Mode=OneWay}" 
-                                     Value="{x:Bind ViewModel.Selected.Phone2, Mode=OneWay}"
-                                     Visibility="{x:Bind ViewModel.Selected.Phone2, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                     Label="{x:Bind _viewModel.Selected.Phone2Identity, Mode=OneWay}" 
+                                     Value="{x:Bind _viewModel.Selected.Phone2, Mode=OneWay}"
+                                     Visibility="{x:Bind _viewModel.Selected.Phone2, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Phone 3 -->
                         <c:LabelPair Grid.Row="2" Grid.Column="1"
-                                    Label="{x:Bind ViewModel.Selected.Phone3Identity, Mode=OneWay}" 
-                                    Value="{x:Bind ViewModel.Selected.Phone3, Mode=OneWay}"
-                                    Visibility="{x:Bind ViewModel.Selected.Phone3, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                    Label="{x:Bind _viewModel.Selected.Phone3Identity, Mode=OneWay}" 
+                                    Value="{x:Bind _viewModel.Selected.Phone3, Mode=OneWay}"
+                                    Visibility="{x:Bind _viewModel.Selected.Phone3, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 1 -->
                         <FontIcon Grid.Row="3" Grid.Column="0" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" Glyph="&#xE715;" 
-                                Visibility="{x:Bind ViewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                Visibility="{x:Bind _viewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <c:LabelPair Grid.Row="3" Grid.Column="1"
-                                    Label="{x:Bind ViewModel.Selected.EmailIdentity, Mode=OneWay}" 
-                                    Value="{x:Bind ViewModel.Selected.Email, Mode=OneWay}"
-                                    Visibility="{x:Bind ViewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                    Label="{x:Bind _viewModel.Selected.EmailIdentity, Mode=OneWay}" 
+                                    Value="{x:Bind _viewModel.Selected.Email, Mode=OneWay}"
+                                    Visibility="{x:Bind _viewModel.Selected.Email, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
 
                         <!-- Email 2 -->
                         <c:LabelPair Grid.Row="4" Grid.Column="1"
-                                     Label="{x:Bind ViewModel.Selected.Email2Identity, Mode=OneWay}" 
-                                     Value="{x:Bind ViewModel.Selected.Email2, Mode=OneWay}"
-                                     Visibility="{x:Bind ViewModel.Selected.Email2, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
+                                     Label="{x:Bind _viewModel.Selected.Email2Identity, Mode=OneWay}" 
+                                     Value="{x:Bind _viewModel.Selected.Email2, Mode=OneWay}"
+                                     Visibility="{x:Bind _viewModel.Selected.Email2, Mode=OneWay, Converter={StaticResource StringToVisability}}"/>
                     </Grid>
                 </Grid>
 
@@ -278,27 +278,27 @@
 
                             <!-- Start Date/Case ID/Tier Section -->
                             <c:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Label="Start Date" 
-                                     Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Label="Case ID" 
-                                     Value="{x:Bind ViewModel.Selected.CaseID, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.CaseID, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Label="Case Load"
-                                     Value="{x:Bind ViewModel.Selected.CounselorReference.CaseLoadID, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.CounselorReference.CaseLoadID, Mode=OneWay}"/>
 
                             <!-- Benefits/Premiums Section -->
                             <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Label="Benefits" 
-                                     Value="{x:Bind ViewModel.Selected.Benefits, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Benefits, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Label="Premiums" 
-                                     Value="{x:Bind ViewModel.Selected.Premiums, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Premiums, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Label="Tier" 
-                                     Value="{x:Bind ViewModel.Selected.Status, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Status, Mode=OneWay}"/>
 
                             <!-- Counselor Section -->
                             <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
-                                        Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
+                                        Visibility="{x:Bind _viewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                                 <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Counselor"/>
 
                                 <Grid ColumnSpacing="8">
@@ -309,18 +309,18 @@
 
                                     <Button Grid.Column="1" VerticalAlignment="Top" Margin="0,6,12,0"
                                             Style="{StaticResource AccentButtonStyle}"
-                                            IsEnabled="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
-                                            Tag="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay}" Click="GoToCounselor_Click">
+                                            IsEnabled="{x:Bind _viewModel.Selected.CounselorID, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
+                                            Tag="{x:Bind _viewModel.Selected.CounselorID, Mode=OneWay}" Click="GoToCounselor_Click">
                                         <FontIcon Glyph="&#xE76C;"/>
                                     </Button>
 
                                     <StackPanel Grid.Column="0" Orientation="Vertical">
                                         <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                                   Text="{x:Bind ViewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
+                                                   Text="{x:Bind _viewModel.Selected.CounselorReference.Name, Mode=OneWay}"/>
                                         <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                                   Text="{x:Bind ViewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
+                                                   Text="{x:Bind _viewModel.Selected.CounselorReference.Phone, Mode=OneWay}"/>
                                         <TextBlock TextWrapping="Wrap" Style="{StaticResource ValueTextBlockStyle}"
-                                                   Text="{x:Bind ViewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
+                                                   Text="{x:Bind _viewModel.Selected.CounselorReference.Email, Mode=OneWay}"/>
                                     </StackPanel>
                                 </Grid>
                             </StackPanel>
@@ -329,12 +329,12 @@
 
                                 <!-- Secretary Section -->
                             <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"
-                                    Visibility="{x:Bind ViewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
+                                    Visibility="{x:Bind _viewModel.Selected.CounselorReference, Mode=OneWay, Converter={StaticResource StringToVisability}}">
                                 <TextBlock Style="{StaticResource LabelTextBlockStyle}" Text="Secretary"/>
                                 <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryName, Mode=OneWay}"/>
+                                       Text="{x:Bind _viewModel.Selected.CounselorReference.SecretaryName, Mode=OneWay}"/>
                                 <TextBlock Style="{StaticResource ValueTextBlockStyle}"
-                                       Text="{x:Bind ViewModel.Selected.CounselorReference.SecretaryEmail, Mode=OneWay}"/>
+                                       Text="{x:Bind _viewModel.Selected.CounselorReference.SecretaryEmail, Mode=OneWay}"/>
                             </StackPanel>
                         </Grid>
                     </ScrollView>
@@ -373,10 +373,10 @@
 
                             <!-- Start Date/Case ID/Status Section -->
                             <c:LabelPair Grid.Row="0" Grid.Column="0" Label="Employment Goals"
-                                     Value="{x:Bind ViewModel.Selected.EmploymentGoal, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.EmploymentGoal, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Conditions"
-                                      Value="{x:Bind ViewModel.Selected.Conditions, Mode=OneWay}"/>
+                                      Value="{x:Bind _viewModel.Selected.Conditions, Mode=OneWay}"/>
                         </Grid>
                     </ScrollView>
                 </Grid>
@@ -404,7 +404,7 @@
 
                     <!-- Item Repeater -->
                     <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.Invoices, Mode=OneWay}">
+                        <ItemsRepeater ItemsSource="{x:Bind _viewModel.Invoices, Mode=OneWay}">
                             <DataTemplate x:DataType="sas:SADetail">
 
                                 <!-- Button -->
@@ -455,13 +455,13 @@
 
                             <!-- Start Date/Case ID/Status Section -->
                             <c:LabelPair Grid.Row="0" Grid.Column="0" Label="Disability" 
-                                     Value="{x:Bind ViewModel.Selected.Disability, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Disability, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="1" Grid.Column="0" Label="Criminal Charges" 
-                                     Value="{x:Bind ViewModel.Selected.CriminalCharge, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.CriminalCharge, Mode=OneWay}"/>
 
                             <c:LabelPair Grid.Row="2" Grid.Column="0" Label="Transportation" 
-                                     Value="{x:Bind ViewModel.Selected.Transportation, Mode=OneWay}"/>
+                                     Value="{x:Bind _viewModel.Selected.Transportation, Mode=OneWay}"/>
                         </Grid>
                     </ScrollView>
                 </Grid>
@@ -491,7 +491,7 @@
 
                         <!-- Item Repeater -->
                     <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.Placements, Mode=OneWay}">
+                        <ItemsRepeater ItemsSource="{x:Bind _viewModel.Placements, Mode=OneWay}">
                             <DataTemplate x:DataType="placements:PlacementDetail">
 
                                 <!-- Button -->
@@ -564,11 +564,11 @@
                         
                         <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource LeftCheckboxStyle}"
                                   Content="Required" Tag="{x:Bind dialogs:CheckboxTag.ResumeRequired}"
-                                  IsChecked="{x:Bind ViewModel.Selected.ResumeRequired, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.ResumeRequired, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
                         <CheckBox Grid.Row="1" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.ResumeCompleted}"
-                                  IsChecked="{x:Bind ViewModel.Selected.ResumeCompleted, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.ResumeCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Video Interviews Section -->
@@ -577,11 +577,11 @@
                                    FontWeight="Bold"/>
                         <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource LeftCheckboxStyle}"
                                   Content="Required" Tag="{x:Bind dialogs:CheckboxTag.VideoInterviewRequired}"
-                                  IsChecked="{x:Bind ViewModel.Selected.VideoInterviewRequired, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.VideoInterviewRequired, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
                         <CheckBox Grid.Row="3" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.VideoInterviewCompleted}"
-                                  IsChecked="{x:Bind ViewModel.Selected.VideoInterviewCompleted, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.VideoInterviewCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Releases Section -->
@@ -589,7 +589,7 @@
                                    Text="Releases" FontWeight="Bold"/>
                         <CheckBox Grid.Row="4" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.ReleasesCompleted}"
-                                  IsChecked="{x:Bind ViewModel.Selected.ReleasesCompleted, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.ReleasesCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Orientation Section -->
@@ -597,7 +597,7 @@
                                    Text="Orientation" FontWeight="Bold"/>
                         <CheckBox Grid.Row="5" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.OrientationCompleted}"
-                                  IsChecked="{x:Bind ViewModel.Selected.OrientationCompleted, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.OrientationCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- 1850 Data Sheet Section -->
@@ -605,7 +605,7 @@
                                    Text="1850 Data Sheet" FontWeight="Bold"/>
                         <CheckBox Grid.Row="6"  Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.DataSheetCompleted}"
-                                  IsChecked="{x:Bind ViewModel.Selected.DataSheetCompleted, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.DataSheetCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
 
                         <!-- Elevator Speech Section -->
@@ -613,7 +613,7 @@
                                    Text="Elevator Speech" FontWeight="Bold"/>
                         <CheckBox Grid.Row="7" Grid.Column="1" Style="{StaticResource RightCheckboxStyle}"
                                   Content="Completed" Tag="{x:Bind dialogs:CheckboxTag.ElevatorSpeechCompleted}"
-                                  IsChecked="{x:Bind ViewModel.Selected.ElevatorSpeechCompleted, Mode=OneWay}"
+                                  IsChecked="{x:Bind _viewModel.Selected.ElevatorSpeechCompleted, Mode=OneWay}"
                                   Click="Checkbox_Clicked"/>
                     </Grid>
                 </Grid>
@@ -627,15 +627,15 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
                     <Run Text="ACE ID:"/>
-                    <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Selected.Id, Mode=OneWay}"/>
                     <Run Text=","/>
                 </TextBlock>
                 <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
                     <Run Text="Counselor ID:"/>
-                    <Run Text="{x:Bind ViewModel.Selected.CounselorID, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Selected.CounselorID, Mode=OneWay}"/>
                 </TextBlock>
                 <TextBlock Text="TTW" FontWeight="Bold" Style="{StaticResource PageSubtitleStyle}" Margin="0"
-                           Visibility="{x:Bind ViewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
+                           Visibility="{x:Bind _viewModel.Selected.TTW, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
             </StackPanel>
         </Grid>
 

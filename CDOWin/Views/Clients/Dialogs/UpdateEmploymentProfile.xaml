@@ -17,18 +17,18 @@
         
         <!-- Row 0: Disability -->
         <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Disability" Text="{x:Bind ViewModel.OriginalClient.Disability}" 
+                 Header="Disability" Text="{x:Bind _viewModel.OriginalClient.Disability}" 
                  Tag="{x:Bind local:EmploymentField.Disability}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="255"/>
         <!-- Row 1: Criminal Charges -->
         <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Criminal Charges" Text="{x:Bind ViewModel.OriginalClient.CriminalCharge}" 
+                 Header="Criminal Charges" Text="{x:Bind _viewModel.OriginalClient.CriminalCharge}" 
                  Tag="{x:Bind local:EmploymentField.CriminalCharge}"
                  TextChanged="TextBox_TextChanged"/>
         <!-- Row 2: Transportation -->
         <TextBox Grid.Row="2" Grid.Column="0" Header="Transportation" 
-                 Text="{x:Bind ViewModel.OriginalClient.Transportation}" 
+                 Text="{x:Bind _viewModel.OriginalClient.Transportation}" 
                  Tag="{x:Bind local:EmploymentField.Transportation}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="40"/>

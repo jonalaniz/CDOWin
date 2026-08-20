@@ -81,7 +81,7 @@
                              MaxLength="50"/>
                     <StackPanel Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="1" Spacing="8">
                         <TextBlock Text="State"/>
-                        <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind ViewModel.State}"
+                        <DropDownButton x:Name="StateDropDownButton" Content="{x:Bind _viewModel.State}"
                                         Style="{StaticResource DropDownButtonStyle}"/>
                     </StackPanel>
                     <NumberBox Grid.Row="4" Grid.Column="5" Header="Zip"
@@ -90,7 +90,7 @@
 
                     <!-- Row 5: Education -->
                     <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" Style="{StaticResource MultiLineTextBoxStyle}"
-                             Header="Education" Text="{x:Bind ViewModel.Education}" 
+                             Header="Education" Text="{x:Bind _viewModel.Education}" 
                              Tag="{x:Bind local:PersonalField.Education}" TextChanged="PTextBox_TextChanged"/>
                 </Grid>
             </Expander>

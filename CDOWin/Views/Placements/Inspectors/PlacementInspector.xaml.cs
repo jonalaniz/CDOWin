@@ -15,12 +15,13 @@ public sealed partial class PlacementInspector : Page {
     // =========================
     // ViewModel
     // =========================
-    public PlacementsViewModel ViewModel { get; } = AppServices.PlacementsViewModel;
+    private readonly PlacementsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public PlacementInspector() {
+        _viewModel = AppServices.PlacementsViewModel;
         InitializeComponent();
     }
 
@@ -28,9 +29,9 @@ public sealed partial class PlacementInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.Selected == null) return;
+        if (_viewModel == null || _viewModel.Selected == null) return;
 
-        var updateVM = new PlacementUpdateViewModel(ViewModel.Selected);
+        var updateVM = new PlacementUpdateViewModel(_viewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Placement");
         dialog.Content = new UpdatePlacement(updateVM);
 
@@ -45,18 +46,18 @@ public sealed partial class PlacementInspector : Page {
             return;
         }
 
-        _ = ViewModel.ReloadPlacementAsync();
+        _ = _viewModel.ReloadPlacementAsync();
     }
 
     private async void Delete_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
         var dialog = DialogFactory.DeleteDialog(this.XamlRoot, "Delete Placement?");
         dialog.Content = new DeletePage();
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary) {
-            await ViewModel.DeleteSelectedPlacement();
+            await _viewModel.DeleteSelectedPlacement();
         }
     }
 }

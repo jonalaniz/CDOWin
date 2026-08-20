@@ -19,15 +19,15 @@ public sealed partial class CreatePlacements : Page {
     // =========================
     // Dependencies
     // =========================
+    private readonly CreatePlacementViewModel _viewModel;
     private List<Employer> _employers = [];
-    private readonly CreatePlacementViewModel ViewModel;
-    private List<State> _states = AppServices.StatesViewModel.States.ToList();
+    private List<State> _states = AppServices.States();
 
     // =========================
     // Constructor
     // =========================
     public CreatePlacements(CreatePlacementViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         BuildDropDown();
         BuildStateDropdown();
@@ -41,8 +41,8 @@ public sealed partial class CreatePlacements : Page {
     private void BuildDropDown() {
         var flyout = new MenuFlyout();
 
-        if (ViewModel.Client.Sas == null) return;
-        foreach (var sa in ViewModel.Client.Sas) {
+        if (_viewModel.Client.Sas == null) return;
+        foreach (var sa in _viewModel.Client.Sas) {
             var item = new MenuFlyoutItem {
                 Text = sa.Description,
                 Tag = sa
@@ -69,7 +69,7 @@ public sealed partial class CreatePlacements : Page {
         }
 
         StateDropDownButton.Content = "TX";
-        ViewModel.State = "TX";
+        _viewModel.State = "TX";
         StateDropDownButton.Flyout = flyout;
     }
 
@@ -86,13 +86,13 @@ public sealed partial class CreatePlacements : Page {
         if (sender is not MenuFlyoutItem item || item.Tag is not SADetail sa)
             return;
         SANumberDropDownButton.Content = sa.ServiceAuthorizationNumber;
-        ViewModel.SaNumber = sa.ServiceAuthorizationNumber;
+        _viewModel.SaNumber = sa.ServiceAuthorizationNumber;
     }
 
     private void StateSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             var state = item.Tag.ToString();
-            ViewModel.State = state;
+            _viewModel.State = state;
             StateDropDownButton.Content = state;
         }
     }
@@ -112,26 +112,26 @@ public sealed partial class CreatePlacements : Page {
             var dateString = offset.DateTime.Date.ToString(format: "MM/dd/yyyy");
             switch (field) {
                 case UpdateField.HireDate:
-                    ViewModel.HireDate = offset.DateTime.Date.ToUniversalTime();
+                    _viewModel.HireDate = offset.DateTime.Date.ToUniversalTime();
                     break;
                 case UpdateField.EndDate:
-                    ViewModel.EndDate = offset.DateTime.Date.ToUniversalTime();
+                    _viewModel.EndDate = offset.DateTime.Date.ToUniversalTime();
                     SetDaysWorking();
                     break;
                 case UpdateField.Day1:
-                    ViewModel.Day1 = dateString;
+                    _viewModel.Day1 = dateString;
                     break;
                 case UpdateField.Day2:
-                    ViewModel.Day2 = dateString;
+                    _viewModel.Day2 = dateString;
                     break;
                 case UpdateField.Day3:
-                    ViewModel.Day3 = dateString;
+                    _viewModel.Day3 = dateString;
                     break;
                 case UpdateField.Day4:
-                    ViewModel.Day4 = dateString;
+                    _viewModel.Day4 = dateString;
                     break;
                 case UpdateField.Day5:
-                    ViewModel.Day5 = dateString;
+                    _viewModel.Day5 = dateString;
                     break;
             }
         }
@@ -155,7 +155,7 @@ public sealed partial class CreatePlacements : Page {
     // =========================
     private void EmployerAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
-            ViewModel.EmployerName = sender.Text.Trim();
+            _viewModel.EmployerName = sender.Text.Trim();
             var query = sender.Text.Trim().ToLower();
             var suggestions = _employers
                 .Where(c => !string.IsNullOrWhiteSpace(c.Name) && c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
@@ -181,12 +181,12 @@ public sealed partial class CreatePlacements : Page {
     private void SetDaysWorking() {
         if (HireDatePicker.Date is not DateTimeOffset startDate
             || EndDatePicker.Date is not DateTimeOffset endDate) {
-            ViewModel.DaysOnJob = null;
+            _viewModel.DaysOnJob = null;
             Debug.WriteLine("Set days to null");
             return;
         }
         var daysOnJob = endDate - startDate;
-        if (daysOnJob.Days > 0) ViewModel.DaysOnJob = daysOnJob.Days;
+        if (daysOnJob.Days > 0) _viewModel.DaysOnJob = daysOnJob.Days;
     }
 
     private void UpdateValue(string value, UpdateField field) {
@@ -195,72 +195,72 @@ public sealed partial class CreatePlacements : Page {
 
         switch (field) {
             case UpdateField.EmployerPhone:
-                ViewModel.EmployerPhone = text;
+                _viewModel.EmployerPhone = text;
                 break;
             case UpdateField.Address1:
-                ViewModel.Address1 = text;
+                _viewModel.Address1 = text;
                 break;
             case UpdateField.Address2:
-                ViewModel.Address2 = text;
+                _viewModel.Address2 = text;
                 break;
             case UpdateField.City:
-                ViewModel.City = text;
+                _viewModel.City = text;
                 break;
             case UpdateField.Zip:
-                ViewModel.Zip = text;
+                _viewModel.Zip = text;
                 break;
             case UpdateField.SupervisorName:
-                ViewModel.SupervisorName = text;
+                _viewModel.SupervisorName = text;
                 break;
             case UpdateField.SupervisorPhone:
-                ViewModel.SupervisorPhone = text;
+                _viewModel.SupervisorPhone = text;
                 break;
             case UpdateField.SupervisorEmail:
-                ViewModel.SupervisorEmail = text;
+                _viewModel.SupervisorEmail = text;
                 break;
             case UpdateField.Website:
-                ViewModel.Website = text;
+                _viewModel.Website = text;
                 break;
             case UpdateField.Position:
-                ViewModel.Position = text;
+                _viewModel.Position = text;
                 break;
             case UpdateField.HoursWorking:
-                ViewModel.HoursWorking = text;
+                _viewModel.HoursWorking = text;
                 break;
             case UpdateField.Wage:
-                ViewModel.Wages = text;
+                _viewModel.Wages = text;
                 break;
             case UpdateField.Benefits:
-                ViewModel.Benefits = text;
+                _viewModel.Benefits = text;
                 break;
             case UpdateField.JobDuties:
-                ViewModel.JobDuties = text;
+                _viewModel.JobDuties = text;
                 break;
             case UpdateField.WorkSchedule:
-                ViewModel.WorkSchedule = text;
+                _viewModel.WorkSchedule = text;
                 break;
             case UpdateField.WorkEnvironment:
-                ViewModel.WorkEnvironment = text;
+                _viewModel.WorkEnvironment = text;
                 break;
             case UpdateField.Accommodations:
-                ViewModel.Accommodations = text;
+                _viewModel.Accommodations = text;
                 break;
         }
     }
 
     private void UpdateSelectedEmployer(Employer employer) {
-        ViewModel.EmployerID = employer.Id;
-        ViewModel.EmployerName = employer.Name;
-        ViewModel.EmployerPhone = employer.Phone;
-        ViewModel.Address1 = employer.Address1;
-        ViewModel.Address2 = employer.Address2;
-        ViewModel.City = employer.City;
-        ViewModel.State = employer.State;
-        ViewModel.Zip = employer.Zip;
-        ViewModel.SupervisorName = employer.SupervisorName;
-        ViewModel.SupervisorPhone = employer.SupervisorPhone;
-        ViewModel.SupervisorEmail = employer.SupervisorEmail;
-        ViewModel.Website = employer.Website;
+        _viewModel.EmployerID = employer.Id;
+        _viewModel.EmployerName = employer.Name;
+        _viewModel.EmployerPhone = employer.Phone;
+        _viewModel.Address1 = employer.Address1;
+        _viewModel.Address2 = employer.Address2;
+        _viewModel.City = employer.City;
+        _viewModel.State = employer.State;
+        _viewModel.Zip = employer.Zip;
+        _viewModel.SupervisorName = employer.SupervisorName;
+        _viewModel.SupervisorPhone = employer.SupervisorPhone;
+        _viewModel.SupervisorEmail = employer.SupervisorEmail;
+        _viewModel.Website = employer.Website;
 
         EmployerPhoneTextBox.Text = employer.Phone;
         AddressTextBox.Text = employer.Address1;

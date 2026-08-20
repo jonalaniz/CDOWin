@@ -24,7 +24,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" 
                    Style="{StaticResource PageTitleStyle}"
-                   Text="{x:Bind ViewModel.Selected.ClientName, Mode=OneWay}"
+                   Text="{x:Bind _viewModel.Selected.ClientName, Mode=OneWay}"
                    TextWrapping="WrapWholeWords"/>
         
         <!-- CommandBar -->
@@ -87,46 +87,46 @@
             <!-- Row 0: PO Number + Case ID-->
             <c:LabelPair Grid.Row="0" Grid.Column="0" 
                          Label="SA Number" 
-                         Value="{x:Bind ViewModel.Selected.ServiceAuthorizationNumber, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.ServiceAuthorizationNumber, Mode=OneWay}"/>
             <c:LabelPair Grid.Row="0" Grid.Column="1" 
                          Label="Case ID"
-                         Value="{x:Bind ViewModel.Selected.CaseId, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.CaseId, Mode=OneWay}"/>
 
             <!-- Row 1: Counselor -->
             <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                          Label="Issued By" 
-                         Value="{x:Bind ViewModel.Selected.CounselorName, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.CounselorName, Mode=OneWay}"/>
 
             <!-- Row 2: Office -->
             <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                          Label="Office"
-                         Value="{x:Bind ViewModel.Selected.Office, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.Office, Mode=OneWay}"/>
 
             <!-- Row 3: Secretary -->
             <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                          Label="Secretary"
-                         Value="{x:Bind ViewModel.Selected.SecretaryName, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.SecretaryName, Mode=OneWay}"/>
 
             <!-- Row 4: Start Date + End Date -->
             <c:LabelPair Grid.Row="4" Grid.Column="0" 
                          Label="Start Date" 
-                         Value="{x:Bind ViewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.FormattedStartDate, Mode=OneWay}"/>
             <c:LabelPair Grid.Row="4" Grid.Column="1" 
                          Label="End Date" 
-                         Value="{x:Bind ViewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
 
             <!-- Row 5: Unit Cost -->
             <c:LabelPair Grid.Row="5" Grid.Column="0"
                          Label="Unit Cost" 
-                         Value="{x:Bind ViewModel.Selected.FormattedCost, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.FormattedCost, Mode=OneWay}"/>
             <c:LabelPair Grid.Row="5" Grid.Column="1"
                          Label="U/M" 
-                         Value="{x:Bind ViewModel.Selected.UnitOfMeasurement, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.UnitOfMeasurement, Mode=OneWay}"/>
             
             <!-- Row 6: Description -->
             <c:LabelPair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                          Label="Description" 
-                         Value="{x:Bind ViewModel.Selected.Description, Mode=OneWay}"/>
+                         Value="{x:Bind _viewModel.Selected.Description, Mode=OneWay}"/>
         </Grid>
     </Grid>
 </Page>

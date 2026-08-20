@@ -19,7 +19,7 @@ public sealed partial class CreateClient : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly CreateClientViewModel ViewModel;
+    private readonly CreateClientViewModel _viewModel;
     private List<CounselorSummary> _counselors = [];
     private readonly List<State> _states = AppServices.StatesViewModel.GetStates();
 
@@ -29,7 +29,7 @@ public sealed partial class CreateClient : Page {
     // =========================
 
     public CreateClient(CreateClientViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         GetCounselorSummaries();
         BuildDropDowns();
@@ -120,20 +120,20 @@ public sealed partial class CreateClient : Page {
 
         switch (field) {
             case PersonalField.DL:
-                ViewModel.DriversLicense = stringValue;
+                _viewModel.DriversLicense = stringValue;
                 break;
             case PersonalField.SSN:
-                ViewModel.Ssn = ParseSSN(stringValue);
+                _viewModel.Ssn = ParseSSN(stringValue);
                 break;
             case PersonalField.Zip:
-                ViewModel.Zip = stringValue;
+                _viewModel.Zip = stringValue;
                 break;
         }
     }
 
     private void DOBPicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
         if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset)
-            ViewModel.Dob = offset.DateTime.Date.ToUniversalTime();
+            _viewModel.Dob = offset.DateTime.Date.ToUniversalTime();
     }
 
     private void PTextBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -149,7 +149,7 @@ public sealed partial class CreateClient : Page {
     private void StateSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             var state = item.Tag.ToString();
-            ViewModel.State = state;
+            _viewModel.State = state;
             StateDropDownButton.Content = state;
         }
     }
@@ -171,7 +171,7 @@ public sealed partial class CreateClient : Page {
     // =========================
     private void StartDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
         if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset)
-            ViewModel.StartDate = offset.DateTime.Date.ToUniversalTime();
+            _viewModel.StartDate = offset.DateTime.Date.ToUniversalTime();
     }
 
     // =========================
@@ -212,10 +212,10 @@ public sealed partial class CreateClient : Page {
     private void DropDownSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             if (item.Tag is Benefit benefit) {
-                ViewModel.Benefits = benefit.Value;
+                _viewModel.Benefits = benefit.Value;
                 BenefitDropDown.Content = benefit.Value;
             } else if (item.Tag is Status status) {
-                ViewModel.Status = status.Value;
+                _viewModel.Status = status.Value;
                 StatusDropDown.Content = status.Value;
             }
         }
@@ -262,10 +262,10 @@ public sealed partial class CreateClient : Page {
     private void UpdateValue(string value, AdministrativeField type) {
         switch (type) {
             case AdministrativeField.FirstName:
-                ViewModel.FirstName = value;
+                _viewModel.FirstName = value;
                 break;
             case AdministrativeField.LastName:
-                ViewModel.LastName = value;
+                _viewModel.LastName = value;
                 break;
         }
     }
@@ -274,22 +274,22 @@ public sealed partial class CreateClient : Page {
     private void UpdateValue(string value, PersonalField type) {
         switch (type) {
             case PersonalField.Languages:
-                ViewModel.FluentLanguages = value;
+                _viewModel.FluentLanguages = value;
                 break;
             case PersonalField.Race:
-                ViewModel.Race = value;
+                _viewModel.Race = value;
                 break;
             case PersonalField.Address1:
-                ViewModel.Address1 = value;
+                _viewModel.Address1 = value;
                 break;
             case PersonalField.Address2:
-                ViewModel.Address2 = value;
+                _viewModel.Address2 = value;
                 break;
             case PersonalField.City:
-                ViewModel.City = value;
+                _viewModel.City = value;
                 break;
             case PersonalField.Education:
-                ViewModel.Education = value;
+                _viewModel.Education = value;
                 break;
         }
     }
@@ -298,34 +298,34 @@ public sealed partial class CreateClient : Page {
     private void UpdateValue(string value, ContactField type) {
         switch (type) {
             case ContactField.Phone1:
-                ViewModel.Phone1 = value;
+                _viewModel.Phone1 = value;
                 break;
             case ContactField.Phone1Identity:
-                ViewModel.Phone1Identity = value;
+                _viewModel.Phone1Identity = value;
                 break;
             case ContactField.Phone2:
-                ViewModel.Phone2 = value;
+                _viewModel.Phone2 = value;
                 break;
             case ContactField.Phone2Identity:
-                ViewModel.Phone2Identity = value;
+                _viewModel.Phone2Identity = value;
                 break;
             case ContactField.Phone3:
-                ViewModel.Phone3 = value;
+                _viewModel.Phone3 = value;
                 break;
             case ContactField.Phone3Identity:
-                ViewModel.Phone3Identity = value;
+                _viewModel.Phone3Identity = value;
                 break;
             case ContactField.Email:
-                ViewModel.Email = value;
+                _viewModel.Email = value;
                 break;
             case ContactField.EmailIdentity:
-                ViewModel.EmailIdentity = value;
+                _viewModel.EmailIdentity = value;
                 break;
             case ContactField.Email2:
-                ViewModel.Email2 = value;
+                _viewModel.Email2 = value;
                 break;
             case ContactField.Email2Identity:
-                ViewModel.Email2Identity = value;
+                _viewModel.Email2Identity = value;
                 break;
         }
     }
@@ -334,28 +334,28 @@ public sealed partial class CreateClient : Page {
     private void UpdateValue(string value, CaseField type) {
         switch (type) {
             case CaseField.CaseID:
-                ViewModel.CaseID = value;
+                _viewModel.CaseID = value;
                 break;
             case CaseField.Premiums:
-                ViewModel.Premiums = value;
+                _viewModel.Premiums = value;
                 break;
         }
     }
 
     private void UpdateSelectedCounselor(CounselorSummary counselor) {
         Debug.WriteLine(counselor.Name);
-        ViewModel.CounselorID = counselor.Id;
-        ViewModel.CounselorName = counselor.Name;
+        _viewModel.CounselorID = counselor.Id;
+        _viewModel.CounselorName = counselor.Name;
     }
 
     // Conditions Fields
     private void UpdateValue(string value, ArrangementsField type) {
         switch (type) {
             case ArrangementsField.EmploymentGoal:
-                ViewModel.EmploymentGoal = value;
+                _viewModel.EmploymentGoal = value;
                 break;
             case ArrangementsField.Conditions:
-                ViewModel.Conditions = value;
+                _viewModel.Conditions = value;
                 break;
         }
     }
@@ -364,13 +364,13 @@ public sealed partial class CreateClient : Page {
     private void UpdateValue(string value, EmploymentField type) {
         switch (type) {
             case EmploymentField.Disability:
-                ViewModel.Disability = value;
+                _viewModel.Disability = value;
                 break;
             case EmploymentField.CriminalCharge:
-                ViewModel.CriminalCharge = value;
+                _viewModel.CriminalCharge = value;
                 break;
             case EmploymentField.Transportation:
-                ViewModel.Transportation = value;
+                _viewModel.Transportation = value;
                 break;
         }
     }

@@ -9,13 +9,13 @@ public sealed partial class CreateCounselor : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly CreateCounselorViewModel ViewModel;
+    private readonly CreateCounselorViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public CreateCounselor(CreateCounselorViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
     }
 
@@ -28,11 +28,11 @@ public sealed partial class CreateCounselor : Page {
 
         var text = textbox.Text.NormalizeString();
         if (text == null) return;
-        ViewModel.UpdateField(field, text);
+        _viewModel.UpdateField(field, text);
     }
 
     private void CaseLoad_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
         var value = (int)sender.Value;
-        ViewModel.CaseLoadId = value;
+        _viewModel.CaseLoadId = value;
     }
 }

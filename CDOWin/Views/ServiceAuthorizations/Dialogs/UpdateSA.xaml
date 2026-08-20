@@ -29,7 +29,7 @@
         <!-- Row 0: Office Address -->
         <AutoSuggestBox x:Name="OfficeSuggestBox"
                         Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" 
-                        Header="Office Address" Text="{x:Bind ViewModel.Original.Office}"
+                        Header="Office Address" Text="{x:Bind _viewModel.Original.Office}"
                         TextChanged="OfficeSuggestBox_TextChanged"
                         QuerySubmitted="OfficeSuggestBox_QuerySubmitted"
                         SuggestionChosen="OfficeSuggestBox_SuggestionChosen"/>
@@ -45,13 +45,13 @@
                 </Grid.RowDefinitions>
                 <!-- Row 0: Counselor Name -->
                 <TextBox Grid.Row="0"
-                         Header="Counselor Name" Text="{x:Bind ViewModel.Original.CounselorName}"
+                         Header="Counselor Name" Text="{x:Bind _viewModel.Original.CounselorName}"
                          Tag="{x:Bind local:Field.CounselorName}"
                          TextChanged="TextChanged"/>
 
                 <!-- Row 1: Secretary Name -->
                 <TextBox Grid.Row="1"
-                         Header="Secretary Name" Text="{x:Bind ViewModel.Original.SecretaryName}"
+                         Header="Secretary Name" Text="{x:Bind _viewModel.Original.SecretaryName}"
                          Tag="{x:Bind local:Field.SecretaryName}"
                          TextChanged="TextChanged"/>
             </Grid>
@@ -59,7 +59,7 @@
 
         <!-- Row 2: SA Number + Start Date + End Date -->
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                 Header="SA Number" Text="{x:Bind ViewModel.Original.ServiceAuthorizationNumber}"
+                 Header="SA Number" Text="{x:Bind _viewModel.Original.ServiceAuthorizationNumber}"
                  MaxLength="15"
                  Tag="{x:Bind local:Field.SaNumber}"
                  TextChanged="TextChanged"/>
@@ -81,7 +81,7 @@
         <!-- Row 3: Description -->
         <AutoSuggestBox x:Name="DescriptionSuggestBox"
                         Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" 
-                        Header="Description" Text="{x:Bind ViewModel.Original.Description}"
+                        Header="Description" Text="{x:Bind _viewModel.Original.Description}"
                         TextChanged="DescriptionSuggestBox_TextChanged"
                         QuerySubmitted="DescriptionSuggestBox_QuerySubmitted"
                         SuggestionChosen="DescriptionSuggestBox_SuggestionChosen"/>
@@ -89,7 +89,7 @@
         <!-- Row 4: U/M + Cost-->
         <TextBox x:Name="UMBox"
                  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
-                 Header="U/M" Text="{x:Bind ViewModel.Original.UnitOfMeasurement}"
+                 Header="U/M" Text="{x:Bind _viewModel.Original.UnitOfMeasurement}"
                  Tag="{x:Bind local:Field.UoM}"
                  TextChanged="TextChanged"/>
         <NumberBox x:Name="NumberBox"
@@ -98,7 +98,7 @@
                    ValueChanged="NumberBox_ValueChanged"/>
         <CheckBox x:Name="BilledCheckbox" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                   Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2"
-                  Content="Billed" IsChecked="{x:Bind ViewModel.Original.Billed, Mode=OneWay}"
+                  Content="Billed" IsChecked="{x:Bind _viewModel.Original.Billed, Mode=OneWay}"
                   Click="BilledCheckbox_Click"/>
     </Grid>
 </Page>

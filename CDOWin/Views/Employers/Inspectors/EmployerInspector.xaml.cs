@@ -13,12 +13,13 @@ public sealed partial class EmployerInspector : Page {
     // =========================
     // ViewModel
     // =========================
-    public EmployersViewModel ViewModel { get; private set; } = AppServices.EmployersViewModel;
+    private readonly EmployersViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public EmployerInspector() {
+        _viewModel = AppServices.EmployersViewModel;
         InitializeComponent();
     }
 
@@ -26,10 +27,10 @@ public sealed partial class EmployerInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.Selected == null)
+        if (_viewModel == null || _viewModel.Selected == null)
             return;
 
-        var updateVM = new EmployerUpdateViewModel(ViewModel.Selected);
+        var updateVM = new EmployerUpdateViewModel(_viewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Employer");
         dialog.Content = new UpdateEmployer(updateVM);
 
@@ -37,7 +38,7 @@ public sealed partial class EmployerInspector : Page {
 
         if (result != ContentDialogResult.Primary) return;
 
-        var updateResult = await ViewModel.UpdateEmployerAsync(updateVM.Updated);
+        var updateResult = await _viewModel.UpdateEmployerAsync(updateVM.Updated);
         if (!updateResult.IsSuccess) {
             ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;

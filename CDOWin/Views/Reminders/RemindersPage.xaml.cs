@@ -20,13 +20,14 @@ public sealed partial class RemindersPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public RemindersViewModel ViewModel { get; } = AppServices.RemindersViewModel;
+    private readonly RemindersViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public RemindersPage() {
-        ViewModel.ClientSpecific.CollectionChanged += ClientRemindersChanged;
+        _viewModel = AppServices.RemindersViewModel;
+        _viewModel.ClientSpecific.CollectionChanged += ClientRemindersChanged;
         InitializeComponent();
     }
 
@@ -35,7 +36,7 @@ public sealed partial class RemindersPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadRemindersAsync();
+        await _viewModel.LoadRemindersAsync();
     }
 
     // =========================
@@ -67,7 +68,7 @@ public sealed partial class RemindersPage : Page {
             DateTime day = args.Item.Date.Date;
 
             // Does any reminder match this Date?
-            bool hasReminder = ViewModel.DateHasReminders(day);
+            bool hasReminder = _viewModel.DateHasReminders(day);
 
             if (hasReminder) {
                 // Mark the Date (simple highlight)
@@ -90,7 +91,7 @@ public sealed partial class RemindersPage : Page {
                     SetDate();
                     break;
                 default:
-                    ViewModel.Filter = filter;
+                    _viewModel.Filter = filter;
                     break;
             }
         }
@@ -104,7 +105,7 @@ public sealed partial class RemindersPage : Page {
     }
 
     private async void Reminder_Click(SplitButton sender, SplitButtonClickEventArgs args) {
-        if (sender.Tag is Int32 id && ViewModel.GetReminderByID(id) is Reminder reminder) {
+        if (sender.Tag is Int32 id && _viewModel.GetReminderByID(id) is Reminder reminder) {
             var updateVM = new ReminderUpdateViewModel(reminder);
             var dialog = DialogFactory.UpdateDialog(this.XamlRoot, $"Edit Reminder for {updateVM.Original.ClientName}");
             dialog.Content = new UpdateReminderPage(updateVM);
@@ -112,19 +113,19 @@ public sealed partial class RemindersPage : Page {
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary) {
-                _ = ViewModel.UpdateReminderAsync(id, updateVM.Updated);
+                _ = _viewModel.UpdateReminderAsync(id, updateVM.Updated);
             }
         }
     }
 
     private void ToggleCompleted_Click(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int id)
-            ViewModel.ToggleCompleted(id);
+            _viewModel.ToggleCompleted(id);
     }
 
     private void ViewClient_Click(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem flyoutItem && flyoutItem.Tag is int clientId) {
-            ViewModel.RequestClient(clientId);
+            _viewModel.RequestClient(clientId);
         }
     }
 
@@ -132,7 +133,7 @@ public sealed partial class RemindersPage : Page {
         if (sender is MenuFlyoutItem item && item.Tag is int id) {
             if (!int.TryParse(item.CommandParameter?.ToString(), out var days))
                 return;
-            ViewModel.DeferDate(id, days);
+            _viewModel.DeferDate(id, days);
         }
     }
 
@@ -143,7 +144,7 @@ public sealed partial class RemindersPage : Page {
 
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
-                await ViewModel.DeleteReminderAsync(id);
+                await _viewModel.DeleteReminderAsync(id);
         }
     }
 
@@ -152,9 +153,9 @@ public sealed partial class RemindersPage : Page {
     // =========================
     private void SetDate() {
         if (RemindersCalendar.SelectedDates.Count == 0) {
-            ViewModel.ApplyDateFilter(DateTime.Now);
+            _viewModel.ApplyDateFilter(DateTime.Now);
         } else if (RemindersCalendar.SelectedDates.First() is DateTimeOffset offset) {
-            ViewModel.ApplyDateFilter(offset.Date);
+            _viewModel.ApplyDateFilter(offset.Date);
             if (SelectionBar.Items.Last().IsSelected)
                 return;
 

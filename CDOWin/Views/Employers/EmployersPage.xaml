@@ -55,7 +55,7 @@
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" 
                      PlaceholderText="Filter Employers"
-                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{x:Bind _viewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Employers Table -->
             <ListView x:Name="ListView" 
@@ -63,8 +63,8 @@
                       BorderThickness="0,1"
                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
-                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}" 
-                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}" 
+                      ItemsSource="{x:Bind _viewModel.Filtered, Mode=OneWay}" 
+                      SelectedItem="{x:Bind _viewModel.SelectedSummary, Mode=TwoWay}" 
                       ItemClick="ListView_ItemClick">
 
                 <!-- Header -->
@@ -135,7 +135,7 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Employers"/>
                 </TextBlock>
             </Grid>

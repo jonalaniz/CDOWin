@@ -13,12 +13,13 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public ServiceAuthorizationsViewModel ViewModel { get; } = AppServices.SAsViewModel;
+    private readonly ServiceAuthorizationsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public ServiceAuthorizationsPage() {
+        _viewModel = AppServices.SAsViewModel;
         InitializeComponent();
         InspectorFrame.Navigate(typeof(ServiceAuthorizationInspector));
     }
@@ -28,7 +29,7 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.RefreshAsync();
+        await _viewModel.RefreshAsync();
     }
 
     // =========================
@@ -36,24 +37,24 @@ public sealed partial class ServiceAuthorizationsPage : Page {
     // =========================
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is SASummary sa) {
-            _ = ViewModel.LoadSelectedSAAsync(sa.Id);
+            _ = _viewModel.LoadSelectedSAAsync(sa.Id);
         }
     }
 
     private void GoToClient_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestClient(id);
+        _viewModel.RequestClient(id);
     }
 
     private void GoToCounselor_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestCounselor(id);
+        _viewModel.RequestCounselor(id);
     }
 
     private async void ToggleSort_Click(object sender, RoutedEventArgs e) {
         if (sender is not AppBarButton button) return;
         button.IsEnabled = false;
-        await ViewModel.ToggleSortAsync();
+        await _viewModel.ToggleSortAsync();
         button.IsEnabled = true;
     }
 }

@@ -31,7 +31,7 @@
                             DateChanged="StartDatePicker_DateChanged"/>
         
         <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Header="Case ID" 
-                 Text="{x:Bind ViewModel.OriginalClient.CaseID}" Tag="{x:Bind local:CaseField.CaseID}"
+                 Text="{x:Bind _viewModel.OriginalClient.CaseID}" Tag="{x:Bind local:CaseField.CaseID}"
                  TextChanged="TextBox_TextChanged"/>
         <StackPanel Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Spacing="8">
             <TextBlock Text="Tier"/>
@@ -46,7 +46,7 @@
                             HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Header="Premiums" 
-                 Text="{x:Bind ViewModel.OriginalClient.Premiums}" Tag="{x:Bind local:CaseField.Premiums}"
+                 Text="{x:Bind _viewModel.OriginalClient.Premiums}" Tag="{x:Bind local:CaseField.Premiums}"
                  TextChanged="TextBox_TextChanged"
                  MaxLength="255"/>
         
@@ -62,10 +62,10 @@
         <!-- Row 3: Counselor Information -->
         <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                      Label="Counselor Phone" x:Name="CPhone"
-                     Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Phone}"/>
+                     Value="{x:Bind _viewModel.OriginalClient.CounselorReference.Phone}"/>
         <c:LabelPair Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4"
                      Label="Counselor Email" x:Name="CEmail"
-                     Value="{x:Bind ViewModel.OriginalClient.CounselorReference.Email}"/>
+                     Value="{x:Bind _viewModel.OriginalClient.CounselorReference.Email}"/>
 
     </Grid>
 </Page>

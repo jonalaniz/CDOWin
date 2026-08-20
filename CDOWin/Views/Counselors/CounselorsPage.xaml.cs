@@ -18,12 +18,13 @@ public sealed partial class CounselorsPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public CounselorsViewModel ViewModel { get; } = AppServices.CounselorsViewModel;
+    private readonly CounselorsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public CounselorsPage() {
+        _viewModel = AppServices.CounselorsViewModel;
         InitializeComponent();
         InspectorFrame.Navigate(typeof(CounselorInspector));
     }
@@ -33,7 +34,7 @@ public sealed partial class CounselorsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.RefreshAsync();
+        await _viewModel.RefreshAsync();
     }
 
     // =========================
@@ -64,30 +65,30 @@ public sealed partial class CounselorsPage : Page {
             return;
         }
 
-        await ViewModel.RefreshAsync(force: true);
-        _ = ViewModel.LoadSelectedCounselorAsync(updateResult.Value!.Id);
+        await _viewModel.RefreshAsync(force: true);
+        _ = _viewModel.LoadSelectedCounselorAsync(updateResult.Value!.Id);
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         if (e.ClickedItem is CounselorSummary counselor) {
-            _ = ViewModel.LoadSelectedCounselorAsync(counselor.Id);
+            _ = _viewModel.LoadSelectedCounselorAsync(counselor.Id);
         }
     }
 
     private void GoToClient_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        ViewModel.RequestClient(id);
+        _viewModel.RequestClient(id);
     }
 
     private async void Delete_MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected == null) return;
+        if (_viewModel.Selected == null) return;
 
-        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, $"Delete {ViewModel.Selected.Name}?");
+        var dialog = DialogFactory.DeleteDialog(this.XamlRoot, $"Delete {_viewModel.Selected.Name}?");
         dialog.Content = "Deleting this counselor will disassociate any linked Clients. This action cannot be undone.";
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary) {
-            var deleteResult = await ViewModel.DeleteSelectedCounselor();
+            var deleteResult = await _viewModel.DeleteSelectedCounselor();
             if (!deleteResult.IsSuccess) ErrorHandler.Handle(deleteResult, this.XamlRoot);
         }
     }

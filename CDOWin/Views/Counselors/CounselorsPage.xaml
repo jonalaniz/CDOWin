@@ -57,13 +57,13 @@
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" 
                      PlaceholderText="Filter Counselors"
-                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{x:Bind _viewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Counselors List -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource SummaryListViewStyle}"
-                      SelectedItem="{x:Bind ViewModel.SelectedSummary, Mode=TwoWay}"
-                      ItemsSource="{x:Bind ViewModel.Filtered, Mode=OneWay}"
+                      SelectedItem="{x:Bind _viewModel.SelectedSummary, Mode=TwoWay}"
+                      ItemsSource="{x:Bind _viewModel.Filtered, Mode=OneWay}"
                       ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="counselors:CounselorSummary">
@@ -92,7 +92,7 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.Filtered.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Filtered.Count, Mode=OneWay}"/>
                     <Run Text="Counselors"/>
                 </TextBlock>
             </Grid>
@@ -101,7 +101,7 @@
         <!-- Middle Column -->
         <Grid Grid.Column="1" BorderThickness="0,0,1,0"
               BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-              Visibility="{x:Bind ViewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
+              Visibility="{x:Bind _viewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -116,7 +116,7 @@
 
             <!-- Title -->
             <TextBlock Grid.Row="0" Grid.Column="0"
-                       Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}"
+                       Text="{x:Bind _viewModel.Selected.Name, Mode=OneWay}"
                        Style="{StaticResource PageTitleStyle}"/>
 
             <!-- CommandBar -->
@@ -147,7 +147,7 @@
                       BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
                       BorderThickness="0,1"
                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                      ItemsSource="{x:Bind ViewModel.Clients, Mode=OneWay}"
+                      ItemsSource="{x:Bind _viewModel.Clients, Mode=OneWay}"
                       Style="{StaticResource DataTableStyle}">
 
                 <!-- Header -->
@@ -223,7 +223,7 @@
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.Clients.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Clients.Count, Mode=OneWay}"/>
                     <Run Text="Client(s)"/>
                 </TextBlock>
             </Grid>

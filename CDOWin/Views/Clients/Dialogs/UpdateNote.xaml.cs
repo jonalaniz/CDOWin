@@ -10,13 +10,13 @@ public sealed partial class UpdateNote : Page {
     // =========================
     // Dependencies
     // =========================
-    private NoteUpdateViewModel ViewModel;
+    private readonly NoteUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateNote(NoteUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupTimeAndDatePickers();
     }
@@ -39,7 +39,7 @@ public sealed partial class UpdateNote : Page {
         var text = textbox.Text.NormalizeString();
 
         if (string.IsNullOrWhiteSpace(text)) return;
-        ViewModel.Updated.Text = text;
+        _viewModel.Updated.Text = text;
     }
 
     private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e) {
@@ -56,12 +56,12 @@ public sealed partial class UpdateNote : Page {
     }
 
     private DateTime LocalOriginalTime() {
-        return TimeZoneInfo.ConvertTimeFromUtc(ViewModel.Original.Date, TimeZoneInfo.Local);
+        return TimeZoneInfo.ConvertTimeFromUtc(_viewModel.Original.Date, TimeZoneInfo.Local);
     }
 
     private void UpdateDateAndTime() {
         if (TimePicker.Time is TimeSpan timeSpan && DatePicker.Date is DateTimeOffset offset) {
-            ViewModel.Updated.Date = new DateTime(
+            _viewModel.Updated.Date = new DateTime(
                     offset.Year,
                     offset.Month,
                     offset.Day,

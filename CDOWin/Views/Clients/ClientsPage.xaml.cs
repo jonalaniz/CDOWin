@@ -18,12 +18,13 @@ public sealed partial class ClientsPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public ClientsViewModel ViewModel { get; } = AppServices.ClientsViewModel;
+    private readonly ClientsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public ClientsPage() {
+        _viewModel = AppServices.ClientsViewModel;
         InitializeComponent();
         ClientFrame.Navigate(typeof(ClientViewPage));
         InspectorFrame.Navigate(typeof(Notes));
@@ -34,7 +35,7 @@ public sealed partial class ClientsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.RefreshAsync();
+        await _viewModel.RefreshAsync();
     }
 
     // =========================
@@ -65,12 +66,12 @@ public sealed partial class ClientsPage : Page {
             return;
         }
 
-        await ViewModel.RefreshAsync(force: true);
-        ViewModel.Selected = updateResult.Value;
+        await _viewModel.RefreshAsync(force: true);
+        _viewModel.Selected = updateResult.Value;
     }
 
     private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
         var selection = (ClientSummary)e.ClickedItem;
-        _ = ViewModel.LoadSelectedClientAsync(selection.Id);
+        _ = _viewModel.LoadSelectedClientAsync(selection.Id);
     }
 }

@@ -11,13 +11,13 @@ public sealed partial class UpdateReminderPage : Page {
     // =========================
     // Dependencies
     // =========================
-    private ReminderUpdateViewModel ViewModel;
+    private readonly ReminderUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateReminderPage(ReminderUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupDatePicker();
     }
@@ -26,7 +26,7 @@ public sealed partial class UpdateReminderPage : Page {
     // UI Setup
     // =========================
     private void SetupDatePicker() {
-        if (ViewModel.Original.ActionDate is DateTime date) {
+        if (_viewModel.Original.ActionDate is DateTime date) {
             DatePicker.Date = date;
         }
     }
@@ -35,12 +35,12 @@ public sealed partial class UpdateReminderPage : Page {
     // Property Change Methods
     // =========================
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
-        if (ViewModel.Original.ActionDate is DateTime date) {
+        if (_viewModel.Original.ActionDate is DateTime date) {
             if (date == DatePicker.Date)
                 return;
 
             if (sender is CalendarDatePicker picker && picker.Date is DateTimeOffset offset) {
-                ViewModel.Updated.ActionDate = offset.DateTime.Date.ToUniversalTime();
+                _viewModel.Updated.ActionDate = offset.DateTime.Date.ToUniversalTime();
             }
         }
     }
@@ -54,12 +54,12 @@ public sealed partial class UpdateReminderPage : Page {
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        ViewModel.Updated.Text = text;
+        _viewModel.Updated.Text = text;
     }
 
     private void Checkbox_Clicked(object sender, RoutedEventArgs e) {
         if (sender is CheckBox checkbox) {
-            ViewModel.Updated.Completed = checkbox.IsChecked;
+            _viewModel.Updated.Completed = checkbox.IsChecked;
         }
     }
 
@@ -73,6 +73,6 @@ public sealed partial class UpdateReminderPage : Page {
         // Set our date
         var newDate = offset.AddDays(days);
         DatePicker.Date = newDate;
-        ViewModel.Updated.ActionDate = newDate.DateTime.Date.ToUniversalTime();
+        _viewModel.Updated.ActionDate = newDate.DateTime.Date.ToUniversalTime();
     }
 }

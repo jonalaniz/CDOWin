@@ -14,14 +14,14 @@ public sealed partial class CreateEmployer : Page {
     // =========================
     // Dependencies
     // =========================
-    private readonly CreateEmployerViewModel ViewModel;
-    private List<State> _states = AppServices.StatesViewModel.States.ToList();
+    private readonly CreateEmployerViewModel _viewModel;
+    private readonly List<State> _states = AppServices.States();
 
     // =========================
     // Constructor
     // =========================
     public CreateEmployer(CreateEmployerViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         BuildStateDropdown();
     }
@@ -49,7 +49,7 @@ public sealed partial class CreateEmployer : Page {
     private void StateSelected(object sender, RoutedEventArgs e) {
         if (sender is MenuFlyoutItem item) {
             var state = item.Tag.ToString();
-            ViewModel.State = state;
+            _viewModel.State = state;
             StateDropDownButton.Content = state;
         }
     }
@@ -62,6 +62,6 @@ public sealed partial class CreateEmployer : Page {
 
         // Null check only, all fiends are optional
         if (text == null) return;
-        ViewModel.UpdateField(field, text);
+        _viewModel.UpdateField(field, text);
     }
 }

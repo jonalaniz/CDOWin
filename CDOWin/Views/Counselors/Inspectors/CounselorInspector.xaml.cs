@@ -13,12 +13,13 @@ public sealed partial class CounselorInspector : Page {
     // =========================
     // ViewModel
     // =========================
-    public CounselorsViewModel ViewModel { get; private set; } = AppServices.CounselorsViewModel;
+    private readonly CounselorsViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public CounselorInspector() {
+        _viewModel = AppServices.CounselorsViewModel;
         InitializeComponent();
     }
 
@@ -26,10 +27,10 @@ public sealed partial class CounselorInspector : Page {
     // Click Handlers
     // =========================
     private async void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-        if (ViewModel == null || ViewModel.Selected == null)
+        if (_viewModel == null || _viewModel.Selected == null)
             return;
 
-        var updateVM = new CounselorUpdateViewModel(ViewModel.Selected);
+        var updateVM = new CounselorUpdateViewModel(_viewModel.Selected);
         var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Counselor");
         dialog.Content = new UpdateCounselor(updateVM);
 
@@ -37,13 +38,13 @@ public sealed partial class CounselorInspector : Page {
 
         if (result != ContentDialogResult.Primary) return;
 
-        var updateResult = await ViewModel.UpdateCounselorAsync(updateVM.Updated);
+        var updateResult = await _viewModel.UpdateCounselorAsync(updateVM.Updated);
         if (!updateResult.IsSuccess) {
             ErrorHandler.Handle(updateResult, this.XamlRoot);
             return;
         }
 
-        _ = ViewModel.LoadSelectedCounselorAsync(ViewModel.Selected.Id);
+        _ = _viewModel.LoadSelectedCounselorAsync(_viewModel.Selected.Id);
     }
 
     private async void SA_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {

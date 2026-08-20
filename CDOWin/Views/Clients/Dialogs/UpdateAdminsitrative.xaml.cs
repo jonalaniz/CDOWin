@@ -11,13 +11,13 @@ public sealed partial class UpdateAdminsitrative : Page {
     // =========================
     // Dependencies
     // =========================
-    private ClientUpdateViewModel ViewModel;
+    private readonly ClientUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateAdminsitrative(ClientUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
     }
 
@@ -57,20 +57,20 @@ public sealed partial class UpdateAdminsitrative : Page {
     // Utility Methods
     // =========================
     private void SetDocumentsFolder(string folder) {
-        ViewModel.FolderPath = folder;
+        _viewModel.FolderPath = folder;
         UpdateValue(folder, AdministrativeField.DocumentsFolder);
     }
 
     private void UpdateValue(string value, AdministrativeField type) {
         switch (type) {
             case AdministrativeField.FirstName:
-                ViewModel.UpdatedClient.FirstName = value;
+                _viewModel.UpdatedClient.FirstName = value;
                 break;
             case AdministrativeField.LastName:
-                ViewModel.UpdatedClient.LastName = value;
+                _viewModel.UpdatedClient.LastName = value;
                 break;
             case AdministrativeField.DocumentsFolder:
-                ViewModel.UpdatedClient.DocumentFolder = value;
+                _viewModel.UpdatedClient.DocumentFolder = value;
                 break;
         }
     }

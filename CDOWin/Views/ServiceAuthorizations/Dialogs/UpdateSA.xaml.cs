@@ -14,7 +14,7 @@ public sealed partial class UpdateSA : Page {
     // =========================
     // Dependencies
     // =========================
-    private ServiceAuthorizationUpdateViewModel ViewModel;
+    private readonly ServiceAuthorizationUpdateViewModel _viewModel;
     private readonly SAType[] _descriptions = SAType.AllItems();
     private readonly DARSOffice[] _offices = DARSOffice.AllItems();
 
@@ -23,7 +23,7 @@ public sealed partial class UpdateSA : Page {
     // Constructor
     // =========================
     public UpdateSA(ServiceAuthorizationUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupNumberBox();
         SetupDatePickers();
@@ -33,8 +33,8 @@ public sealed partial class UpdateSA : Page {
     // UI Setup
     // =========================
     private void SetupDatePickers() {
-        StartDatePicker.Date = ViewModel.Original.StartDate;
-        EndDatePicker.Date = ViewModel.Original.EndDate;
+        StartDatePicker.Date = _viewModel.Original.StartDate;
+        EndDatePicker.Date = _viewModel.Original.EndDate;
     }
 
     private void SetupNumberBox() {
@@ -45,7 +45,7 @@ public sealed partial class UpdateSA : Page {
         };
 
         NumberBox.NumberFormatter = formatter;
-        NumberBox.Value = ViewModel.Original.UnitCost ?? 0.00;
+        NumberBox.Value = _viewModel.Original.UnitCost ?? 0.00;
     }
 
 
@@ -63,37 +63,37 @@ public sealed partial class UpdateSA : Page {
         switch (field) {
             case Field.SaNumber:
                 if (string.IsNullOrWhiteSpace(text)) return;
-                ViewModel.Updated.ServiceAuthorizationNumber = text;
+                _viewModel.Updated.ServiceAuthorizationNumber = text;
                 break;
             case Field.CounselorName:
                 if (string.IsNullOrWhiteSpace(text)) return;
-                ViewModel.Updated.CounselorName = text;
+                _viewModel.Updated.CounselorName = text;
                 break;
             case Field.SecretaryName:
-                ViewModel.Updated.SecretaryName = text;
+                _viewModel.Updated.SecretaryName = text;
                 break;
             case Field.Description:
                 if (string.IsNullOrWhiteSpace(text)) return;
-                ViewModel.Updated.Description = text;
+                _viewModel.Updated.Description = text;
                 break;
             case Field.Office:
-                ViewModel.Updated.Office = text;
+                _viewModel.Updated.Office = text;
                 break;
             case Field.UoM:
-                ViewModel.Updated.UnitOfMeasurement = text;
+                _viewModel.Updated.UnitOfMeasurement = text;
                 break;
         }
     }
 
     private void BilledCheckbox_Click(object sender, RoutedEventArgs e) {
         if (sender is not CheckBox checkbox) return;
-        ViewModel.Updated.Billed = checkbox.IsChecked;
+        _viewModel.Updated.Billed = checkbox.IsChecked;
     }
 
     private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
         if (sender is not NumberBox numberBox || numberBox.Value <= 0.00) return;
 
-        ViewModel.Updated.UnitCost = numberBox.Value;
+        _viewModel.Updated.UnitCost = numberBox.Value;
     }
 
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
@@ -103,10 +103,10 @@ public sealed partial class UpdateSA : Page {
         if (datePicker.Date is DateTimeOffset offset) {
             switch (dateType) {
                 case DateType.StartDate:
-                    ViewModel.Updated.StartDate = offset.Date.ToUniversalTime();
+                    _viewModel.Updated.StartDate = offset.Date.ToUniversalTime();
                     break;
                 case DateType.EndDate:
-                    ViewModel.Updated.EndDate = offset.Date.ToUniversalTime();
+                    _viewModel.Updated.EndDate = offset.Date.ToUniversalTime();
                     break;
             }
         }
@@ -122,13 +122,13 @@ public sealed partial class UpdateSA : Page {
             sender.ItemsSource = suggestions;
 
             // Also set the description to the text in case they do not ever select.
-            ViewModel.Updated.Description = sender.Text;
+            _viewModel.Updated.Description = sender.Text;
         }
     }
 
     private void DescriptionSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
         if (args.ChosenSuggestion is SAType saType) {
-            ViewModel.Updated.Description = saType.Description;
+            _viewModel.Updated.Description = saType.Description;
             NumberBox.Value = (double)saType.Value;
             UMBox.Text = saType.UM;
         }
@@ -137,7 +137,7 @@ public sealed partial class UpdateSA : Page {
     private void DescriptionSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
         if (args.SelectedItem is SAType saType) {
             sender.Text = saType.Description;
-            ViewModel.Updated.Description = saType.Description;
+            _viewModel.Updated.Description = saType.Description;
             NumberBox.Value = (double)saType.Value;
             UMBox.Text = saType.UM;
         }
@@ -153,17 +153,17 @@ public sealed partial class UpdateSA : Page {
             sender.ItemsSource = suggestions;
 
             // Also set the description to the text in case they do not ever select.
-            ViewModel.Updated.Office = sender.Text;
+            _viewModel.Updated.Office = sender.Text;
         }
     }
 
     private void OfficeSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
         if (args.ChosenSuggestion is DARSOffice office)
-            ViewModel.Updated.Office = office.Address;
+            _viewModel.Updated.Office = office.Address;
     }
 
     private void OfficeSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args) {
         if (args.SelectedItem is DARSOffice office)
-            ViewModel.Updated.Office = office.Address;
+            _viewModel.Updated.Office = office.Address;
     }
 }

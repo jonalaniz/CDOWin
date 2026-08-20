@@ -8,7 +8,7 @@
     xmlns:notes="using:CDO.Core.DTOs.Clients.Notes"
     mc:Ignorable="d">
 
-    <Grid Visibility="{x:Bind ViewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}"
+    <Grid Visibility="{x:Bind _viewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}"
           Background="{ThemeResource CardBackgroundFillColorSecondary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -52,12 +52,12 @@
         <!-- Search Bar -->
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                  Margin="10,0,10,8" PlaceholderText="Search Notes"
-                 Text="{x:Bind ViewModel.NotesSearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{x:Bind _viewModel.NotesSearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <!-- Notes ListView -->
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                   CornerRadius="0" BorderThickness="0" SelectionMode="None"
-                  ItemsSource="{x:Bind ViewModel.FilteredNotes, Mode=OneWay}">
+                  ItemsSource="{x:Bind _viewModel.FilteredNotes, Mode=OneWay}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Padding" Value="0"/>

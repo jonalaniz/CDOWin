@@ -17,7 +17,7 @@ public sealed partial class CalendarWindow : Window {
     // =========================
     // Dependencies
     // =========================
-    private CalendarViewModel ViewModel { get; }
+    private readonly CalendarViewModel _viewModel;
     private readonly FrameworkElement[] _dayCells = new FrameworkElement[42];
 
     // =========================
@@ -28,8 +28,8 @@ public sealed partial class CalendarWindow : Window {
         SetupWindow();
         _ = SetupTitleBarAsync();
 
-        ViewModel = AppServices.CalendarViewModel;
-        ViewModel.BuildCalendarDays();
+        _viewModel = AppServices.CalendarViewModel;
+        _viewModel.BuildCalendarDays();
         InitializeCalendarGrid();
         UpdateCalendar();
     }
@@ -60,10 +60,10 @@ public sealed partial class CalendarWindow : Window {
     }
 
     private void UpdateCalendar() {
-        MonthHeader.Text = ViewModel.CurrentMonth.ToString("MMMM yyyy");
+        MonthHeader.Text = _viewModel.CurrentMonth.ToString("MMMM yyyy");
 
         for (int i = 0; i < _dayCells.Length; i++) {
-            var day = ViewModel.Days[i];
+            var day = _viewModel.Days[i];
             var cell = (CalendarDayView)_dayCells[i];
             cell.IsCurrentMonth = day.IsCurrentMonth;
 
@@ -83,17 +83,17 @@ public sealed partial class CalendarWindow : Window {
     private void Button_Click(object sender, RoutedEventArgs e) {
         if (sender is Button button && button.Tag is string tag) {
             if (tag == "0") {
-                ViewModel.DecrementMonth();
+                _viewModel.DecrementMonth();
                 UpdateCalendar();
             } else {
-                ViewModel.IncrementMonth();
+                _viewModel.IncrementMonth();
                 UpdateCalendar();
             }
         }
     }
 
     private async void OnReminderClickedAsync(object? sender, int id) {
-        if (ViewModel.GetReminderByID(id) is not Reminder reminder)
+        if (_viewModel.GetReminderByID(id) is not Reminder reminder)
             return;
 
         var updateVM = new ReminderUpdateViewModel(reminder);
@@ -103,13 +103,13 @@ public sealed partial class CalendarWindow : Window {
         var result = await dialog.ShowAsync();
 
         if (result == ContentDialogResult.Primary) {
-            await ViewModel.UpdateReminderAsync(id, updateVM.Updated);
+            await _viewModel.UpdateReminderAsync(id, updateVM.Updated);
             UpdateCalendar();
         }
     }
 
     private void ExportButton_Click(object sender, RoutedEventArgs e) {
-        ViewModel.ExportReminders();
+        _viewModel.ExportReminders();
     }
 
     private void RootGrid_Loaded(object sender, RoutedEventArgs e) {

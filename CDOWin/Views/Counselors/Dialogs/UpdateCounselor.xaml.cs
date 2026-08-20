@@ -9,13 +9,13 @@ public sealed partial class UpdateCounselor : Page {
     // =========================
     // Dependencies
     // =========================
-    private CounselorUpdateViewModel ViewModel;
+    private readonly CounselorUpdateViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public UpdateCounselor(CounselorUpdateViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupNumberBox();
     }
@@ -24,8 +24,8 @@ public sealed partial class UpdateCounselor : Page {
     // UI Methods
     // =========================
     private void SetupNumberBox() {
-        if (ViewModel.Original.CaseLoadId == null) return;
-        CaseLoad_Numberbox.Value = (double)ViewModel.Original.CaseLoadId;
+        if (_viewModel.Original.CaseLoadId == null) return;
+        CaseLoad_Numberbox.Value = (double)_viewModel.Original.CaseLoadId;
     }
 
     // =========================
@@ -43,7 +43,7 @@ public sealed partial class UpdateCounselor : Page {
 
     private void CaseLoad_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args) {
         var value = (int)sender.Value;
-        ViewModel.Updated.CaseLoadID = value;
+        _viewModel.Updated.CaseLoadID = value;
     }
 
     // =========================
@@ -52,32 +52,32 @@ public sealed partial class UpdateCounselor : Page {
     private void UpdateModel(string value, Field field) {
         switch (field) {
             case Field.Name:
-                if (value != ViewModel.Original.Name || !string.IsNullOrWhiteSpace(value))
-                    ViewModel.Updated.Name = value;
+                if (value != _viewModel.Original.Name || !string.IsNullOrWhiteSpace(value))
+                    _viewModel.Updated.Name = value;
                 break;
             case Field.Email:
-                if (value != ViewModel.Original.Email)
-                    ViewModel.Updated.Email = value;
+                if (value != _viewModel.Original.Email)
+                    _viewModel.Updated.Email = value;
                 break;
             case Field.Phone:
-                if (value != ViewModel.Original.Phone)
-                    ViewModel.Updated.Phone = value;
+                if (value != _viewModel.Original.Phone)
+                    _viewModel.Updated.Phone = value;
                 break;
             case Field.Fax:
-                if (value != ViewModel.Original.Fax)
-                    ViewModel.Updated.Fax = value;
+                if (value != _viewModel.Original.Fax)
+                    _viewModel.Updated.Fax = value;
                 break;
             case Field.Notes:
-                if (value != ViewModel.Original.Notes)
-                    ViewModel.Updated.Notes = value;
+                if (value != _viewModel.Original.Notes)
+                    _viewModel.Updated.Notes = value;
                 break;
             case Field.Secretary:
-                if (value != ViewModel.Original.SecretaryName)
-                    ViewModel.Updated.SecretaryName = value;
+                if (value != _viewModel.Original.SecretaryName)
+                    _viewModel.Updated.SecretaryName = value;
                 break;
             case Field.SecretaryEmail:
-                if (value != ViewModel.Original.SecretaryEmail)
-                    ViewModel.Updated.SecretaryEmail = value;
+                if (value != _viewModel.Original.SecretaryEmail)
+                    _viewModel.Updated.SecretaryEmail = value;
                 break;
         }
     }

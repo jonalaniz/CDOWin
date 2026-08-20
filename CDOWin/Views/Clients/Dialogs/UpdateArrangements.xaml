@@ -16,13 +16,13 @@
         
         <!-- Row 0: Employment Goals -->
         <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Employment Goals" Text="{x:Bind ViewModel.OriginalClient.EmploymentGoal}"
+                 Header="Employment Goals" Text="{x:Bind _viewModel.OriginalClient.EmploymentGoal}"
                  Tag="{x:Bind local:ArrangementsField.EmploymentGoal}"
                  TextChanged="TextBox_TextChanged"/>
 
         <!-- Row 1: Conditions -->
         <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MultiLineTextBoxStyle}"
-                 Header="Conditions" Text="{x:Bind ViewModel.OriginalClient.Conditions}"
+                 Header="Conditions" Text="{x:Bind _viewModel.OriginalClient.Conditions}"
                  Tag="{x:Bind local:ArrangementsField.Conditions}"
                  TextChanged="TextBox_TextChanged"/>
     </Grid>

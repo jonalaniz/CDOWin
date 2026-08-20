@@ -11,13 +11,13 @@ public sealed partial class CreateReminder : Page {
     // =========================
     // Dependencies
     // =========================
-    private CreateReminderViewModel ViewModel;
+    private readonly CreateReminderViewModel _viewModel;
 
     // =========================
     // Constructor
     // =========================
     public CreateReminder(CreateReminderViewModel viewModel) {
-        ViewModel = viewModel;
+        _viewModel = viewModel;
         InitializeComponent();
         SetupDatePicker();
     }
@@ -35,13 +35,13 @@ public sealed partial class CreateReminder : Page {
     private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) {
         if (sender is CalendarDatePicker datePicker && datePicker.Date is DateTimeOffset dateTimeOffset) {
             var dateTime = dateTimeOffset.DateTime.Date;
-            ViewModel.ActionDate = dateTime;
+            _viewModel.ActionDate = dateTime;
         }
     }
 
     private void TextChanged(object sender, TextChangedEventArgs e) {
         if (sender is TextBox textbox && textbox.Text.NormalizeString() is string text)
-            ViewModel.Description = text;
+            _viewModel.Description = text;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e) {
@@ -54,6 +54,6 @@ public sealed partial class CreateReminder : Page {
         // Set our date
         var newDate = offset.AddDays(days);
         DatePicker.Date = newDate;
-        ViewModel.ActionDate = newDate.DateTime.Date;
+        _viewModel.ActionDate = newDate.DateTime.Date;
     }
 }

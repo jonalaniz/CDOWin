@@ -6,5 +6,9 @@ public record class AdminClientNote(
     int ClientId,
     DateTime Date,
     string Text,
-    string? Author
-);
+    string? Author,
+    DateTime UpdatedAt
+) {
+    public string FormattedUpdatedTime => $"Updated at {UpdatedTime}";
+    private string UpdatedTime => UpdatedAt.ToLocalTime().ToString(format: "hh:mm tt");
+}

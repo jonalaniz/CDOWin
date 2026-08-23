@@ -82,7 +82,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0" Spacing="2" Margin="0">
                                                     <TextBlock FontWeight="Bold" Text="{x:Bind Name}"/>
-                                                    <TextBlock Text="{x:Bind FormattedUpdatedAtTime()}"/>
+                                                    <TextBlock Text="{x:Bind FormattedUpdatedAtTime()}" Foreground="{StaticResource TextFillColorSecondaryBrush}"/>
                                                 </StackPanel>
                                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
                                                         IsEnabled="{x:Bind Id, Converter={StaticResource NullToBoolConverter}}"
@@ -131,6 +131,7 @@
                                                     <TextBlock Grid.Column="1" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" FontWeight="Bold" Text="{x:Bind Author}"/>
                                                 </Grid>
                                                 <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
+                                                <TextBlock Text="{x:Bind FormattedUpdatedTime}" Foreground="{StaticResource TextFillColorSecondaryBrush}"/>
                                             </StackPanel>
                                         </Button>
                                     </DataTemplate>

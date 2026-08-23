@@ -11,29 +11,15 @@
     xmlns:models="using:CDO.Core.Models"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource BackstageContentViewStyle}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="0,0,10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
-            <CommandBar Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
-                <AppBarButton x:Name="RefreshButton" Width="56" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </CommandBar>
-        </Grid>
-        
+
         <!-- Main Scroll Viewer Content -->
-        <ScrollViewer Grid.Row="1" Style="{StaticResource VerticalScrollViewer}">
-            <Grid RowSpacing="8">
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource VerticalScrollViewer}">
+            <Grid RowSpacing="8" Padding="0,60,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -41,7 +27,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Today Section -->
-                <StackPanel Grid.Row="0" Style="{StaticResource VerticalScrollViewerContent}">
+                <StackPanel Grid.Row="0" Padding="14,0,0,0" Style="{StaticResource VerticalScrollViewerContent}">
                     
                     <!-- Header -->
                     <TextBlock Text="Today" VerticalAlignment="Center" Style="{StaticResource BackstageSubHeader}"/>
@@ -188,7 +174,8 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
-                        <TextBlock Grid.Column="0" Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
+                        <TextBlock Grid.Column="0" Padding="14,0,0,0" Text="Expiring Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
+                        
                         <Button Grid.Column="1" VerticalAlignment="Bottom" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="More">
                             <FontIcon Glyph="&#xE712;" FontSize="16" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
                             <Button.Flyout>
@@ -202,7 +189,7 @@
                     
                     <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater ItemsSource="{x:Bind BillingViewModel.ExpiringSAs, Mode=OneWay}">
+                        <ItemsRepeater Margin="14,0,0,0" ItemsSource="{x:Bind BillingViewModel.ExpiringSAs, Mode=OneWay}">
                             
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -282,10 +269,10 @@
                 </StackPanel>
                 
                 <!-- Stale Clients Section -->
-                <StackPanel Grid.Row="2" Style="{StaticResource VerticalScrollViewerContent}" Margin="0,-10,0,0">
+                <StackPanel Grid.Row="2" Padding="0,-10,0,0" Style="{StaticResource VerticalScrollViewerContent}">
                     
                     <!-- Section Title -->
-                    <Grid Margin="0,0,16,0">
+                    <Grid Margin="14,0,16,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -297,7 +284,7 @@
                     
                     <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
+                        <ItemsRepeater Margin="14,0,0,0" ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
                             
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -378,6 +365,24 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
+
+        <!-- Main Header -->
+        <Grid Grid.Row="0" Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Margin="14,0,0,0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
+            <CommandBar Grid.Column="1" Margin="0,0,4,0" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton x:Name="RefreshButton" Width="56" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+        
+        <!-- Info Bar -->
         <Grid Grid.Row="1" x:Name="InfoBarContainer" Margin="16" Width="400"
               VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Grid.ChildrenTransitions>

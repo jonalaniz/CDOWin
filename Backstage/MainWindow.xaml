@@ -51,6 +51,7 @@
                 </NavigationViewItem>
                 <NavigationViewItem Icon="People" Content="Users" Tag="{x:Bind views:BackstageView.Users}"/>
             </NavigationView.MenuItems>
+            
             <Frame x:Name="ContentFrame"/>
         </NavigationView>
     </Grid>

@@ -106,7 +106,7 @@
 
                                         <!-- Button -->
                                         <Button Style="{StaticResource BackstageListButton}"
-                                                Tag="{x:Bind Id}">
+                                                Tag="{x:Bind Id}" Click="Note_Click">
                                             <StackPanel Spacing="2">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>

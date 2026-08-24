@@ -67,6 +67,18 @@ public sealed partial class HomePage : Page {
     // =========================
     // Click Handlers
     // =========================
+    private async void Note_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not int id) return;
+        var note = ViewModel.RecentNotes.FirstOrDefault(n => n.Id == id);
+        if (note == null) return;
+
+        // TODO: Create a Dialog for this
+        var dialog = DialogFactory.InformationDialog(this.XamlRoot, "Note Detail");
+        dialog.Content = new NoteDetailPage(note);
+
+        var result = await dialog.ShowAsync();
+    }
+
     private async void Reminder_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
         var reminder = ReminderViewModel.Reminders.FirstOrDefault(r => r.Id == id);

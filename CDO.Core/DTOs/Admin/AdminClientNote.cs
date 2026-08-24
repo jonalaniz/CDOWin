@@ -10,5 +10,6 @@ public record class AdminClientNote(
     DateTime UpdatedAt
 ) {
     public string FormattedUpdatedTime => $"Updated at {UpdatedTime}";
+    public string LocalDate => Date.ToString(format: "MM/dd/yyyy");
     private string UpdatedTime => UpdatedAt.ToLocalTime().ToString(format: "hh:mm tt");
 }

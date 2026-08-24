@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Backstage.Dialogs.NoteDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Backstage.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Style="{StaticResource DialogGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition MaxHeight="320"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Note -->
+        <Grid Grid.Row="0" Padding="18,12" Background="{StaticResource SolidBackgroundFillColorTertiaryBrush}"
+              BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+              Style="{StaticResource DialogGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0: Name + Date -->
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                       FontWeight="Bold" Text="{x:Bind _note.ClientName}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
+                       FontWeight="Bold" Text="{x:Bind _note.LocalDate}"/>
+            
+            <!-- Row 1: Note -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                       TextWrapping="WrapWholeWords" Text="{x:Bind _note.Text}"/>
+        </Grid>
+    </Grid>
+</Page>

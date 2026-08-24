@@ -3,18 +3,18 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Backstage.Dialogs;
 
-public sealed partial class ReminderDetailPage : Page {
+public sealed partial class NoteDetailPage : Page {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly AdminReminderDetail _reminder;
+    private readonly AdminClientNote _note;
 
     // =========================
     // Constructor
     // =========================
-    public ReminderDetailPage(AdminReminderDetail reminder) {
-        _reminder = reminder;
+    public NoteDetailPage(AdminClientNote note) {
+        _note = note;
         InitializeComponent();
     }
 }

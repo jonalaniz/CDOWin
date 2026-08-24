@@ -33,16 +33,16 @@
             </Grid.ColumnDefinitions>
             
             <!-- Row 0: Name + Date -->
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       HorizontalAlignment="Left" FontWeight="Bold" Text="{x:Bind Reminder.ClientName}"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0"
-                       HorizontalAlignment="Right" FontWeight="Bold" Text="{x:Bind Reminder.LocalDate}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                       FontWeight="Bold" Text="{x:Bind _reminder.ClientName}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
+                       FontWeight="Bold" Text="{x:Bind _reminder.LocalDate}"/>
             
             <!-- Row 1: Text -->
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                       TextWrapping="WrapWholeWords" Text="{x:Bind Reminder.Text}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="WrapWholeWords" 
+                       Text="{x:Bind _reminder.Text}"/>
             <CheckBox Grid.Row="1" Grid.Column="1" Margin="0,-4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
-                      MinWidth="0" IsEnabled="False" Content="Done" IsChecked="{x:Bind Reminder.Completed}"/>
+                      MinWidth="0" IsEnabled="False" Content="Done" IsChecked="{x:Bind _reminder.Completed}"/>
 
         </Grid>
         
@@ -52,7 +52,7 @@
         <!-- Reminder History Table -->
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                   Style="{StaticResource DataTableStyle}"
-                  ItemsSource="{x:Bind Reminder.Logs}" SelectionMode="None">
+                  ItemsSource="{x:Bind _reminder.Logs}" SelectionMode="None">
             
             <!-- Header -->
             <ListView.Header>

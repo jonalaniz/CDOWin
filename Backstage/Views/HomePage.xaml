@@ -35,7 +35,7 @@
                     <!-- Content -->
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         
-                        <!-- Recent Clients Card -->
+                        <!-- Updated Clients Card -->
                         <Grid Style="{StaticResource CardContainerGridStyle}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -67,8 +67,8 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0" Spacing="2" Margin="0">
-                                                    <TextBlock FontWeight="Bold" Text="{x:Bind Name}"/>
-                                                    <TextBlock Text="{x:Bind FormattedUpdatedAtTime()}" Foreground="{StaticResource TextFillColorSecondaryBrush}"/>
+                                                    <TextBlock Style="{StaticResource ListHeader}" Text="{x:Bind Name}"/>
+                                                    <TextBlock Style="{StaticResource ListCaption}" Text="{x:Bind FormattedUpdatedAtTime()}"/>
                                                 </StackPanel>
                                                 <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}"
                                                         IsEnabled="{x:Bind Id, Converter={StaticResource NullToBoolConverter}}"
@@ -113,11 +113,11 @@
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0" FontWeight="Bold" Text="{x:Bind ClientName}"/>
-                                                    <TextBlock Grid.Column="1" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" FontWeight="Bold" Text="{x:Bind Author}"/>
+                                                    <TextBlock Grid.Column="0" Style="{StaticResource ListHeader}" Text="{x:Bind ClientName}"/>
+                                                    <TextBlock Grid.Column="1" Style="{StaticResource AccentListHeader}" Text="{x:Bind Author}"/>
                                                 </Grid>
-                                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
-                                                <TextBlock Text="{x:Bind FormattedUpdatedTime}" Foreground="{StaticResource TextFillColorSecondaryBrush}"/>
+                                                <TextBlock MaxLines="3" TextWrapping="WrapWholeWords" TextTrimming="WordEllipsis" Text="{x:Bind Text}"/>
+                                                <TextBlock Style="{StaticResource ListCaption}" Text="{x:Bind FormattedUpdatedTime}"/>
                                             </StackPanel>
                                         </Button>
                                     </DataTemplate>

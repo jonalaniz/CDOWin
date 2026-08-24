@@ -232,4 +232,21 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     </Style>
+    
+    <!-- ListHeader TextBlock Style -->
+    <Style x:Key="ListHeader" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
+    <!-- AccentListHeader TextBlock Style -->
+    <Style x:Key="AccentListHeader" TargetType="TextBlock" BasedOn="{StaticResource ListHeader}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+    </Style>
+    
+    <!-- ListCaption TextBlock Style -->
+    <Style x:Key="ListCaption" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextFillColorSecondaryBrush}"/>
+    </Style>
 </ResourceDictionary>

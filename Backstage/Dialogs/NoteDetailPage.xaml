@@ -22,6 +22,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -29,15 +30,21 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Row 0: Name + Date -->
             <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
-                       FontWeight="Bold" Text="{x:Bind _note.ClientName}"/>
+                       Style="{StaticResource ListHeader}" Text="{x:Bind _note.ClientName}"/>
             <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
-                       FontWeight="Bold" Text="{x:Bind _note.LocalDate}"/>
+                       Style="{StaticResource AccentListHeader}" Text="{x:Bind _note.Author}"/>
             
             <!-- Row 1: Note -->
-            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,0,0,10"
+                BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}">
+                <TextBlock 
                        TextWrapping="WrapWholeWords" Text="{x:Bind _note.Text}"/>
+            </Border>
+
+            <!-- Row 2: Meta -->
+            <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"
+                       Style="{StaticResource ListCaption}" Text="{x:Bind _note.FormattedUpdatedOnDate}"/>
         </Grid>
     </Grid>
 </Page>

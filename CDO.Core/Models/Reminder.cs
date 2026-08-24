@@ -3,7 +3,7 @@
 public class Reminder {
     // Required fields
     public int Id { get; set; }
-    public DateTime ActionDate { get; set; }
+    public DateTime Date { get; set; }
     public string Text { get; set; } = "";
     public int ClientID { get; set; }
     public bool Completed { get; set; }
@@ -12,5 +12,5 @@ public class Reminder {
     public string? ClientName { get; set; }
 
     // Computed Properties
-    public string LocalDate => ActionDate.ToString(format: "MM/dd/yyyy");
+    public string LocalDate => Date.ToString(format: "MM/dd/yyyy");
 }

@@ -73,7 +73,7 @@ public sealed partial class HomePage : Page {
         if (note == null) return;
 
         // TODO: Create a Dialog for this
-        var dialog = DialogFactory.InformationDialog(this.XamlRoot, "Note Detail");
+        var dialog = DialogFactory.InformationDialog(this.XamlRoot, $"Note Detail: {note.ClientName}");
         dialog.Content = new NoteDetailPage(note);
 
         var result = await dialog.ShowAsync();

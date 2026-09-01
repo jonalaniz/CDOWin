@@ -91,7 +91,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="{x:Bind User.Username}" FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" Text="{x:Bind LocalDate}"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind LocalCreatedDate}"/>
                         <TextBlock Grid.Column="2" Padding="0,0,4,0" TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
                         <TextBlock Grid.Column="3" Text="{x:Bind LocalActionDate}"/>
                         <CheckBox Grid.Column="4" Padding="0" HorizontalAlignment="Center" MinWidth="0" IsEnabled="False" IsChecked="{x:Bind Completed}"/>

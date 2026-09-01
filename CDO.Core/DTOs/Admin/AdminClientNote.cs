@@ -11,7 +11,7 @@ public record class AdminClientNote(
 ) {
     public string FormattedUpdatedTime => $"Updated at {UpdatedTime}";
     public string FormattedUpdatedOnDate => $"Updated on {UpdatedDate}";
-    public string LocalDate => Date.ToString(format: "MM/dd/yyyy");
+    public string LocalDate => Date.ToString(format: "MM/dd/yyyy hh:mm tt");
     private string UpdatedTime => UpdatedAt.ToLocalTime().ToString(format: "hh:mm tt");
     private string UpdatedDate => UpdatedAt.ToLocalTime().ToString(format: "MM/dd/yyyy hh:mm tt");
 }

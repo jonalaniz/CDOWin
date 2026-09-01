@@ -95,7 +95,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="New Notes" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="0" Text="Updated Notes" Style="{StaticResource BackstageCardTitle}"/>
                                 <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentNotes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 

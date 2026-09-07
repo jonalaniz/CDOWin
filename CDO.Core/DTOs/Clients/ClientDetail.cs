@@ -1,8 +1,8 @@
 ﻿using CDO.Core.DTOs.Clients.Notes;
 using CDO.Core.DTOs.Counselors;
 using CDO.Core.DTOs.Placements;
+using CDO.Core.DTOs.Reminders;
 using CDO.Core.DTOs.SAs;
-using CDO.Core.Models;
 
 namespace CDO.Core.DTOs.Clients;
 
@@ -20,7 +20,7 @@ public record class ClientDetail(
     CounselorUpdate? CounselorReference,
 
     // Child Objects
-    Reminder[] Reminders,
+    ReminderDetail[] Reminders,
     SADetail[]? Sas,
     PlacementDetail[]? Placements,
     ClientNote[]? ClientNotes,

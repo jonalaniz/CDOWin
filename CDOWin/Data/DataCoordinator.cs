@@ -2,6 +2,7 @@
 using CDO.Core.DTOs.Counselors;
 using CDO.Core.DTOs.Employers;
 using CDO.Core.DTOs.Placements;
+using CDO.Core.DTOs.Reminders;
 using CDO.Core.DTOs.SAs;
 using CDO.Core.Interfaces;
 using CDO.Core.Models;
@@ -32,7 +33,7 @@ public class DataCoordinator {
     public CachedList<CounselorSummary> Counselors { get; } = new();
     public CachedList<EmployerSummary> Employers { get; } = new();
     public CachedList<PlacementSummary> Placements { get; } = new();
-    public CachedList<Reminder> Reminders { get; } = new();
+    public CachedList<ReminderDetail> Reminders { get; } = new();
     public CachedList<SASummary> SAs { get; } = new();
     public CachedList<State> States { get; } = new();
 
@@ -119,7 +120,7 @@ public class DataCoordinator {
         return Placements.Data ?? [];
     }
 
-    public async Task<IReadOnlyList<Reminder>> GetRemindersAsync(CancellationToken ct = default, bool force = false) {
+    public async Task<IReadOnlyList<ReminderDetail>> GetRemindersAsync(CancellationToken ct = default, bool force = false) {
         if (force || Reminders.IsStale(ReminderTTL)) {
             var data = await _reminders.GetAllRemindersAsync(ct);
             if (data != null) Reminders.Update(data);

@@ -2,7 +2,6 @@
 using CDO.Core.DTOs.Admin;
 using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
-using CDO.Core.Models;
 using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
@@ -51,7 +50,7 @@ public partial class ReminderViewModel : ObservableObject {
     // =========================
     // Post Methods
     // =========================
-    public async Task<Result<Reminder>> CreateReminderAsync(NewReminder reminder) {
+    public async Task<Result<ReminderDetail>> CreateReminderAsync(NewReminder reminder) {
         return await _service.CreateRemindersAsync(reminder);
     }
 

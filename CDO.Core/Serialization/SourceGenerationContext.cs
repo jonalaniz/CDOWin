@@ -52,8 +52,8 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(PlacementSummary))]
 [JsonSerializable(typeof(List<PlacementSummary>))]
 
-[JsonSerializable(typeof(Reminder))]
-[JsonSerializable(typeof(List<Reminder>))]
+[JsonSerializable(typeof(ReminderDetail))]
+[JsonSerializable(typeof(List<ReminderDetail>))]
 [JsonSerializable(typeof(NewReminder))]
 [JsonSerializable(typeof(ReminderUpdate))]
 
@@ -72,8 +72,13 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(List<AdminClientSummary>))]
 [JsonSerializable(typeof(ClientHistory))]
 [JsonSerializable(typeof(List<ClientHistory>))]
+
 [JsonSerializable(typeof(AdminClientNote))]
 [JsonSerializable(typeof(List<AdminClientNote>))]
+
+[JsonSerializable(typeof(NoteLog))]
+[JsonSerializable(typeof(List<NoteLog>))]
+
 [JsonSerializable(typeof(AdminSASummary))]
 [JsonSerializable(typeof(List<AdminSASummary>))]
 [JsonSerializable(typeof(UserSummary))]
@@ -88,7 +93,6 @@ namespace CDO.Core.Serialization;
 
 [JsonSerializable(typeof(SessionToken))]
 [JsonSerializable(typeof(UserStub))]
-
 
 [JsonSerializable(typeof(UserHistory))]
 [JsonSerializable(typeof(UserActivity))]

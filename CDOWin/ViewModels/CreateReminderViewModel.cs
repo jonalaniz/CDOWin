@@ -1,7 +1,6 @@
 ﻿using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Threading.Tasks;
@@ -33,7 +32,7 @@ public partial class CreateReminderViewModel(IReminderService service, int clien
     // =========================
     // CRUD Methods
     // =========================
-    public async Task<Result<Reminder>> CreateReminderAsync() {
+    public async Task<Result<ReminderDetail>> CreateReminderAsync() {
         NewReminder reminder = new(ClientID: _clientId, ActionDate: ActionDate.ToUniversalTime(), Text: Description);
         return await _service.CreateRemindersAsync(reminder);
     }

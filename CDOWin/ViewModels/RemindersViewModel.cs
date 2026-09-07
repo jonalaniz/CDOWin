@@ -2,7 +2,6 @@
 using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Interfaces;
-using CDO.Core.Models;
 using CDOWin.Data;
 using CDOWin.Services;
 using CDOWin.Views.Reminders;
@@ -33,7 +32,7 @@ public partial class RemindersViewModel : ObservableObject {
     // =========================
     // Private Backing Fields
     // =========================
-    private IReadOnlyList<Reminder> _cache = [];
+    private IReadOnlyList<ReminderDetail> _cache = [];
     private RemindersFilter _filter = RemindersFilter.All;
     private DispatcherTimer _refreshTimer;
     private DateTime _selectedDate = DateTime.Now;
@@ -45,10 +44,10 @@ public partial class RemindersViewModel : ObservableObject {
     // UI State
     // =========================
     [ObservableProperty]
-    public partial ObservableCollection<Reminder> Filtered { get; private set; } = [];
+    public partial ObservableCollection<ReminderDetail> Filtered { get; private set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<Reminder> ClientSpecific { get; private set; } = [];
+    public partial ObservableCollection<ReminderDetail> ClientSpecific { get; private set; } = [];
 
     [ObservableProperty]
     public partial string EndText { get; set; } = string.Empty;
@@ -91,8 +90,8 @@ public partial class RemindersViewModel : ObservableObject {
     // Public Methods
     // =========================
 
-    public IReadOnlyDictionary<DateTime, IReadOnlyList<Reminder>> GetRemindersByMonth(DateTime month) {
-        var dict = new Dictionary<DateTime, IReadOnlyList<Reminder>>();
+    public IReadOnlyDictionary<DateTime, IReadOnlyList<ReminderDetail>> GetRemindersByMonth(DateTime month) {
+        var dict = new Dictionary<DateTime, IReadOnlyList<ReminderDetail>>();
         foreach (var group in _cache
             .Where(r => r.ActionDate.Month == month.Month)
             .GroupBy(r => r.ActionDate.Date)
@@ -102,7 +101,7 @@ public partial class RemindersViewModel : ObservableObject {
         return dict;
     }
 
-    public List<Reminder> GetRemindsListForMonth(DateTime month) {
+    public List<ReminderDetail> GetRemindsListForMonth(DateTime month) {
         return _cache
             .Where(r => r.ActionDate.Date.Month == month.Month)
             .ToList();
@@ -126,7 +125,7 @@ public partial class RemindersViewModel : ObservableObject {
         }
     }
 
-    public Reminder? GetReminderByID(int id) => _cache.FirstOrDefault(r => r.Id == id);
+    public ReminderDetail? GetReminderByID(int id) => _cache.FirstOrDefault(r => r.Id == id);
 
     public bool DateHasReminders(DateTime date) => _cache.Any(r => r.ActionDate.Date == date.Date);
 
@@ -216,12 +215,12 @@ public partial class RemindersViewModel : ObservableObject {
         OnUI(ApplyFilter);
     }
 
-    private static ObservableCollection<Reminder> UpdateReminder(int id, Reminder reminder, ObservableCollection<Reminder> collection) {
-        return new ObservableCollection<Reminder>(collection.Select(r => r.Id == id ? reminder : r));
+    private static ObservableCollection<ReminderDetail> UpdateReminder(int id, ReminderDetail reminder, ObservableCollection<ReminderDetail> collection) {
+        return new ObservableCollection<ReminderDetail>(collection.Select(r => r.Id == id ? reminder : r));
     }
 
-    private static ObservableCollection<Reminder> RemoveReminder(int id, ObservableCollection<Reminder> collection) {
-        return new ObservableCollection<Reminder>(collection.Where(r => r.Id != id));
+    private static ObservableCollection<ReminderDetail> RemoveReminder(int id, ObservableCollection<ReminderDetail> collection) {
+        return new ObservableCollection<ReminderDetail>(collection.Where(r => r.Id != id));
     }
 
     // =========================
@@ -253,7 +252,7 @@ public partial class RemindersViewModel : ObservableObject {
     // Utility / Filtering
     // =========================
     private void ApplyFilter() {
-        IEnumerable<Reminder> source = _filter switch {
+        IEnumerable<ReminderDetail> source = _filter switch {
             RemindersFilter.All => _cache,
             RemindersFilter.Upcoming => _cache.Where(r => r.ActionDate > DateTime.Now.AddDays(-1)),
             RemindersFilter.Client => ClientSpecific,
@@ -268,7 +267,7 @@ public partial class RemindersViewModel : ObservableObject {
         UpdateEndText();
     }
 
-    private IReadOnlyList<Reminder> DateSpecifc() {
+    private IReadOnlyList<ReminderDetail> DateSpecifc() {
         return _cache
             .Where(r => r.ActionDate.Date == _selectedDate.Date)
             .ToList()

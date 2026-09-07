@@ -1,4 +1,4 @@
-using CDO.Core.Models;
+using CDO.Core.DTOs.Reminders;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -32,14 +32,14 @@ public sealed partial class CalendarDayView : UserControl {
         new PropertyMetadata(true)
         );
 
-    public ObservableCollection<Reminder> Reminders {
-        get => (ObservableCollection<Reminder>)GetValue(RemindersProperty);
+    public ObservableCollection<ReminderDetail> Reminders {
+        get => (ObservableCollection<ReminderDetail>)GetValue(RemindersProperty);
         set => SetValue(RemindersProperty, value);
     }
 
     public static readonly DependencyProperty RemindersProperty = DependencyProperty.Register(
         nameof(Reminders),
-        typeof(ObservableCollection<Reminder>),
+        typeof(ObservableCollection<ReminderDetail>),
         typeof(CalendarDayView),
         new PropertyMetadata(null)
     );

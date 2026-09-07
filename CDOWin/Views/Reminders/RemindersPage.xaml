@@ -6,7 +6,7 @@
     xmlns:local="using:CDOWin.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:CDO.Core.Models"
+    xmlns:dto="using:CDO.Core.DTOs.Reminders"
     xmlns:reminders="using:CDOWin.Views.Reminders"
     mc:Ignorable="d">
 
@@ -62,7 +62,7 @@
                 </Grid.RowDefinitions>
                 <ItemsRepeater Grid.Row="0" ItemsSource="{x:Bind _viewModel.Filtered, Mode=OneWay}" HorizontalAlignment="Stretch">
                     <ItemsRepeater.ItemTemplate>
-                        <DataTemplate x:DataType="models:Reminder">
+                        <DataTemplate x:DataType="dto:ReminderDetail">
                             
                             <!-- Split Button -->
                             <SplitButton Margin="8,6,8,0" Padding="12,8" Click="Reminder_Click"

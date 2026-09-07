@@ -1,6 +1,5 @@
 ﻿using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
-using CDO.Core.Models;
 
 namespace CDO.Core.Interfaces;
 
@@ -9,14 +8,14 @@ public interface IReminderService {
     // -----------------------------
     // GET Methods
     // -----------------------------
-    public Task<List<Reminder>?> GetAllRemindersAsync(CancellationToken ct);
+    public Task<List<ReminderDetail>?> GetAllRemindersAsync(CancellationToken ct);
 
-    public Task<Reminder?> GetReminderAsync(int id);
+    public Task<ReminderDetail?> GetReminderAsync(int id);
 
     // -----------------------------
     // POST Methods
     // -----------------------------
-    public Task<Result<Reminder>> CreateRemindersAsync(NewReminder dto);
+    public Task<Result<ReminderDetail>> CreateRemindersAsync(NewReminder dto);
 
     // -----------------------------
     // PATCH Methods

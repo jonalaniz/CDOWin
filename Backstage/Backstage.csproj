@@ -48,9 +48,9 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.3.260211-preview1" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.3.260211-preview1" />
-    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2526" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.3.1" />
+    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2705" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.4.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>

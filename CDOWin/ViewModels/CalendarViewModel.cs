@@ -27,7 +27,7 @@ public partial class CalendarViewModel(RemindersViewModel viewModel) : Observabl
             var date = firstVisibleDay.AddDays(i);
 
             Days.Add(new CalendarDay(date, date.Month == CurrentMonth.Month) {
-                Reminders = new ObservableCollection<Reminder>(
+                Reminders = new ObservableCollection<ReminderDetail>(
                     reminders.GetValueOrDefault(date.Date) ?? []
                     )
             });
@@ -56,7 +56,7 @@ public partial class CalendarViewModel(RemindersViewModel viewModel) : Observabl
         BuildCalendarDays();
     }
 
-    public Reminder? GetReminderByID(int id) => _remindersViewModel.GetReminderByID(id);
+    public ReminderDetail? GetReminderByID(int id) => _remindersViewModel.GetReminderByID(id);
 
     public async Task UpdateReminderAsync(int id, ReminderUpdate update) {
         await _remindersViewModel.UpdateReminderAsync(id, update);

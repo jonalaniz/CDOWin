@@ -1,4 +1,4 @@
-﻿using CDO.Core.Models;
+﻿using CDO.Core.DTOs.Reminders;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ class RemindersComposer {
     private readonly string _filePath = Path.GetTempPath() + "export.csv";
     private readonly StringBuilder csv = new();
 
-    public void BuildCSV(List<Reminder> list) {
+    public void BuildCSV(List<ReminderDetail> list) {
         csv.AppendLine("ActionDate,ClientDetail,Text");
 
         foreach (var reminder in list)

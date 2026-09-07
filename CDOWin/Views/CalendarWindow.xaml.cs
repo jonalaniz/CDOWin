@@ -1,4 +1,4 @@
-using CDO.Core.Models;
+using CDO.Core.DTOs.Reminders;
 using CDO.UI.Shared.Factories;
 using CDO.UI.Shared.Helpers;
 using CDOWin.Controls;
@@ -93,7 +93,7 @@ public sealed partial class CalendarWindow : Window {
     }
 
     private async void OnReminderClickedAsync(object? sender, int id) {
-        if (_viewModel.GetReminderByID(id) is not Reminder reminder)
+        if (_viewModel.GetReminderByID(id) is not ReminderDetail reminder)
             return;
 
         var updateVM = new ReminderUpdateViewModel(reminder);

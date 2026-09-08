@@ -226,13 +226,13 @@
 
                         <!-- Row 3: Work Schedule -->
                         <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-                                 Label="Description of Work Schedule" 
-                                 Value="{x:Bind _viewModel.Selected.WorkSchedule, Mode=OneWay}"/>
+                                     Label="Description of Work Schedule" 
+                                     Value="{x:Bind _viewModel.Selected.WorkSchedule, Mode=OneWay}"/>
 
                         <!-- Row 4: Wages -->
                         <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
-                                 Label="Wages" 
-                                 Value="{x:Bind _viewModel.Selected.Wages, Mode=OneWay}"/>
+                                     Label="Wages" 
+                                     Value="{x:Bind _viewModel.Selected.Wages, Mode=OneWay}"/>
                     </Grid>
                 </Grid>
             </ScrollViewer>

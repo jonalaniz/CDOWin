@@ -77,9 +77,9 @@ public partial class NavigationService : ObservableObject, INavigationService<CD
     }
 
     public void AddNavigationHandlers(
-        ClientSelectionService clientSelectionService, 
-        CounselorSelectionService counselorSelectionService, 
-        EmployerSelectionService employerSelectionService, 
+        ClientSelectionService clientSelectionService,
+        CounselorSelectionService counselorSelectionService,
+        EmployerSelectionService employerSelectionService,
         PlacementSelectionService placementSelectionService) {
         _clientSelectionService = clientSelectionService;
         _clientSelectionService.ClientSelectionRequested += (_) => RequestNavigation(CDOFrame.Clients);

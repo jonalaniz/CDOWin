@@ -83,9 +83,9 @@ public static class AppServices {
         // Initialize NavigationService
         var navigation = new NavigationService();
         navigation.AddNavigationHandlers(
-            _clientSelectionService, 
-            _counselorSelecitonService, 
-            _employerSelectionService, 
+            _clientSelectionService,
+            _counselorSelecitonService,
+            _employerSelectionService,
             _placementSelectionService
             );
         Navigation = navigation;

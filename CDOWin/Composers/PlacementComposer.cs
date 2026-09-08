@@ -1,17 +1,14 @@
 ﻿using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.WordInterop;
-using Microsoft.UI.Xaml.Controls;
 using Spire.Pdf;
 using Spire.Pdf.Fields;
 using Spire.Pdf.Widget;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CDOWin.Composers; 
+namespace CDOWin.Composers;
 
 public sealed class PlacementComposer {
     private readonly PdfDocument Doc = new();
@@ -19,18 +16,18 @@ public sealed class PlacementComposer {
 
     public Result ComposePDF(PlacementDetail placement) {
         // Get the PDF path
-        if(_templateProvider.GetTemplate("vr1845b-twc.pdf") is not string path)
+        if (_templateProvider.GetTemplate("vr1845b-twc.pdf") is not string path)
             return Result.Fail(new AppError(ErrorKind.Unknown, "PDF Template not found."));
 
         // Load the PDF
         Doc.LoadFromFile(path);
 
         // Grab the form
-        if(Doc.Form is not PdfFormWidget formWidget)
+        if (Doc.Form is not PdfFormWidget formWidget)
             return Result.Fail(new AppError(ErrorKind.Unknown, "Unable to get Form Widget"));
 
         // Loop over the form items and fill in the form
-        foreach(PdfField field in formWidget.FieldsWidget.List) {
+        foreach (PdfField field in formWidget.FieldsWidget.List) {
             switch (field) {
                 case PdfTextBoxFieldWidget textBox:
                     textBox.Text = TextBoxString(textBox.Name);

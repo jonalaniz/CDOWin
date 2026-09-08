@@ -12,7 +12,7 @@ namespace CDOWin.Composers;
 
 public sealed class PlacementComposer(PlacementDetail placement) {
     private readonly PdfDocument Doc = new();
-    private readonly ITemplateProvider _templateProvider = new TemplateProvider();
+    private readonly TemplateProvider _templateProvider = new();
     private readonly PlacementDetail _placement = placement;
 
     public Result ComposePDF() {

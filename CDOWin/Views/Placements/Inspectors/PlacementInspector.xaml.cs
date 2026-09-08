@@ -1,4 +1,6 @@
+using CDO.Core.DTOs.Placements;
 using CDO.UI.Shared.Factories;
+using CDOWin.Composers;
 using CDOWin.ErrorHandling;
 using CDOWin.Services;
 using CDOWin.ViewModels;
@@ -7,6 +9,7 @@ using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Diagnostics;
 
 namespace CDOWin.Views.Placements.Inspectors;
 
@@ -59,5 +62,18 @@ public sealed partial class PlacementInspector : Page {
         if (result == ContentDialogResult.Primary) {
             await _viewModel.DeleteSelectedPlacement();
         }
+    }
+
+    private void Export_Click(object sender, RoutedEventArgs e) {
+        // Notify the user we are exporting
+
+        // Get the placement
+        if (_viewModel.Selected is not PlacementDetail placement) return;
+
+        var composer = new PlacementComposer();
+
+        var result = composer.ComposePDF(placement);
+
+        Debug.Write(result.ToString());
     }
 }

@@ -31,6 +31,7 @@
   <ItemGroup>
     <None Remove="Assets\CDO_Dark.png" />
     <None Remove="Assets\CDO_Light.png" />
+    <None Remove="Assets\Templates\vr1845b-twc.pdf" />
     <None Remove="Controls\CalendarDayView.xaml" />
     <None Remove="SplashWindow.xaml" />
     <None Remove="Views\Clients\Dialogs\CreateClient.xaml" />
@@ -103,6 +104,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Assets\Templates\Invoice.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\Templates\vr1845b-twc.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

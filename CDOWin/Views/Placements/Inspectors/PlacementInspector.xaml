@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -58,7 +59,7 @@
 
         <!-- Details Grid -->
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-              Style="{StaticResource InspectorDetialsGridStyle}" Padding="12,6,4,0">
+              Style="{StaticResource CDOCardContentContainerStyle}" Padding="12,6,4,0">
             <ScrollViewer>
                 <Grid RowSpacing="10" ColumnSpacing="12" Padding="0,0,8,8">
                     <Grid.RowDefinitions>
@@ -205,6 +206,17 @@
                     
                 </Grid>
             </ScrollViewer>
+        </Grid>
+
+        <!-- Button Grid -->
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ColumnSpacing="8" Padding="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" 
+                    Content="Export" Style="{StaticResource AccentButtonStyle}"
+                    Click="Export_Click"/>
         </Grid>
     </Grid>
 </Page>

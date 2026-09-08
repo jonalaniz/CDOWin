@@ -31,7 +31,8 @@ public sealed class PlacementComposer(PlacementDetail placement) {
         foreach (PdfField field in formWidget.FieldsWidget.List) {
             switch (field) {
                 case PdfTextBoxFieldWidget textBox:
-                    textBox.Text = TextBoxString(textBox.Name);
+                    if (TextBoxString(textBox.Name) is string value)
+                        textBox.Text = value;
                     break;
                 case PdfRadioButtonListFieldWidget radioButton:
                     Debug.WriteLine($"Radio Button: {radioButton.Name}");
@@ -60,15 +61,43 @@ public sealed class PlacementComposer(PlacementDetail placement) {
         return Result.Success();
     }
 
-    static string TextBoxString(string fieldName) {
+    string? TextBoxString(string nameString) {
+        if (PTextField.Name(nameString) is not PTextFieldName fieldName) return null;
+
         return fieldName switch {
-            _ => ""
+            // Placement Specific
+            PTextFieldName.Position => _placement.Position,
+            //HireDate => HireDate,
+            PTextFieldName.Day1 => _placement.Day1,
+            PTextFieldName.Day2 => _placement.Day2,
+            PTextFieldName.Day3 => _placement.Day3,
+            PTextFieldName.Day4 => _placement.Day4,
+            PTextFieldName.Day5 => _placement.Day5,
+            PTextFieldName.JobDuties => _placement.JobDuties,
+            PTextFieldName.WorkEnvironment => _placement.WorkEnvironment,
+            PTextFieldName.Accommodations => _placement.Accommodations,
+            //Wages,
+            PTextFieldName.Benefits => _placement.Benefits,
+
+            // Client Specific
+            PTextFieldName.ClientName => _placement.ClientName,
+            PTextFieldName.SANumber => _placement.SaNumber,
+            PTextFieldName.CaseID => _placement.CaseID,
+
+            // Employer Specific
+            PTextFieldName.EmployerName => _placement.EmployerName,
+            PTextFieldName.EmployerPhone => _placement.EmployerPhone,
+            PTextFieldName.SupervisorName => _placement.SupervisorName,
+            PTextFieldName.SupervisorEmail => _placement.SupervisorEmail,
+            PTextFieldName.SupervisorPhone => _placement.SupervisorPhone,
+            PTextFieldName.Website => _placement.Website,
+            PTextFieldName.Address => _placement.Address1 + _placement.Address2,
+            PTextFieldName.City => _placement.City,
+            PTextFieldName.State => _placement.State,
+            PTextFieldName.Zip => _placement.Zip,
+            _ => throw new NotImplementedException()
         };
     }
-}
-
-enum PlacementComposerFields {
-
 }
 
 /*

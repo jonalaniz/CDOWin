@@ -70,9 +70,9 @@ public sealed partial class PlacementInspector : Page {
         // Get the placement
         if (_viewModel.Selected is not PlacementDetail placement) return;
 
-        var composer = new PlacementComposer();
+        var composer = new PlacementComposer(placement);
 
-        var result = composer.ComposePDF(placement);
+        var result = composer.ComposePDF();
 
         Debug.Write(result.ToString());
     }

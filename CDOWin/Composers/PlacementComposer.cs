@@ -10,11 +10,12 @@ using System.IO;
 
 namespace CDOWin.Composers;
 
-public sealed class PlacementComposer {
+public sealed class PlacementComposer(PlacementDetail placement) {
     private readonly PdfDocument Doc = new();
     private readonly ITemplateProvider _templateProvider = new TemplateProvider();
+    private readonly PlacementDetail _placement = placement;
 
-    public Result ComposePDF(PlacementDetail placement) {
+    public Result ComposePDF() {
         // Get the PDF path
         if (_templateProvider.GetTemplate("vr1845b-twc.pdf") is not string path)
             return Result.Fail(new AppError(ErrorKind.Unknown, "PDF Template not found."));
@@ -64,6 +65,10 @@ public sealed class PlacementComposer {
             _ => ""
         };
     }
+}
+
+enum PlacementComposerFields {
+
 }
 
 /*

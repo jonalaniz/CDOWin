@@ -32,6 +32,7 @@ public record class PlacementDetail(
     // ClientDetail Specific
     int? ClientID,
     string? ClientName,
+    string? CaseID,
 
     // Counselor Specific
     int? CounselorID,

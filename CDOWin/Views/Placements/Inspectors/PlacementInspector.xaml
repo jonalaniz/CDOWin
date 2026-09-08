@@ -16,64 +16,56 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefault}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Header -->
-        <TextBlock Grid.Row="0" Grid.Column="0" 
-                   Style="{StaticResource PageTitleStyle}"
-                   Text="{x:Bind _viewModel.Selected.ClientName, Mode=OneWay}"/>
+            <!-- Header -->
+            <TextBlock Grid.Row="0" Grid.Column="0" 
+                       Style="{StaticResource PageTitleStyle}"
+                       Text="{x:Bind _viewModel.Selected.ClientName, Mode=OneWay}"/>
 
-        <!-- CommandBar -->
-        <CommandBar Grid.Row="0" Grid.Column="1"
-                    Style="{StaticResource CommandBarDefaultStyle}">
-            <AppBarButton IsCompact="False" 
-                          ToolTipService.ToolTip="Edit"
-                          Click="EditButton_Click">
-                <FontIcon Glyph="&#xE70F;" 
-                          Style="{StaticResource SingleIconFontStyle}"/>
-            </AppBarButton>
+            <!-- CommandBar -->
+            <CommandBar Grid.Row="0" Grid.Column="1" Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton IsCompact="False" 
+                              ToolTipService.ToolTip="Edit"
+                              Click="EditButton_Click">
+                    <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton>
 
-            <!-- More Menu -->
-            <AppBarButton Width="56" 
-                          IsCompact="False" 
-                          ToolTipService.ToolTip="More">
-                <AppBarButton.Icon>
-                    <FontIcon Glyph="&#xE712;" 
-                              Style="{StaticResource SingleIconFontStyle}"/>
-                </AppBarButton.Icon>
-                <AppBarButton.Flyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedRight">
-                        <MenuFlyoutItem Text="Delete..." 
-                                        Click="Delete_Click">
-                            <MenuFlyoutItem.Icon>
-                                <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                    </MenuFlyout>
-                </AppBarButton.Flyout>
-            </AppBarButton>
-        </CommandBar>
+                <!-- More Menu -->
+                <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedRight">
+                            <MenuFlyoutItem Text="Export..." 
+                                        Click="Export_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <SymbolIcon Symbol="OpenFile" 
+                                            Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem Text="Delete..."  Click="Delete_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
 
         <!-- Details Grid -->
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-              Style="{StaticResource CDOCardContentContainerStyle}" Padding="12,6,4,0">
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <ScrollViewer>
-                <Grid RowSpacing="10" ColumnSpacing="12" Padding="0,0,8,8">
+                <Grid RowSpacing="8" ColumnSpacing="8">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -82,141 +74,166 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
                     <!-- Row 0: Employer Title -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" 
-                               Text="Employer" 
-                               Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <Border Grid.Row="0"
+                            BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefault}"
+                            Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                        <TextBlock Padding="16,8" FontWeight="Bold" Text="Employer"/>
+                    </Border>
 
-                    <!-- Row 1: Employer Name + Phone -->
-                    <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
-                                 Label="Name" 
-                                 Value="{x:Bind _viewModel.Selected.EmployerName, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" 
-                                 Label="Phone" 
-                                 Value="{x:Bind _viewModel.Selected.EmployerPhone, Mode=OneWay}"/>
+                    <Grid Grid.Row="1" RowSpacing="8" ColumnSpacing="8" Padding="16,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Row 2: Website -->
-                    <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" 
-                                 Label="Website"
-                                 Value="{x:Bind _viewModel.Selected.Website, Mode=OneWay}"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!-- Row 3: Address -->
-                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">
-                        <TextBlock Text="Address"
-                                   Style="{StaticResource LabelTextBlockStyle}"/>
-                        <TextBlock Text="{x:Bind _viewModel.Selected.FormattedAddress, Mode=OneWay}"
-                                   Style="{StaticResource ValueTextBlockStyle}"/>
-                    </StackPanel>
+                        <!-- Row 1: Employer Name + Phone -->
+                        <c:LabelPair Grid.Row="0" Grid.Column="0"
+                                     Label="Name" Value="{x:Bind _viewModel.Selected.EmployerName, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="0" Grid.Column="1"
+                                     Label="Phone" Value="{x:Bind _viewModel.Selected.EmployerPhone, Mode=OneWay}"/>
 
-                    <!-- Row 4: Supervisor Information-->
-                    <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6">
-                        <TextBlock Text="Supervisor"
-                                   Style="{StaticResource LabelTextBlockStyle}"/>
-                        <TextBlock Text="{x:Bind _viewModel.Selected.SupervisorName, Mode=OneWay}"
-                                   Style="{StaticResource ValueTextBlockStyle}"/>
-                        <TextBlock Text="{x:Bind _viewModel.Selected.SupervisorPhone, Mode=OneWay}"
-                                   Style="{StaticResource ValueTextBlockStyle}"/>
-                        <TextBlock Text="{x:Bind _viewModel.Selected.SupervisorEmail, Mode=OneWay}"
-                                   Style="{StaticResource ValueTextBlockStyle}"/>
-                    </StackPanel>
+                        <!-- Row 2: Website -->
+                        <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                     Label="Website" Value="{x:Bind _viewModel.Selected.Website, Mode=OneWay}"/>
 
-                    <!-- Row 5: Job Placement Title -->
-                    <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"
-                               Text="Job Placement Information" 
-                               Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <!-- Row 3: Address -->
+                        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <TextBlock Text="Address" Style="{StaticResource LabelTextBlockStyle}"/>
+                            <TextBlock Text="{x:Bind _viewModel.Selected.FormattedAddress, Mode=OneWay}"
+                                       Style="{StaticResource ValueTextBlockStyle}"/>
+                        </StackPanel>
 
-                    <!-- Row 6: Position -->
-                    <c:LabelPair Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" 
-                                 Label="Position/Title" 
-                                 Value="{x:Bind _viewModel.Selected.Position, Mode=OneWay}"/>
+                        <!-- Row 4: Supervisor Information-->
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                            <TextBlock Style="{StaticResource LabelTextBlockStyle}"
+                                       Text="Supervisor"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                       Text="{x:Bind _viewModel.Selected.SupervisorName, Mode=OneWay}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}"
+                                       Text="{x:Bind _viewModel.Selected.SupervisorPhone, Mode=OneWay}"/>
+                            <TextBlock Style="{StaticResource ValueTextBlockStyle}" 
+                                       Text="{x:Bind _viewModel.Selected.SupervisorEmail, Mode=OneWay}"/>
+                        </StackPanel>
+                    </Grid>
 
-                    <!-- Row 7: Description of Duties -->
-                    <c:LabelPair Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6" 
-                                 Label="Description of Duties" 
-                                 Value="{x:Bind _viewModel.Selected.JobDuties, Mode=OneWay}"/>
+                    <Border Grid.Row="2"
+                            BorderThickness="0,1" BorderBrush="{StaticResource DividerStrokeColorDefault}"
+                            Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                        <TextBlock Padding="16,8" FontWeight="Bold" Text="Job Placement"/>
+                    </Border>
 
-                    <!-- Row 8: Work Environment -->
-                    <c:LabelPair Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" 
-                                 Label="Work Environment" 
-                                 Value="{x:Bind _viewModel.Selected.WorkEnvironment, Mode=OneWay}"/>
+                    <Grid Grid.Row="3" RowSpacing="8" ColumnSpacing="8" Padding="16,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Row 9: Accomodations -->
-                    <c:LabelPair Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" 
-                                 Label="Accommodations" 
-                                 Value="{x:Bind _viewModel.Selected.Accommodations, Mode=OneWay}"/>
-                    
-                    <!-- Row 10: Hours Working + Benefits -->
-                    <c:LabelPair Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" 
-                                 Label="Hours Working" 
-                                 Value="{x:Bind _viewModel.Selected.HoursWorking, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="3" 
-                                 Label="Benefits" 
-                                 Value="{x:Bind _viewModel.Selected.Benefits, Mode=OneWay}"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!-- Row 11: Benchmark Report Title -->
-                    <TextBlock Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="6" 
-                               Text="Benchmark Report" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <!-- Row 6: Position -->
+                        <c:LabelPair Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                                     Label="Position/Title" 
+                                     Value="{x:Bind _viewModel.Selected.Position, Mode=OneWay}"/>
 
-                    <!-- Row 12: Hire Date + End Date + Days on Job -->
-                    <c:LabelPair Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" 
-                                 Label="Hire Date" 
-                                 Value="{x:Bind _viewModel.Selected.FormattedHireDate, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" 
-                                 Label="End Date" 
-                                 Value="{x:Bind _viewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="12" Grid.Column="4" Grid.ColumnSpan="2" 
-                                 Label="Days on Job" 
-                                 Value="{x:Bind _viewModel.Selected.DaysOnJob, Mode=OneWay}"/>
+                        <!-- Row 7: Description of Duties -->
+                        <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                     Label="Description of Duties" 
+                                     Value="{x:Bind _viewModel.Selected.JobDuties, Mode=OneWay}"/>
 
-                    <!-- Row 13 & 14: Days 1- 5 -->
-                    <c:LabelPair Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" 
-                                 Label="Day 1" 
-                                 Value="{x:Bind _viewModel.Selected.Day1, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" 
-                                 Label="Day 2" 
-                                 Value="{x:Bind _viewModel.Selected.Day2, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2" 
-                                 Label="Day 3" 
-                                 Value="{x:Bind _viewModel.Selected.Day3, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" 
-                                 Label="Day 4" 
-                                 Value="{x:Bind _viewModel.Selected.Day4, Mode=OneWay}"/>
-                    <c:LabelPair Grid.Row="14" Grid.Column="2" Grid.ColumnSpan="2" 
-                                 Label="Day 5" 
-                                 Value="{x:Bind _viewModel.Selected.Day5, Mode=OneWay}"/>
-                    
-                    <!-- Row 15: Work Schedule -->
-                    <c:LabelPair Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="6" 
+                        <!-- Row 8: Work Environment -->
+                        <c:LabelPair Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                                     Label="Work Environment" 
+                                     Value="{x:Bind _viewModel.Selected.WorkEnvironment, Mode=OneWay}"/>
+
+                        <!-- Row 9: Accomodations -->
+                        <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                                     Label="Accommodations" 
+                                     Value="{x:Bind _viewModel.Selected.Accommodations, Mode=OneWay}"/>
+
+                        <!-- Row 10: Hours Working + Benefits -->
+                        <c:LabelPair Grid.Row="4" Grid.Column="0"
+                                     Label="Hours Working" 
+                                     Value="{x:Bind _viewModel.Selected.HoursWorking, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="4" Grid.Column="1"
+                                     Label="Benefits" 
+                                     Value="{x:Bind _viewModel.Selected.Benefits, Mode=OneWay}"/>
+                    </Grid>
+
+                    <Border Grid.Row="4"
+                            BorderThickness="0,1" BorderBrush="{StaticResource DividerStrokeColorDefault}"
+                            Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                        <TextBlock Padding="16,8" FontWeight="Bold" Text="Benchmark Report"/>
+                    </Border>
+
+                    <Grid Grid.Row="5" RowSpacing="8" ColumnSpacing="8" Padding="16,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Row 12: Hire Date + End Date + Days on Job -->
+                        <c:LabelPair Grid.Row="0" Grid.Column="0"
+                                     Label="Hire Date" 
+                                     Value="{x:Bind _viewModel.Selected.FormattedHireDate, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="0" Grid.Column="1" 
+                                     Label="End Date" 
+                                     Value="{x:Bind _viewModel.Selected.FormattedEndDate, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" 
+                                     Label="Days on Job" 
+                                     Value="{x:Bind _viewModel.Selected.DaysOnJob, Mode=OneWay}"/>
+
+                        <!-- Row 13 & 14: Days 1- 5 -->
+                        <c:LabelPair Grid.Row="1" Grid.Column="0"
+                                     Label="Day 1" 
+                                     Value="{x:Bind _viewModel.Selected.Day1, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="1" Grid.Column="1"
+                                     Label="Day 2" 
+                                     Value="{x:Bind _viewModel.Selected.Day2, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="1" Grid.Column="2"
+                                     Label="Day 3" 
+                                     Value="{x:Bind _viewModel.Selected.Day3, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="2" Grid.Column="0"
+                                     Label="Day 4" 
+                                     Value="{x:Bind _viewModel.Selected.Day4, Mode=OneWay}"/>
+                        <c:LabelPair Grid.Row="2" Grid.Column="1"
+                                     Label="Day 5" 
+                                     Value="{x:Bind _viewModel.Selected.Day5, Mode=OneWay}"/>
+
+                        <!-- Row 15: Work Schedule -->
+                        <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                                  Label="Description of Work Schedule" 
                                  Value="{x:Bind _viewModel.Selected.WorkSchedule, Mode=OneWay}"/>
-                    
-                    <!-- Row 16: Wages -->
-                    <c:LabelPair Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2" 
+
+                        <!-- Row 16: Wages -->
+                        <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
                                  Label="Wages" 
                                  Value="{x:Bind _viewModel.Selected.Wages, Mode=OneWay}"/>
-                    
+                    </Grid>
                 </Grid>
             </ScrollViewer>
-        </Grid>
-
-        <!-- Button Grid -->
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ColumnSpacing="8" Padding="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" 
-                    Content="Export" Style="{StaticResource AccentButtonStyle}"
-                    Click="Export_Click"/>
         </Grid>
     </Grid>
 </Page>

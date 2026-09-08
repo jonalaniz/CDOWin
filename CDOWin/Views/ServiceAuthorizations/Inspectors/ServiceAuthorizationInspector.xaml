@@ -38,17 +38,14 @@
             </AppBarButton>
 
             <!-- More Menu -->
-            <AppBarButton Width="56" 
-                          IsCompact="False" 
+            <AppBarButton Width="56" IsCompact="False" 
                           ToolTipService.ToolTip="More">
                 <AppBarButton.Icon>
-                    <FontIcon Glyph="&#xE712;" 
-                              Style="{StaticResource SingleIconFontStyle}"/>
+                    <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
                 <AppBarButton.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                        <MenuFlyoutItem Text="Export..." 
-                                        Click="Export_Click">
+                        <MenuFlyoutItem Text="Export..." Click="Export_Click">
                             <MenuFlyoutItem.Icon>
                                 <SymbolIcon Symbol="OpenFile" 
                                             Foreground="{ThemeResource AccentAAFillColorDefaultBrush}"/>

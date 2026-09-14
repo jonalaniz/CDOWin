@@ -64,16 +64,13 @@ public sealed partial class PlacementInspector : Page {
         }
     }
 
-    private void Export_Click(object sender, RoutedEventArgs e) {
+    private async void Export_Click(object sender, RoutedEventArgs e) {
         // Notify the user we are exporting
 
         // Get the placement
         if (_viewModel.Selected is not PlacementDetail placement) return;
 
         var composer = new PlacementComposer(placement);
-
-        var result = composer.ComposePDF();
-
-        Debug.Write(result.ToString());
+        _ = composer.ComposePDF();
     }
 }

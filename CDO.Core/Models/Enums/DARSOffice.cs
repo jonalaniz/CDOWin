@@ -35,6 +35,10 @@ public class DARSOffice {
         get { return new DARSOffice("1411 E Court St Seguin, TX 78155"); }
     }
 
+    public static DARSOffice NEW {
+        get { return new DARSOffice("8518 Culebra Road Ste. 105 San Antonio, TX 78251"); }
+    }
+
     public override string ToString() {
         return Address;
     }
@@ -47,7 +51,8 @@ public class DARSOffice {
             DARSOffice.SFO,
             DARSOffice.EHFO,
             DARSOffice.NBFO,
-            DARSOffice.SEFO
+            DARSOffice.SEFO,
+            DARSOffice.NEW
             ];
     }
 }

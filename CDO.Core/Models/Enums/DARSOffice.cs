@@ -16,7 +16,7 @@ public class DARSOffice {
     }
 
     public static DARSOffice WFO {
-        get { return new DARSOffice("4241 Woodcock Drive, Suite A-105 San Antonio, TX 78228"); }
+        get { return new DARSOffice("8518 Culebra Road Ste. 105 San Antonio, TX 78251"); }
     }
 
     public static DARSOffice SFO {
@@ -35,10 +35,6 @@ public class DARSOffice {
         get { return new DARSOffice("1411 E Court St Seguin, TX 78155"); }
     }
 
-    public static DARSOffice NEW {
-        get { return new DARSOffice("8518 Culebra Road Ste. 105 San Antonio, TX 78251"); }
-    }
-
     public override string ToString() {
         return Address;
     }
@@ -51,8 +47,7 @@ public class DARSOffice {
             DARSOffice.SFO,
             DARSOffice.EHFO,
             DARSOffice.NBFO,
-            DARSOffice.SEFO,
-            DARSOffice.NEW
+            DARSOffice.SEFO
             ];
     }
 }

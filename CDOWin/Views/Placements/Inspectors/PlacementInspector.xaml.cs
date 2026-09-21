@@ -9,7 +9,7 @@ using CDOWin.Views.Shared.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Diagnostics;
+using System.ComponentModel;
 
 namespace CDOWin.Views.Placements.Inspectors;
 
@@ -65,12 +65,27 @@ public sealed partial class PlacementInspector : Page {
     }
 
     private async void Export_Click(object sender, RoutedEventArgs e) {
-        // Notify the user we are exporting
+        if (_viewModel == null || _viewModel.Selected is not PlacementDetail placement) return;
 
-        // Get the placement
-        if (_viewModel.Selected is not PlacementDetail placement) return;
-
+        // Create the composer
         var composer = new PlacementComposer(placement);
+
+        // Create the FileDrop dialog
+        var dialog = DialogFactory.FileDropDialog(this.XamlRoot, "Placement Export");
+        dialog.Content = new ExportPlacement(composer);
+        dialog.IsPrimaryButtonEnabled = composer.CanExport;
+
+        PropertyChangedEventHandler handler = (_, args) => {
+            if (args.PropertyName == nameof(composer.CanExport))
+                dialog.IsPrimaryButtonEnabled = composer.CanExport;
+        };
+
+        composer.PropertyChanged += handler;
+
+        var result = await dialog.ShowAsync();
+        composer.PropertyChanged -= handler;
+
+        if (result != ContentDialogResult.Primary) return;
         _ = composer.ComposePDF();
     }
 }

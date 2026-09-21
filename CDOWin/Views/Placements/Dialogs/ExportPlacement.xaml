@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CDOWin.Views.Placements.Dialogs.ExportPlacement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CDOWin.Views.Placements.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Style="{StaticResource DialogGridStyle}">
+        <Grid x:Name="DropGrid" Height="140" CornerRadius="8"
+              BorderBrush="{StaticResource SurfaceStrokeColorDefaultBrush}" BorderThickness="2"
+              Background="{StaticResource LayerFillColorDefaultBrush}"
+              AllowDrop="True" DragOver="DropGrid_DragOver" DragLeave="DropGrid_DragLeave" Drop="DropGrid_Drop">
+            <TextBlock x:Name="DropTextBlock" Foreground="{StaticResource AccentTextFillColorPrimaryBrush}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="18" FontWeight="Bold"
+                       Text="Drop your vr1845b here."/>
+            </Grid>
+    </Grid>
+</Page>

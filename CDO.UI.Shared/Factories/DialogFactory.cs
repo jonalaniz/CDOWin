@@ -10,6 +10,14 @@ public static class DialogFactory {
         dialog.Title = title;
         return dialog;
     }
+
+    public static ContentDialog FileDropDialog(XamlRoot root, string title) {
+        ContentDialog dialog = Dialog(root, title);
+        dialog.PrimaryButtonText = "Export";
+        dialog.Title = title;
+        return dialog;
+    }
+
     public static ContentDialog UpdateDialog(XamlRoot root, string title) {
         ContentDialog dialog = Dialog(root, title);
         dialog.PrimaryButtonText = "Save";

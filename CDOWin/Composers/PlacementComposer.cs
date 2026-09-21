@@ -1,6 +1,7 @@
 ﻿using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
 using CDO.Core.WordInterop;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Spire.Pdf;
 using Spire.Pdf.Fields;
 using Spire.Pdf.Widget;
@@ -10,15 +11,24 @@ using System.IO;
 
 namespace CDOWin.Composers;
 
-public sealed class PlacementComposer(PlacementDetail placement) {
+public partial class PlacementComposer(PlacementDetail placement) : ObservableObject {
     private readonly PdfDocument Doc = new();
     private readonly TemplateProvider _templateProvider = new();
     private readonly PlacementDetail _placement = placement;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanExport))]
+    public partial string? FilePath { get; set; }
+
+    // =========================
+    // Input Validation
+    // =========================
+    public bool CanExport => !String.IsNullOrEmpty(FilePath);
+
     public Result ComposePDF() {
         // Get the PDF path
-        if (_templateProvider.GetTemplate("vr1845b-twc.pdf") is not string path)
-            return Result.Fail(new AppError(ErrorKind.Unknown, "PDF Template not found."));
+        if (FilePath is not string path)
+            return Result.Fail(new AppError(ErrorKind.Unknown, "PDF not found."));
 
         // Load the PDF
         Doc.LoadFromFile(path);

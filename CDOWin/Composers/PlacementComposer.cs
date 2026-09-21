@@ -41,7 +41,7 @@ public partial class PlacementComposer(PlacementDetail placement) : ObservableOb
         foreach (PdfField field in formWidget.FieldsWidget.List) {
             switch (field) {
                 case PdfTextBoxFieldWidget textBox:
-                    if (TextBoxString(textBox.Name) is string value)
+                    if (TextBoxString(textBox.Name) is string value && string.IsNullOrWhiteSpace(textBox.Text))
                         textBox.Text = value;
                     break;
                 case PdfRadioButtonListFieldWidget radioButton:

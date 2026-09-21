@@ -13,7 +13,6 @@ namespace CDOWin.Composers;
 
 public partial class PlacementComposer(PlacementDetail placement) : ObservableObject {
     private readonly PdfDocument Doc = new();
-    private readonly TemplateProvider _templateProvider = new();
     private readonly PlacementDetail _placement = placement;
 
     [ObservableProperty]
@@ -77,6 +76,7 @@ public partial class PlacementComposer(PlacementDetail placement) : ObservableOb
         return fieldName switch {
             // Placement Specific
             PTextFieldName.Position => _placement.Position,
+
             //HireDate => HireDate,
             PTextFieldName.Day1 => _placement.Day1,
             PTextFieldName.Day2 => _placement.Day2,

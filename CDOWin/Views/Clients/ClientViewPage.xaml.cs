@@ -297,6 +297,10 @@ public sealed partial class ClientViewPage : Page {
         }
     }
 
+    private void Refresh_Click(object sender, RoutedEventArgs e) {
+        _ = _viewModel.ReloadClientAsync();
+    }
+
     // =========================
     // Utility Methods
     // =========================

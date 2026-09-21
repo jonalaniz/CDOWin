@@ -49,7 +49,16 @@
                     <FontIcon Glyph="&#xED0E;" Style="{StaticResource SingleIconFontStyle}"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            
+
+            <AppBarSeparator/>
+
+            <!-- Refresh Button -->
+            <AppBarButton Width="56" Label="Refresh" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE72C;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+
             <!-- Menu Button -->
             <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
                 <AppBarButton.Icon>

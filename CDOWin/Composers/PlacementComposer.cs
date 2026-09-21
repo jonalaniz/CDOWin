@@ -1,6 +1,5 @@
 ﻿using CDO.Core.DTOs.Placements;
 using CDO.Core.ErrorHandling;
-using CDO.Core.WordInterop;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Spire.Pdf;
 using Spire.Pdf.Fields;

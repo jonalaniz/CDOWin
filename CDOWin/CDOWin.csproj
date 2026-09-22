@@ -82,7 +82,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.3.260211-preview1" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.3.260211-preview1" />
     <PackageReference Include="FreeSpire.PDF" Version="12.4.0" />
-    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="3.0.3" />
+    <PackageReference Include="Meziantou.Framework.Win32.CredentialManager" Version="3.0.4" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2705" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.4.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />

@@ -10,11 +10,11 @@ public sealed class ClientComposer {
     private readonly Serializer _serializer = new();
 
     public Result ComposeClientToFile(ClientDetail client) {
-        // Check and create path
+        // Validate path
         if (client.DocumentsFolderPath is not string path)
             return Result.Fail(new AppError(ErrorKind.Unknown, "Missing file path.", null));
 
-        if (!Directory.Exists(client.DocumentsFolderPath))
+        if (!Directory.Exists(path))
             return Result.Fail(new AppError(ErrorKind.Unknown, "File path does not exist", null));
 
         var filePath = Path.Combine(path, "Client.txt");

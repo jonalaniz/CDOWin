@@ -11,22 +11,22 @@ public sealed class ServiceAuthorizationComposer(SADetail sa) {
     private readonly SADetail _sa = sa;
     private readonly ITemplateProvider _templateProvider = new TemplateProvider();
 
-    public Task<Result<string>> Compose() {
-        var tcs = new TaskCompletionSource<Result<string>>();
+    public Task<Result> Compose() {
+        var tcs = new TaskCompletionSource<Result>();
 
         if (_templateProvider.GetTemplate("Invoice.dotx") is not string path) {
-            tcs.SetResult(Result<string>.Fail(new AppError(ErrorKind.Unknown, "SADetail Template not found.")));
+            tcs.SetResult(Result.Fail(new AppError(ErrorKind.Unknown, "SADetail Template not found.")));
             return tcs.Task;
         }
 
-        var thread = new System.Threading.Thread(() => {
+        var thread = new Thread(() => {
             try {
                 var wordService = new WordInteropService();
                 wordService.ExportServiceAuthorization(path, _sa);
 
-                tcs.SetResult(Result<string>.Success("success"));
+                tcs.SetResult(Result.Success());
             } catch (Exception ex) {
-                tcs.SetResult(Result<string>.Fail(new AppError(ErrorKind.Unknown, "Failed to export Service Authorization", Exception: ex)));
+                tcs.SetResult(Result.Fail(new AppError(ErrorKind.Unknown, "Failed to export Service Authorization", Exception: ex)));
             }
         });
 

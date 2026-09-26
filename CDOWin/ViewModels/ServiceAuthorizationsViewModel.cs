@@ -93,11 +93,11 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
     // =========================
     // Export Methods
     // =========================
-    public Task<Result<string>> ExportSelectedAsync() {
-        var tcs = new TaskCompletionSource<Result<string>>();
+    public Task<Result> ExportSelectedAsync() {
+        var tcs = new TaskCompletionSource<Result>();
 
         if (Selected == null) {
-            tcs.SetResult(Result<string>.Fail(new AppError(ErrorKind.Validation, "No SA Selected.")));
+            tcs.SetResult(Result.Fail(new AppError(ErrorKind.Validation, "No SA Selected.")));
             return tcs.Task;
         }
 

@@ -168,7 +168,7 @@ public sealed partial class ClientViewPage : Page {
         if (_viewModel.Selected == null) return;
 
         var dialog = DialogFactory.NewObjectDialog(this.XamlRoot, $"New Placement for {_viewModel.Selected.NameAndID}");
-        var createPlacementVM = AppServices.CreatePlacementViewMdoel(_viewModel.Selected);
+        var createPlacementVM = AppServices.CreatePlacementViewModel(_viewModel.Selected);
         var createPage = new CreatePlacements(createPlacementVM);
         dialog.Content = createPage;
         dialog.IsPrimaryButtonEnabled = createPlacementVM.CanSave;
@@ -265,7 +265,7 @@ public sealed partial class ClientViewPage : Page {
             switch (tag) {
                 case ClientEditType.Administrative:
                     dialog.Title = "Edit Client";
-                    dialog.Content = new UpdateAdminsitrative(updateVM);
+                    dialog.Content = new UpdateAdministrative(updateVM);
                     break;
                 case ClientEditType.Personal:
                     dialog.Title = "Edit Personal Information";

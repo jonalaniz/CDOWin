@@ -6,7 +6,7 @@ using System;
 
 namespace CDOWin.Views.Clients.Dialogs;
 
-public sealed partial class UpdateAdminsitrative : Page {
+public sealed partial class UpdateAdministrative : Page {
 
     // =========================
     // Dependencies
@@ -16,7 +16,7 @@ public sealed partial class UpdateAdminsitrative : Page {
     // =========================
     // Constructor
     // =========================
-    public UpdateAdminsitrative(ClientUpdateViewModel viewModel) {
+    public UpdateAdministrative(ClientUpdateViewModel viewModel) {
         _viewModel = viewModel;
         InitializeComponent();
     }

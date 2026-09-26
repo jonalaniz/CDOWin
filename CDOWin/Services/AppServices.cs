@@ -38,7 +38,7 @@ public static class AppServices {
     public static DataCoordinator DataCoordinator { get; private set; } = null!;
     private static readonly DataInvalidationService _invalidationService = new();
     private static readonly ClientSelectionService _clientSelectionService = new();
-    private static readonly CounselorSelectionService _counselorSelecitonService = new();
+    private static readonly CounselorSelectionService _counselorSelectionService = new();
     private static readonly EmployerSelectionService _employerSelectionService = new();
     private static readonly PlacementSelectionService _placementSelectionService = new();
 
@@ -84,7 +84,7 @@ public static class AppServices {
         var navigation = new NavigationService();
         navigation.AddNavigationHandlers(
             _clientSelectionService,
-            _counselorSelecitonService,
+            _counselorSelectionService,
             _employerSelectionService,
             _placementSelectionService
             );
@@ -95,7 +95,7 @@ public static class AppServices {
             ClientService,
             DataCoordinator,
             _clientSelectionService,
-            _counselorSelecitonService,
+            _counselorSelectionService,
             _placementSelectionService,
             _invalidationService
         );
@@ -103,7 +103,7 @@ public static class AppServices {
         CounselorsViewModel = new CounselorsViewModel(
             DataCoordinator,
             CounselorService,
-            _counselorSelecitonService,
+            _counselorSelectionService,
             _clientSelectionService
             );
 
@@ -117,7 +117,7 @@ public static class AppServices {
             DataCoordinator,
             SAService,
             _clientSelectionService,
-            _counselorSelecitonService
+            _counselorSelectionService
             );
 
         RemindersViewModel = new RemindersViewModel(
@@ -133,7 +133,7 @@ public static class AppServices {
             DataCoordinator,
             PlacementService,
             _clientSelectionService,
-            _counselorSelecitonService,
+            _counselorSelectionService,
             _employerSelectionService,
             _placementSelectionService
             );
@@ -182,7 +182,7 @@ public static class AppServices {
         return new CreateEmployerViewModel(EmployerService);
     }
 
-    public static CreatePlacementViewModel CreatePlacementViewMdoel(ClientDetail client) {
+    public static CreatePlacementViewModel CreatePlacementViewModel(ClientDetail client) {
         return new CreatePlacementViewModel(PlacementService, _invalidationService, client);
     }
 

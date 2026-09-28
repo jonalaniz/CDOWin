@@ -101,7 +101,7 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
             return tcs.Task;
         }
 
-        var composer = new ServiceAuthorizationComposer(Selected);
+        var composer = new InvoiceComposer(Selected);
         return composer.Compose();
     }
 

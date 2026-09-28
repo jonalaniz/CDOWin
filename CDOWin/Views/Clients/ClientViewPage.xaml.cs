@@ -155,7 +155,7 @@ public sealed partial class ClientViewPage : Page {
             if (!updateResult.IsSuccess) return;
             _ = _viewModel.ReloadClientAsync();
         } else if (result == ContentDialogResult.Secondary) {
-            var composer = new ServiceAuthorizationComposer(invoice);
+            var composer = new InvoiceComposer(invoice);
             var composerResult = await composer.Compose();
 
             _ = ShowMessage(ClientPageMessageType.ExportedSA, composerResult.IsSuccess);

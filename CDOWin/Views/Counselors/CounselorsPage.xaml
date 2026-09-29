@@ -9,6 +9,8 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:counselors="using:CDO.Core.DTOs.Counselors"
     xmlns:clients="using:CDO.Core.DTOs.Clients"
+    xmlns:dto="using:CDO.Core.DTOs.SAs"
+    xmlns:c="using:CDO.UI.Shared.Controls"
     mc:Ignorable="d">
 
     <Grid>
@@ -16,7 +18,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="212"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="336"/>
         </Grid.ColumnDefinitions>
         
         <!-- Left Column -->
@@ -42,21 +43,16 @@
                        Text="Counselors"/>
             
             <!-- CommandBar -->
-            <CommandBar Grid.Row="0" Grid.Column="1"
-                        Style="{StaticResource CommandBarDefaultStyle}">
-                <AppBarButton Width="56"
-                              IsCompact="False" 
-                              ToolTipService.ToolTip="New Counselor"
+            <CommandBar Grid.Row="0" Grid.Column="1" Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="New Counselor"
                               Click="NewCounselor_ClickAsync">
-                    <FontIcon Style="{StaticResource SingleIconFontStyle}"
-                              Glyph="&#xE710;"/>
+                    <FontIcon Style="{StaticResource SingleIconFontStyle}" Glyph="&#xE710;"/>
                 </AppBarButton>
             </CommandBar>
 
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="8,0,8,8" 
-                     PlaceholderText="Filter Counselors"
+                     Margin="8,0,8,8" PlaceholderText="Filter Counselors"
                      Text="{x:Bind _viewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Counselors List -->
@@ -98,12 +94,12 @@
             </Grid>
         </Grid>
 
-        <!-- Middle Column -->
-        <Grid Grid.Column="1" BorderThickness="0,0,1,0"
-              BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+        <!-- Right Column -->
+        <Grid Grid.Column="1"
               Visibility="{x:Bind _viewModel.Selected, Mode=OneWay, Converter={StaticResource NullToVisability}}">
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
@@ -120,19 +116,18 @@
                        Style="{StaticResource PageTitleStyle}"/>
 
             <!-- CommandBar -->
-            <CommandBar Grid.Row="0" Grid.Column="1"
-                        Style="{StaticResource CommandBarDefaultStyle}">
-                <AppBarButton Width="56" 
-                              IsCompact="False" 
-                              ToolTipService.ToolTip="More">
+            <CommandBar Grid.Row="0" Grid.Column="1" Style="{StaticResource CommandBarDefaultStyle}">
+                <AppBarButton IsCompact="False" ToolTipService.ToolTip="Edit" Click="EditButton_Click">
+                    <FontIcon Glyph="&#xE70F;" Style="{StaticResource SingleIconFontStyle}"/>
+                </AppBarButton>
+                
+                <AppBarButton Width="56" IsCompact="False" ToolTipService.ToolTip="More">
                     <AppBarButton.Icon>
-                        <FontIcon Style="{StaticResource SingleIconFontStyle}"
-                                  Glyph="&#xE712;"/>
+                        <FontIcon Style="{StaticResource SingleIconFontStyle}" Glyph="&#xE712;"/>
                     </AppBarButton.Icon>
                     <AppBarButton.Flyout>
                         <MenuFlyout Placement="BottomEdgeAlignedRight">
-                            <MenuFlyoutItem Text="Delete..." 
-                                            Click="Delete_MenuFlyoutItem_Click">
+                            <MenuFlyoutItem Text="Delete..." Click="Delete_MenuFlyoutItem_Click">
                                 <MenuFlyoutItem.Icon>
                                     <SymbolIcon Style="{StaticResource DeleteSymbolIcon}"/>
                                 </MenuFlyoutItem.Icon>
@@ -141,14 +136,127 @@
                     </AppBarButton.Flyout>
                 </AppBarButton>
             </CommandBar>
+            
+            <!-- Detail Cards Section -->
+            <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource HorizontalScrollView}">
+                <StackPanel Padding="8,0" Orientation="Horizontal" Spacing="10">
+                    
+                    <!-- Details Card -->
+                    <Grid Style="{StaticResource CardContainerGridStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
+                        <!-- Header -->
+                        <Grid Grid.Row="0" Padding="0,0,0,4" Style="{StaticResource CDOCardHeaderContainerStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Details" Style="{StaticResource BackstageCardTitle}"/>
+                        </Grid>
+
+                        <!-- Content -->
+                        <ScrollViewer Grid.Row="1">
+                            <Grid Style="{StaticResource CDOCardContentContainerStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Row 2: ACE ID + Case Load -->
+                                <c:LabelPair Grid.Row="0" Grid.Column="0"
+                                             Label="ACE ID" Value="{x:Bind _viewModel.Selected.Id, Mode=OneWay}"/>
+                                <c:LabelPair Grid.Row="0" Grid.Column="1" 
+                                             Label="Case Load" Value="{x:Bind _viewModel.Selected.CaseLoadId, Mode=OneWay}"/>
+
+                                <!-- Row 1: Email -->
+                                <c:LabelPair Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             Label="Email" Value="{x:Bind _viewModel.Selected.Email, Mode=OneWay}"/>
+
+                                <!-- Row 2: Phone + Fax -->
+                                <c:LabelPair Grid.Row="2" Grid.Column="0"
+                                             Label="Phone" Value="{x:Bind _viewModel.Selected.Phone, Mode=OneWay}"/>
+                                <c:LabelPair Grid.Row="2" Grid.Column="1" 
+                                             Label="Fax" Value="{x:Bind _viewModel.Selected.Fax, Mode=OneWay}"/>
+
+                                <!-- Row 3: Secretary -->
+                                <c:LabelPair Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             Label="Secretary" Value="{x:Bind _viewModel.Selected.SecretaryName, Mode=OneWay}"/>
+
+                                <!-- Row 4: Secretary -->
+                                <c:LabelPair Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             Label="Secretary Email" Value="{x:Bind _viewModel.Selected.SecretaryEmail, Mode=OneWay}"/>
+
+                                <!-- Row 5: Notes -->
+                                <c:LabelPair Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             Label="Notes" Value="{x:Bind _viewModel.Selected.Notes, Mode=OneWay}"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <!-- SAs Card -->
+                    <Grid Style="{StaticResource CardContainerGridStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Header -->
+                        <Grid Grid.Row="0" Padding="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Service Authorizations" Style="{StaticResource BackstageCardTitle}"/>
+                        </Grid>
+
+                        <!-- Item Repeater -->
+                        <ScrollViewer Grid.Row="1">
+                            <ItemsRepeater ItemsSource="{x:Bind _viewModel.Selected.Sas, Mode=OneWay}">
+                                <DataTemplate x:DataType="dto:SADetail">
+
+                                    <!-- Button -->
+                                    <Button Style="{StaticResource BackstageListButton}" Tag="{x:Bind Id}">
+                                        <StackPanel Spacing="2">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0" FontWeight="Bold" Text="{x:Bind ClientName}"/>
+                                                <TextBlock Grid.Column="1" Text="{x:Bind ServiceAuthorizationNumber}"/>
+                                            </Grid>
+                                            <TextBlock Text="{x:Bind Description}"/>
+                                            <TextBlock Text="{x:Bind FormattedDateRange}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsRepeater>
+                        </ScrollViewer>
+                    </Grid>
+                </StackPanel>
+            </ScrollView>
+            
             <!-- Clients Table -->
-            <ListView x:Name="ListView"
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                      Style="{StaticResource DataTableStyle}"
                       BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
                       BorderThickness="0,1"
-                      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                      ItemsSource="{x:Bind _viewModel.Clients, Mode=OneWay}"
-                      Style="{StaticResource DataTableStyle}">
+                      ItemsSource="{x:Bind _viewModel.Clients, Mode=OneWay}">
 
                 <!-- Header -->
                 <ListView.Header>
@@ -165,18 +273,10 @@
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" 
-                                   Text="Name" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="1" 
-                                   Text="Case ID" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="2" 
-                                   Text="Address" 
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Grid.Column="3" 
-                                   Text="Phone" 
-                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="0" FontWeight="SemiBold" Text="Name" />
+                        <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="Case ID"/>
+                        <TextBlock Grid.Column="2" FontWeight="SemiBold" Text="Address" />
+                        <TextBlock Grid.Column="3" FontWeight="SemiBold" Text="Phone"/>
                     </Grid>
                 </ListView.Header>
 
@@ -220,7 +320,7 @@
             </ListView>
 
             <!-- Status Bar -->
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
                     <Run Text="{x:Bind _viewModel.Clients.Count, Mode=OneWay}"/>
@@ -228,10 +328,5 @@
                 </TextBlock>
             </Grid>
         </Grid>
-        
-        <!-- Right Column -->
-        <Frame x:Name="InspectorFrame"
-               Grid.Column="2"
-               IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

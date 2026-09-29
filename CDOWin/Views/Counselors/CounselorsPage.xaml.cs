@@ -26,7 +26,6 @@ public sealed partial class CounselorsPage : Page {
     public CounselorsPage() {
         _viewModel = AppServices.CounselorsViewModel;
         InitializeComponent();
-        InspectorFrame.Navigate(typeof(CounselorInspector));
     }
 
     // =========================
@@ -78,6 +77,27 @@ public sealed partial class CounselorsPage : Page {
     private void GoToClient_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
         _viewModel.RequestClient(id);
+    }
+
+    private async void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+        if (_viewModel == null || _viewModel.Selected == null)
+            return;
+
+        var updateVM = new CounselorUpdateViewModel(_viewModel.Selected);
+        var dialog = DialogFactory.UpdateDialog(this.XamlRoot, "Edit Counselor");
+        dialog.Content = new UpdateCounselor(updateVM);
+
+        var result = await dialog.ShowAsync();
+
+        if (result != ContentDialogResult.Primary) return;
+
+        var updateResult = await _viewModel.UpdateCounselorAsync(updateVM.Updated);
+        if (!updateResult.IsSuccess) {
+            ErrorHandler.Handle(updateResult, this.XamlRoot);
+            return;
+        }
+
+        _ = _viewModel.LoadSelectedCounselorAsync(_viewModel.Selected.Id);
     }
 
     private async void Delete_MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {

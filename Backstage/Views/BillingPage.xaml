@@ -168,16 +168,18 @@
                                         
                                         <!-- Content -->
                                         <Grid Grid.Row="1" RowSpacing="8" Style="{StaticResource CDOCardContentContainerStyle}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
                                             <controls:LabelPair Grid.Row="0" Grid.Column="0" Label="SA Number" Value="{x:Bind ServiceAuthorizationNumber}"/>
                                             <controls:LabelPair Grid.Row="0" Grid.Column="1" Label="Case ID" Value="{x:Bind CaseID}"/>
                                             <controls:LabelPair Grid.Row="1" Grid.Column="0" Label="Start Date" Value="{x:Bind FormattedStartDate}"/>

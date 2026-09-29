@@ -38,7 +38,6 @@
     <None Remove="Views\ClientViewPage.xaml" />
     <None Remove="Views\Counselors\Dialogs\CreateCounselor.xaml" />
     <None Remove="Views\Counselors\Dialogs\UpdateCounselor.xaml" />
-    <None Remove="Views\Counselors\Inspectors\CounselorInspector.xaml" />
     <None Remove="Views\Employers\Dialogs\CreateEmployer.xaml" />
     <None Remove="Views\Employers\Dialogs\UpdateEmployer.xaml" />
     <None Remove="Views\Employers\Inspectors\EmployerInspector.xaml" />
@@ -254,11 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Referrals\Inspectors\PlacementInspector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\Counselors\Inspectors\CounselorInspector.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -268,7 +268,7 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="220"/>
-                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
@@ -286,7 +286,7 @@
                         <Grid Padding="12,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="220"/>
-                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>

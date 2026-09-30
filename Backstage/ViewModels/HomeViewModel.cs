@@ -34,10 +34,12 @@ public partial class HomeViewModel : ObservableObject {
     [ObservableProperty]
     public partial ObservableCollection<AdminClientSummary> StaleClients { get; private set; } = [];
 
+    private DateOnly _date = DateOnly.FromDateTime(DateTime.Today);
+
     // =========================
     // Constructor
     // =========================
-    public HomeViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService, ClientService clientService) {
+    public HomeViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService) {
         _dataCoordinator = dataCoordinator;
         _selectionService = selectionService;
         _dispatcher = DispatcherQueue.GetForCurrentThread();

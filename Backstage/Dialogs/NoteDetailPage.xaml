@@ -6,13 +6,13 @@
     xmlns:local="using:Backstage.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dtos="using:CDO.Core.DTOs.Admin"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource DialogGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition MaxHeight="320"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <!-- Note -->
@@ -46,5 +46,43 @@
             <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"
                        Style="{StaticResource ListCaption}" Text="{x:Bind _note.FormattedUpdatedOnDate}"/>
         </Grid>
+
+        <ScrollViewer Grid.Row="1">
+            <ItemsRepeater ItemsSource="{x:Bind _note.Logs}">
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="dtos:NoteLog">
+                        <Grid Grid.Row="0" Padding="18,12" Background="{StaticResource SolidBackgroundFillColorQuarternaryBrush}"
+                              BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}"
+                              Style="{StaticResource DialogGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                                       Style="{StaticResource ListHeader}" Text="{x:Bind LocalNoteDate}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
+                                       Style="{StaticResource AccentListHeader}" Text="{x:Bind User.Username}"/>
+
+                            <!-- Row 1: Note -->
+                            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,0,0,10"
+                                    BorderThickness="0,0,0,1" BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}">
+                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Text}"/>
+                            </Border>
+
+                            <!-- Row 2: Meta -->
+                            <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"
+                                       Style="{StaticResource ListCaption}" Text="{x:Bind LocalCreatedDate}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </ScrollViewer>
     </Grid>
 </Page>

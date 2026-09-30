@@ -22,7 +22,7 @@ public sealed partial class HomePage : Page {
     // =========================
     // ViewModel
     // =========================
-    public HomeViewModel ViewModel { get; } = AppServices.HomeViewModel;
+    private HomeViewModel _viewModel { get; } = AppServices.HomeViewModel;
     public BillingViewModel BillingViewModel { get; } = AppServices.BillingViewModel;
     public ClientViewModel ClientViewModel { get; } = AppServices.ClientViewModel;
     public ReminderViewModel ReminderViewModel { get; } = AppServices.ReminderViewModel;
@@ -45,11 +45,11 @@ public sealed partial class HomePage : Page {
 
     private async Task RefreshAsync(bool force = false) {
         var tasks = new List<Task> {
-            ViewModel.LoadRecentClientsAsync(force),
-            ViewModel.LoadRecentNotesAsync(force),
+            _viewModel.LoadRecentClientsAsync(force),
+            _viewModel.LoadRecentNotesAsync(force),
             ReminderViewModel.LoadRecentRemindersAsync(force),
             BillingViewModel.LoadExpiringSAsAsync(force),
-            ViewModel.LoadStaleClientsAsync(force),
+            _viewModel.LoadStaleClientsAsync(force),
         };
 
         await Task.WhenAll(tasks);
@@ -67,9 +67,20 @@ public sealed partial class HomePage : Page {
     // =========================
     // Click Handlers
     // =========================
+    private void Button_Click(object sender, RoutedEventArgs e) {
+        if (sender is Button button && button.Tag is string tag) {
+            if (tag == "0") {
+                //_viewModel.DecrementMonth();
+                //UpdateCalendar();
+            } else {
+                //_viewModel.IncrementMonth();
+                //UpdateCalendar();
+            }
+        }
+    }
     private async void Note_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        var note = ViewModel.RecentNotes.FirstOrDefault(n => n.Id == id);
+        var note = _viewModel.RecentNotes.FirstOrDefault(n => n.Id == id);
         if (note == null) return;
 
         // TODO: Create a Dialog for this
@@ -106,7 +117,7 @@ public sealed partial class HomePage : Page {
     private async void MarkInactive_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
         var result = await ClientViewModel.MarkClientInactive(id);
-        if (result.IsSuccess) ViewModel.RemoveClient(id);
+        if (result.IsSuccess) _viewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedInactive, result.IsSuccess);
     }
 
@@ -114,7 +125,7 @@ public sealed partial class HomePage : Page {
         if (sender is not MenuFlyoutItem item || item.Tag is not int id) return;
         Debug.WriteLine("we made it bros");
         var result = await ClientViewModel.MarkClientTTW(id);
-        if (result.IsSuccess) ViewModel.RemoveClient(id);
+        if (result.IsSuccess) _viewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
 
@@ -132,7 +143,7 @@ public sealed partial class HomePage : Page {
 
         InfoBarContainer.Children.Add(infoBar);
 
-        var result = await ViewModel.ExportSAs();
+        var result = await _viewModel.ExportSAs();
         item.IsEnabled = true;
         InfoBarContainer.Children.Remove(infoBar);
 
@@ -178,7 +189,7 @@ public sealed partial class HomePage : Page {
 
     private void ClientButton_Click(object sender, RoutedEventArgs e) {
         if (sender is not Control control || control.Tag is not int id) return;
-        ViewModel.RequestClient(id);
+        _viewModel.RequestClient(id);
     }
 
     private async Task ShowMessage(MessageType type, bool success) {

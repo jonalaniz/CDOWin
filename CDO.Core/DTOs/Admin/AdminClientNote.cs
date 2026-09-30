@@ -7,7 +7,8 @@ public record class AdminClientNote(
     DateTime Date,
     string Text,
     string? Author,
-    DateTime UpdatedAt
+    DateTime UpdatedAt,
+    NoteLog[] Logs
 ) {
     public string FormattedUpdatedTime => $"Updated at {UpdatedTime}";
     public string FormattedUpdatedOnDate => $"Updated on {UpdatedDate}";

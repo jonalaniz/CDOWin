@@ -27,10 +27,28 @@
                 </Grid.RowDefinitions>
 
                 <!-- Today Section -->
-                <StackPanel Grid.Row="0" Padding="14,0,0,0" Style="{StaticResource VerticalScrollViewerContent}">
+                <StackPanel Grid.Row="0" Padding="14,8,0,0" Style="{StaticResource VerticalScrollViewerContent}">
                     
                     <!-- Header -->
-                    <TextBlock Text="Today" VerticalAlignment="Center" Style="{StaticResource BackstageSubHeader}"/>
+                    <Grid Margin="0,0,16,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="Today" VerticalAlignment="Top" Style="{StaticResource BackstageSubHeader}"/>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <!-- Decrement Button -->
+                            <Button Click="Button_Click" Tag="0" Margin="0" Style="{StaticResource SingleIconButtonStyle}">
+                                <FontIcon Glyph="&#xE76B;" Style="{StaticResource SingleIconFontStyle}"/>
+                            </Button>
+
+                            <!-- Increment Button -->
+                            <Button Click="Button_Click" Tag="1" Margin="0" Style="{StaticResource SingleIconButtonStyle}">
+                                <FontIcon Glyph="&#xE76C;" Style="{StaticResource SingleIconFontStyle}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
                     
                     <!-- Content -->
                     <StackPanel Orientation="Horizontal" Spacing="10">
@@ -50,12 +68,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="Updated Clients" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentClients.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.RecentClients.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentClients, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.RecentClients, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminClientSummary">
 
                                         <!-- Button -->
@@ -96,12 +114,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Updated Notes" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentNotes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.RecentNotes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentNotes, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.RecentNotes, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminClientNote">
 
                                         <!-- Button -->
@@ -279,12 +297,12 @@
                         </Grid.ColumnDefinitions>
                         
                         <TextBlock Grid.Column="0" Text="Stale Clients" Style="{StaticResource BackstageSubHeader}"/>
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.StaleClients.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.StaleClients.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
                     </Grid>
                     
                     <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater Margin="14,0,0,0" ItemsSource="{x:Bind ViewModel.StaleClients, Mode=OneWay}">
+                        <ItemsRepeater Margin="14,0,0,0" ItemsSource="{x:Bind _viewModel.StaleClients, Mode=OneWay}">
                             
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>

@@ -71,8 +71,7 @@ public static class AppServices {
         // Initialize ViewModels
         HomeViewModel = new HomeViewModel(
             DataCoordinator,
-            _clientSelectionService,
-            ClientService
+            _clientSelectionService
             );
 
         BillingViewModel = new BillingViewModel(

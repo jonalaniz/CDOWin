@@ -25,7 +25,7 @@ public static class AppServices {
     public static ServiceAuthorizationService SAService { get; private set; } = null!;
     public static AdminClientService AdminClientService { get; private set; } = null!;
     public static ClientService ClientService { get; private set; } = null!;
-    public static AdminReminderService AdminReminderService { get; private set; } = null!;
+    public static RecentDataService AdminReminderService { get; private set; } = null!;
     public static ReminderService ReminderService { get; private set; } = null!;
     public static UserService UserService { get; private set; } = null!;
 
@@ -51,7 +51,7 @@ public static class AppServices {
         SAService = new ServiceAuthorizationService(network);
         AdminClientService = new AdminClientService(network);
         ClientService = new ClientService(network);
-        AdminReminderService = new AdminReminderService(network);
+        AdminReminderService = new RecentDataService(network);
         ReminderService = new ReminderService(network);
         UserService = new UserService(network);
 
@@ -87,10 +87,7 @@ public static class AppServices {
             ClientService
             );
 
-        ReminderViewModel = new ReminderViewModel(
-            DataCoordinator,
-            ReminderService
-            );
+        ReminderViewModel = new ReminderViewModel(ReminderService);
 
         UserViewModel = new UserViewModel(
             DataCoordinator,
@@ -107,7 +104,6 @@ public static class AppServices {
             DataCoordinator.GetUsersAsync(),
             DataCoordinator.GetUnbilledSAsAsync(),
             DataCoordinator.GetExpiringSAsAsync(),
-            DataCoordinator.GetRecentClientsAsync(),
             DataCoordinator.GetStaleClientsAsync()
         };
 

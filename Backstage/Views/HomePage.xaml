@@ -35,8 +35,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Text="Today" VerticalAlignment="Top" Style="{StaticResource BackstageSubHeader}"/>
+
+                        <TextBlock Grid.Column="0" x:Name="DateBlock" VerticalAlignment="Top" Style="{StaticResource BackstageSubHeader}"
+                                   Text="{x:Bind _viewModel.Date, Converter={StaticResource DateOnlyStringConverter}, Mode=OneWay}"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <!-- Decrement Button -->
                             <Button Click="Button_Click" Tag="0" Margin="0" Style="{StaticResource SingleIconButtonStyle}">
@@ -44,7 +45,7 @@
                             </Button>
 
                             <!-- Increment Button -->
-                            <Button Click="Button_Click" Tag="1" Margin="0" Style="{StaticResource SingleIconButtonStyle}">
+                            <Button x:Name="Increment_Button" Click="Button_Click" Tag="1" IsEnabled="False" Margin="0" Style="{StaticResource SingleIconButtonStyle}">
                                 <FontIcon Glyph="&#xE76C;" Style="{StaticResource SingleIconFontStyle}"/>
                             </Button>
                         </StackPanel>
@@ -68,12 +69,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="Updated Clients" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.RecentClients.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.Snapshot.Notes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.RecentClients, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.Snapshot.Clients, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminClientSummary">
 
                                         <!-- Button -->
@@ -114,12 +115,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Updated Notes" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.RecentNotes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.Snapshot.Notes.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.RecentNotes, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.Snapshot.Notes, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminClientNote">
 
                                         <!-- Button -->
@@ -157,12 +158,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Reminders" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ReminderViewModel.Reminders.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.Snapshot.Reminders.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind ReminderViewModel.Reminders, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.Snapshot.Reminders, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminReminderDetail">
 
                                         <!-- Button -->
@@ -202,12 +203,12 @@
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>
-                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{x:Bind BillingViewModel.ExpiringSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{x:Bind _billingViewModel.ExpiringSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
                     </Grid>
                     
                     <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater Margin="14,0,0,0" ItemsSource="{x:Bind BillingViewModel.ExpiringSAs, Mode=OneWay}">
+                        <ItemsRepeater Margin="14,0,0,0" ItemsSource="{x:Bind _billingViewModel.ExpiringSAs, Mode=OneWay}">
                             
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>
@@ -390,7 +391,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Margin="14,0,0,0" x:Name="HelloText" Style="{StaticResource BackstageHeader}"/>
+            <TextBlock Grid.Column="0" Margin="14,0,0,0" Text="{x:Bind HelloText}" Style="{StaticResource BackstageHeader}"/>
             <CommandBar Grid.Column="1" Margin="0,0,4,0" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
                 <AppBarButton x:Name="RefreshButton" Width="56" Click="Refresh_Click" IsCompact="False" ToolTipService.ToolTip="Refresh">
                     <AppBarButton.Icon>

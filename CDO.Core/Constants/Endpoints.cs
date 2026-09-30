@@ -32,7 +32,6 @@ public static class Endpoints {
     public static readonly string Placements = "/api/placements";
     public static string Reminder(int id) => $"{Reminders}/{id}";
     public static readonly string Reminders = "/api/reminders";
-    public static string State(int id) => $"{States}/{id}";
     public static readonly string States = "/api/states";
 
     // Session Endpoints
@@ -52,12 +51,11 @@ public static class Endpoints {
     public static readonly string AdminClientExport = $"{AdminClients}/export";
     public static readonly string AdminStaleClients = $"{AdminClients}/stale";
 
+    // Recent Data: Folded recently updated Clients, Notes, and Reminders
+    public static string DailySnapshot => $"{Admin}/recent";
+
     // Client History: Returns an AdminClientSummary with all edit history.
     public static string ClientHistory(int id) => $"{AdminClients}/{id}";
-
-    // Reminders: Base endpoint returns reminders updated in the past 24 hours or
-    // specific date if date is appended as parameter
-    public static readonly string AdminReminders = $"{Admin}/reminders";
 
     // Notes: Base endpoint returns notes updated in the past 24 hours or
     // specific date if date is appended as parameter

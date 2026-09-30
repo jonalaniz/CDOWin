@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace Backstage.Data;
 
-public class DataCoordinator {
+public class DataCoordinator(
+    BillingService billingService,
+    AdminClientService clientService,
+    RecentDataService recentDataService,
+    UserService userService) {
     // =========================
     // Services
     // =========================
-    private readonly BillingService _billingService;
-    private readonly AdminClientService _clientService;
-    private readonly AdminReminderService _reminderService;
-    private readonly UserService _userService;
+    private readonly BillingService _billingService = billingService;
+    private readonly AdminClientService _clientService = clientService;
+    private readonly RecentDataService _recentDataService = recentDataService;
+    private readonly UserService _userService = userService;
 
     // =========================
     // Public Fields
@@ -36,20 +40,6 @@ public class DataCoordinator {
     // =========================
     private static readonly TimeSpan BaseTTL = TimeSpan.FromMinutes(5);
     private static readonly TimeSpan UserTTL = TimeSpan.FromMinutes(30);
-
-    // =========================
-    // Constructor
-    // =========================
-    public DataCoordinator(
-        BillingService billingService,
-        AdminClientService clientService,
-        AdminReminderService reminderService,
-        UserService userService) {
-        _billingService = billingService;
-        _clientService = clientService;
-        _reminderService = reminderService;
-        _userService = userService;
-    }
 
     // =========================
     // Update Methods
@@ -93,15 +83,6 @@ public class DataCoordinator {
     }
 
     // Clients
-    public async Task<IReadOnlyList<AdminClientSummary>> GetRecentClientsAsync(bool force = false) {
-        if (force || RecentClients.IsStale(BaseTTL)) {
-            var data = await _clientService.GetRecentClientSummariesAsync(date: null);
-            if (data != null) RecentClients.Update(data);
-        }
-
-        return RecentClients.Data ?? [];
-    }
-
     public async Task<IReadOnlyList<AdminClientSummary>> GetStaleClientsAsync(bool force = false) {
         if (force || StaleClients.IsStale(BaseTTL)) {
             var data = await _clientService.GetStaleClientsAsync();
@@ -120,23 +101,10 @@ public class DataCoordinator {
         return ClientSummaries.Data ?? [];
     }
 
-    public async Task<IReadOnlyList<AdminClientNote>> GetRecentNotesAsync(bool force = false) {
-        if (force || RecentNotes.IsStale(BaseTTL)) {
-            var data = await _clientService.GetRecentClientNotesAsync();
-            if (data != null) RecentNotes.Update(data);
-        }
-
-        return RecentNotes.Data ?? [];
-    }
-
-    // Reminders
-    public async Task<IReadOnlyList<AdminReminderDetail>> GetRemindersAsync(bool force = false) {
-        if (force || Reminders.IsStale(BaseTTL)) {
-            var data = await _reminderService.GetDailyRemindersAsync();
-            if (data != null) Reminders.Update(data);
-        }
-
-        return Reminders.Data ?? [];
+    // Recent Data
+    public async Task<DailySnapshot?> GetSnapshotAsync(string date) {
+        var data = await _recentDataService.GetSnapshot(date);
+        return data;
     }
 
     // Users

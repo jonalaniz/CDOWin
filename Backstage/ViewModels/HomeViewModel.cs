@@ -3,7 +3,6 @@ using Backstage.Data;
 using Backstage.Services;
 using CDO.Core.DTOs.Admin;
 using CDO.Core.ErrorHandling;
-using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
@@ -13,42 +12,38 @@ using System.Threading.Tasks;
 
 namespace Backstage.ViewModels;
 
-public partial class HomeViewModel : ObservableObject {
+public partial class HomeViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly DataCoordinator _dataCoordinator;
-    private readonly ClientSelectionService _selectionService;
-    private readonly DispatcherQueue _dispatcher;
+    private readonly DataCoordinator _dataCoordinator = dataCoordinator;
+    private readonly ClientSelectionService _selectionService = selectionService;
+    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
     // UI State
     // =========================
     [ObservableProperty]
-    public partial ObservableCollection<AdminClientSummary> RecentClients { get; private set; } = [];
-
-    [ObservableProperty]
-    public partial ObservableCollection<AdminClientNote> RecentNotes { get; private set; } = [];
+    public partial DailySnapshot? Snapshot { get; private set; } = null;
 
     [ObservableProperty]
     public partial ObservableCollection<AdminClientSummary> StaleClients { get; private set; } = [];
 
-    private DateOnly _date = DateOnly.FromDateTime(DateTime.Today);
-
-    // =========================
-    // Constructor
-    // =========================
-    public HomeViewModel(DataCoordinator dataCoordinator, ClientSelectionService selectionService) {
-        _dataCoordinator = dataCoordinator;
-        _selectionService = selectionService;
-        _dispatcher = DispatcherQueue.GetForCurrentThread();
-    }
+    [ObservableProperty]
+    public partial DateOnly Date { get; private set; } = DateOnly.FromDateTime(DateTime.Today);
 
     // =========================
     // Public Methods
     // =========================
     public void RequestClient(int clientId) => _selectionService.RequestSelectedClient(clientId);
+
+    public async Task AddDaysAsync(int days) {
+        var newDate = Date.AddDays(days);
+        if (newDate > DateOnly.FromDateTime(DateTime.Today)) return;
+        Date = newDate;
+        await LoadSnapshotAsync();
+    }
 
     public async Task<Result> ExportSAs() {
         var list = await _dataCoordinator.GetExpiringSAsAsync();
@@ -61,22 +56,13 @@ public partial class HomeViewModel : ObservableObject {
     // =========================
     // Get Methods
     // =========================
-    public async Task LoadRecentClientsAsync(bool force = false) {
-        var clients = await _dataCoordinator.GetRecentClientsAsync(force);
-        if (clients == null) return;
-
-        var snapshot = clients.OrderBy(c => c.UpdatedAt).ToList().AsReadOnly();
-        OnUI(() => {
-            RecentClients = new ObservableCollection<AdminClientSummary>(snapshot);
-        });
-    }
-
-    public async Task LoadRecentNotesAsync(bool force = false) {
-        var notes = await _dataCoordinator.GetRecentNotesAsync(force);
-        if (notes == null) return;
+    public async Task LoadSnapshotAsync() {
+        var date = Date.ToDateTime(TimeOnly.MinValue).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
+        var snapshot = await _dataCoordinator.GetSnapshotAsync(date);
+        if (snapshot == null) return;
 
         OnUI(() => {
-            RecentNotes = new ObservableCollection<AdminClientNote>(notes);
+            Snapshot = snapshot;
         });
     }
 

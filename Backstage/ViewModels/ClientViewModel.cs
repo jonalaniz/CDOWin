@@ -37,12 +37,6 @@ public partial class ClientViewModel : ObservableObject {
     // =========================
 
     [ObservableProperty]
-    public partial ObservableCollection<AdminClientSummary> RecentClients { get; private set; } = [];
-
-    [ObservableProperty]
-    public partial ObservableCollection<AdminClientSummary> StaleClients { get; private set; } = [];
-
-    [ObservableProperty]
     public partial ObservableCollection<AdminClientSummary> ClientSummaries { get; private set; } = [];
 
     [ObservableProperty]
@@ -85,8 +79,7 @@ public partial class ClientViewModel : ObservableObject {
         OnUI(() => {
             if (ClientSummaries.FirstOrDefault(c => c.Id == clientId) is AdminClientSummary summary)
                 Selected = summary;
-        }
-        );
+        });
     }
 
     partial void OnSelectedChanged(AdminClientSummary? value) {
@@ -105,30 +98,11 @@ public partial class ClientViewModel : ObservableObject {
         var composer = new ClientComposer();
         composer.BuildCSV(list);
         return Result.Success();
-
     }
 
     // =========================
     // Get Methods
     // =========================
-    public async Task LoadRecentClientsAsync(bool force = false) {
-        var clients = await _dataCoordinator.GetRecentClientsAsync(force);
-        if (clients == null) return;
-
-        OnUI(() => {
-            RecentClients = new ObservableCollection<AdminClientSummary>(clients);
-        });
-    }
-
-    public async Task LoadStaleClientsAsync(bool force = false) {
-        var clients = await _dataCoordinator.GetStaleClientsAsync(force);
-        if (clients == null) return;
-
-        var snapshot = clients.OrderBy(c => c.UpdatedAt).ToList().AsReadOnly();
-        OnUI(() => {
-            StaleClients = new ObservableCollection<AdminClientSummary>(snapshot);
-        });
-    }
 
     public async Task LoadSelectedClientHistory(int id) {
         // TODO: Implement cancellation tokens

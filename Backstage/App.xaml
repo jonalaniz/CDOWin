@@ -14,6 +14,7 @@
             <converters:BoolTTWConverter x:Key="BoolTTWConverter"/>
             <converters:BoolTransparentConverter x:Key="BoolTransparentConverter"/>
             <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+            <converters:DateOnlyStringConverter x:Key="DateOnlyStringConverter"/>
             <converters:NullOpacityConverter x:Key="NullOpacityConverter"/>
             <converters:StringNullVisibilityConverter x:Key="StringToVisability"/>
             <converters:NullVisibilityConverter x:Key="NullToVisability"/>

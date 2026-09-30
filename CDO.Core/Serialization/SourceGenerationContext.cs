@@ -97,4 +97,6 @@ namespace CDO.Core.Serialization;
 [JsonSerializable(typeof(UserHistory))]
 [JsonSerializable(typeof(UserActivity))]
 [JsonSerializable(typeof(List<UserActivity>))]
+
+[JsonSerializable(typeof(DailySnapshot))]
 public partial class SourceGenerationContext : JsonSerializerContext { }

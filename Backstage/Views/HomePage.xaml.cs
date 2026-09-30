@@ -11,7 +11,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,17 +21,21 @@ public sealed partial class HomePage : Page {
     // =========================
     // ViewModel
     // =========================
-    private HomeViewModel _viewModel { get; } = AppServices.HomeViewModel;
-    public BillingViewModel BillingViewModel { get; } = AppServices.BillingViewModel;
-    public ClientViewModel ClientViewModel { get; } = AppServices.ClientViewModel;
-    public ReminderViewModel ReminderViewModel { get; } = AppServices.ReminderViewModel;
+    private readonly HomeViewModel _viewModel = AppServices.HomeViewModel;
+    private readonly BillingViewModel _billingViewModel = AppServices.BillingViewModel;
+    private readonly ClientViewModel _clientViewModel = AppServices.ClientViewModel;
+    private readonly ReminderViewModel _reminderViewModel = AppServices.ReminderViewModel;
+
+    // =========================
+    // Variables
+    // =========================
+    public string HelloText => $"Hello, {char.ToUpper(Environment.UserName[0]) + Environment.UserName[1..]}";
 
     // =========================
     // Constructor
     // =========================
     public HomePage() {
         InitializeComponent();
-        SetupHelloText();
     }
 
     // =========================
@@ -45,42 +48,20 @@ public sealed partial class HomePage : Page {
 
     private async Task RefreshAsync(bool force = false) {
         var tasks = new List<Task> {
-            _viewModel.LoadRecentClientsAsync(force),
-            _viewModel.LoadRecentNotesAsync(force),
-            ReminderViewModel.LoadRecentRemindersAsync(force),
-            BillingViewModel.LoadExpiringSAsAsync(force),
+            _viewModel.LoadSnapshotAsync(),
+            _billingViewModel.LoadExpiringSAsAsync(force),
             _viewModel.LoadStaleClientsAsync(force),
         };
 
         await Task.WhenAll(tasks);
     }
 
-
-    private void SetupHelloText() {
-        HelloText.Text = $"Hello, {UserName()}";
-    }
-
-    private string UserName() {
-        return char.ToUpper(Environment.UserName[0]) + Environment.UserName[1..];
-    }
-
     // =========================
     // Click Handlers
     // =========================
-    private void Button_Click(object sender, RoutedEventArgs e) {
-        if (sender is Button button && button.Tag is string tag) {
-            if (tag == "0") {
-                //_viewModel.DecrementMonth();
-                //UpdateCalendar();
-            } else {
-                //_viewModel.IncrementMonth();
-                //UpdateCalendar();
-            }
-        }
-    }
     private async void Note_Click(object sender, RoutedEventArgs e) {
-        if (sender is not Button button || button.Tag is not int id) return;
-        var note = _viewModel.RecentNotes.FirstOrDefault(n => n.Id == id);
+        if (sender is not Button button || button.Tag is not int id || _viewModel.Snapshot == null) return;
+        var note = _viewModel.Snapshot.Notes.FirstOrDefault(n => n.Id == id);
         if (note == null) return;
 
         // TODO: Create a Dialog for this
@@ -91,14 +72,24 @@ public sealed partial class HomePage : Page {
     }
 
     private async void Reminder_Click(object sender, RoutedEventArgs e) {
-        if (sender is not Button button || button.Tag is not int id) return;
-        var reminder = ReminderViewModel.Reminders.FirstOrDefault(r => r.Id == id);
+        if (sender is not Button button || button.Tag is not int id || _viewModel.Snapshot == null) return;
+        var reminder = _viewModel.Snapshot.Reminders.FirstOrDefault(r => r.Id == id);
         if (reminder == null) return;
 
         var dialog = DialogFactory.InformationDialog(this.XamlRoot, "Reminder Detail");
         dialog.Content = new ReminderDetailPage(reminder);
 
         var result = await dialog.ShowAsync();
+    }
+
+    private async void Button_Click(object sender, RoutedEventArgs e) {
+        if (sender is not Button button || button.Tag is not string tag) return;
+        var days = tag == "0" ? -1 : 1;
+
+        var enabled = _viewModel.Date.AddDays(days) < DateOnly.FromDateTime(DateTime.Today);
+        Increment_Button.IsEnabled = enabled;
+
+        await _viewModel.AddDaysAsync(days);
     }
 
     private async void Refresh_Click(object sender, RoutedEventArgs e) {
@@ -109,22 +100,21 @@ public sealed partial class HomePage : Page {
 
     private async void MarkBilled_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        var result = await BillingViewModel.MarkSABilled(id);
-        if (result.IsSuccess) BillingViewModel.RemoveExpiredSA(id);
+        var result = await _billingViewModel.MarkSABilled(id);
+        if (result.IsSuccess) _billingViewModel.RemoveExpiredSA(id);
         await ShowMessage(MessageType.MarkedBilled, result.IsSuccess);
     }
 
     private async void MarkInactive_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        var result = await ClientViewModel.MarkClientInactive(id);
+        var result = await _clientViewModel.MarkClientInactive(id);
         if (result.IsSuccess) _viewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedInactive, result.IsSuccess);
     }
 
     private async void MarkTTW_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item || item.Tag is not int id) return;
-        Debug.WriteLine("we made it bros");
-        var result = await ClientViewModel.MarkClientTTW(id);
+        var result = await _clientViewModel.MarkClientTTW(id);
         if (result.IsSuccess) _viewModel.RemoveClient(id);
         await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
@@ -155,7 +145,7 @@ public sealed partial class HomePage : Page {
     private async void CreateSAReminder_Today_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || BillingViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
+            || _billingViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
         var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Today, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
@@ -163,7 +153,7 @@ public sealed partial class HomePage : Page {
     private async void CreateSAReminder_Tomorrow_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || BillingViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
+            || _billingViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
         var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Tomorrow, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
@@ -181,7 +171,7 @@ public sealed partial class HomePage : Page {
     }
 
     private async Task CreateReminder(NewReminder reminder) {
-        var result = await ReminderViewModel.CreateReminderAsync(reminder);
+        var result = await _reminderViewModel.CreateReminderAsync(reminder);
         await ShowMessage(MessageType.CreatedReminder, result.IsSuccess);
     }
 

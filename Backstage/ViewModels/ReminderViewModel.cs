@@ -1,64 +1,24 @@
-﻿using Backstage.Data;
-using CDO.Core.DTOs.Admin;
-using CDO.Core.DTOs.Reminders;
+﻿using CDO.Core.DTOs.Reminders;
 using CDO.Core.ErrorHandling;
 using CDO.Core.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
-using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Backstage.ViewModels;
 
-public partial class ReminderViewModel : ObservableObject {
+public partial class ReminderViewModel(ReminderService reminderService) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly ReminderService _service;
-    private readonly DataCoordinator _dataCoordinator;
-    private readonly DispatcherQueue _dispatcher;
-
-    // =========================
-    // UI State
-    // =========================
-    [ObservableProperty]
-    public partial ObservableCollection<AdminReminderDetail> Reminders { get; private set; } = [];
-
-    // =========================
-    // Constructor
-    // =========================
-    public ReminderViewModel(DataCoordinator dataCoordinator, ReminderService reminderService) {
-        _dataCoordinator = dataCoordinator;
-        _service = reminderService;
-        _dispatcher = DispatcherQueue.GetForCurrentThread();
-    }
-
-    // =========================
-    // Get Methods
-    // =========================
-    public async Task LoadRecentRemindersAsync(bool force = false) {
-        var reminders = await _dataCoordinator.GetRemindersAsync(force);
-        if (reminders == null) return;
-
-        OnUI(() => {
-            Reminders = new ObservableCollection<AdminReminderDetail>(reminders);
-        });
-    }
+    private readonly ReminderService _service = reminderService;
+    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
     // Post Methods
     // =========================
     public async Task<Result<ReminderDetail>> CreateReminderAsync(NewReminder reminder) {
         return await _service.CreateRemindersAsync(reminder);
-    }
-
-    // =========================
-    // Utility Methods
-    // =========================
-    private void OnUI(Action action) {
-        if (_dispatcher.HasThreadAccess) action();
-        else _dispatcher.TryEnqueue(() => action());
     }
 }

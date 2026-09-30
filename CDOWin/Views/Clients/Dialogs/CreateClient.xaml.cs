@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 
@@ -142,7 +141,6 @@ public sealed partial class CreateClient : Page {
 
         var text = textbox.Text.NormalizeString();
         if (text == null) return;
-        Debug.WriteLine(text);
         UpdateValue(text, field);
     }
 
@@ -343,7 +341,6 @@ public sealed partial class CreateClient : Page {
     }
 
     private void UpdateSelectedCounselor(CounselorSummary counselor) {
-        Debug.WriteLine(counselor.Name);
         _viewModel.CounselorID = counselor.Id;
         _viewModel.CounselorName = counselor.Name;
     }

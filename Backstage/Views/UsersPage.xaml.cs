@@ -1,5 +1,6 @@
 using Backstage.Services;
 using Backstage.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -14,9 +15,7 @@ namespace Backstage.Views {
         // =========================
         // Constructor
         // =========================
-        public UsersPage() {
-            InitializeComponent();
-        }
+        public UsersPage() => InitializeComponent();
 
         // =========================
         // Navigation
@@ -26,12 +25,8 @@ namespace Backstage.Views {
             await ViewModel.RefreshAsync();
         }
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e) { }
 
-        }
-
-        private void Refresh_ItemCLick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
-            _ = ViewModel.RefreshAsync(force: true);
-        }
+        private void Refresh_ItemCLick(object sender, RoutedEventArgs e) => _ = ViewModel.RefreshAsync(force: true);
     }
 }

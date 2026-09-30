@@ -5,12 +5,8 @@ using CDO.Core.Interfaces;
 
 namespace CDO.Core.Services.Admin;
 
-public class BillingService {
-    private readonly INetworkService _network;
-
-    public BillingService(INetworkService network) {
-        _network = network;
-    }
+public class BillingService(INetworkService network) {
+    private readonly INetworkService _network = network;
 
     // -----------------------------
     // GET Methods

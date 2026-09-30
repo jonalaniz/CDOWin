@@ -6,12 +6,8 @@ using CDO.Core.Models;
 
 namespace CDO.Core.Services;
 
-public class CounselorService : ICounselorService {
-    private readonly INetworkService _network;
-
-    public CounselorService(INetworkService network) {
-        _network = network;
-    }
+public class CounselorService(INetworkService network) : ICounselorService {
+    private readonly INetworkService _network = network;
 
     // -----------------------------
     // GET

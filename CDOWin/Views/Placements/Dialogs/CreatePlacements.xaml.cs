@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -182,7 +181,6 @@ public sealed partial class CreatePlacements : Page {
         if (HireDatePicker.Date is not DateTimeOffset startDate
             || EndDatePicker.Date is not DateTimeOffset endDate) {
             _viewModel.DaysOnJob = null;
-            Debug.WriteLine("Set days to null");
             return;
         }
         var daysOnJob = endDate - startDate;

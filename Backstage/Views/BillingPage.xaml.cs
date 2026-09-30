@@ -23,9 +23,7 @@ public sealed partial class BillingPage : Page {
     // =========================
     // Constructor
     // =========================
-    public BillingPage() {
-        InitializeComponent();
-    }
+    public BillingPage() => InitializeComponent();
 
     // =========================
     // Navigation
@@ -54,13 +52,6 @@ public sealed partial class BillingPage : Page {
         RefreshButton.IsEnabled = false;
         await RefreshAsync(force: true);
         RefreshButton.IsEnabled = true;
-    }
-
-    private async void MarkExpiredBilled_Click(object sender, RoutedEventArgs e) {
-        if (sender is not Button button || button.Tag is not int id) return;
-        var result = await ViewModel.MarkSABilled(id);
-        if (result.IsSuccess) ViewModel.RemoveExpiredSA(id);
-        await ShowMessage(MessageType.MarkedBilled, result.IsSuccess);
     }
 
     private async void MarkBilled_Click(object sender, RoutedEventArgs e) {

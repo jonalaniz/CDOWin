@@ -5,12 +5,8 @@ using CDO.Core.Interfaces;
 
 namespace CDO.Core.Services;
 
-public class PlacementService : IPlacementService {
-    private readonly INetworkService _network;
-
-    public PlacementService(INetworkService network) {
-        _network = network;
-    }
+public class PlacementService(INetworkService network) : IPlacementService {
+    private readonly INetworkService _network = network;
 
     // -----------------------------
     // GET

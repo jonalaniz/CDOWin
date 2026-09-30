@@ -67,8 +67,7 @@ public partial class UserViewModel : ObservableObject {
         OnUI(() => {
             if (Users.FirstOrDefault(u => u.Id == userId) is UserSummary summary)
                 Selected = summary;
-        }
-        );
+        });
     }
 
     partial void OnSelectedChanged(UserSummary? value) {

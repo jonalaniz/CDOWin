@@ -129,7 +129,6 @@ public partial class ClientViewModel : ObservableObject {
     public async Task<Result> MarkClientTTW(int id) {
         var result = await _clientService.MarkClientTTWAsync(id);
         _dataCoordinator.ExpiringSAs.Invalidate();
-
         return result;
     }
 

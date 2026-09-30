@@ -305,7 +305,6 @@ public sealed partial class ClientViewPage : Page {
     // =========================
     private async Task ToggleActiveAsync(bool isActive) {
         if (_viewModel.Selected?.Id is not int id) return;
-        Debug.WriteLine($"Client Active: {isActive}");
         var result = isActive
             ? await _viewModel.MarkClientInactive(id)
             : await _viewModel.MarkClientActive(id);

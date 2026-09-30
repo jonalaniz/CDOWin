@@ -5,12 +5,8 @@ using CDO.Core.Interfaces;
 
 namespace CDO.Core.Services;
 
-public class ServiceAuthorizationService : IServiceAuthorizationService {
-    private readonly INetworkService _network;
-
-    public ServiceAuthorizationService(INetworkService network) {
-        _network = network;
-    }
+public class ServiceAuthorizationService(INetworkService network) : IServiceAuthorizationService {
+    private readonly INetworkService _network = network;
 
     // -----------------------------
     // GET

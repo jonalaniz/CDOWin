@@ -5,12 +5,8 @@ using CDO.Core.Interfaces;
 
 namespace CDO.Core.Services;
 
-public class ReminderService : IReminderService {
-    private readonly INetworkService _network;
-
-    public ReminderService(INetworkService network) {
-        _network = network;
-    }
+public class ReminderService(INetworkService network) : IReminderService {
+    private readonly INetworkService _network = network;
 
     // -----------------------------
     // GET

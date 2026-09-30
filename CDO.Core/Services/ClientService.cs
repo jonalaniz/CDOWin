@@ -6,12 +6,8 @@ using CDO.Core.Interfaces;
 
 namespace CDO.Core.Services;
 
-public class ClientService : IClientService {
-    private readonly INetworkService _network;
-
-    public ClientService(INetworkService network) {
-        _network = network;
-    }
+public class ClientService(INetworkService network) : IClientService {
+    private readonly INetworkService _network = network;
 
     // -----------------------------
     // GET

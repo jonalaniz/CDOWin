@@ -20,9 +20,7 @@ public sealed partial class ClientsPage : Page {
     // =========================
     public ClientViewModel ViewModel { get; } = AppServices.ClientViewModel;
 
-    public ClientsPage() {
-        InitializeComponent();
-    }
+    public ClientsPage() => InitializeComponent();
 
     // =========================
     // Navigation

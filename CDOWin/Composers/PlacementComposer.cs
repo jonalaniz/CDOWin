@@ -43,10 +43,8 @@ public partial class PlacementComposer(PlacementDetail placement) : ObservableOb
                         textBox.Text = value;
                     break;
                 case PdfRadioButtonListFieldWidget radioButton:
-                    Debug.WriteLine($"Radio Button: {radioButton.Name}");
                     break;
                 case PdfCheckBoxWidgetFieldWidget checkbox:
-                    Debug.WriteLine($"Check Box: {checkbox.Name}");
                     break;
                 default:
                     break;
@@ -62,7 +60,6 @@ public partial class PlacementComposer(PlacementDetail placement) : ObservableOb
             var startInfo = new ProcessStartInfo(tempPath) { UseShellExecute = true };
             Process.Start(startInfo);
         } catch (Exception ex) {
-            Debug.WriteLine(ex.ToString());
             return Result.Fail(new AppError(ErrorKind.Unknown, "Failed to export Placement", Exception: ex));
         }
 

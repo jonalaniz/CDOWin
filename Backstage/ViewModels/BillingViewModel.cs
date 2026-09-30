@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace Backstage.ViewModels;
 
-public partial class BillingViewModel : ObservableObject {
+public partial class BillingViewModel(DataCoordinator dataCoordinator, ServiceAuthorizationService saService) : ObservableObject {
 
     // =========================
     // Dependencies
     // =========================
-    private readonly ServiceAuthorizationService _saService;
-    private readonly DataCoordinator _dataCoordinator;
-    private readonly DispatcherQueue _dispatcher;
+    private readonly ServiceAuthorizationService _saService = saService;
+    private readonly DataCoordinator _dataCoordinator = dataCoordinator;
+    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
     // UI State
@@ -36,16 +36,6 @@ public partial class BillingViewModel : ObservableObject {
     [ObservableProperty]
     public partial ObservableCollection<AdminSASummary> UnbilledSAs { get; private set; } = [];
 
-
-    // =========================
-    // Constructor
-    // =========================
-    public BillingViewModel(DataCoordinator dataCoordinator, ServiceAuthorizationService saService) {
-        _dataCoordinator = dataCoordinator;
-        _saService = saService;
-        _dispatcher = DispatcherQueue.GetForCurrentThread();
-    }
-
     // =========================
     // Get Methods
     // =========================
@@ -58,6 +48,7 @@ public partial class BillingViewModel : ObservableObject {
             RecentSAs = new ObservableCollection<AdminSASummary>(snapshot);
         });
     }
+
     public async Task LoadNewPlacements(bool force = false) {
         var placements = await _dataCoordinator.GetNewPlacements(force);
         if (placements == null) return;
@@ -67,6 +58,7 @@ public partial class BillingViewModel : ObservableObject {
             NewPlacements = new ObservableCollection<PlacementSummary>(snapshot);
         });
     }
+
     public async Task LoadUnbilledSAs(bool force = false) {
         var sas = await _dataCoordinator.GetUnbilledSAsAsync(force);
         if (sas == null) return;
@@ -90,24 +82,16 @@ public partial class BillingViewModel : ObservableObject {
     // =========================
     // Post Methods
     // =========================
-    public async Task<Result> MarkSABilled(int id) {
-        return await _saService.MarkSABilled(id);
-    }
+    public async Task<Result> MarkSABilled(int id) => await _saService.MarkSABilled(id);
 
-    public async Task<Result> MarkSAUnbilled(int id) {
-        return await _saService.MarkSAUnbilled(id);
-    }
+    public async Task<Result> MarkSAUnbilled(int id) => await _saService.MarkSAUnbilled(id);
 
     // =========================
     // Utility Methods
     // =========================
-    public AdminSASummary? ExpiredSA(int id) {
-        return ExpiringSAs.FirstOrDefault(sa => sa.Id == id);
-    }
+    public AdminSASummary? ExpiredSA(int id) => ExpiringSAs.FirstOrDefault(sa => sa.Id == id);
 
-    public AdminSASummary? UnbilledSA(int id) {
-        return UnbilledSAs.FirstOrDefault(sa => sa.Id == id);
-    }
+    public AdminSASummary? UnbilledSA(int id) => UnbilledSAs.FirstOrDefault(sa => sa.Id == id);
 
     public void RemoveExpiredSA(int id) {
         if (ExpiringSAs.FirstOrDefault(sa => sa.Id == id) is not AdminSASummary sa) return;

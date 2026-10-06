@@ -34,9 +34,7 @@ public sealed partial class HomePage : Page {
     // =========================
     // Constructor
     // =========================
-    public HomePage() {
-        InitializeComponent();
-    }
+    public HomePage() => InitializeComponent();
 
     // =========================
     // Navigation
@@ -141,7 +139,6 @@ public sealed partial class HomePage : Page {
     }
 
     // Reminders
-
     private async void CreateSAReminder_Today_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
@@ -176,7 +173,6 @@ public sealed partial class HomePage : Page {
     }
 
     // Utility Methods
-
     private void ClientButton_Click(object sender, RoutedEventArgs e) {
         if (sender is not Control control || control.Tag is not int id) return;
         _viewModel.RequestClient(id);

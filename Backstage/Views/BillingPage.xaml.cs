@@ -17,8 +17,8 @@ public sealed partial class BillingPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public BillingViewModel ViewModel { get; } = AppServices.BillingViewModel;
-    private ReminderViewModel ReminderViewModel { get; } = AppServices.ReminderViewModel;
+    private readonly BillingViewModel _viewModel = AppServices.BillingViewModel;
+    private readonly ReminderViewModel _reminderViewModel = AppServices.ReminderViewModel;
 
     // =========================
     // Constructor
@@ -35,10 +35,10 @@ public sealed partial class BillingPage : Page {
 
     private async Task RefreshAsync(bool force = false) {
         var tasks = new List<Task> {
-            ViewModel.LoadRecentSAs(force),
-            ViewModel.LoadNewPlacements(force),
-            ViewModel.LoadUnbilledSAs(force),
-            ViewModel.LoadExpiringSAsAsync(force)
+            _viewModel.LoadRecentSAs(force),
+            _viewModel.LoadNewPlacements(force),
+            _viewModel.LoadUnbilledSAs(force),
+            _viewModel.LoadExpiringSAsAsync(force)
         };
 
         await Task.WhenAll(tasks);
@@ -56,15 +56,15 @@ public sealed partial class BillingPage : Page {
 
     private async void MarkBilled_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        var result = await ViewModel.MarkSABilled(id);
-        if (result.IsSuccess) ViewModel.RemoveUnbilledSA(id);
+        var result = await _viewModel.MarkSABilled(id);
+        if (result.IsSuccess) _viewModel.RemoveUnbilledSA(id);
         await ShowMessage(MessageType.MarkedBilled, result.IsSuccess);
     }
 
     private async void CreateSAReminder_Today_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || ViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
+            || _viewModel.ExpiredSA(id) is not AdminSASummary sa) return;
         var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Today, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
@@ -72,13 +72,13 @@ public sealed partial class BillingPage : Page {
     private async void CreateSAReminder_Tomorrow_Click(object sender, RoutedEventArgs e) {
         if (sender is not MenuFlyoutItem item
             || item.Tag is not int id
-            || ViewModel.ExpiredSA(id) is not AdminSASummary sa) return;
+            || _viewModel.ExpiredSA(id) is not AdminSASummary sa) return;
         var reminder = ReminderFactory.CreateSAReminder(sa.ClientID, ReminderDate.Tomorrow, sa.ServiceAuthorizationNumber, SAReminderType.StaleSA);
         await CreateReminder(reminder);
     }
 
     private async Task CreateReminder(NewReminder reminder) {
-        var result = await ReminderViewModel.CreateReminderAsync(reminder);
+        var result = await _reminderViewModel.CreateReminderAsync(reminder);
         await ShowMessage(MessageType.CreatedReminder, result.IsSuccess);
     }
 

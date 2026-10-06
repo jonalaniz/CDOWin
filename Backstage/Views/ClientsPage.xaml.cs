@@ -18,7 +18,7 @@ public sealed partial class ClientsPage : Page {
     // =========================
     // ViewModel
     // =========================
-    public ClientViewModel ViewModel { get; } = AppServices.ClientViewModel;
+    private readonly ClientViewModel _viewModel = AppServices.ClientViewModel;
 
     public ClientsPage() => InitializeComponent();
 
@@ -27,7 +27,7 @@ public sealed partial class ClientsPage : Page {
     // =========================
     protected override async void OnNavigatedTo(NavigationEventArgs e) {
         base.OnNavigatedTo(e);
-        await ViewModel.RefreshAsync();
+        await _viewModel.RefreshAsync();
     }
 
     // =========================
@@ -35,20 +35,20 @@ public sealed partial class ClientsPage : Page {
     // =========================
 
     private async void ToggleInactive_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected is not AdminClientSummary summary) return;
+        if (_viewModel.Selected is not AdminClientSummary summary) return;
         var result = summary.Active
-            ? await ViewModel.MarkClientInactive(summary.Id)
-            : await ViewModel.MarkClientActive(summary.Id);
-        if (result.IsSuccess) ViewModel.ToggleActive(summary.Id);
+            ? await _viewModel.MarkClientInactive(summary.Id)
+            : await _viewModel.MarkClientActive(summary.Id);
+        if (result.IsSuccess) _viewModel.ToggleActive(summary.Id);
         await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
 
     private async void ToggleTTW_Click(object sender, RoutedEventArgs e) {
-        if (ViewModel.Selected is not AdminClientSummary summary) return;
+        if (_viewModel.Selected is not AdminClientSummary summary) return;
         var result = summary.Ttw
-            ? await ViewModel.UnmarkClientTTW(summary.Id)
-            : await ViewModel.MarkClientTTW(summary.Id);
-        if (result.IsSuccess) ViewModel.ToggleTTW(summary.Id);
+            ? await _viewModel.UnmarkClientTTW(summary.Id)
+            : await _viewModel.MarkClientTTW(summary.Id);
+        if (result.IsSuccess) _viewModel.ToggleTTW(summary.Id);
         await ShowMessage(MessageType.MarkedTTW, result.IsSuccess);
     }
 
@@ -65,7 +65,7 @@ public sealed partial class ClientsPage : Page {
 
         InfoBarContainer.Children.Add(infoBar);
 
-        var result = await ViewModel.ExportClients();
+        var result = await _viewModel.ExportClients();
         item.IsEnabled = true;
         InfoBarContainer.Children.Remove(infoBar);
 
@@ -74,8 +74,8 @@ public sealed partial class ClientsPage : Page {
 
     private async void Reminder_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not int id) return;
-        if (ViewModel.SelectedClientHistory is null) return;
-        var reminder = ViewModel.SelectedClientHistory.Reminders.Where(r => r.Id == id).First();
+        if (_viewModel.SelectedClientHistory is null) return;
+        var reminder = _viewModel.SelectedClientHistory.Reminders.Where(r => r.Id == id).First();
         if (reminder == null) return;
 
         var dialog = DialogFactory.InformationDialog(this.XamlRoot, "Reminder Detail");
@@ -86,7 +86,7 @@ public sealed partial class ClientsPage : Page {
 
     private void User_Click(object sender, RoutedEventArgs e) {
         if (sender is not Button button || button.Tag is not string id) return;
-        ViewModel.RequestUser(id);
+        _viewModel.RequestUser(id);
     }
 
     private async Task ShowMessage(MessageType type, bool success) {

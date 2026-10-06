@@ -64,13 +64,13 @@
             <!-- Search Bar -->
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" PlaceholderText="Filter Clients"
-                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{x:Bind _viewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Clients List -->
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
-                      ItemsSource="{x:Bind ViewModel.ClientSummaries, Mode=OneWay}"
+                      SelectedItem="{x:Bind _viewModel.Selected, Mode=TwoWay}"
+                      ItemsSource="{x:Bind _viewModel.ClientSummaries, Mode=OneWay}"
                       IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dtos:AdminClientSummary">
@@ -93,7 +93,7 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.ClientSummaries.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.ClientSummaries.Count, Mode=OneWay}"/>
                     <Run Text="Clients"/>
                 </TextBlock>
             </Grid>
@@ -119,7 +119,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <!-- Client Name -->
-                <TextBlock Grid.Column="0" Text="{x:Bind ViewModel.Selected.Name, Mode=OneWay}" Padding="8" Style="{StaticResource BackstageHeader}"/>
+                <TextBlock Grid.Column="0" Text="{x:Bind _viewModel.Selected.Name, Mode=OneWay}" Padding="8" Style="{StaticResource BackstageHeader}"/>
                 <CommandBar Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="AliceBlue" VerticalAlignment="Center" Style="{StaticResource CommandBarDefaultStyle}">
 
                     <!-- Export Menu -->
@@ -127,9 +127,9 @@
                         <FontIcon Glyph="&#xE712;" Style="{StaticResource SingleIconFontStyle}"/>
                         <AppBarButton.Flyout>
                             <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
+                                <MenuFlyoutItem Text="{x:Bind _viewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolTTWConverter}}"
                                                 Click="ToggleTTW_Click"/>
-                                <MenuFlyoutItem Text="{x:Bind ViewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
+                                <MenuFlyoutItem Text="{x:Bind _viewModel.Selected.Active, Mode=OneWay, Converter={StaticResource BoolActiveConverter}}"
                                                 Click="ToggleInactive_Click"/>
                                 <MenuFlyoutSeparator/>
                                 <MenuFlyoutItem Text="Delete..." >
@@ -145,7 +145,7 @@
 
             <!-- Client History Table -->
             <ListView x:Name="ListView" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                      ItemsSource="{x:Bind ViewModel.SelectedClientHistory.Activities, Mode=OneWay}"
+                      ItemsSource="{x:Bind _viewModel.SelectedClientHistory.Activities, Mode=OneWay}"
                       Style="{StaticResource DataTableStyle}">
                 
                 <!-- Header -->
@@ -202,21 +202,21 @@
                             VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
                         <Run Text="ACE ID:"/>
-                        <Run Text="{x:Bind ViewModel.Selected.Id, Mode=OneWay}"/>
+                        <Run Text="{x:Bind _viewModel.Selected.Id, Mode=OneWay}"/>
                         <Run Text=" |"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
                         <Run Text="Created:"/>
-                        <Run Text="{x:Bind ViewModel.Selected.FormattedCreatedDate, Mode=OneWay}"/>
+                        <Run Text="{x:Bind _viewModel.Selected.FormattedCreatedDate, Mode=OneWay}"/>
                         <Run Text=" |"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0">
                         <Run Text="Last Updated:"/>
-                        <Run Text="{x:Bind ViewModel.Selected.FormattedUpdatedDate, Mode=OneWay}"/>
+                        <Run Text="{x:Bind _viewModel.Selected.FormattedUpdatedDate, Mode=OneWay}"/>
                         <Run Text=" |"/>
                     </TextBlock>
                     <TextBlock Text="TTW" FontWeight="Bold" Style="{StaticResource PageSubtitleStyle}" Margin="0"
-                               Visibility="{x:Bind ViewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
+                               Visibility="{x:Bind _viewModel.Selected.Ttw, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"/>
                 </StackPanel>
             </Grid>
         </Grid>
@@ -243,7 +243,7 @@
                     <TextBlock Grid.Row="0" Padding="12,8" FontWeight="Bold" Text="Reminders"/>
                 </Border>
                 <ScrollViewer Grid.Row="1">
-                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.SelectedClientHistory.Reminders, Mode=OneWay}">
+                    <ItemsRepeater ItemsSource="{x:Bind _viewModel.SelectedClientHistory.Reminders, Mode=OneWay}">
                         <DataTemplate x:DataType="dtos:AdminReminderDetail">
 
                             <!-- Button -->

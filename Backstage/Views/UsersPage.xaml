@@ -55,14 +55,14 @@
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="8,0,8,8" 
                      PlaceholderText="Filter Users"
-                     Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{x:Bind _viewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- ServiceAuthorizations Table -->
             <ListView x:Name="ListView"
                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       Style="{StaticResource DataTableStyle}" 
-                      ItemsSource="{x:Bind ViewModel.Users, Mode=OneWay}" 
-                      SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" 
+                      ItemsSource="{x:Bind _viewModel.Users, Mode=OneWay}" 
+                      SelectedItem="{x:Bind _viewModel.Selected, Mode=TwoWay}" 
                       ItemClick="ListView_ItemClick">
 
                 <!-- Header -->
@@ -111,7 +111,7 @@
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                   Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                 <TextBlock Style="{StaticResource ListStatusBarStyle}">
-                    <Run Text="{x:Bind ViewModel.Users.Count, Mode=OneWay}"/>
+                    <Run Text="{x:Bind _viewModel.Users.Count, Mode=OneWay}"/>
                     <Run Text="Users"/>
                 </TextBlock>
             </Grid>
@@ -141,7 +141,7 @@
                 
                 <!-- User History Table -->
                 <ScrollViewer Grid.Row="1">
-                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.SelectedUserHistory.Activities, Mode=OneWay}">
+                    <ItemsRepeater ItemsSource="{x:Bind _viewModel.SelectedUserHistory.Activities, Mode=OneWay}">
                         <DataTemplate x:DataType="activities:UserActivity">
                             <Grid Padding="12" BorderThickness="0,0,0,1">
                                 <Grid RowSpacing="4">

@@ -62,12 +62,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="Updated SAs" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.RecentSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.RecentSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentSAs, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.RecentSAs, Mode=OneWay}">
                                     <DataTemplate x:DataType="dtos:AdminSASummary">
 
                                         <!-- Button -->
@@ -101,12 +101,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="New Placements" Style="{StaticResource BackstageCardTitle}"/>
-                                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.NewPlacements.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.NewPlacements.Count, Mode=OneWay}" Style="{StaticResource BackstageCardTitle}"/>
                             </Grid>
 
                             <!-- Item Repeater -->
                             <ScrollViewer Grid.Row="1">
-                                <ItemsRepeater ItemsSource="{x:Bind ViewModel.NewPlacements, Mode=OneWay}">
+                                <ItemsRepeater ItemsSource="{x:Bind _viewModel.NewPlacements, Mode=OneWay}">
                                     <DataTemplate x:DataType="placements:PlacementSummary">
 
                                         <!-- Button -->
@@ -138,12 +138,12 @@
                         </Grid.ColumnDefinitions>
                         
                         <TextBlock Grid.Column="0" Text="Unbilled Service Authorizations" Style="{StaticResource BackstageSubHeader}"/>
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.UnbilledSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind _viewModel.UnbilledSAs.Count, Mode=OneWay}" Style="{StaticResource BackstageSubHeader}"/>
                     </Grid>
                     
                     <!-- Horizontal ScrollView Content -->
                     <ScrollView Style="{StaticResource HorizontalScrollView}">
-                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.UnbilledSAs, Mode=OneWay}">
+                        <ItemsRepeater ItemsSource="{x:Bind _viewModel.UnbilledSAs, Mode=OneWay}">
                             
                             <ItemsRepeater.Layout>
                                 <StackLayout Orientation="Horizontal" Spacing="8"/>

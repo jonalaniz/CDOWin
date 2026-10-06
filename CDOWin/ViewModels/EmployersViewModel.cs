@@ -150,9 +150,7 @@ public partial class EmployersViewModel : ObservableObject {
             );
 
             OnUI(() => {
-                Filtered = new ObservableCollection<EmployerSummary>(
-                    snapshot.OrderBy(e => e.Name)
-                    );
+                Filtered = new ObservableCollection<EmployerSummary>(snapshot);
                 ReSelect(previousSelection);
             });
         } catch (OperationCanceledException) { }

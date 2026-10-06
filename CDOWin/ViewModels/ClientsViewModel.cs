@@ -269,9 +269,7 @@ public partial class ClientsViewModel : ObservableObject {
             }
 
             OnUI(() => {
-                Filtered = new ObservableCollection<ClientSummary>(
-                    snapshot.OrderBy(c => c.Name)
-                    );
+                Filtered = new ObservableCollection<ClientSummary>(snapshot);
                 ReSelect(previousSelection);
             });
         } catch (OperationCanceledException) { }

@@ -168,9 +168,7 @@ public partial class CounselorsViewModel : ObservableObject {
             );
 
             OnUI(() => {
-                Filtered = new ObservableCollection<CounselorSummary>(
-                    result.OrderBy(s => s.Name)
-                    );
+                Filtered = new ObservableCollection<CounselorSummary>(result);
                 ReSelect(previousSelection);
             });
         } catch (OperationCanceledException) { }

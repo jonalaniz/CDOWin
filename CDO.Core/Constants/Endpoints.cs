@@ -5,10 +5,10 @@ public static class Endpoints {
     // -----------------------------
     // API Endpoints
     // -----------------------------
-    public static string Client(int id) => $"{Clients}/{id}";
-    public static readonly string Clients = "/api/clients";
 
-    // Client Convenience Endpoints
+    // Client Endpoints
+    public const string Clients = "/api/clients";
+    public static string Client(int id) => $"{Clients}/{id}";
     public static string ClientMarkActive(int id) => $"{Clients}/{id}/mark-active";
     public static string ClientMarkInactive(int id) => $"{Clients}/{id}/mark-inactive";
 
@@ -16,60 +16,66 @@ public static class Endpoints {
     public static string ClientUnmarkTTW(int id) => $"{Clients}/{id}/unmark-ttw";
 
     public static string Note(int id) => $"{Clients}/{id}/notes";
-    public static string Note(int id, int noteId) => $"{Clients}/{id}/notes/{noteId}/";
-    public static string Counselor(int id) => $"{Counselors}/{id}";
-    public static readonly string Counselors = "/api/counselors";
-    public static string Employer(int id) => $"{Employers}/{id}";
-    public static readonly string Employers = "/api/employers";
-    public static readonly string EmployerSummaries = "/api/employers/summaries";
-    public static string ServiceAuthorization(int id) => $"{ServiceAuthorizations}/{id}";
-    public static readonly string ServiceAuthorizations = "/api/sas";
+    public static string Note(int clientId, int noteId) => $"{Clients}/{clientId}/notes/{noteId}";
 
-    // Service Authorization Convenience Endpoints
+    // Counselor Endpoints
+    public const string Counselors = "/api/counselors";
+    public static string Counselor(int id) => $"{Counselors}/{id}";
+
+    // Employer Endpoints
+    public const string Employers = "/api/employers";
+    public static string Employer(int id) => $"{Employers}/{id}";
+    public const string EmployerSummaries = "/api/employers/summaries";
+
+    // Service Authorization Endpoints
+    public const string ServiceAuthorizations = "/api/sas";
+    public static string ServiceAuthorization(int id) => $"{ServiceAuthorizations}/{id}";
     public static string SAMarkBilled(int id) => $"{ServiceAuthorizations}/{id}/mark-billed";
     public static string SAMarkUnbilled(int id) => $"{ServiceAuthorizations}/{id}/mark-unbilled";
+
+    // Placement Endpoints
+    public const string Placements = "/api/placements";
     public static string Placement(int id) => $"{Placements}/{id}";
-    public static readonly string Placements = "/api/placements";
+
+    // Reminder Endpoints
+    public const string Reminders = "/api/reminders";
     public static string Reminder(int id) => $"{Reminders}/{id}";
-    public static readonly string Reminders = "/api/reminders";
-    public static readonly string States = "/api/states";
+
+    // States Endpoints
+    public const string States = "/api/states";
 
     // Session Endpoints
-    public static string Session => "/api/session";
+    public const string Session = "/api/session";
 
     // -----------------------------
     // Administrative Endpoints
     // -----------------------------
 
     // Base Endpoint
-    public static readonly string Admin = "/api/admin";
+    public const string Admin = "/api/admin";
 
-    // Clients: Base endpoint returns clients updated in the past 24 hours or
-    // specific date if date is appended as parameter
-    public static readonly string AdminClients = $"{Admin}/clients";
-    public static readonly string AdminAllClientSummaries = $"{AdminClients}/all";
-    public static readonly string AdminClientExport = $"{AdminClients}/export";
-    public static readonly string AdminStaleClients = $"{AdminClients}/stale";
-
-    // Recent Data: Folded recently updated Clients, Notes, and Reminders
-    public static string DailySnapshot => $"{Admin}/recent";
-
-    // Client History: Returns an AdminClientSummary with all edit history.
+    // Client Endpoints
+    private const string AdminClients = $"{Admin}/clients";
+    public const string AdminAllClientSummaries = $"{AdminClients}/all";
+    public const string AdminClientExport = $"{AdminClients}/export";
+    public const string AdminStaleClients = $"{AdminClients}/stale";
     public static string ClientHistory(int id) => $"{AdminClients}/{id}";
 
-    // Notes: Base endpoint returns notes updated in the past 24 hours or
-    // specific date if date is appended as parameter
-    public static readonly string AdminNotes = $"{Admin}/notes";
+    // Notes Endpoints
+    private const string AdminNotes = $"{Admin}/notes";
     public static string AdminUserNotes(string author) => $"{AdminNotes}/{author}";
 
-    // Billing Endpoints, returns unbilled SAs and Placements
-    public static readonly string Billing = $"{Admin}/billing";
-    public static readonly string BillingSAs = $"{Billing}/sas";
-    public static readonly string BillingExpiringSAs = $"{BillingSAs}/expiring";
-    public static readonly string BillingRecentSAs = $"{BillingSAs}/recent";
-    public static readonly string BillingNewPlacements = $"{Billing}/placements/new";
+    // Recent Data Endpoint: Folded recently updated Clients, Notes, and Reminders
+    public static string DailySnapshot(string date) => $"{Admin}/recent?date={date}";
 
-    // Users: Full endpoints, base returns all users as summaries
-    public static readonly string Users = $"{Admin}/users";
+    // Billing Endpoints
+    private const string Billing = $"{Admin}/billing";
+    public const string BillingSAs = $"{Billing}/sas";
+    public const string BillingExpiringSAs = $"{BillingSAs}/expiring";
+    public const string BillingRecentSAs = $"{BillingSAs}/recent";
+    public const string BillingNewPlacements = $"{Billing}/placements/new";
+
+    // Users Endpoints
+    public const string Users = $"{Admin}/users";
     public static string User(string id) => $"{Users}/{id}";
 }

@@ -9,7 +9,7 @@ public class RecentDataService(INetworkService network) {
 
     // Returns a snapshot of work for the given day
     public Task<DailySnapshot?> GetSnapshot(string date) {
-        var endpoint = Endpoints.DailySnapshot + $"?date={date}";
+        var endpoint = Endpoints.DailySnapshot(date);
         return _network.GetAsync<DailySnapshot>(endpoint);
     }
 }

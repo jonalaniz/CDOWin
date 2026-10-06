@@ -13,7 +13,6 @@ public partial class ReminderViewModel(ReminderService reminderService) : Observ
     // Dependencies
     // =========================
     private readonly ReminderService _service = reminderService;
-    private readonly DispatcherQueue _dispatcher = DispatcherQueue.GetForCurrentThread();
 
     // =========================
     // Post Methods

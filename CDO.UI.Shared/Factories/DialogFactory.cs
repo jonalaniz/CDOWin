@@ -57,19 +57,19 @@ public static class DialogFactory {
     }
 
     private static ContentDialog Dialog(XamlRoot root, string title) {
-        ContentDialog dialog = new() { XamlRoot = root };
-        dialog.Style = dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.CloseButtonText = "Cancel";
-        dialog.DefaultButton = ContentDialogButton.Primary;
-        dialog.Title = title;
-        return dialog;
+        return new ContentDialog() {
+            XamlRoot = root,
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            Title = title
+        };
     }
 
     private static ContentDialog BaseDialog(XamlRoot root, string title) {
-        ContentDialog dialog = new() { XamlRoot = root };
-        dialog.Style = dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.DefaultButton = ContentDialogButton.Primary;
-        dialog.Title = title;
-        return dialog;
+        return new ContentDialog() {
+            XamlRoot = root,
+            DefaultButton = ContentDialogButton.Primary,
+            Title = title
+        };
     }
 }

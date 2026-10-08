@@ -181,7 +181,7 @@ public sealed partial class ClientViewPage : Page {
         createPlacementVM.PropertyChanged += handler;
 
         var result = await dialog.ShowAsync();
-        createPlacementVM.PropertyChanged += handler;
+        createPlacementVM.PropertyChanged -= handler;
 
         if (result != ContentDialogResult.Primary) return;
         var placementResult = await createPlacementVM.CreatePlacementAsync();

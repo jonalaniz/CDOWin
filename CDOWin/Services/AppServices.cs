@@ -52,11 +52,11 @@ public static class AppServices {
     public static StatesViewModel StatesViewModel { get; private set; } = null!;
     public static PlacementsViewModel PlacementsViewModel { get; private set; } = null!;
 
-    public static void InitializeServices(string baseAddress, string apiKey) {
+    public static async Task InitializeServices(string baseAddress, string apiKey) {
 
         // Initialize network service
         var network = new NetworkService();
-        network.Initialize(baseAddress, apiKey);
+        await network.Initialize(baseAddress, apiKey);
         NetworkService = network;
 
         // Initialize child services

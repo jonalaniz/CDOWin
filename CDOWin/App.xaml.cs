@@ -20,7 +20,7 @@ public partial class App : Application {
 
         if (CredentialManager.ReadCredential(AppConstants.AppName) is { } creds) {
             // Initialize services
-            AppServices.InitializeServices(creds.UserName!, creds.Password!);
+            await AppServices.InitializeServices(creds.UserName!, creds.Password!);
 
             // Show the loading splash screen
             _windowManager.ShowSplash();

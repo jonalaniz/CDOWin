@@ -630,7 +630,7 @@
         </ScrollViewer>
     
         <!-- Row 2: Status Bar -->
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
               Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
             <StackPanel Orientation="Horizontal" Spacing="8" 
                         VerticalAlignment="Center" HorizontalAlignment="Center">

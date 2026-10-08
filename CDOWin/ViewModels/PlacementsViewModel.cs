@@ -152,17 +152,15 @@ public partial class PlacementsViewModel : ObservableObject {
             int? previousSelection = Selected?.Id;
 
             snapshot = IsFiltered ? snapshot.Where(i => i.Active == true).ToList() : snapshot;
-
-            snapshot = snapshot.OrderBy(p => p.HireDate).ToList();
-            if (Reversed) snapshot = snapshot.Reverse().ToList();
+            snapshot = Reversed ? snapshot.OrderByDescending(p => p.HireDate).ToList() : snapshot.OrderBy(p => p.HireDate).ToList();
 
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-                var query = SearchQuery.Trim().ToLower();
+                var query = SearchQuery.Trim();
                 snapshot = snapshot.Where(r =>
                 (r.ClientName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
                 (r.EmployerName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-                (r.SupervisorName ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-                (r.Position ?? "").ToLower().Contains(query, StringComparison.CurrentCultureIgnoreCase)
+                (r.SupervisorName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                (r.Position ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase)
                 ).ToList();
             }
 

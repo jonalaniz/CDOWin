@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -143,12 +144,10 @@ public partial class ServiceAuthorizationsViewModel : ObservableObject {
             int? previousSelection = SelectedSummary?.Id;
 
             snapshot = IsFiltered ? snapshot.Where(r => r.Active).ToList() : snapshot;
-
-            snapshot = snapshot.OrderBy(o => o.EndDate).ToList();
-            if (Reversed) snapshot = snapshot.Reverse().ToList();
+            snapshot = Reversed ? snapshot.OrderByDescending(o => o.EndDate).ToList() : snapshot.OrderBy(o => o.EndDate).ToList();
 
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-                var query = SearchQuery.Trim().ToLower();
+                var query = SearchQuery.Trim();
                 snapshot = snapshot.Where(i =>
                 i.ClientName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
                 i.CounselorName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

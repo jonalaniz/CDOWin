@@ -166,7 +166,7 @@ public sealed partial class UpdatePlacement : Page {
     private void EmployerAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
             _viewModel.Updated.EmployerName = sender.Text;
-            var query = sender.Text.Trim().ToLower();
+            var query = sender.Text.Trim();
             var suggestions = _employers
                 .Where(c => !string.IsNullOrWhiteSpace(c.Name) && c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
                 .ToList();

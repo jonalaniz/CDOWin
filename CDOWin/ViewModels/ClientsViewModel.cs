@@ -219,8 +219,7 @@ public partial class ClientsViewModel : ObservableObject {
     // =========================
     private void SetupSAs(SADetail[] sas) {
         var sortedInvoices = sas
-            .OrderBy(i => i.EndDate)
-            .Reverse()
+            .OrderByDescending(i => i.EndDate)
             .ToList();
         OnUI(() => {
             Invoices = new ObservableCollection<SADetail>(sortedInvoices);
@@ -229,8 +228,7 @@ public partial class ClientsViewModel : ObservableObject {
 
     private void SetupPlacements(PlacementDetail[] placements) {
         var sortedPlacements = placements
-            .OrderBy(p => p.HireDate)
-            .Reverse()
+            .OrderByDescending(p => p.HireDate)
             .ToList();
         OnUI(() => {
             Placements = new ObservableCollection<PlacementDetail>(sortedPlacements);
@@ -254,7 +252,7 @@ public partial class ClientsViewModel : ObservableObject {
             snapshot = IsFiltered ? snapshot.Where(i => i.Active == true).ToList() : snapshot;
 
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-                var query = SearchQuery.Trim().ToLower();
+                var query = SearchQuery.Trim();
                 snapshot = snapshot.Where(c =>
                 (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
                 (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
@@ -285,7 +283,7 @@ public partial class ClientsViewModel : ObservableObject {
 
         IEnumerable<ClientNote> result = Selected.ClientNotes;
         if (!string.IsNullOrWhiteSpace(NotesSearchQuery)) {
-            var query = NotesSearchQuery.Trim().ToLower();
+            var query = NotesSearchQuery.Trim();
             result = result.Where(n => n.Text.Contains(query, StringComparison.CurrentCultureIgnoreCase));
         }
 

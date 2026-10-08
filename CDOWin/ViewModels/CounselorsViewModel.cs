@@ -159,7 +159,7 @@ public partial class CounselorsViewModel : ObservableObject {
                 return;
             }
 
-            var query = SearchQuery.Trim().ToLower();
+            var query = SearchQuery.Trim();
             var result = snapshot.Where(c =>
             (c.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
             (c.CaseLoadID.ToString() ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

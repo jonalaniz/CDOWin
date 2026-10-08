@@ -157,7 +157,7 @@ public partial class ClientViewModel : ObservableObject {
             int? previousSelection = Selected?.Id;
 
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-                var query = SearchQuery.Trim().ToLower();
+                var query = SearchQuery.Trim();
                 snapshot = snapshot.Where(c =>
                 (c.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
                 (c.LastName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

@@ -155,7 +155,7 @@ public sealed partial class CreatePlacements : Page {
     private void EmployerAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
             _viewModel.EmployerName = sender.Text.Trim();
-            var query = sender.Text.Trim().ToLower();
+            var query = sender.Text.Trim();
             var suggestions = _employers
                 .Where(c => !string.IsNullOrWhiteSpace(c.Name) && c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
                 .ToList();

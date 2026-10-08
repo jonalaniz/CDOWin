@@ -114,7 +114,7 @@ public sealed partial class UpdateSA : Page {
 
     private void DescriptionSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
-            var query = sender.Text.Trim().ToLower();
+            var query = sender.Text.Trim();
             var suggestions = _descriptions
                 .Where(d => d.Description.Contains(query, StringComparison.CurrentCultureIgnoreCase))
                 .ToList();
@@ -145,7 +145,7 @@ public sealed partial class UpdateSA : Page {
 
     private void OfficeSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
-            var query = sender.Text.Trim().ToLower();
+            var query = sender.Text.Trim();
             var suggestions = _offices
                 .Where(o => o.Address.Contains(query, StringComparison.CurrentCultureIgnoreCase))
                 .ToList();

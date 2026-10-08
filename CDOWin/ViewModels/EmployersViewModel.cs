@@ -141,7 +141,7 @@ public partial class EmployersViewModel : ObservableObject {
                 return;
             }
 
-            var query = SearchQuery.Trim().ToLower();
+            var query = SearchQuery.Trim();
             var result = snapshot.Where(e =>
             (e.Name ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
             (e.FormattedAddress ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||

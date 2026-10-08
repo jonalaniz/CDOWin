@@ -97,7 +97,7 @@ public sealed partial class UpdateCaseInformation : Page {
     // =========================
     private void CounselorAutoSuggest_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
-            var query = sender.Text.Trim().ToLower();
+            var query = sender.Text.Trim();
             var suggestions = _counselors
                 .Where(c => c.Name.Contains(query, StringComparison.CurrentCultureIgnoreCase))
                 .ToList();

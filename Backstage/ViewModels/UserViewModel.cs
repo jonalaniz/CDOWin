@@ -93,7 +93,7 @@ public partial class UserViewModel : ObservableObject {
             string? previousSelection = Selected?.Id;
 
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
-                var query = SearchQuery.Trim().ToLower();
+                var query = SearchQuery.Trim();
                 snapshot = snapshot.Where(u =>
                 u.Username.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
                 (u.FirstName ?? "").Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
